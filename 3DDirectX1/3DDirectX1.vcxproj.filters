@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="HLSL">
+      <UniqueIdentifier>{38cedc2e-1f11-455e-8a50-db8e3fa0dc2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル">
+      <UniqueIdentifier>{0af46e8d-2344-4391-aa32-8b9d79c5be2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\2d">
+      <UniqueIdentifier>{f6eca569-6d02-4300-8b39-edf1e96d23e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\3d">
+      <UniqueIdentifier>{c81aa983-fd24-436d-93f0-52e0275fefc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\camera">
+      <UniqueIdentifier>{018a49dd-0dc5-4c79-8ba7-943a56a1f818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\Common">
+      <UniqueIdentifier>{9c8fcbec-81bc-45d1-a4c4-1df0234423da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\others">
+      <UniqueIdentifier>{96bfd6e6-ce33-4984-8725-60229998b883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\scene">
+      <UniqueIdentifier>{c1923a4d-0c3d-4ea4-a17e-16ddd50df236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\winnapp">
+      <UniqueIdentifier>{b50eeb8b-f432-4e29-aa68-30bdf2d83391}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Object3d.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="WinApp.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugText.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleManager.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="debugCamera.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース&amp;ヘッダーファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shaders\OBJ.hlsli">
+      <Filter>HLSL</Filter>
+    </None>
+    <None Include="Resources\shaders\Particle.hlsli">
+      <Filter>HLSL</Filter>
+    </None>
+    <None Include="Resources\shaders\Sprite.hlsli">
+      <Filter>HLSL</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\shaders\OBJPS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\OBJVS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticlePS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sprite.h">
+      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3d.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleManager.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="debugCamera.h">
+      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXCommon.h">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugText.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeDelete.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="WinApp.h">
+      <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
