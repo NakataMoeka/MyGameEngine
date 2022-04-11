@@ -17,6 +17,7 @@ GameScene::~GameScene()
 
 void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 {
+	//u
 	assert(dxCommon);
 	assert(input);
 	assert(audio);
