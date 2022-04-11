@@ -32,49 +32,58 @@
     <Filter Include="ソース&amp;ヘッダーファイル\winnapp">
       <UniqueIdentifier>{b50eeb8b-f432-4e29-aa68-30bdf2d83391}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\audio">
+      <UniqueIdentifier>{169d3a54-5b3a-41cb-b8b4-d03ce29f9998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\input">
+      <UniqueIdentifier>{3aa9bbac-beaf-461a-9c79-1b9ce2629b10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Object3d.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="WinApp.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectXCommon.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugText.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleManager.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="debugCamera.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
-    </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース&amp;ヘッダーファイル</Filter>
+    <ClCompile Include="2d\DebugText.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Sprite.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\FbxLoader.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Model.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Object3d.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\ParticleManager.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="camera\Camera.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="camera\debugCamera.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\Audio.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\DirectXCommon.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\main.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\WinApp.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
+    </ClCompile>
+    <ClCompile Include="input\input.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\input</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\GameScene.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,47 +121,50 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sprite.h">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Object3d.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleManager.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
     <ClInclude Include="Shape.h">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="2d\DebugText.h">
+      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Sprite.h">
+      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxLoader.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Model.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Object3d.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\ParticleManager.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="camera\Camera.h">
       <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
     </ClInclude>
-    <ClInclude Include="debugCamera.h">
+    <ClInclude Include="camera\debugCamera.h">
       <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXCommon.h">
+    <ClInclude Include="audio\Audio.h">
+      <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXCommon\DirectXCommon.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    <ClInclude Include="DirectXCommon\SafeDelete.h">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
-    <ClInclude Include="DebugText.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClInclude>
-    <ClInclude Include="SafeDelete.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="WinApp.h">
+    <ClInclude Include="DirectXCommon\WinApp.h">
       <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
+    </ClInclude>
+    <ClInclude Include="input\input.h">
+      <Filter>ソース&amp;ヘッダーファイル\input</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\GameScene.h">
+      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

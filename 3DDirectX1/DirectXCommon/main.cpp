@@ -2,12 +2,12 @@
 #include"Audio.h"
 #include"DirectXCommon.h"
 #include "GameScene.h"
-
+#include "fbxsdk.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	HRESULT result;
 	
-
+	FbxManager* fbxManager = FbxManager::Create();
 	WinApp* winapp = nullptr;
 	DirectXCommon* dxcommon = nullptr;
 	Audio* audio = nullptr;
