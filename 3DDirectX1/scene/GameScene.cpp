@@ -1,6 +1,6 @@
 #include "GameScene.h"
 #include <cassert>
-
+#include "FbxLoader.h"
 GameScene::GameScene()
 {
 }
@@ -41,9 +41,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	object3d2->SetRotation({ 0,180,0 });
 	object3d2->SetPosition({ 0,0,0 });
 	object3d->Update();
-
-
 	object3d2->Update();
+	//ƒ‚ƒfƒ‹–¼‚ðŽw’è‚µ‚Ä“Ç‚Ýž‚Ý
+	FbxLoader::GetInstance()->LoadModelFromFile("cube");
 	//‚ ‚ ‚ ‚ ‚ 
 
 	//object3d2->Update();

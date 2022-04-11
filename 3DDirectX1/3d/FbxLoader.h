@@ -4,10 +4,15 @@
 
 #include <d3d12.h>
 #include <d3dx12.h>
+#include <string>
 
 class FbxLoader
 {
+private://エイリアス
+	//std::を省略
+	using string = std::string;
 public:
+
 	/// <summary>
 	/// シングルトンインスタンスの取得
 	/// </summary>
@@ -22,6 +27,14 @@ public:
 	/// 後始末
 	/// </summary>
 	void Finalize();
+	/// <summary>
+	/// ファイルからFBXモデル読み込み
+	/// </summary>
+	/// <param name="modelName">モデル名</param>
+	void LoadModelFromFile(const string&modelName);
+public://定数
+
+	static const string baseDirectory;
 private:
 	// privateなコンストラクタ（シングルトンパターン）
 	FbxLoader() = default;
@@ -37,4 +50,5 @@ private:
 	FbxManager* fbxManager = nullptr;
 	//fbxインポータ
 	FbxImporter* fbxImporter = nullptr;
+
 };
