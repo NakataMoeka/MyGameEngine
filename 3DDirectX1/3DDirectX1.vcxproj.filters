@@ -85,6 +85,7 @@
     <ClCompile Include="scene\GameScene.cpp">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClCompile>
+    <ClCompile Include="DEBUGTEXT.CPP" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli">

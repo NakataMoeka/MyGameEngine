@@ -1,0 +1,8 @@
+GitHubURL↓
+https://github.com/NakataMoeka/CG4
+
+ブランチ↓
+MT4
+
+記述してあるファイル↓
+GameScene.h&GemeScene.cpp

@@ -23,10 +23,10 @@ void DebugText::Initialize(UINT texnumber)
 	}
 }
 
-void DebugText::Print( const std::string& text, float x, float y, float scale = 1.0f)
+void DebugText::Print(int len, const std::string& text, float x, float y, float scale = 1.0f)
 {
 	// ‘S‚Ä‚Ì•¶š‚É‚Â‚¢‚Ä
-	for (int i = 0; i < text.size(); i++)
+	for (int i = 0; i < len; i++)
 	{
 		// Å‘å•¶š”’´‰ß
 		if (spriteIndex >= maxCharCount) {
@@ -47,11 +47,23 @@ void DebugText::Print( const std::string& text, float x, float y, float scale = 
 
 		// À•WŒvZ
 		sprite[spriteIndex]->SetPosition({ x + fontWidth * scale * i, y});
-		sprite[spriteIndex]->SetTextureRect({ (float)fontIndexX * fontWidth, (float)fontIndexY * fontHeight }, { (float)fontWidth ,(float)fontHeight });
+		sprite[spriteIndex]->SetTextureRect({ (float)fontIndexX * fontWidth, (float)fontIndexY * fontHeight }
+
+		, { (float)fontWidth ,(float)fontHeight });
 		sprite[spriteIndex]->SetSize({ fontWidth * scale, fontHeight * scale });
 		// •¶š‚ğ‚P‚Âi‚ß‚é
 		spriteIndex++;
 	}
+}
+
+
+void DebugText::Printf(float x, float y, float scale,const char* fmt, ...)
+{
+	va_list args;
+	va_start(args, fmt);
+	int w = vsnprintf(buffer, bufferSize - 1, fmt, args);
+	Print(w, buffer,x,y,scale);
+	va_end(args);
 }
 
 // ‚Ü‚Æ‚ß‚Ä•`‰æ
