@@ -65,30 +65,36 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
-	camera->SetDistance(20.0f);
+	//camera->SetDistance(20.0f);
 }
 
 void GameScene::Update()
 {
 	//XMFLOAT3 playerPosition
-	if (input->TriggerKey(DIK_1)) {
+	if (input->TriggerKey(DIK_SPACE)) {
+
 		Mflag = true;
 	}
+	
+
 	if (Mflag == true) {
-		playerPosition.x = playerPosition.x + vx;
-		vx = vx + ax;
-		ax = ax + fx / m;
-		if (playerPosition.x >= 1400) {
+		playerPosition.y = playerPosition.y + vx;
+		vx = -g/2 + vx;
+		
+		if (playerPosition.y <= -100) {
+			playerPosition.y = 100;
+			vx = 0.0f;
+			g = 9.8f;
+			fx = 1.0f;
+			m = 5.0f;
 			Mflag = false;
 		}
 	}
-	else if (Mflag == false) {
-		playerPosition.x = 0;
-		vx = 0.5f;
-		ax = 1.0f;
-		fx = 1.0f;
-		m = 5.0f;
-	}
+
+
+	
+	
+
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
 	}
@@ -115,8 +121,10 @@ void GameScene::Draw()
 	char str[256];
 
 	debugText.Printf( 100, 20, 3.0f, "MauseLeftClick");
-	debugText.Printf( 600, 20, 3.0f, "%f",playerPosition.x);
-	debugText.DrawAll(dxCommon->GetCmdList());
+	debugText.Printf(0, 140, 3.0f, "%f",vx);
+	debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
+
+	debugText.DrawAll(dxCommon->GetCmdList( ));
 	sprite->PostDraw();
 }
 void GameScene::CreateParticles()

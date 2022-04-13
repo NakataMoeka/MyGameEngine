@@ -63,9 +63,10 @@ private: // ƒƒ“ƒo•Ï”
 	
 	//MT4‚Ì‰Û‘è‚Ì‚â‚Â
 	bool Mflag = false;
-	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
-	float vx = 0.5f;
-	float ax = 1.0f;
+
+	XMFLOAT3 playerPosition = { 0.0f,100.0f,0.0f };
+	float vx = 0.0f;
+	float g = 9.8f;
 	float fx = 1.0f;
 	float m = 5.0f;
 };
