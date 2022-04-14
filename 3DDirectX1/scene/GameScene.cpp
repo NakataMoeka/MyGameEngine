@@ -79,12 +79,12 @@ void GameScene::Update()
 
 	if (Mflag == true) {
 		playerPosition.y = playerPosition.y + vx;
-		vx = -g/2 + vx;
-		
-		if (playerPosition.y <= -100) {
-			playerPosition.y = 100;
+		vx = -g + vx;
+	
+		if (playerPosition.y <= -1000) {
+			playerPosition.y = 30;
 			vx = 0.0f;
-			g = 9.8f;
+			g = 0.2f;
 			fx = 1.0f;
 			m = 5.0f;
 			Mflag = false;
@@ -121,7 +121,7 @@ void GameScene::Draw()
 	char str[256];
 
 	debugText.Printf( 100, 20, 3.0f, "MauseLeftClick");
-	debugText.Printf(0, 140, 3.0f, "%f",vx);
+	debugText.Printf(0, 140, 3.0f, "%f",playerPosition.y);
 	debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
 	debugText.DrawAll(dxCommon->GetCmdList( ));
