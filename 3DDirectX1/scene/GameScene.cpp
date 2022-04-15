@@ -120,7 +120,7 @@ void GameScene::Draw()
 	sprite->Draw();
 	char str[256];
 
-	debugText.Printf( 100, 20, 3.0f, "MauseLeftClick");
+
 	debugText.Printf(0, 140, 3.0f, "%f",playerPosition.y);
 	debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
