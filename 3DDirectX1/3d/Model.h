@@ -5,6 +5,7 @@
 #include <DirectXMath.h>
 #include <d3dx12.h>
 #include <string>
+//OBJ用のモデルクラス
 class Model
 {
 private: // エイリアス

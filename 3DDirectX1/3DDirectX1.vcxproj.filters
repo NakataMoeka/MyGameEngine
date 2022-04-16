@@ -40,9 +40,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Shape.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
     <ClCompile Include="2d\DebugText.cpp">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClCompile>
@@ -70,10 +67,7 @@
     <ClCompile Include="audio\Audio.cpp">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon\DirectXCommon.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectXCommon\main.cpp">
+    <ClCompile Include="DirectXCommon\DXCommon.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\WinApp.cpp">
@@ -85,7 +79,12 @@
     <ClCompile Include="scene\GameScene.cpp">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClCompile>
-    <ClCompile Include="DEBUGTEXT.CPP" />
+    <ClCompile Include="main.cpp">
+      <Filter>ソース&amp;ヘッダーファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\FbxModel.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli">
@@ -122,9 +121,6 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shape.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
     <ClInclude Include="2d\DebugText.h">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClInclude>
@@ -152,7 +148,7 @@
     <ClInclude Include="audio\Audio.h">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXCommon\DirectXCommon.h">
+    <ClInclude Include="DirectXCommon\DXCommon.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon\SafeDelete.h">
@@ -166,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="scene\GameScene.h">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxModel.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

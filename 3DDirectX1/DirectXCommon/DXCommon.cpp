@@ -1,5 +1,4 @@
-#include"DirectXCommon.h"
-#include "DirectXCommon.h"
+#include"DXCommon.h"
 #include <vector>
 #include <cassert>
 

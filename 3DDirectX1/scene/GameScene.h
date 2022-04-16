@@ -6,7 +6,7 @@
 #include"input.h"
 #include"Sprite.h"
 #include"Audio.h"
-#include"DirectXCommon.h"
+#include"DXCommon.h"
 #include"DebugText.h"
 #include"Object3d.h"
 #include "ParticleManager.h"
@@ -59,15 +59,8 @@ private: // ƒƒ“ƒo•Ï”
 
 	const int debugTextTexNumber = 0;
 
-	//XMFLOAT3 playerPosition = {0.0f,0.0f,0.0f};
-	
-	//MT4‚Ì‰Û‘è‚Ì‚â‚Â
-	bool Mflag = false;
-	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
-	float vx = 0.5f;
-	float ax = 1.0f;
-	float fx = 1.0f;
-	float m = 5.0f;
+	XMFLOAT3 playerPosition = {0.0f,0.0f,0.0f};
+
 };
 
 

@@ -1,13 +1,13 @@
 ﻿#include"WinApp.h"
 #include"Audio.h"
-#include"DirectXCommon.h"
+#include"DXCommon.h"
 #include "GameScene.h"
-
+#include "FbxLoader.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	HRESULT result;
 	
-
+	//FbxManager* fbxManager = FbxManager::Create();
 	WinApp* winapp = nullptr;
 	DirectXCommon* dxcommon = nullptr;
 	Audio* audio = nullptr;
@@ -32,6 +32,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		assert(0);
 		return 1;
 	}
+
+	FbxLoader::GetInstance()->Initialize(dxcommon->Getdev());
 
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxcommon->Getdev());
@@ -59,7 +61,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	}
 	 //ウィンドウクラスを登録解除
 	winapp->TerminateGameWindow();
-	
+	FbxLoader::GetInstance()->Finalize();
 	// 各種解放
 	safe_delete(gameScene);
 	safe_delete(audio);
