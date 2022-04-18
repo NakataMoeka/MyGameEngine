@@ -161,7 +161,6 @@
     <ClCompile Include="audio\Audio.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
     <ClCompile Include="camera\debugCamera.cpp" />
-    <ClCompile Include="DEBUGTEXT.CPP" />
     <ClCompile Include="DirectXCommon\DirectXCommon.cpp" />
     <ClCompile Include="DirectXCommon\main.cpp" />
     <ClCompile Include="DirectXCommon\WinApp.cpp" />

@@ -84,7 +84,7 @@ void GameScene::Update()
 		if (playerPosition.y <= -1000) {
 			playerPosition.y = 30;
 			vx = 0.0f;
-			g = 0.2f;
+			g = 9.8f / 60.0f;
 			fx = 1.0f;
 			m = 5.0f;
 			Mflag = false;

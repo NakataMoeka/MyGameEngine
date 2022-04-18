@@ -66,7 +66,7 @@ private: // ƒƒ“ƒo•Ï”
 
 	XMFLOAT3 playerPosition = { 0.0f,30.0f,0.0f };
 	float vx = 0.0f;
-	float g = 0.2f;
+	float g = 9.8f/60.0f;
 	float fx = 1.0f;
 	float m = 5.0f;
 };
