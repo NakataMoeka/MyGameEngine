@@ -5,7 +5,7 @@
 #include <DirectXMath.h>
 #include <d3dx12.h>
 #include <string>
-class Model
+class Shape
 {
 private: // エイリアス
 // Microsoft::WRL::を省略
@@ -54,22 +54,20 @@ public:
 
 	static bool StaticInitialize(ID3D12Device* dev);
 
-	Model* Create(const std::string& text);
+	Shape* CreateSquare(const float width, const float height, const float depth);
 
-	bool Initialize(const std::string& text);
+	bool InitializeSquare(const float width, const float height, const float depth);
 	// 描画
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
+	void Square(const float width, const float height, const float depth);
+	
+	bool InitializeDescriptorHeap();
+
+	bool LoadTexture();
 private:
 	Material material;
 
-	bool InitializeDescriptorHeap();
-
-	bool LoadTexture(const std::string& directoryPath, const std::string& filename);
-
-	void CreateModel(const std::string& name);
-
-	void LoadMaterial(const std::string& directoryPath, const std::string& filename);
 
 
 	// デバイス
@@ -97,8 +95,6 @@ private:
 	std::vector<VertexPosNormalUv> vertices;
 	// 頂点インデックス配列
 	std::vector<unsigned short> indices;
-
-
 
 	ComPtr<ID3D12Resource> constBuffB1; // 定数バッファ
 };

@@ -71,7 +71,24 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 void GameScene::Update()
 {
 	//XMFLOAT3 playerPosition
-
+	if (input->TriggerKey(DIK_1)) {
+		Mflag = true;
+	}
+	if (Mflag == true) {
+		playerPosition.x = playerPosition.x + vx;
+		vx = vx + ax;
+		ax = ax + fx / m;
+		if (playerPosition.x >= 1400) {
+			Mflag = false;
+		}
+	}
+	else if (Mflag == false) {
+		playerPosition.x = 0;
+		vx = 0.5f;
+		ax = 1.0f;
+		fx = 1.0f;
+		m = 5.0f;
+	}
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
 	}
@@ -97,9 +114,8 @@ void GameScene::Draw()
 	sprite->Draw();
 	char str[256];
 
-
-	debugText.Printf( 0, 80, 3.0f, "%f,%f,%f",playerPosition.x,
-		playerPosition.y,playerPosition.z);
+	debugText.Printf( 100, 20, 3.0f, "MauseLeftClick");
+	debugText.Printf( 600, 20, 3.0f, "%f",playerPosition.x);
 	debugText.DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }
