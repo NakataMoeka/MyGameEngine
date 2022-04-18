@@ -1,5 +1,6 @@
 ﻿#include "FbxLoader.h"
 #include <cassert>
+
 using namespace DirectX;
 const std::string FbxLoader::baseDirectory = "Resources/";
 
@@ -59,7 +60,7 @@ void FbxLoader::LoadModelFromFile(const string& modelName)
     //fbxシーン解放
     fbxScene->Destroy();
 }
-void FbxLoader::ParseNodeRecursive(FbxModel* fbxModel, FbxNode* fbxNode,Node* parent=nullptr)
+void FbxLoader::ParseNodeRecursive(FbxModel* fbxModel, FbxNode* fbxNode,Node* parent)
 {
     //ノード名を取得
     string name = fbxNode->GetName();
@@ -90,7 +91,13 @@ void FbxLoader::ParseNodeRecursive(FbxModel* fbxModel, FbxNode* fbxNode,Node* pa
     node.transform *= matScaling;
     node.transform *= matRotation;
     node.transform *= matTranslation;
-   
+   //グローバル変換行列の計算   
+    node.globalTransform = node.transform;
+    if (parent) {
+        node.parent = parent;
+        //親の変形を乗算
+        node.globalTransform *= parent->globalTransform;
+    }
     //子ノードに対して再帰呼び出し
     for (int i = 0; i < fbxNode->GetChildCount(); i++) {
         ParseNodeRecursive(fbxModel, fbxNode->GetChild(i),&node);
