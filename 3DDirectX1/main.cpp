@@ -2,7 +2,7 @@
 #include"Audio.h"
 #include"DirectXCommon.h"
 #include "GameScene.h"
-
+#include "FbxLoader.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	HRESULT result;
@@ -13,7 +13,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Audio* audio = nullptr;
 	Input* input = nullptr;
 	GameScene* gameScene = nullptr;
-
+	FbxLoader* fbxloader = nullptr;
 	//ウィンドウの生成
 	winapp = new WinApp();
 	winapp->CreateGameWindow();
@@ -36,6 +36,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxcommon->Getdev());
 	
+	FbxLoader::GetInstance()->Initialize(dxcommon->Getdev());
+
 	input = new Input();
 	input->Initialize(winapp);
 	input->InitializeMouse(winapp);
