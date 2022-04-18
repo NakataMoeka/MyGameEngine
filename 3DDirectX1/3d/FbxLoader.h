@@ -5,6 +5,7 @@
 #include <d3d12.h>
 #include <d3dx12.h>
 #include <string>
+#include "FbxModel.h"
 
 class FbxLoader
 {
@@ -32,6 +33,7 @@ public:
 	/// </summary>
 	/// <param name="modelName">モデル名</param>
 	void LoadModelFromFile(const string&modelName);
+	void ParseNodeRecursive(FbxModel* fbxModel, FbxNode* fbxNode);
 public://定数
 
 	static const string baseDirectory;

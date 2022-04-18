@@ -73,9 +73,6 @@
     <ClCompile Include="DirectXCommon\DirectXCommon.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon\main.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClCompile>
     <ClCompile Include="DirectXCommon\WinApp.cpp">
       <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
     </ClCompile>
@@ -85,7 +82,12 @@
     <ClCompile Include="scene\GameScene.cpp">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClCompile>
-    <ClCompile Include="DEBUGTEXT.CPP" />
+    <ClCompile Include="main.cpp">
+      <Filter>ソース&amp;ヘッダーファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\FbxModel.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli">
@@ -166,6 +168,9 @@
     </ClInclude>
     <ClInclude Include="scene\GameScene.h">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxModel.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
