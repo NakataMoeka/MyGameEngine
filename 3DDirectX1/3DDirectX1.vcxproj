@@ -162,9 +162,9 @@
     <ClCompile Include="camera\Camera.cpp" />
     <ClCompile Include="camera\debugCamera.cpp" />
     <ClCompile Include="DirectXCommon\DirectXCommon.cpp" />
-    <ClCompile Include="DirectXCommon\main.cpp" />
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
     <ClCompile Include="input\input.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="Shape.cpp" />
   </ItemGroup>

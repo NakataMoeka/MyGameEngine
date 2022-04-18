@@ -73,9 +73,6 @@
     <ClCompile Include="DirectXCommon\DirectXCommon.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon\main.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClCompile>
     <ClCompile Include="DirectXCommon\WinApp.cpp">
       <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
     </ClCompile>
@@ -84,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="scene\GameScene.cpp">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
