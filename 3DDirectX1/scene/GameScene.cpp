@@ -70,8 +70,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 void GameScene::Update()
 {
-	//XMFLOAT3 playerPosition
-	if (input->TriggerKey(DIK_SPACE)) {
+
+#pragma region MT4_課題1コメントアウト	
+
+	/*if (input->TriggerKey(DIK_SPACE)) {
 
 		Mflag = true;
 	}
@@ -89,9 +91,15 @@ void GameScene::Update()
 			m = 5.0f;
 			Mflag = false;
 		}
+	}*/
+#pragma endregion
+
+#pragma region MT4_課題2
+	if (input->TriggerKey(DIK_SPACE)) {
+
+		Mflag = true;
 	}
-
-
+#pragma endregion
 	
 	
 
