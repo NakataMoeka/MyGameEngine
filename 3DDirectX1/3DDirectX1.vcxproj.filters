@@ -49,9 +49,6 @@
     <ClCompile Include="2d\Sprite.cpp">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClCompile>
-    <ClCompile Include="3d\FbxLoader.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Model.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClCompile>
@@ -129,9 +126,6 @@
     </ClInclude>
     <ClInclude Include="2d\Sprite.h">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\FbxLoader.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
     <ClInclude Include="3d\Model.h">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>

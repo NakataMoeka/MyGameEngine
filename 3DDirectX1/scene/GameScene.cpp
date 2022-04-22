@@ -1,6 +1,6 @@
 #include "GameScene.h"
 #include <cassert>
-#include "FbxLoader.h"
+//#include "FbxLoader.h"
 GameScene::GameScene()
 {
 }
@@ -44,7 +44,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	object3d->Update();
 	object3d2->Update();
 	//ƒ‚ƒfƒ‹–¼‚ðŽw’è‚µ‚Ä“Ç‚Ýž‚Ý
-	FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
 	//‚ ‚ ‚ ‚ ‚ 
 
 	//object3d2->Update();
@@ -87,7 +87,7 @@ void GameScene::Update()
 			playerPosition.y = 30;
 			vx = 0.0f;
 			g = 9.8f / 60.0f;
-			fx = 1.0f;
+			fx1 = 1.0f;
 			m = 5.0f;
 			Mflag = false;
 		}
@@ -98,6 +98,28 @@ void GameScene::Update()
 	if (input->TriggerKey(DIK_SPACE)) {
 
 		Mflag = true;
+	}
+	if (Mflag == true) {
+		if (vx <= 0) {
+			vx = 0;
+		}
+		playerPosition.x = playerPosition.x + vx;
+		if (vx < 0.5f) {
+			vx = vx + a;
+		}
+		else if(vx>=0.5f) {
+			vx = vx - a;
+		}
+
+		fx = 100 * cos(60 * PI / 180.0);
+		fy = 100 * sin(60 * PI / 180.0);
+
+		N = m * g - fy;
+		fx = fx - (uk * N);
+	
+		a = fx / m;
+		a = a / 300;
+
 	}
 #pragma endregion
 	
@@ -129,7 +151,7 @@ void GameScene::Draw()
 	char str[256];
 
 
-	debugText.Printf(0, 140, 3.0f, "%f",playerPosition.y);
+	debugText.Printf(0, 140, 3.0f, "%f,%f,%f",fx,fy,vx);
 	debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
 	debugText.DrawAll(dxCommon->GetCmdList( ));

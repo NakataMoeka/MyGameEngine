@@ -65,21 +65,24 @@ private: // ƒƒ“ƒo•Ï”
 	bool Mflag = false;
 
 	//MT4_‰Û‘è1
-	XMFLOAT3 playerPosition = { 0.0f,30.0f,0.0f };
+	XMFLOAT3 playerPosition = { -50.0f,0.0f,0.0f };
 	float vx = 0.0f;
+	float a = 0.0f;
 	float g = 9.8f/60.0f;
-	float fx = 1.0f;
-	float m = 5.0f;
-	
+	float fx1 = 1.0f;
+	float m = 10.0f;
+
 	//Mt4_‰Û‘è2
 	float mg = 9.8f;
-	float f = 0.0f;
-	float k = 0.0f;
-	float s = 0.0f;
-	float us = 0.0f;
-	float uk = 0.0f;
-	float N = 0.0f;
 
+	float fk = 0.0f;
+	float fs = 0.0f;
+	float us = 0.8f;
+	float uk = 1.5f;
+	float N = 0.0f;
+	float fx = 0.0f;
+	float fy = 0.0f;
+	float PI = 3.141592;
 };
 
 

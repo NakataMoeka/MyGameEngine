@@ -154,7 +154,6 @@
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
-    <ClCompile Include="3d\FbxLoader.cpp" />
     <ClCompile Include="3d\Model.cpp" />
     <ClCompile Include="3d\Object3d.cpp" />
     <ClCompile Include="3d\ParticleManager.cpp" />
@@ -225,7 +224,6 @@
   <ItemGroup>
     <ClInclude Include="2d\DebugText.h" />
     <ClInclude Include="2d\Sprite.h" />
-    <ClInclude Include="3d\FbxLoader.h" />
     <ClInclude Include="3d\Model.h" />
     <ClInclude Include="3d\Object3d.h" />
     <ClInclude Include="3d\ParticleManager.h" />
