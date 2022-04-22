@@ -70,7 +70,7 @@
     <ClCompile Include="audio\Audio.cpp">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon\DirectXCommon.cpp">
+    <ClCompile Include="DirectXCommon\DXCommon.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\WinApp.cpp">
@@ -154,7 +154,7 @@
     <ClInclude Include="audio\Audio.h">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXCommon\DirectXCommon.h">
+    <ClInclude Include="DirectXCommon\DXCommon.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon\SafeDelete.h">

@@ -98,9 +98,46 @@ void FbxLoader::ParseNodeRecursive(FbxModel* fbxModel, FbxNode* fbxNode,Node* pa
         //親の変形を乗算
         node.globalTransform *= parent->globalTransform;
     }
+    //fbxノードのメッシュ情報を解析
+    FbxNodeAttribute* fbxNodeAttribute = fbxNode->GetNodeAttribute();
+    if (fbxNodeAttribute) {
+        if (fbxNodeAttribute->GetAttributeType() == FbxNodeAttribute::eMesh) {
+            fbxModel->meshNode = &node;
+            ParseMesh(fbxModel, fbxNode);
+        }
+    }
     //子ノードに対して再帰呼び出し
     for (int i = 0; i < fbxNode->GetChildCount(); i++) {
         ParseNodeRecursive(fbxModel, fbxNode->GetChild(i),&node);
     }
 
+}
+
+void FbxLoader::ParseMesh(FbxModel* fbxModel, FbxNode* fbxNode)
+{
+    //ノードのメッシュを取得
+    FbxMesh* fbxMesh = fbxNode->GetMesh();
+    
+    //頂点座標読み取り
+    ParseMeshVertices(fbxModel, fbxMesh);
+    //面を構成するデータの読み取り
+    ParseMeshFaces(fbxModel, fbxMesh);
+    //マテリアルの読み取り
+    ParseMaterial(fbxModel, fbxNode);
+}
+
+void FbxLoader::ParseMeshVertices(FbxModel* fbxModel, FbxMesh* fbxMesh)
+{
+}
+
+void FbxLoader::ParseMeshFaces(FbxModel* fbxModel, FbxMesh* fbxMesh)
+{
+}
+
+void FbxLoader::ParseMaterial(FbxModel* fbxModel, FbxNode* fbxNode)
+{
+}
+
+void FbxLoader::LoadTexture(FbxModel* fbxModel, const std::string& fullpath)
+{
 }

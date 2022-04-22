@@ -14,6 +14,8 @@ private://エイリアス
 	using string = std::string;
 public:
 
+
+
 	/// <summary>
 	/// シングルトンインスタンスの取得
 	/// </summary>
@@ -33,7 +35,19 @@ public:
 	/// </summary>
 	/// <param name="modelName">モデル名</param>
 	void LoadModelFromFile(const string&modelName);
+	
 	void ParseNodeRecursive(FbxModel* fbxModel, FbxNode* fbxNode, Node* parent = nullptr);
+	
+	void ParseMesh(FbxModel* fbxModel, FbxNode* fbxNode);
+	//頂点座標読み取り
+	void ParseMeshVertices(FbxModel* fbxModel, FbxMesh* fbxMesh);
+	//面情報読み込み
+	void ParseMeshFaces(FbxModel* fbxModel, FbxMesh* fbxMesh);
+	//マテリアル読み込み
+	void ParseMaterial(FbxModel* fbxModel, FbxNode* fbxNode);
+	//テクスチャ読み込み
+	void LoadTexture(FbxModel* fbxModel, const std::string& fullpath);
+
 public://定数
 
 	static const string baseDirectory;
@@ -52,5 +66,6 @@ private:
 	FbxManager* fbxManager = nullptr;
 	//fbxインポータ
 	FbxImporter* fbxImporter = nullptr;
+
 
 };

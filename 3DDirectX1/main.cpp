@@ -1,6 +1,6 @@
 ﻿#include"WinApp.h"
 #include"Audio.h"
-#include"DirectXCommon.h"
+#include"DXCommon.h"
 #include "GameScene.h"
 #include "FbxLoader.h"
 

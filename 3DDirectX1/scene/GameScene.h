@@ -6,7 +6,7 @@
 #include"input.h"
 #include"Sprite.h"
 #include"Audio.h"
-#include"DirectXCommon.h"
+#include"DXCommon.h"
 #include"DebugText.h"
 #include"Object3d.h"
 #include "ParticleManager.h"
