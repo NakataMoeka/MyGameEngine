@@ -13,8 +13,8 @@ private://エイリアス
 	//std::を省略
 	using string = std::string;
 public:
-
-
+	static const string defaultTextureFileName;
+	
 
 	/// <summary>
 	/// シングルトンインスタンスの取得
@@ -66,6 +66,7 @@ private:
 	FbxManager* fbxManager = nullptr;
 	//fbxインポータ
 	FbxImporter* fbxImporter = nullptr;
-
+	// ディレクトリを含んだファイルパスからファイル名を抽出する
+	std::string ExtractFileName(const std::string& path);
 
 };

@@ -2,6 +2,7 @@
 #include <string>
 #include <DirectXMath.h>
 #include <vector>
+#include<DirectXTex.h>
 struct Node
 {
 	//名前
@@ -30,9 +31,9 @@ public:
 	// 頂点データ構造体
 	struct VertexPosNormalUv
 	{
-		XMFLOAT3 pos; // xyz座標
-		XMFLOAT3 normal; // 法線ベクトル
-		XMFLOAT2 uv;  // uv座標
+		DirectX::XMFLOAT3 pos; // xyz座標
+		DirectX::XMFLOAT3 normal; // 法線ベクトル
+		DirectX::XMFLOAT2 uv;  // uv座標
 	};
 private:
 	//モデル名
@@ -45,4 +46,13 @@ private:
 	std::vector<VertexPosNormalUv> vertices;
 	// 頂点インデックス配列
 	std::vector<unsigned short> indices;
+	// アンビエント係数
+	DirectX::XMFLOAT3 ambient = { 1,1,1 };
+	// ディフューズ係数
+	DirectX::XMFLOAT3 diffuse = { 1,1,1 };
+	// テクスチャメタデータ
+	DirectX::TexMetadata metadata = {};
+	// スクラッチイメージ
+	DirectX::ScratchImage scratchImg = {};
+
 };
