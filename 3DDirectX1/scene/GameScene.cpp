@@ -104,12 +104,10 @@ void GameScene::Update()
 			vx = 0;
 		}
 		playerPosition.x = playerPosition.x + vx;
-		if (vx < 0.5f) {
-			vx = vx + a;
-		}
-		else if(vx>=0.5f) {
+	
+		
 			vx = vx - a;
-		}
+		
 
 		fx = 100 * cos(60 * PI / 180.0);
 		fy = 100 * sin(60 * PI / 180.0);

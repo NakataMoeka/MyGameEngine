@@ -66,7 +66,7 @@ private: // ƒƒ“ƒo•Ï”
 
 	//MT4_‰Û‘è1
 	XMFLOAT3 playerPosition = { -50.0f,0.0f,0.0f };
-	float vx = 0.0f;
+	float vx = 2.0f;
 	float a = 0.0f;
 	float g = 9.8f/60.0f;
 	float fx1 = 1.0f;
