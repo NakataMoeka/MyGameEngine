@@ -2,7 +2,7 @@ GitHubURL↓
 https://github.com/NakataMoeka/CG4
 
 ブランチ↓
-MT4
+MT4課題
 
 記述してあるファイル↓
 GameScene.h&GemeScene.cpp
