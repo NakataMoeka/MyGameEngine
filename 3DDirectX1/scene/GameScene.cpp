@@ -57,15 +57,17 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	}
 	// デバッグテキスト初期化
 	debugText.Initialize(debugTextTexNumber);
+	
+	Sprite::LoadTexture(1, L"Resources/jimenParticle.png");
 
-	Sprite::LoadTexture(1, L"Resources/Arrow.png");
-
-	sprite = Sprite::CreateSprite(1, { 10,10 });
+	sprite = Sprite::CreateSprite(1, playerPosition2);
 
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
 	//camera->SetDistance(20.0f);
+			v2.x = v * cos(60 * PI / 180.0);
+			v2.y = v * sin(60 * PI / 180.0);
 }
 
 void GameScene::Update()
@@ -73,55 +75,76 @@ void GameScene::Update()
 
 #pragma region MT4_課題1コメントアウト	
 
-	/*if (input->TriggerKey(DIK_SPACE)) {
+	//if (input->TriggerKey(DIK_SPACE)) {
 
-		Mflag = true;
-	}
-	
+	//	Mflag = true;
+	//}
+	//
 
-	if (Mflag == true) {
-		playerPosition.y = playerPosition.y + vx;
-		vx = -g + vx;
-	
-		if (playerPosition.y <= -1000) {
-			playerPosition.y = 30;
-			vx = 0.0f;
+	//if (Mflag == true) {
+	//	playerPosition2.y = playerPosition2.y + v;
+	//	v = -g + v;
+	//	g = k*v / m;
+	/*	if (playerPosition2.y >= 1000) {
+			playerPosition2.y = 30;
+			v = 0.0f;
 			g = 9.8f / 60.0f;
 			fx1 = 1.0f;
 			m = 5.0f;
 			Mflag = false;
-		}
-	}*/
+		}*/
+	//}
 #pragma endregion
 
-#pragma region MT4_課題2
+#pragma region MT4_課題2_1
+	//if (input->TriggerKey(DIK_SPACE)) {
+
+	//	Mflag = true;
+	//}
+	//if (Mflag == true) {
+	//	if (v <= 0) {
+	//		v = 0;
+	//	}
+	//	playerPosition2.x = playerPosition2.x + v;
+	//
+	//		v = v - a;
+
+	//	fx = 100 * cos(60 * PI / 180.0);
+	//	fy = 100 * sin(60 * PI / 180.0);
+
+	//	N = m * g - fy;
+	//	fx = fx - (uk * N);
+	//
+	//	a = fx / m;
+	//	a = a / 300;
+
+	//}
+#pragma endregion
+	
+#pragma region MT4_課題2_2
 	if (input->TriggerKey(DIK_SPACE)) {
 
 		Mflag = true;
 	}
-	if (Mflag == true) {
-		if (vx <= 0) {
-			vx = 0;
+	
+		if (Mflag == true) {
+			
+			if (playerPosition2.y<= 500) {
+				playerPosition2.x += v2.x;
+				playerPosition2.y -= v2.y;
+
+
+				v2.y = -g + v2.y;
+				g = k * v / m;
+		
+		
+
+			}
 		}
-		playerPosition.x = playerPosition.x + vx;
 	
-		
-			vx = vx - a;
-		
-
-		fx = 100 * cos(60 * PI / 180.0);
-		fy = 100 * sin(60 * PI / 180.0);
-
-		N = m * g - fy;
-		fx = fx - (uk * N);
-	
-		a = fx / m;
-		a = a / 300;
-
-	}
+	sprite->SetPosition(playerPosition2);
 #pragma endregion
-	
-	
+
 
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
@@ -149,7 +172,8 @@ void GameScene::Draw()
 	char str[256];
 
 
-	debugText.Printf(0, 140, 3.0f, "%f,%f,%f",fx,fy,vx);
+	debugText.Printf(0, 140, 3.0f, "%f,%f",playerPosition2.y,v);
+	debugText.Printf(0, 180, 3.0f, "%d", tFlag);
 	debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
 	debugText.DrawAll(dxCommon->GetCmdList( ));
