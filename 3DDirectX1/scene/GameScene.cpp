@@ -27,7 +27,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	this->audio = audio;
 
 	// カメラ生成
-	camera = new DebugCamera(WinApp::window_width, WinApp::window_height, input);
+	camera = new Camera(WinApp::window_width, WinApp::window_height);
 
 	// 3Dオブジェクトにカメラをセット
 	Object3d::SetCamera(camera);
@@ -65,7 +65,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
-	camera->SetDistance(20.0f);
+
 }
 
 void GameScene::Update()

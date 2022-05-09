@@ -11,7 +11,7 @@
 #include"Object3d.h"
 #include "ParticleManager.h"
 #include"Model.h"
-#include "DebugCamera.h"
+#include "Camera.h"
 class GameScene 
 {
 private: 
@@ -46,7 +46,7 @@ private: // ƒƒ“ƒo•Ï”
 
 	DebugText debugText;
 
-	DebugCamera* camera = nullptr;
+	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
 
 	Sprite* sprite = nullptr;
