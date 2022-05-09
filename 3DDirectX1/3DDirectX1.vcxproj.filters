@@ -97,6 +97,9 @@
     <ClCompile Include="others\CollisionPrimitive.cpp">
       <Filter>ソース&amp;ヘッダーファイル\others</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Light.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli">
@@ -195,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="others\CollisionPrimitive.h">
       <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Light.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

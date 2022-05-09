@@ -5,6 +5,7 @@
 #include <DirectXMath.h>
 #include <d3dx12.h>
 #include <string>
+#include<unordered_map>
 /// <summary>
 /// OBJ用のモデルクラス
 /// </summary>
@@ -18,6 +19,7 @@ private: // エイリアス
 	using XMFLOAT3 = DirectX::XMFLOAT3;
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
+	using XMVECTOR = DirectX::XMVECTOR;
 
 public:
 	// 頂点データ構造体
@@ -57,9 +59,14 @@ public:
 
 	static bool StaticInitialize(ID3D12Device* dev);
 
-	Model* Create(const std::string& text);
+	Model* Create(const std::string& modelname, bool smoothing = false);
 
-	bool Initialize(const std::string& text);
+	bool Initialize(const std::string& modelname, bool smoothing);
+	
+	void AddSmoothData( unsigned short indexPosition, unsigned short indexVertex);
+	
+	void CalculateSmoothedVertexNormals();
+
 	// 描画
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
@@ -70,7 +77,7 @@ private:
 
 	bool LoadTexture(const std::string& directoryPath, const std::string& filename);
 
-	void CreateModel(const std::string& name);
+	void CreateModel(const std::string& name, bool smoothing);
 
 	void LoadMaterial(const std::string& directoryPath, const std::string& filename);
 
@@ -101,7 +108,8 @@ private:
 	// 頂点インデックス配列
 	std::vector<unsigned short> indices;
 
-
-
 	ComPtr<ID3D12Resource> constBuffB1; // 定数バッファ
+
+	std::unordered_map<unsigned short, std::vector<unsigned short>>smoothData;
+
 };
