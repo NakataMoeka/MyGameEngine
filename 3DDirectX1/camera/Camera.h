@@ -42,29 +42,17 @@ public: // ƒƒ“ƒoŠÖ”
 		return matBillboard;
 	}
 
-	inline const XMFLOAT3& GetEye() {
-		return eye;
-	}
+	const XMFLOAT3& GetEye() {return eye;}
 
-	inline void SetEye(XMFLOAT3 eye) {
-		this->eye = eye; viewDirty = true;
-	}
+	void SetEye(XMFLOAT3 eye) {this->eye = eye; viewDirty = true;}
 
-	inline const XMFLOAT3& GetTarget() {
-		return target;
-	}
+	const XMFLOAT3& GetTarget() {return target;}
 
-	inline void SetTarget(XMFLOAT3 target) {
-		this->target = target; viewDirty = true;
-	}
+	void SetTarget(XMFLOAT3 target) {this->target = target; viewDirty = true;}
 
-	inline const XMFLOAT3& GetUp() {
-		return up;
-	}
+	const XMFLOAT3& GetUp() {return up;}
 
-	inline void SetUp(XMFLOAT3 up) {
-		this->up = up; viewDirty = true;
-	}
+	void SetUp(XMFLOAT3 up) {this->up = up; viewDirty = true;}
 
 	void MoveEyeVector(const XMFLOAT3& move);
 	void MoveEyeVector(const XMVECTOR& move);

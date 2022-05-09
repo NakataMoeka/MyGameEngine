@@ -12,6 +12,7 @@
 #include "ParticleManager.h"
 #include"Model.h"
 #include "Camera.h"
+#include "FbxObject.h"
 class GameScene 
 {
 private: 
@@ -54,20 +55,15 @@ private: // ÉÅÉìÉoïœêî
 	Object3d* object3d = nullptr;
 	Model*	model = nullptr;
 
-	Object3d* object3d2 = nullptr;
-	Model* model2 = nullptr;
+	FbxObject3d* object3d2 = nullptr;
+	FbxModel* model2 = nullptr;
 
 	const int debugTextTexNumber = 0;
 
-	//XMFLOAT3 playerPosition = {0.0f,0.0f,0.0f};
+	XMFLOAT3 playerPosition = {0.0f,0.0f,0.0f};
 	
-	//MT4ÇÃâ€ëËÇÃÇ‚Ç¬
-	bool Mflag = false;
-	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
-	float vx = 0.5f;
-	float ax = 1.0f;
-	float fx = 1.0f;
-	float m = 5.0f;
+
+
 };
 
 

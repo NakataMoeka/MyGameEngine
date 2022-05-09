@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include <cassert>
 #include "FbxLoader.h"
+#include "FbxObject.h"
 GameScene::GameScene()
 {
 }
@@ -31,13 +32,19 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	// 3Dオブジェクトにカメラをセット
 	Object3d::SetCamera(camera);
+	FbxObject3d::SetDev(dxCommon->Getdev());
+	FbxObject3d::SetCamera(camera);
+	FbxObject3d::CreateGraphicsPipeline();
+
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
 	model = model->Create("bullet");
-	model2 = model2->Create("Player");
+	model2 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
 	object3d = Object3d::Create(model);
-	object3d2 = Object3d::Create(model2);
+	object3d2 = new FbxObject3d();
+	object3d2->Initialize();
+	object3d2->SetModel(model2);
 	
 	object3d2->SetRotation({ 0,180,0 });
 	object3d2->SetPosition({ 0,0,0 });
@@ -64,8 +71,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
-	camera->SetTarget({ 0, 1, 0 });
-
+	camera->SetTarget({ 0, 20, 0 });
+	camera->SetEye({ 0, 0, -200 });
 }
 
 void GameScene::Update()
@@ -88,9 +95,11 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
+	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 	object3d->Draw();
-	//object3d2->Draw();
+	object3d2->Draw();
 	Object3d::PostDraw();
+	FbxObject3d::PostDraw();
 
 
 	sprite->PreDraw(dxCommon->GetCmdList());
