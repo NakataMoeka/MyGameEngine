@@ -3,6 +3,12 @@
 #include <DirectXMath.h>
 #include <vector>
 #include<DirectXTex.h>
+#include <Windows.h>
+#include <wrl.h>
+#include <d3d12.h>
+#include <DirectXMath.h>
+#include <d3dx12.h>
+#include <string>
 struct Node
 {
 	//名前
@@ -24,6 +30,18 @@ struct Node
 //Fbx用のモデルクラス
 class FbxModel
 {
+private: // エイリアス
+// Microsoft::WRL::を省略
+	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
+	// DirectX::を省略
+	using XMFLOAT2 = DirectX::XMFLOAT2;
+	using XMFLOAT3 = DirectX::XMFLOAT3;
+	using XMFLOAT4 = DirectX::XMFLOAT4;
+	using XMMATRIX = DirectX::XMMATRIX;
+	using TexMetadata = DirectX::TexMetadata;
+	using ScratchImage = DirectX::ScratchImage;
+	// std::を省略
+	template <class T> using vector = std::vector<T>;
 public:
 	//フレンドクラス
 	friend class FbxLoader;
@@ -35,6 +53,9 @@ public:
 		DirectX::XMFLOAT3 normal; // 法線ベクトル
 		DirectX::XMFLOAT2 uv;  // uv座標
 	};
+	void CreateBuffers(ID3D12Device* dev);
+	void Draw(ID3D12GraphicsCommandList*cmdList);
+	const XMMATRIX& GetModelTransform() { return meshNode->globalTransform; }
 private:
 	//モデル名
 	std::string name;
@@ -54,5 +75,16 @@ private:
 	DirectX::TexMetadata metadata = {};
 	// スクラッチイメージ
 	DirectX::ScratchImage scratchImg = {};
-
+	// 頂点バッファ
+	ComPtr<ID3D12Resource> vertBuff;
+	// インデックスバッファ
+	ComPtr<ID3D12Resource> indexBuff;
+	// テクスチャバッファ
+	ComPtr<ID3D12Resource> texbuff;
+	// 頂点バッファビュー
+	D3D12_VERTEX_BUFFER_VIEW vbView={};
+	// インデックスバッファビュー
+	D3D12_INDEX_BUFFER_VIEW ibView={};
+	// デスクリプタヒープ
+	ComPtr<ID3D12DescriptorHeap> descHeapSRV;
 };
