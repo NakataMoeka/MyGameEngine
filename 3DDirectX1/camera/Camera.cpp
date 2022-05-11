@@ -40,7 +40,7 @@ void Camera::Update()
 void Camera::UpdateViewMatrix()
 {
 	// ビュー行列の更新
-	//matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
+//matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
 	XMVECTOR eyePosition = XMLoadFloat3(&eye);
 	XMVECTOR targetPosition = XMLoadFloat3(&target);
 	XMVECTOR upVector = XMLoadFloat3(&up);
