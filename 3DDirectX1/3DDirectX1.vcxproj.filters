@@ -67,7 +67,11 @@
     <ClCompile Include="audio\Audio.cpp">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="DirectXCommon\DXCommon.cpp">
+=======
+    <ClCompile Include="DirectXCommon\DirectXCommon.cpp">
+>>>>>>> MT4課題
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\WinApp.cpp">
@@ -80,6 +84,7 @@
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+<<<<<<< HEAD
       <Filter>ソース&amp;ヘッダーファイル</Filter>
     </ClCompile>
     <ClCompile Include="3d\FbxLoader.cpp">
@@ -99,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="3d\Light.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+=======
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+>>>>>>> MT4課題
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

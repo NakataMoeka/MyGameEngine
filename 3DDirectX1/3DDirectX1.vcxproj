@@ -154,21 +154,32 @@
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="3d\FbxLoader.cpp" />
     <ClCompile Include="3d\FbxModel.cpp" />
     <ClCompile Include="3d\FbxObject.cpp" />
     <ClCompile Include="3d\Light.cpp" />
+=======
+>>>>>>> MT4課題
     <ClCompile Include="3d\Model.cpp" />
     <ClCompile Include="3d\Object3d.cpp" />
     <ClCompile Include="3d\ParticleManager.cpp" />
     <ClCompile Include="audio\Audio.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="DirectXCommon\DXCommon.cpp" />
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="others\Collision.cpp" />
     <ClCompile Include="others\CollisionPrimitive.cpp" />
+=======
+    <ClCompile Include="camera\debugCamera.cpp" />
+    <ClCompile Include="DirectXCommon\DirectXCommon.cpp" />
+    <ClCompile Include="DirectXCommon\WinApp.cpp" />
+    <ClCompile Include="input\input.cpp" />
+    <ClCompile Include="main.cpp" />
+>>>>>>> MT4課題
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="Shape.cpp" />
   </ItemGroup>
@@ -242,10 +253,13 @@
   <ItemGroup>
     <ClInclude Include="2d\DebugText.h" />
     <ClInclude Include="2d\Sprite.h" />
+<<<<<<< HEAD
     <ClInclude Include="3d\FbxLoader.h" />
     <ClInclude Include="3d\FbxModel.h" />
     <ClInclude Include="3d\FbxObject.h" />
     <ClInclude Include="3d\Light.h" />
+=======
+>>>>>>> MT4課題
     <ClInclude Include="3d\Model.h" />
     <ClInclude Include="3d\Object3d.h" />
     <ClInclude Include="3d\ParticleManager.h" />

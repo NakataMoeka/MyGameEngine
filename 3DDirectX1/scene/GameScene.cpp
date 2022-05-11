@@ -1,7 +1,11 @@
 #include "GameScene.h"
 #include <cassert>
+<<<<<<< HEAD
 #include "FbxLoader.h"
 #include "FbxObject.h"
+=======
+//#include "FbxLoader.h"
+>>>>>>> MT4èª²é¡Œ
 GameScene::GameScene()
 {
 }
@@ -51,7 +55,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	object3d->Update();
 	object3d2->Update();
 	//ƒ‚ƒfƒ‹–¼‚ðŽw’è‚µ‚Ä“Ç‚Ýž‚Ý
-	FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
 	//‚ ‚ ‚ ‚ ‚ 
 
 	//object3d2->Update();
@@ -64,20 +68,102 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	}
 	// ƒfƒoƒbƒOƒeƒLƒXƒg‰Šú‰»
 	debugText.Initialize(debugTextTexNumber);
+	
+	Sprite::LoadTexture(1, L"Resources/jimenParticle.png");
 
-	Sprite::LoadTexture(1, L"Resources/Arrow.png");
-
-	sprite = Sprite::CreateSprite(1, { 10,10 });
+	sprite = Sprite::CreateSprite(1, playerPosition2);
 
 	//audio->SoundPlayWave("Resources/ƒVƒ‡ƒbƒg.wav",true);
 	// ƒJƒƒ‰’Ž‹“_‚ðƒZƒbƒg
 	camera->SetTarget({ 0, 1, 0 });
+<<<<<<< HEAD
 	camera->SetEye({ 0, 0, -5 });
+=======
+	//camera->SetDistance(20.0f);
+			v2.x = v * cos(60 * PI / 180.0);
+			v2.y = v * sin(60 * PI / 180.0);
+>>>>>>> MT4èª²é¡Œ
 }
 
 void GameScene::Update()
 {
+<<<<<<< HEAD
 	//XMFLOAT3 playerPosition
+=======
+
+#pragma region MT4_‰Û‘è1ƒRƒƒ“ƒgƒAƒEƒg	
+
+	//if (input->TriggerKey(DIK_SPACE)) {
+
+	//	Mflag = true;
+	//}
+	//
+
+	//if (Mflag == true) {
+	//	playerPosition2.y = playerPosition2.y + v;
+	//	v = -g + v;
+	//	g = k*v / m;
+	/*	if (playerPosition2.y >= 1000) {
+			playerPosition2.y = 30;
+			v = 0.0f;
+			g = 9.8f / 60.0f;
+			fx1 = 1.0f;
+			m = 5.0f;
+			Mflag = false;
+		}*/
+	//}
+#pragma endregion
+
+#pragma region MT4_‰Û‘è2_1
+	//if (input->TriggerKey(DIK_SPACE)) {
+
+	//	Mflag = true;
+	//}
+	//if (Mflag == true) {
+	//	if (v <= 0) {
+	//		v = 0;
+	//	}
+	//	playerPosition2.x = playerPosition2.x + v;
+	//
+	//		v = v - a;
+
+	//	fx = 100 * cos(60 * PI / 180.0);
+	//	fy = 100 * sin(60 * PI / 180.0);
+
+	//	N = m * g - fy;
+	//	fx = fx - (uk * N);
+	//
+	//	a = fx / m;
+	//	a = a / 300;
+
+	//}
+#pragma endregion
+	
+#pragma region MT4_‰Û‘è2_2
+	if (input->TriggerKey(DIK_SPACE)) {
+
+		Mflag = true;
+	}
+	
+		if (Mflag == true) {
+			
+			if (playerPosition2.y<= 500) {
+				playerPosition2.x += v2.x;
+				playerPosition2.y -= v2.y;
+
+
+				v2.y = -g + v2.y;
+				g = k * v / m;
+		
+		
+
+			}
+		}
+	
+	sprite->SetPosition(playerPosition2);
+#pragma endregion
+
+>>>>>>> MT4èª²é¡Œ
 
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
@@ -106,9 +192,12 @@ void GameScene::Draw()
 	sprite->Draw();
 	char str[256];
 
-	debugText.Printf( 100, 20, 3.0f, "MauseLeftClick");
-	debugText.Printf( 600, 20, 3.0f, "%f",playerPosition.x);
-	debugText.DrawAll(dxCommon->GetCmdList());
+
+	debugText.Printf(0, 140, 3.0f, "%f,%f",playerPosition2.y,v);
+	debugText.Printf(0, 180, 3.0f, "%d", tFlag);
+	debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
+
+	debugText.DrawAll(dxCommon->GetCmdList( ));
 	sprite->PostDraw();
 }
 void GameScene::CreateParticles()
