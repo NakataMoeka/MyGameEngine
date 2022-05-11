@@ -94,7 +94,7 @@ private: // ƒƒ“ƒo•Ï”
 	float fx = 0.0f;
 	float fy = 0.0f;
 	float PI = 3.141592;
->>>>>>> MT4èª²é¡Œ
+>>>>>>> MT4èª²é¡E
 
 };
 

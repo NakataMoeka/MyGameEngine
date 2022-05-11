@@ -5,7 +5,7 @@
 #include "FbxObject.h"
 =======
 //#include "FbxLoader.h"
->>>>>>> MT4課題
+>>>>>>> MT4課顁E
 GameScene::GameScene()
 {
 }
@@ -82,7 +82,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	//camera->SetDistance(20.0f);
 			v2.x = v * cos(60 * PI / 180.0);
 			v2.y = v * sin(60 * PI / 180.0);
->>>>>>> MT4課題
+>>>>>>> MT4課顁E
 }
 
 void GameScene::Update()
@@ -163,7 +163,7 @@ void GameScene::Update()
 	sprite->SetPosition(playerPosition2);
 #pragma endregion
 
->>>>>>> MT4課題
+>>>>>>> MT4課顁E
 
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");

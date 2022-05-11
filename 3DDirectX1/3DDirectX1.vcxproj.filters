@@ -1,214 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="HLSL">
-      <UniqueIdentifier>{38cedc2e-1f11-455e-8a50-db8e3fa0dc2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル">
-      <UniqueIdentifier>{0af46e8d-2344-4391-aa32-8b9d79c5be2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\2d">
-      <UniqueIdentifier>{f6eca569-6d02-4300-8b39-edf1e96d23e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\3d">
-      <UniqueIdentifier>{c81aa983-fd24-436d-93f0-52e0275fefc1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\camera">
-      <UniqueIdentifier>{018a49dd-0dc5-4c79-8ba7-943a56a1f818}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\Common">
-      <UniqueIdentifier>{9c8fcbec-81bc-45d1-a4c4-1df0234423da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\others">
-      <UniqueIdentifier>{96bfd6e6-ce33-4984-8725-60229998b883}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\scene">
-      <UniqueIdentifier>{c1923a4d-0c3d-4ea4-a17e-16ddd50df236}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\winnapp">
-      <UniqueIdentifier>{b50eeb8b-f432-4e29-aa68-30bdf2d83391}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\audio">
-      <UniqueIdentifier>{169d3a54-5b3a-41cb-b8b4-d03ce29f9998}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\input">
-      <UniqueIdentifier>{3aa9bbac-beaf-461a-9c79-1b9ce2629b10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\3d\FBX">
-      <UniqueIdentifier>{c5e0626a-af0d-44b6-b1fb-e76884f5d0c2}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Shape.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\DebugText.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\Sprite.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Model.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Object3d.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\ParticleManager.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="camera\Camera.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="audio\Audio.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="DirectXCommon\DXCommon.cpp">
-=======
-    <ClCompile Include="DirectXCommon\DirectXCommon.cpp">
->>>>>>> MT4課題
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectXCommon\WinApp.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
-    </ClCompile>
-    <ClCompile Include="input\input.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\input</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\GameScene.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-<<<<<<< HEAD
-      <Filter>ソース&amp;ヘッダーファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\FbxLoader.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\FBX</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\FbxModel.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\FBX</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\FbxObject.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\FBX</Filter>
-    </ClCompile>
-    <ClCompile Include="others\Collision.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClCompile>
-    <ClCompile Include="others\CollisionPrimitive.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Light.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-=======
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
->>>>>>> MT4課題
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\shaders\OBJ.hlsli">
-      <Filter>HLSL</Filter>
-    </None>
-    <None Include="Resources\shaders\Particle.hlsli">
-      <Filter>HLSL</Filter>
-    </None>
-    <None Include="Resources\shaders\Sprite.hlsli">
-      <Filter>HLSL</Filter>
-    </None>
-    <None Include="Resources\shaders\FBX.hlsli">
-      <Filter>HLSL</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Resources\shaders\OBJPS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\OBJVS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticlePS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
+    <FxCompile Include="Resources\shaders\FBXVS.hlsl" />
+    <FxCompile Include="Resources\shaders\OBJPS.hlsl" />
+    <FxCompile Include="Resources\shaders\OBJVS.hlsl" />
+    <FxCompile Include="Resources\shaders\ParticleGS.hlsl" />
+    <FxCompile Include="Resources\shaders\ParticlePS.hlsl" />
+    <FxCompile Include="Resources\shaders\ParticleVS.hlsl" />
+    <FxCompile Include="Resources\shaders\SpritePS.hlsl" />
+    <FxCompile Include="Resources\shaders\SpriteVS.hlsl" />
     <FxCompile Include="Resources\shaders\FBXPS.hlsl">
       <Filter>HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\FBXVS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shape.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\DebugText.h">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\Sprite.h">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Model.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Object3d.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\ParticleManager.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="camera\Camera.h">
-      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="audio\Audio.h">
-      <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXCommon\DXCommon.h">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXCommon\SafeDelete.h">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXCommon\WinApp.h">
-      <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
-    </ClInclude>
-    <ClInclude Include="input\input.h">
-      <Filter>ソース&amp;ヘッダーファイル\input</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\GameScene.h">
-      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\FbxLoader.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\FBX</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\FbxModel.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\FBX</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\FbxObject.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\FBX</Filter>
-    </ClInclude>
+    <ClCompile Include="2d\Sprite.cpp" />
+    <ClCompile Include="3d\FbxLoader.cpp" />
+    <ClCompile Include="3d\FbxModel.cpp" />
+    <ClCompile Include="3d\FbxObject.cpp" />
+    <ClCompile Include="3d\Light.cpp" />
+    <ClCompile Include="3d\Model.cpp" />
+    <ClCompile Include="3d\Object3d.cpp" />
+    <ClCompile Include="3d\ParticleManager.cpp" />
+    <ClCompile Include="audio\Audio.cpp" />
+    <ClCompile Include="camera\Camera.cpp" />
+    <ClCompile Include="DirectXCommon\DXCommon.cpp" />
+    <ClCompile Include="DirectXCommon\WinApp.cpp" />
+    <ClCompile Include="input\input.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="scene\GameScene.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="others\Collision.cpp">
+      <Filter>collision</Filter>
+    </ClCompile>
+    <ClCompile Include="others\CollisionPrimitive.cpp">
+      <Filter>collision</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\DebugText.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="2d\Sprite.h" />
+    <ClInclude Include="3d\FbxLoader.h" />
+    <ClInclude Include="3d\FbxModel.h" />
+    <ClInclude Include="3d\FbxObject.h" />
+    <ClInclude Include="3d\Light.h" />
+    <ClInclude Include="3d\Model.h" />
+    <ClInclude Include="3d\Object3d.h" />
+    <ClInclude Include="3d\ParticleManager.h" />
+    <ClInclude Include="audio\Audio.h" />
+    <ClInclude Include="camera\Camera.h" />
+    <ClInclude Include="DirectXCommon\DXCommon.h" />
+    <ClInclude Include="DirectXCommon\SafeDelete.h" />
+    <ClInclude Include="DirectXCommon\WinApp.h" />
+    <ClInclude Include="input\input.h" />
+    <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="Shape.h" />
     <ClInclude Include="others\Collision.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+      <Filter>collision</Filter>
     </ClInclude>
     <ClInclude Include="others\CollisionPrimitive.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+      <Filter>collision</Filter>
     </ClInclude>
-    <ClInclude Include="3d\Light.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    <ClInclude Include="2d\DebugText.h">
+      <Filter>2d</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shaders\Particle.hlsli" />
+    <None Include="Resources\shaders\Sprite.hlsli" />
+    <None Include="Resources\shaders\FBX.hlsli">
+      <Filter>HLSL</Filter>
+    </None>
+    <None Include="Resources\shaders\OBJ.hlsli">
+      <Filter>HLSL</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="HLSL">
+      <UniqueIdentifier>{e4125239-188b-488f-9ff3-fd52a069eb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3d">
+      <UniqueIdentifier>{80ea3a40-2793-420c-8b86-d1c5b50f21df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d">
+      <UniqueIdentifier>{9d2e6ff4-956b-4a8c-ade4-4e4c8cf781fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="collision">
+      <UniqueIdentifier>{f7ac801e-1cba-4abb-b7a9-4ce5b42478b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
