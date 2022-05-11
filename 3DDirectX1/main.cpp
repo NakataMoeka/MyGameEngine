@@ -6,7 +6,6 @@
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	HRESULT result;
-	
 
 	WinApp* winapp = nullptr;
 	DirectXCommon* dxcommon = nullptr;
