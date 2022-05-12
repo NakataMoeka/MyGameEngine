@@ -164,6 +164,8 @@
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="others\Collision.cpp" />
+    <ClCompile Include="others\CollisionPrimitive.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="Shape.cpp" />
   </ItemGroup>
@@ -234,6 +236,8 @@
     <ClInclude Include="DirectXCommon\SafeDelete.h" />
     <ClInclude Include="DirectXCommon\WinApp.h" />
     <ClInclude Include="input\input.h" />
+    <ClInclude Include="others\Collision.h" />
+    <ClInclude Include="others\CollisionPrimitive.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="Shape.h" />
   </ItemGroup>

@@ -35,19 +35,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
 	model = model->Create("bullet");
-	model2 = model2->Create("Player");
+	model2 = model2->Create("bullet");
 	object3d = Object3d::Create(model);
 	object3d2 = Object3d::Create(model2);
 	
-	object3d2->SetRotation({ 0,180,0 });
-	object3d2->SetPosition({ 0,0,0 });
+
 	object3d->Update();
 	object3d2->Update();
 	//モデル名を指定して読み込み
 	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
 	//あああああ
 
-	//object3d2->Update();
+
 
 
 	// デバッグテキスト用テクスチャ読み込み
@@ -122,29 +121,48 @@ void GameScene::Update()
 #pragma endregion
 	
 #pragma region MT4_課題2_2
+	//if (input->TriggerKey(DIK_SPACE)) {
+
+	//	Mflag = true;
+	//}
+	//
+	//	if (Mflag == true) {
+	//		
+	//		if (playerPosition2.y<= 500) {
+	//			playerPosition2.x += v2.x;
+	//			playerPosition2.y -= v2.y;
+
+
+	//			v2.y = -g + v2.y;
+	//			g = k * v / m;
+	//	
+	//	
+
+	//		}
+	//	}
+	//
+	//sprite->SetPosition(playerPosition2);
+#pragma endregion
+#pragma region MT4_課題3
+
+	sphereA.center = XMVectorSet(playerPosition.x, playerPosition.y, playerPosition.z, 1);
+	sphereB.center = XMVectorSet(playerPositionB.x, playerPositionB.y, playerPositionB.z, 1);
+	sphereA.radius = 2.0f;
+	sphereB.radius = 2.0f;
+
 	if (input->TriggerKey(DIK_SPACE)) {
 
 		Mflag = true;
 	}
 	
-		if (Mflag == true) {
-			
-			if (playerPosition2.y<= 500) {
-				playerPosition2.x += v2.x;
-				playerPosition2.y -= v2.y;
-
-
-				v2.y = -g + v2.y;
-				g = k * v / m;
-		
-		
-
-			}
-		}
-	
-	sprite->SetPosition(playerPosition2);
+	if (Mflag == true) {
+		playerPosition.x+=speed;
+	}
+	if (Collision::CheckSphere2Sphere(sphereA, sphereB)) {
+		debugText.Printf(0, 500, 3.0f, "Hit");
+		speed = 0;
+	}
 #pragma endregion
-
 
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
@@ -154,6 +172,7 @@ void GameScene::Update()
 	camera->Update();
 	particleMan->Update();
 	object3d->SetPosition(playerPosition);
+	object3d2->SetPosition(playerPositionB);
 	object3d->Update();
 	object3d2->Update();
 	
@@ -163,12 +182,12 @@ void GameScene::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	object3d->Draw();
-	//object3d2->Draw();
+	object3d2->Draw();
 	Object3d::PostDraw();
 
 
 	sprite->PreDraw(dxCommon->GetCmdList());
-	sprite->Draw();
+	//sprite->Draw();
 	char str[256];
 
 

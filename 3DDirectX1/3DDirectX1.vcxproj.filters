@@ -82,6 +82,12 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
+    <ClCompile Include="others\Collision.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClCompile>
+    <ClCompile Include="others\CollisionPrimitive.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli">
@@ -159,6 +165,12 @@
     </ClInclude>
     <ClInclude Include="scene\GameScene.h">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="others\Collision.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClInclude>
+    <ClInclude Include="others\CollisionPrimitive.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

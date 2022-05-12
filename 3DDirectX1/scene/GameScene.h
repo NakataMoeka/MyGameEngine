@@ -12,6 +12,7 @@
 #include "ParticleManager.h"
 #include"Model.h"
 #include "DebugCamera.h"
+#include "Collision.h"
 class GameScene 
 {
 private: 
@@ -59,13 +60,14 @@ private: // ƒƒ“ƒo•Ï”
 
 	const int debugTextTexNumber = 0;
 
-	//XMFLOAT3 playerPosition = {0.0f,0.0f,0.0f};
-	
+	XMFLOAT3 playerPosition = {-30.0f,0.0f,0.0f};
+	XMFLOAT3 playerPositionB = { 20.0f,0.0f,0.0f };
+
 	
 	bool Mflag = false;
 
 	//MT4_‰Û‘è1
-	XMFLOAT3 playerPosition = { -50.0f,-30.0f,0.0f };
+	//XMFLOAT3 playerPosition = { -50.0f,-30.0f,0.0f };
 	XMFLOAT2 playerPosition2 = { 0.0f,500.0f };
 	XMFLOAT2 v2 = { 0.0f,0.0f };
 
@@ -90,7 +92,10 @@ private: // ƒƒ“ƒo•Ï”
 	float fx = 0.0f;
 	float fy = 0.0f;
 	float PI = 3.141592;
+	//MT4‰Û‘è3
+
+	Sphere sphereA;
+	Sphere sphereB;
+	float speed = 1;
 
 };
-
-
