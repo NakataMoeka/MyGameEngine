@@ -9,6 +9,7 @@
 #include <DirectXMath.h>
 #include <d3dx12.h>
 #include <string>
+#include<fbxsdk.h>
 struct Node
 {
 	//名前
@@ -42,6 +43,9 @@ private: // エイリアス
 	using ScratchImage = DirectX::ScratchImage;
 	// std::を省略
 	template <class T> using vector = std::vector<T>;
+public://定数
+	//ボーンインデックスの最大数
+	static const int MAX_BONE_INDICES = 4;
 public:
 	//フレンドクラス
 	friend class FbxLoader;
@@ -52,10 +56,34 @@ public:
 		DirectX::XMFLOAT3 pos; // xyz座標
 		DirectX::XMFLOAT3 normal; // 法線ベクトル
 		DirectX::XMFLOAT2 uv;  // uv座標
+		UINT boneIndex[MAX_BONE_INDICES];
+		float boneWeight[MAX_BONE_INDICES];
 	};
+	//ボーン構造体
+	struct Bone
+	{
+		//名前
+		std::string name;
+		//初期姿勢の逆行列
+		DirectX::XMMATRIX invInitialPose;
+		//クラスター
+		FbxCluster* fbxCluster;
+		//コンストラクタ
+		Bone(const std::string& name) {
+			this->name = name;
+		}
+	};
+
+
 	void CreateBuffers(ID3D12Device* dev);
 	void Draw(ID3D12GraphicsCommandList*cmdList);
 	const XMMATRIX& GetModelTransform() { return meshNode->globalTransform; }
+	//getter
+	//FbxScene* GetFbxScene() { return fbxScene; }
+	//getter
+	std::vector<Bone>& GetBones() { return bones; }
+
+
 private:
 	//モデル名
 	std::string name;
@@ -87,4 +115,7 @@ private:
 	D3D12_INDEX_BUFFER_VIEW ibView={};
 	// デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapSRV;
+	//ボーン配列
+	std::vector<Bone>bones;
+
 };
