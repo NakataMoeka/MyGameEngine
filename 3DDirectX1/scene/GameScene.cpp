@@ -65,8 +65,14 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
 	//camera->SetDistance(20.0f);
-			v2.x = v * cos(60 * PI / 180.0);
-			v2.y = v * sin(60 * PI / 180.0);
+			//v2.x = v * cos(60 * PI / 180.0);
+			//v2.y = v * sin(60 * PI / 180.0);
+		
+			
+	v *= m;
+	vB *= m2;
+	vu = -v;
+	vBu = -vB;
 }
 
 void GameScene::Update()
@@ -156,12 +162,17 @@ void GameScene::Update()
 	}
 	
 	if (Mflag == true) {
-		playerPosition.x+=speed;
+
+		playerPosition.x += v;
+		playerPositionB.x += vB;
+
 	}
 	if (Collision::CheckSphere2Sphere(sphereA, sphereB)) {
 		debugText.Printf(0, 500, 3.0f, "Hit");
-		speed = 0;
+		v = vu;
+		vB = vBu;
 	}
+
 #pragma endregion
 
 	if (input->PushMouse(0)) {
@@ -173,6 +184,7 @@ void GameScene::Update()
 	particleMan->Update();
 	object3d->SetPosition(playerPosition);
 	object3d2->SetPosition(playerPositionB);
+	object3d2->SetScale({ 2.0f,2.0f,2.0f });
 	object3d->Update();
 	object3d2->Update();
 	
@@ -191,8 +203,8 @@ void GameScene::Draw()
 	char str[256];
 
 
-	debugText.Printf(0, 140, 3.0f, "%f,%f",playerPosition2.y,v);
-	debugText.Printf(0, 180, 3.0f, "%d", tFlag);
+	debugText.Printf(0, 140, 3.0f, "%f,%f",v,vB);
+
 	debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
 	debugText.DrawAll(dxCommon->GetCmdList( ));

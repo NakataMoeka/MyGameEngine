@@ -60,8 +60,6 @@ private: // ƒƒ“ƒo•Ï”
 
 	const int debugTextTexNumber = 0;
 
-	XMFLOAT3 playerPosition = {-30.0f,0.0f,0.0f};
-	XMFLOAT3 playerPositionB = { 20.0f,0.0f,0.0f };
 
 	
 	bool Mflag = false;
@@ -73,13 +71,13 @@ private: // ƒƒ“ƒo•Ï”
 
 	bool tFlag = false;
 
-	float f = 10.0f;
-	float v = 40.0f;
+	//float f = 10.0f;
+	//float v = 40.0f;
 	float k = 1.0f;
-	float a = 0.f;
+//	float a = 0.f;
 	float g = 9.8f/60.0f;
 	float fx1 = 1.0f;
-	float m = 5.0f;
+	//float m = 5.0f;
 	float t=0.0f;
 	//Mt4_‰Û‘è2
 	float mg = 9.8f;
@@ -94,8 +92,28 @@ private: // ƒƒ“ƒo•Ï”
 	float PI = 3.141592;
 	//MT4‰Û‘è3
 
+	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
+	XMFLOAT3 playerPositionB = { 20.0f,0.0f,0.0f };
+
+	const float minus = -1.0f;
+
+	float f = 0.0f;
+	float f2 = 0.0f;
+
+	float v = 1.0f;
+	float vB = -1.0f;
+	float vu;
+	float vBu ;
+
+	float a = 0.1f;
+	float a2 = 0.1f;
+
+	float m = 0.7f;
+	float m2 = 0.5f;
 	Sphere sphereA;
 	Sphere sphereB;
-	float speed = 1;
+
+
+
 
 };
