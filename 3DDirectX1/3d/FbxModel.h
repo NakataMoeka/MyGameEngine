@@ -51,7 +51,7 @@ public:
 	friend class FbxLoader;
 
 	// 頂点データ構造体
-	struct VertexPosNormalUv
+	struct VertexPosNormalUvSkin
 	{
 		DirectX::XMFLOAT3 pos; // xyz座標
 		DirectX::XMFLOAT3 normal; // 法線ベクトル
@@ -92,7 +92,7 @@ private:
 	//メッシュを持つノード
 	Node* meshNode = nullptr;
 	// 頂点データ配列
-	std::vector<VertexPosNormalUv> vertices;
+	std::vector<VertexPosNormalUvSkin> vertices;
 	// 頂点インデックス配列
 	std::vector<unsigned short> indices;
 	// アンビエント係数

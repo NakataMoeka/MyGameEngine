@@ -61,9 +61,6 @@
     <ClCompile Include="camera\Camera.cpp">
       <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
     </ClCompile>
-    <ClCompile Include="camera\debugCamera.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
-    </ClCompile>
     <ClCompile Include="audio\Audio.cpp">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClCompile>
@@ -146,9 +143,6 @@
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
     <ClInclude Include="camera\Camera.h">
-      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="camera\debugCamera.h">
       <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
     </ClInclude>
     <ClInclude Include="audio\Audio.h">

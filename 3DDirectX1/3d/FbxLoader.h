@@ -50,6 +50,8 @@ public:
 
 	static void ConvertMatrixFromFbx(DirectX::XMMATRIX* dst, const FbxAMatrix& src);
 
+	void ParseSkin(FbxModel* fbxModel, FbxMesh* fbxMesh);
+
 public://定数
 
 	static const string baseDirectory;

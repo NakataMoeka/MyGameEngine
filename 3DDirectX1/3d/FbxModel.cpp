@@ -5,7 +5,7 @@ void FbxModel::CreateBuffers(ID3D12Device* dev)
 	HRESULT result;
 
 	// 頂点データ全体のサイズ
-	UINT sizeVB = static_cast<UINT>(sizeof(VertexPosNormalUv) * vertices.size());
+	UINT sizeVB = static_cast<UINT>(sizeof(VertexPosNormalUvSkin) * vertices.size());
 	//インデックスデータの全サイズ
 	UINT sizeIB = static_cast<UINT>(sizeof(unsigned short) * indices.size());
 
@@ -27,7 +27,7 @@ void FbxModel::CreateBuffers(ID3D12Device* dev)
 	);
 
 	// 頂点バッファへのデータ転送
-	VertexPosNormalUv* vertMap = nullptr;
+	VertexPosNormalUvSkin* vertMap = nullptr;
 	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
 	if (SUCCEEDED(result)) {
 		std::copy(vertices.begin(), vertices.end(), vertMap);
