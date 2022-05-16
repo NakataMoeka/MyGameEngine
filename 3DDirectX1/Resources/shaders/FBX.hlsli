@@ -1,3 +1,8 @@
+
+//ボーンの最大数
+static const int MAX_BONES = 32;
+
+
 cbuffer cbuff0 : register(b0)
 {
 	//float4 color; // 色(RGBA)
@@ -6,6 +11,12 @@ cbuffer cbuff0 : register(b0)
 	matrix world;
 	float3 cameraPos;
 };
+
+cbuffer skinning: register(b3)
+{
+	matrix matSkinning[MAX_BONES];
+};
+
 
 //cbuffer cbuff1 : register(b1)
 //{
@@ -20,7 +31,10 @@ struct VSInput
 	float4 pos : POSITION; // システム用頂点座標
 	float3 normal :NORMAL; // 法線ベクトル
 	float2 uv  :TEXCOORD; // uv値
+	uint4 boneIndices:BONEINDICES;
+	float4 boneWeights: BONEWEIGHTS;
 };
+
 // 頂点シェーダーからピクセルシェーダーへのやり取りに使用する構造体
 struct VSOutput
 {

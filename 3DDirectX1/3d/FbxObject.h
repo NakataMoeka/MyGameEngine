@@ -8,7 +8,7 @@
 #include <string>
 
 #include "FbxModel.h"
-
+#include "FbxLoader.h"
 #include "Camera.h"
 class FbxObject3d
 {
@@ -22,13 +22,19 @@ protected: // エイリアス
 	using XMMATRIX = DirectX::XMMATRIX;
 
 public:
-
+	//ボーンの最大数
+	static const int MAX_BONES = 32;
 
 	struct ConstBufferDataTransform
 	{
 		XMMATRIX viewproj;
 		XMMATRIX world;
 		XMFLOAT3 cameraPos;
+	};
+	struct ConstBufferDataSkin
+	{
+		XMMATRIX bones[MAX_BONES];
+
 	};
 
 
@@ -72,6 +78,8 @@ public:
 
 protected:
 	ComPtr<ID3D12Resource> constBuffTransform;
+
+	ComPtr<ID3D12Resource> constBuffSkin;
 private:
 
 	// デバイス
@@ -87,7 +95,8 @@ private:
 
 
 
-	ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
+	//ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
+
 
 	// 色
 	//XMFLOAT4 color = { 1,0,0,1 };

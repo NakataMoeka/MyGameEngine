@@ -368,10 +368,10 @@ void FbxLoader::ParseSkin(FbxModel* fbxModel, FbxMesh* fbxMesh)
             });
         int weightArrayIndex = 0;
         //降順ソート済みのウェイトリストから
-        for (auto& WeightSet : weightList) {
+        for (auto& weightSet : weightList) {
             //頂点データに書きこみ
-            vertices[i].boneIndex[weightArrayIndex] = WeightSet.index;
-            vertices[i].boneWeight[weightArrayIndex] = WeightSet.weight;
+            vertices[i].boneIndex[weightArrayIndex] = weightSet.index;
+            vertices[i].boneWeight[weightArrayIndex] = weightSet.weight;
             //4つの達したら終了
             if (++weightArrayIndex >= FbxModel::MAX_BONE_INDICES)
             {

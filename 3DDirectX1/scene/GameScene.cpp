@@ -40,7 +40,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
 	model = model->Create("bullet",true);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
@@ -51,7 +51,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	object3d->Update();
 //	object3d2->Update();
 	//モデル名を指定して読み込み
-	FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
 	//あああああ
 
 	//object3d2->Update();
@@ -71,8 +71,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
-	camera->SetTarget({ 0, 1, 0 });
-	camera->SetEye({ 0, 0, -5 });
+	camera->SetTarget({ 0, 0, 0 });
+	camera->SetEye({ 0, 0, -10 });
 }
 
 void GameScene::Update()
@@ -96,8 +96,8 @@ void GameScene::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
-	object3d->Draw();
-	//object3d2->Draw();
+	//object3d->Draw();
+	object3d2->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 
