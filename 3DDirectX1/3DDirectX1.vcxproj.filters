@@ -64,9 +64,6 @@
     <ClCompile Include="audio\Audio.cpp">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon\DirectXCommon.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClCompile>
     <ClCompile Include="DirectXCommon\WinApp.cpp">
       <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
     </ClCompile>
@@ -76,9 +73,6 @@
     <ClCompile Include="scene\GameScene.cpp">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClCompile>
     <ClCompile Include="3d\FbxLoader.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClCompile>
@@ -87,6 +81,12 @@
     </ClCompile>
     <ClCompile Include="3d\FbxObject.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\DXCommon.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +148,6 @@
     <ClInclude Include="audio\Audio.h">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXCommon\DirectXCommon.h">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClInclude>
     <ClInclude Include="DirectXCommon\SafeDelete.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
@@ -171,6 +168,9 @@
     </ClInclude>
     <ClInclude Include="3d\FbxObject.h">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXCommon\DXCommon.h">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -78,11 +78,14 @@ public:
 	void CreateBuffers(ID3D12Device* dev);
 	void Draw(ID3D12GraphicsCommandList*cmdList);
 	const XMMATRIX& GetModelTransform() { return meshNode->globalTransform; }
+	
+	FbxScene* fbxScene = nullptr;
 	//getter
-	//FbxScene* GetFbxScene() { return fbxScene; }
+	FbxScene* GetFbxScene() { return fbxScene; }
 	//getter
 	std::vector<Bone>& GetBones() { return bones; }
-
+	//デスクリプタ
+	~FbxModel();
 
 private:
 	//モデル名

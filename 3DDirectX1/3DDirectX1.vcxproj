@@ -162,7 +162,7 @@
     <ClCompile Include="3d\ParticleManager.cpp" />
     <ClCompile Include="audio\Audio.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
-    <ClCompile Include="DirectXCommon\DirectXCommon.cpp" />
+    <ClCompile Include="DirectXCommon\DXCommon.cpp" />
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -234,7 +234,7 @@
     <ClInclude Include="3d\ParticleManager.h" />
     <ClInclude Include="audio\Audio.h" />
     <ClInclude Include="camera\Camera.h" />
-    <ClInclude Include="DirectXCommon\DirectXCommon.h" />
+    <ClInclude Include="DirectXCommon\DXCommon.h" />
     <ClInclude Include="DirectXCommon\SafeDelete.h" />
     <ClInclude Include="DirectXCommon\WinApp.h" />
     <ClInclude Include="input\input.h" />

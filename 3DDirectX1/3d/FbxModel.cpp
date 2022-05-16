@@ -121,3 +121,9 @@ void FbxModel::Draw(ID3D12GraphicsCommandList* cmdList)
 	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 
 }
+
+FbxModel::~FbxModel()
+{
+	//fbxƒV[ƒ“‚Ì‰ð•ú
+	fbxScene->Destroy();
+}
