@@ -100,16 +100,20 @@ private: // ƒƒ“ƒo•Ï”
 	float f = 0.0f;
 	float f2 = 0.0f;
 
-	float v = 1.0f;
-	float vB = -1.0f;
+
+
+	float v = 0.4f;
+	float vB = 0.0f;
 	float vu;
 	float vBu ;
 
 	float a = 0.1f;
 	float a2 = 0.1f;
 
-	float m = 0.7f;
-	float m2 = 0.5f;
+	float m = 0.2f;
+	float m2 = 0.1f;
+	float e = 0.5;
+
 	Sphere sphereA;
 	Sphere sphereB;
 
