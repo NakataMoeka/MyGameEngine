@@ -23,21 +23,6 @@ ComPtr<ID3D12PipelineState> FbxObject3d::pipelinestate;
 
 Camera* FbxObject3d::camera = nullptr;
 
-void FbxObject3d::StaticInitialize(ID3D12Device* dev, Camera* camera)
-{
-	assert(!FbxObject3d::dev);
-	// nullptrチェック
-	assert(dev);
-
-	FbxObject3d::dev = dev;
-	FbxObject3d::camera = camera;
-
-	// グラフィックパイプラインの生成
-	CreateGraphicsPipeline();
-
-	// モデルの静的初期化
-	//FbxModel::StaticInitialize(dev);
-}
 
 void FbxObject3d::CreateGraphicsPipeline()
 {
@@ -198,7 +183,7 @@ void FbxObject3d::CreateGraphicsPipeline()
 		// グラフィックスパイプラインの生成
 		result = dev->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(pipelinestate.ReleaseAndGetAddressOf()));
 		if (FAILED(result)) { assert(0); }
-	}
+}
 
 
 
@@ -240,7 +225,16 @@ void FbxObject3d::Initialize()
 		&CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferDataSkin) + 0xff) & ~0xff),
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr, IID_PPV_ARGS(&constBuffSkin));
+	
+	frameTime.SetTime(0, 0, 0, 1, 0, FbxTime::EMode::eFrames60);
 
+	// 定数バッファへデータ転送
+	ConstBufferDataSkin* constMapSkin = nullptr;
+	result = constBuffSkin->Map(0, nullptr, (void**)&constMapSkin);
+	for (int i = 0; i < MAX_BONES; i++) {
+		constMapSkin->bones[i] = XMMatrixIdentity();
+	}
+	constBuffSkin->Unmap(0, nullptr);
 }
 
 void FbxObject3d::Update()
@@ -284,13 +278,22 @@ void FbxObject3d::Update()
 		//今の姿勢行列	
 		XMMATRIX matCurrentPose;
 		FbxAMatrix fbxCurrentPose = 
-			bones[i].fbxCluster->GetLink()->EvaluateGlobalTransform(0);
+			bones[i].fbxCluster->GetLink()->EvaluateGlobalTransform(currentTime);
 		//XMMATRIXに変換
 		FbxLoader::ConvertMatrixFromFbx(&matCurrentPose, fbxCurrentPose);
 		//合成してスキニング行列に
 		constMapSkin->bones[i] = bones[i].invInitialPose * matCurrentPose;
 	}
 	constBuffSkin->Unmap(0, nullptr);
+	//アニメーション
+	if (isPlay) {
+		//1フレーム進める
+		currentTime += frameTime;
+		//最後まで再生したら先頭に戻す	
+		if (currentTime > endTime) {
+			currentTime = startTime;
+		}
+	}
 }
 
 void FbxObject3d::Draw()
@@ -316,5 +319,26 @@ void FbxObject3d::Draw()
 
 	// モデル描画
 	fbxModel->Draw(cmdList);
+
+}
+
+void FbxObject3d::PlayAnimation()
+{
+	FbxScene* fbxScene = fbxModel->GetFbxScene();
+	//0番のアニメーションを取得	
+	FbxAnimStack* animstack = fbxScene->GetSrcObject<FbxAnimStack>(0);
+	//アニメーションの名前取得
+	const char* animstackname = animstack->GetName();
+	//アニメーションの時間情報
+	FbxTakeInfo* takeinfo = fbxScene->GetTakeInfo(animstackname);
+
+	//開始時間取得
+	startTime = takeinfo->mLocalTimeSpan.GetStart();
+	//終了時間取得
+	endTime = takeinfo->mLocalTimeSpan.GetStop();
+	//開始時間に合わせる	
+	currentTime = startTime;
+	//再生状態にする
+	isPlay = true;
 
 }

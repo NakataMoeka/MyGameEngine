@@ -38,7 +38,6 @@ public:
 	};
 
 
-	static void StaticInitialize(ID3D12Device* dev, Camera* camera = nullptr);
 
 	static void CreateGraphicsPipeline();
 
@@ -59,6 +58,8 @@ public:
 
 	void Draw();
 
+	void PlayAnimation();
+
 	const XMFLOAT3& GetPosition() { return position; }
 
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
@@ -74,7 +75,6 @@ public:
 
 
 
-	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
 
 protected:
 	ComPtr<ID3D12Resource> constBuffTransform;
@@ -115,7 +115,16 @@ private:
 
 	// カメラ
 	static Camera* camera;
-	// ビルボード
-	bool isBillboard = false;
+
+	//1フレームの時間
+	FbxTime frameTime;
+	//アニメーション開始時間	
+	FbxTime startTime;
+	//アニメーション終了時間
+	FbxTime endTime;
+	//現在時間
+	FbxTime currentTime;
+	//アニメーション再生中
+	bool isPlay = false;
 };
 

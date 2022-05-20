@@ -77,16 +77,20 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 void GameScene::Update()
 {
-	//XMFLOAT3 playerPosition
+
 
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
 	}
 	// パーティクル生成
 	//CreateParticles();
+	if (input->TriggerKey(DIK_SPACE)) {
+		object3d2->PlayAnimation();
+	}
 	camera->Update();
 	particleMan->Update();
 	object3d->SetPosition(playerPosition);
+	object3d2->SetRotation({ 0,0,0 });
 	object3d->Update();
 	object3d2->Update();
 
