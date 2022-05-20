@@ -99,7 +99,8 @@ void FbxLoader::ParseNodeRecursive(FbxModel* fbxModel, FbxNode* fbxNode,Node* pa
         //親の変形を乗算
         node.globalTransform *= parent->globalTransform;
     }
-    //fbxノードのメッシュ情報を解析
+
+   //fbxノードのメッシュ情報を解析
     FbxNodeAttribute* fbxNodeAttribute = fbxNode->GetNodeAttribute();
     if (fbxNodeAttribute) {
         if (fbxNodeAttribute->GetAttributeType() == FbxNodeAttribute::eMesh) {
