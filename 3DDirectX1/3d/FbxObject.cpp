@@ -273,8 +273,7 @@ void FbxObject3d::Update()
 	std::vector<FbxModel::Bone>& bones = fbxModel->GetBones();
 	
 	// グローバル変形逆行列
-	DirectX::XMMATRIX globaliTransform;
-	globaliTransform = XMMatrixInverse(nullptr, fbxModel->GetModelTransform());
+
 
 	
 	// 定数バッファへデータ転送
@@ -288,7 +287,7 @@ void FbxObject3d::Update()
 		//XMMATRIXに変換
 		FbxLoader::ConvertMatrixFromFbx(&matCurrentPose, fbxCurrentPose);
 		//合成してスキニング行列に
-		constMapSkin->bones[i] = fbxModel->GetModelTransform() * bones[i].invInitialPose * matCurrentPose * globaliTransform;
+		constMapSkin->bones[i] = fbxModel->GetModelTransform() * bones[i].invInitialPose * matCurrentPose * XMMatrixInverse(nullptr, fbxModel->GetModelTransform());
 	}
 	constBuffSkin->Unmap(0, nullptr);
 	//アニメーション

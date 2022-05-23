@@ -40,7 +40,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
 	model = model->Create("bullet",true);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("block");
+	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
@@ -71,8 +71,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
-	camera->SetTarget({ 0, 0, 0 });
-	camera->SetEye({ 0, 0, -600 });
+	camera->SetTarget({ 0, 2.5f, 0 });
+	camera->SetEye({ 0, 0, -10 });
 }
 
 void GameScene::Update()
@@ -90,7 +90,7 @@ void GameScene::Update()
 	camera->Update();
 	particleMan->Update();
 	object3d->SetPosition(playerPosition);
-	object3d2->SetRotation({ 0,0,0 });
+	object3d2->SetRotation({ 0,90,0 });
 	object3d->Update();
 	object3d2->Update();
 

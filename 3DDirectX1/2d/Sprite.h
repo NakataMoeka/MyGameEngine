@@ -65,7 +65,7 @@ public:
 	void SetTextureRect(XMFLOAT2 texBase, XMFLOAT2 texSize);
 	//•`‰æ
 	void Draw();
-private: 
+protected: 
 
 
 

@@ -88,6 +88,9 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
+    <ClCompile Include="2d\PostEffect.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli">
@@ -180,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="DirectXCommon\DXCommon.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\PostEffect.h">
+      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
