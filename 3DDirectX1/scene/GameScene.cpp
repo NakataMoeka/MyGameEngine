@@ -166,9 +166,10 @@ void GameScene::Update()
 	if (Collision::CheckSphere2Sphere(sphereA, sphereB)) {
 		debugText.Printf(0, 500, 3.0f, "Hit");
 
-		v = (vBu*e * m2 - vu*e * m) / m;
-		vB = (v*e * m - vBu*e * m2) / m2;
-
+		v = (vBu * m2 - vu * m) / m;
+		vB = (v * m - vBu * m2) / m2;
+		v *= e;
+		vB *= e;
 	}
 
 
