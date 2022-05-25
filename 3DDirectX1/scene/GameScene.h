@@ -97,23 +97,21 @@ private: // ƒƒ“ƒo•Ï”
 
 	const float minus = -1.0f;
 
-	float f = 0.0f;
-	float f2 = 0.0f;
+
 
 
 
 	float v = 0.4f;
 	float vB = 0.0f;
 	float vu;
-	float vBu ;
+	float vBu;
 
-	float a = 0.1f;
-	float a2 = 0.1f;
+	float a = 0.01f;
+	float a2 = 0.01f;
 
-	float m = 0.2f;
-	float m2 = 0.1f;
+	float m = 1.0f;
+	float m2 = 2.0f;
 	float e = 0.5;
-
 	Sphere sphereA;
 	Sphere sphereB;
 

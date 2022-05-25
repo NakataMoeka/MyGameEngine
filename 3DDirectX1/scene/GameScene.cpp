@@ -68,11 +68,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			//v2.x = v * cos(60 * PI / 180.0);
 			//v2.y = v * sin(60 * PI / 180.0);
 		
-			
-	//v *= m;
-	//vB *= m2;
-	//vu = v*e;
-	//vBu = vB*e;
+	vu = v;
+	vBu = vB;
 }
 
 void GameScene::Update()
@@ -164,18 +161,16 @@ void GameScene::Update()
 	if (Mflag == true) {
 
 		playerPosition.x += v;
-		playerPositionB.x += vB;
-
+		playerPositionB.x -= vB;
 	}
 	if (Collision::CheckSphere2Sphere(sphereA, sphereB)) {
 		debugText.Printf(0, 500, 3.0f, "Hit");
-		
-		vu = v;
-		vBu = vB;
 
-		v += (vBu * m2- vu * m) / m;
-		vB += (vu * m - vBu * m2) / m2;
+		v = (vBu*e * m2 - vu*e * m) / m;
+		vB = (v*e * m - vBu*e * m2) / m2;
+
 	}
+
 
 #pragma endregion
 
@@ -206,8 +201,8 @@ void GameScene::Draw()
 	//sprite->Draw();
 	char str[256];
 
-	debugText.Printf(0, 80, 3.0f, "e:%f",e);
-	debugText.Printf(0, 140, 3.0f, "%f,%f",v,vB);
+	//debugText.Printf(0, 80, 3.0f, "e:%f",e);
+	//debugText.Printf(0, 140, 3.0f, "%f,%f",v,vB);
 
 	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
