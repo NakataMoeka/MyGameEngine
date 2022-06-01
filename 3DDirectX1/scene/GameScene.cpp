@@ -59,17 +59,19 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	
 	Sprite::LoadTexture(1, L"Resources/jimenParticle.png");
 
-	sprite = Sprite::CreateSprite(1, playerPosition2);
+	//sprite = Sprite::CreateSprite(1, playerPosition2);
 
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
+	camera->SetEye({ 0, 0, -100 });
 	//camera->SetDistance(20.0f);
 			//v2.x = v * cos(60 * PI / 180.0);
 			//v2.y = v * sin(60 * PI / 180.0);
 		
-	vu = v;
-	vBu = vB;
+	//vu = v;
+	//vBu = vB;
+
 }
 
 void GameScene::Update()
@@ -124,6 +126,7 @@ void GameScene::Update()
 #pragma endregion
 	
 #pragma region MT4_課題2_2
+
 	//if (input->TriggerKey(DIK_SPACE)) {
 
 	//	Mflag = true;
@@ -138,8 +141,6 @@ void GameScene::Update()
 
 	//			v2.y = -g + v2.y;
 	//			g = k * v / m;
-	//	
-	//	
 
 	//		}
 	//	}
@@ -148,7 +149,7 @@ void GameScene::Update()
 #pragma endregion
 #pragma region MT4_課題3
 
-	sphereA.center = XMVectorSet(playerPosition.x, playerPosition.y, playerPosition.z, 1);
+	/*sphereA.center = XMVectorSet(playerPosition.x, playerPosition.y, playerPosition.z, 1);
 	sphereB.center = XMVectorSet(playerPositionB.x, playerPositionB.y, playerPositionB.z, 1);
 	sphereA.radius = 2.0f;
 	sphereB.radius = 2.0f;
@@ -170,11 +171,40 @@ void GameScene::Update()
 		vB = (v * m - vBu * m2) / m2;
 		v *= e;
 		vB *= e;
-	}
+	}*/
 
 
 #pragma endregion
+#pragma region MT4_課題4
 
+
+
+if (input->TriggerKey(DIK_SPACE)) {
+
+	Mflag = true;
+}
+
+if (Mflag == true) 
+{
+	Length += 0.5f;
+	if (Length >= 50)
+	{
+		Length = 50;
+	}
+		radius = angle * 3.14f / 180.0f;
+		add_x = cos(radius) * Length;
+		add_y = sin(radius) * Length;
+		playerPosition.x = playerPositionB.x + add_x;
+		playerPosition.y = playerPositionB.y + add_y;
+		angle += va;
+}
+if (input->TriggerKey(DIK_R)) {
+	Mflag = false;
+	Length = 0;
+	playerPosition = { 0.0f,0.0f,0.0f };
+}
+
+#pragma endregion
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
 	}
@@ -202,8 +232,8 @@ void GameScene::Draw()
 	//sprite->Draw();
 	char str[256];
 
-	//debugText.Printf(0, 80, 3.0f, "e:%f",e);
-	//debugText.Printf(0, 140, 3.0f, "%f,%f",v,vB);
+	//debugText.Printf(0, 80, 3.0f, "v:%fLength:%f",v,Length);
+	//debugText.Printf(0, 140, 3.0f, "%d",circleFlag);
 
 	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 

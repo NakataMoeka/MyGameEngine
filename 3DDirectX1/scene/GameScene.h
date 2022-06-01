@@ -63,58 +63,60 @@ private: // ÉÅÉìÉoïœêî
 
 	
 	bool Mflag = false;
-
+#pragma region ç°âÒÇÕégÇÌÇÒ
 	//MT4_â€ëË1
 	//XMFLOAT3 playerPosition = { -50.0f,-30.0f,0.0f };
-	XMFLOAT2 playerPosition2 = { 0.0f,500.0f };
-	XMFLOAT2 v2 = { 0.0f,0.0f };
+	//XMFLOAT2 playerPosition2 = { 0.0f,500.0f };
+	//XMFLOAT2 v2 = { 0.0f,0.0f };
 
-	bool tFlag = false;
+	//bool tFlag = false;
 
-	//float f = 10.0f;
+	//loat f=1;
 	//float v = 40.0f;
-	float k = 1.0f;
-//	float a = 0.f;
-	float g = 9.8f/60.0f;
-	float fx1 = 1.0f;
+	//float k = 1.0f;
+	//float a = 0.f;
+	//float g = 9.8f/60.0f;
+	//float fx1 = 1.0f;
 	//float m = 5.0f;
-	float t=0.0f;
+	//float t=0.0f;
 	//Mt4_â€ëË2
-	float mg = 9.8f;
+	//float mg = 9.8f;
 
-	float fk = 0.0f;
-	float fs = 0.0f;
-	float us = 0.8f;
-	float uk = 1.5f;
-	float N = 0.0f;
-	float fx = 0.0f;
-	float fy = 0.0f;
-	float PI = 3.141592;
+	//float fk = 0.0f;
+	//float fs = 0.0f;
+	//float us = 0.8f;
+	//float uk = 1.5f;
+	//float N = 0.0f;
+	//float fx = 0.0f;
+	//float fy = 0.0f;
+	//float PI = 3.141592;
 	//MT4â€ëË3
 
+	//const float minus = -1.0f;
+	//float vB = 0.0f;
+	//float vu;
+	//float vBu;
+
+	//float a = 0.01f;
+	//float a2 = 0.01f;
+
+	//float m = 1.0f;
+	//float m2 = 2.0f;
+	//float e = 0.5;
+	//Sphere sphereA;
+	//Sphere sphereB;
+#pragma endregion
+
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
-	XMFLOAT3 playerPositionB = { 20.0f,0.0f,0.0f };
+	XMFLOAT3 playerPositionB = { 0.0f,0.0f,0.0f };
 
-	const float minus = -1.0f;
-
-
-
-
-
-	float v = 0.4f;
-	float vB = 0.0f;
-	float vu;
-	float vBu;
-
-	float a = 0.01f;
-	float a2 = 0.01f;
-
-	float m = 1.0f;
-	float m2 = 2.0f;
-	float e = 0.5;
-	Sphere sphereA;
-	Sphere sphereB;
-
+	float angle = 90;
+	float radius = 0;
+	float Length = 0;
+	float add_x;
+	float add_y;
+	float v = 5.0f;
+	float va = 2.0;
 
 
 
