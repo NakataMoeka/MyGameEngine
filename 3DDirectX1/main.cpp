@@ -62,7 +62,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//描画
 			dxcommon->preDraw();
 			postEffect->Draw(dxcommon->GetCmdList());
-		//	gameScene->Draw();
+			//gameScene->Draw();
 			dxcommon->postDraw();
 	}
 	 //ウィンドウクラスを登録解除
@@ -74,7 +74,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	safe_delete(input);
 	safe_delete(dxcommon);
 	safe_delete(winapp);
-	delete postEffect;
+	//delete postEffect;
 
 	return 0;
 }

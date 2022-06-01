@@ -187,5 +187,16 @@
     <ClInclude Include="2d\PostEffect.h">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DirectXEngine.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\engine.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
 </Project>
