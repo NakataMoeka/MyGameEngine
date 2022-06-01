@@ -74,7 +74,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	safe_delete(input);
 	safe_delete(dxcommon);
 	safe_delete(winapp);
-	//delete postEffect;
+	delete postEffect;
 
 	return 0;
 }
