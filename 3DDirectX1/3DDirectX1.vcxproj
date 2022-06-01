@@ -257,12 +257,6 @@
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="Shape.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="DirectXEngine.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\engine.ico" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

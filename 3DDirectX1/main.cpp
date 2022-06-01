@@ -35,8 +35,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//ポストエフェクト用のテクスチャ読み込み
 	Sprite::LoadTexture(100, L"Resources/white1x1.png");
 	//ポストエフェクトの初期化
-	postEffect = new PostEffect();
-	postEffect->Initialize();
+	//postEffect = new PostEffect();
+	//postEffect->Initialize();
 
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxcommon->Getdev());
@@ -61,8 +61,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			gameScene->Update();
 			//描画
 			dxcommon->preDraw();
-			postEffect->Draw(dxcommon->GetCmdList());
-			//gameScene->Draw();
+			//postEffect->Draw(dxcommon->GetCmdList());
+			gameScene->Draw();
 			dxcommon->postDraw();
 	}
 	 //ウィンドウクラスを登録解除

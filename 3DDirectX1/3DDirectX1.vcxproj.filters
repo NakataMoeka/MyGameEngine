@@ -189,14 +189,4 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="DirectXEngine.rc">
-      <Filter>リソース ファイル</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\engine.ico">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-  </ItemGroup>
 </Project>
