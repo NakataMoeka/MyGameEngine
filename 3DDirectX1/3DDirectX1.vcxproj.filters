@@ -187,6 +187,5 @@
     <ClInclude Include="2d\PostEffect.h">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
   </ItemGroup>
 </Project>
