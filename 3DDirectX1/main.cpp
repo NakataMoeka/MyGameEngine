@@ -32,11 +32,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		assert(0);
 		return 1;
 	}
-	//ポストエフェクト用のテクスチャ読み込み
-	Sprite::LoadTexture(100, L"Resources/white1x1.png");
-	//ポストエフェクトの初期化
-	postEffect = new PostEffect();
-	postEffect->Initialize();
 
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxcommon->Getdev());
@@ -46,6 +41,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	input = new Input();
 	input->Initialize(winapp);
 	input->InitializeMouse(winapp);
+	//ポストエフェクト用のテクスチャ読み込み
+	Sprite::LoadTexture(100, L"Resources/white1x1.png");
+	//ポストエフェクトの初期化
+	postEffect = new PostEffect();
+	postEffect->Initialize();
+
 	//ゲームシーンの初期化
 	gameScene = new GameScene();
 	gameScene->Initialize(dxcommon, input, audio);
@@ -66,6 +67,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			
 			dxcommon->preDraw();
 			postEffect->Draw(dxcommon->GetCmdList());
+			//gameScene->Draw();
 			dxcommon->postDraw();
 	}
 	 //ウィンドウクラスを登録解除

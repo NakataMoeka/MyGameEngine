@@ -65,9 +65,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// デバッグテキスト初期化
 	debugText.Initialize(debugTextTexNumber);
 
-	Sprite::LoadTexture(1, L"Resources/Arrow.png");
+	Sprite::LoadTexture(1, L"Resources/background.png");
 
-	sprite = Sprite::CreateSprite(1, { 10,10 });
+	sprite = Sprite::CreateSprite(1, { 0,0 });
 
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
@@ -98,20 +98,27 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
+	//背景
+	sprite->PreDraw(dxCommon->GetCmdList());
+	sprite->Draw();
+	sprite->PostDraw();
+	dxCommon->ClearDepthBuffer();
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
-	
+
+	//object3d->Draw();
+	object3d2->Draw();
+	Object3d::PostDraw();
+	FbxObject3d::PostDraw();
+
+	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	object3d->Draw();
-	object3d2->Draw();
-
 	debugText.Printf(100, 20, 3.0f, "MauseLeftClick");
 	debugText.Printf(600, 20, 3.0f, "%f", playerPosition.x);
 	debugText.DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
-	Object3d::PostDraw();
-	FbxObject3d::PostDraw();
+
 }
 void GameScene::CreateParticles()
 {
