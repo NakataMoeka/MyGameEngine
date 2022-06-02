@@ -34,7 +34,7 @@ void PostEffect::Initialize()
 
 	assert(SUCCEEDED(result));
 
-	//頂点データ
+	//頂点データ!
 	VertexPosUv vertices[vertNum] = {
 		{{-0.5f, -0.5f, 0.0f}, {0.0f, 1.0f}},	//左下
 		{{-0.5f, +0.5f, 0.0f}, {0.0f, 0.0f}},	//左上
