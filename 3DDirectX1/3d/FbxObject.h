@@ -41,7 +41,7 @@ public:
 
 	static void CreateGraphicsPipeline();
 
-	static void SetDev(ID3D12Device* dev){
+	static void SetDev(ID3D12Device* dev) {
 		FbxObject3d::dev = dev;
 	}
 	static void SetCamera(Camera* camera) {

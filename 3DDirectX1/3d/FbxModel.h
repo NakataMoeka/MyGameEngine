@@ -76,9 +76,9 @@ public:
 
 
 	void CreateBuffers(ID3D12Device* dev);
-	void Draw(ID3D12GraphicsCommandList*cmdList);
+	void Draw(ID3D12GraphicsCommandList* cmdList);
 	const XMMATRIX& GetModelTransform() { return meshNode->globalTransform; }
-	
+
 	FbxScene* fbxScene = nullptr;
 	//getter
 	FbxScene* GetFbxScene() { return fbxScene; }
@@ -113,9 +113,9 @@ private:
 	// テクスチャバッファ
 	ComPtr<ID3D12Resource> texbuff;
 	// 頂点バッファビュー
-	D3D12_VERTEX_BUFFER_VIEW vbView={};
+	D3D12_VERTEX_BUFFER_VIEW vbView = {};
 	// インデックスバッファビュー
-	D3D12_INDEX_BUFFER_VIEW ibView={};
+	D3D12_INDEX_BUFFER_VIEW ibView = {};
 	// デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapSRV;
 	//ボーン配列

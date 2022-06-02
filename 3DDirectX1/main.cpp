@@ -60,9 +60,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//ゲームシーンの毎フレーム処理
 			gameScene->Update();
 			//描画
+			postEffect->PreDrawScene(dxcommon->GetCmdList());
+			gameScene->Draw();
+			postEffect->PostDrawScene(dxcommon->GetCmdList());
+			
 			dxcommon->preDraw();
 			postEffect->Draw(dxcommon->GetCmdList());
-			//gameScene->Draw();
 			dxcommon->postDraw();
 	}
 	 //ウィンドウクラスを登録解除

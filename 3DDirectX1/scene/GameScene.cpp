@@ -100,20 +100,18 @@ void GameScene::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
-	//object3d->Draw();
-	object3d2->Draw();
-	Object3d::PostDraw();
-	FbxObject3d::PostDraw();
-
-
+	
 	sprite->PreDraw(dxCommon->GetCmdList());
-	sprite->Draw();
-	char str[256];
+	//sprite->Draw();
+	object3d->Draw();
+	object3d2->Draw();
 
 	debugText.Printf(100, 20, 3.0f, "MauseLeftClick");
 	debugText.Printf(600, 20, 3.0f, "%f", playerPosition.x);
 	debugText.DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
+	Object3d::PostDraw();
+	FbxObject3d::PostDraw();
 }
 void GameScene::CreateParticles()
 {

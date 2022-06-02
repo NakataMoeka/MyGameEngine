@@ -103,7 +103,7 @@ void FbxModel::CreateBuffers(ID3D12Device* dev)
 void FbxModel::Draw(ID3D12GraphicsCommandList* cmdList)
 {
 
-	
+
 
 	// 頂点バッファの設定
 	cmdList->IASetVertexBuffers(0, 1, &vbView);

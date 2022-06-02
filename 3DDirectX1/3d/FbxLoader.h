@@ -14,7 +14,7 @@ private://エイリアス
 	using string = std::string;
 public:
 	static const string defaultTextureFileName;
-	
+
 
 	/// <summary>
 	/// シングルトンインスタンスの取得
@@ -34,10 +34,10 @@ public:
 	/// ファイルからFBXモデル読み込み
 	/// </summary>
 	/// <param name="modelName">モデル名</param>
-	FbxModel* LoadModelFromFile(const string&modelName);
-	
+	FbxModel* LoadModelFromFile(const string& modelName);
+
 	void ParseNodeRecursive(FbxModel* fbxModel, FbxNode* fbxNode, Node* parent = nullptr);
-	
+
 	void ParseMesh(FbxModel* fbxModel, FbxNode* fbxNode);
 	//頂点座標読み取り
 	void ParseMeshVertices(FbxModel* fbxModel, FbxMesh* fbxMesh);

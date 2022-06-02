@@ -438,8 +438,8 @@ void Sprite::Draw()
 	this->matWorld *= XMMatrixTranslation(position.x, position.y, 0.0f);
 
 	// 定数バッファにデータ転送
-	ConstBufferData *constMap = nullptr;
-	HRESULT result = this->constBuff->Map(0, nullptr, (void **)&constMap);
+	ConstBufferData* constMap = nullptr;
+	HRESULT result = this->constBuff->Map(0, nullptr, (void**)&constMap);
 	if (SUCCEEDED(result))
 	{
 		constMap->color = this->color;
@@ -450,7 +450,7 @@ void Sprite::Draw()
 	// 頂点バッファの設定
 	cmdList->IASetVertexBuffers(0, 1, &this->vbView);
 
-	ID3D12DescriptorHeap *ppHeaps[] = { descHeap.Get() };
+	ID3D12DescriptorHeap* ppHeaps[] = { descHeap.Get() };
 	// デスクリプタヒープをセット
 	cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 	// 定数バッファビューをセット
