@@ -42,7 +42,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	input->Initialize(winapp);
 	input->InitializeMouse(winapp);
 	//ポストエフェクト用のテクスチャ読み込み
-	Sprite::LoadTexture(100, L"Resources/white1x1.png");
+	//Sprite::LoadTexture(100, L"Resources/white1x1.png");
 	//ポストエフェクトの初期化
 	postEffect = new PostEffect();
 	postEffect->Initialize();

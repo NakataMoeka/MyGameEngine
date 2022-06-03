@@ -62,7 +62,8 @@ private: // メンバ変数
 
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
 
-
-
+	int HP = 50;
+	int pg = 0;
+	bool pFlag = false;
 };
 

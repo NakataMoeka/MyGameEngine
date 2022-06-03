@@ -105,6 +105,9 @@
     <None Include="Resources\shaders\FBX.hlsli">
       <Filter>HLSL</Filter>
     </None>
+    <None Include="Resources\shaders\PostEffectTest.hlsli">
+      <Filter>HLSL</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\OBJPS.hlsl">
@@ -132,6 +135,12 @@
       <Filter>HLSL</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\FBXVS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectTestPS.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectTestVS.hlsl">
       <Filter>HLSL</Filter>
     </FxCompile>
   </ItemGroup>

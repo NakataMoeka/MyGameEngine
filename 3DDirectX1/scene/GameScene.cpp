@@ -100,7 +100,7 @@ void GameScene::Draw()
 {
 	//背景
 	sprite->PreDraw(dxCommon->GetCmdList());
-	sprite->Draw();
+	//sprite->Draw();
 	sprite->PostDraw();
 	dxCommon->ClearDepthBuffer();
 	Object3d::PreDraw(dxCommon->GetCmdList());
