@@ -55,10 +55,10 @@ void Framework::Finalize()
 	winapp->TerminateGameWindow();
 
 
-	safe_delete(audio);
-	safe_delete(input);
-	safe_delete(dxcommon);
-	safe_delete(winapp);
+	delete audio;
+	delete input;
+	delete dxcommon;
+	delete winapp;
 	delete postEffect;
 }
 

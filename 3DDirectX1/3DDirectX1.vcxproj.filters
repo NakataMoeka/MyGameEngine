@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="HLSL">
       <UniqueIdentifier>{38cedc2e-1f11-455e-8a50-db8e3fa0dc2d}</UniqueIdentifier>
     </Filter>
@@ -34,6 +30,10 @@
     </Filter>
     <Filter Include="ソース&amp;ヘッダーファイル\input">
       <UniqueIdentifier>{3aa9bbac-beaf-461a-9c79-1b9ce2629b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +67,6 @@
     <ClCompile Include="scene\GameScene.cpp">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClCompile>
-    <ClCompile Include="3d\FbxLoader.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
     <ClCompile Include="3d\FbxModel.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClCompile>
@@ -88,10 +85,13 @@
     <ClCompile Include="DirectXCommon\WinApp.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="NMGame.cpp">
+    <ClCompile Include="3d\FbxLoader.cpp">
+      <Filter>ソース&amp;ヘッダーファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\Framework.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Framework.cpp">
+    <ClCompile Include="DirectXCommon\NMGame.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -199,10 +199,10 @@
     <ClInclude Include="DirectXCommon\WinApp.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
-    <ClInclude Include="NMGame.h">
+    <ClInclude Include="DirectXCommon\Framework.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Framework.h">
+    <ClInclude Include="DirectXCommon\NMGame.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
   </ItemGroup>

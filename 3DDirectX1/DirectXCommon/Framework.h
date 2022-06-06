@@ -2,7 +2,8 @@
 #include"WinApp.h"
 #include"Audio.h"
 #include"DXCommon.h"
-#include "GameScene.h"
+#include "input.h"
+#include "Object3d.h"
 #include "FbxLoader.h"
 #include "PostEffect.h"
 class Framework
@@ -24,7 +25,7 @@ protected:
 	DirectXCommon* dxcommon = nullptr;
 	Audio* audio = nullptr;
 	Input* input = nullptr;
-	GameScene* gameScene = nullptr;
+
 	PostEffect* postEffect = nullptr;
 };
 

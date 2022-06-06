@@ -1,5 +1,7 @@
 #pragma once
 #include"Framework.h"
+#include "GameScene.h"
+class GameScene;
 class NMGame :public Framework
 {
 public:
@@ -12,7 +14,7 @@ public:
 	// •`‰æ
 	void Draw() override;
 private:
-
+	GameScene* gameScene = nullptr;
 
 };
 
