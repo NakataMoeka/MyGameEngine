@@ -29,9 +29,6 @@
     <Filter Include="ソース&amp;ヘッダーファイル\scene">
       <UniqueIdentifier>{c1923a4d-0c3d-4ea4-a17e-16ddd50df236}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\winnapp">
-      <UniqueIdentifier>{b50eeb8b-f432-4e29-aa68-30bdf2d83391}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース&amp;ヘッダーファイル\audio">
       <UniqueIdentifier>{169d3a54-5b3a-41cb-b8b4-d03ce29f9998}</UniqueIdentifier>
     </Filter>
@@ -64,9 +61,6 @@
     <ClCompile Include="audio\Audio.cpp">
       <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon\WinApp.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
-    </ClCompile>
     <ClCompile Include="input\input.cpp">
       <Filter>ソース&amp;ヘッダーファイル\input</Filter>
     </ClCompile>
@@ -90,6 +84,15 @@
     </ClCompile>
     <ClCompile Include="2d\PostEffect.cpp">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\WinApp.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="NMGame.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +175,6 @@
     <ClInclude Include="DirectXCommon\SafeDelete.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXCommon\WinApp.h">
-      <Filter>ソース&amp;ヘッダーファイル\winnapp</Filter>
-    </ClInclude>
     <ClInclude Include="input\input.h">
       <Filter>ソース&amp;ヘッダーファイル\input</Filter>
     </ClInclude>
@@ -195,6 +195,15 @@
     </ClInclude>
     <ClInclude Include="2d\PostEffect.h">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXCommon\WinApp.h">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="NMGame.h">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
