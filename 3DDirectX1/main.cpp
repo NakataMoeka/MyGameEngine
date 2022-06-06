@@ -62,11 +62,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			gameScene->Update();
 			//描画
 			postEffect->PreDrawScene(dxcommon->GetCmdList());
+			
 			gameScene->Draw();
 			postEffect->PostDrawScene(dxcommon->GetCmdList());
 			
 			dxcommon->preDraw();
+			gameScene->DrawBG();
 			postEffect->Draw(dxcommon->GetCmdList());
+			gameScene->DrawFront();
 			//gameScene->Draw();
 			dxcommon->postDraw();
 	}

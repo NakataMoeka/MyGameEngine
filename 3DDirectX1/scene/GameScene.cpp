@@ -96,13 +96,17 @@ void GameScene::Update()
 
 }
 
-void GameScene::Draw()
+void GameScene::DrawBG()
 {
 	//背景
 	sprite->PreDraw(dxCommon->GetCmdList());
-	//sprite->Draw();
+	sprite->Draw();
 	sprite->PostDraw();
 	dxCommon->ClearDepthBuffer();
+}
+
+void GameScene::Draw()
+{
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
@@ -111,6 +115,9 @@ void GameScene::Draw()
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 
+}
+void GameScene::DrawFront()
+{
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
@@ -118,7 +125,6 @@ void GameScene::Draw()
 	debugText.Printf(600, 20, 3.0f, "%f", playerPosition.x);
 	debugText.DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
-
 }
 void GameScene::CreateParticles()
 {

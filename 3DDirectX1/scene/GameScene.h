@@ -35,8 +35,9 @@ public: // メンバ関数
 
 
 	void Update();
-
+	void DrawBG();
 	void Draw();
+	void DrawFront();
 	void CreateParticles();
 private: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;

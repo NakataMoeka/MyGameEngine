@@ -23,5 +23,5 @@ float4 main(VSOutput input) : SV_TARGET
 	texcolor /= 9.0f;
 	//‚±‚±‚Ü‚Å
 	
-	return float4(texcolor.rgb, 1);
+	return texcolor;
 }
