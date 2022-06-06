@@ -39,6 +39,7 @@ public: // メンバ関数
 	void Draw();
 	void DrawFront();
 	void CreateParticles();
+	bool GetBlur() { return Blur; }
 private: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 
@@ -66,5 +67,7 @@ private: // メンバ変数
 	int HP = 50;
 	int pg = 0;
 	bool pFlag = false;
+
+	bool Blur = false;
 };
 
