@@ -27,7 +27,9 @@ public:
 	void PostDrawScene(ID3D12GraphicsCommandList* cmdList);
 
 	void Draw(ID3D12GraphicsCommandList* cmdList);
-
+	bool GetBlur() { return Blur; }
+	bool SetBlur(bool Blur) { return this->Blur=Blur; }
+private:
 	//テクスチャバッファ
 	ComPtr<ID3D12Resource> texBuff;
 	//SRV用デスクリプタヒープ
@@ -46,5 +48,7 @@ public:
 
 	//画面クリアカラー
 	static const float clearColor[4];
+
+	bool Blur = true;
 
 };
