@@ -20,32 +20,17 @@ void NMGame::Update()
 void NMGame::Draw()
 {
 	//•`‰æ
-	if (gameScene->GetBlur() == true) {
-		postEffect->PreDrawScene(dxcommon->GetCmdList());
+	postEffect->PreDrawScene(dxcommon->GetCmdList());
 
-		gameScene->Draw();
-		postEffect->PostDrawScene(dxcommon->GetCmdList());
+	gameScene->Draw();
+	postEffect->PostDrawScene(dxcommon->GetCmdList());
 
-		dxcommon->preDraw();
-		gameScene->DrawBG();
-		postEffect->Draw(dxcommon->GetCmdList());
-		gameScene->DrawFront();
-		//gameScene->Draw();
-		dxcommon->postDraw();
-	}
-	else {
-		//postEffect->PreDrawScene(dxcommon->GetCmdList());
-
-		//gameScene->Draw();
-		//postEffect->PostDrawScene(dxcommon->GetCmdList());
-
-		dxcommon->preDraw();
-		gameScene->DrawBG();
-		//postEffect->Draw(dxcommon->GetCmdList());
-		gameScene->DrawFront();
-		gameScene->Draw();
-		dxcommon->postDraw();
-	}
+	dxcommon->preDraw();
+	gameScene->DrawBG();
+	postEffect->Draw(dxcommon->GetCmdList());
+	gameScene->DrawFront();
+	//gameScene->Draw();
+	dxcommon->postDraw();
 }
 
 void NMGame::Finalize()

@@ -85,14 +85,14 @@
     <ClCompile Include="DirectXCommon\WinApp.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
+    <ClCompile Include="3d\FbxLoader.cpp">
+      <Filter>ソース&amp;ヘッダーファイル</Filter>
+    </ClCompile>
     <ClCompile Include="DirectXCommon\Framework.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\NMGame.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\FbxLoader.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
