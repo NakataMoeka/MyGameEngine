@@ -36,7 +36,8 @@ void Framework::Initialize()
 
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxcommon->Getdev());
-
+	//ライト静的初期化
+	Light::StaticInitialize(dxcommon->Getdev());
 	FbxLoader::GetInstance()->Initialize(dxcommon->Getdev());
 
 	input = new Input();

@@ -17,6 +17,7 @@ ID3D12Device* Object3d::dev = nullptr;
 ID3D12GraphicsCommandList* Object3d::cmdList = nullptr;
 Object3d::PipelineSet Object3d::pipelineSet;
 Camera* Object3d::camera = nullptr;
+Light* Object3d::light = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* dev, Camera* camera)
 {
@@ -153,10 +154,11 @@ void Object3d::CreateGraphicsPipeline()
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
 
 	// ルートパラメータ
-	CD3DX12_ROOT_PARAMETER rootparams[3];
+	CD3DX12_ROOT_PARAMETER rootparams[4];
 	rootparams[0].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_ALL);
 	rootparams[1].InitAsConstantBufferView(1, 0, D3D12_SHADER_VISIBILITY_ALL);
 	rootparams[2].InitAsDescriptorTable(1, &descRangeSRV, D3D12_SHADER_VISIBILITY_ALL);
+	rootparams[3].InitAsConstantBufferView(2, 0, D3D12_SHADER_VISIBILITY_ALL);
 
 	// スタティックサンプラー
 	CD3DX12_STATIC_SAMPLER_DESC samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
@@ -294,12 +296,15 @@ void Object3d::Update()
 	}
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
+	const XMFLOAT3& cameraPos = camera->GetEye();
 
 	// 定数バッファへデータ転送
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
-	constMap->mat = matWorld * matViewProjection;	// 行列の合成
-
+	//constMap->mat = matWorld * matViewProjection;	// 行列の合成
+	constMap->viewproj = matViewProjection;
+	constMap->world = matWorld;
+	constMap->cameraPos = cameraPos;
 	constBuffB0->Unmap(0, nullptr);
 	
 }
@@ -322,7 +327,7 @@ void Object3d::Draw()
 	cmdList->SetGraphicsRootSignature(pipelineSet.rootsignature.Get());
 	// 定数バッファビューをセット
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
-
+	light->Draw(cmdList,3);
 	// モデル描画
 	model->Draw(cmdList);
 	//shape->Draw(cmdList);

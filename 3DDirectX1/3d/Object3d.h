@@ -10,6 +10,7 @@
 #include "Model.h"
 
 #include "Camera.h"
+#include "Light.h"
 class Object3d
 {
 private: // エイリアス
@@ -35,9 +36,10 @@ public:
 	// 定数バッファ用データ構造体
 	struct ConstBufferDataB0
 	{
-		//a
-		//XMFLOAT4 color;	// 色 (RGBA)
-		XMMATRIX mat;	// ３Ｄ変換行列
+		//XMMATRIX mat;	// ３Ｄ変換行列
+		XMMATRIX viewproj;//ビュープロジェクション行列
+		XMMATRIX world;//ワールド行列
+		XMFLOAT3 cameraPos;//カメラ座標(ワールド座標)
 	};
 
 
@@ -48,6 +50,9 @@ public:
 
 	static void SetCamera(Camera* camera) {
 		Object3d::camera = camera;
+	}
+	static void SetLight(Light* light) {
+		Object3d::light = light;
 	}
 
 	static void PreDraw(ID3D12GraphicsCommandList* cmdList);
@@ -112,6 +117,7 @@ private:
 
 	// カメラ
 	static Camera* camera;
+	static Light* light;
 	// ビルボード
 	bool isBillboard = false;
 };

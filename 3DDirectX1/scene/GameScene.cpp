@@ -1,5 +1,7 @@
 ﻿#include "GameScene.h"
 #include <cassert>
+#include<sstream>
+#include<iomanip>
 #include "FbxLoader.h"
 #include "FbxObject.h"
 GameScene::GameScene()
@@ -14,6 +16,7 @@ GameScene::~GameScene()
 	safe_delete(model2);
 	safe_delete(sprite);
 	safe_delete(particleMan);
+	safe_delete(light);
 }
 
 void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
@@ -33,6 +36,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// 3Dオブジェクトにカメラをセット
 	Object3d::SetCamera(camera);
 	FbxObject3d::SetDev(dxCommon->Getdev());
+	//ライト生成
+	light = Light::Create();
+	//ライト色を設定
+	light->SetLightColor({ 1,1,1 });
+	Object3d::SetLight(light);
+
 	FbxObject3d::SetCamera(camera);
 	FbxObject3d::CreateGraphicsPipeline();
 
@@ -40,7 +49,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
 	model = model->Create("bullet",true);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
+	model2 = FbxLoader::GetInstance()->LoadModelFromFile("block");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
@@ -71,29 +80,69 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
-	camera->SetTarget({ 0, 2.5f, 0 });
+	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
+
 }
 
 void GameScene::Update()
 {
+	{
+		XMFLOAT3 rot = object3d->GetRotation();
+		rot.y += 1.0f;
+		object3d->SetRotation(rot);
+		
+	}
+	{
+		//光線方向初期値                  上奥
+		static XMVECTOR lightDir = { 0, 1, 5, 0 };
 
+		if (input->PushKey(DIK_W)) { lightDir.m128_f32[1] += 1.0f; }
+		else if (input->PushKey(DIK_S)) { lightDir.m128_f32[1] -= 1.0f; }
+		if (input->PushKey(DIK_D)) { lightDir.m128_f32[0] += 1.0f; }
+		else if (input->PushKey(DIK_A)) { lightDir.m128_f32[0] -= 1.0f; }
+
+		light->SetLightDir(lightDir);
+		std::ostringstream debugstr;
+		debugstr << "lightDirFactor("
+			<< std::fixed << std::setprecision(2)
+			<< lightDir.m128_f32[0] << ","
+			<< lightDir.m128_f32[1] << ","
+			<< lightDir.m128_f32[2] << ")";
+		debugText.Print(31,debugstr.str(), 50, 50, 1.0f);
+		debugstr.str("");
+		debugstr.clear();
+
+		const XMFLOAT3& cameraPos = camera->GetEye();
+		debugstr << "cameraPos("
+			<< std::fixed << std::setprecision(2)
+			<< cameraPos.x << ","
+			<< cameraPos.y << ","
+			<< cameraPos.z << ")";
+		debugText.Print(25,debugstr.str(), 50, 70, 1.0f);
+	}
 
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
 	}
 	// パーティクル生成
 	//CreateParticles();
+	//if (input->PushKey(DIK_A)) {
+	//	playerPosition.x--;
+	//}
+	//if (input->PushKey(DIK_D)) {
+	//	playerPosition.x++;
+	//}
 	if (input->TriggerKey(DIK_SPACE)) {
 		object3d2->PlayAnimation();
 	}
 	camera->Update();
 	particleMan->Update();
-	object3d->SetPosition(playerPosition);
-	object3d2->SetRotation({ 0,90,0 });
+	object3d2->SetPosition(playerPosition);
+	object3d2->SetRotation({ 0,0,0 });
 	object3d->Update();
 	object3d2->Update();
-
+	light->Update();
 }
 
 void GameScene::DrawBG()
@@ -110,8 +159,8 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
-	//object3d->Draw();
-	object3d2->Draw();
+	object3d->Draw();
+	//object3d2->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 
@@ -121,8 +170,8 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	debugText.Printf(100, 20, 3.0f, "MauseLeftClick");
-	debugText.Printf(600, 20, 3.0f, "%f", playerPosition.x);
+	//debugText.Printf(100, 20, 3.0f, "MauseLeftClick");
+	//debugText.Printf(600, 20, 3.0f, "%f", playerPosition.x);
 	debugText.DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }

@@ -35,6 +35,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\3d\light">
+      <UniqueIdentifier>{26ec9426-ad30-4d8a-ad2d-81c9a3c5deb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shape.cpp">
@@ -93,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="3d\FbxLoader.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Light.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +219,9 @@
     </ClInclude>
     <ClInclude Include="DirectXCommon\NMGame.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Light.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

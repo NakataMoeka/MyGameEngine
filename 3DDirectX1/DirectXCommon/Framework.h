@@ -6,6 +6,7 @@
 #include "Object3d.h"
 #include "FbxLoader.h"
 #include "PostEffect.h"
+#include"Light.h"
 class Framework
 {
 public:

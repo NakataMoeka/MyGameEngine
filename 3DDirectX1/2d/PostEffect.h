@@ -49,6 +49,6 @@ private:
 	//画面クリアカラー
 	static const float clearColor[4];
 
-	bool Blur = true;
+	bool Blur = false;
 
 };

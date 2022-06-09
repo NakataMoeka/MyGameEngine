@@ -13,6 +13,7 @@
 #include"Model.h"
 #include "Camera.h"
 #include "FbxObject.h"
+#include"Light.h"
 class GameScene
 {
 private:
@@ -58,7 +59,7 @@ private: // メンバ変数
 
 	FbxObject3d* object3d2 = nullptr;
 	FbxModel* model2 = nullptr;
-
+	Light* light = nullptr;
 	const int debugTextTexNumber = 0;
 
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
@@ -66,5 +67,6 @@ private: // メンバ変数
 	int HP = 50;
 	int pg = 0;
 	bool pFlag = false;
+	float a = 0;
 };
 
