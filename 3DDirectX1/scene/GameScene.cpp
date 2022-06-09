@@ -48,7 +48,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	model = model->Create("bullet",true);
+	model = model->Create("bullet", false);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("block");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
@@ -87,52 +87,37 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 void GameScene::Update()
 {
-	{
-		XMFLOAT3 rot = object3d->GetRotation();
-		rot.y += 1.0f;
-		object3d->SetRotation(rot);
-		
-	}
-	{
+
+	
 		//光線方向初期値                  上奥
-		static XMVECTOR lightDir = { 0, 1, 5, 0 };
+		static XMVECTOR lightDir = { 4, -6, 3, 0 };
 
-		if (input->PushKey(DIK_W)) { lightDir.m128_f32[1] += 1.0f; }
-		else if (input->PushKey(DIK_S)) { lightDir.m128_f32[1] -= 1.0f; }
-		if (input->PushKey(DIK_D)) { lightDir.m128_f32[0] += 1.0f; }
-		else if (input->PushKey(DIK_A)) { lightDir.m128_f32[0] -= 1.0f; }
 
-		light->SetLightDir(lightDir);
-		std::ostringstream debugstr;
-		debugstr << "lightDirFactor("
-			<< std::fixed << std::setprecision(2)
-			<< lightDir.m128_f32[0] << ","
-			<< lightDir.m128_f32[1] << ","
-			<< lightDir.m128_f32[2] << ")";
-		debugText.Print(31,debugstr.str(), 50, 50, 1.0f);
-		debugstr.str("");
-		debugstr.clear();
-
-		const XMFLOAT3& cameraPos = camera->GetEye();
-		debugstr << "cameraPos("
-			<< std::fixed << std::setprecision(2)
-			<< cameraPos.x << ","
-			<< cameraPos.y << ","
-			<< cameraPos.z << ")";
-		debugText.Print(25,debugstr.str(), 50, 70, 1.0f);
-	}
-
+	
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
 	}
 	// パーティクル生成
 	//CreateParticles();
-	//if (input->PushKey(DIK_A)) {
-	//	playerPosition.x--;
-	//}
-	//if (input->PushKey(DIK_D)) {
-	//	playerPosition.x++;
-	//}
+	if (input->PushKey(DIK_A)) {
+		lightDir.m128_f32[0]--;
+	}
+	if (input->PushKey(DIK_D)) {
+		lightDir.m128_f32[0]++;
+	}
+	if (input->PushKey(DIK_W)) {
+		lightDir.m128_f32[1]++;
+	}
+	if (input->PushKey(DIK_S)) {
+		lightDir.m128_f32[1]--;
+	}
+	if (input->PushKey(DIK_Q)) {
+		lightDir.m128_f32[2]--;
+	}
+	if (input->PushKey(DIK_E)) {
+		lightDir.m128_f32[2]++;
+	}
+	light->SetLightDir(lightDir);
 	if (input->TriggerKey(DIK_SPACE)) {
 		object3d2->PlayAnimation();
 	}
