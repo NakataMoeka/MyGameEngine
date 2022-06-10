@@ -47,7 +47,7 @@ void Framework::Initialize()
 	//Sprite::LoadTexture(100, L"Resources/white1x1.png");
 	//ポストエフェクトの初期化
 	postEffect = new PostEffect();
-	postEffect->Initialize();
+	postEffect->Initialize(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
 }
 
 void Framework::Finalize()

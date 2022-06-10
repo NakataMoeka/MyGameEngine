@@ -16,9 +16,9 @@ public:
 	PostEffect();
 
 
-	void Initialize();
+	void Initialize(const wchar_t* ps, const wchar_t* vs);
 
-	void CreateGraphicsPipeline();
+	void CreateGraphicsPipeline(const wchar_t* ps,const wchar_t* vs);
 
 
 	void PreDrawScene(ID3D12GraphicsCommandList* cmdList);

@@ -19,7 +19,7 @@ false) //上下反転フラグ
 
 }
 
-void PostEffect::Initialize()
+void PostEffect::Initialize(const wchar_t* ps, const wchar_t*vs)
 {
 	HRESULT result;
 
@@ -169,10 +169,10 @@ void PostEffect::Initialize()
 	dev->CreateDepthStencilView(depthBuff.Get(),
 		&dsvDesc,
 		descHeapDSV->GetCPUDescriptorHandleForHeapStart());
-	CreateGraphicsPipeline();
+	CreateGraphicsPipeline(ps,vs);
 }
 
-void PostEffect::CreateGraphicsPipeline()
+void PostEffect::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 {
 
 	HRESULT result = S_FALSE;
@@ -180,10 +180,10 @@ void PostEffect::CreateGraphicsPipeline()
 	ComPtr<ID3DBlob> vsBlob = nullptr; // 頂点シェーダオブジェクト
 	ComPtr<ID3DBlob> psBlob = nullptr; // ピクセルシェーダオブジェクト
 	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
-	if (Blur == false) {
+	
 		// 頂点シェーダの読み込みとコンパイル
 		result = D3DCompileFromFile(
-			L"Resources/shaders/PostEffectTestVS.hlsl",  // シェーダファイル名
+			vs,  // シェーダファイル名
 			nullptr,
 			D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 			"main", "vs_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -207,7 +207,7 @@ void PostEffect::CreateGraphicsPipeline()
 
 		// ピクセルシェーダの読み込みとコンパイル
 		result = D3DCompileFromFile(
-			L"Resources/shaders/PostEffectTestPS.hlsl",   // シェーダファイル名
+			ps,   // シェーダファイル名
 			nullptr,
 			D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 			"main", "ps_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -228,56 +228,8 @@ void PostEffect::CreateGraphicsPipeline()
 			OutputDebugStringA(errstr.c_str());
 			assert(0);
 		}
-	}
-	else if (Blur == true) {
-		// 頂点シェーダの読み込みとコンパイル
-		result = D3DCompileFromFile(
-			L"Resources/shaders/BlurVS.hlsl",  // シェーダファイル名
-			nullptr,
-			D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
-			"main", "vs_5_0", // エントリーポイント名、シェーダーモデル指定
-			D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバッグ用設定
-			0,
-			&vsBlob, &errorBlob);
+	
 
-		if (FAILED(result)) {
-			// errorBlobからエラー内容をstring型にコピー
-			std::string errstr;
-			errstr.resize(errorBlob->GetBufferSize());
-
-			std::copy_n((char*)errorBlob->GetBufferPointer(),
-				errorBlob->GetBufferSize(),
-				errstr.begin());
-			errstr += "\n";
-			// エラー内容を出力ウィンドウに表示
-			OutputDebugStringA(errstr.c_str());
-			assert(0);
-		}
-
-		// ピクセルシェーダの読み込みとコンパイル
-		result = D3DCompileFromFile(
-			L"Resources/shaders/BlurPS.hlsl",   // シェーダファイル名
-			nullptr,
-			D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
-			"main", "ps_5_0", // エントリーポイント名、シェーダーモデル指定
-			D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバッグ用設定
-			0,
-			&psBlob, &errorBlob);
-
-		if (FAILED(result)) {
-			// errorBlobからエラー内容をstring型にコピー
-			std::string errstr;
-			errstr.resize(errorBlob->GetBufferSize());
-
-			std::copy_n((char*)errorBlob->GetBufferPointer(),
-				errorBlob->GetBufferSize(),
-				errstr.begin());
-			errstr += "\n";
-			// エラー内容を出力ウィンドウに表示
-			OutputDebugStringA(errstr.c_str());
-			assert(0);
-		}
-	}
 	// 頂点レイアウト
 	D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
 		{
