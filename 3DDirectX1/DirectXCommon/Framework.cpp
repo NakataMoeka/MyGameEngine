@@ -73,10 +73,5 @@ void Framework::Update()
 	//“ü—ÍŠÖ˜A‚Ì–ˆƒtƒŒ[ƒ€ˆ—
 	input->update();
 	input->updateMouse();
-	if (Input::GetInstance()->TriggerKey(DIK_1)) {
-		postEffect->CreateGraphicsPipeline(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
-	}
-	if (Input::GetInstance()->TriggerKey(DIK_2)) {
-		postEffect->CreateGraphicsPipeline(L"Resources/shaders/PostEffectTestPS.hlsl", L"Resources/shaders/PostEffectTestVS.hlsl");
-	}
+
 	}
