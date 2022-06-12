@@ -2,9 +2,15 @@
 
 Texture2D<float4> tex : register(t0);	//0番スロットに設定されたテクスチャ
 SamplerState smp : register(s0);		//0番スロットに設定されたサンプラー
-
-float4 main(VSOutput input) : SV_TARGET
+struct PSOutput
 {
+	float4 target0 : SV_TARGET0;
+	float4 target1 : SV_TARGET1;
+};
+
+PSOutput main(VSOutput input) 
+{
+		PSOutput output;
 	float4 texcolor = tex.Sample(smp, input.uv);
 	float4 shadercolor;
 	//光沢度
@@ -19,6 +25,7 @@ float4 main(VSOutput input) : SV_TARGET
 	shadercolor.a = m_alpha;
 
 
-
-	return shadercolor * texcolor;
+	output.target0 = shadercolor * texcolor;
+	output.target1 = float4(1 - (shadercolor * texcolor).rgb, 1);
+	return output;
 }
