@@ -12,10 +12,10 @@ void NMGame::Initialize()
 void NMGame::Update()
 {
 	Framework::Update();
-	if (Input::GetInstance()->TriggerKey(DIK_1)) {
+	if (Input::GetInstance()->TriggerKey(DIK_1)/*ここにGetterを書くつもり*/) {
 		postEffect->CreateGraphicsPipeline(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
 	}
-	if (Input::GetInstance()->TriggerKey(DIK_2)) {
+	if (Input::GetInstance()->TriggerKey(DIK_2)/*ここにGetterを書くつもり*/) {
 		postEffect->CreateGraphicsPipeline(L"Resources/shaders/PostEffectTestPS.hlsl", L"Resources/shaders/PostEffectTestVS.hlsl");
 	}
 	//ゲームシーンの毎フレーム処理
