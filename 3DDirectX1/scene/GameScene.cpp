@@ -48,7 +48,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Audio* audio)
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
 	model = model->Create("bullet", false);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("block");
+	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
