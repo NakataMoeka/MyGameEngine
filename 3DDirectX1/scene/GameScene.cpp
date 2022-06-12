@@ -4,6 +4,7 @@
 #include<iomanip>
 #include "FbxLoader.h"
 #include "FbxObject.h"
+#include"input.h"
 GameScene::GameScene()
 {
 }
@@ -19,15 +20,13 @@ GameScene::~GameScene()
 	safe_delete(light);
 }
 
-void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
+void GameScene::Initialize(DirectXCommon* dxCommon, Audio* audio)
 {
 	//u
 	assert(dxCommon);
-	assert(input);
 	assert(audio);
 
 	this->dxCommon = dxCommon;
-	this->input = input;
 	this->audio = audio;
 
 	// カメラ生成
@@ -91,34 +90,8 @@ void GameScene::Update()
 	
 		//光線方向初期値                  上奥
 		static XMVECTOR lightDir = { 4, -6, 3, 0 };
-
-
 	
-	if (input->PushMouse(0)) {
-		debugText.Printf(100, 100, 5.0f, "www");
-	}
-	// パーティクル生成
-	//CreateParticles();
-	if (input->PushKey(DIK_A)) {
-		lightDir.m128_f32[0]--;
-	}
-	if (input->PushKey(DIK_D)) {
-		lightDir.m128_f32[0]++;
-	}
-	if (input->PushKey(DIK_W)) {
-		lightDir.m128_f32[1]++;
-	}
-	if (input->PushKey(DIK_S)) {
-		lightDir.m128_f32[1]--;
-	}
-	if (input->PushKey(DIK_Q)) {
-		lightDir.m128_f32[2]--;
-	}
-	if (input->PushKey(DIK_E)) {
-		lightDir.m128_f32[2]++;
-	}
-	light->SetLightDir(lightDir);
-	if (input->TriggerKey(DIK_SPACE)) {
+	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		object3d2->PlayAnimation();
 	}
 	camera->Update();
@@ -144,8 +117,8 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
-	object3d->Draw();
-	//object3d2->Draw();
+	//object3d->Draw();
+	object3d2->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 

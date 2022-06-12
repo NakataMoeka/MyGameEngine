@@ -14,6 +14,8 @@ private:
 
 public: 
 
+	static Input* GetInstance();
+
 	struct MouseMove {
 		LONG    lX;
 		LONG    lY;
@@ -31,6 +33,11 @@ public:
 	bool TriggerMouse(int MouseNumber);
 	MouseMove GetMouseMove();
 private: // ƒƒ“ƒo•Ï”
+	Input() = default;
+	Input(const Input&) = delete;
+	~Input() = default;
+	Input& operator=(const Input&) = delete;
+
 	ComPtr<IDirectInput8> dinput;
 	ComPtr<IDirectInputDevice8> devkeyboard;
 	BYTE key[256] = {};

@@ -32,7 +32,7 @@ public: // メンバ関数
 
 	~GameScene();
 
-	void Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio);
+	void Initialize(DirectXCommon* dxCommon, Audio* audio);
 
 
 	void Update();
@@ -43,7 +43,6 @@ public: // メンバ関数
 private: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 
-	Input* input = nullptr;
 
 	Audio* audio = nullptr;
 

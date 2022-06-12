@@ -6,7 +6,7 @@ void NMGame::Initialize()
 
 	//ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
 	gameScene = new GameScene();
-	gameScene->Initialize(dxcommon, input, audio);
+	gameScene->Initialize(dxcommon, audio);
 
 }
 

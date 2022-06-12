@@ -40,7 +40,7 @@ void Framework::Initialize()
 	Light::StaticInitialize(dxcommon->Getdev());
 	FbxLoader::GetInstance()->Initialize(dxcommon->Getdev());
 
-	input = new Input();
+	input = Input::GetInstance();
 	input->Initialize(winapp);
 	input->InitializeMouse(winapp);
 	//ポストエフェクト用のテクスチャ読み込み
@@ -57,7 +57,6 @@ void Framework::Finalize()
 
 
 	delete audio;
-	delete input;
 	delete dxcommon;
 	delete winapp;
 	delete postEffect;
