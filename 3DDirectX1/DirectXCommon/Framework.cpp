@@ -47,7 +47,8 @@ void Framework::Initialize()
 	//Sprite::LoadTexture(100, L"Resources/white1x1.png");
 	//ポストエフェクトの初期化
 	postEffect = new PostEffect();
-	postEffect->Initialize(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
+	postEffect->Initialize();
+	postEffect->CreateGraphicsPipeline(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
 }
 
 void Framework::Finalize()
@@ -72,4 +73,10 @@ void Framework::Update()
 	//入力関連の毎フレーム処理
 	input->update();
 	input->updateMouse();
-}
+	if (Input::GetInstance()->TriggerKey(DIK_1)) {
+		postEffect->CreateGraphicsPipeline(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
+	}
+	if (Input::GetInstance()->TriggerKey(DIK_2)) {
+		postEffect->CreateGraphicsPipeline(L"Resources/shaders/PostEffectTestPS.hlsl", L"Resources/shaders/PostEffectTestVS.hlsl");
+	}
+	}

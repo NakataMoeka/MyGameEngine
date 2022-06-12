@@ -20,7 +20,7 @@ false) //ã‰º”½“]ƒtƒ‰ƒO
 
 }
 
-void PostEffect::Initialize(const wchar_t* ps, const wchar_t*vs)
+void PostEffect::Initialize()
 {
 	HRESULT result;
 
@@ -177,7 +177,7 @@ void PostEffect::Initialize(const wchar_t* ps, const wchar_t*vs)
 	dev->CreateDepthStencilView(depthBuff.Get(),
 		&dsvDesc,
 		descHeapDSV->GetCPUDescriptorHandleForHeapStart());
-	CreateGraphicsPipeline(ps,vs);
+	//CreateGraphicsPipeline(ps,vs);
 }
 
 void PostEffect::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)

@@ -16,7 +16,7 @@ public:
 	PostEffect();
 
 
-	void Initialize(const wchar_t* ps, const wchar_t* vs);
+	void Initialize();
 
 	void CreateGraphicsPipeline(const wchar_t* ps,const wchar_t* vs);
 
