@@ -48,7 +48,7 @@ void Framework::Initialize()
 	//ポストエフェクトの初期化
 	postEffect = new PostEffect();
 	postEffect->Initialize();
-	postEffect->CreateGraphicsPipeline(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
+	postEffect->CreateGraphicsPipeline(L"Resources/shaders/PostEffectTestPS.hlsl", L"Resources/shaders/PostEffectTestVS.hlsl");
 }
 
 void Framework::Finalize()
