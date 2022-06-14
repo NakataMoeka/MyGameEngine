@@ -47,7 +47,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Audio* audio)
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	object3d->CreateGraphicsPipeline(L"Resources/shaders/colorPS.hlsl", L"Resources/shaders/colorVS.hlsl");
+	object3d->CreateGraphicsPipeline(L"Resources/shaders/ToonPS.hlsl", L"Resources/shaders/ToonVS.hlsl");
 
 	model = model->Create("bullet", true);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
@@ -93,7 +93,7 @@ void GameScene::Update()
 		//光線方向初期値                  上奥
 		static XMVECTOR lightDir = { 4, -6, 3, 0 };
 	
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+	if (Input::GetInstance()->TriggerKey(DIK_SPACE)&& Input::GetInstance()->IsButtonDown(ButtonA)) {
 		object3d2->PlayAnimation();
 	}
 	camera->Update();
@@ -119,8 +119,8 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
-	object3d->Draw();
-	//object3d2->Draw();
+	//object3d->Draw();
+	object3d2->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 

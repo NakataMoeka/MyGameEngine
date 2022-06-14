@@ -43,6 +43,7 @@ void Framework::Initialize()
 	input = Input::GetInstance();
 	input->Initialize(winapp);
 	input->InitializeMouse(winapp);
+	input->InitializePad();
 	//ポストエフェクト用のテクスチャ読み込み
 	//Sprite::LoadTexture(100, L"Resources/white1x1.png");
 	//ポストエフェクトの初期化
@@ -73,5 +74,6 @@ void Framework::Update()
 	//入力関連の毎フレーム処理
 	input->update();
 	input->updateMouse();
+	input->updatePud();
 
 	}
