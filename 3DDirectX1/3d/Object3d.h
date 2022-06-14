@@ -46,7 +46,7 @@ public:
 
 	static void StaticInitialize(ID3D12Device* dev, Camera* camera= nullptr);
 
-	static void CreateGraphicsPipeline();
+	static void CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs);
 
 	static void SetCamera(Camera* camera) {
 		Object3d::camera = camera;

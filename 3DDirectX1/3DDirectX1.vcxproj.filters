@@ -38,6 +38,27 @@
     <Filter Include="ソース&amp;ヘッダーファイル\3d\light">
       <UniqueIdentifier>{26ec9426-ad30-4d8a-ad2d-81c9a3c5deb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\3d\fbx">
+      <UniqueIdentifier>{7a3270e0-a118-42d7-b712-dae35167a7cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\3d\obj">
+      <UniqueIdentifier>{88091a91-be9e-4f37-9bd4-0462efc396e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\3d">
+      <UniqueIdentifier>{20852dec-bc3c-4e93-aeda-227cda28e057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\3d\fbx">
+      <UniqueIdentifier>{be5bbe79-55df-4d3e-b046-0bb5b8e88e80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\3d\obj">
+      <UniqueIdentifier>{4f9787f2-9399-48f0-bab8-cd1dc8df384e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\2d">
+      <UniqueIdentifier>{11e9a7b7-d166-402b-920b-b683285884fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\2d\posteffect">
+      <UniqueIdentifier>{7fdd82e8-a493-4df6-a3d4-3e2e77dbc06f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shape.cpp">
@@ -48,12 +69,6 @@
     </ClCompile>
     <ClCompile Include="2d\Sprite.cpp">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Model.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\Object3d.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClCompile>
     <ClCompile Include="3d\ParticleManager.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
@@ -69,12 +84,6 @@
     </ClCompile>
     <ClCompile Include="scene\GameScene.cpp">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\FbxModel.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="3d\FbxObject.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\DXCommon.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
@@ -94,72 +103,102 @@
     <ClCompile Include="DirectXCommon\NMGame.cpp">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="3d\FbxLoader.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
     <ClCompile Include="3d\Light.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
     </ClCompile>
+    <ClCompile Include="3d\FbxLoader.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\FbxModel.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\FbxObject.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Model.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Object3d.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shaders\OBJ.hlsli">
-      <Filter>HLSL</Filter>
-    </None>
-    <None Include="Resources\shaders\Particle.hlsli">
-      <Filter>HLSL</Filter>
-    </None>
-    <None Include="Resources\shaders\Sprite.hlsli">
-      <Filter>HLSL</Filter>
-    </None>
     <None Include="Resources\shaders\FBX.hlsli">
-      <Filter>HLSL</Filter>
-    </None>
-    <None Include="Resources\shaders\PostEffectTest.hlsli">
-      <Filter>HLSL</Filter>
+      <Filter>HLSL\3d\fbx</Filter>
     </None>
     <None Include="Resources\shaders\Blur.hlsli">
-      <Filter>HLSL</Filter>
+      <Filter>HLSL\2d\posteffect</Filter>
+    </None>
+    <None Include="Resources\shaders\PostEffectTest.hlsli">
+      <Filter>HLSL\2d\posteffect</Filter>
+    </None>
+    <None Include="Resources\shaders\color.hlsli">
+      <Filter>HLSL\3d\obj</Filter>
+    </None>
+    <None Include="Resources\shaders\OBJ.hlsli">
+      <Filter>HLSL\3d\obj</Filter>
+    </None>
+    <None Include="Resources\shaders\Toon.hlsli">
+      <Filter>HLSL\3d\obj</Filter>
+    </None>
+    <None Include="Resources\shaders\Particle.hlsli">
+      <Filter>HLSL\3d</Filter>
+    </None>
+    <None Include="Resources\shaders\Sprite.hlsli">
+      <Filter>HLSL\2d</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\shaders\OBJPS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\OBJVS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticlePS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\shaders\FBXPS.hlsl">
-      <Filter>HLSL</Filter>
+      <Filter>HLSL\3d\fbx</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\FBXVS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffectTestPS.hlsl">
-      <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffectTestVS.hlsl">
-      <Filter>HLSL</Filter>
+      <Filter>HLSL\3d\fbx</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\BlurPS.hlsl">
-      <Filter>HLSL</Filter>
+      <Filter>HLSL\2d\posteffect</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\BlurVS.hlsl">
-      <Filter>HLSL</Filter>
+      <Filter>HLSL\2d\posteffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectTestPS.hlsl">
+      <Filter>HLSL\2d\posteffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectTestVS.hlsl">
+      <Filter>HLSL\2d\posteffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\colorPS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\colorVS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\OBJPS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\OBJVS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ToonPS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ToonVS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticlePS.hlsl">
+      <Filter>HLSL\3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
+      <Filter>HLSL\3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
+      <Filter>HLSL\3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
+      <Filter>HLSL\2d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
+      <Filter>HLSL\2d</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,12 +210,6 @@
     </ClInclude>
     <ClInclude Include="2d\Sprite.h">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Model.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Object3d.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
     <ClInclude Include="3d\ParticleManager.h">
       <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
@@ -196,15 +229,6 @@
     <ClInclude Include="scene\GameScene.h">
       <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
     </ClInclude>
-    <ClInclude Include="3d\FbxLoader.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\FbxModel.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\FbxObject.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
     <ClInclude Include="DirectXCommon\DXCommon.h">
       <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
     </ClInclude>
@@ -222,6 +246,21 @@
     </ClInclude>
     <ClInclude Include="3d\Light.h">
       <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxLoader.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxModel.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxObject.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Model.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Object3d.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

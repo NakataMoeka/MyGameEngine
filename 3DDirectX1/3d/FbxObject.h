@@ -39,8 +39,7 @@ public:
 
 
 
-	static void CreateGraphicsPipeline();
-
+	static void CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs);
 	static void SetDev(ID3D12Device* dev) {
 		FbxObject3d::dev = dev;
 	}

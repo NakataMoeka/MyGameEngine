@@ -42,12 +42,14 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Audio* audio)
 	Object3d::SetLight(light);
 
 	FbxObject3d::SetCamera(camera);
-	FbxObject3d::CreateGraphicsPipeline();
+	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
 
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	model = model->Create("bullet", false);
+	object3d->CreateGraphicsPipeline(L"Resources/shaders/colorPS.hlsl", L"Resources/shaders/colorVS.hlsl");
+
+	model = model->Create("bullet", true);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
@@ -117,8 +119,8 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
-	//object3d->Draw();
-	object3d2->Draw();
+	object3d->Draw();
+	//object3d2->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 

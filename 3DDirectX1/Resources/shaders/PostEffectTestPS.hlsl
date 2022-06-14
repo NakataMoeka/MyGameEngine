@@ -7,11 +7,11 @@ SamplerState smp : register(s0);		//0番スロットに設定されたサンプラー
 float4 main(VSOutput input) : SV_TARGET
 {
 	float4 colortex0 = tex0.Sample(smp,input.uv);
-	float4 colortex1 = tex1.Sample(smp, input.uv);
+	//float4 colortex1 = tex1.Sample(smp, input.uv);
 	float4 color = colortex0;
-	if (fmod(input.uv.y, 0.1f) < 0.05f) {
-		color = colortex1;
-	}
+	//if (fmod(input.uv.y, 0.1f) < 0.05f) {
+	//	color = colortex1;
+	//}
 	return color;
 }
 
