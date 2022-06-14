@@ -53,10 +53,13 @@ public:
 		LONG    lZ;
 	};
 
+	void Initialize(WinApp* winapp);
+	void update();
+private:
 	/// <summary>
 	/// キーボードの初期化
 	/// </summary>
-	void Initialize(WinApp* winapp);
+	void InitializeKeybord(WinApp* winapp);
 	/// <summary>
 	/// マウスの初期化
 	/// </summary>
@@ -71,7 +74,7 @@ public:
 	/// <summary>
 	/// キーボードの更新
 	/// </summary>
-	void update();
+	void updateKeybord();
 	/// <summary>
 	/// マウスの更新
 	/// </summary>
@@ -79,7 +82,8 @@ public:
 	/// <summary>
 	/// ゲームパッドの更新
 	/// </summary>
-	void updatePud();
+	void updatePad();
+public:
 	//キーボード押す
 	bool PushKey(BYTE keyNumber);
 	bool TriggerKey(BYTE keyNumber);

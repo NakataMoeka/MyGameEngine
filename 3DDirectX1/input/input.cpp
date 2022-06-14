@@ -178,6 +178,20 @@ Input* Input::GetInstance()
 
 void Input::Initialize(WinApp* winapp)
 {
+	InitializeKeybord(winapp);
+	InitializeMouse(winapp);
+	InitializePad();
+}
+
+void Input::update()
+{
+	updateKeybord();
+	updateMouse();
+	updatePad();
+}
+
+void Input::InitializeKeybord(WinApp* winapp)
+{
 	HRESULT result;
 	this->winapp = winapp;
 	result = DirectInput8Create(
@@ -245,7 +259,7 @@ void Input::ReleaseInput()
 	}
 }
 
-void Input::update()
+void Input::updateKeybord()
 {
 	HRESULT result;
 
@@ -269,7 +283,7 @@ void Input::updateMouse()
 	result = devMouse->GetDeviceState(sizeof(DIMOUSESTATE), &mouse);
 }
 
-void Input::updatePud()
+void Input::updatePad()
 {
 	UpdateGamePad();
 }

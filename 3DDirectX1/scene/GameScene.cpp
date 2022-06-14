@@ -93,7 +93,7 @@ void GameScene::Update()
 		//光線方向初期値                  上奥
 		static XMVECTOR lightDir = { 4, -6, 3, 0 };
 	
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE)&& Input::GetInstance()->IsButtonDown(ButtonA)) {
+	if (Input::GetInstance()->TriggerKey(DIK_SPACE)|| Input::GetInstance()->IsButtonDown(ButtonA)) {
 		object3d2->PlayAnimation();
 	}
 	camera->Update();
