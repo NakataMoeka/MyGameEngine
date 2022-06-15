@@ -55,6 +55,8 @@ public:
 	void SetPosition(XMFLOAT2 position);
 	//サイズの設定
 	void SetSize(XMFLOAT2 size);
+	//色の設定
+	void SetColor(XMFLOAT4 color);
 	//アンカーポイントの設定
 	void SetAnchorPoint(XMFLOAT2 anchorpoint);
 	//左右反転の設定

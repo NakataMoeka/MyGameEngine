@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include <cassert>
 //#include "FbxLoader.h"
+#include<time.h>
 GameScene::GameScene()
 {
 }
@@ -58,9 +59,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	debugText.Initialize(debugTextTexNumber);
 	
 	Sprite::LoadTexture(1, L"Resources/jimenParticle.png");
+	Sprite::LoadTexture(2, L"Resources/white1x1.png");
 
-	//sprite = Sprite::CreateSprite(1, playerPosition2);
-
+	sprite = Sprite::CreateSprite(1, playerPos2d);
+	sprite2 = Sprite::CreateSprite(2, playerPos2d2);
+	sprite->SetSize({ 100,100 });
+	sprite2->SetSize({ 100, 1 });
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
@@ -71,7 +75,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		
 	//vu = v;
 	//vBu = vB;
-
+	srand(time(NULL));
+	radius = 2.0f;
 }
 
 void GameScene::Update()
@@ -179,31 +184,116 @@ void GameScene::Update()
 
 
 
+//if (input->TriggerKey(DIK_SPACE)) {
+//
+//	Mflag = true;
+//}
+//
+//if (Mflag == true) 
+//{
+//	Length += 0.5f;
+//	if (Length >= 50)
+//	{
+//		Length = 50;
+//	}
+//		radius = angle * 3.14f / 180.0f;
+//		add_x = cos(radius) * Length;
+//		add_y = sin(radius) * Length;
+//		playerPosition.x = playerPositionB.x + add_x;
+//		playerPosition.y = playerPositionB.y + add_y;
+//		angle += va;
+//}
+//if (input->TriggerKey(DIK_R)) {
+//	Mflag = false;
+//	Length = 0;
+//	playerPosition = { 0.0f,0.0f,0.0f };
+//}
+
+#pragma endregion
+#pragma region MT4_課題5
 if (input->TriggerKey(DIK_SPACE)) {
 
 	Mflag = true;
 }
+playerEndPos2d2 = { playerPos2d2.x+cosf(XMConvertToRadians(angle))*100,playerPos2d2.y + sinf(XMConvertToRadians(angle))*100 };
 
-if (Mflag == true) 
-{
-	Length += 0.5f;
-	if (Length >= 50)
-	{
-		Length = 50;
+sprite->SetAnchorPoint({ 0.5,0.5 });
+playerPos2d = { 100,100};
+
+//if (Mflag == true) {
+	
+	//if (playerPos2d2.x >= 0 && playerPos2d2.x < 1280) {
+		if (input->PushKey(DIK_D)) {
+			playerPos2d2.x += 1;
+		}
+		if (input->PushKey(DIK_A)) {
+			playerPos2d2.x -= 1;
+		}
+	//}
+	//if (playerPos2d2.y >= 0 && playerPos2d2.y <720) {
+		if (input->PushKey(DIK_W)) {
+			playerPos2d2.y -= 1;
+		}
+		if (input->PushKey(DIK_S)) {
+			playerPos2d2.y += 1;
+		}
+	//}
+	if (input->PushKey(DIK_Q)) {
+		angle -=1 ;
 	}
-		radius = angle * 3.14f / 180.0f;
-		add_x = cos(radius) * Length;
-		add_y = sin(radius) * Length;
-		playerPosition.x = playerPositionB.x + add_x;
-		playerPosition.y = playerPositionB.y + add_y;
-		angle += va;
-}
-if (input->TriggerKey(DIK_R)) {
-	Mflag = false;
-	Length = 0;
-	playerPosition = { 0.0f,0.0f,0.0f };
-}
+	if (input->PushKey(DIK_E)) {
+		angle += 1;
+	}
+	sprite->SetColor({ 1,1,1,1 });
+	//avec
+	XMFLOAT2 a = { playerPos2d2.x - playerEndPos2d2.x,playerPos2d2.y - playerEndPos2d2.y };
+	//bvec
+	XMFLOAT2 b = { playerPos2d2.x - playerPos2d.x,playerPos2d2.y - playerPos2d.y };
+	//cvec
+	XMFLOAT2 c = { playerEndPos2d2.x - playerPos2d.x,playerEndPos2d2.y - playerPos2d.y };
 
+	//|a|算出
+	float alength = sqrtf(pow(a.x, 2) + pow(a.y, 2));
+	//|b|算出
+	float blength = sqrtf(pow(b.x, 2) + pow(b.y, 2));
+	//|c|算出
+	float clength = sqrtf(pow(c.x, 2) + pow(c.y, 2));
+	float noma =0;
+	float noma2 = 0;
+	if (alength > 0)
+	{
+		noma = a.x / alength;
+		noma2 = a.y / alength;
+	}
+	bool flag = true;
+	
+		//外積	
+		float distance = abs(b.x * noma2 - b.y * noma);
+
+		
+
+		if (distance <= radius) {
+			float dot1 = b.x * a.x + b.x * a.y;
+			float dot2 = c.x * a.x + c.x * a.y;
+			if (dot1*dot2 <= 0.0f) {
+				sprite->SetColor({ 1,0,0,1 });
+			}
+			if (blength < radius || clength < radius) {
+				sprite->SetColor({ 1,0,0,1 });
+			}
+		}
+		
+	
+
+
+		
+		
+	
+//}
+
+sprite->SetPosition(playerPos2d);
+sprite2->SetPosition(playerPos2d2);
+sprite2->SetRotation(angle);
 #pragma endregion
 	if (input->PushMouse(0)) {
 		debugText.Printf(100, 100, 5.0f, "www");
@@ -223,16 +313,17 @@ if (input->TriggerKey(DIK_R)) {
 void GameScene::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
-	object3d->Draw();
-	object3d2->Draw();
+	//object3d->Draw();
+	//object3d2->Draw();
 	Object3d::PostDraw();
 
 
 	sprite->PreDraw(dxCommon->GetCmdList());
-	//sprite->Draw();
-	char str[256];
+	sprite->Draw();
+	sprite2->Draw();
+	//char str[256];
 
-	//debugText.Printf(0, 80, 3.0f, "v:%fLength:%f",v,Length);
+	//debugText.Printf(0, 80, 3.0f, "%f,%f",playerEndPos2d2.x,playerEndPos2d2.y);
 	//debugText.Printf(0, 140, 3.0f, "%d",circleFlag);
 
 	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");

@@ -397,6 +397,11 @@ void Sprite::SetSize(XMFLOAT2 size)
 	TransferVertices();
 }
 
+void Sprite::SetColor(XMFLOAT4 color)
+{
+	this->color = color;
+}
+
 void Sprite::SetAnchorPoint(XMFLOAT2 anchorpoint)
 {
 	this->anchorpoint = anchorpoint;
