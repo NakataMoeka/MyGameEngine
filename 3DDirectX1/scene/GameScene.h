@@ -110,20 +110,14 @@ private: // ÉÅÉìÉoïœêî
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
 	XMFLOAT3 playerPositionB = { 0.0f,0.0f,0.0f };
 
-	XMFLOAT2 playerPos2d = { 100.0f,100.0f };
+	XMFLOAT2 playerPos2d = {640, 320};
 	XMFLOAT2 playerPos2d2= { 0.0f,0.0f };
 	XMFLOAT2 playerEndPos2d2 = { 0,0 };
 
 
 	float angle = 0;
-	float radius = 0;
-	float Length = 0;
-	float add_x;
-	float add_y;
-	float v = 5.0f;
-	float va = 2.0;
+
 	//float angl = 0;
-
-	float length=100;
-
+	Sphere circle;
+	Box line;
 };

@@ -58,7 +58,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// デバッグテキスト初期化
 	debugText.Initialize(debugTextTexNumber);
 	
-	Sprite::LoadTexture(1, L"Resources/jimenParticle.png");
+	Sprite::LoadTexture(1, L"Resources/circle.png");
 	Sprite::LoadTexture(2, L"Resources/white1x1.png");
 
 	sprite = Sprite::CreateSprite(1, playerPos2d);
@@ -76,7 +76,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	//vu = v;
 	//vBu = vB;
 	srand(time(NULL));
-	radius = 2.0f;
 }
 
 void GameScene::Update()
@@ -217,8 +216,10 @@ if (input->TriggerKey(DIK_SPACE)) {
 }
 playerEndPos2d2 = { playerPos2d2.x+cosf(XMConvertToRadians(angle))*100,playerPos2d2.y + sinf(XMConvertToRadians(angle))*100 };
 
-sprite->SetAnchorPoint({ 0.5,0.5 });
-playerPos2d = { 100,100};
+circle.center = { playerPos2d.x + 100, playerPos2d.y + 100, 0 };
+circle.radius = 100;
+line.center = { playerPos2d2.x + 100, playerPos2d2.y + 0.5f, 0 };
+line.scale= { 1,150,1 };
 
 //if (Mflag == true) {
 	
@@ -244,44 +245,15 @@ playerPos2d = { 100,100};
 	if (input->PushKey(DIK_E)) {
 		angle += 1;
 	}
-	sprite->SetColor({ 1,1,1,1 });
-	//avec
-	XMFLOAT2 a = { playerPos2d2.x - playerEndPos2d2.x,playerPos2d2.y - playerEndPos2d2.y };
-	//bvec
-	XMFLOAT2 b = { playerPos2d2.x - playerPos2d.x,playerPos2d2.y - playerPos2d.y };
-	//cvec
-	XMFLOAT2 c = { playerEndPos2d2.x - playerPos2d.x,playerEndPos2d2.y - playerPos2d.y };
-
-	//|a|算出
-	float alength = sqrtf(pow(a.x, 2) + pow(a.y, 2));
-	//|b|算出
-	float blength = sqrtf(pow(b.x, 2) + pow(b.y, 2));
-	//|c|算出
-	float clength = sqrtf(pow(c.x, 2) + pow(c.y, 2));
-	float noma =0;
-	float noma2 = 0;
-	if (alength > 0)
+	if (Collision::CheckSphere2Box(circle, line))
 	{
-		noma = a.x / alength;
-		noma2 = a.y / alength;
+		sprite->SetColor({ 1,0,0,1 });
 	}
-	bool flag = true;
+	else
+	{
+		sprite->SetColor({ 1,1,1,1 });
+	}
 	
-		//外積	
-		float distance = abs(b.x * noma2 - b.y * noma);
-
-		
-
-		if (distance <= radius) {
-			float dot1 = b.x * a.x + b.x * a.y;
-			float dot2 = c.x * a.x + c.x * a.y;
-			if (dot1*dot2 <= 0.0f) {
-				sprite->SetColor({ 1,0,0,1 });
-			}
-			if (blength < radius || clength < radius) {
-				sprite->SetColor({ 1,0,0,1 });
-			}
-		}
 		
 	
 
