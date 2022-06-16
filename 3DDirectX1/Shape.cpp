@@ -6,6 +6,7 @@
 //#include <string>
 //#include <vector>
 //#pragma comment(lib, "d3dcompiler.lib")
+//
 //using namespace DirectX;
 //using namespace Microsoft::WRL;
 //
@@ -23,6 +24,27 @@
 //
 //	return true;
 //}
+//
+//Shape* Shape::Create(const std::string& modelname, bool smoothing)
+//{
+//	// 3Dオブジェクトのインスタンスを生成
+//	Shape* model = new Shape();
+//	if (model == nullptr)
+//	{
+//		return nullptr;
+//	}
+//
+//	// 初期化
+//	if (!model->Initialize(modelname, smoothing))
+//	{
+//		delete model;
+//		assert(0);
+//		return nullptr;
+//	}
+//
+//	return model;
+//}
+//
 //bool Shape::InitializeDescriptorHeap()
 //{
 //	HRESULT result = S_FALSE;
@@ -42,175 +64,215 @@
 //
 //	return true;
 //}
-//Shape* Shape::CreateSquare(const float width, const float height, const float depth) {
-//	// 3Dオブジェクトのインスタンスを生成
-//	Shape* square = new Shape();
-//	if (square == nullptr)
-//	{
-//		return nullptr;
-//	}
 //
-//	// 初期化
-//	if (!square->InitializeSquare(width, height, depth))
-//	{
-//		delete square;
-//		assert(0);
-//		return nullptr;
-//	}
-//
-//	return square;
-//}
-//void Shape::Square(const float width, const float height, const float depth)
+//bool Shape::LoadTexture(const std::string& directoryPath, const std::string& filename)
 //{
-//	//前
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,-height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,0.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,-height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,0.0f };
-//
-//	//後ろ
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,-height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,0.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,-height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,0.0f };
-//
-//	//左
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,-height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,-height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,0.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,0.0f };
-//
-//
-//	//右
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,-height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,-height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,0.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,0.0f };
-//
-//
-//	//上
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,-height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,-height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,0.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,-height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,-height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,0.0f };
-//
-//	//下
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { -width / 2,height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 0.0f,0.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,height / 2,depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,1.0f };
-//
-//	vertices.emplace_back(new VertexPosNormalUv);
-//	vertices[vertices.size() - 1].pos = { width / 2,height / 2,-depth / 2 };
-//	vertices[vertices.size() - 1].uv = { 1.0f,0.0f };
-//	//前
-//	indices.emplace_back(new unsigned short(0)), indices.emplace_back(new unsigned short(1)), indices.emplace_back(new unsigned short(2));
-//	indices.emplace_back(new unsigned short(2)), indices.emplace_back(new unsigned short(1)), indices.emplace_back(new unsigned short(3));
-//	//後ろ
-//	indices.emplace_back(new unsigned short(5)), indices.emplace_back(new unsigned short(4)), indices.emplace_back(new unsigned short(6));
-//	indices.emplace_back(new unsigned short(5)), indices.emplace_back(new unsigned short(6)), indices.emplace_back(new unsigned short(7));
-//	//左
-//	indices.emplace_back(new unsigned short(8)), indices.emplace_back(new unsigned short(9)), indices.emplace_back(new unsigned short(10));
-//	indices.emplace_back(new unsigned short(10)), indices.emplace_back(new unsigned short(9)), indices.emplace_back(new unsigned short(11));
-//	//右
-//	indices.emplace_back(new unsigned short(13)), indices.emplace_back(new unsigned short(12)), indices.emplace_back(new unsigned short(14));
-//	indices.emplace_back(new unsigned short(13)), indices.emplace_back(new unsigned short(14)), indices.emplace_back(new unsigned short(15));
-//	//上
-//	indices.emplace_back(new unsigned short(16)), indices.emplace_back(new unsigned short(17)), indices.emplace_back(new unsigned short(18));
-//	indices.emplace_back(new unsigned short(18)), indices.emplace_back(new unsigned short(17)), indices.emplace_back(new unsigned short(19));
-//	//下
-//	indices.emplace_back(new unsigned short(21)), indices.emplace_back(new unsigned short(20)), indices.emplace_back(new unsigned short(22));
-//	indices.emplace_back(new unsigned short(21)), indices.emplace_back(new unsigned short(22)), indices.emplace_back(new unsigned short(23));
-//
 //	HRESULT result = S_FALSE;
-//	for (size_t i = 0; i < indices.size() / 3; i++)
-//	{//三角形1つごとに計算していく
-//		//三角形のインデックスを取り出して、一時的な変数に入れる
-//		unsigned short indices0 = indices[i * 3 + 0];
-//		unsigned short indices1 = indices[i * 3 + 1];
-//		unsigned short indices2 = indices[i * 3 + 2];
-//		//三角形を構成する頂点座標をベクトルに代入
-//		XMVECTOR p0 = XMLoadFloat3(&vertices[indices0].pos);
-//		XMVECTOR p1 = XMLoadFloat3(&vertices[indices1].pos);
-//		XMVECTOR p2 = XMLoadFloat3(&vertices[indices2].pos);
-//		//p0→p1ベクトル、p0→p2ベクトルを計算（ベクトルの減算）
-//		XMVECTOR v1 = XMVectorSubtract(p1, p0);
-//		XMVECTOR v2 = XMVectorSubtract(p2, p0);
+//	// WICテクスチャのロード
+//	TexMetadata metadata{};
+//	ScratchImage scratchImg{};
 //
-//		//外積は両方から垂直なベクトル
-//		XMVECTOR normal;
-//		normal = XMVector3Cross(v1, v2);
-//		//正規化（長さを１にする）
-//		normal = XMVector3Normalize(normal);
-//		//求めた法線を頂点データに代入
-//		XMStoreFloat3(&vertices[indices0].normal, normal);
-//		XMStoreFloat3(&vertices[indices1].normal, normal);
-//		XMStoreFloat3(&vertices[indices2].normal, normal);
+//	string filepath = directoryPath + filename;
+//	wchar_t wfilepath[128];
+//	int iBufferSize = MultiByteToWideChar(CP_ACP, 0, filepath.c_str(),
+//		-1, wfilepath, _countof(wfilepath));
+//	result = LoadFromWICFile(
+//		wfilepath, WIC_FLAGS_NONE,
+//		&metadata, scratchImg);
+//	if (FAILED(result)) {
+//		return result;
+//	}
+//
+//	const Image* img = scratchImg.GetImage(0, 0, 0); // 生データ抽出
+//	// リソース設定
+//	CD3DX12_RESOURCE_DESC texresDesc = CD3DX12_RESOURCE_DESC::Tex2D(
+//		metadata.format, metadata.width,
+//		(UINT)metadata.height,
+//		(UINT16)metadata.arraySize,
+//		(UINT16)metadata.mipLevels
+//	);
+//
+//	// テクスチャ用バッファの生成
+//	result = dev->CreateCommittedResource(		//GPUリソースの生成
+//		&CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0),
+//		D3D12_HEAP_FLAG_NONE,
+//		&texresDesc,
+//		D3D12_RESOURCE_STATE_GENERIC_READ,		//テクスチャ用設定
+//		nullptr,
+//		IID_PPV_ARGS(&texbuff));
+//	if (FAILED(result)) {
+//		return result;
+//	}
+//	//テクスチャバッファにデータ転送
+//	result = texbuff->WriteToSubresource(
+//		0,
+//		nullptr,		//全領域へコピー
+//		img->pixels,
+//		(UINT)img->rowPitch,
+//		(UINT)img->slicePitch
+//	);
+//	if (FAILED(result)) {
+//		return result;
 //	}
 //
 //
+//	// シェーダリソースビュー作成
+//	cpuDescHandleSRV = CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeap->GetCPUDescriptorHandleForHeapStart(), 0, descriptorHandleIncrementSize);
+//	gpuDescHandleSRV = CD3DX12_GPU_DESCRIPTOR_HANDLE(descHeap->GetGPUDescriptorHandleForHeapStart(), 0, descriptorHandleIncrementSize);
+//
+//	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{}; // 設定構造体
+//	D3D12_RESOURCE_DESC resDesc = texbuff->GetDesc();
+//
+//	srvDesc.Format = resDesc.Format;
+//	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+//	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;//2Dテクスチャ
+//	srvDesc.Texture2D.MipLevels = 1;
+//
+//	dev->CreateShaderResourceView(texbuff.Get(), //ビューと関連付けるバッファ
+//		&srvDesc, //テクスチャ設定情報
+//		cpuDescHandleSRV
+//	);
+//
+//	return true;
+//}
+//
+//void Shape::CreateModel(const std::string& name, bool smoothing)
+//{
+//	HRESULT result = S_FALSE;
+//	int index = 0;
+//	std::ifstream file;
+//	//file.open("Resources/triangle/triangle_mat.obj");
+//	const string modelname = name;
+//	const string filename = modelname + ".obj";
+//	const string directoryPath = "Resources/" + modelname + "/";
+//	file.open(directoryPath + filename);
+//	if (file.fail()) {
+//		assert(0);
+//	}
+//
+//	int indexCountTex = 0;
+//
+//
+//	vector<XMFLOAT3>positions;
+//	vector<XMFLOAT3>normals;
+//	vector<XMFLOAT2>texcoords;
+//
+//	string line;
+//	while (getline(file, line)) {
+//		std::istringstream line_stream(line);
+//		string key;
+//		getline(line_stream, key, ' ');
+//		//先頭文字列がvなら頂点座標
+//		if (key == "mtllib") {
+//			string filename;
+//			line_stream >> filename;
+//			LoadMaterial(directoryPath, filename);
+//		}
+//
+//		if (key == "v") {
+//			//座標読み込み
+//			XMFLOAT3 position{};
+//			line_stream >> position.x;
+//			line_stream >> position.y;
+//			line_stream >> position.z;
+//			//座標データに追加
+//			positions.emplace_back(position);
+//
+//		}
+//		if (key == "vt") {
+//			//UV読み込み
+//			XMFLOAT2 texcoord{};
+//			line_stream >> texcoord.x;
+//			line_stream >> texcoord.y;
+//			//V方向反転
+//			texcoord.y = 1.0f - texcoord.y;
+//			texcoords.emplace_back(texcoord);
+//		}
+//		if (key == "vn") {
+//			XMFLOAT3 normal{};
+//			line_stream >> normal.x;
+//			line_stream >> normal.y;
+//			line_stream >> normal.z;
+//
+//			normals.emplace_back(normal);
+//		}
+//		if (key == "f") {
+//			int faceIndexCount = 0;
+//			string index_string;
+//			while (getline(line_stream, index_string, ' '))
+//			{
+//				std::istringstream index_stream(index_string);
+//				unsigned short indexPosition, indexNormal, indexTexcoord;
+//				index_stream >> indexPosition;
+//
+//				if (material.textureFilename.size() > 0) {
+//					index_stream.seekg(1, ios_base::cur);
+//					index_stream >> indexTexcoord;
+//					index_stream.seekg(1, ios_base::cur);
+//					index_stream >> indexNormal;
+//					//頂点データの追加
+//					VertexPosNormalUv vertex{};
+//					vertex.pos = positions[indexPosition - 1];
+//					vertex.normal = normals[indexNormal - 1];
+//					vertex.uv = texcoords[indexTexcoord - 1];
+//					vertices.emplace_back(vertex);
+//					if (smoothing) {
+//						AddSmoothData(indexPosition, (unsigned short)vertices.size() - 1);
+//					}
+//				}
+//				else {
+//					char c;
+//					index_stream >> c;
+//					// スラッシュ2連続の場合、頂点番号のみ
+//					if (c == '/') {
+//						// 頂点データの追加
+//						VertexPosNormalUv vertex{};
+//						vertex.pos = positions[indexPosition - 1];
+//						vertex.normal = { 0, 0, 1 };
+//						vertex.uv = { 0, 0 };
+//						vertices.emplace_back(vertex);
+//					}
+//					else {
+//						index_stream.seekg(-1, ios_base::cur); // 1文字戻る
+//						index_stream >> indexTexcoord;
+//						index_stream.seekg(1, ios_base::cur); // スラッシュを飛ばす
+//						index_stream >> indexNormal;
+//						// 頂点データの追加
+//						VertexPosNormalUv vertex{};
+//						vertex.pos = positions[indexPosition - 1];
+//						vertex.normal = normals[indexNormal - 1];
+//						vertex.uv = { 0, 0 };
+//						vertices.emplace_back(vertex);
+//						if (smoothing) {
+//							AddSmoothData(indexPosition, (unsigned short)vertices.size() - 1);
+//						}
+//					}
+//				}
+//				// インデックスデータの追加
+//				if (faceIndexCount >= 3) {
+//					// 四角形ポリゴンの4点目なので、
+//					// 四角形の0,1,2,3の内 2,3,0で三角形を構築する
+//					indices.emplace_back(indexCountTex - 1);
+//					indices.emplace_back(indexCountTex);
+//					indices.emplace_back(indexCountTex - 3);
+//				}
+//				else
+//				{
+//					indices.emplace_back(indexCountTex);
+//				}
+//				indexCountTex++;
+//				faceIndexCount++;
+//
+//			}
+//
+//
+//		}
+//
+//	}
+//	file.close();
+//	if (smoothing) {
+//		CalculateSmoothedVertexNormals();
+//	}
 //	// 頂点データ全体のサイズ = 頂点データ一つ分のサイズ * 頂点データの要素数
 //	UINT sizeVB = static_cast<UINT>(sizeof(VertexPosNormalUv) * vertices.size());
 //	//インデックスデータの全サイズ
@@ -259,84 +321,87 @@
 //
 //	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 //	vbView.SizeInBytes = sizeVB;
-//	vbView.StrideInBytes = sizeof(VertexPosNormalUv);
+//	vbView.StrideInBytes = sizeof(vertices[0]);
 //
 //	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
 //	ibView.Format = DXGI_FORMAT_R16_UINT;
 //	ibView.SizeInBytes = sizeIB;
 //
 //}
-//bool Shape::LoadTexture()
+//void Shape::LoadMaterial(const std::string& directoryPath, const std::string& filename)
 //{
-//	HRESULT result = S_FALSE;
-//
-//	// WICテクスチャのロード
-//	TexMetadata metadata{};
-//	ScratchImage scratchImg{};
-//
-//	result = LoadFromWICFile(
-//		L"Resources/white.png", WIC_FLAGS_NONE,
-//		&metadata, scratchImg);
-//	if (FAILED(result)) {
-//		return result;
+//	//ファイルストリーム
+//	std::ifstream file;
+//	//マテリアルファイルを開く
+//	file.open(directoryPath + filename);
+//	//ファイルオープン失敗をチェック
+//	if (file.fail())
+//	{
+//		assert(0);
 //	}
 //
-//	const Image* img = scratchImg.GetImage(0, 0, 0); // 生データ抽出
+//	//1行ずつ読み込む
+//	string line;
+//	while (getline(file, line))
+//	{
+//		//1行分の文字列をストリームに変換
+//		std::istringstream line_stream(line);
 //
-//	// リソース設定
-//	CD3DX12_RESOURCE_DESC texresDesc = CD3DX12_RESOURCE_DESC::Tex2D(
-//		metadata.format,
-//		metadata.width,
-//		(UINT)metadata.height,
-//		(UINT16)metadata.arraySize,
-//		(UINT16)metadata.mipLevels
-//	);
+//		//半角スペース区切りで行の先頭文字列を取得
+//		string key;
+//		getline(line_stream, key, ' ');
 //
-//	// テクスチャ用バッファの生成
-//	result = dev->CreateCommittedResource(
-//		&CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0),
-//		D3D12_HEAP_FLAG_NONE,
-//		&texresDesc,
-//		D3D12_RESOURCE_STATE_GENERIC_READ, // テクスチャ用指定
-//		nullptr,
-//		IID_PPV_ARGS(&texbuff));
-//	if (FAILED(result)) {
-//		return result;
+//		//先頭のタブ文字は無視する
+//		if (key[0] == '\t')
+//		{
+//			key.erase(key.begin()); //先頭の文字を削除
+//		}
+//
+//		//先頭の文字列がnewmtlならマテリアル名
+//		if (key == "newmtl")
+//		{//マテリアル名読み込み
+//			line_stream >> material.name;
+//		}
+//
+//		//先頭の文字列がKaならアンビエント色
+//		if (key == "Ka")
+//		{
+//			line_stream >> material.ambient.x;
+//			line_stream >> material.ambient.y;
+//			line_stream >> material.ambient.z;
+//		}
+//
+//		//先頭の文字列がKdならディフューズ色
+//		if (key == "Kd")
+//		{
+//			line_stream >> material.diffuse.x;
+//			line_stream >> material.diffuse.y;
+//			line_stream >> material.diffuse.z;
+//		}
+//
+//		//先頭の文字列がKsならスペキュラー色
+//		if (key == "Ks")
+//		{
+//			line_stream >> material.specular.x;
+//			line_stream >> material.specular.y;
+//			line_stream >> material.specular.z;
+//		}
+//
+//		//先頭の文字列がmap_Kdならテクスチャファイル名
+//		if (key == "map_Kd")
+//		{
+//			//テクスチャのファイル名読み込み
+//			line_stream >> material.textureFilename;
+//			InitializeDescriptorHeap();
+//			//テクスチャ読み込み
+//			LoadTexture(directoryPath, material.textureFilename);
+//		}
 //	}
-//
-//	// テクスチャバッファにデータ転送
-//	result = texbuff->WriteToSubresource(
-//		0,
-//		nullptr, // 全領域へコピー
-//		img->pixels,    // 元データアドレス
-//		(UINT)img->rowPitch,  // 1ラインサイズ
-//		(UINT)img->slicePitch // 1枚サイズ
-//	);
-//	if (FAILED(result)) {
-//		return result;
-//	}
-//
-//	// シェーダリソースビュー作成
-//	cpuDescHandleSRV = CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeap->GetCPUDescriptorHandleForHeapStart(), 0, descriptorHandleIncrementSize);
-//	gpuDescHandleSRV = CD3DX12_GPU_DESCRIPTOR_HANDLE(descHeap->GetGPUDescriptorHandleForHeapStart(), 0, descriptorHandleIncrementSize);
-//
-//	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{}; // 設定構造体
-//	D3D12_RESOURCE_DESC resDesc = texbuff->GetDesc();
-//
-//	srvDesc.Format = resDesc.Format;
-//	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-//	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;//2Dテクスチャ
-//	srvDesc.Texture2D.MipLevels = 1;
-//
-//	dev->CreateShaderResourceView(texbuff.Get(), //ビューと関連付けるバッファ
-//		&srvDesc, //テクスチャ設定情報
-//		cpuDescHandleSRV
-//	);
-//
-//	return true;
+//	//ファイルを閉じる
+//	file.close();
 //}
 //
-//bool Shape::InitializeSquare(const float width, const float height, const float depth)
+//bool Shape::Initialize(const std::string& modelname, bool smoothing)
 //{
 //
 //	// nullptrチェック
@@ -351,9 +416,8 @@
 //		D3D12_RESOURCE_STATE_GENERIC_READ,
 //		nullptr, IID_PPV_ARGS(&constBuffB1));
 //
-//	Square(width, height, depth);
-//	InitializeDescriptorHeap();
-//	LoadTexture();
+//	CreateModel(modelname, smoothing);
+//
 //	ConstBufferDataB1* constMap1 = nullptr;
 //	result = constBuffB1->Map(0, nullptr, (void**)&constMap1);
 //	constMap1->ambient = material.ambient;
@@ -365,6 +429,31 @@
 //
 //	return true;
 //}
+//
+//void Shape::AddSmoothData(unsigned short indexPosition, unsigned short indexVertex)
+//{
+//	smoothData[indexPosition].emplace_back(indexVertex);
+//}
+//
+//void Shape::CalculateSmoothedVertexNormals()
+//{
+//	auto itr = smoothData.begin();
+//	for (; itr != smoothData.end(); ++itr) {
+//		//各面用の共通頂点コレクション
+//		std::vector<unsigned short>& v = itr->second;
+//		//全頂点の法線を平均する
+//		XMVECTOR normal = {};
+//		for (unsigned short index : v) {
+//			normal += XMVectorSet(vertices[index].normal.x, vertices[index].normal.y, vertices[index].normal.z, 0);
+//		}
+//		normal = XMVector3Normalize(normal / (float)v.size());
+//		//共通法線を使用する全ての頂点データに書き込む
+//		for (unsigned short index : v) {
+//			vertices[index].normal = { normal.m128_f32[0], normal.m128_f32[1], normal.m128_f32[2] };
+//		}
+//	}
+//}
+//
 //void Shape::Draw(ID3D12GraphicsCommandList* cmdList)
 //{
 //	// nullptrチェック

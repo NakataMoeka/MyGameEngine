@@ -5,6 +5,10 @@
 #include <DirectXMath.h>
 #include <d3dx12.h>
 #include <string>
+#include<unordered_map>
+/// <summary>
+/// OBJ用のモデルクラス
+/// </summary>
 class Shape
 {
 private: // エイリアス
@@ -15,6 +19,7 @@ private: // エイリアス
 	using XMFLOAT3 = DirectX::XMFLOAT3;
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
+	using XMVECTOR = DirectX::XMVECTOR;
 
 public:
 	// 頂点データ構造体
@@ -54,20 +59,30 @@ public:
 
 	static bool StaticInitialize(ID3D12Device* dev);
 
-	Shape* CreateSquare(const float width, const float height, const float depth);
+	Shape* Create(const std::string& modelname, bool smoothing = false);
 
-	bool InitializeSquare(const float width, const float height, const float depth);
+	bool Initialize(const std::string& modelname, bool smoothing);
+
+	void AddSmoothData(unsigned short indexPosition, unsigned short indexVertex);
+
+	void CalculateSmoothedVertexNormals();
+
 	// 描画
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
-	void Square(const float width, const float height, const float depth);
-	
-	bool InitializeDescriptorHeap();
-
-	bool LoadTexture();
 private:
 	Material material;
 
+	bool InitializeDescriptorHeap();
+
+	bool LoadTexture(const std::string& directoryPath, const std::string& filename);
+
+	void CreateRect(const std::string& name, bool smoothing);
+	void CreateSquare(const std::string& name, bool smoothing);
+
+	void CreateModel(const std::string& name, bool smoothing);
+
+	void LoadMaterial(const std::string& directoryPath, const std::string& filename);
 
 
 	// デバイス
@@ -97,4 +112,7 @@ private:
 	std::vector<unsigned short> indices;
 
 	ComPtr<ID3D12Resource> constBuffB1; // 定数バッファ
+
+	std::unordered_map<unsigned short, std::vector<unsigned short>>smoothData;
+
 };

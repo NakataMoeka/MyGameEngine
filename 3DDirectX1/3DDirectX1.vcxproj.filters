@@ -61,9 +61,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Shape.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
     <ClCompile Include="2d\DebugText.cpp">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClCompile>
@@ -119,6 +116,9 @@
       <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
     </ClCompile>
     <ClCompile Include="3d\Object3d.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
     </ClCompile>
   </ItemGroup>
@@ -202,9 +202,6 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shape.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClInclude>
     <ClInclude Include="2d\DebugText.h">
       <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClInclude>
@@ -260,6 +257,9 @@
       <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
     </ClInclude>
     <ClInclude Include="3d\Object3d.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
       <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
     </ClInclude>
   </ItemGroup>
