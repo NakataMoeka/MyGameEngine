@@ -67,6 +67,14 @@ void PostEffect::Initialize()
 
 	assert(SUCCEEDED(result));
 
+	Tex();
+	DescHeap();
+	//CreateGraphicsPipeline(ps,vs);
+}
+
+void PostEffect::Tex()
+{
+	HRESULT result;
 	// リソース設定
 	CD3DX12_RESOURCE_DESC texresDesc = CD3DX12_RESOURCE_DESC::Tex2D(
 		DXGI_FORMAT_R8G8B8A8_UNORM,
@@ -104,6 +112,12 @@ void PostEffect::Initialize()
 			delete[] img;
 		}
 	}
+}
+
+void PostEffect::DescHeap()
+{
+	HRESULT result;
+	
 	// デスクリプタヒープを生成	
 	D3D12_DESCRIPTOR_HEAP_DESC srvDescHeapDesc = {};
 	srvDescHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
@@ -123,7 +137,7 @@ void PostEffect::Initialize()
 	for (UINT i = 0; i < 2; i++) {
 		dev->CreateShaderResourceView(texBuff[i].Get(),
 			&srvDesc,
-			CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeapSRV->GetCPUDescriptorHandleForHeapStart(),i,
+			CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeapSRV->GetCPUDescriptorHandleForHeapStart(), i,
 				dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)
 			)
 		);
@@ -142,8 +156,8 @@ void PostEffect::Initialize()
 	for (int i = 0; i < 2; i++) {
 		// デスクリプタヒープにRTVを作成
 		dev->CreateRenderTargetView(texBuff[i].Get(),
-			nullptr, CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeapRTV->GetCPUDescriptorHandleForHeapStart(),i
-		,dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)));
+			nullptr, CD3DX12_CPU_DESCRIPTOR_HANDLE(descHeapRTV->GetCPUDescriptorHandleForHeapStart(), i
+				, dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)));
 	}
 	// 深度バッファリソース設定
 	CD3DX12_RESOURCE_DESC depthResDesc =
@@ -181,7 +195,6 @@ void PostEffect::Initialize()
 	dev->CreateDepthStencilView(depthBuff.Get(),
 		&dsvDesc,
 		descHeapDSV->GetCPUDescriptorHandleForHeapStart());
-	//CreateGraphicsPipeline(ps,vs);
 }
 
 void PostEffect::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)

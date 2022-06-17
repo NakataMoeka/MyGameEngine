@@ -19,7 +19,7 @@ void Framework::Initialize()
 	winapp = new WinApp();
 	winapp->CreateGameWindow();
 	//DirectX‚Ì‰Šú‰»
-	dxcommon = new DirectXCommon();
+	dxcommon = new DXCommon();
 	dxcommon->Initialize(winapp);
 
 	//”Ä—p‹@”\‚Ì‰Šú‰»

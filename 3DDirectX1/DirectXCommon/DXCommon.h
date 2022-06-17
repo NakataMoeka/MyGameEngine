@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include "WinApp.h"
 
-class DirectXCommon {
+class DXCommon {
 public:
 	void Initialize(WinApp* winapp);
 	void preDraw();

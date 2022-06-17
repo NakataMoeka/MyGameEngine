@@ -23,7 +23,7 @@ public:
 protected:
 	bool endRequst = false;
 	WinApp* winapp = nullptr;
-	DirectXCommon* dxcommon = nullptr;
+	DXCommon* dxcommon = nullptr;
 	Audio* audio = nullptr;
 	Input* input = nullptr;
 

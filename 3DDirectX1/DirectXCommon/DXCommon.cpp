@@ -11,7 +11,7 @@
 using namespace Microsoft::WRL;
 
 
-void DirectXCommon::Initialize(WinApp* winapp)
+void DXCommon::Initialize(WinApp* winapp)
 {
 	assert(winapp);
 	this->winapp = winapp;
@@ -28,7 +28,7 @@ void DirectXCommon::Initialize(WinApp* winapp)
 
 	InitializeFance();
 }
-void DirectXCommon::preDraw()
+void DXCommon::preDraw()
 {
 	// バックバッファの番号を取得（2つなので0番か1番）
 	UINT bbIndex = swapchain->GetCurrentBackBufferIndex();
@@ -56,7 +56,7 @@ void DirectXCommon::preDraw()
 	cmdList->RSSetScissorRects(1, &CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height));
 	}
 
-void DirectXCommon::postDraw()
+void DXCommon::postDraw()
 {
 	// バックバッファの番号を取得（2つなので0番か1番）
 	UINT bbIndex = swapchain->GetCurrentBackBufferIndex();
@@ -82,7 +82,7 @@ void DirectXCommon::postDraw()
 	// バッファをフリップ（裏表の入替え）
 	swapchain->Present(1, 0);
 }
-void DirectXCommon::ClearRenderTarget()
+void DXCommon::ClearRenderTarget()
 {
 	// バックバッファの番号を取得（2つなので0番か1番）
 	UINT bbIndex = swapchain->GetCurrentBackBufferIndex();
@@ -93,7 +93,7 @@ void DirectXCommon::ClearRenderTarget()
 	cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
 }
 
-void DirectXCommon::ClearDepthBuffer()
+void DXCommon::ClearDepthBuffer()
 {
 	//深度ステンシルビュー用デスクリプタヒープのハンドルを取得
 	CD3DX12_CPU_DESCRIPTOR_HANDLE dsvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(dsvHeap->GetCPUDescriptorHandleForHeapStart());
@@ -101,7 +101,7 @@ void DirectXCommon::ClearDepthBuffer()
 	cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
 
-void DirectXCommon::InitializeDevice()
+void DXCommon::InitializeDevice()
 {
 
 #ifdef _DEBUG
@@ -174,7 +174,7 @@ void DirectXCommon::InitializeDevice()
 
 }
 
-void DirectXCommon::InitializeCommand()
+void DXCommon::InitializeCommand()
 {
 	HRESULT result;
 
@@ -197,7 +197,7 @@ void DirectXCommon::InitializeCommand()
 
 }
 
-void DirectXCommon::InitializeSwapchain()
+void DXCommon::InitializeSwapchain()
 {
 
 
@@ -227,7 +227,7 @@ void DirectXCommon::InitializeSwapchain()
 	swapchain1.As(&swapchain);
 }
 
-void DirectXCommon::InitializeRenderTargetView()
+void DXCommon::InitializeRenderTargetView()
 {
 	HRESULT result;
 	
@@ -260,7 +260,7 @@ void DirectXCommon::InitializeRenderTargetView()
 	}
 }
 
-void DirectXCommon::InitializeDepthBuffer()
+void DXCommon::InitializeDepthBuffer()
 {
 	HRESULT result;
 	
@@ -298,7 +298,7 @@ void DirectXCommon::InitializeDepthBuffer()
 		dsvHeap->GetCPUDescriptorHandleForHeapStart());
 
 }
-void DirectXCommon::InitializeFance()
+void DXCommon::InitializeFance()
 {
 	HRESULT result;
 	// フェンスの生成

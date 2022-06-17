@@ -20,7 +20,7 @@ GameScene::~GameScene()
 	safe_delete(light);
 }
 
-void GameScene::Initialize(DirectXCommon* dxCommon, Audio* audio)
+void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 {
 	//u
 	assert(dxCommon);
@@ -47,7 +47,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Audio* audio)
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	object3d->CreateGraphicsPipeline(L"Resources/shaders/ToonPS.hlsl", L"Resources/shaders/ToonVS.hlsl");
+	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 	model = model->Create("bullet", true);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
@@ -88,7 +88,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Audio* audio)
 
 void GameScene::Update()
 {
-
+	HP += HPRecovery;
 	
 		//光線方向初期値                  上奥
 		static XMVECTOR lightDir = { 4, -6, 3, 0 };
@@ -119,8 +119,8 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
-	//object3d->Draw();
-	object3d2->Draw();
+	object3d->Draw();
+	//object3d2->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 

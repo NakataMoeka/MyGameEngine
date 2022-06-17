@@ -33,7 +33,7 @@ public: // メンバ関数
 
 	~GameScene();
 
-	void Initialize(DirectXCommon* dxCommon, Audio* audio);
+	void Initialize(DXCommon* dxCommon, Audio* audio);
 
 
 	void Update();
@@ -42,7 +42,7 @@ public: // メンバ関数
 	void DrawFront();
 	void CreateParticles();
 private: // メンバ変数
-	DirectXCommon* dxCommon = nullptr;
+	DXCommon* dxCommon = nullptr;
 
 
 	Audio* audio = nullptr;
@@ -65,6 +65,7 @@ private: // メンバ変数
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
 
 	int HP = 50;
+	const int HPRecovery = 10;
 	int pg = 0;
 	bool pFlag = false;
 	float a = 0;

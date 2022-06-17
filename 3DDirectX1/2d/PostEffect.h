@@ -17,7 +17,8 @@ public:
 
 
 	void Initialize();
-
+	void Tex();
+	void DescHeap();
 	void CreateGraphicsPipeline(const wchar_t* ps,const wchar_t* vs);
 
 
