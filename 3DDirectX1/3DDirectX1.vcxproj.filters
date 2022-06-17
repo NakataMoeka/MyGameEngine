@@ -59,6 +59,9 @@
     <Filter Include="HLSL\2d\posteffect">
       <UniqueIdentifier>{7fdd82e8-a493-4df6-a3d4-3e2e77dbc06f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース&amp;ヘッダーファイル\game">
+      <UniqueIdentifier>{9191c314-550f-469e-bbb6-db002c93363e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp">
@@ -120,6 +123,15 @@
     </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="others\Collision.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClCompile>
+    <ClCompile Include="others\CollisionPrimitive.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClCompile>
+    <ClCompile Include="game\player.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +273,15 @@
     </ClInclude>
     <ClInclude Include="Shape.h">
       <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="others\Collision.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClInclude>
+    <ClInclude Include="others\CollisionPrimitive.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+    </ClInclude>
+    <ClInclude Include="game\player.h">
+      <Filter>ソース&amp;ヘッダーファイル\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

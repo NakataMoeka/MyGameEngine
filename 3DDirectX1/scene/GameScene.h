@@ -15,6 +15,8 @@
 #include "FbxObject.h"
 #include"Light.h"
 #include"PostEffect.h"
+#include"player.h"
+
 class GameScene
 {
 private:
@@ -60,6 +62,9 @@ private: // メンバ変数
 	FbxObject3d* object3d2 = nullptr;
 	FbxModel* model2 = nullptr;
 	Light* light = nullptr;
+
+	Player* player;
+
 	const int debugTextTexNumber = 0;
 
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };

@@ -79,12 +79,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)2d\;$(ProjectDir)3d\;$(ProjectDir)camera\;$(ProjectDir)DirectXCommon\;$(ProjectDir)input\;$(ProjectDir)audio\;$(ProjectDir)scene\;$(ProjectDir)others\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)2d\;$(ProjectDir)3d\;$(ProjectDir)camera\;$(ProjectDir)DirectXCommon\;$(ProjectDir)input\;$(ProjectDir)audio\;$(ProjectDir)scene\;$(ProjectDir)others\;$(ProjectDir)game\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)2d\;$(ProjectDir)3d\;$(ProjectDir)camera\;$(ProjectDir)DirectXCommon\;$(ProjectDir)input\;$(ProjectDir)audio\;$(ProjectDir)scene\;$(ProjectDir)others\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)2d\;$(ProjectDir)3d\;$(ProjectDir)camera\;$(ProjectDir)DirectXCommon\;$(ProjectDir)input\;$(ProjectDir)audio\;$(ProjectDir)scene\;$(ProjectDir)others\;$(ProjectDir)game\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -168,8 +168,11 @@
     <ClCompile Include="DirectXCommon\Framework.cpp" />
     <ClCompile Include="DirectXCommon\NMGame.cpp" />
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
+    <ClCompile Include="game\player.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="others\Collision.cpp" />
+    <ClCompile Include="others\CollisionPrimitive.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="Shape.cpp" />
   </ItemGroup>
@@ -314,7 +317,10 @@
     <ClInclude Include="DirectXCommon\NMGame.h" />
     <ClInclude Include="DirectXCommon\SafeDelete.h" />
     <ClInclude Include="DirectXCommon\WinApp.h" />
+    <ClInclude Include="game\player.h" />
     <ClInclude Include="input\input.h" />
+    <ClInclude Include="others\Collision.h" />
+    <ClInclude Include="others\CollisionPrimitive.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="Shape.h" />
   </ItemGroup>

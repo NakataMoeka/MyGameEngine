@@ -49,20 +49,17 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
-	model = model->Create("bullet", true);
+	model = model->Create("bullet", false);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
 	object3d2->SetModel(model2);
 
-//	object3d2->SetRotation({ 0,180,0 });
-//	object3d2->SetPosition({ 0,0,0 });
+
+	object3d2->SetRotation({ 0,45,0 });
+
 	object3d->Update();
-//	object3d2->Update();
-	//モデル名を指定して読み込み
-	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
-	//あああああ
 
 	//object3d2->Update();
 
@@ -82,8 +79,9 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
-	camera->SetEye({ 0, 0, -10 });
-
+	camera->SetEye({ 0, 0, -30 });
+	player = new Player;//newすればエラー吐かない
+	player->Initialize();
 }
 
 void GameScene::Update()
@@ -91,11 +89,12 @@ void GameScene::Update()
 	HP += HPRecovery;
 	
 		//光線方向初期値                  上奥
-		static XMVECTOR lightDir = { 4, -6, 3, 0 };
+		//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 	
 	if (Input::GetInstance()->TriggerKey(DIK_SPACE)|| Input::GetInstance()->IsButtonDown(ButtonA)) {
 		object3d2->PlayAnimation();
 	}
+	player->Move();
 	camera->Update();
 	particleMan->Update();
 	object3d2->SetPosition(playerPosition);
@@ -119,8 +118,9 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
-	object3d->Draw();
+	//object3d->Draw();
 	//object3d2->Draw();
+	player->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 
@@ -131,7 +131,7 @@ void GameScene::DrawFront()
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
 	//debugText.Printf(100, 20, 3.0f, "MauseLeftClick");
-	//debugText.Printf(600, 20, 3.0f, "%f", playerPosition.x);
+	debugText.Printf(600, 20, 3.0f, "%d", player->GetPower());
 	debugText.DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }
