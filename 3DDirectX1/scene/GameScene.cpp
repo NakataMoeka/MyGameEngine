@@ -48,10 +48,10 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
 	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-
-	model = model->Create("bullet", false);
+	shape = shape->Create(0.5, 0.5, 0.5);
+	//model = model->Create("bullet", false);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
-	object3d = Object3d::Create(model);
+	object3d = Object3d::CreateShape(shape);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
 	object3d2->SetModel(model2);

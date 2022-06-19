@@ -32,6 +32,7 @@ void Object3d::StaticInitialize(ID3D12Device* dev, Camera* camera)
 
 	// ƒ‚ƒfƒ‹‚ÌÃ“I‰Šú‰»
 	Model::StaticInitialize(dev);
+	Shape::StaticInitialize(dev);
 }
 
 void Object3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
@@ -225,27 +226,27 @@ Object3d* Object3d::Create(Model* model)
 
 	return object3d;
 }
-//Object3d* Object3d::CreateShape(Shape* shape)
-//{
-//
-//	Object3d* object3d = new Object3d();
-//	if (object3d == nullptr) {
-//		return nullptr;
-//	}
-//
-//	// ‰Šú‰»
-//	if (!object3d->Initialize()) {
-//		delete object3d;
-//		assert(0);
-//		return nullptr;
-//	}
-//
-//
-//	if (shape) {
-//		object3d->SetShape(shape);
-//	}
-//	return object3d;
-//}
+Object3d* Object3d::CreateShape(Shape* shape)
+{
+
+	Object3d* object3d = new Object3d();
+	if (object3d == nullptr) {
+		return nullptr;
+	}
+
+	// ‰Šú‰»
+	if (!object3d->Initialize()) {
+		delete object3d;
+		assert(0);
+		return nullptr;
+	}
+
+
+	if (shape) {
+		object3d->SetShape(shape);
+	}
+	return object3d;
+}
 
 bool Object3d::Initialize()
 {
@@ -315,7 +316,7 @@ void Object3d::Draw()
 	assert(Object3d::cmdList);
 
 	// ƒ‚ƒfƒ‹‚ÌŠ„‚è“–‚Ä‚ª‚È‚¯‚ê‚Î•`‰æ‚µ‚È‚¢
-	if (model == nullptr/* && shape == nullptr*/) {
+	if (model == nullptr && shape == nullptr) {
 		return;
 	}
 
@@ -329,5 +330,5 @@ void Object3d::Draw()
 	light->Draw(cmdList,3);
 	// ƒ‚ƒfƒ‹•`‰æ
 	model->Draw(cmdList);
-	//shape->Draw(cmdList);
+	shape->Draw(cmdList);
 }

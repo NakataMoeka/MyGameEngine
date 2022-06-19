@@ -6,6 +6,7 @@
 #include <d3dx12.h>
 #include <string>
 #include<unordered_map>
+#include<vector>
 /// <summary>
 /// OBJ用のモデルクラス
 /// </summary>
@@ -59,13 +60,9 @@ public:
 
 	static bool StaticInitialize(ID3D12Device* dev);
 
-	Shape* Create(const std::string& modelname, bool smoothing = false);
+	Shape* Create(float x, float y, float z );
 
-	bool Initialize(const std::string& modelname, bool smoothing);
-
-	void AddSmoothData(unsigned short indexPosition, unsigned short indexVertex);
-
-	void CalculateSmoothedVertexNormals();
+	bool Initialize();
 
 	// 描画
 	void Draw(ID3D12GraphicsCommandList* cmdList);
@@ -75,15 +72,16 @@ private:
 
 	bool InitializeDescriptorHeap();
 
-	bool LoadTexture(const std::string& directoryPath, const std::string& filename);
+	bool LoadTexture(const wchar_t* filename);
 
 	void CreateRect(const std::string& name, bool smoothing);
-	void CreateSquare(const std::string& name, bool smoothing);
+	void CreateCube(float x, float y, float z);
 
-	void CreateModel(const std::string& name, bool smoothing);
+	bool Initialize(float x, float y, float z);
 
-	void LoadMaterial(const std::string& directoryPath, const std::string& filename);
+	void CreateModel();
 
+	
 
 	// デバイス
 	static ID3D12Device* dev;
@@ -113,6 +111,5 @@ private:
 
 	ComPtr<ID3D12Resource> constBuffB1; // 定数バッファ
 
-	std::unordered_map<unsigned short, std::vector<unsigned short>>smoothData;
 
 };

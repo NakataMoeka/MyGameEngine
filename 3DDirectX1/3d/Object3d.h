@@ -8,6 +8,7 @@
 #include <string>
 
 #include "Model.h"
+#include "Shape.h"
 
 #include "Camera.h"
 #include "Light.h"
@@ -61,7 +62,7 @@ public:
 
 	static Object3d* Create(Model* model);
 
-	//static Object3d* CreateShape(Shape* shape);
+	static Object3d* CreateShape(Shape* shape);
 
 	bool Initialize();
 
@@ -82,7 +83,7 @@ public:
 	// ƒ‚ƒfƒ‹‚Æ‚Ì˜AŒg
 	void SetModel(Model* model) { this->model = model; };
 
-	//void SetShape(Shape* shape) { this->shape = shape; };
+	void SetShape(Shape* shape) { this->shape = shape; };
 
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
@@ -114,7 +115,7 @@ private:
 	Object3d* parent = nullptr;
 
 	Model* model = nullptr;
-
+	Shape* shape = nullptr;
 	// ƒJƒƒ‰
 	static Camera* camera;
 	static Light* light;

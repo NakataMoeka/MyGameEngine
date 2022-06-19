@@ -121,9 +121,6 @@
     <ClCompile Include="3d\Object3d.cpp">
       <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
     </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
-    </ClCompile>
     <ClCompile Include="others\Collision.cpp">
       <Filter>ソース&amp;ヘッダーファイル\others</Filter>
     </ClCompile>
@@ -132,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="game\player.cpp">
       <Filter>ソース&amp;ヘッダーファイル\game</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Shape.cpp">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -271,9 +271,6 @@
     <ClInclude Include="3d\Object3d.h">
       <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
     </ClInclude>
-    <ClInclude Include="Shape.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
-    </ClInclude>
     <ClInclude Include="others\Collision.h">
       <Filter>ソース&amp;ヘッダーファイル\others</Filter>
     </ClInclude>
@@ -282,6 +279,9 @@
     </ClInclude>
     <ClInclude Include="game\player.h">
       <Filter>ソース&amp;ヘッダーファイル\game</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Shape.h">
+      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
