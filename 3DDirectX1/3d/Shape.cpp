@@ -306,23 +306,23 @@ void Shape::CreateModel()
 
 void Shape::Draw(ID3D12GraphicsCommandList* cmdList)
 {
-	// nullptrチェック
-	assert(dev);
+	//// nullptrチェック
+	//assert(dev);
 
-	// 頂点バッファの設定
-	cmdList->IASetVertexBuffers(0, 1, &vbView);
-	// インデックスバッファの設定
-	cmdList->IASetIndexBuffer(&ibView);
+	//// 頂点バッファの設定
+	//cmdList->IASetVertexBuffers(0, 1, &vbView);
+	//// インデックスバッファの設定
+	//cmdList->IASetIndexBuffer(&ibView);
 
-	// デスクリプタヒープの配列
-	ID3D12DescriptorHeap* ppHeaps[] = { descHeap.Get() };
-	cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+	//// デスクリプタヒープの配列
+	//ID3D12DescriptorHeap* ppHeaps[] = { descHeap.Get() };
+	//cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 
-	// 定数バッファビューをセット
-	cmdList->SetGraphicsRootConstantBufferView(1, constBuffB1->GetGPUVirtualAddress());
-	//// シェーダリソースビューをセット
-	cmdList->SetGraphicsRootDescriptorTable(2, gpuDescHandleSRV);
+	//// 定数バッファビューをセット
+	//cmdList->SetGraphicsRootConstantBufferView(1, constBuffB1->GetGPUVirtualAddress());
+	////// シェーダリソースビューをセット
+	//cmdList->SetGraphicsRootDescriptorTable(2, gpuDescHandleSRV);
 
-	// 描画コマンド
-	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
+	//// 描画コマンド
+	//cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 }
