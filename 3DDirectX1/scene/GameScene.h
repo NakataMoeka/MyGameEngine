@@ -64,7 +64,7 @@ private: // メンバ変数
 	Light* light = nullptr;
 
 	Player* player;
-	Shape* shape = nullptr;
+
 	const int debugTextTexNumber = 0;
 
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };

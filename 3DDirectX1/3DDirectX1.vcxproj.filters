@@ -130,9 +130,6 @@
     <ClCompile Include="game\player.cpp">
       <Filter>ソース&amp;ヘッダーファイル\game</Filter>
     </ClCompile>
-    <ClCompile Include="3d\Shape.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -279,9 +276,6 @@
     </ClInclude>
     <ClInclude Include="game\player.h">
       <Filter>ソース&amp;ヘッダーファイル\game</Filter>
-    </ClInclude>
-    <ClInclude Include="3d\Shape.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
