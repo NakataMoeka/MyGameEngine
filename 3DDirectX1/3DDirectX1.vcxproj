@@ -158,7 +158,7 @@
     <ClCompile Include="3d\FbxLoader.cpp" />
     <ClCompile Include="3d\FbxModel.cpp" />
     <ClCompile Include="3d\FbxObject.cpp" />
-    <ClCompile Include="3d\Light.cpp" />
+    <ClCompile Include="3d\LightGroup.cpp" />
     <ClCompile Include="3d\Model.cpp" />
     <ClCompile Include="3d\Object3d.cpp" />
     <ClCompile Include="3d\ParticleManager.cpp" />
@@ -302,13 +302,17 @@
     <ClInclude Include="2d\DebugText.h" />
     <ClInclude Include="2d\PostEffect.h" />
     <ClInclude Include="2d\Sprite.h" />
+    <ClInclude Include="3d\CircleShadow.h" />
+    <ClInclude Include="3d\DirectionalLight.h" />
     <ClInclude Include="3d\FbxLoader.h" />
     <ClInclude Include="3d\FbxModel.h" />
     <ClInclude Include="3d\FbxObject.h" />
-    <ClInclude Include="3d\Light.h" />
+    <ClInclude Include="3d\LightGroup.h" />
     <ClInclude Include="3d\Model.h" />
     <ClInclude Include="3d\Object3d.h" />
     <ClInclude Include="3d\ParticleManager.h" />
+    <ClInclude Include="3d\PointLight.h" />
+    <ClInclude Include="3d\SpotLight.h" />
     <ClInclude Include="audio\Audio.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="DirectXCommon\DXCommon.h" />

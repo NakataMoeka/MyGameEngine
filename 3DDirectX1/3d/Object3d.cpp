@@ -17,7 +17,7 @@ ID3D12Device* Object3d::dev = nullptr;
 ID3D12GraphicsCommandList* Object3d::cmdList = nullptr;
 Object3d::PipelineSet Object3d::pipelineSet;
 Camera* Object3d::camera = nullptr;
-Light* Object3d::light = nullptr;
+LightGroup* Object3d::lightGroup = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* dev, Camera* camera)
 {
@@ -305,7 +305,7 @@ void Object3d::Draw()
 	cmdList->SetGraphicsRootSignature(pipelineSet.rootsignature.Get());
 	// 定数バッファビューをセット
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
-	light->Draw(cmdList,3);
+	lightGroup->Draw(cmdList,3);
 	// モデル描画
 	model->Draw(cmdList);
 }

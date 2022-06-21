@@ -10,7 +10,7 @@
 #include "Model.h"
 
 #include "Camera.h"
-#include "Light.h"
+#include "LightGroup.h"
 class Object3d
 {
 private: // エイリアス
@@ -51,8 +51,8 @@ public:
 	static void SetCamera(Camera* camera) {
 		Object3d::camera = camera;
 	}
-	static void SetLight(Light* light) {
-		Object3d::light = light;
+	static void SetLight(LightGroup* lightGroup) {
+		Object3d::lightGroup = lightGroup;
 	}
 
 	static void PreDraw(ID3D12GraphicsCommandList* cmdList);
@@ -114,7 +114,7 @@ private:
 
 	// カメラ
 	static Camera* camera;
-	static Light* light;
+	static LightGroup* lightGroup;
 	// ビルボード
 	bool isBillboard = false;
 };

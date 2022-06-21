@@ -17,7 +17,7 @@ GameScene::~GameScene()
 	safe_delete(model2);
 	safe_delete(sprite);
 	safe_delete(particleMan);
-	safe_delete(light);
+	safe_delete(lightGroup);
 }
 
 void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
@@ -36,10 +36,19 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Object3d::SetCamera(camera);
 	FbxObject3d::SetDev(dxCommon->Getdev());
 	//ライト生成
-	light = Light::Create();
-	//ライト色を設定
-	light->SetLightColor({ 1,1,1 });
-	Object3d::SetLight(light);
+	lightGroup = LightGroup::Create();
+
+	Object3d::SetLight(lightGroup);
+
+	// 3Dオブエクトにライトをセット
+	lightGroup->SetDirLightActive(0, true);
+	lightGroup->SetDirLightDir(0, XMVECTOR{ 0,0,1,0 });
+	lightGroup->SetDirLightActive(1, true);
+	lightGroup->SetDirLightDir(1, XMVECTOR{ 0,-1,0,0 });
+
+	lightGroup->SetPointLightActive(0, false);
+	lightGroup->SetSpotLightActive(0, false);
+	lightGroup->SetCircleShadowActive(0, false);
 
 	FbxObject3d::SetCamera(camera);
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
@@ -101,7 +110,7 @@ void GameScene::Update()
 	object3d2->SetRotation({ 0,90,0 });
 	object3d->Update();
 	object3d2->Update();
-	light->Update();
+	lightGroup->Update();
 }
 
 void GameScene::DrawBG()

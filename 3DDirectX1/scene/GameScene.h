@@ -13,7 +13,7 @@
 #include"Model.h"
 #include "Camera.h"
 #include "FbxObject.h"
-#include"Light.h"
+#include"LightGroup.h"
 #include"PostEffect.h"
 #include"player.h"
 
@@ -61,7 +61,8 @@ private: // メンバ変数
 
 	FbxObject3d* object3d2 = nullptr;
 	FbxModel* model2 = nullptr;
-	Light* light = nullptr;
+	LightGroup* lightGroup = nullptr;
+
 
 	Player* player;
 
