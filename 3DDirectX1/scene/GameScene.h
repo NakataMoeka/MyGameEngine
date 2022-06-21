@@ -61,8 +61,14 @@ private: // メンバ変数
 
 	FbxObject3d* object3d2 = nullptr;
 	FbxModel* model2 = nullptr;
-	LightGroup* lightGroup = nullptr;
 
+	Object3d* object3d3 = nullptr;
+	Model* model3 = nullptr;
+
+	Object3d* object3d4 = nullptr;
+	Model* model4 = nullptr;
+
+	LightGroup* lightGroup = nullptr;
 
 	Player* player;
 

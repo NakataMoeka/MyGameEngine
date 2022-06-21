@@ -17,6 +17,7 @@ public:
 	void Move();
 	void Draw();
 	int GetPower() { return power; }
+	XMFLOAT3 GetPlayerPos() { return playerPos; }
 private:
 	Object3d* playerObj;
 	Model* model;
