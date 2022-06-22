@@ -7,18 +7,6 @@ struct Sphere
 	//半径
 	float radius = 1.0f;
 };
-struct Box
-{
-	////最小値
-	//DirectX::XMVECTOR minPosition;
-	////最大値
-	//DirectX::XMVECTOR maxPosition;
-	//中心座標
-	DirectX::XMVECTOR center = { 0,0,0,1 };
-	//半径
-	DirectX::XMFLOAT3 scale = { 1.0f, 1.0f, 1.0f };
-};
-
 struct Plane
 {
 	//法線ベクトル

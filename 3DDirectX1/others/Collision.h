@@ -18,5 +18,5 @@ public:
 	static bool CheackRay2Sphere(const Ray& ray, const Sphere& sphere,
 		float* distance = nullptr, DirectX::XMVECTOR* inter = nullptr);
 	static bool CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB);
-	static bool CheckSphere2Box(const Sphere& sphere, const Box& box);
+
 };

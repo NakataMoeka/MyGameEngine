@@ -25,7 +25,7 @@ bool Model::StaticInitialize(ID3D12Device* dev)
 	return true;
 }
 
-Model* Model::Create(const std::string& text)
+Model* Model::Create(const std::string& modelname, bool smoothing)
 {
 	// 3Dオブジェクトのインスタンスを生成
 	Model* model = new Model();
@@ -35,7 +35,7 @@ Model* Model::Create(const std::string& text)
 	}
 
 	// 初期化
-	if (!model->Initialize(text))
+	if (!model->Initialize(modelname,smoothing))
 	{
 		delete model;
 		assert(0);
@@ -136,7 +136,7 @@ bool Model::LoadTexture(const std::string& directoryPath, const std::string& fil
 	return true;
 }
 
-void Model::CreateModel(const std::string& name)
+void Model::CreateModel(const std::string& name, bool smoothing)
 {
 	HRESULT result = S_FALSE;
 	int index = 0;
@@ -216,6 +216,9 @@ void Model::CreateModel(const std::string& name)
 					vertex.normal = normals[indexNormal - 1];
 					vertex.uv = texcoords[indexTexcoord - 1];
 					vertices.emplace_back(vertex);
+					if (smoothing) {
+						AddSmoothData(indexPosition, (unsigned short)vertices.size() - 1);
+					}
 				}
 				else {
 					char c;
@@ -240,7 +243,9 @@ void Model::CreateModel(const std::string& name)
 						vertex.normal = normals[indexNormal - 1];
 						vertex.uv = { 0, 0 };
 						vertices.emplace_back(vertex);
-
+						if (smoothing) {
+							AddSmoothData(indexPosition, (unsigned short)vertices.size() - 1);
+						}
 					}
 				}
 				// インデックスデータの追加
@@ -265,7 +270,9 @@ void Model::CreateModel(const std::string& name)
 
 	}
 	file.close();
-
+	if (smoothing) {
+		CalculateSmoothedVertexNormals();
+	}
 	// 頂点データ全体のサイズ = 頂点データ一つ分のサイズ * 頂点データの要素数
 	UINT sizeVB = static_cast<UINT>(sizeof(VertexPosNormalUv) * vertices.size());
 	//インデックスデータの全サイズ
@@ -394,7 +401,7 @@ void Model::LoadMaterial(const std::string& directoryPath, const std::string& fi
 	file.close();
 }
 
-bool Model::Initialize(const std::string& text)
+bool Model::Initialize(const std::string& modelname, bool smoothing)
 {
 
 	// nullptrチェック
@@ -409,7 +416,7 @@ bool Model::Initialize(const std::string& text)
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr, IID_PPV_ARGS(&constBuffB1));
 
-	CreateModel(text);
+	CreateModel(modelname, smoothing);
 
 	ConstBufferDataB1* constMap1 = nullptr;
 	result = constBuffB1->Map(0, nullptr, (void**)&constMap1);
@@ -421,6 +428,30 @@ bool Model::Initialize(const std::string& text)
 
 
 	return true;
+}
+
+void Model::AddSmoothData(unsigned short indexPosition, unsigned short indexVertex)
+{
+	smoothData[indexPosition].emplace_back(indexVertex);
+}
+
+void Model::CalculateSmoothedVertexNormals()
+{
+	auto itr = smoothData.begin();
+	for (; itr != smoothData.end(); ++itr) {
+		//各面用の共通頂点コレクション
+		std::vector<unsigned short>& v = itr->second;
+		//全頂点の法線を平均する
+		XMVECTOR normal = {};
+		for (unsigned short index : v) {
+			normal += XMVectorSet(vertices[index].normal.x, vertices[index].normal.y, vertices[index].normal.z, 0);
+		}
+		normal = XMVector3Normalize(normal / (float)v.size());
+		//共通法線を使用する全ての頂点データに書き込む
+		for (unsigned short index : v) {
+			vertices[index].normal = { normal.m128_f32[0], normal.m128_f32[1], normal.m128_f32[2] };
+		}
+	}
 }
 
 void Model::Draw(ID3D12GraphicsCommandList* cmdList)

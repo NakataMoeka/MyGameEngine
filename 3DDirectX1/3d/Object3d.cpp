@@ -17,6 +17,7 @@ ID3D12Device* Object3d::dev = nullptr;
 ID3D12GraphicsCommandList* Object3d::cmdList = nullptr;
 Object3d::PipelineSet Object3d::pipelineSet;
 Camera* Object3d::camera = nullptr;
+LightGroup* Object3d::lightGroup = nullptr;
 
 void Object3d::StaticInitialize(ID3D12Device* dev, Camera* camera)
 {
@@ -27,14 +28,13 @@ void Object3d::StaticInitialize(ID3D12Device* dev, Camera* camera)
 	Object3d::dev = dev;
 	Object3d::camera = camera;
 
-	// グラフィックパイプラインの生成
-	CreateGraphicsPipeline();
+
 
 	// モデルの静的初期化
 	Model::StaticInitialize(dev);
 }
 
-void Object3d::CreateGraphicsPipeline()
+void Object3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 {
 	HRESULT result = S_FALSE;
 	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
@@ -43,7 +43,7 @@ void Object3d::CreateGraphicsPipeline()
 
 	// 頂点シェーダの読み込みとコンパイル
 	result = D3DCompileFromFile(
-		L"Resources/shaders/OBJVS.hlsl",  // シェーダファイル名
+		vs,  // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "vs_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -65,7 +65,7 @@ void Object3d::CreateGraphicsPipeline()
 	}
 	// ピクセルシェーダの読み込みとコンパイル
 	result = D3DCompileFromFile(
-		L"Resources/shaders/OBJPS.hlsl",   // シェーダファイル名
+		ps,   // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "ps_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -153,10 +153,11 @@ void Object3d::CreateGraphicsPipeline()
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
 
 	// ルートパラメータ
-	CD3DX12_ROOT_PARAMETER rootparams[3];
+	CD3DX12_ROOT_PARAMETER rootparams[4];
 	rootparams[0].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_ALL);
 	rootparams[1].InitAsConstantBufferView(1, 0, D3D12_SHADER_VISIBILITY_ALL);
 	rootparams[2].InitAsDescriptorTable(1, &descRangeSRV, D3D12_SHADER_VISIBILITY_ALL);
+	rootparams[3].InitAsConstantBufferView(2, 0, D3D12_SHADER_VISIBILITY_ALL);
 
 	// スタティックサンプラー
 	CD3DX12_STATIC_SAMPLER_DESC samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
@@ -224,27 +225,6 @@ Object3d* Object3d::Create(Model* model)
 
 	return object3d;
 }
-//Object3d* Object3d::CreateShape(Shape* shape)
-//{
-//
-//	Object3d* object3d = new Object3d();
-//	if (object3d == nullptr) {
-//		return nullptr;
-//	}
-//
-//	// 初期化
-//	if (!object3d->Initialize()) {
-//		delete object3d;
-//		assert(0);
-//		return nullptr;
-//	}
-//
-//
-//	if (shape) {
-//		object3d->SetShape(shape);
-//	}
-//	return object3d;
-//}
 
 bool Object3d::Initialize()
 {
@@ -279,27 +259,30 @@ void Object3d::Update()
 	matWorld *= matRot;
 	matWorld *= matTrans;
 
-	if (isBillboard) {
-		const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
+	//if (isBillboard) {
+	//	const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
 
-		matWorld = XMMatrixIdentity();
-		matWorld *= matScale; // ワールド行列にスケーリングを反映
-		matWorld *= matRot; // ワールド行列に回転を反映
-		matWorld *= matBillboard;
-		matWorld *= matTrans; // ワールド行列に平行移動を反映
-	}
+	//	matWorld = XMMatrixIdentity();
+	//	matWorld *= matScale; // ワールド行列にスケーリングを反映
+	//	matWorld *= matRot; // ワールド行列に回転を反映
+	//	matWorld *= matBillboard;
+	//	matWorld *= matTrans; // ワールド行列に平行移動を反映
+	//}
 
 	if (parent != nullptr) {
 		matWorld *= parent->matWorld;
 	}
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
+	const XMFLOAT3& cameraPos = camera->GetEye();
 
 	// 定数バッファへデータ転送
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
-	constMap->mat = matWorld * matViewProjection;	// 行列の合成
-
+	//constMap->mat = matWorld * matViewProjection;	// 行列の合成
+	constMap->viewproj = matViewProjection;
+	constMap->world = matWorld;
+	constMap->cameraPos = cameraPos;
 	constBuffB0->Unmap(0, nullptr);
 	
 }
@@ -311,7 +294,7 @@ void Object3d::Draw()
 	assert(Object3d::cmdList);
 
 	// モデルの割り当てがなければ描画しない
-	if (model == nullptr/* && shape == nullptr*/) {
+	if (model == nullptr) {
 		return;
 	}
 
@@ -322,8 +305,7 @@ void Object3d::Draw()
 	cmdList->SetGraphicsRootSignature(pipelineSet.rootsignature.Get());
 	// 定数バッファビューをセット
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
-
+	lightGroup->Draw(cmdList,3);
 	// モデル描画
 	model->Draw(cmdList);
-	//shape->Draw(cmdList);
 }

@@ -7,11 +7,16 @@
 #include <cstdlib>
 #include "WinApp.h"
 
-class DirectXCommon {
+class DXCommon {
 public:
 	void Initialize(WinApp* winapp);
 	void preDraw();
 	void postDraw();
+
+	void ClearRenderTarget();
+
+	void ClearDepthBuffer();
+
 	ID3D12Device* Getdev() { return dev.Get(); }
 
 	ID3D12GraphicsCommandList* GetCmdList() { return cmdList.Get(); }
