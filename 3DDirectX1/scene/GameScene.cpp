@@ -273,7 +273,7 @@ void GameScene::Update()
 		Mflag = true;
 	}
 	if (Mflag == true) {
-		playerPosition = Eas::lerp(playerPosition, playerEndPosition, 0.05);
+		playerPosition = Eas::easeIn(playerPosition, playerEndPosition, 0.5);
 	}
 	if (input->TriggerKey(DIK_R)) {
 		playerPosition = { 0,0,0 };

@@ -18,6 +18,6 @@ private:
 	using XMMATRIX = DirectX::XMMATRIX;
 public:
 	static const XMFLOAT3 lerp(const XMFLOAT3& start, const XMFLOAT3& end, const float t);
-
+	static const XMFLOAT3 easeIn(const XMFLOAT3& start, const XMFLOAT3& end, const float t);
 };
 
