@@ -173,6 +173,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="others\Collision.cpp" />
     <ClCompile Include="others\CollisionPrimitive.cpp" />
+    <ClCompile Include="others\Ease.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -324,6 +325,7 @@
     <ClInclude Include="input\input.h" />
     <ClInclude Include="others\Collision.h" />
     <ClInclude Include="others\CollisionPrimitive.h" />
+    <ClInclude Include="others\Ease.h" />
     <ClInclude Include="scene\GameScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

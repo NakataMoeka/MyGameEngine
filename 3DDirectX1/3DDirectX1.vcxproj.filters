@@ -65,6 +65,12 @@
     <Filter Include="Game\player">
       <UniqueIdentifier>{9191c314-550f-469e-bbb6-db002c93363e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\others\collision">
+      <UniqueIdentifier>{e07f5ec7-ceef-4321-83db-e4ee7794b159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\others\easing">
+      <UniqueIdentifier>{3d1a1b9c-09fb-4d9d-b58f-fc9125ffef7b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp">
@@ -124,14 +130,17 @@
     <ClCompile Include="3d\Object3d.cpp">
       <Filter>Library\3d\obj</Filter>
     </ClCompile>
-    <ClCompile Include="others\Collision.cpp">
-      <Filter>Library\others</Filter>
-    </ClCompile>
-    <ClCompile Include="others\CollisionPrimitive.cpp">
-      <Filter>Library\others</Filter>
-    </ClCompile>
     <ClCompile Include="game\player.cpp">
       <Filter>Game\player</Filter>
+    </ClCompile>
+    <ClCompile Include="others\Collision.cpp">
+      <Filter>Library\others\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="others\CollisionPrimitive.cpp">
+      <Filter>Library\others\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="others\Ease.cpp">
+      <Filter>Library\others\easing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -271,12 +280,6 @@
     <ClInclude Include="3d\Object3d.h">
       <Filter>Library\3d\obj</Filter>
     </ClInclude>
-    <ClInclude Include="others\Collision.h">
-      <Filter>Library\others</Filter>
-    </ClInclude>
-    <ClInclude Include="others\CollisionPrimitive.h">
-      <Filter>Library\others</Filter>
-    </ClInclude>
     <ClInclude Include="game\player.h">
       <Filter>Game\player</Filter>
     </ClInclude>
@@ -291,6 +294,15 @@
     </ClInclude>
     <ClInclude Include="3d\CircleShadow.h">
       <Filter>Library\3d\light</Filter>
+    </ClInclude>
+    <ClInclude Include="others\Collision.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\CollisionPrimitive.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\Ease.h">
+      <Filter>Library\others\easing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
