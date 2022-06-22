@@ -13,6 +13,7 @@
 #include"Model.h"
 #include "DebugCamera.h"
 #include "Collision.h"
+#include"../Ease.h"
 class GameScene 
 {
 private: 
@@ -108,10 +109,11 @@ private: // ÉÅÉìÉoïœêî
 #pragma endregion
 
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
+	XMFLOAT3 playerEndPosition = { 10.0f,0.0f,0.0f };
 	XMFLOAT3 playerPositionB = { 0.0f,0.0f,0.0f };
 
-	XMFLOAT2 playerPos2d = {640, 320};
-	XMFLOAT2 playerPos2d2= { 0.0f,0.0f };
+	//XMFLOAT2 playerPos2d = {640, 320};
+	//XMFLOAT2 playerPos2d2= { 0.0f,0.0f };
 	XMFLOAT2 playerEndPos2d2 = { 0,0 };
 
 
