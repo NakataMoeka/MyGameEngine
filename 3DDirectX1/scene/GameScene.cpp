@@ -58,12 +58,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// デバッグテキスト初期化
 	debugText.Initialize(debugTextTexNumber);
 	
-	Sprite::LoadTexture(1, L"Resources/circle.png");
+	Sprite::LoadTexture(1, L"Resources/yellow.png");
 	Sprite::LoadTexture(2, L"Resources/white1x1.png");
 
-	//sprite = Sprite::CreateSprite(1, playerPos2d);
+	sprite = Sprite::CreateSprite(1, playerPos2d);
 	//sprite2 = Sprite::CreateSprite(2, playerPos2d2);
-	//sprite->SetSize({ 100,100 });
+	
 	//sprite2->SetSize({ 100, 1 });
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
@@ -267,25 +267,25 @@ void GameScene::Update()
 //sprite2->SetPosition(playerPos2d2);
 //sprite2->SetRotation(angle);
 #pragma endregion
-
+#pragma region MT4_課題6
 	if (input->TriggerKey(DIK_SPACE)) {
 
 		Mflag = true;
 	}
 	if (Mflag == true) {
-		playerPosition = Eas::easeIn(playerPosition, playerEndPosition, 0.5);
+		playerSize2d = Eas::easeIn(playerSize2d, playerEndSize2d, 0.5);
 	}
 	if (input->TriggerKey(DIK_R)) {
-		playerPosition = { 0,0,0 };
+		playerPos2d = { 0,0 };
 		Mflag = false;
 	}
-	if (input->PushMouse(0)) {
-		debugText.Printf(100, 100, 5.0f, "www");
-	}
+#pragma endregion
 	// パーティクル生成
 	//CreateParticles();
 	camera->Update();
 	particleMan->Update();
+	sprite->SetSize(playerSize2d);
+	sprite->SetPosition(playerPos2d);
 	object3d->SetPosition(playerPosition);
 	//object3d2->SetPosition(playerPositionB);
 	object3d2->SetScale({ 2.0f,2.0f,2.0f });
@@ -297,13 +297,13 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
-	object3d->Draw();
+	//object3d->Draw();
 	//object3d2->Draw();
 	Object3d::PostDraw();
 
 
 	sprite->PreDraw(dxCommon->GetCmdList());
-	//sprite->Draw();
+	sprite->Draw();
 	//sprite2->Draw();
 	//char str[256];
 
