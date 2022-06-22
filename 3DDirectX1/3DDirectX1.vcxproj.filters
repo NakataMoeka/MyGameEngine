@@ -4,45 +4,9 @@
     <Filter Include="HLSL">
       <UniqueIdentifier>{38cedc2e-1f11-455e-8a50-db8e3fa0dc2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル">
-      <UniqueIdentifier>{0af46e8d-2344-4391-aa32-8b9d79c5be2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\2d">
-      <UniqueIdentifier>{f6eca569-6d02-4300-8b39-edf1e96d23e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\3d">
-      <UniqueIdentifier>{c81aa983-fd24-436d-93f0-52e0275fefc1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\camera">
-      <UniqueIdentifier>{018a49dd-0dc5-4c79-8ba7-943a56a1f818}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\Common">
-      <UniqueIdentifier>{9c8fcbec-81bc-45d1-a4c4-1df0234423da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\others">
-      <UniqueIdentifier>{96bfd6e6-ce33-4984-8725-60229998b883}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\scene">
-      <UniqueIdentifier>{c1923a4d-0c3d-4ea4-a17e-16ddd50df236}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\audio">
-      <UniqueIdentifier>{169d3a54-5b3a-41cb-b8b4-d03ce29f9998}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\input">
-      <UniqueIdentifier>{3aa9bbac-beaf-461a-9c79-1b9ce2629b10}</UniqueIdentifier>
-    </Filter>
     <Filter Include="リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\3d\light">
-      <UniqueIdentifier>{26ec9426-ad30-4d8a-ad2d-81c9a3c5deb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\3d\fbx">
-      <UniqueIdentifier>{7a3270e0-a118-42d7-b712-dae35167a7cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\3d\obj">
-      <UniqueIdentifier>{88091a91-be9e-4f37-9bd4-0462efc396e9}</UniqueIdentifier>
     </Filter>
     <Filter Include="HLSL\3d">
       <UniqueIdentifier>{20852dec-bc3c-4e93-aeda-227cda28e057}</UniqueIdentifier>
@@ -59,76 +23,115 @@
     <Filter Include="HLSL\2d\posteffect">
       <UniqueIdentifier>{7fdd82e8-a493-4df6-a3d4-3e2e77dbc06f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース&amp;ヘッダーファイル\game">
+    <Filter Include="Library">
+      <UniqueIdentifier>{0af46e8d-2344-4391-aa32-8b9d79c5be2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\2d">
+      <UniqueIdentifier>{f6eca569-6d02-4300-8b39-edf1e96d23e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\3d">
+      <UniqueIdentifier>{c81aa983-fd24-436d-93f0-52e0275fefc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\3d\light">
+      <UniqueIdentifier>{26ec9426-ad30-4d8a-ad2d-81c9a3c5deb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\3d\fbx">
+      <UniqueIdentifier>{7a3270e0-a118-42d7-b712-dae35167a7cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\3d\obj">
+      <UniqueIdentifier>{88091a91-be9e-4f37-9bd4-0462efc396e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\camera">
+      <UniqueIdentifier>{018a49dd-0dc5-4c79-8ba7-943a56a1f818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\Common">
+      <UniqueIdentifier>{9c8fcbec-81bc-45d1-a4c4-1df0234423da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\others">
+      <UniqueIdentifier>{96bfd6e6-ce33-4984-8725-60229998b883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\audio">
+      <UniqueIdentifier>{169d3a54-5b3a-41cb-b8b4-d03ce29f9998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\input">
+      <UniqueIdentifier>{3aa9bbac-beaf-461a-9c79-1b9ce2629b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{6f35af6f-1a7d-4035-9b38-bc726536e710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\scene">
+      <UniqueIdentifier>{c1923a4d-0c3d-4ea4-a17e-16ddd50df236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\player">
       <UniqueIdentifier>{9191c314-550f-469e-bbb6-db002c93363e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+      <Filter>Library\2d</Filter>
     </ClCompile>
     <ClCompile Include="2d\Sprite.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+      <Filter>Library\2d</Filter>
     </ClCompile>
     <ClCompile Include="3d\ParticleManager.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+      <Filter>Library\3d</Filter>
     </ClCompile>
     <ClCompile Include="camera\Camera.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
+      <Filter>Library\camera</Filter>
     </ClCompile>
     <ClCompile Include="audio\Audio.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
+      <Filter>Library\audio</Filter>
     </ClCompile>
     <ClCompile Include="input\input.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\input</Filter>
+      <Filter>Library\input</Filter>
     </ClCompile>
     <ClCompile Include="scene\GameScene.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
+      <Filter>Game\scene</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\DXCommon.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClCompile>
     <ClCompile Include="2d\PostEffect.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+      <Filter>Library\2d</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\WinApp.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\Framework.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\NMGame.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClCompile>
     <ClCompile Include="3d\LightGroup.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
+      <Filter>Library\3d\light</Filter>
     </ClCompile>
     <ClCompile Include="3d\FbxLoader.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+      <Filter>Library\3d\fbx</Filter>
     </ClCompile>
     <ClCompile Include="3d\FbxModel.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+      <Filter>Library\3d\fbx</Filter>
     </ClCompile>
     <ClCompile Include="3d\FbxObject.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+      <Filter>Library\3d\fbx</Filter>
     </ClCompile>
     <ClCompile Include="3d\Model.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+      <Filter>Library\3d\obj</Filter>
     </ClCompile>
     <ClCompile Include="3d\Object3d.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+      <Filter>Library\3d\obj</Filter>
     </ClCompile>
     <ClCompile Include="others\Collision.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+      <Filter>Library\others</Filter>
     </ClCompile>
     <ClCompile Include="others\CollisionPrimitive.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+      <Filter>Library\others</Filter>
     </ClCompile>
     <ClCompile Include="game\player.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\game</Filter>
+      <Filter>Game\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,82 +215,82 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\DebugText.h">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+      <Filter>Library\2d</Filter>
     </ClInclude>
     <ClInclude Include="2d\Sprite.h">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+      <Filter>Library\2d</Filter>
     </ClInclude>
     <ClInclude Include="3d\ParticleManager.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d</Filter>
+      <Filter>Library\3d</Filter>
     </ClInclude>
     <ClInclude Include="camera\Camera.h">
-      <Filter>ソース&amp;ヘッダーファイル\camera</Filter>
+      <Filter>Library\camera</Filter>
     </ClInclude>
     <ClInclude Include="audio\Audio.h">
-      <Filter>ソース&amp;ヘッダーファイル\audio</Filter>
+      <Filter>Library\audio</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon\SafeDelete.h">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClInclude>
     <ClInclude Include="input\input.h">
-      <Filter>ソース&amp;ヘッダーファイル\input</Filter>
+      <Filter>Library\input</Filter>
     </ClInclude>
     <ClInclude Include="scene\GameScene.h">
-      <Filter>ソース&amp;ヘッダーファイル\scene</Filter>
+      <Filter>Game\scene</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon\DXCommon.h">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClInclude>
     <ClInclude Include="2d\PostEffect.h">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
+      <Filter>Library\2d</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon\WinApp.h">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon\Framework.h">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon\NMGame.h">
-      <Filter>ソース&amp;ヘッダーファイル\Common</Filter>
+      <Filter>Library\Common</Filter>
     </ClInclude>
     <ClInclude Include="3d\LightGroup.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
+      <Filter>Library\3d\light</Filter>
     </ClInclude>
     <ClInclude Include="3d\FbxLoader.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+      <Filter>Library\3d\fbx</Filter>
     </ClInclude>
     <ClInclude Include="3d\FbxModel.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+      <Filter>Library\3d\fbx</Filter>
     </ClInclude>
     <ClInclude Include="3d\FbxObject.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\fbx</Filter>
+      <Filter>Library\3d\fbx</Filter>
     </ClInclude>
     <ClInclude Include="3d\Model.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+      <Filter>Library\3d\obj</Filter>
     </ClInclude>
     <ClInclude Include="3d\Object3d.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\obj</Filter>
+      <Filter>Library\3d\obj</Filter>
     </ClInclude>
     <ClInclude Include="others\Collision.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+      <Filter>Library\others</Filter>
     </ClInclude>
     <ClInclude Include="others\CollisionPrimitive.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
+      <Filter>Library\others</Filter>
     </ClInclude>
     <ClInclude Include="game\player.h">
-      <Filter>ソース&amp;ヘッダーファイル\game</Filter>
+      <Filter>Game\player</Filter>
     </ClInclude>
     <ClInclude Include="3d\PointLight.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
+      <Filter>Library\3d\light</Filter>
     </ClInclude>
     <ClInclude Include="3d\DirectionalLight.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
+      <Filter>Library\3d\light</Filter>
     </ClInclude>
     <ClInclude Include="3d\SpotLight.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
+      <Filter>Library\3d\light</Filter>
     </ClInclude>
     <ClInclude Include="3d\CircleShadow.h">
-      <Filter>ソース&amp;ヘッダーファイル\3d\light</Filter>
+      <Filter>Library\3d\light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
