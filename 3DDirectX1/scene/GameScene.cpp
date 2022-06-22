@@ -1,10 +1,7 @@
-ï»¿#include "GameScene.h"
+#include "GameScene.h"
 #include <cassert>
-#include<sstream>
-#include<iomanip>
-#include "FbxLoader.h"
-#include "FbxObject.h"
-#include"input.h"
+//#include "FbxLoader.h"
+#include<time.h>
 GameScene::GameScene()
 {
 }
@@ -13,169 +10,303 @@ GameScene::~GameScene()
 {
 	safe_delete(object3d);
 	safe_delete(object3d2);
-	safe_delete(object3d3);
-	safe_delete(object3d4);
 	safe_delete(model);
 	safe_delete(model2);
-	safe_delete(model3);
-	safe_delete(model4);
 	safe_delete(sprite);
 	safe_delete(particleMan);
-	safe_delete(lightGroup);
 }
 
-void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
+void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 {
 	//u
 	assert(dxCommon);
+	assert(input);
 	assert(audio);
 
 	this->dxCommon = dxCommon;
+	this->input = input;
 	this->audio = audio;
 
-	// ã‚«ãƒ¡ãƒ©ç”Ÿæˆ
-	camera = new Camera(WinApp::window_width, WinApp::window_height);
+	// ƒJƒƒ‰¶¬
+	camera = new DebugCamera(WinApp::window_width, WinApp::window_height, input);
 
-	// 3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚«ãƒ¡ãƒ©ã‚’ã‚»ãƒƒãƒˆ
+	// 3DƒIƒuƒWƒFƒNƒg‚ÉƒJƒƒ‰‚ðƒZƒbƒg
 	Object3d::SetCamera(camera);
-	FbxObject3d::SetDev(dxCommon->Getdev());
-	//ãƒ©ã‚¤ãƒˆç”Ÿæˆ
-	lightGroup = LightGroup::Create();
-
-	Object3d::SetLight(lightGroup);
-
-	// 3Dã‚ªãƒ–ã‚¨ã‚¯ãƒˆã«ãƒ©ã‚¤ãƒˆã‚’ã‚»ãƒƒãƒˆ
-	// 
-	lightGroup->SetDirLightActive(0, true);
-	lightGroup->SetDirLightActive(1, true);
-	lightGroup->SetDirLightActive(2, true);
-	//lightGroup->SetDirLightActive(0, true);
-	//lightGroup->SetDirLightDir(0, XMVECTOR{ 0,0,1,0 });
-	//lightGroup->SetDirLightActive(1, true);
-	//lightGroup->SetDirLightDir(1, XMVECTOR{ 0,-1,0,0 });
-	//lightGroup->SetDirLightActive(2, true);
-	//lightGroup->SetDirLightDir(2, XMVECTOR{ 1,0,0,0 });
-	//lightGroup->SetPointLightActive(0, true);
-	//lightGroup->SetSpotLightActive(0, true);
-	lightGroup->SetCircleShadowActive(0, true);
-
-	FbxObject3d::SetCamera(camera);
-	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
-
-	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ãƒžãƒãƒ¼ã‚¸ãƒ£ç”Ÿæˆ
+	// ƒp[ƒeƒBƒNƒ‹ƒ}ƒl[ƒWƒƒ¶¬
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	object3d3->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	object3d4->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-
-	model = model->Create("bullet", false);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
+	model = model->Create("bullet");
+	model2 = model2->Create("bullet");
 	object3d = Object3d::Create(model);
-	object3d2 = new FbxObject3d();
-	object3d2->Initialize();
-	object3d2->SetModel(model2);
-	model3 = model3->Create("skydome", true);
-	model4 = model4->Create("ground", false);
-	object3d3 = Object3d::Create(model3);
-	object3d4 = Object3d::Create(model4);
-
-	object3d2->SetRotation({ 0,45,0 });
+	object3d2 = Object3d::Create(model2);
+	
 
 	object3d->Update();
+	object3d2->Update();
+	//ƒ‚ƒfƒ‹–¼‚ðŽw’è‚µ‚Ä“Ç‚Ýž‚Ý
+	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	//‚ ‚ ‚ ‚ ‚ 
 
-	//object3d2->Update();
 
 
-	// ãƒ‡ãƒãƒƒã‚°ãƒ†ã‚­ã‚¹ãƒˆç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
+
+	// ƒfƒoƒbƒOƒeƒLƒXƒg—pƒeƒNƒXƒ`ƒƒ“Ç‚Ýž‚Ý
 	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
 		assert(0);
 		return;
 	}
-	// ãƒ‡ãƒãƒƒã‚°ãƒ†ã‚­ã‚¹ãƒˆåˆæœŸåŒ–
+	// ƒfƒoƒbƒOƒeƒLƒXƒg‰Šú‰»
 	debugText.Initialize(debugTextTexNumber);
+	
+	Sprite::LoadTexture(1, L"Resources/circle.png");
+	Sprite::LoadTexture(2, L"Resources/white1x1.png");
 
-	Sprite::LoadTexture(1, L"Resources/background.png");
-
-	sprite = Sprite::CreateSprite(1, { 0,0 });
-
-	//audio->SoundPlayWave("Resources/ã‚·ãƒ§ãƒƒãƒˆ.wav",true);
-	// ã‚«ãƒ¡ãƒ©æ³¨è¦–ç‚¹ã‚’ã‚»ãƒƒãƒˆ
-	camera->SetTarget({ 0, 0.0f, 0 });
-	camera->SetEye({ 0, 0, -10 });
-	player = new Player;//newã™ã‚Œã°ã‚¨ãƒ©ãƒ¼åã‹ãªã„
-	player->Initialize();
+	sprite = Sprite::CreateSprite(1, playerPos2d);
+	sprite2 = Sprite::CreateSprite(2, playerPos2d2);
+	sprite->SetSize({ 100,100 });
+	sprite2->SetSize({ 100, 1 });
+	//audio->SoundPlayWave("Resources/ƒVƒ‡ƒbƒg.wav",true);
+	// ƒJƒƒ‰’Ž‹“_‚ðƒZƒbƒg
+	camera->SetTarget({ 0, 1, 0 });
+	camera->SetEye({ 0, 0, -100 });
+	//camera->SetDistance(20.0f);
+			//v2.x = v * cos(60 * PI / 180.0);
+			//v2.y = v * sin(60 * PI / 180.0);
+		
+	//vu = v;
+	//vBu = vB;
+	srand(time(NULL));
 }
 
 void GameScene::Update()
 {
-	HP += HPRecovery;
 
-	//å…‰ç·šæ–¹å‘åˆæœŸå€¤                  ä¸Šå¥¥
-	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
+#pragma region MT4_‰Û‘è1ƒRƒƒ“ƒgƒAƒEƒg	
 
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
-		object3d2->PlayAnimation();
+	//if (input->TriggerKey(DIK_SPACE)) {
+
+	//	Mflag = true;
+	//}
+	//
+
+	//if (Mflag == true) {
+	//	playerPosition2.y = playerPosition2.y + v;
+	//	v = -g + v;
+	//	g = k*v / m;
+	/*	if (playerPosition2.y >= 1000) {
+			playerPosition2.y = 30;
+			v = 0.0f;
+			g = 9.8f / 60.0f;
+			fx1 = 1.0f;
+			m = 5.0f;
+			Mflag = false;
+		}*/
+	//}
+#pragma endregion
+
+#pragma region MT4_‰Û‘è2_1
+	//if (input->TriggerKey(DIK_SPACE)) {
+
+	//	Mflag = true;
+	//}
+	//if (Mflag == true) {
+	//	if (v <= 0) {
+	//		v = 0;
+	//	}
+	//	playerPosition2.x = playerPosition2.x + v;
+	//
+	//		v = v - a;
+
+	//	fx = 100 * cos(60 * PI / 180.0);
+	//	fy = 100 * sin(60 * PI / 180.0);
+
+	//	N = m * g - fy;
+	//	fx = fx - (uk * N);
+	//
+	//	a = fx / m;
+	//	a = a / 300;
+
+	//}
+#pragma endregion
+	
+#pragma region MT4_‰Û‘è2_2
+
+	//if (input->TriggerKey(DIK_SPACE)) {
+
+	//	Mflag = true;
+	//}
+	//
+	//	if (Mflag == true) {
+	//		
+	//		if (playerPosition2.y<= 500) {
+	//			playerPosition2.x += v2.x;
+	//			playerPosition2.y -= v2.y;
+
+
+	//			v2.y = -g + v2.y;
+	//			g = k * v / m;
+
+	//		}
+	//	}
+	//
+	//sprite->SetPosition(playerPosition2);
+#pragma endregion
+#pragma region MT4_‰Û‘è3
+
+	/*sphereA.center = XMVectorSet(playerPosition.x, playerPosition.y, playerPosition.z, 1);
+	sphereB.center = XMVectorSet(playerPositionB.x, playerPositionB.y, playerPositionB.z, 1);
+	sphereA.radius = 2.0f;
+	sphereB.radius = 2.0f;
+
+	if (input->TriggerKey(DIK_SPACE)) {
+
+		Mflag = true;
 	}
-	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
-	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
-	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5,0.6,0));
-	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0,0.5));
+	
+	if (Mflag == true) {
+
+		playerPosition.x += v;
+		playerPositionB.x -= vB;
+	}
+	if (Collision::CheckSphere2Sphere(sphereA, sphereB)) {
+		debugText.Printf(0, 500, 3.0f, "Hit");
+
+		v = (vBu * m2 - vu * m) / m;
+		vB = (v * m - vBu * m2) / m2;
+		v *= e;
+		vB *= e;
+	}*/
 
 
-	object3d->SetScale({ 0.2, 0.2, 0.2});
-	object3d4->SetPosition({ 0,-1,0 });
-	player->Move();
+#pragma endregion
+#pragma region MT4_‰Û‘è4
+
+
+
+//if (input->TriggerKey(DIK_SPACE)) {
+//
+//	Mflag = true;
+//}
+//
+//if (Mflag == true) 
+//{
+//	Length += 0.5f;
+//	if (Length >= 50)
+//	{
+//		Length = 50;
+//	}
+//		radius = angle * 3.14f / 180.0f;
+//		add_x = cos(radius) * Length;
+//		add_y = sin(radius) * Length;
+//		playerPosition.x = playerPositionB.x + add_x;
+//		playerPosition.y = playerPositionB.y + add_y;
+//		angle += va;
+//}
+//if (input->TriggerKey(DIK_R)) {
+//	Mflag = false;
+//	Length = 0;
+//	playerPosition = { 0.0f,0.0f,0.0f };
+//}
+
+#pragma endregion
+#pragma region MT4_‰Û‘è5
+if (input->TriggerKey(DIK_SPACE)) {
+
+	Mflag = true;
+}
+playerEndPos2d2 = { playerPos2d2.x+cosf(XMConvertToRadians(angle))*100,playerPos2d2.y + sinf(XMConvertToRadians(angle))*100 };
+
+circle.center = { playerPos2d.x + 100, playerPos2d.y + 100, 0 };
+circle.radius = 100;
+line.center = { playerPos2d2.x + 100, playerPos2d2.y + 0.5f, 0 };
+line.scale= { 1,150,1 };
+
+//if (Mflag == true) {
+	
+	//if (playerPos2d2.x >= 0 && playerPos2d2.x < 1280) {
+		if (input->PushKey(DIK_D)) {
+			playerPos2d2.x += 1;
+		}
+		if (input->PushKey(DIK_A)) {
+			playerPos2d2.x -= 1;
+		}
+	//}
+	//if (playerPos2d2.y >= 0 && playerPos2d2.y <720) {
+		if (input->PushKey(DIK_W)) {
+			playerPos2d2.y -= 1;
+		}
+		if (input->PushKey(DIK_S)) {
+			playerPos2d2.y += 1;
+		}
+	//}
+	if (input->PushKey(DIK_Q)) {
+		angle -=1 ;
+	}
+	if (input->PushKey(DIK_E)) {
+		angle += 1;
+	}
+	if (Collision::CheckSphere2Box(circle, line))
+	{
+		sprite->SetColor({ 1,0,0,1 });
+	}
+	else
+	{
+		sprite->SetColor({ 1,1,1,1 });
+	}
+	
+		
+	
+
+
+		
+		
+	
+//}
+
+sprite->SetPosition(playerPos2d);
+sprite2->SetPosition(playerPos2d2);
+sprite2->SetRotation(angle);
+#pragma endregion
+	if (input->PushMouse(0)) {
+		debugText.Printf(100, 100, 5.0f, "www");
+	}
+	// ƒp[ƒeƒBƒNƒ‹¶¬
+	//CreateParticles();
 	camera->Update();
 	particleMan->Update();
-	object3d2->SetPosition(playerPosition);
-	object3d2->SetRotation({ 0,90,0 });
+	object3d->SetPosition(playerPosition);
+	object3d2->SetPosition(playerPositionB);
+	object3d2->SetScale({ 2.0f,2.0f,2.0f });
 	object3d->Update();
 	object3d2->Update();
-	object3d3->Update();
-	object3d4->Update();
-	lightGroup->Update();
-}
-
-void GameScene::DrawBG()
-{
-	//èƒŒæ™¯
-	sprite->PreDraw(dxCommon->GetCmdList());
-	sprite->Draw();
-	sprite->PostDraw();
-	dxCommon->ClearDepthBuffer();
+	
 }
 
 void GameScene::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
-	FbxObject3d::PreDraw(dxCommon->GetCmdList());
-
-	object3d3->Draw();
-	object3d4->Draw();
-
 	//object3d->Draw();
 	//object3d2->Draw();
-	player->Draw();
-
 	Object3d::PostDraw();
-	FbxObject3d::PostDraw();
 
-}
-void GameScene::DrawFront()
-{
-	//å‰æ™¯
+
 	sprite->PreDraw(dxCommon->GetCmdList());
-	//sprite->Draw();
-	//debugText.Printf(100, 20, 3.0f, "MauseLeftClick");
-	//debugText.Printf(600, 20, 3.0f, "%f,%f,%f",object3d4->GetPosition().x, object3d4->GetPosition().y, object3d4->GetPosition().z) ;
-	debugText.DrawAll(dxCommon->GetCmdList());
+	sprite->Draw();
+	sprite2->Draw();
+	//char str[256];
+
+	//debugText.Printf(0, 80, 3.0f, "%f,%f",playerEndPos2d2.x,playerEndPos2d2.y);
+	//debugText.Printf(0, 140, 3.0f, "%d",circleFlag);
+
+	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
+
+	debugText.DrawAll(dxCommon->GetCmdList( ));
 	sprite->PostDraw();
 }
 void GameScene::CreateParticles()
 {
 	for (int i = 0; i < 10; i++) {
-		// X,Y,Zå…¨ã¦[-5.0f,+5.0f]ã§ãƒ©ãƒ³ãƒ€ãƒ ã«åˆ†å¸ƒ
+		// X,Y,Z‘S‚Ä[-5.0f,+5.0f]‚Åƒ‰ƒ“ƒ_ƒ€‚É•ª•z
 		const float rnd_pos = 10.0f;
 		XMFLOAT3 pos{};
 		pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
@@ -192,7 +323,8 @@ void GameScene::CreateParticles()
 		const float rnd_acc = 0.001f;
 		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
-		// è¿½åŠ 
+		// ’Ç‰Á
 		particleMan->Add(60, pos, vel, acc, 1.0f, 0.0f);
 	}
 }
+

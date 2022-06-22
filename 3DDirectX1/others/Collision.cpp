@@ -193,6 +193,71 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		//ÇQì_ä‘ÇÃãóó£ÇÃÇQèÊÅÉîºåaÇÃçáåvÇÃÇQèÊÇ»ÇÁÇQÇ¬ÇÃãÖÇÕåç∑ÇµÇƒÇ¢ÇÈ
 		return  sqLength < r* r;
 	}
+	bool Collision::CheckSphere2Box(const Sphere& sphere, const Box& box)
+	{
+		/*float sqDistance = 0.0f;
+		float pos;
+
+		pos = sphere.center.m128_f32[0];
+		if (pos < box.minPosition.m128_f32[0]) {
+			sqDistance += (pos - box.minPosition.m128_f32[0]) * (pos - box.minPosition.m128_f32[0]);
+		}
+		else if (pos > box.maxPosition.m128_f32[0]) {
+			sqDistance += (pos - box.maxPosition.m128_f32[0]) * (pos - box.maxPosition.m128_f32[0]);
+		}
+
+		pos = sphere.center.m128_f32[1];
+		if (pos < box.minPosition.m128_f32[1]) {
+			sqDistance += (pos - box.minPosition.m128_f32[1]) * (pos - box.minPosition.m128_f32[1]);
+		}
+		else if (pos > box.maxPosition.m128_f32[1]) {
+			sqDistance += (pos - box.maxPosition.m128_f32[1]) * (pos - box.maxPosition.m128_f32[1]);
+		}
+
+		pos = sphere.center.m128_f32[2];
+		if (pos < box.minPosition.m128_f32[2]) {
+			sqDistance += (pos - box.minPosition.m128_f32[2]) * (pos - box.minPosition.m128_f32[2]);
+		}
+		else if (pos > box.maxPosition.m128_f32[2]) {
+			sqDistance += (pos - box.maxPosition.m128_f32[2]) * (pos - box.maxPosition.m128_f32[2]);
+		}
+		return sqDistance < sphere.radius* sphere.radius;*/
+		float sqDistance = 0.0f;
+		float pos;
+
+		pos = sphere.center.m128_f32[0];
+		if (pos < box.center.m128_f32[0] - box.scale.x)
+		{
+			sqDistance += (pos - box.center.m128_f32[0] - box.scale.x) * (pos - box.center.m128_f32[0] - box.scale.x);
+		}
+		else if (pos > box.center.m128_f32[0] + box.scale.x)
+		{
+			sqDistance += (pos - box.center.m128_f32[0] + box.scale.x) * (pos - box.center.m128_f32[0] + box.scale.x);
+		}
+
+		pos = sphere.center.m128_f32[1];
+		if (pos < box.center.m128_f32[1] - box.scale.y)
+		{
+			sqDistance += (pos - box.center.m128_f32[1] - box.scale.y) * (pos - box.center.m128_f32[1] - box.scale.y);
+		}
+		else if (pos > box.center.m128_f32[1] + box.scale.y)
+		{
+			sqDistance += (pos - box.center.m128_f32[1] + box.scale.y) * (pos - box.center.m128_f32[1] + box.scale.y);
+		}
+
+		pos = sphere.center.m128_f32[2];
+		if (pos < box.center.m128_f32[2] - box.scale.z)
+		{
+			sqDistance += (pos - box.center.m128_f32[2] - box.scale.z) * (pos - box.center.m128_f32[2] - box.scale.z);
+		}
+		else if (pos > box.center.m128_f32[2] + box.scale.z)
+		{
+			sqDistance += (pos - box.center.m128_f32[2] + box.scale.z) * (pos - box.center.m128_f32[2] + box.scale.z);
+		}
+
+		return sqDistance < sphere.radius* sphere.radius;
+	}
+
 
 	
 	

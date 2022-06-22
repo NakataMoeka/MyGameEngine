@@ -1,5 +1,4 @@
 #include "WinApp.h"
-
 const wchar_t WinApp::windowClassName[] = L"DirectXGame";
 
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
@@ -21,8 +20,7 @@ void WinApp::CreateGameWindow()
 	w.lpszClassName = windowClassName; // ウィンドウクラス名
 	w.hInstance = GetModuleHandle(nullptr); // ウィンドウハンドル
 	w.hCursor = LoadCursor(NULL, IDC_ARROW); // カーソル指定
-	//w.hIcon = LoadIcon(w.hInstance, MAKEINTRESOURCE(IDI_ICON1));
-	//w.hIconSm = LoadIcon(w.hInstance, MAKEINTRESOURCE(IDI_ICON1));
+
 	// ウィンドウクラスをOSに登録
 	RegisterClassEx(&w);
 	// ウィンドウサイズ{ X座標 Y座標 横幅 縦幅 }

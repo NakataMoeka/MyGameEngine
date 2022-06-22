@@ -10,7 +10,7 @@ using namespace DirectX;
 #pragma comment(lib, "d3dcompiler.lib")
 class Sprite {
 
-private:
+	private: 
 
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
@@ -55,6 +55,8 @@ public:
 	void SetPosition(XMFLOAT2 position);
 	//サイズの設定
 	void SetSize(XMFLOAT2 size);
+	//色の設定
+	void SetColor(XMFLOAT4 color);
 	//アンカーポイントの設定
 	void SetAnchorPoint(XMFLOAT2 anchorpoint);
 	//左右反転の設定
@@ -65,7 +67,7 @@ public:
 	void SetTextureRect(XMFLOAT2 texBase, XMFLOAT2 texSize);
 	//描画
 	void Draw();
-protected:
+private: 
 
 
 
@@ -92,7 +94,7 @@ protected:
 	static ComPtr<ID3D12Resource> texBuff[spriteSRVCount];
 	//射影行列
 	static XMMATRIX matProjection;
-
+	
 	//メンバ変数
 	//頂点バッファ
 	ComPtr<ID3D12Resource> vertBuff;

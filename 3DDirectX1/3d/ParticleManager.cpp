@@ -92,22 +92,26 @@ void ParticleManager::Update()
 		it != particles.end();
 		it++) {
 
-		//経過フレーム数をカウント
+		// 経過フレーム数をカウント
 		it->frame++;
-		//速度に加速度を加算
-		it->velocity = it->velocity + it->accel;
-		//速度による移動
-		it->position = it->position + it->velocity;
-		//進行度を0～1の範囲に換算
+		// 進行度を0～1の範囲に換算
 		float f = (float)it->num_frame / it->frame;
+
+		// 速度に加速度を加算
+		it->velocity = it->velocity + it->accel;
+
+		// 速度による移動
+		it->position = it->position + it->velocity;
+
 		// カラーの線形補間
 		it->color = it->s_color + (it->e_color - it->s_color) / f;
 
 		// スケールの線形補間
 		it->scale = it->s_scale + (it->e_scale - it->s_scale) / f;
 
-
-}
+		// スケールの線形補間
+		it->rotation = it->s_rotation + (it->e_rotation - it->s_rotation) / f;
+	}
 
 	// 頂点バッファへデータ転送
 	int vertCount = 0;

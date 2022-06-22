@@ -153,21 +153,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp" />
-    <ClCompile Include="2d\PostEffect.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
-    <ClCompile Include="3d\FbxLoader.cpp" />
-    <ClCompile Include="3d\FbxModel.cpp" />
-    <ClCompile Include="3d\FbxObject.cpp" />
-    <ClCompile Include="3d\LightGroup.cpp" />
     <ClCompile Include="3d\Model.cpp" />
     <ClCompile Include="3d\Object3d.cpp" />
     <ClCompile Include="3d\ParticleManager.cpp" />
     <ClCompile Include="audio\Audio.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
     <ClCompile Include="camera\debugCamera.cpp" />
-    <ClCompile Include="DirectXCommon\DXCommon.cpp" />
-    <ClCompile Include="DirectXCommon\Framework.cpp" />
-    <ClCompile Include="DirectXCommon\NMGame.cpp" />
+    <ClCompile Include="DirectXCommon\DirectXCommon.cpp" />
+    <ClCompile Include="DirectXCommon\WinApp.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="others\Collision.cpp" />
@@ -231,26 +225,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\DebugText.h" />
-    <ClInclude Include="2d\PostEffect.h" />
     <ClInclude Include="2d\Sprite.h" />
-    <ClInclude Include="3d\CircleShadow.h" />
-    <ClInclude Include="3d\DirectionalLight.h" />
-    <ClInclude Include="3d\FbxLoader.h" />
-    <ClInclude Include="3d\FbxModel.h" />
-    <ClInclude Include="3d\FbxObject.h" />
-    <ClInclude Include="3d\LightGroup.h" />
     <ClInclude Include="3d\Model.h" />
     <ClInclude Include="3d\Object3d.h" />
     <ClInclude Include="3d\ParticleManager.h" />
-    <ClInclude Include="3d\PointLight.h" />
-    <ClInclude Include="3d\SpotLight.h" />
     <ClInclude Include="audio\Audio.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="camera\debugCamera.h" />
-    <ClInclude Include="DirectXCommon\DXCommon.h" />
-    <ClInclude Include="DirectXCommon\Framework.h" />
-    <ClInclude Include="DirectXCommon\NMGame.h" />
+    <ClInclude Include="DirectXCommon\DirectXCommon.h" />
     <ClInclude Include="DirectXCommon\SafeDelete.h" />
+    <ClInclude Include="DirectXCommon\WinApp.h" />
     <ClInclude Include="input\input.h" />
     <ClInclude Include="others\Collision.h" />
     <ClInclude Include="others\CollisionPrimitive.h" />

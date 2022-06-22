@@ -10,7 +10,6 @@
 #include "Model.h"
 
 #include "Camera.h"
-#include "LightGroup.h"
 class Object3d
 {
 private: // エイリアス
@@ -36,23 +35,19 @@ public:
 	// 定数バッファ用データ構造体
 	struct ConstBufferDataB0
 	{
-		//XMMATRIX mat;	// ３Ｄ変換行列
-		XMMATRIX viewproj;//ビュープロジェクション行列
-		XMMATRIX world;//ワールド行列
-		XMFLOAT3 cameraPos;//カメラ座標(ワールド座標)
+		//a
+		//XMFLOAT4 color;	// 色 (RGBA)
+		XMMATRIX mat;	// ３Ｄ変換行列
 	};
 
 
 
 	static void StaticInitialize(ID3D12Device* dev, Camera* camera= nullptr);
 
-	static void CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs);
+	static void CreateGraphicsPipeline();
 
 	static void SetCamera(Camera* camera) {
 		Object3d::camera = camera;
-	}
-	static void SetLight(LightGroup* lightGroup) {
-		Object3d::lightGroup = lightGroup;
 	}
 
 	static void PreDraw(ID3D12GraphicsCommandList* cmdList);
@@ -61,6 +56,7 @@ public:
 
 	static Object3d* Create(Model* model);
 
+	//static Object3d* CreateShape(Shape* shape);
 
 	bool Initialize();
 
@@ -80,6 +76,8 @@ public:
 
 	// モデルとの連携
 	void SetModel(Model* model) { this->model = model; };
+
+	//void SetShape(Shape* shape) { this->shape = shape; };
 
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
@@ -114,7 +112,6 @@ private:
 
 	// カメラ
 	static Camera* camera;
-	static LightGroup* lightGroup;
 	// ビルボード
 	bool isBillboard = false;
 };
