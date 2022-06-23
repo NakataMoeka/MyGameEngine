@@ -71,6 +71,9 @@
     <Filter Include="Library\others\easing">
       <UniqueIdentifier>{3d1a1b9c-09fb-4d9d-b58f-fc9125ffef7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\Common\Frame">
+      <UniqueIdentifier>{64f12138-5e11-4a54-8f1f-eeac2a4f0a1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp">
@@ -97,19 +100,10 @@
     <ClCompile Include="DirectXCommon\DXCommon.cpp">
       <Filter>Library\Common</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Library\Common</Filter>
-    </ClCompile>
     <ClCompile Include="2d\PostEffect.cpp">
       <Filter>Library\2d</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon\WinApp.cpp">
-      <Filter>Library\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectXCommon\Framework.cpp">
-      <Filter>Library\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectXCommon\NMGame.cpp">
       <Filter>Library\Common</Filter>
     </ClCompile>
     <ClCompile Include="3d\LightGroup.cpp">
@@ -141,6 +135,18 @@
     </ClCompile>
     <ClCompile Include="others\Ease.cpp">
       <Filter>Library\others\easing</Filter>
+    </ClCompile>
+    <ClCompile Include="FPS.cpp">
+      <Filter>Library\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\Framework.cpp">
+      <Filter>Library\Common\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\NMGame.cpp">
+      <Filter>Library\Common\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Library\Common\Frame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,12 +262,6 @@
     <ClInclude Include="DirectXCommon\WinApp.h">
       <Filter>Library\Common</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXCommon\Framework.h">
-      <Filter>Library\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXCommon\NMGame.h">
-      <Filter>Library\Common</Filter>
-    </ClInclude>
     <ClInclude Include="3d\LightGroup.h">
       <Filter>Library\3d\light</Filter>
     </ClInclude>
@@ -303,6 +303,15 @@
     </ClInclude>
     <ClInclude Include="others\Ease.h">
       <Filter>Library\others\easing</Filter>
+    </ClInclude>
+    <ClInclude Include="FPS.h">
+      <Filter>Library\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXCommon\Framework.h">
+      <Filter>Library\Common\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXCommon\NMGame.h">
+      <Filter>Library\Common\Frame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
