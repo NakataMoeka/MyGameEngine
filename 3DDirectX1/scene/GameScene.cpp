@@ -49,12 +49,9 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	lightGroup->SetDirLightActive(0, true);
 	lightGroup->SetDirLightActive(1, true);
 	lightGroup->SetDirLightActive(2, true);
-	//lightGroup->SetDirLightActive(0, true);
-	//lightGroup->SetDirLightDir(0, XMVECTOR{ 0,0,1,0 });
-	//lightGroup->SetDirLightActive(1, true);
-	//lightGroup->SetDirLightDir(1, XMVECTOR{ 0,-1,0,0 });
-	//lightGroup->SetDirLightActive(2, true);
-	//lightGroup->SetDirLightDir(2, XMVECTOR{ 1,0,0,0 });
+	lightGroup->SetDirLightDir(0, XMVECTOR{ 0,0,1,0 });
+	lightGroup->SetDirLightDir(1, XMVECTOR{ 0,-1,0,0 });
+	lightGroup->SetDirLightDir(2, XMVECTOR{ 1,0,0,0 });
 	//lightGroup->SetPointLightActive(0, true);
 	//lightGroup->SetSpotLightActive(0, true);
 	lightGroup->SetCircleShadowActive(0, true);
@@ -77,7 +74,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	object3d4 = Object3d::Create(model4);
 
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
-	object3d->CreateGraphicsPipeline(L"Resources/shaders/ToonPS.hlsl", L"Resources/shaders/ToonVS.hlsl");
+	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	object3d3->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	object3d4->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
