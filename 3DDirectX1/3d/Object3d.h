@@ -46,7 +46,7 @@ public:
 
 	static void StaticInitialize(ID3D12Device* dev, Camera* camera= nullptr);
 
-	static void CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs);
+	void CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs);
 
 	static void SetCamera(Camera* camera) {
 		Object3d::camera = camera;
@@ -93,7 +93,7 @@ private:
 	static ID3D12GraphicsCommandList* cmdList;
 
 	// パイプライン
-	static PipelineSet pipelineSet;
+	PipelineSet pipelineSet;
 
 	ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
 

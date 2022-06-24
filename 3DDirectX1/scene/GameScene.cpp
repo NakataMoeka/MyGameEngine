@@ -65,10 +65,6 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	object3d3->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	object3d4->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-
 	model = model->Create("bullet", false);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object3d = Object3d::Create(model);
@@ -79,6 +75,11 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	model4 = model4->Create("ground", false);
 	object3d3 = Object3d::Create(model3);
 	object3d4 = Object3d::Create(model4);
+
+	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
+	object3d->CreateGraphicsPipeline(L"Resources/shaders/colorPS.hlsl", L"Resources/shaders/colorVS.hlsl");
+	object3d3->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	object3d4->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 	object3d2->SetRotation({ 0,45,0 });
 
@@ -154,7 +155,7 @@ void GameScene::Draw()
 	object3d3->Draw();
 	object3d4->Draw();
 
-	//object3d->Draw();
+	object3d->Draw();
 	//object3d2->Draw();
 	player->Draw();
 

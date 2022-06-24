@@ -15,7 +15,7 @@ using namespace std;
 ID3D12Device* Object3d::dev = nullptr;
 
 ID3D12GraphicsCommandList* Object3d::cmdList = nullptr;
-Object3d::PipelineSet Object3d::pipelineSet;
+//Object3d::PipelineSet Object3d::pipelineSet;
 Camera* Object3d::camera = nullptr;
 LightGroup* Object3d::lightGroup = nullptr;
 

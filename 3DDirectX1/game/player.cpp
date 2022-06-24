@@ -5,9 +5,11 @@ Player::Player()
 }
 void Player::Initialize()
 {
-	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	model = model->Create("car", false);
 	playerObj = Object3d::Create(model);
+	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
+	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+
 }
 
 
