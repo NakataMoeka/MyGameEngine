@@ -65,7 +65,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	model = model->Create("bullet", false);
+	model = model->Create("bullet", true);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
@@ -77,7 +77,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	object3d4 = Object3d::Create(model4);
 
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
-	object3d->CreateGraphicsPipeline(L"Resources/shaders/colorPS.hlsl", L"Resources/shaders/colorVS.hlsl");
+	object3d->CreateGraphicsPipeline(L"Resources/shaders/ToonPS.hlsl", L"Resources/shaders/ToonVS.hlsl");
 	object3d3->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	object3d4->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
