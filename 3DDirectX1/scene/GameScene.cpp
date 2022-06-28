@@ -268,16 +268,42 @@ void GameScene::Update()
 //sprite2->SetRotation(angle);
 #pragma endregion
 #pragma region MT4_課題6
-	if (input->TriggerKey(DIK_SPACE)) {
-
-		Mflag = true;
+	if (input->TriggerKey(DIK_1)) {
+		playerPos2d = { 300,300 };
+		playerSize2d = { 100, 100 };
+		EaseFlag = 1;
 	}
-	if (Mflag == true) {
-		playerSize2d = Eas::easeIn(playerSize2d, playerEndSize2d, 0.5);
+	if (input->TriggerKey(DIK_2)) {
+		playerPos2d = { 300,300 };
+		playerSize2d = { 100, 100 };
+		EaseFlag = 2;
+	}
+	if (input->TriggerKey(DIK_3)) {
+		playerPos2d = { 300,300 };
+		playerSize2d = { 100, 100 };
+		EaseFlag = 3;
+	}
+	if (input->TriggerKey(DIK_4)) {
+		playerPos2d = { 300,300 };
+		playerSize2d = { 100, 100 };
+		EaseFlag = 4;
+	}
+	if (EaseFlag== 1) {
+		playerPos2d = Eas::easeIn(playerPos2d, playerEndPos2d, 0.3);
+	}
+	if (EaseFlag == 2) {
+		playerPos2d = Eas::easeOut(playerPos2d, playerEndPos2d, 0.1);
+	}
+	if (EaseFlag == 3) {
+		playerPos2d = Eas::easeInOut(playerPos2d, playerEndPos2d, 0.3);
+	}
+	if (EaseFlag == 4) {
+		playerPos2d = Eas::easeInCubic(playerPos2d, playerEndPos2d, 0.3);
 	}
 	if (input->TriggerKey(DIK_R)) {
-		playerPos2d = { 0,0 };
-		Mflag = false;
+		playerPos2d = { 300,300 };
+		playerSize2d = { 100, 100 };
+		EaseFlag = 0;
 	}
 #pragma endregion
 	// パーティクル生成
@@ -307,7 +333,7 @@ void GameScene::Draw()
 	//sprite2->Draw();
 	//char str[256];
 
-	debugText.Printf(0, 80, 3.0f, "%f",playerPosition.x);
+	debugText.Printf(0, 80, 3.0f, "%f",playerPos2d.x);
 	//debugText.Printf(0, 140, 3.0f, "%d",circleFlag);
 
 	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
