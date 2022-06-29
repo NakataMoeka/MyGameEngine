@@ -15,22 +15,32 @@ void Player::Initialize()
 
 void Player::Move()
 {
-			if (Input::GetInstance()->PushKey(DIK_D))
+			if (Input::GetInstance()->PushKey(DIK_E))
 			{
 				playerAngle.y += 1;
 
 			}
-			if (Input::GetInstance()->PushKey(DIK_A))
+			else if (Input::GetInstance()->PushKey(DIK_Q))
 			{
 				playerAngle.y-= 1;
 
 			}
-			if (Input::GetInstance()->PushKey(DIK_W))
+			if (Input::GetInstance()->PushKey(DIK_D))
+			{
+				playerPos.x += 0.1;
+
+			}
+			else if (Input::GetInstance()->PushKey(DIK_A))
+			{
+				playerPos.x -= 0.1;
+
+			}
+			else if (Input::GetInstance()->PushKey(DIK_W))
 			{
 				playerPos.z += 0.1;
 
 			}
-			if (Input::GetInstance()->PushKey(DIK_S))
+			else if (Input::GetInstance()->PushKey(DIK_S))
 			{
 				playerPos.z -= 0.1;
 
