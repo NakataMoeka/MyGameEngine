@@ -17,12 +17,12 @@ void Player::Move()
 {
 			if (Input::GetInstance()->PushKey(DIK_D))
 			{
-				playerPos.x += 0.1;
+				playerAngle.y += 1;
 
 			}
 			if (Input::GetInstance()->PushKey(DIK_A))
 			{
-				playerPos.x -= 0.1;
+				playerAngle.y-= 1;
 
 			}
 			if (Input::GetInstance()->PushKey(DIK_W))
