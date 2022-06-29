@@ -112,6 +112,7 @@ void GameScene::Update()
 	//光線方向初期値                  上奥
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
+
 	if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
 		object3d2->PlayAnimation();
 	}
@@ -123,8 +124,12 @@ void GameScene::Update()
 
 	object3d->SetScale({ 0.2, 0.2, 0.2});
 	object3d4->SetPosition({ 0,-1,0 });
+	camera->SetTarget(player->GetPlayerPos());
+	camera->SetEye({ player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z - 10 });
 	player->Move();
 	camera->Update();
+
+
 	particleMan->Update();
 	object3d2->SetPosition(playerPosition);
 	object3d2->SetRotation({ 0,90,0 });

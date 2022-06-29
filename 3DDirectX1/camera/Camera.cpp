@@ -37,10 +37,32 @@ void Camera::Update()
 	}
 }
 
+void Camera::FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX, float angleY)
+{
+	target = position;
+
+	XMFLOAT3 V0 = d;
+
+	XMMATRIX  rotM = XMMatrixIdentity();
+	rotM *= XMMatrixRotationY(XMConvertToRadians(angleX));//Y軸
+	rotM *= XMMatrixRotationX(XMConvertToRadians(angleY));//X軸
+
+	XMVECTOR v3 = { V0.x,V0.y,V0.z };
+	XMVECTOR v = XMVector3TransformNormal(v3, rotM);
+
+
+	XMFLOAT3 f3 = { v.m128_f32[0],v.m128_f32[1],v.m128_f32[2] };
+	eye.x = target.x + f3.x, eye.y = target.y + f3.y, eye.z = target.z + f3.z;
+
+
+	UpdateViewMatrix();
+
+}
+
 void Camera::UpdateViewMatrix()
 {
 	// ビュー行列の更新
-//matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
+	//matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
 	XMVECTOR eyePosition = XMLoadFloat3(&eye);
 	XMVECTOR targetPosition = XMLoadFloat3(&target);
 	XMVECTOR upVector = XMLoadFloat3(&up);

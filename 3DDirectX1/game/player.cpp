@@ -15,10 +15,6 @@ void Player::Initialize()
 
 void Player::Move()
 {
-	if (HP != 0) {
-
-		if (power > 0) {
-
 			if (Input::GetInstance()->PushKey(DIK_D))
 			{
 				playerPos.x += 0.1;
@@ -29,8 +25,16 @@ void Player::Move()
 				playerPos.x -= 0.1;
 
 			}
-		}
-	}
+			if (Input::GetInstance()->PushKey(DIK_W))
+			{
+				playerPos.z += 0.1;
+
+			}
+			if (Input::GetInstance()->PushKey(DIK_S))
+			{
+				playerPos.z -= 0.1;
+
+			}
 
 	playerObj->SetPosition(playerPos);
 	playerObj->Update();
