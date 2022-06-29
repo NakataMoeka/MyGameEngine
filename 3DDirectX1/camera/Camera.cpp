@@ -39,25 +39,27 @@ void Camera::Update()
 
 void Camera::FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX, float angleY)
 {
-	target = position;
-
+	target = position;//íçéãì_ç¿ïW
+//ÉJÉÅÉâí«è]
+//1
 	XMFLOAT3 V0 = d;
-
+	//2
 	XMMATRIX  rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(angleX));//Yé≤
 	rotM *= XMMatrixRotationX(XMConvertToRadians(angleY));//Xé≤
-
+	//3
 	XMVECTOR v3 = { V0.x,V0.y,V0.z };
 	XMVECTOR v = XMVector3TransformNormal(v3, rotM);
 
-
+	//4
 	XMFLOAT3 f3 = { v.m128_f32[0],v.m128_f32[1],v.m128_f32[2] };
-	eye.x = target.x + f3.x, eye.y = target.y + f3.y, eye.z = target.z + f3.z;
-
-
-	UpdateViewMatrix();
-
+	eye.x = target.x + f3.x;
+	eye.y = target.y + f3.y;
+	eye.z = target.z + f3.z;
+	SetEye(eye);
+	SetTarget(target);
 }
+
 
 void Camera::UpdateViewMatrix()
 {

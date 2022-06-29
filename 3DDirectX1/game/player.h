@@ -18,11 +18,14 @@ public:
 	void Draw();
 	int GetPower() { return power; }
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
+	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
 private:
 	Object3d* playerObj;
 	Model* model;
 
 	XMFLOAT3 playerPos{ 0,0,0 };
+
+	XMFLOAT3 playerAngle{ 0,0,0 };
 	int HP = 50;
 	int power = 100;
 

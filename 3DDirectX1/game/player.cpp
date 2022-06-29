@@ -37,6 +37,7 @@ void Player::Move()
 			}
 
 	playerObj->SetPosition(playerPos);
+	playerObj->SetRotation(playerAngle);
 	playerObj->Update();
 }
 
