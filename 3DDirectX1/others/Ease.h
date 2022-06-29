@@ -23,6 +23,23 @@ public:
 	static const XMFLOAT2 easeIn(const XMFLOAT2& start, const XMFLOAT2& end, const float t);
 	static const XMFLOAT3 easeIn(const XMFLOAT3& start, const XMFLOAT3& end, const float t);
 
-};
+	static const XMFLOAT2 easeOut(const XMFLOAT2& start, const XMFLOAT2& end, const float t);
+	static const XMFLOAT3 easeOut(const XMFLOAT3& start, const XMFLOAT3& end, const float t);
 
+	static const XMFLOAT2 easeInOut(const XMFLOAT2& start, const XMFLOAT2& end, const float t);
+	static const XMFLOAT3 easeInOut(const XMFLOAT3& start, const XMFLOAT3& end, const float t);
+
+	static const XMFLOAT2 easeInCubic(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d);
+	static const XMFLOAT3 easeInCubic(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d);
+
+	static const XMFLOAT2 easeOutCubic(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d);
+	static const XMFLOAT3 easeOutCubic(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d);
+
+	static const XMFLOAT2 easeInQuad(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d);
+	static const XMFLOAT3 easeInQuad(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d);
+
+	static const XMFLOAT2 easeOutQuad(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d);
+	static const XMFLOAT3 easeOutQuad(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d);
+
+};
 
