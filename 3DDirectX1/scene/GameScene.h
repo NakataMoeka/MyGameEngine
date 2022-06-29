@@ -120,7 +120,7 @@ private: // ƒƒ“ƒo•Ï”
 	//XMFLOAT2 playerEndPos2d2 = { 0,0 };
 
 	int EaseFlag = 0;
-
+	float easeTimer = 0;
 	float angle = 0;
 
 	//float angl = 0;
