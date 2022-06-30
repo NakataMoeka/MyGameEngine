@@ -16,6 +16,10 @@ void Player::Initialize()
 
 void Player::Move()
 {
+			radWS = XMConvertToRadians(playerAngle.y+90.0f);
+			XMVECTOR move = { 0,0,0.1f,0 };
+			XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));
+			move = XMVector3TransformNormal(move, matRot);
 			if (Input::GetInstance()->PushKey(DIK_E))
 			{
 				playerAngle.y += 1;
@@ -26,37 +30,19 @@ void Player::Move()
 				playerAngle.y-= 1;
 
 			}
-			if (Input::GetInstance()->PushKey(DIK_D))
+			if (Input::GetInstance()->PushKey(DIK_W))
 			{
-				playerPos.x += 0.1;
-
-			}
-			else if (Input::GetInstance()->PushKey(DIK_A))
-			{
-				playerPos.x -= 0.1;
-
-			}
-			else if (Input::GetInstance()->PushKey(DIK_W))
-			{
-				playerPos.z += 0.1;
-
+				playerPos.x += move.m128_f32[0];
+				playerPos.z += move.m128_f32[2];
 			}
 			else if (Input::GetInstance()->PushKey(DIK_S))
 			{
-				playerPos.z -= 0.1;
-
+				playerPos.x -= move.m128_f32[0];
+				playerPos.z -= move.m128_f32[2];
 			}
-			//if (Input::GetInstance()->ConLeftInput())
-			//{
-			//	playerAngle.y = XMConvertToDegrees(atan2(sinRad, cosRad)) - 90;
-			//	rad = Input::GetInstance()->GetLeftAngle();
-			//	sinRad = sinf(-rad);
-			//	cosRad = cosf(rad);
-			//		
-			//	//	playerPos.x += 0.1*sinRad;
-			//	//	playerPos.z += 0.1*cosRad;
-			//		
-			//}
+
+
+
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
 	playerObj->Update();
