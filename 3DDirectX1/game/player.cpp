@@ -1,5 +1,6 @@
 #include "player.h"
 #include"input.h"
+using namespace DirectX;
 Player::Player()
 {
 }
@@ -45,7 +46,17 @@ void Player::Move()
 				playerPos.z -= 0.1;
 
 			}
-
+			//if (Input::GetInstance()->ConLeftInput())
+			//{
+			//	playerAngle.y = XMConvertToDegrees(atan2(sinRad, cosRad)) - 90;
+			//	rad = Input::GetInstance()->GetLeftAngle();
+			//	sinRad = sinf(-rad);
+			//	cosRad = cosf(rad);
+			//		
+			//	//	playerPos.x += 0.1*sinRad;
+			//	//	playerPos.z += 0.1*cosRad;
+			//		
+			//}
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
 	playerObj->Update();

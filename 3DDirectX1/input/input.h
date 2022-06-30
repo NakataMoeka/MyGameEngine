@@ -96,9 +96,13 @@ public:
 	bool IsButtonPush(ButtonKind button);
 	bool IsButtonUp(ButtonKind button);
 	bool IsButtonDown(ButtonKind button);
-	//スティック入力してるか
+	
 	bool ConRightInput();
 	bool ConLeftInput();
+	
+	float GetLeftAngle();
+	float GetRightAngle();
+
 
 
 private: // メンバ変数

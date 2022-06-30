@@ -6,7 +6,8 @@
 static LPDIRECTINPUT8 g_InputInterface;							//!< DIRECTINPUT8のポインタ
 static LPDIRECTINPUTDEVICE8 g_GamePadDevice;					//!< DIRECTINPUTDEVICE8のポインタ
 static ButtonState g_ButtonStates[ButtonKind::ButtonKindMax];
-
+static float leftAngle;
+static float rightAngle;
 // 入力インターフェースの作成
 bool CreateInputInterface();
 
@@ -385,7 +386,15 @@ bool Input::ConLeftInput()
 	}
 	return isHit;
 }
+float Input::GetLeftAngle()
+{
+	return leftAngle;
+}
 
+float Input::GetRightAngle()
+{
+	return rightAngle;
+}
 
 bool CreateInputInterface()
 {
@@ -527,7 +536,10 @@ void UpdateGamePad()
 	{
 		is_push[ButtonKind::ButtonRT] = true;
 	}
-
+	//角度を取得
+#define PI 3.141592653589793
+	leftAngle = atan2(0 - pad_data.lX, 0 - pad_data.lY);
+	rightAngle = atan2(0 - pad_data.lRx, 0 - pad_data.lRy);
 	// 十字キー判定
 	if (pad_data.rgdwPOV[0] != 0xFFFFFFFF)
 	{
@@ -619,3 +631,5 @@ void UpdateGamePad()
 		}
 	}
 }
+
+

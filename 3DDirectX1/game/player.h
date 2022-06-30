@@ -26,6 +26,9 @@ private:
 	XMFLOAT3 playerPos{ 0,0,0 };
 
 	XMFLOAT3 playerAngle{ 0,0,0 };
+	float sinRad = 0;
+	float cosRad = 0;
+	float rad = 0.0f;
 	int HP = 50;
 	int power = 100;
 
