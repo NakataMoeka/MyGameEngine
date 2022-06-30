@@ -16,7 +16,6 @@ void Player::Initialize()
 
 void Player::Move()
 {
-			radWS = XMConvertToRadians(playerAngle.y+90.0f);
 			XMVECTOR moveUD = { 0,0,0.1f,0 };//上下方向用の移動ベクトル
 			XMVECTOR moveLR = { 0.1f,0,0,0 };//左右方向の移動用ベクトル
 			XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
