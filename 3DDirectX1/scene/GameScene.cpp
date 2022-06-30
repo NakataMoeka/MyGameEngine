@@ -125,7 +125,7 @@ void GameScene::Update()
 	object3d->SetScale({ 0.2, 0.2, 0.2});
 	object3d4->SetPosition({ 0,-1,0 });
 
-	player->Move();
+	player->Update();
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,0,-10 }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 

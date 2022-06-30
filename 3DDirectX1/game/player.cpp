@@ -4,6 +4,9 @@ using namespace DirectX;
 Player::Player()
 {
 }
+Player::~Player()
+{
+}
 void Player::Initialize()
 {
 	model = model->Create("car", false);
@@ -57,6 +60,11 @@ void Player::Move()
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
 	playerObj->Update();
+}
+
+void Player::Update()
+{
+	Move();
 }
 
 void Player::Draw()

@@ -13,12 +13,15 @@ private:
 	using XMMATRIX = DirectX::XMMATRIX;
 public:
 	Player();
+	~Player();
 	void Initialize();
-	void Move();
+	void Update();
 	void Draw();
 	int GetPower() { return power; }
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
+private:
+	void Move();
 private:
 	Object3d* playerObj;
 	Model* model;
