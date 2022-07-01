@@ -22,13 +22,17 @@ public:
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
 private:
 	void Move();
+	void Ball();
 private:
 	Object3d* playerObj;
 	Model* model;
-
+	Object3d* SphereObj;
+	Model* model2;
 	XMFLOAT3 playerPos{ 0,0,0 };
-
+	XMFLOAT3 spherePos{ 0,0,0 };
 	XMFLOAT3 playerAngle{ 0,0,0 };
+	XMFLOAT3 sphereAngle{ 0,0,0 };
+
 	float sinRad = 0;
 	float cosRad = 0;
 	float radAD = 0.0f;
