@@ -74,7 +74,7 @@ void Player::Move()
 void Player::Ball()
 {
 #pragma region ƒJƒƒ‰’Ç]‚Æ‚Ù‚Ú“¯‚¶
-	XMFLOAT3 V0 = { 0,0,2 };
+	XMFLOAT3 V0 = { 0,0,1.5 };
 	//2
 	XMMATRIX  rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//Y²
