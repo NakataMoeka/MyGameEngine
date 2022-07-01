@@ -28,8 +28,8 @@ private:
 	Model* model;
 	Object3d* SphereObj;
 	Model* model2;
-	XMFLOAT3 playerPos{ 0,0,0 };
-	XMFLOAT3 spherePos{ 0,0,0 };
+	XMFLOAT3 playerPos{ 0,-0.8,0 };
+	XMFLOAT3 spherePos{ 0,0.2,0 };
 	XMFLOAT3 playerAngle{ 0,0,0 };
 	XMFLOAT3 sphereAngle{ 0,0,0 };
 

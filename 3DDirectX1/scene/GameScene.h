@@ -81,6 +81,6 @@ private: // メンバ変数
 	int pg = 0;
 	bool pFlag = false;
 	float a = 0;
-	
+	float b = 0;
 };
 

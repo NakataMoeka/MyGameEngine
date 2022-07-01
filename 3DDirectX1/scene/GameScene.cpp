@@ -62,7 +62,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	model = model->Create("bullet", true);
+	model = model->Create("bullet", false);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
@@ -116,6 +116,7 @@ void GameScene::Update()
 	if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
 		object3d2->PlayAnimation();
 	}
+
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5,0.6,0));
@@ -124,9 +125,9 @@ void GameScene::Update()
 
 	object3d->SetScale({ 0.2, 0.2, 0.2});
 	object3d4->SetPosition({ 0,-1,0 });
-
+	object3d->SetRotation({ a,0,b });
 	player->Update();
-	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,0,-10 }, 0, player->GetPlayerAngle().y);
+	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-10 }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 
 
@@ -157,7 +158,7 @@ void GameScene::Draw()
 	object3d3->Draw();
 	object3d4->Draw();
 
-	object3d->Draw();
+	//object3d->Draw();
 	//object3d2->Draw();
 	player->Draw();
 
