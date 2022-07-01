@@ -136,9 +136,6 @@
     <ClCompile Include="others\Ease.cpp">
       <Filter>Library\others\easing</Filter>
     </ClCompile>
-    <ClCompile Include="FPS.cpp">
-      <Filter>Library\Common</Filter>
-    </ClCompile>
     <ClCompile Include="DirectXCommon\Framework.cpp">
       <Filter>Library\Common\Frame</Filter>
     </ClCompile>
@@ -146,6 +143,9 @@
       <Filter>Library\Common\Frame</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Library\Common\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon\FPS.cpp">
       <Filter>Library\Common\Frame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -313,13 +313,13 @@
     <ClInclude Include="others\Ease.h">
       <Filter>Library\others\easing</Filter>
     </ClInclude>
-    <ClInclude Include="FPS.h">
-      <Filter>Library\Common</Filter>
-    </ClInclude>
     <ClInclude Include="DirectXCommon\Framework.h">
       <Filter>Library\Common\Frame</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon\NMGame.h">
+      <Filter>Library\Common\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXCommon\FPS.h">
       <Filter>Library\Common\Frame</Filter>
     </ClInclude>
   </ItemGroup>

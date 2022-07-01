@@ -2,6 +2,7 @@
 #include "DXCommon.h"
 #include <vector>
 #include <cassert>
+#include"FPS.h"
 
 
 #pragma comment(lib, "d3d12.lib")
@@ -27,6 +28,7 @@ void DXCommon::Initialize(WinApp* winapp)
 	InitializeDepthBuffer();
 
 	InitializeFance();
+	FPS::GetInstance()->Start();
 }
 void DXCommon::preDraw()
 {
@@ -67,6 +69,8 @@ void DXCommon::postDraw()
 	// コマンドリストの実行
 	ID3D12CommandList* cmdLists[] = { cmdList.Get() }; // コマンドリストの配列
 	cmdQueue->ExecuteCommandLists(1, cmdLists);
+	// バッファをフリップ（裏表の入替え）
+	swapchain->Present(1, 0);
 	// コマンドリストの実行完了を待つ
 	cmdQueue->Signal(fence.Get(), ++fenceVal);
 	if (fence->GetCompletedValue() != fenceVal) {
@@ -75,12 +79,10 @@ void DXCommon::postDraw()
 		WaitForSingleObject(event, INFINITE);
 		CloseHandle(event);
 	}
-
+	FPS::GetInstance()->Ran();
 	cmdAllocator->Reset(); // キューをクリア
 	cmdList->Reset(cmdAllocator.Get(), nullptr);  // 再びコマンドリストを貯める準備
 
-	// バッファをフリップ（裏表の入替え）
-	swapchain->Present(1, 0);
 }
 void DXCommon::ClearRenderTarget()
 {

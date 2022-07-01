@@ -165,10 +165,10 @@
     <ClCompile Include="audio\Audio.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
     <ClCompile Include="DirectXCommon\DXCommon.cpp" />
+    <ClCompile Include="DirectXCommon\FPS.cpp" />
     <ClCompile Include="DirectXCommon\Framework.cpp" />
     <ClCompile Include="DirectXCommon\NMGame.cpp" />
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
-    <ClCompile Include="FPS.cpp" />
     <ClCompile Include="game\player.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -331,11 +331,11 @@
     <ClInclude Include="audio\Audio.h" />
     <ClInclude Include="camera\Camera.h" />
     <ClInclude Include="DirectXCommon\DXCommon.h" />
+    <ClInclude Include="DirectXCommon\FPS.h" />
     <ClInclude Include="DirectXCommon\Framework.h" />
     <ClInclude Include="DirectXCommon\NMGame.h" />
     <ClInclude Include="DirectXCommon\SafeDelete.h" />
     <ClInclude Include="DirectXCommon\WinApp.h" />
-    <ClInclude Include="FPS.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="input\input.h" />
     <ClInclude Include="others\Collision.h" />

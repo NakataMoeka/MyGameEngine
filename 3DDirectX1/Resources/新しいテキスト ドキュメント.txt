@@ -1,4 +1,6 @@
-	//四角形ポリゴン読み込むためのもの
+		// コントロールポイントのデータ
+	std::vector<std::vector<int>> controlPointsData;
+
 	FbxGeometryConverter fbx_converter(fbxManager);
 	fbx_converter.Triangulate(fbxScene, true);
 	fbx_converter.RemoveBadPolygonsFromMeshes(fbxScene);
