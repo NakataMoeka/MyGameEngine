@@ -13,18 +13,19 @@ public: // 定数の宣言
 
 public: // メンバ関数
 
-
-	DebugText();
-	~DebugText();
+	static DebugText* GetInstance();
 
 	void Initialize(UINT texnumber);
-
 	void Print(int len, const std::string& text, float x, float y, float scale);
 	//void NPrint(int len, const char* text);
 	void Printf(float x, float y, float scale, const char* fmt, ...);
 	void DrawAll(ID3D12GraphicsCommandList* cmdList);
 
 private: // メンバ変数     
+	DebugText() = default;
+	DebugText(const DebugText&) = delete;
+	~DebugText() = default;
+	DebugText& operator=(const DebugText&) = delete;
 	// スプライトデータの配列
 	Sprite* sprite[maxCharCount] = {};
 	// スプライトデータ配列の添え字番号

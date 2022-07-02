@@ -1,17 +1,20 @@
 #include "DebugText.h"
 
-DebugText::DebugText()
+
+//DebugText::~DebugText()
+//{
+//	for (int i = 0; i < _countof(sprite); i++) {
+//		delete sprite[i];
+//	}
+//}
+
+
+DebugText* DebugText::GetInstance()
 {
+	static DebugText instance;
 
+	return &instance;
 }
-
-DebugText::~DebugText()
-{
-	for (int i = 0; i < _countof(sprite); i++) {
-		delete sprite[i];
-	}
-}
-
 
 void DebugText::Initialize(UINT texnumber)
 {
@@ -46,7 +49,7 @@ void DebugText::Print(int len, const std::string& text, float x, float y, float 
 		int fontIndexX = fontIndex % fontLineCount;
 
 		// À•WŒvŽZ
-		sprite[spriteIndex]->SetPosition({ x + fontWidth * scale * i, y});
+		sprite[spriteIndex]->SetPosition({ x + fontWidth * scale * i, y });
 		sprite[spriteIndex]->SetTextureRect({ (float)fontIndexX * fontWidth, (float)fontIndexY * fontHeight }
 
 		, { (float)fontWidth ,(float)fontHeight });
@@ -57,12 +60,12 @@ void DebugText::Print(int len, const std::string& text, float x, float y, float 
 }
 
 
-void DebugText::Printf(float x, float y, float scale,const char* fmt, ...)
+void DebugText::Printf(float x, float y, float scale, const char* fmt, ...)
 {
 	va_list args;
 	va_start(args, fmt);
 	int w = vsnprintf(buffer, bufferSize - 1, fmt, args);
-	Print(w, buffer,x,y,scale);
+	Print(w, buffer, x, y, scale);
 	va_end(args);
 }
 
@@ -78,3 +81,7 @@ void DebugText::DrawAll(ID3D12GraphicsCommandList* cmdList)
 
 	spriteIndex = 0;
 }
+
+
+
+

@@ -49,7 +49,7 @@ private: // メンバ変数
 
 	Audio* audio = nullptr;
 
-	DebugText debugText;
+;
 
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
