@@ -65,12 +65,37 @@ public:
 
 
 	bool Initialize();
-	//u
+	/// <summary>
+	/// ‰¹ƒ[ƒh‚·‚é
+	/// </summary>
+	/// <param name="filename"></param>
+	/// <returns></returns>
 	static SoundData SoundLoadWave(const char* filename);
+	/// <summary>
+	/// SE‚ğÄ¶
+	/// </summary>
+	/// <param name="soundData"></param>
 	void SEPlayWave(const SoundData& soundData);
+	/// <summary>
+	/// BGM‚ğÄ¶
+	/// </summary>
+	/// <param name="soundData"></param>
 	void SoundPlayWave(const SoundData& soundData);
+	/// <summary>
+	/// BGM‚Ì’â~
+	/// </summary>
 	void StopWave();
-	void SetVolume(float volume);
+	/// <summary>
+	/// SE‚Ì‰¹—Ê’²ß
+	/// </summary>
+	/// <param name="volume"></param>
+	void SetSEVolume(float volume);
+	/// <summary>
+	/// BGM‚Ì‰¹—Ê’²ß
+	/// </summary>
+	/// <param name="volume"></param>
+	void SetBGMVolume(float volume);
+
 private: //•Ï”
 	ComPtr<IXAudio2> xAudio2;
 	IXAudio2MasteringVoice* masterVoice;

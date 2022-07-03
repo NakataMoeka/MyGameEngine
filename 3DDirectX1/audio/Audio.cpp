@@ -125,7 +125,6 @@ void Audio::SoundPlayWave(const SoundData& soundData)
 	HRESULT result;
 
 
-	IXAudio2SourceVoice* pSourceVoice = nullptr;
 	result = xAudio2->CreateSourceVoice(&pSourceVoice, &soundData.wfex);
 	assert(SUCCEEDED(result));
 
@@ -145,7 +144,11 @@ void Audio::StopWave()
 	pSourceVoice->Stop();
 }
 
-void Audio::SetVolume(float volume)
+void Audio::SetSEVolume(float volume)
 {
-	masterVoice->SetVolume(volume);
+	pSourceSEVoice->SetVolume(volume);
+}
+void Audio::SetBGMVolume(float volume)
+{
+	pSourceVoice->SetVolume(volume);
 }

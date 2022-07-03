@@ -100,7 +100,10 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 
 	sound1 = Audio::SoundLoadWave("Resources/ショット.wav");
+	sound2 = Audio::SoundLoadWave("Resources/World_Heritage.wav");
 	audio->SoundPlayWave(sound1);
+	audio->SoundPlayWave(sound2);
+	audio->SetBGMVolume(0.5f);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });

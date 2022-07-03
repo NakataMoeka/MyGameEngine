@@ -50,6 +50,7 @@ private: // メンバ変数
 	Audio* audio = nullptr;
 	
 	SoundData sound1;
+	SoundData sound2;
 
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
