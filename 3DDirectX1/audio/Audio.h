@@ -24,7 +24,37 @@ public:
 	// ボイスの実行エラー時
 	STDMETHOD_(void, OnVoiceError) (THIS_ void* pBufferContext, HRESULT Error) {};
 };
+//チャンクヘッダ
+struct ChunkHeader
+{
+	char id[4];			//チャンク毎のID
+	int size;		//チャンクサイズ
+};
 
+//RIFFヘッダチャンク
+struct RiffHeader
+{
+	ChunkHeader chunk;		//"RIFF"
+	char type[4];			//"WAVE"
+};
+
+//FMIチャンク
+struct FormatChunk
+{
+	ChunkHeader chunk;		//"fmt"
+	WAVEFORMATEX fmt;		//波形フォーマット
+};
+//e
+//音声データ
+struct SoundData
+{
+	//波形フォーマット
+	WAVEFORMATEX wfex;
+	//バッファの先頭アドレス
+	BYTE* pBuffer;
+	//バッファのサイズ
+	unsigned int bufferSize;
+};
 class Audio {
 private:
 	//Microsoft::WRL::を省略する
@@ -33,44 +63,18 @@ private:
 
 public:
 
-	//チャンクヘッダ
-	struct ChunkHeader
-	{
-		char id[4];			//チャンク毎のID
-		int size;		//チャンクサイズ
-	};
 
-	//RIFFヘッダチャンク
-	struct RiffHeader
-	{
-		ChunkHeader chunk;		//"RIFF"
-		char type[4];			//"WAVE"
-	};
-
-	//FMIチャンク
-	struct FormatChunk
-	{
-		ChunkHeader chunk;		//"fmt"
-		WAVEFORMATEX fmt;		//波形フォーマット
-	};
-	//e
-	//音声データ
-	struct SoundData
-	{
-		//波形フォーマット
-		WAVEFORMATEX wfex;
-		//バッファの先頭アドレス
-		BYTE* pBuffer;
-		//バッファのサイズ
-		unsigned int bufferSize;
-	};
 	bool Initialize();
 	//u
-	void SoundPlayWave(const char* filename,bool LOOP);
+	static SoundData SoundLoadWave(const char* filename);
+	void SEPlayWave(const SoundData& soundData);
+	void SoundPlayWave(const SoundData& soundData);
 	void StopWave();
+	void SetVolume(float volume);
 private: //変数
 	ComPtr<IXAudio2> xAudio2;
 	IXAudio2MasteringVoice* masterVoice;
 	XAudio2VoiceCallback voiceCallback;
+	IXAudio2SourceVoice* pSourceSEVoice = nullptr;
 	IXAudio2SourceVoice* pSourceVoice = nullptr;
 };

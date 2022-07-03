@@ -95,10 +95,12 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
 
 	Sprite::LoadTexture(1, L"Resources/background.png");
-
+	
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 
-	//audio->SoundPlayWave("Resources/ショット.wav",true);
+
+	sound1 = Audio::SoundLoadWave("Resources/ショット.wav");
+	audio->SoundPlayWave(sound1);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
