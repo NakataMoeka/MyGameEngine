@@ -5,6 +5,7 @@
 #include "FbxLoader.h"
 #include "FbxObject.h"
 #include"input.h"
+#include"DebugText.h"
 GameScene::GameScene()
 {
 }
@@ -91,13 +92,18 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 		return;
 	}
 	// デバッグテキスト初期化
-	debugText.Initialize(debugTextTexNumber);
+	DebugText::GetInstance()->Initialize(debugTextTexNumber);
 
 	Sprite::LoadTexture(1, L"Resources/background.png");
 
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 
-	//audio->SoundPlayWave("Resources/ショット.wav",true);
+
+	sound1 = Audio::SoundLoadWave("Resources/ショット.wav");
+	sound2 = Audio::SoundLoadWave("Resources/World_Heritage.wav");
+	//audio->SoundPlayWave(sound1);
+	//audio->SoundPlayWave(sound2);
+	//audio->SetBGMVolume(0.5f);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
@@ -119,11 +125,11 @@ void GameScene::Update()
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
-	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5,0.6,0));
-	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0,0.5));
+	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
+	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
 
-	object3d->SetScale({ 0.2, 0.2, 0.2});
+	object3d->SetScale({ 0.2, 0.2, 0.2 });
 	object3d4->SetPosition({ 0,-1,0 });
 	object3d->SetRotation({ a,0,b });
 	player->Update();
@@ -171,9 +177,8 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	//debugText.Printf(100, 20, 3.0f, "MauseLeftClick");
-	//debugText.Printf(600, 20, 3.0f, "%f,%f,%f",object3d4->GetPosition().x, object3d4->GetPosition().y, object3d4->GetPosition().z) ;
-	debugText.DrawAll(dxCommon->GetCmdList());
+	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetSpherePos().y);
+	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }
 void GameScene::CreateParticles()

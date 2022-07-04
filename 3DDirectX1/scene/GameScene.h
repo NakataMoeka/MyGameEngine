@@ -49,7 +49,8 @@ private: // メンバ変数
 
 	Audio* audio = nullptr;
 
-	DebugText debugText;
+	SoundData sound1;
+	SoundData sound2;
 
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
@@ -83,4 +84,3 @@ private: // メンバ変数
 	float a = 0;
 	float b = 0;
 };
-
