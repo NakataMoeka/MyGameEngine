@@ -19,6 +19,7 @@ public:
 	void Draw();
 	int GetPower() { return power; }
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
+	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
 private:
 	void Move();
@@ -29,10 +30,10 @@ private:
 	Object3d* SphereObj;
 	Model* model2;
 	XMFLOAT3 playerPos{ 0,-0.8,0 };
-	XMFLOAT3 spherePos{ 0,0.2,0 };
+	XMFLOAT3 spherePos{ 0,3,6 };
 	XMFLOAT3 playerAngle{ 0,0,0 };
 	XMFLOAT3 sphereAngle{ 0,0,0 };
-
+	XMFLOAT3 sphereSize{ 1,1,1 };
 	float sinRad = 0;
 	float cosRad = 0;
 	float radAD = 0.0f;
@@ -41,4 +42,3 @@ private:
 	int power = 100;
 
 };
-

@@ -83,7 +83,7 @@ public:
 
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
-
+	void SetParent(Object3d* parent) { this->parent = parent; }
 private:
 
 	// デバイス
