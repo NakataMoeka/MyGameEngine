@@ -101,9 +101,9 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	sound1 = Audio::SoundLoadWave("Resources/ショット.wav");
 	sound2 = Audio::SoundLoadWave("Resources/World_Heritage.wav");
-	audio->SoundPlayWave(sound1);
-	audio->SoundPlayWave(sound2);
-	audio->SetBGMVolume(0.5f);
+	//audio->SoundPlayWave(sound1);
+	//audio->SoundPlayWave(sound2);
+	//audio->SetBGMVolume(0.5f);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
@@ -177,7 +177,7 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "MauseLeftClick");
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f",player->GetSpherePos().y);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }
