@@ -19,6 +19,10 @@ void Player::Initialize()
 	SphereObj->SetParent(playerObj);
 }
 
+void Player::Init()
+{
+}
+
 
 void Player::Move()
 {
@@ -83,6 +87,10 @@ void Player::Update()
 {
 	Move();
 	Ball();
+}
+
+void Player::Collision(GameObject* gameObject)
+{
 }
 
 void Player::Draw()

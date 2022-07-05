@@ -16,6 +16,7 @@
 #include"LightGroup.h"
 #include"PostEffect.h"
 #include"player.h"
+#include"GameObject.h"
 
 class GameScene
 {
@@ -72,6 +73,8 @@ private: // メンバ変数
 	LightGroup* lightGroup = nullptr;
 
 	Player* player;
+
+	GameObject* gameObject;
 
 	const int debugTextTexNumber = 0;
 

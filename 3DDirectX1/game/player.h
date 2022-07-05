@@ -1,6 +1,10 @@
 #pragma once
 #include"Object3d.h"
 #include"Model.h"
+/// <summary>
+/// プレイヤー関連のクラス
+/// </summary>
+class GameObject;
 class Player
 {
 private:
@@ -14,16 +18,18 @@ private:
 public:
 	Player();
 	~Player();
-	void Initialize();
+	void Initialize();//一回だけの初期化
+	void Init();//シーンチェンジ時にもする初期化
 	void Update();
+	void Collision(class GameObject* gameObject);
 	void Draw();
 	int GetPower() { return power; }
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
 private:
-	void Move();
-	void Ball();
+	void Move();//移動
+	void Ball();//ボール関係
 private:
 	Object3d* playerObj;
 	Model* model;

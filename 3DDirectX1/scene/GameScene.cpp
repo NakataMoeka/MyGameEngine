@@ -109,6 +109,8 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	camera->SetEye({ 0, 0, -10 });
 	player = new Player;//newすればエラー吐かない
 	player->Initialize();
+	gameObject = new GameObject;//newすればエラー吐かない
+	gameObject->Initialize();
 }
 
 void GameScene::Update()
@@ -136,6 +138,7 @@ void GameScene::Update()
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-10 }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 
+	gameObject->Update();
 
 	particleMan->Update();
 	object3d2->SetPosition(playerPosition);
@@ -167,6 +170,7 @@ void GameScene::Draw()
 	//object3d->Draw();
 	//object3d2->Draw();
 	player->Draw();
+	gameObject->Draw();
 
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
