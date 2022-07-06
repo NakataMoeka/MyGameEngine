@@ -58,13 +58,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// デバッグテキスト初期化
 	debugText.Initialize(debugTextTexNumber);
 	
-	Sprite::LoadTexture(1, L"Resources/yellow.png");
+	Sprite::LoadTexture(1, L"Resources/Circle.png");
 	Sprite::LoadTexture(2, L"Resources/white1x1.png");
 
-	sprite = Sprite::CreateSprite(1, playerPos2d);
-	//sprite2 = Sprite::CreateSprite(2, playerPos2d2);
+	sprite = Sprite::CreateSprite(1, { playerPos2d.x-50 ,playerPos2d.y + 60 });
+	sprite2 = Sprite::CreateSprite(2,playerPos2d);
 	
-	//sprite2->SetSize({ 100, 1 });
+	sprite2->SetSize({ 1, 100 });
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
@@ -75,7 +75,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		
 	//vu = v;
 	//vBu = vB;
-	srand(time(NULL));
+	//srand(time(NULL));
 }
 
 void GameScene::Update()
@@ -269,67 +269,72 @@ void GameScene::Update()
 #pragma endregion
 #pragma region MT4_課題6
 
-	if (input->TriggerKey(DIK_1)) {
-		playerPos2d = { 300,300 };
-		playerSize2d = { 100, 100 };
-		easeTimer = 0;
-		EaseFlag = 1;
-	}
-	if (input->TriggerKey(DIK_2)) {
-		playerPos2d = { 300,300 };
-		playerSize2d = { 100, 100 };
-		easeTimer = 0;
-		EaseFlag = 2;
-	}
-	if (input->TriggerKey(DIK_3)) {
-		playerPos2d = { 300,300 };
-		playerSize2d = { 100, 100 };
-		easeTimer = 0;
-		EaseFlag = 3;
-	}
-	if (input->TriggerKey(DIK_4)) {
-		playerPos2d = { 300,300 };
-		playerSize2d = { 100, 100 };
-		easeTimer = 0;
-		EaseFlag = 4;
-	}
-	if (EaseFlag== 1) {
-		if (easeTimer < 0.2) {
-			easeTimer += 0.1 / 60;
-		}
-		playerPos2d = Eas::easeInQuad(playerPos2d, playerEndPos2d, easeTimer,0.2);
-	}
-	if (EaseFlag == 2) {
-		if (easeTimer < 0.2) {
-			easeTimer += 0.1 / 60;
-		}
-		playerPos2d = Eas::easeOutQuad(playerPos2d, playerEndPos2d, easeTimer,0.2);
-	}
-	if (EaseFlag == 3) {
-		if (easeTimer < 0.2) {
-			easeTimer += 0.1 / 60;
-		}
-		playerPos2d = Eas::easeInCubic(playerPos2d, playerEndPos2d, easeTimer,0.2);
-	}
-	if (EaseFlag == 4) {
-		if (easeTimer < 0.2) {
-			easeTimer += 0.1 / 60;
-		}
-		playerPos2d = Eas::easeOutCubic(playerPos2d, playerEndPos2d, easeTimer,0.2);
-	}
-	if (input->TriggerKey(DIK_R)) {
-		playerPos2d = { 300,300 };
-		playerSize2d = { 100, 100 };
-		easeTimer = 0;
-		EaseFlag = 0;
-	}
+	//if (input->TriggerKey(DIK_1)) {
+	//	playerPos2d = { 300,300 };
+	//	playerSize2d = { 100, 100 };
+	//	easeTimer = 0;
+	//	EaseFlag = 1;
+	//}
+	//if (input->TriggerKey(DIK_2)) {
+	//	playerPos2d = { 300,300 };
+	//	playerSize2d = { 100, 100 };
+	//	easeTimer = 0;
+	//	EaseFlag = 2;
+	//}
+	//if (input->TriggerKey(DIK_3)) {
+	//	playerPos2d = { 300,300 };
+	//	playerSize2d = { 100, 100 };
+	//	easeTimer = 0;
+	//	EaseFlag = 3;
+	//}
+	//if (input->TriggerKey(DIK_4)) {
+	//	playerPos2d = { 300,300 };
+	//	playerSize2d = { 100, 100 };
+	//	easeTimer = 0;
+	//	EaseFlag = 4;
+	//}
+	//if (EaseFlag== 1) {
+	//	if (easeTimer < 0.2) {
+	//		easeTimer += 0.1 / 60;
+	//	}
+	//	playerPos2d = Eas::easeInQuad(playerPos2d, playerEndPos2d, easeTimer,0.2);
+	//}
+	//if (EaseFlag == 2) {
+	//	if (easeTimer < 0.2) {
+	//		easeTimer += 0.1 / 60;
+	//	}
+	//	playerPos2d = Eas::easeOutQuad(playerPos2d, playerEndPos2d, easeTimer,0.2);
+	//}
+	//if (EaseFlag == 3) {
+	//	if (easeTimer < 0.2) {
+	//		easeTimer += 0.1 / 60;
+	//	}
+	//	playerPos2d = Eas::easeInCubic(playerPos2d, playerEndPos2d, easeTimer,0.2);
+	//}
+	//if (EaseFlag == 4) {
+	//	if (easeTimer < 0.2) {
+	//		easeTimer += 0.1 / 60;
+	//	}
+	//	playerPos2d = Eas::easeOutCubic(playerPos2d, playerEndPos2d, easeTimer,0.2);
+	//}
+	//if (input->TriggerKey(DIK_R)) {
+	//	playerPos2d = { 300,300 };
+	//	playerSize2d = { 100, 100 };
+	//	easeTimer = 0;
+	//	EaseFlag = 0;
+	//}
+#pragma endregion
+#pragma region MT4_課題8
+//if (input->PushMouse(2)) {
+//
+//}
 #pragma endregion
 	// パーティクル生成
 	//CreateParticles();
 	camera->Update();
 	particleMan->Update();
 	sprite->SetSize(playerSize2d);
-	sprite->SetPosition(playerPos2d);
+	//sprite->SetPosition(playerPos2d);
 	object3d->SetPosition(playerPosition);
 	//object3d2->SetPosition(playerPositionB);
 	object3d2->SetScale({ 2.0f,2.0f,2.0f });
@@ -348,11 +353,11 @@ void GameScene::Draw()
 
 	sprite->PreDraw(dxCommon->GetCmdList());
 	sprite->Draw();
-	//sprite2->Draw();
+	sprite2->Draw();
 	//char str[256];
 
 //	debugText.Printf(0, 80, 3.0f, "%f",playerPos2d.x);
-	//debugText.Printf(0, 140, 3.0f, "%d",circleFlag);
+	debugText.Printf(0, 140, 3.0f, "%f,%f",input->GetMousePos().x,input->GetMousePos().y);
 
 	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 

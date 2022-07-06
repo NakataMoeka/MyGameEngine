@@ -112,7 +112,7 @@ private: // ÉÅÉìÉoïœêî
 	XMFLOAT3 playerEndPosition = { 10.0f,0.0f,0.0f };
 	XMFLOAT3 playerPositionB = { 0.0f,0.0f,0.0f };
 
-	XMFLOAT2 playerPos2d = {300, 300};
+	XMFLOAT2 playerPos2d = {300, 0};
 	XMFLOAT2 playerEndPos2d = { 500,300 };
 	XMFLOAT2 playerSize2d = { 100, 100 };
 	XMFLOAT2 playerEndSize2d = { 200,200 };
