@@ -1,5 +1,5 @@
 #include "GameObject.h"
-
+using namespace DirectX;
 GameObject::GameObject()
 {
 }
@@ -17,11 +17,13 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
+	cBox.minPosition = XMVectorSet(position.x - r, position.y - r, position.z - r, 1);
+	cBox.maxPosition = XMVectorSet(position.x + r, position.y + r, position.z + r, 1);
 }
 
 void GameObject::Update()
 {
-	cube->SetPosition({ 0,-0.8,0 });
+	cube->SetPosition(position);
 	cube->SetScale({ 0.1,0.1,0.1 });
 	cube->Update();
 }

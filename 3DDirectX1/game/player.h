@@ -1,6 +1,7 @@
 #pragma once
 #include"Object3d.h"
 #include"Model.h"
+#include"Collision.h"
 /// <summary>
 /// プレイヤー関連のクラス
 /// </summary>
@@ -40,6 +41,7 @@ private:
 	XMFLOAT3 playerAngle{ 0,0,0 };
 	XMFLOAT3 sphereAngle{ 0,0,0 };
 	XMFLOAT3 sphereSize{ 1,1,1 };
+	Sphere sphere;
 	float sinRad = 0;
 	float cosRad = 0;
 	float radAD = 0.0f;

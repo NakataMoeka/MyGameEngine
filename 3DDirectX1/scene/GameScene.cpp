@@ -113,6 +113,12 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	gameObject->Initialize();
 }
 
+void GameScene::Init()
+{
+	player->Init();
+	gameObject->Init();
+}
+
 void GameScene::Update()
 {
 	HP += HPRecovery;

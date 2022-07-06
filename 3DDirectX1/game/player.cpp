@@ -17,10 +17,12 @@ void Player::Initialize()
 	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	SphereObj->SetParent(playerObj);
+
 }
 
 void Player::Init()
 {
+	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 }
 
 

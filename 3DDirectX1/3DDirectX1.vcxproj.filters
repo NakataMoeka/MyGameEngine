@@ -151,6 +151,7 @@
     <ClCompile Include="game\GameObject.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="2d\SpriteAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -328,5 +329,6 @@
     <ClInclude Include="game\GameObject.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="2d\SpriteAnimation.h" />
   </ItemGroup>
 </Project>

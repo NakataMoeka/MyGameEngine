@@ -38,7 +38,7 @@ public: // メンバ関数
 
 	void Initialize(DXCommon* dxCommon, Audio* audio);
 
-
+	void Init();
 	void Update();
 	void DrawBG();
 	void Draw();
