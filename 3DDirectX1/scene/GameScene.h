@@ -116,7 +116,7 @@ private: // ƒƒ“ƒo•Ï”
 	XMFLOAT2 playerEndPos2d = { 500,300 };
 	XMFLOAT2 playerSize2d = { 100, 100 };
 	XMFLOAT2 playerEndSize2d = { 200,200 };
-	//XMFLOAT2 playerPos2d2= { 0.0f,0.0f };
+	XMFLOAT2 playerPos2d2= { 250.0f,60.0f };
 	//XMFLOAT2 playerEndPos2d2 = { 0,0 };
 
 	int EaseFlag = 0;
@@ -125,5 +125,6 @@ private: // ƒƒ“ƒo•Ï”
 
 	//float angl = 0;
 	Sphere circle;
+	Ray ray;
 	Box line;
 };

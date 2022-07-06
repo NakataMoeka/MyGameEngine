@@ -61,7 +61,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(1, L"Resources/Circle.png");
 	Sprite::LoadTexture(2, L"Resources/white1x1.png");
 
-	sprite = Sprite::CreateSprite(1, { playerPos2d.x-50 ,playerPos2d.y + 60 });
+	sprite = Sprite::CreateSprite(1, playerPos2d2);
 	sprite2 = Sprite::CreateSprite(2,playerPos2d);
 	
 	sprite2->SetSize({ 1, 100 });
@@ -325,16 +325,23 @@ void GameScene::Update()
 	//}
 #pragma endregion
 #pragma region MT4_課題8
-//if (input->PushMouse(2)) {
 //
-//}
+circle.center = { playerPos2d2.x+50, playerPos2d2.y+50, 0 };
+circle.radius = 100;
+ray.start = { input->GetMousePos().x,input->GetMousePos().y,0 };
+ray.dir = { 1,0,0,0 };
+if (input->PushMouse(0)) {
+	if (Collision::CheackRay2Sphere(ray, circle)) {
+		playerPos2d2 = { input->GetMousePos().x,input->GetMousePos().y };
+	}
+}
 #pragma endregion
 	// パーティクル生成
 	//CreateParticles();
 	camera->Update();
 	particleMan->Update();
 	sprite->SetSize(playerSize2d);
-	//sprite->SetPosition(playerPos2d);
+	sprite->SetPosition(playerPos2d2);
 	object3d->SetPosition(playerPosition);
 	//object3d2->SetPosition(playerPositionB);
 	object3d2->SetScale({ 2.0f,2.0f,2.0f });
