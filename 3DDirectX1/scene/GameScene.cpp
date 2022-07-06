@@ -63,7 +63,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	sprite = Sprite::CreateSprite(1, playerPos2d2);
 	sprite2 = Sprite::CreateSprite(2,playerPos2d);
-	
+	sprite2->SetSize({ 100, 100 });
 	sprite2->SetSize({ 1, 100 });
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
@@ -326,7 +326,7 @@ void GameScene::Update()
 #pragma endregion
 #pragma region MT4_課題8
 //
-circle.center = { playerPos2d2.x+50, playerPos2d2.y+50, 0 };
+circle.center = { playerPos2d2.x+10, playerPos2d2.y+10, 0 };
 circle.radius = 100;
 ray.start = { input->GetMousePos().x,input->GetMousePos().y,0 };
 ray.dir = { 1,0,0,0 };
@@ -342,6 +342,7 @@ if (input->PushMouse(0)) {
 	particleMan->Update();
 	sprite->SetSize(playerSize2d);
 	sprite->SetPosition(playerPos2d2);
+	sprite->SetAnchorPoint({ 0.5,0.5 });
 	object3d->SetPosition(playerPosition);
 	//object3d2->SetPosition(playerPositionB);
 	object3d2->SetScale({ 2.0f,2.0f,2.0f });
