@@ -63,8 +63,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	sprite = Sprite::CreateSprite(1, playerPos2d2);
 	sprite2 = Sprite::CreateSprite(2,playerPos2d);
-	sprite2->SetSize({ 100, 100 });
-	sprite2->SetSize({ 1, 100 });
+	sprite->SetSize({ 100, 100 });
+	sprite2->SetSize(playerSize2d);
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
@@ -333,16 +333,40 @@ ray.dir = { 1,0,0,0 };
 if (input->PushMouse(0)) {
 	if (Collision::CheackRay2Sphere(ray, circle)) {
 		playerPos2d2 = { input->GetMousePos().x,input->GetMousePos().y };
+		acc.y = gacc;
+		acc.y += dist * k / m;
+		vel.y += acc.y;
+		vel.y -= vel.y * kv;
+		//playerSize2d.x += vel.x;
+		//playerSize2d.y += vel.y;
+
 	}
+	
 }
+XMFLOAT2 V0 = { 0,0};
+//2
+XMMATRIX  rotM = XMMatrixIdentity();
+rotM *= XMMatrixRotationZ(XMConvertToRadians(playerAngle));
+//3
+XMVECTOR v2 = { V0.x,V0.y};
+XMVECTOR v = XMVector3TransformNormal(v2, rotM);
+
+//4
+XMFLOAT2 f3 = { v.m128_f32[0],v.m128_f32[1]};
+playerPos2d.x = playerPos2d2.x + f3.x;
+playerPos2d.y = playerPos2d2.y + f3.y;
+
+playerSize2d.y = playerPos2d2.y;
+
 #pragma endregion
 	// パーティクル生成
 	//CreateParticles();
 	camera->Update();
 	particleMan->Update();
-	sprite->SetSize(playerSize2d);
+	sprite2->SetSize(playerSize2d);
 	sprite->SetPosition(playerPos2d2);
 	sprite->SetAnchorPoint({ 0.5,0.5 });
+	sprite->SetRotation(playerAngle);
 	object3d->SetPosition(playerPosition);
 	//object3d2->SetPosition(playerPositionB);
 	object3d2->SetScale({ 2.0f,2.0f,2.0f });
