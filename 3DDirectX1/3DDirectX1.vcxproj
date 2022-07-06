@@ -171,7 +171,6 @@
     <ClCompile Include="DirectXCommon\Framework.cpp" />
     <ClCompile Include="DirectXCommon\NMGame.cpp" />
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
-    <ClCompile Include="game\player.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="others\Collision.cpp" />
@@ -338,7 +337,6 @@
     <ClInclude Include="DirectXCommon\NMGame.h" />
     <ClInclude Include="DirectXCommon\SafeDelete.h" />
     <ClInclude Include="DirectXCommon\WinApp.h" />
-    <ClInclude Include="game\player.h" />
     <ClInclude Include="input\input.h" />
     <ClInclude Include="others\Collision.h" />
     <ClInclude Include="others\CollisionPrimitive.h" />

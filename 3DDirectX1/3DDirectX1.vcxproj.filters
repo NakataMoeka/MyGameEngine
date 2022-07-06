@@ -62,9 +62,6 @@
     <Filter Include="Game\scene">
       <UniqueIdentifier>{c1923a4d-0c3d-4ea4-a17e-16ddd50df236}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\player">
-      <UniqueIdentifier>{9191c314-550f-469e-bbb6-db002c93363e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Library\others\collision">
       <UniqueIdentifier>{e07f5ec7-ceef-4321-83db-e4ee7794b159}</UniqueIdentifier>
     </Filter>
@@ -123,9 +120,6 @@
     </ClCompile>
     <ClCompile Include="3d\Object3d.cpp">
       <Filter>Library\3d\obj</Filter>
-    </ClCompile>
-    <ClCompile Include="game\player.cpp">
-      <Filter>Game\player</Filter>
     </ClCompile>
     <ClCompile Include="others\Collision.cpp">
       <Filter>Library\others\collision</Filter>
@@ -288,9 +282,6 @@
     </ClInclude>
     <ClInclude Include="3d\Object3d.h">
       <Filter>Library\3d\obj</Filter>
-    </ClInclude>
-    <ClInclude Include="game\player.h">
-      <Filter>Game\player</Filter>
     </ClInclude>
     <ClInclude Include="3d\PointLight.h">
       <Filter>Library\3d\light</Filter>

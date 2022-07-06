@@ -282,6 +282,13 @@ void Input::updateMouse()
 	result = devMouse->Acquire();
 	//マウスの入力情報を取得
 	result = devMouse->GetDeviceState(sizeof(DIMOUSESTATE), &mouse);
+
+	POINT p;
+	// マウス座標(スクリーン座標)を取得する
+	GetCursorPos(&p);
+	ScreenToClient(winapp->GetHwnd(), &p);
+	MousePos.x = p.x;
+	MousePos.y = p.y;
 }
 
 void Input::updatePad()

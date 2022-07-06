@@ -90,6 +90,8 @@ public:
 	//マウス押す
 	bool PushMouse(int MouseNumber);
 	bool TriggerMouse(int MouseNumber);
+
+	XMFLOAT2 GetMousePos() { return MousePos; }
 	//マウスの移動量
 	MouseMove GetMouseMove();
 	//ボタン押す
@@ -126,6 +128,6 @@ private: // メンバ変数
 	DIJOYSTATE oldpad_data;
 	LPDIRECTINPUTDEVICE8 g_GamePadDevice = nullptr;
 	LPDIRECTINPUT8 g_InputInterface = nullptr;
-
+	XMFLOAT2 MousePos = { 0,0 };
 	WinApp* winapp = nullptr;
 };
