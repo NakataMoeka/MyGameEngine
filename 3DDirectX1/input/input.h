@@ -42,7 +42,7 @@ class Input
 {
 private:
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
-
+	using XMFLOAT2 = DirectX::XMFLOAT2;
 public: 
 
 	static Input* GetInstance();
