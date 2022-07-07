@@ -144,8 +144,7 @@ void GameScene::Update()
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-10 }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 
-	gameObject->Update();
-
+	XMFLOAT3 pos = gameObject->GetPos();
 
 		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
 			IsHit = true;
@@ -156,13 +155,11 @@ void GameScene::Update()
 
 		if (IsHit == true) {
 			DebugText::GetInstance()->Printf(100, 20, 3.0f, "Hit");
-			gameObject->GetObject()->SetParent(player->GetObject());
 		}
-		//if (gameObject->GetObject()->SetParent()!=nullptr) {
-		//
-		//}
 	
-
+	
+		gameObject->SetPos(pos);
+		gameObject->Update();
 	
 	particleMan->Update();
 	object3d2->SetPosition(playerPosition);
