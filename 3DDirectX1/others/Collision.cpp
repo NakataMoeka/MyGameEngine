@@ -198,28 +198,41 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 	{
 		float sqDistance = 0.0f;
 		float pos;
+
 		pos = sphere.center.m128_f32[0];
-		if (pos < box.minPosition.m128_f32[0]) {
-			sqDistance += (pos - box.minPosition.m128_f32[0]) * (pos - box.minPosition.m128_f32[0]);
+		if (pos < box.minPosition.m128_f32[0])
+		{
+			sqDistance += (box.minPosition.m128_f32[0] - pos) * (box.minPosition.m128_f32[0] - pos);
 		}
-		else if (pos > box.maxPosition.m128_f32[0]) {
-			sqDistance += (pos - box.maxPosition.m128_f32[0]) * (pos - box.maxPosition.m128_f32[0]);
+		else if (pos > box.maxPosition.m128_f32[0])
+		{
+			sqDistance += (box.maxPosition.m128_f32[0] - pos) * (box.maxPosition.m128_f32[0] - pos);
 		}
+
+		//yé≤ï˚å¸ÇÃãóó£ÇÃÇQèÊÇâ¡éZ
 		pos = sphere.center.m128_f32[1];
-		if (pos < box.minPosition.m128_f32[1]) {
-			sqDistance += (pos - box.minPosition.m128_f32[1]) * (pos - box.minPosition.m128_f32[1]);
+		if (pos < box.minPosition.m128_f32[1])
+		{
+			sqDistance += (box.minPosition.m128_f32[1] - pos) * (box.minPosition.m128_f32[1] - pos);
 		}
-		else if (pos > box.maxPosition.m128_f32[1]) {
-			sqDistance += (pos - box.maxPosition.m128_f32[1]) * (pos - box.maxPosition.m128_f32[1]);
+		else if (pos > box.maxPosition.m128_f32[1])
+		{
+			sqDistance += (box.maxPosition.m128_f32[1] - pos) * (box.maxPosition.m128_f32[1] - pos);
 		}
 		pos = sphere.center.m128_f32[2];
-		if (pos < box.minPosition.m128_f32[2]) {
-			sqDistance += (pos - box.minPosition.m128_f32[2]) * (pos - box.minPosition.m128_f32[2]);
+		//zé≤ï˚å¸ÇÃãóó£ÇÃÇQèÊÇâ¡éZ
+		if (pos < box.minPosition.m128_f32[2])
+		{
+			sqDistance += (box.minPosition.m128_f32[2] - pos) * (box.minPosition.m128_f32[2] - pos);
 		}
-		else if (pos > box.maxPosition.m128_f32[2]) {
-			sqDistance += (pos - box.maxPosition.m128_f32[2]) * (pos - box.maxPosition.m128_f32[2]);
+		else if (pos > box.maxPosition.m128_f32[2])
+		{
+			sqDistance += (box.maxPosition.m128_f32[2] - pos) * (box.maxPosition.m128_f32[2] - pos);
 		}
+
 		return sqDistance < sphere.radius* sphere.radius;
 	}
+
+
 
 	

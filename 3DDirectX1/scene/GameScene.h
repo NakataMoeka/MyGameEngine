@@ -14,7 +14,6 @@
 #include "Camera.h"
 #include "FbxObject.h"
 #include"LightGroup.h"
-#include"PostEffect.h"
 #include"player.h"
 #include"GameObject.h"
 
@@ -55,7 +54,6 @@ private: // メンバ変数
 
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
-	PostEffect* postEffect = nullptr;
 	Sprite* sprite = nullptr;
 
 	Object3d* object3d = nullptr;

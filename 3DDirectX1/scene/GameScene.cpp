@@ -140,7 +140,7 @@ void GameScene::Update()
 	object3d->SetScale({ 0.2, 0.2, 0.2 });
 	object3d4->SetPosition({ 0,-1,0 });
 	object3d->SetRotation({ a,0,b });
-	player->Update();
+	player->Update(gameObject);
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-10 }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 
@@ -187,8 +187,10 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetSpherePos().y);
-	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
+	if (player->GetAttackFlag() == true) {
+		DebugText::GetInstance()->Printf(100, 20, 3.0f, "Hit");
+	}
+		DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }
 void GameScene::CreateParticles()

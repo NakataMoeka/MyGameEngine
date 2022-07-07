@@ -24,11 +24,14 @@ public:
 	void Update();
 	void Draw();
 	Box	GetCBox() { return cBox; }
+	Sphere GetCSphere() { return cSphere; }
+	XMFLOAT3 GetPos() { return position; }
 private:
 	Object3d* cube;
 	Model* modelCube;
 	Box cBox;
-	float r = 0.1;
-	XMFLOAT3 position = { 0,-0.8,0 };
+	Sphere cSphere;
+	float r = 1;
+	XMFLOAT3 position = { 0,0.5,0 };
 };
 

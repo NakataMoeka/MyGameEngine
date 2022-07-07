@@ -74,6 +74,9 @@
     <Filter Include="Library\Common\Frame">
       <UniqueIdentifier>{64f12138-5e11-4a54-8f1f-eeac2a4f0a1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Onject">
+      <UniqueIdentifier>{a62df537-8e27-4eb1-8cab-5444c316321b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp">
@@ -148,11 +151,11 @@
     <ClCompile Include="DirectXCommon\FPS.cpp">
       <Filter>Library\Common\Frame</Filter>
     </ClCompile>
-    <ClCompile Include="game\GameObject.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="2d\SpriteAnimation.cpp">
       <Filter>Library\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="game\GameObject.cpp">
+      <Filter>Game\Onject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,11 +331,11 @@
     <ClInclude Include="DirectXCommon\FPS.h">
       <Filter>Library\Common\Frame</Filter>
     </ClInclude>
-    <ClInclude Include="game\GameObject.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="2d\SpriteAnimation.h">
       <Filter>Library\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="game\GameObject.h">
+      <Filter>Game\Onject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

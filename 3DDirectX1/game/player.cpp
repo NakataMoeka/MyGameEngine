@@ -1,5 +1,7 @@
 #include "player.h"
 #include"input.h"
+#include"GameObject.h"
+#include <cassert>
 using namespace DirectX;
 Player::Player()
 {
@@ -16,12 +18,13 @@ void Player::Initialize()
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	SphereObj->SetParent(playerObj);
+	//SphereObj->SetParent(playerObj);
 
 }
 
 void Player::Init()
 {
+	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 }
 
@@ -36,11 +39,13 @@ void Player::Move()
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		playerAngle.y += 1;
+		sphereAngle.y += 1;
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
 		playerAngle.y -= 1;
+		sphereAngle.y -= 1;
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
@@ -66,7 +71,8 @@ void Player::Move()
 		playerPos.z -= moveLR.m128_f32[2];
 		sphereAngle.z -= 10;
 	}
-
+	sphere.radius = r;
+	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
@@ -77,6 +83,22 @@ void Player::Move()
 
 void Player::Ball()
 {
+#pragma region カメラ追従とほぼ同じ
+	XMFLOAT3 V0 = { 0,0,1.6 };
+	//2
+	XMMATRIX  rotM = XMMatrixIdentity();
+	rotM *= XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//Y軸
+	rotM *= XMMatrixRotationX(XMConvertToRadians(0));//X軸
+	//3
+	XMVECTOR v3 = { V0.x,V0.y,V0.z };
+	XMVECTOR v = XMVector3TransformNormal(v3, rotM);
+
+	//4
+	XMFLOAT3 f3 = { v.m128_f32[0],v.m128_f32[1],v.m128_f32[2] };
+	spherePos.x = playerPos.x + f3.x;
+	//spherePos.y = playerPos.y + f3.y;
+	spherePos.z = playerPos.z + f3.z;
+#pragma endregion
 
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
@@ -85,14 +107,19 @@ void Player::Ball()
 
 }
 
-void Player::Update()
+void Player::Update(GameObject* gameObject)
 {
 	Move();
 	Ball();
+	Collision(gameObject);
 }
 
 void Player::Collision(GameObject* gameObject)
 {
+	if (Collision::CheckSphere2Box(sphere, gameObject->GetCBox())) {
+		attackFlag = true;
+	}
+	else { attackFlag = false; }
 }
 
 void Player::Draw()
