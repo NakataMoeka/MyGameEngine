@@ -31,7 +31,8 @@ void GameObject::Update()
 	cBox.maxPosition = XMVectorSet(position.x + r, position.y + r, position.z + r, 1);
 
 	cube->SetPosition(position);
-	cube->SetScale({ 0.1,0.1,0.1 });
+
+	cube->SetScale({ 0.5,0.5,0.5});
 	cube->Update();
 }
 

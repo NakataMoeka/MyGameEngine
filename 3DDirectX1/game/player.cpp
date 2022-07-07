@@ -1,6 +1,5 @@
 #include "player.h"
 #include"input.h"
-#include"GameObject.h"
 #include <cassert>
 using namespace DirectX;
 Player::Player()
@@ -18,7 +17,7 @@ void Player::Initialize()
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	//SphereObj->SetParent(playerObj);
+
 
 }
 
@@ -26,6 +25,8 @@ void Player::Init()
 {
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
+	playerPos={ 0,-0.8,-50 };
+	playerObj->SetPosition(playerPos);
 }
 
 
@@ -107,20 +108,13 @@ void Player::Ball()
 
 }
 
-void Player::Update(GameObject* gameObject)
+void Player::Update()
 {
 	Move();
 	Ball();
-	Collision(gameObject);
+
 }
 
-void Player::Collision(GameObject* gameObject)
-{
-	if (Collision::CheckSphere2Box(sphere, gameObject->GetCBox())) {
-		attackFlag = true;
-	}
-	else { attackFlag = false; }
-}
 
 void Player::Draw()
 {

@@ -2,7 +2,6 @@
 #include"Object3d.h"
 #include"Model.h"
 #include"Collision.h"
-class GameObject;
 /// <summary>
 /// プレイヤー関連のクラス
 /// </summary>
@@ -21,15 +20,15 @@ public:
 	~Player();
 	void Initialize();//一回だけの初期化
 	void Init();//シーンチェンジ時にもする初期化
-	void Update(class GameObject* gameObject);
-	void Collision(class GameObject* gameObject);
+	void Update();
+
 	void Draw();
 	int GetPower() { return power; }
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
-	bool GetAttackFlag() { return attackFlag; }
 	Sphere GetSphere() { return sphere; }
+	Object3d* GetObject() { return SphereObj; }
 private:
 	void Move();//移動
 	void Ball();//ボール関係
@@ -38,7 +37,7 @@ private:
 	Model* model;
 	Object3d* SphereObj;
 	Model* model2;
-	XMFLOAT3 playerPos{ 0,-0.8,0 };
+	XMFLOAT3 playerPos{ 0,-0.8,-50 };
 	XMFLOAT3 spherePos{ 0,0.2,0 };
 	XMFLOAT3 playerAngle{ 0,0,0 };
 	XMFLOAT3 sphereAngle{ 0,0,0 };
@@ -50,6 +49,7 @@ private:
 	float radWS = 0.0f;
 	int HP = 50;
 	int power = 100;
-	bool attackFlag = false;
+
+
 	float r = 1;
 };

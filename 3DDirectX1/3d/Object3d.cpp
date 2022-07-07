@@ -270,6 +270,8 @@ void Object3d::Update()
 	//}
 
 	if (parent != nullptr) {
+		//parent->matWorld *= matTrans;
+		//parent->matWorld *= matRot;
 		matWorld *= parent->matWorld;
 	}
 

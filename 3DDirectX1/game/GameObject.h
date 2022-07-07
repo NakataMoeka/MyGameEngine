@@ -26,12 +26,14 @@ public:
 	Box	GetCBox() { return cBox; }
 	Sphere GetCSphere() { return cSphere; }
 	XMFLOAT3 GetPos() { return position; }
+	XMFLOAT3 SetPos(XMFLOAT3 pos) { return this->position=pos; }
+	Object3d* GetObject() { return cube; }
 private:
 	Object3d* cube;
 	Model* modelCube;
 	Box cBox;
 	Sphere cSphere;
 	float r = 1;
-	XMFLOAT3 position = { 0,0.5,0 };
+	XMFLOAT3 position = { 5,0.5,0 };
 };
 
