@@ -27,6 +27,8 @@ public:
 	Sphere GetCSphere() { return cSphere; }
 	XMFLOAT3 GetPos() { return position; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos) { return this->position=pos; }
+	XMFLOAT3 GetSize() { return size; }
+	XMFLOAT3 SetSize(XMFLOAT3 size) { return this->size = size; }
 	Object3d* GetObject() { return cube; }
 private:
 	Object3d* cube;
@@ -35,5 +37,6 @@ private:
 	Sphere cSphere;
 	float r = 1;
 	XMFLOAT3 position = { 5,0.5,0 };
+	XMFLOAT3 size = { 0.1,0.1,0.1 };
 };
 

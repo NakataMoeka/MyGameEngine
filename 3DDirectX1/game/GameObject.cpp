@@ -32,7 +32,7 @@ void GameObject::Update()
 
 	cube->SetPosition(position);
 
-	cube->SetScale({ 0.1,0.1,0.1});
+	cube->SetScale(size);
 	cube->Update();
 }
 
