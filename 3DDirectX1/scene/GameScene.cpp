@@ -156,7 +156,7 @@ void GameScene::Update()
 
 		if (IsHit == true) {
 			gameObject->GetObject()->SetParent(player->GetObject());
-			gameObject->SetSize({0.5,0.5,0.5});
+			//gameObject->SetSize({0.5,0.5,0.5});
 		}
 	
 	

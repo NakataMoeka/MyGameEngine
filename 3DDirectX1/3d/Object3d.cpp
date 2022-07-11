@@ -258,18 +258,18 @@ void Object3d::Update()
 	matWorld *= matScale;
 	matWorld *= matRot;
 	matWorld *= matTrans;
+	if (isBillboard) {
+		const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
 
-	//if (isBillboard) {
-	//	const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
-
-	//	matWorld = XMMatrixIdentity();
-	//	matWorld *= matScale; // ワールド行列にスケーリングを反映
-	//	matWorld *= matRot; // ワールド行列に回転を反映
-	//	matWorld *= matBillboard;
-	//	matWorld *= matTrans; // ワールド行列に平行移動を反映
-	//}
+		matWorld = XMMatrixIdentity();
+		matWorld *= matScale; // ワールド行列にスケーリングを反映
+		matWorld *= matRot; // ワールド行列に回転を反映
+		matWorld *= matBillboard;
+		matWorld *= matTrans; // ワールド行列に平行移動を反映
+	}
 
 	if (parent != nullptr) {
+
 		matWorld *= parent->matWorld;
 	}
 
@@ -308,4 +308,9 @@ void Object3d::Draw()
 	lightGroup->Draw(cmdList,3);
 	// モデル描画
 	model->Draw(cmdList);
+}
+
+void Object3d::transformParent(Object3d* obj)
+{
+
 }

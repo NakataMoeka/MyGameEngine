@@ -84,6 +84,8 @@ public:
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
 	void SetParent(Object3d* parent) { this->parent = parent; }
+	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
+	void transformParent(Object3d* obj);
 private:
 
 	// デバイス
