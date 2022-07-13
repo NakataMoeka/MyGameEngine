@@ -59,10 +59,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	debugText.Initialize(debugTextTexNumber);
 	
 	Sprite::LoadTexture(1, L"Resources/Circle.png");
-	Sprite::LoadTexture(2, L"Resources/white1x1.png");
+	SpriteLine::LoadTexture(2, L"Resources/white1x1.png");
 
-	sprite = Sprite::CreateSprite(1, playerPos2d2);
-	sprite2 = Sprite::CreateSprite(2,playerPos2d);
+	sprite = Sprite::CreateSprite(1, playerPos22d);
+	sprite2 = SpriteLine::CreateSprite(2,playerPos2d);
 	sprite->SetSize({ 100, 100 });
 	sprite2->SetSize(playerSize2d);
 
@@ -327,16 +327,18 @@ void GameScene::Update()
 #pragma endregion
 #pragma region MT4_課題8
 //
-circle.center = { playerPos2d2.x+10, playerPos2d2.y+10, 0 };
+circle.center = { playerPos22d.x+10, playerPos22d.y+10, 0 };
 circle.radius = 100;
 ray.start = { input->GetMousePos().x,input->GetMousePos().y,0 };
 ray.dir = { 1,0,0,0 };
+x = playerPos2d.x;
 //sprite->SetParent(sprite);
 if (input->PushMouse(0)) {
 
 	if (Collision::CheackRay2Sphere(ray, circle)) {
-		playerPos2d2 = { input->GetMousePos().x/*playerPos2d.x*/,input->GetMousePos().y };
-	/*	acc.y = gacc;
+		playerPos22d = { input->GetMousePos().x+1,input->GetMousePos().y };
+		playerPos2d = { input->GetMousePos().x,0 };
+		/*	acc.y = gacc;
 		acc.y += dist * k / m;
 		vel.y += acc.y;
 		vel.y -= vel.y * kv;*/
@@ -344,41 +346,30 @@ if (input->PushMouse(0)) {
 		//playerSize2d.y += vel.y;
 		playerSize2d.y++;
 	}
-	if (playerPos2d2.x > 300) {
-		playerAngle--;
-	}
-	
-}
-else if(!input->PushMouse(0)&&playerPos2d2.y>150) {
-	playerPos2d2.y-=2;
-	//if (playerPos2d2.x > 300) {
-		if (playerAngle < 0) {
-			playerAngle++;
-		}
+	//if (playerPos22d.x > 300) {
+	//	playerAngle--;
 	//}
+	//
+}
+else if(!input->PushMouse(0)&&playerPos22d.y>150) {
+	playerPos22d.y--;
+	////if (playerPos2d2.x > 300) {
+	//	if (playerAngle < 0) {
+	//		playerAngle++;
+	//	}
+	////}
 }
 
-XMFLOAT2 V0 = { 0,0 };
-//2
-XMMATRIX  rotM = XMMatrixIdentity();
-rotM *= XMMatrixRotationZ(XMConvertToRadians(playerAngle));
-//3
-XMVECTOR v2 = { V0.x,V0.y };
-XMVECTOR v = XMVector3TransformNormal(v2, rotM);
-
-//4
-XMFLOAT2 f3 = { v.m128_f32[0],v.m128_f32[1] };
-playerPos2d.x = playerPos2d2.x + f3.x;
-playerPos2d.y = playerPos2d2.y + f3.y;
-
-playerSize2d.y = playerPos2d2.y;
 #pragma endregion
 	// パーティクル生成
 	//CreateParticles();
 	camera->Update();
 	particleMan->Update();
 	sprite2->SetSize(playerSize2d);
-	sprite->SetPosition(playerPos2d2);
+	sprite->SetPosition(playerPos22d);
+	sprite2->SetPosition(playerPos2d);
+	sprite2->SetEPosition(playerPos22d);
+	sprite2->SetX(x);
 	sprite->SetAnchorPoint({ 0.5,0.5 });
 	sprite2->SetRotation(playerAngle);
 	object3d->SetPosition(playerPosition);
@@ -398,18 +389,20 @@ void GameScene::Draw()
 	Object3d::PostDraw();
 
 
-	sprite->PreDraw(dxCommon->GetCmdList());
+	Sprite::PreDraw(dxCommon->GetCmdList());
+	SpriteLine::PreDraw(dxCommon->GetCmdList());
 	sprite->Draw();
 	sprite2->Draw();
 	//char str[256];
 
 //	debugText.Printf(0, 80, 3.0f, "%f",playerPos2d.x);
-	debugText.Printf(0, 140, 3.0f, "%f",playerAngle);
+	debugText.Printf(0, 140, 3.0f, "%f,%f", playerPos2d.x, playerPos22d.x);
 
 	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
 	debugText.DrawAll(dxCommon->GetCmdList( ));
-	sprite->PostDraw();
+	Sprite::PostDraw();
+	SpriteLine::PostDraw();
 }
 void GameScene::CreateParticles()
 {

@@ -14,7 +14,7 @@
 #include "DebugCamera.h"
 #include "Collision.h"
 #include"../Ease.h"
-#include"Draw2D.h"
+#include"SpriteLine.h"
 class GameScene 
 {
 private: 
@@ -53,13 +53,13 @@ private: // ƒƒ“ƒo•Ï”
 	ParticleManager* particleMan = nullptr;
 
 	Sprite* sprite = nullptr;
-	Sprite* sprite2 = nullptr;
+	SpriteLine* sprite2 = nullptr;
 	Object3d* object3d = nullptr;
 	Model*	model = nullptr;
 
 	Object3d* object3d2 = nullptr;
 	Model* model2 = nullptr;
-	Draw2D* drawLine = nullptr;
+
 	const int debugTextTexNumber = 0;
 
 
@@ -113,11 +113,12 @@ private: // ƒƒ“ƒo•Ï”
 	XMFLOAT3 playerEndPosition = { 10.0f,0.0f,0.0f };
 	XMFLOAT3 playerPositionB = { 0.0f,0.0f,0.0f };
 
-	XMFLOAT2 playerPos2d = {300, 0};
+	XMFLOAT2 playerPos2d = {100, 0};
+	XMFLOAT2 playerPos22d = {101, 100};
 	XMFLOAT2 playerEndPos2d = { 500,300 };
 	XMFLOAT2 playerSize2d = { 1, 100 };
 	XMFLOAT2 playerEndSize2d = { 200,200 };
-	XMFLOAT2 playerPos2d2= { 300.0f,150.0f };
+	//XMFLOAT2 playerPos2d2= { 300.0f,150.0f };
 	//XMFLOAT2 playerEndPos2d2 = { 0,0 };
 	float k = 0.001f;
 	float m = 1.0f;
@@ -136,4 +137,5 @@ private: // ƒƒ“ƒo•Ï”
 	Sphere circle;
 	Ray ray;
 	Box line;
+	int x;
 };
