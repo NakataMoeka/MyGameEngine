@@ -27,6 +27,7 @@ void DirectXCommon::Initialize(WinApp* winapp)
 	InitializeDepthBuffer();
 
 	InitializeFance();
+	ClearDepthBuffer();
 }
 void DirectXCommon::preDraw()
 {
@@ -55,6 +56,7 @@ void DirectXCommon::preDraw()
 	cmdList->RSSetViewports(1, &CD3DX12_VIEWPORT(0.0f, 0.0f, WinApp::window_width, WinApp::window_height));
 	// シザー矩形の設定
 	cmdList->RSSetScissorRects(1, &CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height));
+	ClearDepthBuffer();
 }
 
 void DirectXCommon::postDraw()
@@ -85,7 +87,13 @@ void DirectXCommon::postDraw()
 	
 
 }
-
+void DirectXCommon::ClearDepthBuffer()
+{
+	// 深度ステンシルビュー用デスクリプタヒープのハンドルを取得
+	CD3DX12_CPU_DESCRIPTOR_HANDLE dsvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(dsvHeap->GetCPUDescriptorHandleForHeapStart());
+	// 深度バッファのクリア
+	cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+}
 void DirectXCommon::InitializeDevice()
 {
 

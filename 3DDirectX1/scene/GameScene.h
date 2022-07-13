@@ -14,6 +14,7 @@
 #include "DebugCamera.h"
 #include "Collision.h"
 #include"../Ease.h"
+#include"Draw2D.h"
 class GameScene 
 {
 private: 
@@ -58,7 +59,7 @@ private: // ƒƒ“ƒo•Ï”
 
 	Object3d* object3d2 = nullptr;
 	Model* model2 = nullptr;
-
+	Draw2D* drawLine = nullptr;
 	const int debugTextTexNumber = 0;
 
 

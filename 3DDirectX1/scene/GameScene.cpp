@@ -65,6 +65,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	sprite2 = Sprite::CreateSprite(2,playerPos2d);
 	sprite->SetSize({ 100, 100 });
 	sprite2->SetSize(playerSize2d);
+
 	//audio->SoundPlayWave("Resources/ショット.wav",true);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 1, 0 });
@@ -330,34 +331,47 @@ circle.center = { playerPos2d2.x+10, playerPos2d2.y+10, 0 };
 circle.radius = 100;
 ray.start = { input->GetMousePos().x,input->GetMousePos().y,0 };
 ray.dir = { 1,0,0,0 };
+//sprite->SetParent(sprite);
 if (input->PushMouse(0)) {
+
 	if (Collision::CheackRay2Sphere(ray, circle)) {
-		playerPos2d2 = { input->GetMousePos().x,input->GetMousePos().y };
-		acc.y = gacc;
+		playerPos2d2 = { input->GetMousePos().x/*playerPos2d.x*/,input->GetMousePos().y };
+	/*	acc.y = gacc;
 		acc.y += dist * k / m;
 		vel.y += acc.y;
-		vel.y -= vel.y * kv;
+		vel.y -= vel.y * kv;*/
 		//playerSize2d.x += vel.x;
 		//playerSize2d.y += vel.y;
-
+		playerSize2d.y++;
+	}
+	if (playerPos2d2.x > 300) {
+		playerAngle--;
 	}
 	
 }
-XMFLOAT2 V0 = { 0,0};
+else if(!input->PushMouse(0)&&playerPos2d2.y>150) {
+	playerPos2d2.y-=2;
+	//if (playerPos2d2.x > 300) {
+		if (playerAngle < 0) {
+			playerAngle++;
+		}
+	//}
+}
+
+XMFLOAT2 V0 = { 0,0 };
 //2
 XMMATRIX  rotM = XMMatrixIdentity();
 rotM *= XMMatrixRotationZ(XMConvertToRadians(playerAngle));
 //3
-XMVECTOR v2 = { V0.x,V0.y};
+XMVECTOR v2 = { V0.x,V0.y };
 XMVECTOR v = XMVector3TransformNormal(v2, rotM);
 
 //4
-XMFLOAT2 f3 = { v.m128_f32[0],v.m128_f32[1]};
+XMFLOAT2 f3 = { v.m128_f32[0],v.m128_f32[1] };
 playerPos2d.x = playerPos2d2.x + f3.x;
 playerPos2d.y = playerPos2d2.y + f3.y;
 
 playerSize2d.y = playerPos2d2.y;
-
 #pragma endregion
 	// パーティクル生成
 	//CreateParticles();
@@ -366,7 +380,7 @@ playerSize2d.y = playerPos2d2.y;
 	sprite2->SetSize(playerSize2d);
 	sprite->SetPosition(playerPos2d2);
 	sprite->SetAnchorPoint({ 0.5,0.5 });
-	sprite->SetRotation(playerAngle);
+	sprite2->SetRotation(playerAngle);
 	object3d->SetPosition(playerPosition);
 	//object3d2->SetPosition(playerPositionB);
 	object3d2->SetScale({ 2.0f,2.0f,2.0f });
@@ -376,7 +390,8 @@ playerSize2d.y = playerPos2d2.y;
 }
 
 void GameScene::Draw()
-{
+{	// 深度バッファクリア
+	dxCommon->ClearDepthBuffer();
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	//object3d->Draw();
 	//object3d2->Draw();
@@ -389,7 +404,7 @@ void GameScene::Draw()
 	//char str[256];
 
 //	debugText.Printf(0, 80, 3.0f, "%f",playerPos2d.x);
-	debugText.Printf(0, 140, 3.0f, "%f,%f",input->GetMousePos().x,input->GetMousePos().y);
+	debugText.Printf(0, 140, 3.0f, "%f",playerAngle);
 
 	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
