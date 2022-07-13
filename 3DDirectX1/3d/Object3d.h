@@ -120,5 +120,7 @@ private:
 	static LightGroup* lightGroup;
 	// ビルボード
 	bool isBillboard = false;
+
+	bool naz = false;
 };
 

@@ -247,6 +247,7 @@ void Object3d::Update()
 
 	HRESULT result;
 	XMMATRIX matScale, matRot, matTrans;
+
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();
 	matRot *= XMMatrixRotationZ(XMConvertToRadians(rotation.z));	//Z軸まわりに45度回転
@@ -260,7 +261,6 @@ void Object3d::Update()
 	matWorld *= matTrans;
 	if (isBillboard) {
 		const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
-
 		matWorld = XMMatrixIdentity();
 		matWorld *= matScale; // ワールド行列にスケーリングを反映
 		matWorld *= matRot; // ワールド行列に回転を反映
@@ -269,7 +269,17 @@ void Object3d::Update()
 	}
 
 	if (parent != nullptr) {
-
+		XMVECTOR scaleV, rotationV, translationV;
+		scaleV = XMVectorSet(scale.x,scale.y,scale.z,1);
+		rotationV = XMVectorSet(rotation.x, rotation.y, rotation.z, 1);
+		translationV = XMVectorSet(position.x, position.y, position.z, 1);
+		XMMatrixDecompose(&scaleV, &rotationV, &translationV, matWorld);
+		matScale = XMMatrixInverse(&scaleV, matScale);
+		matTrans = XMMatrixInverse(&translationV, matTrans);
+		matRot = XMMatrixInverse(&rotationV, matRot);
+		parent->matWorld *= matScale;
+		parent->matWorld *= matRot;
+		parent->matWorld *= matTrans;
 		matWorld *= parent->matWorld;
 	}
 
@@ -312,5 +322,8 @@ void Object3d::Draw()
 
 void Object3d::transformParent(Object3d* obj)
 {
+	//Decomposeを使い
+	//逆行列をかける
+	
 
 }

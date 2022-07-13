@@ -40,13 +40,13 @@ void Player::Move()
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		playerAngle.y += 1;
-		sphereAngle.y += 1;
+		//sphereAngle.y += 1;
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
 		playerAngle.y -= 1;
-		sphereAngle.y -= 1;
+		//sphereAngle.y -= 1;
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{

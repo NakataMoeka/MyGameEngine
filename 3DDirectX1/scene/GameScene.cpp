@@ -135,7 +135,17 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
+	if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
+		IsHit = true;
+	}
+	else {
+		IsHit = false;
+	}
 
+	if (IsHit == true) {
+		//gameObject->GetObject()->SetParent(player->GetObject());
+		//gameObject->SetSize({0.5,0.5,0.5});
+	}
 
 	object3d->SetScale({ 0.2, 0.2, 0.2 });
 	object3d4->SetPosition({ 0,-1,0 });
@@ -147,17 +157,7 @@ void GameScene::Update()
 	gameObject->Update();
 
 
-		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
-			IsHit = true;
-		}
-		else {
-			IsHit = false;
-		}
-
-		if (IsHit == true) {
-			gameObject->GetObject()->SetParent(player->GetObject());
-			//gameObject->SetSize({0.5,0.5,0.5});
-		}
+	
 	
 	
 
