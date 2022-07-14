@@ -247,12 +247,15 @@ void Object3d::Update()
 
 	HRESULT result;
 	XMMATRIX matScale, matRot, matTrans;
+	XMVECTOR rotV = XMVectorSet(XMConvertToRadians(rotation.x),
+		XMConvertToRadians(rotation.y),
+		XMConvertToRadians(rotation.z),0);
+	//XMVECTOR rotV = XMQuaternionRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
+	rotV = XMQuaternionRotationRollPitchYawFromVector(rotV);
 
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();
-	matRot *= XMMatrixRotationZ(XMConvertToRadians(rotation.z));	//ZŽ²‚Ü‚í‚è‚É45“x‰ñ“]
-	matRot *= XMMatrixRotationX(XMConvertToRadians(rotation.x));
-	matRot *= XMMatrixRotationY(XMConvertToRadians(rotation.y));
+	matRot *= XMMatrixRotationQuaternion(rotV);
 	matTrans = XMMatrixTranslation(position.x,position.y, position.z);	//•½sˆÚ“®s—ñ‚ðÄŒvŽZ
 
 	matWorld = XMMatrixIdentity();
@@ -269,18 +272,18 @@ void Object3d::Update()
 	}
 
 	if (parent != nullptr) {
-		XMVECTOR scaleV, rotationV, translationV;
-		scaleV = XMVectorSet(scale.x,scale.y,scale.z,1);
-		rotationV = XMVectorSet(rotation.x, rotation.y, rotation.z, 1);
-		translationV = XMVectorSet(position.x, position.y, position.z, 1);
-		XMMatrixDecompose(&scaleV, &rotationV, &translationV, matWorld);
-		matScale = XMMatrixInverse(&scaleV, matScale);
-		matTrans = XMMatrixInverse(&translationV, matTrans);
-		matRot = XMMatrixInverse(&rotationV, matRot);
-		parent->matWorld *= matScale;
-		parent->matWorld *= matRot;
-		parent->matWorld *= matTrans;
-		matWorld *= parent->matWorld;
+		//XMVECTOR scaleV, rotationV, translationV;
+		//scaleV = XMVectorSet(scale.x,scale.y,scale.z,1);
+		//rotationV = XMVectorSet(rotation.x, rotation.y, rotation.z, 1);
+		//translationV = XMVectorSet(position.x, position.y, position.z, 1);
+		//XMMatrixDecompose(&scaleV, &rotationV, &translationV, matWorld);
+		//matScale = XMMatrixInverse(&scaleV, matScale);
+		//matTrans = XMMatrixInverse(&translationV, matTrans);
+		//matRot = XMMatrixInverse(&rotationV, matRot);
+		//parent->matWorld *= matScale;
+		//parent->matWorld *= matRot;
+		//parent->matWorld *= matTrans;
+		//matWorld *= parent->matWorld;
 	}
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
