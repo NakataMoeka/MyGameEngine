@@ -111,6 +111,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	player->Initialize();
 	gameObject = new GameObject;//newすればエラー吐かない
 	gameObject->Initialize();
+
 }
 
 void GameScene::Init()
@@ -135,17 +136,19 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
+	gameObject->Update();
+	IsHit = false;
 	if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
 		IsHit = true;
-	}
-	else {
-		IsHit = false;
+		DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+
 	}
 
-	if (IsHit == true) {
-		//gameObject->GetObject()->SetParent(player->GetObject());
-		//gameObject->SetSize({0.5,0.5,0.5});
-	}
+
+	//if (IsHit == true) {
+		gameObject->GetObject()->SetParent(player->GetObject());
+
+	//}
 
 	object3d->SetScale({ 0.2, 0.2, 0.2 });
 	object3d4->SetPosition({ 0,-1,0 });
@@ -203,7 +206,7 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", gameObject->GetSize().x);
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetPlayerPos().x);
 
 		
 		DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());

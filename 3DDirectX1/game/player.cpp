@@ -25,7 +25,7 @@ void Player::Init()
 {
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-	playerPos={ 0,-0.8,-50 };
+	playerPos={ 0,-0.8,0 };
 	playerObj->SetPosition(playerPos);
 }
 

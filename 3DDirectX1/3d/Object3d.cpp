@@ -272,18 +272,7 @@ void Object3d::Update()
 	}
 
 	if (parent != nullptr) {
-		//XMVECTOR scaleV, rotationV, translationV;
-		//scaleV = XMVectorSet(scale.x,scale.y,scale.z,1);
-		//rotationV = XMVectorSet(rotation.x, rotation.y, rotation.z, 1);
-		//translationV = XMVectorSet(position.x, position.y, position.z, 1);
-		//XMMatrixDecompose(&scaleV, &rotationV, &translationV, matWorld);
-		//matScale = XMMatrixInverse(&scaleV, matScale);
-		//matTrans = XMMatrixInverse(&translationV, matTrans);
-		//matRot = XMMatrixInverse(&rotationV, matRot);
-		//parent->matWorld *= matScale;
-		//parent->matWorld *= matRot;
-		//parent->matWorld *= matTrans;
-		//matWorld *= parent->matWorld;
+		transformParent();
 	}
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
@@ -323,10 +312,30 @@ void Object3d::Draw()
 	model->Draw(cmdList);
 }
 
-void Object3d::transformParent(Object3d* obj)
+void Object3d::transformParent()
 {
-	//Decomposeを使い
-	//逆行列をかける
-	
+	//わからないいいいいい\(^o^)/
+	//Decomposeを使い分解する
+	XMVECTOR scaleV, rotationV, positionV;
+		//scaleV = XMVectorSet(scale.x,scale.y,scale.z,0);
+		//rotationV = XMVectorSet(XMConvertToRadians(rotation.x),
+		//	XMConvertToRadians(rotation.y),
+		//	XMConvertToRadians(rotation.z), 0);
+		//positionV = XMVectorSet(position.x, position.y, position.z, 0);
+		scaleV = XMVectorSet(parent->scale.x,parent->scale.y,parent->scale.z,0);
+		rotationV = XMVectorSet(XMConvertToRadians(parent->rotation.x),
+			XMConvertToRadians(parent->rotation.y),
+			XMConvertToRadians(parent->rotation.z), 0);
+		positionV = XMVectorSet(parent->position.x, parent->position.y, parent->position.z, 0);
+
+
+	//逆行列にする
+	XMMATRIX matWorld_parent,matTransV;
+	matWorld_parent = XMMatrixInverse(nullptr, matWorld);
+	XMMatrixDecompose(&scaleV, &rotationV, &positionV, matWorld_parent);
+
+
+
+
 
 }

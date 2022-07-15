@@ -15,6 +15,7 @@ float4 main(VSOutput input) : SV_TARGET
 	float seTime = sbTime + Width;
 	float2 uv = float2(input.uv.x + sin(smoothstep(sbTime, seTime, input.uv.y) * 2 * 3.14159) * power
 		, input.uv.y);*/
+	float4 texcolor = tex0.Sample(smp, input.uv);
 	float shift = 0.005;
 	float r = tex0.Sample(smp, input.uv + float2(-shift, 0)).r;
 	float g = tex0.Sample(smp, input.uv + float2(0, 0)).g;

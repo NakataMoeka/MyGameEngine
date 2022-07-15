@@ -18,6 +18,9 @@ void NMGame::Update()
 	if (Input::GetInstance()->TriggerKey(DIK_2)/*ここにGetterを書くつもり*/) {
 		postEffect->CreateGraphicsPipeline(L"Resources/shaders/PostEffectColorPS.hlsl", L"Resources/shaders/PostEffectColorVS.hlsl");
 	}
+	if (Input::GetInstance()->TriggerKey(DIK_3)/*ここにGetterを書くつもり*/) {
+		postEffect->CreateGraphicsPipeline(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
+	}
 	//ゲームシーンの毎フレーム処理
 	gameScene->Update();
 }
