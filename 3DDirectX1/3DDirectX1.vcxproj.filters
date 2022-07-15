@@ -142,6 +142,9 @@
     <ClCompile Include="DirectXCommon\FPS.cpp">
       <Filter>Library\Common\Frame</Filter>
     </ClCompile>
+    <ClCompile Include="game\player.cpp">
+      <Filter>Game\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -169,6 +172,9 @@
       <Filter>HLSL\2d</Filter>
     </None>
     <None Include="Resources\shaders\PostEffectColor.hlsli">
+      <Filter>HLSL\2d\posteffect</Filter>
+    </None>
+    <None Include="Resources\shaders\mosaic.hlsli">
       <Filter>HLSL\2d\posteffect</Filter>
     </None>
   </ItemGroup>
@@ -228,6 +234,12 @@
       <Filter>HLSL\2d\posteffect</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\PostEffectColorVS.hlsl">
+      <Filter>HLSL\2d\posteffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\mosaicPS.hlsl">
+      <Filter>HLSL\2d\posteffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\mosaicVS.hlsl">
       <Filter>HLSL\2d\posteffect</Filter>
     </FxCompile>
   </ItemGroup>
@@ -312,6 +324,9 @@
     </ClInclude>
     <ClInclude Include="DirectXCommon\FPS.h">
       <Filter>Library\Common\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="game\player.h">
+      <Filter>Game\scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

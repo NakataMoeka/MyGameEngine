@@ -15,7 +15,7 @@ void Player::Initialize()
 	SphereObj = Object3d::Create(model2);
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/colorPS.hlsl", L"Resources/shaders/colorVS.hlsl");
 
 }
 

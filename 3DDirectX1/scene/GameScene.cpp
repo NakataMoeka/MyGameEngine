@@ -80,7 +80,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	object3d4->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 	object3d2->SetRotation({ 0,45,0 });
-
+	object3d->SetPosition({ 2,0,0 });
 	object3d->Update();
 
 	//object3d2->Update();
@@ -164,7 +164,7 @@ void GameScene::Draw()
 	object3d3->Draw();
 	object3d4->Draw();
 
-	//object3d->Draw();
+	object3d->Draw();
 	//object3d2->Draw();
 	player->Draw();
 
@@ -177,7 +177,7 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f",player->GetSpherePos().y);
+	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f",player->GetSpherePos().y);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }
