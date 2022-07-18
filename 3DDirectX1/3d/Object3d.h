@@ -109,6 +109,7 @@ private:
 	XMFLOAT3 position = { 0,0,0 };
 	// ローカルワールド変換行列
 	XMMATRIX matWorld;
+
 	// 親オブジェクト
 	Object3d* parent = nullptr;
 
