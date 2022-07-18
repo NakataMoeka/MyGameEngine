@@ -37,11 +37,11 @@ private:
 	Model* model;
 	Object3d* SphereObj;
 	Model* model2;
-	XMFLOAT3 playerPos{ 1,-0.8,0 };
-	XMFLOAT3 spherePos{ 0,0.2,0 };
+	XMFLOAT3 playerPos{ 1,0,0 };
+	XMFLOAT3 spherePos{ 1,3,0 };
 	XMFLOAT3 playerAngle{ 0,0,0 };
 	XMFLOAT3 sphereAngle{ 0,0,0 };
-	XMFLOAT3 sphereSize{ 0.3,0.3,0.3 };
+	XMFLOAT3 sphereSize{ 1,1,1 };
 	Sphere sphere;
 	float sinRad = 0;
 	float cosRad = 0;
@@ -51,5 +51,5 @@ private:
 	int power = 100;
 
 
-	float r = 1;
+	float r = 3;
 };

@@ -25,7 +25,7 @@ void Player::Init()
 {
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-	playerPos={ 0,-0.8,0 };
+	//playerPos={ 0,-0.8,0 };
 	playerObj->SetPosition(playerPos);
 }
 
@@ -77,7 +77,7 @@ void Player::Move()
 
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
-	playerObj->SetScale({ 0.3, 0.3, 0.3 });
+	playerObj->SetScale({ 1,1,1 });
 	playerObj->Update();
 
 }
@@ -85,7 +85,7 @@ void Player::Move()
 void Player::Ball()
 {
 #pragma region ƒJƒƒ‰’Ç]‚Æ‚Ù‚Ú“¯‚¶
-	XMFLOAT3 V0 = { 0,0,1.6 };
+	XMFLOAT3 V0 = { 0,0,4.0 };
 	//2
 	XMMATRIX  rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//Y²

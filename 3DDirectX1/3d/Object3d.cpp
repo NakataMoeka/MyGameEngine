@@ -322,20 +322,25 @@ void Object3d::transformParent()
 		//	XMConvertToRadians(rotation.y),
 		//	XMConvertToRadians(rotation.z), 0);
 		//positionV = XMVectorSet(position.x, position.y, position.z, 0);
-		scaleV = XMVectorSet(parent->scale.x,parent->scale.y,parent->scale.z,0);
+		scaleV = XMVectorSet(parent->scale.x,parent->scale.y,parent->scale.z,1);
 		rotationV = XMVectorSet(XMConvertToRadians(parent->rotation.x),
 			XMConvertToRadians(parent->rotation.y),
 			XMConvertToRadians(parent->rotation.z), 0);
 		positionV = XMVectorSet(parent->position.x, parent->position.y, parent->position.z, 0);
-
+		rotationV = XMQuaternionRotationRollPitchYawFromVector(rotationV);
 
 	//‹ts—ñ‚É‚·‚é
-	XMMATRIX matWorld_parent,matTransV;
-	matWorld_parent = XMMatrixInverse(nullptr, matWorld);
+	XMMATRIX matWorld_parent,matTransV,matRotV,matScaleV;
+	matWorld_parent = XMMatrixInverse(nullptr, parent->matWorld);
 	XMMatrixDecompose(&scaleV, &rotationV, &positionV, matWorld_parent);
 
-
-
-
-
+	//matScaleV = XMMatrixScalingFromVector(scaleV);
+	//matRotV = XMMatrixIdentity();
+	//matRotV = XMMatrixRotationQuaternion(rotationV);
+	//matTransV = XMMatrixTranslationFromVector(positionV);
+	//matWorld = XMMatrixIdentity();
+	//matWorld *= matScaleV;
+	//matWorld *= matRotV;
+	//matWorld *= matTransV;
+ 
 }

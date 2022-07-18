@@ -150,11 +150,11 @@ void GameScene::Update()
 
 	//}
 
-	object3d->SetScale({ 0.2, 0.2, 0.2 });
+	object3d3->SetScale({ 2,2,2});
 	object3d4->SetPosition({ 0,-1,0 });
 	object3d->SetRotation({ a,0,b });
 	player->Update();
-	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-10 }, 0, player->GetPlayerAngle().y);
+	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-20 }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 
 	gameObject->Update();
@@ -206,7 +206,7 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetPlayerPos().x);
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetSpherePos().x);
 
 		
 		DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
