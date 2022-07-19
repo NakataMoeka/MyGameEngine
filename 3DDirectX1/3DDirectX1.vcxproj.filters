@@ -92,9 +92,6 @@
     <ClCompile Include="2d\Draw2D.cpp">
       <Filter>ソース&amp;ヘッダーファイル</Filter>
     </ClCompile>
-    <ClCompile Include="2d\SpriteLine.cpp">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\OBJ.hlsli">
@@ -182,9 +179,6 @@
     <ClInclude Include="Ease.h" />
     <ClInclude Include="2d\Draw2D.h">
       <Filter>ソース&amp;ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\SpriteLine.h">
-      <Filter>ソース&amp;ヘッダーファイル\2d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

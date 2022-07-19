@@ -14,7 +14,7 @@
 #include "DebugCamera.h"
 #include "Collision.h"
 #include"../Ease.h"
-#include"SpriteLine.h"
+
 class GameScene 
 {
 private: 
@@ -53,7 +53,7 @@ private: // ÉÅÉìÉoïœêî
 	ParticleManager* particleMan = nullptr;
 
 	Sprite* sprite = nullptr;
-	SpriteLine* sprite2 = nullptr;
+	Sprite* sprite2 = nullptr;
 	Object3d* object3d = nullptr;
 	Model*	model = nullptr;
 
@@ -113,22 +113,22 @@ private: // ÉÅÉìÉoïœêî
 	XMFLOAT3 playerEndPosition = { 10.0f,0.0f,0.0f };
 	XMFLOAT3 playerPositionB = { 0.0f,0.0f,0.0f };
 
-	XMFLOAT2 playerPos2d = {100, 0};
-	XMFLOAT2 playerPos22d = {101, 100};
-	XMFLOAT2 playerEndPos2d = { 500,300 };
-	XMFLOAT2 playerSize2d = { 1, 100 };
+	XMFLOAT2 playerPos2d = {500, 0};
+	XMFLOAT2 playerPos22d = {501, 500};
+	XMFLOAT2 playerSize2d = { 1, 500 };
 	XMFLOAT2 playerEndSize2d = { 200,200 };
 	//XMFLOAT2 playerPos2d2= { 300.0f,150.0f };
 	//XMFLOAT2 playerEndPos2d2 = { 0,0 };
-	float k = 0.001f;
-	float m = 1.0f;
-	float gacc = 0.2f;
+	float k = 1.0f;
+	float m = 30.0f;
+	//float gacc = 0.2f;
 	XMFLOAT2 acc;
 	XMFLOAT2 vel;
-	float dist = 10;
-
-	float kv = 0.1f;
-
+	float dist = 0;
+	float f = 0.0;
+	float a = 0.0;
+	float v = 0.0;
+	float kv = 2;
 	int EaseFlag = 0;
 	float easeTimer = 0;
 	float angle = 0;
