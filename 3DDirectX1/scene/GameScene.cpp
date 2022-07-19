@@ -151,6 +151,7 @@ void GameScene::Update()
 	//}
 
 	object3d3->SetScale({ 2,2,2});
+	object3d4->SetScale({ 2,2,2 });
 	object3d4->SetPosition({ 0,-1,0 });
 	object3d->SetRotation({ a,0,b });
 	player->Update();

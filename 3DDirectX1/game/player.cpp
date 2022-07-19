@@ -32,8 +32,8 @@ void Player::Init()
 
 void Player::Move()
 {
-	XMVECTOR moveUD = { 0,0,0.1f,0 };//上下方向用の移動ベクトル
-	XMVECTOR moveLR = { 0.1f,0,0,0 };//左右方向の移動用ベクトル
+	XMVECTOR moveUD = { 0,0,0.2f,0 };//上下方向用の移動ベクトル
+	XMVECTOR moveLR = { 0.2f,0,0,0 };//左右方向の移動用ベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);

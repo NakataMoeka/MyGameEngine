@@ -255,7 +255,7 @@ void Object3d::Update()
 
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();
-	matRot *= XMMatrixRotationQuaternion(rotV);
+	matRot = XMMatrixRotationQuaternion(rotV);
 	matTrans = XMMatrixTranslation(position.x,position.y, position.z);	//ïΩçsà⁄ìÆçsóÒÇçƒåvéZ
 
 	matWorld = XMMatrixIdentity();
@@ -339,12 +339,12 @@ void Object3d::transformParent()
 
 
 
-	XMVECTOR q = XMQuaternionMultiply(rotationV, roV);
+	roV = XMQuaternionMultiply(rotationV, roV);
 	scV *= scaleV;
 	poV += positionV;
 	matScaleV = XMMatrixScalingFromVector(scV);
 	matRotV = XMMatrixIdentity();
-	matRotV = XMMatrixRotationQuaternion(q);
+	matRotV = XMMatrixRotationQuaternion(roV);
 	matTransV = XMMatrixTranslationFromVector(poV);
 	matWorld = XMMatrixIdentity();
 	matWorld *= matScaleV;
