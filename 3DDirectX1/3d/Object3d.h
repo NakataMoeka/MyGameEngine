@@ -21,6 +21,7 @@ private: // エイリアス
 	using XMFLOAT3 = DirectX::XMFLOAT3;
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
+	using XMVECTOR = DirectX::XMVECTOR;
 
 public:
 	
@@ -72,9 +73,9 @@ public:
 
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
 
-	const XMFLOAT3& GetRotation() { return rotation; }
+	const XMVECTOR& GetRotation() { return rotation; }
 
-	void SetRotation(XMFLOAT3 rotation) { this->rotation = rotation; }
+	void SetRotation(XMVECTOR rotation) { this->rotation = rotation; }
 
 	void SetScale(XMFLOAT3 scale) { this->scale = scale; }
 
@@ -104,17 +105,16 @@ private:
 	// ローカルスケール
 	XMFLOAT3 scale = { 1,1,1 };
 	// X,Y,Z軸回りのローカル回転角
-	XMFLOAT3 rotation = { 0,0,0 };
+	XMVECTOR rotation = { 0,0,0 };
 	// ローカル座標
 	XMFLOAT3 position = { 0,0,0 };
 	// ローカルワールド変換行列
 	XMMATRIX matWorld;
-
 	// 親オブジェクト
 	Object3d* parent = nullptr;
 
 	Model* model = nullptr;
-
+	XMMATRIX matWorld_parent, matTransV, matRotV, matScaleV, matWorld_Invers;
 	// カメラ
 	static Camera* camera;
 	static LightGroup* lightGroup;

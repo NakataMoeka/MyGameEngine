@@ -21,6 +21,9 @@ void GameObject::Init()
 	cSphere.center = XMVectorSet(position.x, position.y, position.z,1);
 	cBox.minPosition = XMVectorSet(position.x - r, position.y - r, position.z - r, 1);
 	cBox.maxPosition = XMVectorSet(position.x + r, position.y + r, position.z + r, 1);
+	cube->SetPosition(position);
+	cube->SetScale(size);
+	cube->Update();
 }
 
 void GameObject::Update()
@@ -30,9 +33,9 @@ void GameObject::Update()
 	cBox.minPosition = XMVectorSet(position.x - r, position.y - r, position.z - r, 1);
 	cBox.maxPosition = XMVectorSet(position.x + r, position.y + r, position.z + r, 1);
 
-	cube->SetPosition(position);
+	
 
-	cube->SetScale(size);
+
 	cube->Update();
 }
 

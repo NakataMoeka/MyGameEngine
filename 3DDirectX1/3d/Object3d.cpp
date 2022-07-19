@@ -247,15 +247,13 @@ void Object3d::Update()
 
 	HRESULT result;
 	XMMATRIX matScale, matRot, matTrans;
-	XMVECTOR rotV = XMVectorSet(XMConvertToRadians(rotation.x),
-		XMConvertToRadians(rotation.y),
-		XMConvertToRadians(rotation.z),0);
+	
 	//XMVECTOR rotV = XMQuaternionRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-	rotV = XMQuaternionRotationRollPitchYawFromVector(rotV);
+	rotation = XMQuaternionRotationRollPitchYawFromVector(rotation);
 
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();
-	matRot = XMMatrixRotationQuaternion(rotV);
+	matRot = XMMatrixRotationQuaternion(rotation);
 	matTrans = XMMatrixTranslation(position.x,position.y, position.z);	//平行移動行列を再計算
 
 	matWorld = XMMatrixIdentity();
@@ -272,7 +270,7 @@ void Object3d::Update()
 	}
 
 	if (parent != nullptr) {
-		transformParent();
+		matWorld *= parent->matWorld;
 	}
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
@@ -317,39 +315,30 @@ void Object3d::transformParent()
 	//わからないいいいいい\(^o^)/
 
 	XMVECTOR scaleV, rotationV, positionV;
-	scaleV = XMVectorSet(parent->scale.x, parent->scale.y, parent->scale.z, 1);
-	rotationV = XMVectorSet(XMConvertToRadians(parent->rotation.x),
-		XMConvertToRadians(parent->rotation.y),
-		XMConvertToRadians(parent->rotation.z), 0);
-	positionV = XMVectorSet(parent->position.x, parent->position.y, parent->position.z, 0);
-	rotationV = XMQuaternionRotationRollPitchYawFromVector(rotationV);
-	XMVECTOR scV, roV, poV;
-	scV = XMVectorSet(scale.x, scale.y, scale.z, 1);
-	roV = XMVectorSet(XMConvertToRadians(rotation.x),
-		XMConvertToRadians(rotation.y),
-		XMConvertToRadians(rotation.z), 0);
-	poV = XMVectorSet(position.x, position.y, position.z, 0);
-	roV = XMQuaternionRotationRollPitchYawFromVector(roV);
+	//scaleV = XMVectorSet(parent->scale.x, parent->scale.y, parent->scale.z, 1);
+	//rotationV = XMVectorSet(XMConvertToRadians(parent->rotation.x),
+	//	XMConvertToRadians(parent->rotation.y),
+	//	XMConvertToRadians(parent->rotation.z), 0);
+	//positionV = XMVectorSet(parent->position.x, parent->position.y, parent->position.z, 0);
+	//rotationV = XMQuaternionRotationRollPitchYawFromVector(rotationV);
 
-	//逆行列にする
-	XMMATRIX matWorld_parent, matTransV, matRotV, matScaleV;
-	matWorld_parent = XMMatrixInverse(nullptr, parent->matWorld);
-	//Decomposeを使い分解する
+
+
+	//親を逆行列にする
+	matWorld_Invers = XMMatrixInverse(nullptr, parent->matWorld);
+	//子供のワールド座標と親のワールド座標の逆行列を乗算
+	matWorld_parent = matWorld * matWorld_Invers;
+	//matWorld_parent = XMMatrixMultiply(matWorld, matWorld_Invers);
+	//分解する
 	XMMatrixDecompose(&scaleV, &rotationV, &positionV, matWorld_parent);
-
-
-
-	roV = XMQuaternionMultiply(rotationV, roV);
-	scV *= scaleV;
-	poV += positionV;
-	matScaleV = XMMatrixScalingFromVector(scV);
-	matRotV = XMMatrixIdentity();
-	matRotV = XMMatrixRotationQuaternion(roV);
-	matTransV = XMMatrixTranslationFromVector(poV);
-	matWorld = XMMatrixIdentity();
-	matWorld *= matScaleV;
-	matWorld *= matRotV;
-	matWorld *= matTransV;
-
- 
+	//親のワールド座標に分解したものを乗算
+	matScale = XMMatrixScalingFromVector(scaleV);
+	matRot = XMMatrixIdentity();
+	matRot = XMMatrixRotationQuaternion(rotationV);
+	matTrans = XMMatrixTranslationFromVector(positionV);
+	//XMVECTOR scaleV2, rotationV2, positionV2;
+	XMStoreFloat3(&scale, scaleV);
+	rotation = rotationV;
+	XMStoreFloat3(&position, positionV);
+	
 }

@@ -111,13 +111,15 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	player->Initialize();
 	gameObject = new GameObject;//newすればエラー吐かない
 	gameObject->Initialize();
+	player->Init();
+	gameObject->Init();
 
 }
 
 void GameScene::Init()
 {
-	player->Init();
-	gameObject->Init();
+	//player->Init();
+	//gameObject->Init();
 }
 
 void GameScene::Update()
@@ -136,26 +138,34 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
-	gameObject->Update();
-	IsHit = false;
-	if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
-		IsHit = true;
-		DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 
-	}
+	//IsHit = false;
+	
+		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
+			IsHit = true;
+			HitCount++;
+			DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 
-
-	//if (IsHit == true) {
+		}
+		else {
+			HitCount = 0;
+		}
+	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
+	if (IsHit == true) {
+		HitCount++;
 		gameObject->GetObject()->SetParent(player->GetObject());
-
-	//}
+	}
+	if (HitCount == 1) {
+		gameObject->GetObject()->transformParent();
+	}
 
 	object3d3->SetScale({ 2,2,2});
 	object3d4->SetScale({ 2,2,2 });
 	object3d4->SetPosition({ 0,-1,0 });
 	object3d->SetRotation({ a,0,b });
 	player->Update();
-	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-20 }, 0, player->GetPlayerAngle().y);
+
+	camera->FollowCamera(player->GetSpherePos(), XMFLOAT3{ 0,2,-20 }, 0, player->GetSphereAngle().y);
 	camera->Update();
 
 	gameObject->Update();
@@ -191,7 +201,7 @@ void GameScene::Draw()
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
 	object3d3->Draw();
-	object3d4->Draw();
+	//object3d4->Draw();
 
 	//object3d->Draw();
 	//object3d2->Draw();

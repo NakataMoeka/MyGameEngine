@@ -36,7 +36,7 @@ private:
 	Box cBox;
 	Sphere cSphere;
 	float r = 1;
-	XMFLOAT3 position = { 2,0,0 };
+	XMFLOAT3 position = { 10,0,0 };
 	XMFLOAT3 size = {1,1,1 };
 };
 

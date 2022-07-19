@@ -85,5 +85,6 @@ private: // メンバ変数
 	float a = 0;
 	float b = 0;
 	bool IsHit = false;
+	int HitCount=0;
 	bool parentFlag = false;
 };

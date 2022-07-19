@@ -15,6 +15,7 @@ private:
 	using XMFLOAT3 = DirectX::XMFLOAT3;
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
+	using XMVECTOR = DirectX::XMVECTOR;
 public:
 	Player();
 	~Player();
@@ -23,12 +24,15 @@ public:
 	void Update();
 
 	void Draw();
-	int GetPower() { return power; }
+
+	//Getter
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
-	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
+	XMFLOAT3 GetSphereAngle() { return sphereAngle; }
 	Sphere GetSphere() { return sphere; }
 	Object3d* GetObject() { return SphereObj; }
+	float GetTsize() { return Tsize; }
+	bool SetTransFlag(bool transFlag) { return this->transFlag=transFlag; }
 private:
 	void Move();//移動
 	void Ball();//ボール関係
@@ -38,7 +42,7 @@ private:
 	Object3d* SphereObj;
 	Model* model2;
 	XMFLOAT3 playerPos{ 1,0,0 };
-	XMFLOAT3 spherePos{ 1,3,0 };
+	XMFLOAT3 spherePos{ 1,0,0 };
 	XMFLOAT3 playerAngle{ 0,0,0 };
 	XMFLOAT3 sphereAngle{ 0,0,0 };
 	XMFLOAT3 sphereSize{ 1,1,1 };
@@ -47,9 +51,9 @@ private:
 	float cosRad = 0;
 	float radAD = 0.0f;
 	float radWS = 0.0f;
-	int HP = 50;
-	int power = 100;
 
+	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 
 	float r = 3;
+	bool transFlag = false;
 };
