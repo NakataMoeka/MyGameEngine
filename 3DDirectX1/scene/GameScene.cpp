@@ -141,15 +141,15 @@ void GameScene::Update()
 
 	//IsHit = false;
 	
-		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
-			IsHit = true;
-			HitCount++;
-			DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+		//if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
+		//	IsHit = true;
+		//	HitCount++;
+		//	DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 
-		}
-		else {
-			HitCount = 0;
-		}
+		//}
+		//else {
+		//	HitCount = 0;
+		//}
 	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
 	if (IsHit == true) {
 		HitCount++;
