@@ -114,14 +114,14 @@ private: // ƒƒ“ƒo•Ï”
 	XMFLOAT3 playerPositionB = { 0.0f,0.0f,0.0f };
 
 	XMFLOAT2 playerPos2d = {500, 0};
-	XMFLOAT2 playerPos22d = {501, 500};
+	XMFLOAT2 playerPos22d = {450, 490};
 	XMFLOAT2 playerSize2d = { 1, 500 };
 	XMFLOAT2 playerEndSize2d = { 200,200 };
 	//XMFLOAT2 playerPos2d2= { 300.0f,150.0f };
 	//XMFLOAT2 playerEndPos2d2 = { 0,0 };
 	float k = 1.0f;
-	float m = 30.0f;
-	//float gacc = 0.2f;
+	float m = 0.5f;
+	float gacc = 9.81f;
 	XMFLOAT2 acc;
 	XMFLOAT2 vel;
 	float dist = 0;
@@ -131,11 +131,15 @@ private: // ƒƒ“ƒo•Ï”
 	float kv = 2;
 	int EaseFlag = 0;
 	float easeTimer = 0;
-	float angle = 0;
+	float angle = 45;
+	float angle2 = 45;
+
 	float playerAngle = 0;
 	//float angl = 0;
 	Sphere circle;
 	Ray ray;
 	Box line;
-	int x;
+	float x=45.0f;
+	float x2 = 45.0f;
+	float ap;
 };

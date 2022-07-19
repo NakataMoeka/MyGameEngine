@@ -355,10 +355,13 @@ void GameScene::Update()
 #pragma endregion
 #pragma region MT4_‰Û‘è9
 if (input->TriggerKey(DIK_SPACE)) {
-
+	angle = 45;
 	Mflag = true;
 }
 if (Mflag == true) {
+	
+	angle += -m * gacc* sin(x / 500);
+	x += angle;
 
 }
 #pragma endregion
@@ -370,8 +373,9 @@ if (Mflag == true) {
 	sprite->SetPosition(playerPos22d);
 	sprite2->SetPosition(playerPos2d);
 
-	sprite->SetAnchorPoint({ 0.5,0.5 });
-	sprite2->SetRotation(playerAngle);
+	//sprite->SetAnchorPoint({ 0.5,0.5 });
+	sprite2->SetRotation(angle);
+	sprite->SetRotation(angle2);
 	object3d->SetPosition(playerPosition);
 	//object3d2->SetPosition(playerPositionB);
 	object3d2->SetScale({ 2.0f,2.0f,2.0f });
@@ -395,7 +399,7 @@ void GameScene::Draw()
 	//char str[256];
 
 //	debugText.Printf(0, 80, 3.0f, "%f",playerPos2d.x);
-	debugText.Printf(0, 140, 3.0f, "%f,%f", dist, playerPos22d.y);
+	debugText.Printf(0, 140, 3.0f, "%f,%f", playerPos22d.x, playerPos22d.y);
 
 	//debugText.Printf(0, 80, 3.0f, "SPACE:free fall");
 
