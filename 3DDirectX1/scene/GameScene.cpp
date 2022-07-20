@@ -370,7 +370,7 @@ if (Mflag == true) {
 	float add_y = sin(an) * 450;
 
 	// 結果ででた位置を中心位置に加算し、それを描画位置とする
-	playerPos22d.x =500 + add_x;
+	playerPos22d.x =450 + add_x;
 	playerPos22d.y = 0 + add_y;
 
 	// 向きを変える
@@ -385,7 +385,7 @@ if (Mflag == true) {
 	particleMan->Update();
 	sprite2->SetSize(playerSize2d);
 	sprite->SetPosition(playerPos22d);
-	sprite2->SetPosition(playerPos2d);
+	sprite2->SetPosition(playerPos22d);
 
 	sprite->SetAnchorPoint({ 0.5,0.5 });
 	//sprite2->SetAnchorPoint({ 1,1 });
