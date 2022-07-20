@@ -114,7 +114,7 @@ private: // ƒƒ“ƒo•Ï”
 	XMFLOAT3 playerPositionB = { 0.0f,0.0f,0.0f };
 
 	XMFLOAT2 playerPos2d = {500, 0};
-	XMFLOAT2 playerPos22d = {450, 490};
+	XMFLOAT2 playerPos22d = {500, 500};
 	XMFLOAT2 playerSize2d = { 1, 500 };
 	XMFLOAT2 playerEndSize2d = { 200,200 };
 	//XMFLOAT2 playerPos2d2= { 300.0f,150.0f };
@@ -140,6 +140,5 @@ private: // ƒƒ“ƒo•Ï”
 	Ray ray;
 	Box line;
 	float x=45.0f;
-	float x2 = 45.0f;
 	float ap;
 };

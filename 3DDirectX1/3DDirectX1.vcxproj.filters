@@ -173,12 +173,12 @@
     <ClInclude Include="others\Collision.h">
       <Filter>ソース&amp;ヘッダーファイル\others</Filter>
     </ClInclude>
-    <ClInclude Include="others\CollisionPrimitive.h">
-      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
-    </ClInclude>
     <ClInclude Include="Ease.h" />
     <ClInclude Include="2d\Draw2D.h">
       <Filter>ソース&amp;ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="others\CollisionPrimitive.h">
+      <Filter>ソース&amp;ヘッダーファイル\others</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -355,15 +355,29 @@ void GameScene::Update()
 #pragma endregion
 #pragma region MT4_課題9
 if (input->TriggerKey(DIK_SPACE)) {
-	angle = 45;
 	Mflag = true;
+	//x = 45;
 }
 if (Mflag == true) {
 	
-	angle += -m * gacc* sin(x / 500);
+	angle += -m * gacc* sin(x / 450);
 	x += angle;
 
+	float an = x/450 + 3.1415926535897932384626433832795f / 2;
+
+	// 三角関数を使用し、円の位置を割り出す。
+	float add_x = cos(an) * 450;
+	float add_y = sin(an) * 450;
+
+	// 結果ででた位置を中心位置に加算し、それを描画位置とする
+	playerPos22d.x =500 + add_x;
+	playerPos22d.y = 0 + add_y;
+
+	// 向きを変える
+	//angle2 += 10.0f;
+
 }
+
 #pragma endregion
 	// パーティクル生成
 	//CreateParticles();
@@ -373,9 +387,10 @@ if (Mflag == true) {
 	sprite->SetPosition(playerPos22d);
 	sprite2->SetPosition(playerPos2d);
 
-	//sprite->SetAnchorPoint({ 0.5,0.5 });
+	sprite->SetAnchorPoint({ 0.5,0.5 });
+	//sprite2->SetAnchorPoint({ 1,1 });
 	sprite2->SetRotation(angle);
-	sprite->SetRotation(angle2);
+	//sprite->SetRotation(angle);
 	object3d->SetPosition(playerPosition);
 	//object3d2->SetPosition(playerPositionB);
 	object3d2->SetScale({ 2.0f,2.0f,2.0f });
