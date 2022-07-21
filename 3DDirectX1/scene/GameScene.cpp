@@ -139,20 +139,20 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
-	//IsHit = false;
+	IsHit = false;
 	
-		//if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
-		//	IsHit = true;
-		//	HitCount++;
-		//	DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
+			IsHit = true;
+			HitCount++;
+			DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 
-		//}
-		//else {
-		//	HitCount = 0;
-		//}
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
+		}
+		else {
+			HitCount = 0;
+		}
+//	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
 	if (IsHit == true) {
-		HitCount++;
+		//HitCount++;
 		gameObject->GetObject()->SetParent(player->GetObject());
 	}
 	if (HitCount == 1) {
