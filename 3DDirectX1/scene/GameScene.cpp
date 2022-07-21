@@ -59,7 +59,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	debugText.Initialize(debugTextTexNumber);
 	
 	Sprite::LoadTexture(1, L"Resources/Circle.png");
-	Sprite::LoadTexture(2, L"Resources/white1x1.png");
+	Sprite::LoadTexture(2, L"Resources/line.png");
 
 	sprite = Sprite::CreateSprite(1, playerPos22d);
 	sprite2 = Sprite::CreateSprite(2,playerPos2d);
@@ -326,13 +326,13 @@ void GameScene::Update()
 	//}
 #pragma endregion
 #pragma region MT4_課題8
-////
+//
 //circle.center = { playerPos22d.x+10, playerPos22d.y+10, 0 };
 //circle.radius = 100;
 //ray.start = { input->GetMousePos().x,input->GetMousePos().y,0 };
 //ray.dir = { 1,0,0,0 };
 //x = playerPos2d.x;
-////sprite->SetParent(sprite);
+//sprite->SetParent(sprite);
 //if (input->PushMouse(0)) {
 //
 //	if (Collision::CheackRay2Sphere(ray, circle)) {
@@ -343,16 +343,20 @@ void GameScene::Update()
 //	playerSize2d.y = playerPos22d.y;
 //}
 //else if(!input->PushMouse(0)&&playerPos22d.y>100) {
-//
-//	dist = playerPos22d.y - 100;
-//	a = dist * k / m;
-//	v += a;
-//	v -= v * kv;
+//if (input->TriggerKey(DIK_SPACE)) {
+//	Mflag = true;
+//	//x = 45;
+//}
+//if(Mflag==true){
+//	float force = k * (200 - playerSize2d.y); //フックの法則
+//	a = force / m;
+//	v = d * (v + a); //速度を計算
+//	playerSize2d.y += v; //速度分を座標に
 //	playerPos22d.y += v;
-//	playerSize2d.y = playerPos22d.y;
 //}
 
 #pragma endregion
+
 #pragma region MT4_課題9
 if (input->TriggerKey(DIK_SPACE)) {
 	Mflag = true;
@@ -363,7 +367,7 @@ if (Mflag == true) {
 	angle += -m * gacc* sin(x / 450);
 	x += angle;
 
-	float an = x/450 + 3.1415926535897932384626433832795f / 2;
+	an = x/450 + 3.1415926535897932384626433832795f / 2;
 
 	// 三角関数を使用し、円の位置を割り出す。
 	float add_x = cos(an) * 450;
@@ -385,7 +389,7 @@ if (Mflag == true) {
 	particleMan->Update();
 	sprite2->SetSize(playerSize2d);
 	sprite->SetPosition(playerPos22d);
-	sprite2->SetPosition(playerPos22d);
+	sprite2->SetPosition(playerPos2d);
 
 	sprite->SetAnchorPoint({ 0.5,0.5 });
 	//sprite2->SetAnchorPoint({ 1,1 });

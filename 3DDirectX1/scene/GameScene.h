@@ -119,12 +119,13 @@ private: // ƒƒ“ƒo•Ï”
 	XMFLOAT2 playerEndSize2d = { 200,200 };
 	//XMFLOAT2 playerPos2d2= { 300.0f,150.0f };
 	//XMFLOAT2 playerEndPos2d2 = { 0,0 };
-	float k = 1.0f;
-	float m = 0.5f;
+	float k = 0.1f;
+	float m = 1.0f;
 	float gacc = 9.81f;
 	XMFLOAT2 acc;
 	XMFLOAT2 vel;
 	float dist = 0;
+	float d = 0.9;
 	float f = 0.0;
 	float a = 0.0;
 	float v = 0.0;
@@ -133,7 +134,7 @@ private: // ƒƒ“ƒo•Ï”
 	float easeTimer = 0;
 	float angle = 45;
 	float angle2 = 45;
-
+	float an = 45;
 	float playerAngle = 0;
 	//float angl = 0;
 	Sphere circle;
