@@ -139,6 +139,9 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
+	//やりたいこと->当たり判定が残るのをどうにかする
+	//当たったOBJがくっつくようにする
+	//ぴーーーーーーーーーーーーえん
 	IsHit = false;
 	for (int i = 0; i < 2; i++) {
 		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox(i))) {
@@ -153,11 +156,13 @@ void GameScene::Update()
 		//	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
 		if (IsHit == true) {
 			//HitCount++;
-			gameObject->GetObject(0)->SetParent(player->GetObject());
+			gameObject->GetObject(1)->SetParent(player->GetObject());
+		
 			//gameObject->SetColFlag(true, i);
 		}
 		if (HitCount == 1) {
-			gameObject->GetObject(0)->transformParent();
+			gameObject->GetObject(1)->transformParent();
+	
 		}
 	}
 	object3d3->SetScale({ 2,2,2});
