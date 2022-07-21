@@ -34,19 +34,20 @@ void Player::Move()
 {
 	XMVECTOR moveUD = { 0,0,1,0 };//上下方向用の移動ベクトル
 	XMVECTOR moveLR = { 1,0,0,0 };//左右方向の移動用ベクトル
+	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
+	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
-		//sphereAngle.m128_f32[1] += 1;
-		//sphereAngle.m128_f32[1] += 1;
+		sphereAngle += moveAngle;
+		
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
-		//playerAngle.m128_f32[1] -= 1;
-		//sphereAngle.m128_f32[1] -= 1;
+		sphereAngle -= moveAngle;
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
@@ -74,14 +75,14 @@ void Player::Move()
 	}
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-	XMVECTOR a=XMVectorSet(sphereAngle.x, sphereAngle.y, sphereAngle.z, 0);
+
 	playerObj->SetPosition(playerPos);
 //	playerObj->SetRotation(playerAngle);
 	playerObj->SetScale({ 1,1,1 });
 	playerObj->Update();
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
-	SphereObj->SetRotation(a);
+	SphereObj->SetRotation(sphereAngle);
 	SphereObj->Update();
 
 

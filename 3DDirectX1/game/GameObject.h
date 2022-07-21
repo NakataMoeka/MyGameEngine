@@ -23,20 +23,23 @@ public:
 	void Init();
 	void Update();
 	void Draw();
-	Box	GetCBox() { return cBox; }
+	void Delete();
+	Box	GetCBox(int i) { return cBox[i]; }
 	Sphere GetCSphere() { return cSphere; }
-	XMFLOAT3 GetPos() { return position; }
-	XMFLOAT3 SetPos(XMFLOAT3 pos) { return this->position=pos; }
+	XMFLOAT3 GetPos(int i) { return position[i]; }
+	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize() { return size; }
 	XMFLOAT3 SetSize(XMFLOAT3 size) { return this->size = size; }
-	Object3d* GetObject() { return cube; }
+	bool SetColFlag(bool ColFlag,int i) { return this->ColFlag[i] = ColFlag; }
+	Object3d* GetObject(int i) { return cube[i]; }
 private:
-	Object3d* cube;
+	Object3d* cube[2];
 	Model* modelCube;
-	Box cBox;
+	Box cBox[2];
 	Sphere cSphere;
-	float r = 1;
-	XMFLOAT3 position = { 10,0,0 };
+	float r = 2;
+	XMFLOAT3 position[2] = { {10,0,0},{-10,0,0} };
 	XMFLOAT3 size = {1,1,1 };
+	bool ColFlag[2] = { false,false };
 };
 

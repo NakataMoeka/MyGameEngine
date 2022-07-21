@@ -28,7 +28,7 @@ public:
 	//Getter
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
-	XMFLOAT3 GetSphereAngle() { return sphereAngle; }
+	XMVECTOR GetSphereAngle() { return sphereAngle; }
 	Sphere GetSphere() { return sphere; }
 	Object3d* GetObject() { return SphereObj; }
 	float GetTsize() { return Tsize; }
@@ -44,7 +44,8 @@ private:
 	XMFLOAT3 playerPos{ 1,0,0 };
 	XMFLOAT3 spherePos{ 1,0,0 };
 	XMFLOAT3 playerAngle{ 0,0,0 };
-	XMFLOAT3 sphereAngle{ 0,0,0 };
+	XMVECTOR sphereAngle{ 0,0,0,0 };
+
 	XMFLOAT3 sphereSize{ 1,1,1 };
 	Sphere sphere;
 	float sinRad = 0;
@@ -53,7 +54,6 @@ private:
 	float radWS = 0.0f;
 
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
-
 	float r = 3;
 	bool transFlag = false;
 };

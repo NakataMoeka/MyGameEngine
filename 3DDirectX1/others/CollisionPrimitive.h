@@ -15,6 +15,10 @@ struct Box
 	DirectX::XMVECTOR maxPosition;
 
 };
+struct OBB
+{
+
+};
 struct Plane
 {
 	//法線ベクトル

@@ -140,8 +140,8 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
 	IsHit = false;
-	
-		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox())) {
+	for (int i = 0; i < 2; i++) {
+		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox(i))) {
 			IsHit = true;
 			HitCount++;
 			DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
@@ -150,22 +150,23 @@ void GameScene::Update()
 		else {
 			HitCount = 0;
 		}
-//	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
-	if (IsHit == true) {
-		//HitCount++;
-		gameObject->GetObject()->SetParent(player->GetObject());
+		//	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
+		if (IsHit == true) {
+			//HitCount++;
+			gameObject->GetObject(0)->SetParent(player->GetObject());
+			//gameObject->SetColFlag(true, i);
+		}
+		if (HitCount == 1) {
+			gameObject->GetObject(0)->transformParent();
+		}
 	}
-	if (HitCount == 1) {
-		gameObject->GetObject()->transformParent();
-	}
-
 	object3d3->SetScale({ 2,2,2});
 	object3d4->SetScale({ 2,2,2 });
 	object3d4->SetPosition({ 0,-1,0 });
 	object3d->SetRotation({ a,0,b });
 	player->Update();
 
-	camera->FollowCamera(player->GetSpherePos(), XMFLOAT3{ 0,2,-20 }, 0, player->GetSphereAngle().y);
+	camera->FollowCamera(player->GetSpherePos(), XMFLOAT3{ 0,2,-20 }, 0, player->GetSphereAngle().m128_f32[1]);
 	camera->Update();
 
 	gameObject->Update();
@@ -217,7 +218,7 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetSpherePos().x);
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", gameObject->GetPos(0).x);
 
 		
 		DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
