@@ -1,5 +1,6 @@
 #pragma once
 #include<DirectXMath.h>
+
 struct Sphere
 {
 	//中心座標
@@ -15,10 +16,7 @@ struct Box
 	DirectX::XMVECTOR maxPosition;
 
 };
-struct OBB
-{
 
-};
 struct Plane
 {
 	//法線ベクトル
@@ -42,4 +40,16 @@ public:
 	DirectX::XMVECTOR normal;
 
 	void ComputeNormal();
+};
+class OBB {
+
+public:
+	
+		DirectX::XMVECTOR m_Pos;
+		DirectX::XMVECTOR m_NormaDirect[3];
+		float m_fLength[3];
+
+		DirectX::XMVECTOR GetDirect(int elem) { return m_NormaDirect[elem]; }   // 指定軸番号の方向ベクトルを取得
+		float GetLen_W(int elem) { return m_fLength[elem]; }          // 指定軸方向の長さを取得
+		DirectX::XMVECTOR GetPos_W() { return m_Pos; }
 };
