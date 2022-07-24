@@ -233,6 +233,26 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		return sqDistance < sphere.radius* sphere.radius;
 	}
 
+	bool Collision::CheckSphere2OBB(Sphere& sphere, OBB& obb)
+	{
+		XMVECTOR Vec{ 0, 0, 0,0 };   // 最終的に長さを求めるベクトル
+
+ // 各軸についてはみ出た部分のベクトルを算出
+		for (int i = 0; i < 3; i++)
+		{
+			double L = obb.GetLen_W(i);
+			if (L <= 0) continue;  // L=0は計算できない
+			bool s = ((sphere.center.m128_f32[0] - obb.GetPos_W().m128_f32[0]) * obb.GetDirect(i).m128_f32[0]) + ((sphere.center.m128_f32[1] - obb.GetPos_W().m128_f32[1]) * obb.GetDirect(i).m128_f32[1]) + ((sphere.center.m128_f32[2] - obb.GetPos_W().m128_f32[2]) * obb.GetDirect(i).m128_f32[2]) / L;
+
+			// sの値から、はみ出した部分があればそのベクトルを加算
+			s = fabs(s);
+			if (s > 1)
+				Vec += (1 - s) * L * obb.GetDirect(i);   // はみ出した部分のベクトル算出
+		}
+
+		return sqrt((Vec.m128_f32[0] * Vec.m128_f32[0]) + (Vec.m128_f32[1] * Vec.m128_f32[1]) + (Vec.m128_f32[2] * Vec.m128_f32[2]))<sphere.radius;   // 長さを出力
+	}
+
 	bool Collision::CheckOBB2OBB(OBB& obbA, OBB& obbB)
 	{
 		// 各方向ベクトルの確保
