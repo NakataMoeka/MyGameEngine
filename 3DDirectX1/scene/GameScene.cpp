@@ -144,7 +144,7 @@ void GameScene::Update()
 	//ぴーーーーーーーーーーーーえん
 	IsHit = false;
 	for (int i = 0; i < 2; i++) {
-		if (Collision::CheckSphere2Box(player->GetSphere(), gameObject->GetCBox(i))) {
+		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
 			IsHit = true;
 			HitCount++;
 			DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
@@ -156,12 +156,12 @@ void GameScene::Update()
 		//	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
 		if (IsHit == true) {
 			//HitCount++;
-			gameObject->GetObject(1)->SetParent(player->GetObject());
+			gameObject->GetObject(0)->SetParent(player->GetObject());
 		
 			//gameObject->SetColFlag(true, i);
 		}
 		if (HitCount == 1) {
-			gameObject->GetObject(1)->transformParent();
+			gameObject->GetObject(0)->transformParent();
 	
 		}
 	}

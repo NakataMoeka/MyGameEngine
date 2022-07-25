@@ -240,9 +240,9 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
  // 各軸についてはみ出た部分のベクトルを算出
 		for (int i = 0; i < 3; i++)
 		{
-			double L = obb.GetLen_W(i);
+			float L = obb.GetLen_W(i);
 			if (L <= 0) continue;  // L=0は計算できない
-			bool s = ((sphere.center.m128_f32[0] - obb.GetPos_W().m128_f32[0]) * obb.GetDirect(i).m128_f32[0]) + ((sphere.center.m128_f32[1] - obb.GetPos_W().m128_f32[1]) * obb.GetDirect(i).m128_f32[1]) + ((sphere.center.m128_f32[2] - obb.GetPos_W().m128_f32[2]) * obb.GetDirect(i).m128_f32[2]) / L;
+			float s = ((sphere.center.m128_f32[0] - obb.GetPos_W().m128_f32[0]) * obb.GetDirect(i).m128_f32[0]) + ((sphere.center.m128_f32[1] - obb.GetPos_W().m128_f32[1]) * obb.GetDirect(i).m128_f32[1]) + ((sphere.center.m128_f32[2] - obb.GetPos_W().m128_f32[2]) * obb.GetDirect(i).m128_f32[2]) / L;
 
 			// sの値から、はみ出した部分があればそのベクトルを加算
 			s = fabs(s);
@@ -250,7 +250,8 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 				Vec += (1 - s) * L * obb.GetDirect(i);   // はみ出した部分のベクトル算出
 		}
 
-		return sqrt((Vec.m128_f32[0] * Vec.m128_f32[0]) + (Vec.m128_f32[1] * Vec.m128_f32[1]) + (Vec.m128_f32[2] * Vec.m128_f32[2]))<sphere.radius;   // 長さを出力
+		float length = (Vec.m128_f32[0] * Vec.m128_f32[0]) + (Vec.m128_f32[1] * Vec.m128_f32[1]) + (Vec.m128_f32[2] * Vec.m128_f32[2]);   // 長さを出力
+		return length < sphere.radius* sphere.radius;
 	}
 
 	bool Collision::CheckOBB2OBB(OBB& obbA, OBB& obbB)
@@ -266,8 +267,8 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		XMVECTOR Interval = obbA.GetPos_W() - obbB.GetPos_W();
 
 		// 分離軸 : Ae1
-		double rA = sqrt((Ae1.m128_f32[0] * Ae1.m128_f32[0]) + (Ae1.m128_f32[1] * Ae1.m128_f32[1]) + (Ae1.m128_f32[2] * Ae1.m128_f32[2]));
-		double rB = LenSegOnSeparateAxis(&NAe1, &Be1, &Be2, &Be3);
+		float rA = sqrt((Ae1.m128_f32[0] * Ae1.m128_f32[0]) + (Ae1.m128_f32[1] * Ae1.m128_f32[1]) + (Ae1.m128_f32[2] * Ae1.m128_f32[2]));
+		float rB = LenSegOnSeparateAxis(&NAe1, &Be1, &Be2, &Be3);
 		float L = fabs((Interval.m128_f32[0] * NAe1.m128_f32[0]) + (Interval.m128_f32[1] * NAe1.m128_f32[1]) + (Interval.m128_f32[2] * NAe1.m128_f32[2]));
 		if (L > rA + rB)
 			return false; // 衝突していない
@@ -384,7 +385,7 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		return true;
 	}
 
-	double Collision::LenSegOnSeparateAxis(DirectX::XMVECTOR* Sep, DirectX::XMVECTOR* e1, DirectX::XMVECTOR* e2, DirectX::XMVECTOR* e3)
+	float Collision::LenSegOnSeparateAxis(DirectX::XMVECTOR* Sep, DirectX::XMVECTOR* e1, DirectX::XMVECTOR* e2, DirectX::XMVECTOR* e3)
 	{
 		// 3つの内積の絶対値の和で投影線分長を計算
 		// 分離軸Sepは標準化されていること

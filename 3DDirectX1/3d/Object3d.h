@@ -85,6 +85,9 @@ public:
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
 	void SetParent(Object3d* parent) { this->parent = parent; }
+	XMMATRIX GetMat() { return matWorld; }
+	XMMATRIX GetMatRot() { return matRot; }
+	XMMATRIX GetMatTrans() { return matTrans; }
 	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
 	void transformParent();
 private:
@@ -115,6 +118,7 @@ private:
 
 	Model* model = nullptr;
 	XMMATRIX matWorld_parent, matTransV, matRotV, matScaleV, matWorld_Invers;
+	XMMATRIX matScale, matRot, matTrans;
 	// カメラ
 	static Camera* camera;
 	static LightGroup* lightGroup;
@@ -122,6 +126,5 @@ private:
 	bool isBillboard = false;
 
 	bool naz = false;
-	XMMATRIX matScale, matRot, matTrans;
 };
 

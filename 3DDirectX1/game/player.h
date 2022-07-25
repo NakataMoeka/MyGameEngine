@@ -30,6 +30,7 @@ public:
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMVECTOR GetSphereAngle() { return sphereAngle; }
 	Sphere GetSphere() { return sphere; }
+	OBB GetOBB() { return obb; }
 	Object3d* GetObject() { return SphereObj; }
 	float GetTsize() { return Tsize; }
 	bool SetTransFlag(bool transFlag) { return this->transFlag=transFlag; }
@@ -52,7 +53,7 @@ private:
 	float cosRad = 0;
 	float radAD = 0.0f;
 	float radWS = 0.0f;
-
+	OBB obb;
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 	float r = 3;
 	bool transFlag = false;

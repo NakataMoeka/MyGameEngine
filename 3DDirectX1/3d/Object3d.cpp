@@ -246,7 +246,7 @@ void Object3d::Update()
 	assert(camera);
 
 	HRESULT result;
-	XMMATRIX matScale, matRot, matTrans;
+	
 	
 	//XMVECTOR rotV = XMQuaternionRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
 	rotation = XMQuaternionRotationRollPitchYawFromVector(rotation);
@@ -315,13 +315,10 @@ void Object3d::transformParent()
 	//‚í‚©‚ç‚È‚¢‚¢‚¢‚¢‚¢‚¢\(^o^)/
 
 	XMVECTOR scaleV, rotationV, positionV;
-	//scaleV = XMVectorSet(parent->scale.x, parent->scale.y, parent->scale.z, 1);
-	//rotationV = XMVectorSet(XMConvertToRadians(parent->rotation.x),
-	//	XMConvertToRadians(parent->rotation.y),
-	//	XMConvertToRadians(parent->rotation.z), 0);
-	//positionV = XMVectorSet(parent->position.x, parent->position.y, parent->position.z, 0);
-	//rotationV = XMQuaternionRotationRollPitchYawFromVector(rotationV);
-
+	
+	
+	
+	
 
 
 	//e‚ğ‹ts—ñ‚É‚·‚é

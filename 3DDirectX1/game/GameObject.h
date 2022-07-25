@@ -23,9 +23,10 @@ public:
 	void Init();
 	void Update();
 	void Draw();
-	void Delete();
+	void Delete(int i);
 	Box	GetCBox(int i) { return cBox[i]; }
-	Sphere GetCSphere() { return cSphere; }
+	OBB GetOBB(int i) { return obb[i]; }
+	Sphere GetCSphere(int i) { return cSphere[i]; }
 	XMFLOAT3 GetPos(int i) { return position[i]; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize() { return size; }
@@ -36,10 +37,12 @@ private:
 	Object3d* cube[2];
 	Model* modelCube;
 	Box cBox[2];
-	Sphere cSphere;
+	OBB obb[2];
+	Sphere cSphere[2];
 	float r = 2;
 	XMFLOAT3 position[2] = { {10,0,0},{-10,0,0} };
 	XMFLOAT3 size = {1,1,1 };
+	//XMVECTOR rot[2] = { {0,0,0,0},{0,0,0,0} };
 	bool ColFlag[2] = { false,false };
 };
 

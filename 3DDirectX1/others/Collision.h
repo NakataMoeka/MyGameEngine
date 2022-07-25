@@ -19,8 +19,8 @@ public:
 		float* distance = nullptr, DirectX::XMVECTOR* inter = nullptr);
 	static bool CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB);
 	static bool CheckSphere2Box(const Sphere& sphere, const Box& box);
-	bool CheckSphere2OBB(Sphere& sphere, OBB& obb);
-	bool CheckOBB2OBB(OBB& obbA, OBB& obbB);
-	double LenSegOnSeparateAxis(DirectX::XMVECTOR* Sep, DirectX::XMVECTOR* e1, DirectX::XMVECTOR* e2, DirectX::XMVECTOR* e3 = 0);
+	static bool CheckSphere2OBB(Sphere& sphere, OBB& obb);
+	static bool CheckOBB2OBB(OBB& obbA, OBB& obbB);
+	static float LenSegOnSeparateAxis(DirectX::XMVECTOR* Sep, DirectX::XMVECTOR* e1, DirectX::XMVECTOR* e2, DirectX::XMVECTOR* e3 = 0);
 
 };
