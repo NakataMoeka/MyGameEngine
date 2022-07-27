@@ -65,6 +65,7 @@ public:
 
 	bool Initialize();
 
+	void Quaternion();
 	void Update();
 
 	void Draw();
@@ -119,6 +120,7 @@ private:
 	Model* model = nullptr;
 	XMMATRIX matWorld_parent, matTransV, matRotV, matScaleV, matWorld_Invers;
 	XMMATRIX matScale, matRot, matTrans;
+	XMVECTOR rotV;
 	// ÉJÉÅÉâ
 	static Camera* camera;
 	static LightGroup* lightGroup;

@@ -241,6 +241,11 @@ bool Object3d::Initialize()
 	return true;
 }
 
+void Object3d::Quaternion()
+{
+	rotV = XMQuaternionRotationRollPitchYawFromVector(rotation);
+}
+
 void Object3d::Update()
 {
 	assert(camera);
@@ -248,12 +253,12 @@ void Object3d::Update()
 	HRESULT result;
 	
 	
-	//XMVECTOR rotV = XMQuaternionRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-	rotation = XMQuaternionRotationRollPitchYawFromVector(rotation);
+	//XMVECTOR rotV = XMQuaternionRotationRollPitchYaw(rotation.m128_f32[0], rotation.m128_f32[1], rotation.m128_f32[2]);
+	
 
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();
-	matRot = XMMatrixRotationQuaternion(rotation);
+	matRot = XMMatrixRotationQuaternion(rotV);
 	matTrans = XMMatrixTranslation(position.x,position.y, position.z);	//ïΩçsà⁄ìÆçsóÒÇçƒåvéZ
 
 	matWorld = XMMatrixIdentity();

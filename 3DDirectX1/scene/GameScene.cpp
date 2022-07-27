@@ -142,29 +142,37 @@ void GameScene::Update()
 	//やりたいこと->当たり判定が残るのをどうにかする
 	//当たったOBJがくっつくようにする
 	//ぴーーーーーーーーーーーーえん
-	IsHit = false;
 	for (int i = 0; i < 2; i++) {
-		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
-			IsHit = true;
+		IsHit[i] = false;
+	}
+
+		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(0))) {
+			IsHit[0] = true;
 			HitCount++;
-			DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+			//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 
 		}
-		else {
-			HitCount = 0;
-		}
-		//	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) { IsHit = true; }
-		if (IsHit == true) {
-			//HitCount++;
+		if (IsHit[0] == true) {
 			gameObject->GetObject(0)->SetParent(player->GetObject());
-		
-			//gameObject->SetColFlag(true, i);
 		}
 		if (HitCount == 1) {
 			gameObject->GetObject(0)->transformParent();
+			HitCount = 0;
 	
 		}
-	}
+		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(1))) {
+			IsHit[1] = true;
+			HitCount++;
+			//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+		}
+		if (IsHit[1] == true) {
+			gameObject->GetObject(1)->SetParent(player->GetObject());
+		}
+		if (HitCount == 1) {
+			gameObject->GetObject(1)->transformParent();
+			HitCount = 0;
+
+		}
 	object3d3->SetScale({ 2,2,2});
 	object3d4->SetScale({ 2,2,2 });
 	object3d4->SetPosition({ 0,-1,0 });
@@ -223,8 +231,8 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", gameObject->GetPos(0).x);
-
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", gameObject->GetMat());
+	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 		
 		DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();

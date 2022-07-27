@@ -31,6 +31,7 @@ public:
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize() { return size; }
 	XMFLOAT3 SetSize(XMFLOAT3 size) { return this->size = size; }
+	float GetMat();
 	bool SetColFlag(bool ColFlag,int i) { return this->ColFlag[i] = ColFlag; }
 	Object3d* GetObject(int i) { return cube[i]; }
 private:

@@ -33,6 +33,7 @@ void Player::Init()
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	//playerPos={ 0,-0.8,0 };
+	playerObj->Quaternion();
 	playerObj->SetPosition(playerPos);
 }
 
@@ -46,16 +47,16 @@ void Player::Move()
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
-	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
-	{
-		sphereAngle += moveAngle;
-		
+	//if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
+	//{
+	//	sphereAngle += moveAngle;
+	//	
 
-	}
-	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
-	{
-		sphereAngle -= moveAngle;
-	}
+	//}
+	//else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
+	//{
+	//	sphereAngle -= moveAngle;
+	//}
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
 		spherePos.x += moveUD.m128_f32[0];
@@ -92,6 +93,7 @@ void Player::Move()
 	playerObj->SetPosition(playerPos);
 //	playerObj->SetRotation(playerAngle);
 	playerObj->SetScale({ 1,1,1 });
+	playerObj->Quaternion();
 	playerObj->Update();
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
