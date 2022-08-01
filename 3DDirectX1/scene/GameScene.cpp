@@ -85,7 +85,6 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	//object3d2->Update();
 
-
 	// デバッグテキスト用テクスチャ読み込み
 	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
 		assert(0);
@@ -146,34 +145,34 @@ void GameScene::Update()
 		IsHit[i] = false;
 	}
 
-		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(0))) {
-			IsHit[0] = true;
-			HitCount++;
-			//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(0))) {
+		IsHit[0] = true;
+		HitCount++;
+		//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 
-		}
-		if (IsHit[0] == true) {
-			gameObject->GetObject(0)->SetParent(player->GetObject());
-		}
-		if (HitCount == 1) {
-			gameObject->GetObject(0)->transformParent();
-			HitCount = 0;
-	
-		}
-		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(1))) {
-			IsHit[1] = true;
-			HitCount++;
-			//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-		}
-		if (IsHit[1] == true) {
-			gameObject->GetObject(1)->SetParent(player->GetObject());
-		}
-		if (HitCount == 1) {
-			gameObject->GetObject(1)->transformParent();
-			HitCount = 0;
+	}
+	if (IsHit[0] == true) {
+		gameObject->GetObject(0)->SetParent(player->GetObject());
+	}
+	if (HitCount == 1) {
+		gameObject->GetObject(0)->transformParent();
+		HitCount = 0;
 
-		}
-	object3d3->SetScale({ 2,2,2});
+	}
+	if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(1))) {
+		IsHit[1] = true;
+		HitCount++;
+		//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	}
+	if (IsHit[1] == true) {
+		gameObject->GetObject(1)->SetParent(player->GetObject());
+	}
+	if (HitCount == 1) {
+		gameObject->GetObject(1)->transformParent();
+		HitCount = 0;
+
+	}
+	object3d3->SetScale({ 2,2,2 });
 	object3d4->SetScale({ 2,2,2 });
 	object3d4->SetPosition({ 0,-1,0 });
 	object3d->SetRotation({ a,0,b });
@@ -185,11 +184,11 @@ void GameScene::Update()
 	gameObject->Update();
 
 
-	
-	
-	
 
-	
+
+
+
+
 	particleMan->Update();
 	object3d2->SetPosition(playerPosition);
 	object3d2->SetRotation({ 0,90,0 });
@@ -233,8 +232,8 @@ void GameScene::DrawFront()
 	//sprite->Draw();
 	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", gameObject->GetMat());
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
-		
-		DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
+
+	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }
 void GameScene::CreateParticles()
