@@ -183,12 +183,6 @@ void GameScene::Update()
 
 	gameObject->Update();
 
-
-
-
-
-
-
 	particleMan->Update();
 	object3d2->SetPosition(playerPosition);
 	object3d2->SetRotation({ 0,90,0 });
