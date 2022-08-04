@@ -337,5 +337,8 @@
     <ClInclude Include="game\GameObject.h">
       <Filter>Game\Onject</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectHelper.h">
+      <Filter>Game\Onject</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

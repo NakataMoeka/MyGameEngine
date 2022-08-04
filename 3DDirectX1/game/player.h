@@ -33,6 +33,7 @@ public:
 	OBB GetOBB() { return obb; }
 	Object3d* GetObject() { return SphereObj; }
 	float GetTsize() { return Tsize; }
+	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetTransFlag(bool transFlag) { return this->transFlag=transFlag; }
 private:
 	void Move();//ˆÚ“®

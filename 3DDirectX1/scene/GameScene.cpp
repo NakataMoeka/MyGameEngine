@@ -123,7 +123,7 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
-	HP += HPRecovery;
+
 
 	//光線方向初期値                  上奥
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
@@ -149,7 +149,6 @@ void GameScene::Update()
 		IsHit[0] = true;
 		HitCount++;
 		//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-
 	}
 	if (IsHit[0] == true) {
 		gameObject->GetObject(0)->SetParent(player->GetObject());
@@ -157,7 +156,6 @@ void GameScene::Update()
 	if (HitCount == 1) {
 		gameObject->GetObject(0)->transformParent();
 		HitCount = 0;
-
 	}
 	if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(1))) {
 		IsHit[1] = true;
@@ -170,7 +168,6 @@ void GameScene::Update()
 	if (HitCount == 1) {
 		gameObject->GetObject(1)->transformParent();
 		HitCount = 0;
-
 	}
 	object3d3->SetScale({ 2,2,2 });
 	object3d4->SetScale({ 2,2,2 });
