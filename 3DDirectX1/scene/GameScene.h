@@ -34,14 +34,19 @@ public: // メンバ関数
 
 
 	~GameScene();
-
+	//起動したら一回しか行われない初期化(モデルの読み込みなど)
 	void Initialize(DXCommon* dxCommon, Audio* audio);
-
+	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init();
+	//繰り返し処理
 	void Update();
+	//背景画像描画
 	void DrawBG();
+	//オブジェクト描画
 	void Draw();
+	//前景画像描画
 	void DrawFront();
+	//パーティクル
 	void CreateParticles();
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
