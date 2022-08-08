@@ -134,7 +134,7 @@ void GameScene::Update()
 	}
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
-	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
+	lightGroup->SetCircleShadowCasterPos(0, player->GetSpherePos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
@@ -168,7 +168,7 @@ void GameScene::Update()
 	}
 	object3d3->SetScale({ 2,2,2 });
 	object3d4->SetScale({ 2,2,2 });
-	object3d4->SetPosition({ 0,-1,0 });
+	object3d4->SetPosition({ 0,-4,0 });
 	object3d->SetRotation({ a,0,b });
 	
 	player->Update();
@@ -206,7 +206,7 @@ void GameScene::Draw()
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
 	object3d3->Draw();
-	//object3d4->Draw();
+	object3d4->Draw();
 
 	//object3d->Draw();
 	//object3d2->Draw();
@@ -222,7 +222,7 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", gameObject->GetMat());
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetSpherePos().y);
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());

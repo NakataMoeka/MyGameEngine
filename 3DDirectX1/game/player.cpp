@@ -40,7 +40,7 @@ void Player::Init()
 
 void Player::Move()
 {
-	XMVECTOR moveUD = { 0,0,1,0 };//上下方向用の移動ベクトル
+	XMVECTOR moveUD = { 0,0,1,0 };//前後方向用の移動ベクトル
 	XMVECTOR moveLR = { 1,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
@@ -125,9 +125,49 @@ void Player::Ball()
 
 }
 
+void Player::Jump()
+{
+	XMVECTOR moveJump = { 0,1,0,0 };
+
+	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
+	moveJump = XMVector3TransformNormal(moveJump, matRot);
+
+	if (Input::GetInstance()->TriggerKey(DIK_UPARROW) && JumpFlag == false)
+	{
+		JumpFlag = true;
+	}
+	if (JumpFlag == true) {
+		if (spherePos.y < 20)
+		{
+			spherePos.y += 1;
+		}
+		if (spherePos.y == 20)
+		{
+			gFlag = true;
+		}
+	}
+	if (gFlag == true) {
+		JumpFlag = false;
+		if (spherePos.y > 0)
+		{
+			spherePos.y -= 1;
+		}
+		if (spherePos.y == 0)
+		{
+			gFlag = false;
+		}
+	}
+	SphereObj->SetPosition(spherePos);
+	SphereObj->SetScale(sphereSize);
+	SphereObj->SetRotation(sphereAngle);
+	SphereObj->Update();
+}
+
+
 void Player::Update()
 {
 	Move();
+	Jump();
 	//Ball();
 
 	

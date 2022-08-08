@@ -38,6 +38,7 @@ public:
 private:
 	void Move();//移動
 	void Ball();//ボール関係
+	void Jump();
 private:
 	Object3d* playerObj;
 	Model* model;
@@ -58,4 +59,6 @@ private:
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 	float r = 3;
 	bool transFlag = false;
+	bool JumpFlag = false;
+	bool gFlag = false;
 };
