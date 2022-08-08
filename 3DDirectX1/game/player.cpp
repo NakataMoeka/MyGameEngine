@@ -127,10 +127,6 @@ void Player::Ball()
 
 void Player::Jump()
 {
-	XMVECTOR moveJump = { 0,1,0,0 };
-
-	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
-	moveJump = XMVector3TransformNormal(moveJump, matRot);
 
 	if (Input::GetInstance()->TriggerKey(DIK_UPARROW) && JumpFlag == false)
 	{
@@ -139,10 +135,12 @@ void Player::Jump()
 	if (JumpFlag == true) {
 		if (spherePos.y < 20)
 		{
-			spherePos.y += 1;
+			spherePos.y += jspeed;
+			jspeed += g;
 		}
-		if (spherePos.y == 20)
+		if (spherePos.y >= 20)
 		{
+			jspeed = 0;
 			gFlag = true;
 		}
 	}
@@ -150,11 +148,14 @@ void Player::Jump()
 		JumpFlag = false;
 		if (spherePos.y > 0)
 		{
-			spherePos.y -= 1;
+			spherePos.y += jspeed;
+			jspeed -= g;
 		}
-		if (spherePos.y == 0)
+		if (spherePos.y <= 0)
 		{
 			gFlag = false;
+			jspeed = 0;
+			spherePos.y = 0;
 		}
 	}
 	SphereObj->SetPosition(spherePos);

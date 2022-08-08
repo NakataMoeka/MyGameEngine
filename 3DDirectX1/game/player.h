@@ -35,6 +35,7 @@ public:
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetTransFlag(bool transFlag) { return this->transFlag=transFlag; }
+	float GetJspeed() { return jspeed; }
 private:
 	void Move();//ˆÚ“®
 	void Ball();//ƒ{[ƒ‹ŠÖŒW
@@ -61,4 +62,6 @@ private:
 	bool transFlag = false;
 	bool JumpFlag = false;
 	bool gFlag = false;
+	float g = 9.8/60;
+	float jspeed;
 };
