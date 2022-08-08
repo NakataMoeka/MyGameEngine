@@ -1,3 +1,4 @@
+
 #pragma once
 #include"Collision.h"
 //オブジェクトの構造体を書くヘッダーファイル

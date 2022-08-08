@@ -90,11 +90,11 @@ void Player::Move()
 	obb.m_fLength[1] = 1;
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
-	playerObj->SetPosition(playerPos);
-//	playerObj->SetRotation(playerAngle);
-	playerObj->SetScale({ 1,1,1 });
-	playerObj->Quaternion();
-	playerObj->Update();
+//	playerObj->SetPosition(playerPos);
+////	playerObj->SetRotation(playerAngle);
+//	playerObj->SetScale({ 1,1,1 });
+//	playerObj->Quaternion();
+//	playerObj->Update();
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
 	SphereObj->SetRotation(sphereAngle);
@@ -128,7 +128,7 @@ void Player::Ball()
 void Player::Update()
 {
 	Move();
-	Ball();
+	//Ball();
 
 	
 }

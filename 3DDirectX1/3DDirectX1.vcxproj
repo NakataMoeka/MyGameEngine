@@ -179,7 +179,11 @@
     <ClCompile Include="others\Collision.cpp" />
     <ClCompile Include="others\CollisionPrimitive.cpp" />
     <ClCompile Include="others\Ease.cpp" />
+    <ClCompile Include="scene\ClearScene.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
+    <ClCompile Include="scene\SceneManager.cpp" />
+    <ClCompile Include="scene\SelectScene.cpp" />
+    <ClCompile Include="scene\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DirectXTex\DirectXTex_Desktop_2019_Win10.vcxproj">
@@ -342,13 +346,17 @@
     <ClInclude Include="DirectXCommon\SafeDelete.h" />
     <ClInclude Include="DirectXCommon\WinApp.h" />
     <ClInclude Include="game\GameObject.h" />
+    <ClInclude Include="game\ObjectHelper.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="input\input.h" />
-    <ClInclude Include="ObjectHelper.h" />
     <ClInclude Include="others\Collision.h" />
     <ClInclude Include="others\CollisionPrimitive.h" />
     <ClInclude Include="others\Ease.h" />
+    <ClInclude Include="scene\ClearScene.h" />
     <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="scene\SceneManager.h" />
+    <ClInclude Include="scene\SelectScene.h" />
+    <ClInclude Include="scene\TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -157,6 +157,18 @@
     <ClCompile Include="game\GameObject.cpp">
       <Filter>Game\Onject</Filter>
     </ClCompile>
+    <ClCompile Include="scene\ClearScene.cpp">
+      <Filter>Game\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\TitleScene.cpp">
+      <Filter>Game\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\SceneManager.cpp">
+      <Filter>Game\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\SelectScene.cpp">
+      <Filter>Game\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -337,8 +349,20 @@
     <ClInclude Include="game\GameObject.h">
       <Filter>Game\Onject</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectHelper.h">
+    <ClInclude Include="game\ObjectHelper.h">
       <Filter>Game\Onject</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\ClearScene.h">
+      <Filter>Game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\TitleScene.h">
+      <Filter>Game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneManager.h">
+      <Filter>Game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SelectScene.h">
+      <Filter>Game\scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

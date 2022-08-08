@@ -39,29 +39,26 @@ void Camera::Update()
 
 void Camera::FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX, float angleY)
 {
-	target = position;//注視点座標
-//カメラ追従
-//1
-	XMFLOAT3 V0 = d;
-	//2
-	XMMATRIX  rotM = XMMatrixIdentity();
-	rotM *= XMMatrixRotationY(XMConvertToRadians(angleY));//Y軸
-	rotM *= XMMatrixRotationX(XMConvertToRadians(angleX));//X軸
-	//3
-	XMVECTOR v3 = { V0.x,V0.y,V0.z };
-	XMVECTOR v = XMVector3TransformNormal(v3, rotM);
-
-	//4
-	XMFLOAT3 f3 = { v.m128_f32[0],v.m128_f32[1],v.m128_f32[2] };
-	eye.x = target.x + f3.x;
-	eye.y = target.y + f3.y;
-	eye.z = target.z + f3.z;
+	XMVECTOR v0 = {d.x,d.y,d.z,0 };
+	//angleラジアンだけy軸まわりに回転。半径は-100
+	XMMATRIX rotM = XMMatrixIdentity();
+	rotM *= XMMatrixRotationY(XMConvertToRadians(angleY));
+	rotM *= XMMatrixRotationX(XMConvertToRadians(angleX));
+	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
+	XMVECTOR bossTarget = { position.x,position.y,position.z };
+	XMVECTOR v3 = bossTarget + v;
+	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
+	target= { bossTarget.m128_f32[0], bossTarget.m128_f32[1], bossTarget.m128_f32[2] };
+	eye = f;
 	SetEye(eye);
 	SetTarget(target);
+
 }
 
 
+
 void Camera::UpdateViewMatrix()
+
 {
 	// ビュー行列の更新
 	//matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));

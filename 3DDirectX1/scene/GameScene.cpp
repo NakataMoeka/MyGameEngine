@@ -138,9 +138,6 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
-	//やりたいこと->当たり判定が残るのをどうにかする
-	//当たったOBJがくっつくようにする
-	//ぴーーーーーーーーーーーーえん
 	for (int i = 0; i < 2; i++) {
 		IsHit[i] = false;
 	}
@@ -173,9 +170,13 @@ void GameScene::Update()
 	object3d4->SetScale({ 2,2,2 });
 	object3d4->SetPosition({ 0,-1,0 });
 	object3d->SetRotation({ a,0,b });
+	
 	player->Update();
 
 	camera->FollowCamera(player->GetSpherePos(), XMFLOAT3{ 0,2,-20 }, 0, player->GetSphereAngle().m128_f32[1]);
+	//XMFLOAT3 cameraPos = { player->GetSpherePos().x,player->GetSpherePos().y,player->GetSpherePos().z - 20 };
+	//camera->SetEye(cameraPos);
+	//camera->SetTarget(player->GetSpherePos());
 	camera->Update();
 
 	gameObject->Update();

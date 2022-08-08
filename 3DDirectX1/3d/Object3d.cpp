@@ -321,11 +321,6 @@ void Object3d::transformParent()
 
 	XMVECTOR scaleV, rotationV, positionV;
 	
-	
-	
-	
-
-
 	//親を逆行列にする
 	matWorld_Invers = XMMatrixInverse(nullptr, parent->matWorld);
 	//子供のワールド座標と親のワールド座標の逆行列を乗算
