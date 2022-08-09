@@ -112,7 +112,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	gameObject->Initialize();
 	player->Init();
 	gameObject->Init();
-
+	distance = 20.0f;
 }
 
 void GameScene::Init()
@@ -173,7 +173,7 @@ void GameScene::Update()
 	
 	player->Update();
 
-	camera->FollowCamera(player->GetSpherePos(), XMFLOAT3{ 0,2,-20 }, 0, player->GetSphereAngle().m128_f32[1]);
+	camera->FollowCamera(player->GetSpherePos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetSphereAngle().m128_f32[1]);
 	//XMFLOAT3 cameraPos = { player->GetSpherePos().x,player->GetSpherePos().y,player->GetSpherePos().z - 20 };
 	//camera->SetEye(cameraPos);
 	//camera->SetTarget(player->GetSpherePos());

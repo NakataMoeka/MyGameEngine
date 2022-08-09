@@ -92,4 +92,5 @@ private: // メンバ変数
 	bool IsHit[2] = { false,false };
 	int HitCount=0;
 	bool parentFlag = false;
+	float distance = 20.0f;//プレイヤーとカメラの距離
 };

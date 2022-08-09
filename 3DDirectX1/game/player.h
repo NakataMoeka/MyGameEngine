@@ -39,7 +39,8 @@ public:
 private:
 	void Move();//移動
 	void Ball();//ボール関係
-	void Jump();
+	void Jump();//ジャンプ
+	void Dash();//ダッシュ
 private:
 	Object3d* playerObj;
 	Model* model;
@@ -62,6 +63,7 @@ private:
 	bool transFlag = false;
 	bool JumpFlag = false;
 	bool gFlag = false;
-	float g = 9.8/60;
+	float g = 0.098;
 	float jspeed;
+	bool dashFlag = false;
 };

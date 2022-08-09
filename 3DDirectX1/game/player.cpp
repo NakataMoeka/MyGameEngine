@@ -95,10 +95,6 @@ void Player::Move()
 //	playerObj->SetScale({ 1,1,1 });
 //	playerObj->Quaternion();
 //	playerObj->Update();
-	SphereObj->SetPosition(spherePos);
-	SphereObj->SetScale(sphereSize);
-	SphereObj->SetRotation(sphereAngle);
-	SphereObj->Update();
 
 
 }
@@ -128,7 +124,7 @@ void Player::Ball()
 void Player::Jump()
 {
 
-	if (Input::GetInstance()->TriggerKey(DIK_UPARROW) && JumpFlag == false)
+	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW) && JumpFlag == false)
 	{
 		JumpFlag = true;
 	}
@@ -158,10 +154,18 @@ void Player::Jump()
 			spherePos.y = 0;
 		}
 	}
-	SphereObj->SetPosition(spherePos);
-	SphereObj->SetScale(sphereSize);
-	SphereObj->SetRotation(sphereAngle);
-	SphereObj->Update();
+
+}
+
+void Player::Dash()
+{
+	if (Input::GetInstance()->TriggerKey(DIK_UPARROW)&&dashFlag==false)
+	{
+		dashFlag = true;
+	}
+	if (dashFlag == true) {
+
+	}
 }
 
 
@@ -170,8 +174,11 @@ void Player::Update()
 	Move();
 	Jump();
 	//Ball();
-
-	
+	Dash();
+	SphereObj->SetPosition(spherePos);
+	SphereObj->SetScale(sphereSize);
+	SphereObj->SetRotation(sphereAngle);
+	SphereObj->Update();
 }
 
 
