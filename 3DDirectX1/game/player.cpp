@@ -123,8 +123,8 @@ void Player::Ball()
 
 void Player::Jump()
 {
-
-	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW) && JumpFlag == false)
+	//プレイヤーのみがジャンプするのでまだ
+	/*if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW) && JumpFlag == false)
 	{
 		JumpFlag = true;
 	}
@@ -153,7 +153,7 @@ void Player::Jump()
 			jspeed = 0;
 			spherePos.y = 0;
 		}
-	}
+	}*/
 
 }
 
