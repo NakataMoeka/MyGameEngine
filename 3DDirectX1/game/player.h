@@ -2,6 +2,7 @@
 #include"Object3d.h"
 #include"Model.h"
 #include"Collision.h"
+#include"Sprite.h"
 /// <summary>
 /// プレイヤー関連のクラス
 /// </summary>
@@ -24,6 +25,7 @@ public:
 	void Update();
 
 	void Draw();
+	void DrawSprite();
 
 	//Getter
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
@@ -46,6 +48,9 @@ private:
 	Model* model;
 	Object3d* SphereObj;
 	Model* model2;
+
+	Sprite* dashSprite;
+
 	XMFLOAT3 playerPos{ 1,0,0 };
 	XMFLOAT3 spherePos{ 1,0,0 };
 	XMFLOAT3 playerAngle{ 0,0,0 };
@@ -66,4 +71,9 @@ private:
 	float g = 0.098;
 	float jspeed;
 	bool dashFlag = false;
+	float dashSpeed = 2.0f;
+	int dashCoolTime = 0;
+	const int dashCoolTimeMax = 20;
+	int dashTime = 0;
+	const int dashTimeMax = 20;
 };

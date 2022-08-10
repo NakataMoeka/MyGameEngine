@@ -222,6 +222,7 @@ void GameScene::DrawFront()
 	//前景
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
+	player->DrawSprite();
 	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetSpherePos().y);
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 

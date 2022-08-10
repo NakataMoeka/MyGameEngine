@@ -17,6 +17,9 @@ void Player::Initialize()
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	Sprite::LoadTexture(2, L"Resources/dash.png");
+
+	dashSprite = Sprite::CreateSprite(2, { 0,0 });
 
 
 }
@@ -159,13 +162,34 @@ void Player::Jump()
 
 void Player::Dash()
 {
+	dashCoolTime--;
+	if (dashCoolTime <= 0 && dashTime <= 0)
+	{
+		dashCoolTime = 0;
+		dashFlag = false;
+	}
 	if (Input::GetInstance()->TriggerKey(DIK_UPARROW)&&dashFlag==false)
 	{
+		dashTime = dashTimeMax;
 		dashFlag = true;
 	}
-	if (dashFlag == true) {
 
+	if (dashTime > 0)
+	{
+		dashTime--;
+		if (dashTime <= 0)
+		{
+			dashCoolTime = dashCoolTimeMax;
+		}
+		XMVECTOR movedash = { 0,0,2,0 };//前後方向用の移動ベクトル
+		
+		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
+		movedash = XMVector3TransformNormal(movedash, matRot);
+
+		spherePos.x += movedash.m128_f32[0];
+		spherePos.z += movedash.m128_f32[2];
 	}
+
 }
 
 
@@ -186,4 +210,12 @@ void Player::Draw()
 {
 	//playerObj->Draw();
 	SphereObj->Draw();
+	
+}
+
+void Player::DrawSprite()
+{
+	if (dashFlag == true) {
+		dashSprite->Draw();
+	}
 }
