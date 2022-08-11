@@ -16,6 +16,7 @@ private:
 	using XMFLOAT3 = DirectX::XMFLOAT3;
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
+	using XMVECTOR = DirectX::XMVECTOR;
 public:
 	GameObject();
 	~GameObject();
@@ -31,6 +32,7 @@ public:
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize() { return size; }
 	XMFLOAT3 SetSize(XMFLOAT3 size) { return this->size = size; }
+
 	float GetMat();
 	bool SetColFlag(bool ColFlag,int i) { return this->ColFlag[i] = ColFlag; }
 	Object3d* GetObject(int i) { return cube[i]; }
@@ -43,7 +45,7 @@ private:
 	float r = 2;
 	XMFLOAT3 position[2] = { {10,0,0},{-10,0,0} };
 	XMFLOAT3 size = {1,1,1 };
-	//XMVECTOR rot[2] = { {0,0,0,0},{0,0,0,0} };
+	XMVECTOR rota = { 0,0,0,0 };
 	bool ColFlag[2] = { false,false };
 };
 

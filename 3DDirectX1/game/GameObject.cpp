@@ -24,6 +24,7 @@ void GameObject::Init()
 		cube[i]->SetPosition(position[i]);
 		cube[i]->SetScale(size);
 		cube[i]->Quaternion();
+		cube[i]->SetRotation(rota);
 		cube[i]->Update();
 			cSphere[i].radius = r;
 			//cSphere[i].center = XMVectorSet(position[i].x, position[i].y, position[i].z, 1);
@@ -56,7 +57,8 @@ void GameObject::Update()
 
 		//cube[i]->SetPosition(position[i]);
 			//cube[i]->SetScale(size);
-			//cube[i]->Quaternion();
+			cube[i]->Quaternion();
+			cube[i]->SetRotation(rota);
 			cube[i]->Update();
 	}
 }

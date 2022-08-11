@@ -38,6 +38,8 @@ void Player::Init()
 	//playerPos={ 0,-0.8,0 };
 	playerObj->Quaternion();
 	SphereObj->Quaternion();
+	SphereObj->Update();
+	playerObj->Update();
 }
 
 
@@ -54,26 +56,26 @@ void Player::Move()
 	moveAngleX = XMVector3TransformNormal(moveAngleX, matRot);
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
-		sphereAngle += moveAngle;
+		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
 		playerAngle += moveAngle;
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
-		sphereAngle -= moveAngle;
+		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 		playerAngle -= moveAngle;
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
 		spherePos.x += moveUD.m128_f32[0];
 		spherePos.z += moveUD.m128_f32[2];
-		sphereAngle += moveAngleX;
+		sphereAngle.m128_f32[0] += moveAngleX.m128_f32[0];
 	}
 	else if (Input::GetInstance()->PushKey(DIK_S))
 	{
 		spherePos.x -= moveUD.m128_f32[0];
 		spherePos.z -= moveUD.m128_f32[2];
-		sphereAngle -= moveAngleX;
+		sphereAngle.m128_f32[0] -= moveAngleX.m128_f32[0];
 	}
 	else if (Input::GetInstance()->PushKey(DIK_D))
 	{
@@ -205,6 +207,7 @@ void Player::Update()
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
 	SphereObj->SetRotation(sphereAngle);
+	SphereObj->Quaternion();
 	SphereObj->Update();
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
