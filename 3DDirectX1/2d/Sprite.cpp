@@ -396,7 +396,10 @@ void Sprite::SetSize(XMFLOAT2 size)
 	// 頂点バッファへのデータ転送
 	TransferVertices();
 }
-
+void Sprite::SetColor(XMFLOAT4 color)
+{
+	this->color = color;
+}
 void Sprite::SetAnchorPoint(XMFLOAT2 anchorpoint)
 {
 	this->anchorpoint = anchorpoint;

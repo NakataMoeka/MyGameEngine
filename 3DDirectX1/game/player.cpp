@@ -171,6 +171,7 @@ void Player::Dash()
 	if (Input::GetInstance()->TriggerKey(DIK_UPARROW)&&dashFlag==false)
 	{
 		dashTime = dashTimeMax;
+		fade = 1;
 		dashFlag = true;
 	}
 
@@ -188,6 +189,9 @@ void Player::Dash()
 
 		spherePos.x += movedash.m128_f32[0];
 		spherePos.z += movedash.m128_f32[2];
+		if (fade > 0) {
+			fade -= 0.05f;
+		}
 	}
 
 }
@@ -203,6 +207,7 @@ void Player::Update()
 	SphereObj->SetScale(sphereSize);
 	SphereObj->SetRotation(sphereAngle);
 	SphereObj->Update();
+	dashSprite->SetColor({1, 1, 1, fade});
 }
 
 

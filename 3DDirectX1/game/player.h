@@ -76,4 +76,5 @@ private:
 	const int dashCoolTimeMax = 20;
 	int dashTime = 0;
 	const int dashTimeMax = 20;
+	float fade = 1;
 };
