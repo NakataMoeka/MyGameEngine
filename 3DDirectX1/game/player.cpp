@@ -37,7 +37,7 @@ void Player::Init()
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	//playerPos={ 0,-0.8,0 };
 	playerObj->Quaternion();
-	playerObj->SetPosition(playerPos);
+	SphereObj->Quaternion();
 }
 
 
@@ -46,31 +46,34 @@ void Player::Move()
 	XMVECTOR moveUD = { 0,0,1,0 };//前後方向用の移動ベクトル
 	XMVECTOR moveLR = { 1,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
+	XMVECTOR moveAngleX = { 1,0,0,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
+	moveAngleX = XMVector3TransformNormal(moveAngleX, matRot);
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		sphereAngle += moveAngle;
-		
+		playerAngle += moveAngle;
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
 		sphereAngle -= moveAngle;
+		playerAngle -= moveAngle;
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
 		spherePos.x += moveUD.m128_f32[0];
 		spherePos.z += moveUD.m128_f32[2];
-		//sphereAngle.x += 10;
+		sphereAngle += moveAngleX;
 	}
 	else if (Input::GetInstance()->PushKey(DIK_S))
 	{
 		spherePos.x -= moveUD.m128_f32[0];
 		spherePos.z -= moveUD.m128_f32[2];
-		//sphereAngle.x -= 10;
+		sphereAngle -= moveAngleX;
 	}
 	else if (Input::GetInstance()->PushKey(DIK_D))
 	{
@@ -93,12 +96,8 @@ void Player::Move()
 	obb.m_fLength[1] = 1;
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
-//	playerObj->SetPosition(playerPos);
-////	playerObj->SetRotation(playerAngle);
-//	playerObj->SetScale({ 1,1,1 });
-//	playerObj->Quaternion();
-//	playerObj->Update();
 
+	playerPos = { spherePos.x,spherePos.y,spherePos.z - 5 };
 
 }
 
@@ -207,13 +206,17 @@ void Player::Update()
 	SphereObj->SetScale(sphereSize);
 	SphereObj->SetRotation(sphereAngle);
 	SphereObj->Update();
+	playerObj->SetPosition(playerPos);
+	playerObj->SetRotation(playerAngle);
+	playerObj->SetScale({ 1,1,1 });
+	playerObj->Update();
 	dashSprite->SetColor({1, 1, 1, fade});
 }
 
 
 void Player::Draw()
 {
-	//playerObj->Draw();
+	playerObj->Draw();
 	SphereObj->Draw();
 	
 }

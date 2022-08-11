@@ -31,6 +31,7 @@ public:
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMVECTOR GetSphereAngle() { return sphereAngle; }
+	XMVECTOR GetPlayerAngle() { return playerAngle; }
 	Sphere GetSphere() { return sphere; }
 	OBB GetOBB() { return obb; }
 	Object3d* GetObject() { return SphereObj; }
@@ -53,7 +54,7 @@ private:
 
 	XMFLOAT3 playerPos{ 1,0,0 };
 	XMFLOAT3 spherePos{ 1,0,0 };
-	XMFLOAT3 playerAngle{ 0,0,0 };
+	XMVECTOR playerAngle{ 0,0,0,0 };
 	XMVECTOR sphereAngle{ 0,0,0,0 };
 
 	XMFLOAT3 sphereSize{ 1,1,1 };
