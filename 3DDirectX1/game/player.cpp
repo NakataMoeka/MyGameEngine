@@ -45,8 +45,8 @@ void Player::Init()
 
 void Player::Move()
 {
-	XMVECTOR moveUD = { 0,0,1,0 };//前後方向用の移動ベクトル
-	XMVECTOR moveLR = { 1,0,0,0 };//左右方向の移動用ベクトル
+	XMVECTOR moveUD = { 0,0,0.5,0 };//前後方向用の移動ベクトル
+	XMVECTOR moveLR = { 0.5,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
 	XMVECTOR moveAngleX = { 1,0,0,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
@@ -57,13 +57,13 @@ void Player::Move()
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
-		playerAngle += moveAngle;
+		//playerAngle.m128_f32[1] += moveAngle.m128_f32[1];
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
 		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
-		playerAngle -= moveAngle;
+		//playerAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
@@ -98,28 +98,22 @@ void Player::Move()
 	obb.m_fLength[1] = 1;
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
-
-	playerPos = { spherePos.x,spherePos.y,spherePos.z - 5 };
-
 }
 
 void Player::Ball()
 {
 #pragma region カメラ追従とほぼ同じ
-	//XMFLOAT3 V0 = { 0,0,4.0 };
-	////2
-	//XMMATRIX  rotM = XMMatrixIdentity();
-	//rotM *= XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//Y軸
-	//rotM *= XMMatrixRotationX(XMConvertToRadians(0));//X軸
-	////3
-	//XMVECTOR v3 = { V0.x,V0.y,V0.z };
-	//XMVECTOR v = XMVector3TransformNormal(v3, rotM);
-
-	////4
-	//XMFLOAT3 f3 = { v.m128_f32[0],v.m128_f32[1],v.m128_f32[2] };
-	//spherePos.x = playerPos.x + f3.x;
-	////spherePos.y = playerPos.y + f3.y;
-	//spherePos.z = playerPos.z + f3.z;
+	XMVECTOR v0 = { 0,0,-10,0 };
+	//angleラジアンだけy軸まわりに回転。半径は-100
+	XMMATRIX rotM = XMMatrixIdentity();
+	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
+	//rotM *= XMMatrixRotationX(XMConvertToRadians(sphereAngle.m128_f32[0]));
+	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
+	XMVECTOR bossTarget = {spherePos.x,spherePos.y,spherePos.z };
+	XMVECTOR v3 = bossTarget + v;
+	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
+	//target = { bossTarget.m128_f32[0], bossTarget.m128_f32[1], bossTarget.m128_f32[2] };
+	playerPos = f;
 #pragma endregion
 
 
@@ -202,7 +196,7 @@ void Player::Update()
 {
 	Move();
 	Jump();
-	//Ball();
+	Ball();
 	Dash();
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
@@ -211,6 +205,7 @@ void Player::Update()
 	SphereObj->Update();
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
+	playerObj->Quaternion();
 	playerObj->SetScale({ 1,1,1 });
 	playerObj->Update();
 	dashSprite->SetColor({1, 1, 1, fade});

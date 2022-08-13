@@ -243,6 +243,10 @@ bool Object3d::Initialize()
 
 void Object3d::Quaternion()
 {
+	//rotV = XMQuaternionRotationRollPitchYaw(
+	//	XMConvertToRadians(rotation.m128_f32[0])
+	//	, XMConvertToRadians(rotation.m128_f32[1])
+	//	, XMConvertToRadians(rotation.m128_f32[2]));
 	rotV = XMQuaternionRotationRollPitchYawFromVector(rotation);
 }
 

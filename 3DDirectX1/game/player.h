@@ -37,7 +37,7 @@ public:
 	Object3d* GetObject() { return SphereObj; }
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
-	bool SetTransFlag(bool transFlag) { return this->transFlag=transFlag; }
+	bool SetTransFlag(bool transFlag) { return this->transFlag = transFlag; }
 	float GetJspeed() { return jspeed; }
 private:
 	void Move();//ˆÚ“®
@@ -52,12 +52,11 @@ private:
 
 	Sprite* dashSprite;
 
-	XMFLOAT3 playerPos{ 1,0,0 };
-	XMFLOAT3 spherePos{ 1,0,0 };
-	XMVECTOR playerAngle{ 0,0,0,0 };
-	XMVECTOR sphereAngle{ 0,0,0,0 };
-
-	XMFLOAT3 sphereSize{ 1,1,1 };
+	XMFLOAT3 playerPos = { 1,0,0 };
+	XMFLOAT3 spherePos = { 1,0,0 };
+	XMVECTOR playerAngle = { 0,0,0,0 };
+	XMVECTOR sphereAngle = { 0,0,0,0 };
+	XMFLOAT3 sphereSize = { 1,1,1 };
 	Sphere sphere;
 	float sinRad = 0;
 	float cosRad = 0;
