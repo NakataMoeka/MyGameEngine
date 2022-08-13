@@ -49,11 +49,13 @@ void Player::Move()
 	XMVECTOR moveLR = { 0.5,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
 	XMVECTOR moveAngleX = { 1,0,0,0 };//角度のベクトル
+	XMVECTOR moveAngleZ = { 0,0,1,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
 	moveAngleX = XMVector3TransformNormal(moveAngleX, matRot);
+	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot);
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
@@ -82,12 +84,13 @@ void Player::Move()
 		spherePos.x += moveLR.m128_f32[0];
 		spherePos.z += moveLR.m128_f32[2];
 		//sphereAngle.z += 10;
+		sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
 	}
 	else if (Input::GetInstance()->PushKey(DIK_A))
 	{
 		spherePos.x -= moveLR.m128_f32[0];
 		spherePos.z -= moveLR.m128_f32[2];
-		//sphereAngle.z -= 10;
+		sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
 	}
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
