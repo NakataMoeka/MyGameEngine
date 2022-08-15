@@ -194,6 +194,26 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		return  sqLength < r* r;
 	}
 
+	bool Collision::CheckSphere2Sphere2(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter)
+	{
+		// ’†S“_‚Ì‹——£‚Ì‚Qæ <= ”¼Œa‚Ì˜a‚Ì‚Qæ@‚È‚çŒð·
+		float dist = XMVector3LengthSq(sphereA.center - sphereB.center).m128_f32[0];
+
+		float radius2 = sphereA.radius + sphereB.radius;
+		radius2 *= radius2;
+
+		if (dist <= radius2) {
+			if (inter) {
+				// A‚Ì”¼Œa‚ª0‚ÌŽžÀ•W‚ÍB‚Ì’†S@B‚Ì”¼Œa‚ª0‚ÌŽžÀ•W‚ÍA‚Ì’†S@‚Æ‚È‚é‚æ‚¤•âŠ®
+				float t = sphereB.radius / (sphereA.radius + sphereB.radius);
+				*inter = XMVectorLerp(sphereA.center, sphereB.center, t);
+			}
+			return true;
+		}
+
+		return false;
+	}
+
 	bool Collision::CheckSphere2Box(const Sphere& sphere, const Box& box)
 	{
 		float sqDistance = 0.0f;

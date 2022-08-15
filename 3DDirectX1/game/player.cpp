@@ -83,7 +83,6 @@ void Player::Move()
 	{
 		spherePos.x += moveLR.m128_f32[0];
 		spherePos.z += moveLR.m128_f32[2];
-		//sphereAngle.z += 10;
 		sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
 	}
 	else if (Input::GetInstance()->PushKey(DIK_A))

@@ -169,6 +169,12 @@
     <ClCompile Include="scene\SelectScene.cpp">
       <Filter>Game\scene</Filter>
     </ClCompile>
+    <ClCompile Include="others\CollisionManager.cpp">
+      <Filter>Library\others\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="others\SphereCollider.cpp">
+      <Filter>Library\others\collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -363,6 +369,21 @@
     </ClInclude>
     <ClInclude Include="scene\SelectScene.h">
       <Filter>Game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="others\BaseCollider.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\CollisionInfo.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\CollisionManager.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\CollisionType.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\SphereCollider.h">
+      <Filter>Library\others\collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

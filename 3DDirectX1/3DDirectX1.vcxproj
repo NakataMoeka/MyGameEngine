@@ -177,8 +177,10 @@
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="others\Collision.cpp" />
+    <ClCompile Include="others\CollisionManager.cpp" />
     <ClCompile Include="others\CollisionPrimitive.cpp" />
     <ClCompile Include="others\Ease.cpp" />
+    <ClCompile Include="others\SphereCollider.cpp" />
     <ClCompile Include="scene\ClearScene.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\SceneManager.cpp" />
@@ -349,9 +351,14 @@
     <ClInclude Include="game\ObjectHelper.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="input\input.h" />
+    <ClInclude Include="others\BaseCollider.h" />
     <ClInclude Include="others\Collision.h" />
+    <ClInclude Include="others\CollisionInfo.h" />
+    <ClInclude Include="others\CollisionManager.h" />
     <ClInclude Include="others\CollisionPrimitive.h" />
+    <ClInclude Include="others\CollisionType.h" />
     <ClInclude Include="others\Ease.h" />
+    <ClInclude Include="others\SphereCollider.h" />
     <ClInclude Include="scene\ClearScene.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\SceneManager.h" />

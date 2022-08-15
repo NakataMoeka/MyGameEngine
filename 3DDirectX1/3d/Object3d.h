@@ -11,6 +11,8 @@
 
 #include "Camera.h"
 #include "LightGroup.h"
+#include "CollisionInfo.h"
+class BaseCollider;
 class Object3d
 {
 private: // エイリアス
@@ -43,7 +45,9 @@ public:
 		XMFLOAT3 cameraPos;//カメラ座標(ワールド座標)
 	};
 
+	Object3d() = default;
 
+	virtual ~Object3d();
 
 	static void StaticInitialize(ID3D12Device* dev, Camera* camera= nullptr);
 
@@ -63,12 +67,18 @@ public:
 	static Object3d* Create(Model* model);
 
 
-	bool Initialize();
+	virtual bool Initialize();
 
 	void Quaternion();
-	void Update();
+	virtual void Update();
 
-	void Draw();
+	virtual void Draw();
+
+	const XMMATRIX& GetMatWorld() { return matWorld; }
+
+	void SetCollider(BaseCollider* collider);
+
+	virtual void OnCollision(const CollisionInfo& info) {}
 
 	const XMFLOAT3& GetPosition() { return position; }
 
@@ -91,8 +101,8 @@ public:
 	XMMATRIX GetMatTrans() { return matTrans; }
 	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
 	void transformParent();
-private:
-
+protected:
+	const char* name = nullptr;
 	// デバイス
 	static ID3D12Device* dev;
 
@@ -127,6 +137,7 @@ private:
 	// ビルボード
 	bool isBillboard = false;
 
-	bool naz = false;
+	// コライダー
+	BaseCollider* collider = nullptr;
 };
 

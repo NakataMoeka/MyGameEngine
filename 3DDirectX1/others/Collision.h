@@ -18,6 +18,8 @@ public:
 	static bool CheackRay2Sphere(const Ray& ray, const Sphere& sphere,
 		float* distance = nullptr, DirectX::XMVECTOR* inter = nullptr);
 	static bool CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB);
+	static bool CheckSphere2Sphere2(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter = nullptr);
+
 	static bool CheckSphere2Box(const Sphere& sphere, const Box& box);
 	static bool CheckSphere2OBB(Sphere& sphere, OBB& obb);
 	static bool CheckOBB2OBB(OBB& obbA, OBB& obbB);

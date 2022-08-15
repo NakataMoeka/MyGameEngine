@@ -1,4 +1,7 @@
 #include "Object3d.h"
+#include "BaseCollider.h"
+#include "CollisionManager.h"
+
 #include <d3dcompiler.h>
 #include <DirectXTex.h>
 #include<fstream>
@@ -18,6 +21,14 @@ ID3D12GraphicsCommandList* Object3d::cmdList = nullptr;
 //Object3d::PipelineSet Object3d::pipelineSet;
 Camera* Object3d::camera = nullptr;
 LightGroup* Object3d::lightGroup = nullptr;
+
+Object3d::~Object3d()
+{
+	if (collider) {
+		CollisionManager::GetInstance()->RemoveCollider(collider);
+		delete collider;
+	}
+}
 
 void Object3d::StaticInitialize(ID3D12Device* dev, Camera* camera)
 {
@@ -317,6 +328,14 @@ void Object3d::Draw()
 	lightGroup->Draw(cmdList,3);
 	// モデル描画
 	model->Draw(cmdList);
+}
+
+void Object3d::SetCollider(BaseCollider* collider)
+{
+	collider->SetObject(this);
+	this->collider = collider;
+	// コリジョンマネージャに追加
+	CollisionManager::GetInstance()->AddCollider(collider);
 }
 
 void Object3d::transformParent()
