@@ -173,7 +173,7 @@ void GameScene::Update()
 	
 	player->Update();
 
-	camera->FollowCamera(player->GetSpherePos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetSphereAngle().m128_f32[1]);
+	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
 	//XMFLOAT3 cameraPos = { player->GetSpherePos().x,player->GetSpherePos().y,player->GetSpherePos().z - 20 };
 	//camera->SetEye(cameraPos);
 	//camera->SetTarget(player->GetSpherePos());

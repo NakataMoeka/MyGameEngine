@@ -48,48 +48,50 @@ void Player::Move()
 	XMVECTOR moveUD = { 0,0,0.5,0 };//前後方向用の移動ベクトル
 	XMVECTOR moveLR = { 0.5,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
-	XMVECTOR moveAngleX = { 1,0,0,0 };//角度のベクトル
-	XMVECTOR moveAngleZ = { 0,0,1,0 };//角度のベクトル
-	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
+	XMVECTOR moveAngleX = { 10,0,0,0 };//角度のベクトル
+	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル
+	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
-	moveAngleX = XMVector3TransformNormal(moveAngleX, matRot);
-	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot);
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
-		//playerAngle.m128_f32[1] += moveAngle.m128_f32[1];
+		playerAngle.m128_f32[1] += moveAngle.m128_f32[1];
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
 		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
-		//playerAngle.m128_f32[1] -= moveAngle.m128_f32[1];
+		playerAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
-		spherePos.x += moveUD.m128_f32[0];
-		spherePos.z += moveUD.m128_f32[2];
-		sphereAngle.m128_f32[0] += moveAngleX.m128_f32[0];
+		playerPos.x += moveUD.m128_f32[0];
+		playerPos.z += moveUD.m128_f32[2];
+		sphereAngle.m128_f32[0] += 10;
+		//sphereAngle.m128_f32[2] += moveAngleX.m128_f32[2];
 	}
 	else if (Input::GetInstance()->PushKey(DIK_S))
 	{
-		spherePos.x -= moveUD.m128_f32[0];
-		spherePos.z -= moveUD.m128_f32[2];
-		sphereAngle.m128_f32[0] -= moveAngleX.m128_f32[0];
+		playerPos.x -= moveUD.m128_f32[0];
+		playerPos.z -= moveUD.m128_f32[2];
+		sphereAngle.m128_f32[0] -= 10;
+		//sphereAngle.m128_f32[2] -= moveAngleX.m128_f32[2];
 	}
 	else if (Input::GetInstance()->PushKey(DIK_D))
 	{
-		spherePos.x += moveLR.m128_f32[0];
-		spherePos.z += moveLR.m128_f32[2];
-		sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
+		playerPos.x += moveLR.m128_f32[0];
+		playerPos.z += moveLR.m128_f32[2];
+		//sphereAngle.m128_f32[0] += moveAngleZ.m128_f32[0];
+		sphereAngle.m128_f32[2] += 10;
 	}
 	else if (Input::GetInstance()->PushKey(DIK_A))
 	{
-		spherePos.x -= moveLR.m128_f32[0];
-		spherePos.z -= moveLR.m128_f32[2];
-		sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
+		playerPos.x -= moveLR.m128_f32[0];
+		playerPos.z -= moveLR.m128_f32[2];
+		//sphereAngle.m128_f32[0] -= moveAngleZ.m128_f32[0];
+		sphereAngle.m128_f32[2] -= 10;
 	}
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
@@ -100,22 +102,24 @@ void Player::Move()
 	obb.m_fLength[1] = 1;
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
+	playerPos.y = -2;
 }
 
 void Player::Ball()
 {
 #pragma region カメラ追従とほぼ同じ
-	XMVECTOR v0 = { 0,0,-10,0 };
+	XMVECTOR v0 = { 0,0,10,0 };
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
 	//rotM *= XMMatrixRotationX(XMConvertToRadians(sphereAngle.m128_f32[0]));
 	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
-	XMVECTOR bossTarget = {spherePos.x,spherePos.y,spherePos.z };
+	XMVECTOR bossTarget = {playerPos.x,playerPos.y,playerPos.z };
 	XMVECTOR v3 = bossTarget + v;
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	//target = { bossTarget.m128_f32[0], bossTarget.m128_f32[1], bossTarget.m128_f32[2] };
-	playerPos = f;
+	spherePos.x = f.x;
+	spherePos.z = f.z;
 #pragma endregion
 
 
@@ -181,11 +185,11 @@ void Player::Dash()
 		}
 		XMVECTOR movedash = { 0,0,2,0 };//前後方向用の移動ベクトル
 		
-		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
+		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
 		movedash = XMVector3TransformNormal(movedash, matRot);
 
-		spherePos.x += movedash.m128_f32[0];
-		spherePos.z += movedash.m128_f32[2];
+		playerPos.x += movedash.m128_f32[0];
+		playerPos.z += movedash.m128_f32[2];
 		if (fade > 0) {
 			fade -= 0.05f;
 		}
