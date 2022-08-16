@@ -36,6 +36,7 @@ void Player::Init()
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	//playerPos={ 0,-0.8,0 };
+	playerPos.y = -2;
 	playerObj->Quaternion();
 	SphereObj->Quaternion();
 	SphereObj->Update();
@@ -70,27 +71,23 @@ void Player::Move()
 		playerPos.x += moveUD.m128_f32[0];
 		playerPos.z += moveUD.m128_f32[2];
 		sphereAngle.m128_f32[0] += 10;
-		//sphereAngle.m128_f32[2] += moveAngleX.m128_f32[2];
 	}
 	else if (Input::GetInstance()->PushKey(DIK_S))
 	{
 		playerPos.x -= moveUD.m128_f32[0];
 		playerPos.z -= moveUD.m128_f32[2];
 		sphereAngle.m128_f32[0] -= 10;
-		//sphereAngle.m128_f32[2] -= moveAngleX.m128_f32[2];
 	}
 	else if (Input::GetInstance()->PushKey(DIK_D))
 	{
 		playerPos.x += moveLR.m128_f32[0];
 		playerPos.z += moveLR.m128_f32[2];
-		//sphereAngle.m128_f32[0] += moveAngleZ.m128_f32[0];
 		sphereAngle.m128_f32[2] += 10;
 	}
 	else if (Input::GetInstance()->PushKey(DIK_A))
 	{
 		playerPos.x -= moveLR.m128_f32[0];
 		playerPos.z -= moveLR.m128_f32[2];
-		//sphereAngle.m128_f32[0] -= moveAngleZ.m128_f32[0];
 		sphereAngle.m128_f32[2] -= 10;
 	}
 	sphere.radius = r;
@@ -102,7 +99,7 @@ void Player::Move()
 	obb.m_fLength[1] = 1;
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
-	playerPos.y = -2;
+
 }
 
 void Player::Ball()
@@ -127,18 +124,19 @@ void Player::Ball()
 
 void Player::Jump()
 {
-	//プレイヤーのみがジャンプするのでまだ
-	/*if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW) && JumpFlag == false)
+
+	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW) && JumpFlag == false)
 	{
 		JumpFlag = true;
 	}
 	if (JumpFlag == true) {
-		if (spherePos.y < 20)
+		if (playerPos.y < 40)
 		{
-			spherePos.y += jspeed;
+			playerPos.y += jspeed;
+			cameraAngle += jspeed;
 			jspeed += g;
 		}
-		if (spherePos.y >= 20)
+		if (playerPos.y >= 40)
 		{
 			jspeed = 0;
 			gFlag = true;
@@ -146,18 +144,20 @@ void Player::Jump()
 	}
 	if (gFlag == true) {
 		JumpFlag = false;
-		if (spherePos.y > 0)
+		if (playerPos.y > -2)
 		{
-			spherePos.y += jspeed;
+			playerPos.y += jspeed;
+			cameraAngle += jspeed;
 			jspeed -= g;
 		}
-		if (spherePos.y <= 0)
+		if (playerPos.y <= -2)
 		{
 			gFlag = false;
 			jspeed = 0;
-			spherePos.y = 0;
+			playerPos.y = -2;
+			cameraAngle = 0;
 		}
-	}*/
+	}
 
 }
 

@@ -32,6 +32,7 @@ public:
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMVECTOR GetSphereAngle() { return sphereAngle; }
 	XMVECTOR GetPlayerAngle() { return playerAngle; }
+	float GetCameraAngle() { return cameraAngle; }
 	Sphere GetSphere() { return sphere; }
 	OBB GetOBB() { return obb; }
 	Object3d* GetObject() { return SphereObj; }
@@ -57,6 +58,7 @@ private:
 	XMVECTOR playerAngle = { 0,0,0,0 };
 	XMVECTOR sphereAngle = { 0,0,0,0 };
 	XMFLOAT3 sphereSize = { 1,1,1 };
+	float cameraAngle = 0;
 	Sphere sphere;
 	float sinRad = 0;
 	float cosRad = 0;
@@ -68,7 +70,7 @@ private:
 	bool transFlag = false;
 	bool JumpFlag = false;
 	bool gFlag = false;
-	float g = 0.098;
+	float g = 0.0098;
 	float jspeed;
 	bool dashFlag = false;
 	float dashSpeed = 2.0f;

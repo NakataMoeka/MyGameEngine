@@ -174,7 +174,7 @@ void GameScene::Update()
 	player->Update();
 
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
-	//XMFLOAT3 cameraPos = { player->GetSpherePos().x,player->GetSpherePos().y,player->GetSpherePos().z - 20 };
+
 	//camera->SetEye(cameraPos);
 	//camera->SetTarget(player->GetSpherePos());
 	camera->Update();
@@ -223,7 +223,7 @@ void GameScene::DrawFront()
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
 	player->DrawSprite();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetSphereAngle().m128_f32[0]);
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetPlayerAngle().m128_f32[1]);
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
