@@ -175,6 +175,15 @@
     <ClCompile Include="others\SphereCollider.cpp">
       <Filter>Library\others\collision</Filter>
     </ClCompile>
+    <ClCompile Include="others\MeshCollider.cpp">
+      <Filter>Library\others\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Material.cpp">
+      <Filter>Library\3d\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Mesh.cpp">
+      <Filter>Library\3d\obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -384,6 +393,15 @@
     </ClInclude>
     <ClInclude Include="others\SphereCollider.h">
       <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\MeshCollider.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Material.h">
+      <Filter>Library\3d\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Mesh.h">
+      <Filter>Library\3d\obj</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

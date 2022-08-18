@@ -341,6 +341,7 @@ void Object3d::SetCollider(BaseCollider* collider)
 void Object3d::transformParent()
 {
 	//‚í‚©‚ç‚È‚¢‚¢‚¢‚¢‚¢‚¢\(^o^)/
+	//1‰ñ‚Ì‚Ý’Ê‚é
 
 	XMVECTOR scaleV, rotationV, positionV;
 	

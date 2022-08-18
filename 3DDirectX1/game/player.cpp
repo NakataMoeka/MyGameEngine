@@ -12,7 +12,7 @@ void Player::Initialize()
 {
 	model = model->Create("car", false);
 	playerObj = Object3d::Create(model);
-	model2 = model2->Create("bullet", false);
+	model2 = model2->Create("bullet", true);
 	SphereObj = Object3d::Create(model2);
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
