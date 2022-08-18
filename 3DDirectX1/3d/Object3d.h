@@ -80,6 +80,8 @@ public:
 
 	virtual void OnCollision(const CollisionInfo& info) {}
 
+	XMFLOAT3 GetWorldPosition();
+
 	const XMFLOAT3& GetPosition() { return position; }
 
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
@@ -99,6 +101,7 @@ public:
 	XMMATRIX GetMat() { return matWorld; }
 	XMMATRIX GetMatRot() { return matRot; }
 	XMMATRIX GetMatTrans() { return matTrans; }
+	inline Model* GetModel() { return model; }
 	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
 	void transformParent();
 protected:

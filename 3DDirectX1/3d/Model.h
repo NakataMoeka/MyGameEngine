@@ -30,6 +30,9 @@ public:
 	// •`‰æ
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
+	inline const std::vector<Mesh*>& GetMeshes() { return meshes; }
+
+
 private:
 
 
