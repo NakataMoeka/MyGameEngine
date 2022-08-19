@@ -87,7 +87,7 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		*closest = triangle.p0 + p0_p1 * v + p0_p2 * w;
 	}
 
-	bool Collision::CheackSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter)
+	bool Collision::CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter)
 	{
 		XMVECTOR p;
 		ClosestPtPoint2Triangle(sphere.center, triangle, &p);
@@ -100,7 +100,7 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		return true;
 	}
 
-	bool Collision::CheackRay2Plane(const Ray& ray, const Plane& plane, float* distance, DirectX::XMVECTOR* inter)
+	bool Collision::CheckRay2Plane(const Ray& ray, const Plane& plane, float* distance, DirectX::XMVECTOR* inter)
 	{
 		const float epsilon = 1.0e-5f;//誤差吸収用の微小な値
 		//面とレイの方向ベクトルの内積
@@ -124,7 +124,7 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 
 	}
 
-	bool Collision::CheackRay2Triangle(const Ray& ray, const Triangle& triangle, float* distance, DirectX::XMVECTOR* inter)
+	bool Collision::CheckRay2Triangle(const Ray& ray, const Triangle& triangle, float* distance, DirectX::XMVECTOR* inter)
 	{
 		//三角形が乗っている平面を算出
 		Plane plane;
@@ -132,7 +132,7 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		plane.normal = triangle.normal;
 		plane.distance = XMVector3Dot(triangle.normal, triangle.p0).m128_f32[0];
 		//レイと平面が当たってなければ当たっていない
-		if (!CheackRay2Plane(ray, plane, distance, &interPlane)) { return false; }
+		if (!CheckRay2Plane(ray, plane, distance, &interPlane)) { return false; }
 		//レイと平面が当たっていたので距離と交点が書き込まれた
 		//レイと平面の交点が三角形の内側にあるか判定
 		const float epsilon = 1.0e-5f;//誤差吸収用の微小な値
@@ -162,7 +162,7 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		return true;
 	}
 
-	bool Collision::CheackRay2Sphere(const Ray& ray, const Sphere& sphere, float* distance, DirectX::XMVECTOR* inter)
+	bool Collision::CheckRay2Sphere(const Ray& ray, const Sphere& sphere, float* distance, DirectX::XMVECTOR* inter)
 	{
 		XMVECTOR m = ray.start - sphere.center;
 		float b = XMVector3Dot(m, ray.dir).m128_f32[0];

@@ -183,7 +183,9 @@
     <ClCompile Include="others\CollisionPrimitive.cpp" />
     <ClCompile Include="others\Ease.cpp" />
     <ClCompile Include="others\MeshCollider.cpp" />
+    <ClCompile Include="others\RaycastHit.cpp" />
     <ClCompile Include="others\SphereCollider.cpp" />
+    <ClCompile Include="others\TouchableObject.cpp" />
     <ClCompile Include="scene\ClearScene.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\SceneManager.cpp" />
@@ -364,7 +366,9 @@
     <ClInclude Include="others\CollisionType.h" />
     <ClInclude Include="others\Ease.h" />
     <ClInclude Include="others\MeshCollider.h" />
+    <ClInclude Include="others\RaycastHit.h" />
     <ClInclude Include="others\SphereCollider.h" />
+    <ClInclude Include="others\TouchableObject.h" />
     <ClInclude Include="scene\ClearScene.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\SceneManager.h" />

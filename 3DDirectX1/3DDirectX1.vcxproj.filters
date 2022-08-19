@@ -184,6 +184,12 @@
     <ClCompile Include="3d\Mesh.cpp">
       <Filter>Library\3d\obj</Filter>
     </ClCompile>
+    <ClCompile Include="others\RaycastHit.cpp">
+      <Filter>Library\others\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="others\TouchableObject.cpp">
+      <Filter>Library\others\collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -402,6 +408,12 @@
     </ClInclude>
     <ClInclude Include="3d\Mesh.h">
       <Filter>Library\3d\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="others\RaycastHit.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\TouchableObject.h">
+      <Filter>Library\others\collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

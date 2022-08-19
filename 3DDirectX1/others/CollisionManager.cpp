@@ -2,6 +2,7 @@
 #include "BaseCollider.h"
 #include "Collision.h"
 #include"DebugText.h"
+#include "MeshCollider.h"
 
 using namespace DirectX;
 
@@ -34,14 +35,86 @@ void CollisionManager::CheckAllCollisions()
 				if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
 					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
 					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-					DebugText::GetInstance()->Printf(100, 20, 3.0f, "Hit");
 					colflag = true;
-					colCount++;
 				}
-			
+				else {
+					colflag = false;
+				}
 			}
-		
+			else if (colA->GetShapeType() == COLLISIONSHAPE_MESH &&
+				colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
+				MeshCollider* meshCollider = dynamic_cast<MeshCollider*>(colA);
+				Sphere* sphere = dynamic_cast<Sphere*>(colB);
+				DirectX::XMVECTOR inter;
+				if (meshCollider->CheckCollisionSphere(*sphere, &inter)) {
+					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
+					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+				}
+			}
+			else if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
+				colB->GetShapeType() == COLLISIONSHAPE_MESH) {
+				MeshCollider* meshCollider = dynamic_cast<MeshCollider*>(colB);
+				Sphere* sphere = dynamic_cast<Sphere*>(colA);
+				DirectX::XMVECTOR inter;
+				if (meshCollider->CheckCollisionSphere(*sphere, &inter)) {
+					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
+					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+				}
+			}
 		}
 	}
+}
+
+bool CollisionManager::Raycast(const Ray& ray, RaycastHit* hitInfo, float maxDistance)
+{
+	bool result = false;
+	std::forward_list<BaseCollider*>::iterator it;
+	std::forward_list<BaseCollider*>::iterator it_hit;
+	float distance = maxDistance;
+
+	XMVECTOR inter;
+
+	// 全てのコライダーと総当りチェック
+	it = colliders.begin();
+	for (; it != colliders.end(); ++it) {
+		BaseCollider* colA = *it;
+
+		if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE) {
+			Sphere* sphere = dynamic_cast<Sphere*>(colA);
+
+			float tempDistance;
+			XMVECTOR tempInter;
+
+			if (!Collision::CheckRay2Sphere(ray, *sphere, &tempDistance, &tempInter)) continue;
+			if (tempDistance >= distance) continue;
+
+			result = true;
+			distance = tempDistance;
+			inter = tempInter;
+			it_hit = it;
+		}
+		else if (colA->GetShapeType() == COLLISIONSHAPE_MESH) {
+			MeshCollider* meshCollider = dynamic_cast<MeshCollider*>(colA);
+
+			float tempDistance;
+			DirectX::XMVECTOR tempInter;
+			if (!meshCollider->CheckCollisionRay(ray, &tempDistance, &tempInter)) continue;
+			if (tempDistance >= distance) continue;
+
+			result = true;
+			distance = tempDistance;
+			inter = tempInter;
+			it_hit = it;
+		}
+	}
+
+	if (result && hitInfo) {
+		hitInfo->distance = distance;
+		hitInfo->inter = inter;
+		hitInfo->collider = *it_hit;
+		hitInfo->object = hitInfo->collider->GetObject3d();
+	}
+
+	return result;
 }
 

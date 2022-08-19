@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CollisionPrimitive.h"
+#include "RaycastHit.h"
 
 #include <d3d12.h>
 #include <forward_list>
@@ -24,6 +25,7 @@ public:// ƒƒ“ƒoŠÖ”
 
 	
 	void CheckAllCollisions();
+	bool Raycast(const Ray& ray, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
 	int GetColCount() { return colCount; }
 	bool GetColflag() { return colflag; }
 private:
