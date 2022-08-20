@@ -23,7 +23,7 @@ public:
 	void Initialize();//一回だけの初期化
 	void Init();//シーンチェンジ時にもする初期化
 	void Update();
-
+	void OnCollision(const CollisionInfo& info);
 	void Draw();
 	void DrawSprite();
 
@@ -79,4 +79,7 @@ private:
 	int dashTime = 0;
 	const int dashTimeMax = 20;
 	float fade = 1;
+	bool onGround = true;
+	// 落下ベクトル
+	DirectX::XMVECTOR fallV;
 };

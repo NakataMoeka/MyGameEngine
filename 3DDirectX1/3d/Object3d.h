@@ -104,6 +104,8 @@ public:
 	inline Model* GetModel() { return model; }
 	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
 	void transformParent();
+	// コライダー
+	BaseCollider* collider = nullptr;
 protected:
 	const char* name = nullptr;
 	// デバイス
@@ -140,7 +142,6 @@ protected:
 	// ビルボード
 	bool isBillboard = false;
 
-	// コライダー
-	BaseCollider* collider = nullptr;
+
 };
 

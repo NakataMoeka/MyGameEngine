@@ -26,6 +26,8 @@ public:// ƒƒ“ƒoŠÖ”
 	
 	void CheckAllCollisions();
 	bool Raycast(const Ray& ray, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
+	bool Raycast(const Ray& ray, unsigned short attribute, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
+
 	int GetColCount() { return colCount; }
 	bool GetColflag() { return colflag; }
 private:

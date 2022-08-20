@@ -360,6 +360,7 @@
     <ClInclude Include="input\input.h" />
     <ClInclude Include="others\BaseCollider.h" />
     <ClInclude Include="others\Collision.h" />
+    <ClInclude Include="others\CollisionAttribute.h" />
     <ClInclude Include="others\CollisionInfo.h" />
     <ClInclude Include="others\CollisionManager.h" />
     <ClInclude Include="others\CollisionPrimitive.h" />

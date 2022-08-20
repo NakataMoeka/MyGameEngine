@@ -1,6 +1,9 @@
 #include "player.h"
 #include"input.h"
 #include <cassert>
+#include "SphereCollider.h"
+#include "CollisionManager.h"
+#include "CollisionAttribute.h"
 using namespace DirectX;
 Player::Player()
 {
@@ -21,7 +24,11 @@ void Player::Initialize()
 
 	dashSprite = Sprite::CreateSprite(2, { 0,0 });
 
-
+	// コライダーの追加
+	float radius = 0.6f;
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
+	SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);
+	SphereObj->SetCollider(new SphereCollider);
 }
 
 void Player::Init()
@@ -215,6 +222,10 @@ void Player::Update()
 	playerObj->SetScale({ 1,1,1 });
 	playerObj->Update();
 	dashSprite->SetColor({1, 1, 1, fade});
+}
+
+void Player::OnCollision(const CollisionInfo& info)
+{
 }
 
 

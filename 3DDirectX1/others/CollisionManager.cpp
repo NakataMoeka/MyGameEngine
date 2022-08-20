@@ -67,17 +67,26 @@ void CollisionManager::CheckAllCollisions()
 
 bool CollisionManager::Raycast(const Ray& ray, RaycastHit* hitInfo, float maxDistance)
 {
+	return Raycast(ray, 0xffff, hitInfo, maxDistance);
+}
+
+bool CollisionManager::Raycast(const Ray& ray, unsigned short attribute, RaycastHit* hitInfo, float maxDistance)
+{
 	bool result = false;
 	std::forward_list<BaseCollider*>::iterator it;
 	std::forward_list<BaseCollider*>::iterator it_hit;
 	float distance = maxDistance;
-
 	XMVECTOR inter;
 
 	// 全てのコライダーと総当りチェック
 	it = colliders.begin();
 	for (; it != colliders.end(); ++it) {
 		BaseCollider* colA = *it;
+
+		// 属性が合わなければスキップ
+		if (!(colA->attribute & attribute)) {
+			continue;
+		}
 
 		if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE) {
 			Sphere* sphere = dynamic_cast<Sphere*>(colA);

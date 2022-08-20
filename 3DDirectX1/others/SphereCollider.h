@@ -22,6 +22,12 @@ public:
 
 	void Update() override;
 
+	inline const XMVECTOR& GetOffset() { return offset; }
+
+	inline void SetOffset(const XMVECTOR& offset) { this->offset = offset; }
+
+	inline float GetRadius() { return radius; }
+
 	inline void SetRadius(float radius) { this->radius = radius; }
 
 private:
