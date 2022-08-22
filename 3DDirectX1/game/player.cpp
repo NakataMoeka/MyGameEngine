@@ -13,9 +13,9 @@ Player::~Player()
 }
 void Player::Initialize()
 {
-	model = model->Create("car", false);
+	model = Model::Create("car", false);
 	playerObj = Object3d::Create(model);
-	model2 = model2->Create("bullet", true);
+	model2 = Model::Create("bullet", true);
 	SphereObj = Object3d::Create(model2);
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
@@ -25,10 +25,10 @@ void Player::Initialize()
 	dashSprite = Sprite::CreateSprite(2, { 0,0 });
 
 	// コライダーの追加
-	float radius = 0.6f;
+	/*float radius = 0.6f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
-	SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);
-	SphereObj->SetCollider(new SphereCollider);
+	SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);*/
+
 }
 
 void Player::Init()
@@ -211,6 +211,7 @@ void Player::Update()
 	Jump();
 	Ball();
 	Dash();
+
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
 	SphereObj->SetRotation(sphereAngle);
@@ -226,6 +227,7 @@ void Player::Update()
 
 void Player::OnCollision(const CollisionInfo& info)
 {
+	SphereObj->OnCollision(info);
 }
 
 

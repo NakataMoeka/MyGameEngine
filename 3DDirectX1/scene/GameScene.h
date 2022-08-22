@@ -16,7 +16,9 @@
 #include"LightGroup.h"
 #include"player.h"
 #include"GameObject.h"
-
+class CollisionManager;
+class player2;
+class TouchableObject;
 class GameScene
 {
 private:
@@ -61,7 +63,7 @@ private: // メンバ変数
 	ParticleManager* particleMan = nullptr;
 	Sprite* sprite = nullptr;
 
-	Object3d* object3d = nullptr;
+	//Object3d* object3d = nullptr;
 	Model* model = nullptr;
 
 	FbxObject3d* object3d2 = nullptr;
@@ -70,12 +72,15 @@ private: // メンバ変数
 	Object3d* object3d3 = nullptr;
 	Model* model3 = nullptr;
 
-	Object3d* object3d4 = nullptr;
+	TouchableObject* object3d4 = nullptr;
 	Model* model4 = nullptr;
 
 	LightGroup* lightGroup = nullptr;
 
+	CollisionManager* colMan = nullptr;
+
 	Player* player;
+	player2* object3d = nullptr;
 
 	GameObject* gameObject;
 

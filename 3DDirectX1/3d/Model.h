@@ -23,7 +23,7 @@ public:
 
 	static void StaticInitialize(ID3D12Device* dev);
 
-	Model* Create(const std::string& modelname, bool smoothing = false);
+	static Model* Create(const std::string& modelname, bool smoothing = false);
 
 	void Initialize(const std::string& modelname, bool smoothing);
 	

@@ -190,6 +190,9 @@
     <ClCompile Include="others\TouchableObject.cpp">
       <Filter>Library\others\collision</Filter>
     </ClCompile>
+    <ClCompile Include="game\player2.cpp">
+      <Filter>Game\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -417,6 +420,9 @@
     </ClInclude>
     <ClInclude Include="others\CollisionAttribute.h">
       <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="game\player2.h">
+      <Filter>Game\player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

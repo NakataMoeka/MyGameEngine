@@ -6,6 +6,10 @@
 #include "FbxObject.h"
 #include"input.h"
 #include"DebugText.h"
+#include"CollisionManager.h"
+#include"player2.h"
+#include"TouchableObject.h"
+#include"MeshCollider.h"
 GameScene::GameScene()
 {
 }
@@ -59,20 +63,21 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	FbxObject3d::SetCamera(camera);
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
-
+	colMan=CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	model = model->Create("bullet", false);
+	model3 = Model::Create("skydome", true);
+	model4 = Model::Create("ground", false);
+	object3d3 = Object3d::Create(model3);
+	object3d4 = TouchableObject::Create(model4);
+	model = Model::Create("bullet", false);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
-	object3d = Object3d::Create(model);
+	object3d = player2::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
 	object3d2->SetModel(model2);
-	model3 = model3->Create("skydome", true);
-	model4 = model4->Create("ground", false);
-	object3d3 = Object3d::Create(model3);
-	object3d4 = Object3d::Create(model4);
+
 
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
@@ -81,7 +86,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	object3d2->SetRotation({ 0,45,0 });
 
-	object3d->Update();
+	//object3d->Update();
 
 	//object3d2->Update();
 
@@ -138,40 +143,41 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
-	for (int i = 0; i < 2; i++) {
-		IsHit[i] = false;
-	}
+	//for (int i = 0; i < 2; i++) {
+	//	IsHit[i] = false;
+	//}
 
-	if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(0))) {
-		IsHit[0] = true;
-		HitCount++;
-		//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-	}
-	if (IsHit[0] == true) {
-		gameObject->GetObject(0)->SetParent(player->GetObject());
-	}
-	if (HitCount == 1) {
-		gameObject->GetObject(0)->transformParent();
-		HitCount = 0;
-	}
-	if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(1))) {
-		IsHit[1] = true;
-		HitCount++;
-		//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-	}
-	if (IsHit[1] == true) {
-		gameObject->GetObject(1)->SetParent(player->GetObject());
-	}
-	if (HitCount == 1) {
-		gameObject->GetObject(1)->transformParent();
-		HitCount = 0;
-	}
+	//if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(0))) {
+	//	IsHit[0] = true;
+	//	HitCount++;
+	//	//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	//}
+	//if (IsHit[0] == true) {
+	//	gameObject->GetObject(0)->SetParent(player->GetObject());
+	//}
+	//if (HitCount == 1) {
+	//	gameObject->GetObject(0)->transformParent();
+	//	HitCount = 0;
+	//}
+	//if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(1))) {
+	//	IsHit[1] = true;
+	//	HitCount++;
+	//	//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	//}
+	//if (IsHit[1] == true) {
+	//	gameObject->GetObject(1)->SetParent(player->GetObject());
+	//}
+	//if (HitCount == 1) {
+	//	gameObject->GetObject(1)->transformParent();
+	//	HitCount = 0;
+	//}
+
 	object3d3->SetScale({ 2,2,2 });
 	object3d4->SetScale({ 2,2,2 });
-	object3d4->SetPosition({ 0,-4,0 });
-	object3d->SetRotation({ a,0,b });
+	object3d4->SetPosition({ 0,-2,0 });
+	//object3d->SetRotation({ a,0,b });
 	
-	player->Update();
+	//player->Update();
 
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
 
@@ -184,11 +190,22 @@ void GameScene::Update()
 	particleMan->Update();
 	object3d2->SetPosition(playerPosition);
 	object3d2->SetRotation({ 0,90,0 });
+	object3d4->Update();
 	object3d->Update();
 	object3d2->Update();
 	object3d3->Update();
-	object3d4->Update();
+
 	lightGroup->Update();
+	Ray ray;
+	ray.start = { 10.0f, 0.5f, 0.0f, 1 };
+	ray.dir = { 0,-1,0,0 };
+	RaycastHit raycastHit;
+
+	if (colMan->Raycast(ray, &raycastHit)) {
+
+		DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	}
+	colMan->CheckAllCollisions();
 }
 
 void GameScene::DrawBG()
@@ -198,6 +215,7 @@ void GameScene::DrawBG()
 	sprite->Draw();
 	sprite->PostDraw();
 	dxCommon->ClearDepthBuffer();
+	colMan->CheckAllCollisions();
 }
 
 void GameScene::Draw()
@@ -208,9 +226,9 @@ void GameScene::Draw()
 	object3d3->Draw();
 	object3d4->Draw();
 
-	//object3d->Draw();
+	object3d->Draw();
 	//object3d2->Draw();
-	player->Draw();
+	//player->Draw();
 	gameObject->Draw();
 
 	Object3d::PostDraw();
@@ -223,7 +241,7 @@ void GameScene::DrawFront()
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
 	player->DrawSprite();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", player->GetPlayerAngle().m128_f32[1]);
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", object3d->GetRotation().m128_f32[1]);
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
