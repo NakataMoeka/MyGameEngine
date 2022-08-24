@@ -1,5 +1,4 @@
 #include "SphereCollider.h"
-//#include "Object3d.h"
 
 using namespace DirectX;
 

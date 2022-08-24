@@ -53,8 +53,8 @@ private:
 
 	Sprite* dashSprite;
 
-	XMFLOAT3 playerPos = { 1,0,0 };
-	XMFLOAT3 spherePos = { 1,0,0 };
+	XMFLOAT3 playerPos = { 0,0,0 };
+	XMFLOAT3 spherePos = { 0,0,0 };
 	XMVECTOR playerAngle = { 0,0,0,0 };
 	XMVECTOR sphereAngle = { 0,0,0,0 };
 	XMFLOAT3 sphereSize = { 1,1,1 };

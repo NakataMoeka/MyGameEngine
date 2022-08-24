@@ -98,7 +98,7 @@ public:
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
 	void SetParent(Object3d* parent) { this->parent = parent; }
-	XMMATRIX GetMat() { return matWorld; }
+
 	XMMATRIX GetMatRot() { return matRot; }
 	XMMATRIX GetMatTrans() { return matTrans; }
 	inline Model* GetModel() { return model; }

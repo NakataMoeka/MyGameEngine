@@ -35,10 +35,15 @@ void CollisionManager::CheckAllCollisions()
 				if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
 					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
 					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-					
-					
-					
+					colflag = true;
+					colCount++;
 					 DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+					 if (colflag==true) {
+						 colA->GetObject3d()->SetParent(colB->GetObject3d());
+					 }
+					 if (colCount == 1) {
+						 colA->GetObject3d()->transformParent();
+					 }
 				}
 			}
 			else if (colA->GetShapeType() == COLLISIONSHAPE_MESH &&

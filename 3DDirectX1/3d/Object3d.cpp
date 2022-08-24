@@ -239,7 +239,9 @@ Object3d* Object3d::Create(Model* model)
 
 bool Object3d::Initialize()
 {
+
 	assert(dev);
+	name = typeid(*this).name();
 		HRESULT result;
 
 	result = dev->CreateCommittedResource(
@@ -339,6 +341,7 @@ void Object3d::SetCollider(BaseCollider* collider)
 	this->collider = collider;
 	// コリジョンマネージャに追加
 	CollisionManager::GetInstance()->AddCollider(collider);
+	collider->Update();
 }
 
 XMFLOAT3 Object3d::GetWorldPosition()

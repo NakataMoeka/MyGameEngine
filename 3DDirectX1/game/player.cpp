@@ -42,13 +42,14 @@ void Player::Init()
 	//playerPos={ 0,-0.8,0 };
 	playerPos.y = -2;
 	//SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);
+		// コライダーの追加
+	float radius = 3.0f;
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
+
 	playerObj->Quaternion();
 	SphereObj->Quaternion();
 	SphereObj->Update();
 	playerObj->Update();
-	// コライダーの追加
-	float radius = 3.0f;
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
 
 }
 
