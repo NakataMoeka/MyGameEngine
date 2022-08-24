@@ -304,7 +304,10 @@ void Object3d::Update()
 	constMap->world = matWorld;
 	constMap->cameraPos = cameraPos;
 	constBuffB0->Unmap(0, nullptr);
-	
+	// “–‚½‚è”»’èXV
+	if (collider) {
+		collider->Update();
+	}
 }
 
 void Object3d::Draw()

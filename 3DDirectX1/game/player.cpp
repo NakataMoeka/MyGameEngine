@@ -24,10 +24,7 @@ void Player::Initialize()
 
 	dashSprite = Sprite::CreateSprite(2, { 0,0 });
 
-	// コライダーの追加
-	/*float radius = 0.6f;
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
-	SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);*/
+
 
 }
 
@@ -44,10 +41,15 @@ void Player::Init()
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	//playerPos={ 0,-0.8,0 };
 	playerPos.y = -2;
+	//SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);
 	playerObj->Quaternion();
 	SphereObj->Quaternion();
 	SphereObj->Update();
 	playerObj->Update();
+	// コライダーの追加
+	float radius = 3.0f;
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
+
 }
 
 
@@ -97,6 +99,7 @@ void Player::Move()
 		playerPos.z -= moveLR.m128_f32[2];
 		sphereAngle.m128_f32[2] -= 10;
 	}
+
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	obb.m_NormaDirect[0] = { SphereObj->GetMatRot().r[0].m128_f32[0],SphereObj->GetMatRot().r[0].m128_f32[1] ,SphereObj->GetMatRot().r[0].m128_f32[2] };

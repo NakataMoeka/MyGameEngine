@@ -7,7 +7,6 @@
 #include"input.h"
 #include"DebugText.h"
 #include"CollisionManager.h"
-#include"player2.h"
 #include"TouchableObject.h"
 #include"MeshCollider.h"
 GameScene::GameScene()
@@ -73,7 +72,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	object3d4 = TouchableObject::Create(model4);
 	model = Model::Create("bullet", false);
 	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
-	object3d = player2::Create(model);
+	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
 	object3d2->SetModel(model2);
@@ -174,10 +173,10 @@ void GameScene::Update()
 
 	object3d3->SetScale({ 2,2,2 });
 	object3d4->SetScale({ 2,2,2 });
-	object3d4->SetPosition({ 0,-2,0 });
+	object3d4->SetPosition({ 0,-4,0 });
 	//object3d->SetRotation({ a,0,b });
 	
-	//player->Update();
+	player->Update();
 
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
 
@@ -191,20 +190,12 @@ void GameScene::Update()
 	object3d2->SetPosition(playerPosition);
 	object3d2->SetRotation({ 0,90,0 });
 	object3d4->Update();
-	object3d->Update();
+	//object3d->Update();
 	object3d2->Update();
 	object3d3->Update();
 
 	lightGroup->Update();
-	Ray ray;
-	ray.start = { 10.0f, 0.5f, 0.0f, 1 };
-	ray.dir = { 0,-1,0,0 };
-	RaycastHit raycastHit;
 
-	if (colMan->Raycast(ray, &raycastHit)) {
-
-		DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-	}
 	colMan->CheckAllCollisions();
 }
 
@@ -226,9 +217,9 @@ void GameScene::Draw()
 	object3d3->Draw();
 	object3d4->Draw();
 
-	object3d->Draw();
+	//object3d->Draw();
 	//object3d2->Draw();
-	//player->Draw();
+	player->Draw();
 	gameObject->Draw();
 
 	Object3d::PostDraw();

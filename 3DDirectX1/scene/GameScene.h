@@ -17,7 +17,6 @@
 #include"player.h"
 #include"GameObject.h"
 class CollisionManager;
-class player2;
 class TouchableObject;
 class GameScene
 {
@@ -63,7 +62,7 @@ private: // メンバ変数
 	ParticleManager* particleMan = nullptr;
 	Sprite* sprite = nullptr;
 
-	//Object3d* object3d = nullptr;
+	Object3d* object3d = nullptr;
 	Model* model = nullptr;
 
 	FbxObject3d* object3d2 = nullptr;
@@ -80,7 +79,7 @@ private: // メンバ変数
 	CollisionManager* colMan = nullptr;
 
 	Player* player;
-	player2* object3d = nullptr;
+
 
 	GameObject* gameObject;
 

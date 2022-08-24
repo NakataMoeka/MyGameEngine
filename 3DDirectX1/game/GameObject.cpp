@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "SphereCollider.h"
-#include "CollisionManager.h"
-#include "CollisionAttribute.h"
+//#include "CollisionManager.h"
+//#include "CollisionAttribute.h"
 using namespace DirectX;
 GameObject::GameObject()
 {
@@ -40,7 +40,9 @@ void GameObject::Init()
 			//obb[i].m_fLength[2] = 0.5;
 			//obb[i].m_Pos = { position[i].x, position[i].y, position[i].z};
 		
-			
+				// コライダーの追加
+			float radius = 2.0f;
+			cube[0]->SetCollider(new SphereCollider(XMVECTOR({0,0,0,0}), radius));
 		
 	}
 }
