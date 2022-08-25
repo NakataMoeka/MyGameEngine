@@ -40,19 +40,19 @@ public:
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetTransFlag(bool transFlag) { return this->transFlag = transFlag; }
 	float GetJspeed() { return jspeed; }
-private:
+private://プレイヤーの動き系
 	void Move();//移動
 	void Ball();//ボール関係
 	void Jump();//ジャンプ
 	void Dash();//ダッシュ
-private:
+private://変数
 	Object3d* playerObj;
 	Model* model;
 	Object3d* SphereObj;
 	Model* model2;
 
 	Sprite* dashSprite;
-
+	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
 	XMFLOAT3 spherePos = { 0,0,0 };
 	XMVECTOR playerAngle = { 0,0,0,0 };
@@ -60,8 +60,6 @@ private:
 	XMFLOAT3 sphereSize = { 1,1,1 };
 	float cameraAngle = 0;
 	Sphere sphere;
-	float sinRad = 0;
-	float cosRad = 0;
 	float radAD = 0.0f;
 	float radWS = 0.0f;
 	OBB obb;

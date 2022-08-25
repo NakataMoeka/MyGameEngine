@@ -41,11 +41,11 @@ void Player::Init()
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	//playerPos={ 0,-0.8,0 };
 	playerPos.y = -2;
-	//SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);
+
 		// コライダーの追加
 	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
-
+	SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);
 	playerObj->Quaternion();
 	SphereObj->Quaternion();
 	SphereObj->Update();
@@ -136,39 +136,104 @@ void Player::Ball()
 void Player::Jump()
 {
 
-	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW) && JumpFlag == false)
-	{
-		JumpFlag = true;
+	//if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW) && JumpFlag == false)
+	//{
+	//	JumpFlag = true;
+	//}
+	//if (JumpFlag == true) {
+	//	if (playerPos.y < 40)
+	//	{
+	//		playerPos.y += jspeed;
+	//		cameraAngle += jspeed;
+	//		jspeed += g;
+	//	}
+	//	if (playerPos.y >= 40)
+	//	{
+	//		jspeed = 0;
+	//		gFlag = true;
+	//	}
+	//}
+	//if (gFlag == true) {
+	//	JumpFlag = false;
+	//	if (playerPos.y > -2)
+	//	{
+	//		playerPos.y += jspeed;
+	//		cameraAngle += jspeed;
+	//		jspeed -= g;
+	//	}
+	//	if (playerPos.y <= -2)
+	//	{
+	//		gFlag = false;
+	//		jspeed = 0;
+	//		playerPos.y = -2;
+	//		cameraAngle = 0;
+	//	}
+	//}
+		// 落下処理
+	if (!onGround) {
+		// 下向き加速度
+		const float fallAcc = -0.01f;
+		const float fallVYMin = -0.5f;
+		// 加速
+		fallV.m128_f32[1] = max(fallV.m128_f32[1] + fallAcc, fallVYMin);
+		// 移動
+		playerPos.x += fallV.m128_f32[0];
+		playerPos.y += fallV.m128_f32[1];
+		playerPos.z += fallV.m128_f32[2];
 	}
-	if (JumpFlag == true) {
-		if (playerPos.y < 40)
-		{
-			playerPos.y += jspeed;
-			cameraAngle += jspeed;
-			jspeed += g;
+	// ジャンプ操作
+	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+		onGround = false;
+		const float jumpVYFist = 0.2f;
+		fallV = { 0, jumpVYFist, 0, 0 };
+	}
+	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(SphereObj->collider);
+	assert(sphereCollider);
+
+	//// 球の上端から球の下端までのレイキャスト
+	Ray ray;
+	ray.start = sphereCollider->center;
+	ray.start.m128_f32[1] += sphereCollider->GetRadius();
+	ray.dir = { 0,-1,0,0 };
+	RaycastHit raycastHit;
+
+	// 接地状態
+	if (onGround) {
+		// スムーズに坂を下る為の吸着距離
+		const float adsDistance = 0.2f;
+		// 接地を維持
+		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
+			onGround = true;
+			//playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+			// 行列の更新など
+			playerObj->SetPosition(playerPos);
+			playerObj->SetRotation(playerAngle);
+			playerObj->Quaternion();
+			playerObj->SetScale({ 1,1,1 });
+			playerObj->Update();
+
 		}
-		if (playerPos.y >= 40)
-		{
-			jspeed = 0;
-			gFlag = true;
+		// 地面がないので落下
+		else {
+			onGround = false;
+			fallV = {};
 		}
 	}
-	if (gFlag == true) {
-		JumpFlag = false;
-		if (playerPos.y > -2)
-		{
-			playerPos.y += jspeed;
-			cameraAngle += jspeed;
-			jspeed -= g;
-		}
-		if (playerPos.y <= -2)
-		{
-			gFlag = false;
-			jspeed = 0;
-			playerPos.y = -2;
-			cameraAngle = 0;
+	// 落下状態
+	else if (fallV.m128_f32[1] <= 0.0f) {
+		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f)) {
+			// 着地
+			onGround = true;
+			//playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+			// 行列の更新など
+			playerObj->SetPosition(playerPos);
+			playerObj->SetRotation(playerAngle);
+			playerObj->Quaternion();
+			playerObj->SetScale({ 1,1,1 });
+			playerObj->Update();
 		}
 	}
+
 
 }
 

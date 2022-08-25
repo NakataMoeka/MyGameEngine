@@ -22,13 +22,13 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
-	float radius = 2.0f;
-	cube[0]->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
 
 	for (int i = 0; i < 2; i++) {
 			//positionは何なのかcenterには何を代入するのか
 				// コライダーの追加
-	
+		float radius = 2.0f;
+		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
+
 		cube[i]->SetPosition(position[i]);
 		cube[i]->SetScale(size);
 		cube[i]->Quaternion();

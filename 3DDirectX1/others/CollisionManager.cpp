@@ -35,14 +35,17 @@ void CollisionManager::CheckAllCollisions()
 				if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
 					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
 					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+					//当たったらコライダーを削除したい(オブジェクトの)
 					colflag = true;
 					colCount++;
-					 DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+					 //DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+					 DebugText::GetInstance()->Printf(100, 60, 3.0f, "%d",colCount);
 					 if (colflag==true) {
 						 colA->GetObject3d()->SetParent(colB->GetObject3d());
 					 }
 					 if (colCount == 1) {
 						 colA->GetObject3d()->transformParent();
+						 colCount = 0;
 					 }
 				}
 			}
