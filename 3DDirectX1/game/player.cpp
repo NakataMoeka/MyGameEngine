@@ -21,9 +21,9 @@ void Player::Initialize()
 	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Sprite::LoadTexture(2, L"Resources/dash.png");
-
+	Sprite::LoadTexture(3, L"Resources/UI/sizeUI.png");
 	dashSprite = Sprite::CreateSprite(2, { 0,0 });
-
+	sizeSprite = Sprite::CreateSprite(3, { 100,100 });
 
 
 }
@@ -139,39 +139,7 @@ void Player::Ball()
 void Player::Jump()
 {
 
-	//if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW) && JumpFlag == false)
-	//{
-	//	JumpFlag = true;
-	//}
-	//if (JumpFlag == true) {
-	//	if (playerPos.y < 40)
-	//	{
-	//		playerPos.y += jspeed;
-	//		cameraAngle += jspeed;
-	//		jspeed += g;
-	//	}
-	//	if (playerPos.y >= 40)
-	//	{
-	//		jspeed = 0;
-	//		gFlag = true;
-	//	}
-	//}
-	//if (gFlag == true) {
-	//	JumpFlag = false;
-	//	if (playerPos.y > -2)
-	//	{
-	//		playerPos.y += jspeed;
-	//		cameraAngle += jspeed;
-	//		jspeed -= g;
-	//	}
-	//	if (playerPos.y <= -2)
-	//	{
-	//		gFlag = false;
-	//		jspeed = 0;
-	//		playerPos.y = -2;
-	//		cameraAngle = 0;
-	//	}
-	//}
+
 		// —Ž‰ºˆ—
 	if (!onGround) {
 		// ‰ºŒü‚«‰Á‘¬“x
@@ -284,6 +252,8 @@ void Player::Update()
 	Ball();
 	Dash();
 
+	sizeSprite->SetAnchorPoint({ 0.5, 0.5 });
+
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
 	SphereObj->SetRotation(sphereAngle);
@@ -312,6 +282,7 @@ void Player::Draw()
 
 void Player::DrawSprite()
 {
+	sizeSprite->Draw();
 	if (dashFlag == true) {
 		dashSprite->Draw();
 	}

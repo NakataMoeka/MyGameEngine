@@ -3,6 +3,7 @@
 #include"Model.h"
 #include"Collision.h"
 #include"Sprite.h"
+#include"SafeDelete.h"
 /// <summary>
 /// プレイヤー関連のクラス
 /// </summary>
@@ -46,12 +47,13 @@ private://プレイヤーの動き系
 	void Jump();//ジャンプ
 	void Dash();//ダッシュ
 private://変数
-	Object3d* playerObj;
-	Model* model;
-	Object3d* SphereObj;
-	Model* model2;
+	Object3d* playerObj=nullptr;
+	Model* model=nullptr;
+	Object3d* SphereObj=nullptr;
+	Model* model2=nullptr;
 
-	Sprite* dashSprite;
+	Sprite* dashSprite=nullptr;
+	Sprite* sizeSprite=nullptr;
 	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
 	XMFLOAT3 spherePos = { 0,0,0 };
