@@ -60,6 +60,7 @@ private://•Ï”
 	XMFLOAT3 sphereSize = { 1,1,1 };
 	float cameraAngle = 0;
 	Sphere sphere;
+	
 	float radAD = 0.0f;
 	float radWS = 0.0f;
 	OBB obb;

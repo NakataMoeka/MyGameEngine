@@ -18,6 +18,13 @@ public:
 	{
 		shapeType = COLLISIONSHAPE_SPHERE;
 	}
+	//‹…‚Å‚àŽw’èOK
+	SphereCollider(Sphere sphere)
+		: offset(sphere.center), radius(sphere.radius)
+	{
+		
+		shapeType = COLLISIONSHAPE_SPHERE;
+	}
 
 
 	void Update() override;

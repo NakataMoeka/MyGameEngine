@@ -142,34 +142,34 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
-	//for (int i = 0; i < 2; i++) {
-	//	IsHit[i] = false;
-	//}
+	for (int i = 0; i < 2; i++) {
+		IsHit[i] = false;
+	}
 
-	//if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(0))) {
-	//	IsHit[0] = true;
-	//	HitCount++;
-	//	//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-	//}
-	//if (IsHit[0] == true) {
-	//	gameObject->GetObject(0)->SetParent(player->GetObject());
-	//}
-	//if (HitCount == 1) {
-	//	gameObject->GetObject(0)->transformParent();
-	//	HitCount = 0;
-	//}
-	//if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(1))) {
-	//	IsHit[1] = true;
-	//	HitCount++;
-	//	//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-	//}
-	//if (IsHit[1] == true) {
-	//	gameObject->GetObject(1)->SetParent(player->GetObject());
-	//}
-	//if (HitCount == 1) {
-	//	gameObject->GetObject(1)->transformParent();
-	//	HitCount = 0;
-	//}
+	if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(0))) {
+		IsHit[0] = true;
+		HitCount++;
+		//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	}
+	if (IsHit[0] == true) {
+		gameObject->GetObject(0)->SetParent(player->GetObject());
+	}
+	if (HitCount == 1) {
+		gameObject->GetObject(0)->transformParent();
+		HitCount = 0;
+	}
+	if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(1))) {
+		IsHit[1] = true;
+		HitCount++;
+		//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	}
+	if (IsHit[1] == true) {
+		gameObject->GetObject(1)->SetParent(player->GetObject());
+	}
+	if (HitCount == 1) {
+		gameObject->GetObject(1)->transformParent();
+		HitCount = 0;
+	}
 
 	object3d3->SetScale({ 2,2,2 });
 	object3d4->SetScale({ 2,2,2 });
@@ -195,7 +195,9 @@ void GameScene::Update()
 	object3d3->Update();
 
 	lightGroup->Update();
-
+	//for (int i = 0; i < 2; i++) {
+	//	colMan->ColSphere(gameObject->GetObject(i)->collider, player->GetObject()->collider);
+	//}
 	colMan->CheckAllCollisions();
 }
 

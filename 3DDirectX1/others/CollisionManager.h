@@ -25,6 +25,8 @@ public:// メンバ関数
 
 	
 	void CheckAllCollisions();
+	//オブジェクト指定できる球と球の当たり判定
+	void ColSphere(BaseCollider*colA,BaseCollider* colB);
 	bool Raycast(const Ray& ray, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
 	bool Raycast(const Ray& ray, unsigned short attribute, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
 

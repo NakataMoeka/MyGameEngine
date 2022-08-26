@@ -40,12 +40,15 @@ void Player::Init()
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	//playerPos={ 0,-0.8,0 };
-	playerPos.y = -2;
+	playerPos.y = 0;
 
 		// コライダーの追加
 	float radius = 3.0f;
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
-	SphereObj->collider->SetAttribute(COLLISION_ATTR_ALLIES);
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
+	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
+
+	playerObj->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
+	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	playerObj->Quaternion();
 	SphereObj->Quaternion();
 	SphereObj->Update();
@@ -187,7 +190,7 @@ void Player::Jump()
 		const float jumpVYFist = 0.2f;
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
-	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(SphereObj->collider);
+	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(playerObj->GetCollider());
 	assert(sphereCollider);
 
 	//// 球の上端から球の下端までのレイキャスト

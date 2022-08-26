@@ -102,6 +102,7 @@ public:
 	XMMATRIX GetMatRot() { return matRot; }
 	XMMATRIX GetMatTrans() { return matTrans; }
 	inline Model* GetModel() { return model; }
+	BaseCollider* GetCollider() { return collider; }
 	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
 	void transformParent();
 	// コライダー
