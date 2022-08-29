@@ -175,13 +175,18 @@ void Player::Jump()
 		// 接地を維持
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
-			//playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 			// 行列の更新など
 			playerObj->SetPosition(playerPos);
 			playerObj->SetRotation(playerAngle);
 			playerObj->Quaternion();
 			playerObj->SetScale({ 1,1,1 });
 			playerObj->Update();
+			SphereObj->SetPosition(spherePos);
+			SphereObj->SetScale(sphereSize);
+			SphereObj->SetRotation(sphereAngle);
+			SphereObj->Quaternion();
+			SphereObj->Update();
 
 		}
 		// 地面がないので落下
@@ -195,13 +200,18 @@ void Player::Jump()
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f)) {
 			// 着地
 			onGround = true;
-			//playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 			// 行列の更新など
 			playerObj->SetPosition(playerPos);
 			playerObj->SetRotation(playerAngle);
 			playerObj->Quaternion();
 			playerObj->SetScale({ 1,1,1 });
 			playerObj->Update();
+			SphereObj->SetPosition(spherePos);
+			SphereObj->SetScale(sphereSize);
+			SphereObj->SetRotation(sphereAngle);
+			SphereObj->Quaternion();
+			SphereObj->Update();
 		}
 	}
 
