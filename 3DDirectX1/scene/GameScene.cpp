@@ -173,9 +173,11 @@ void GameScene::Update()
 
 	object3d3->SetScale({ 2,2,2 });
 	object3d4->SetScale({ 2,2,2 });
-	object3d4->SetPosition({ 0,-4,0 });
+	object3d4->SetPosition({ 0,0,0 });
 	//object3d->SetRotation({ a,0,b });
-
+	object3d4->SetRotation({ 5,0,0 });
+	object3d4->Quaternion();
+	object3d4->Update();
 	player->Update();
 
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
@@ -189,9 +191,7 @@ void GameScene::Update()
 	particleMan->Update();
 	object3d2->SetPosition(playerPosition);
 	object3d2->SetRotation({ 0,90,0 });
-	object3d4->SetRotation({ 5,0,0 });
-	object3d4->Quaternion();
-	object3d4->Update();
+
 	//object3d->Update();
 	object3d2->Update();
 	object3d3->Update();
@@ -236,7 +236,8 @@ void GameScene::DrawFront()
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
 	player->DrawSprite();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%f", object3d->GetRotation().m128_f32[1]);
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
+	DebugText::GetInstance()->Printf(100, 80, 3.0f, "%f", player->GetPlayerPos().y);
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());

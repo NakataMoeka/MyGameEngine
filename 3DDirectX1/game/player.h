@@ -41,6 +41,7 @@ public:
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetTransFlag(bool transFlag) { return this->transFlag = transFlag; }
 	float GetJspeed() { return jspeed; }
+	bool GetOnGround() { return onGround; }
 private://プレイヤーの動き系
 	void Move();//移動
 	void Ball();//ボール関係

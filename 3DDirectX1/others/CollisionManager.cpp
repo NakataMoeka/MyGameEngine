@@ -88,7 +88,7 @@ void CollisionManager::ColSphere(BaseCollider* colA, BaseCollider* colB)
 					//当たったらコライダーを削除したい(オブジェクトの)
 					colflag = true;
 					colCount++;
-					//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+					// DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 					DebugText::GetInstance()->Printf(100, 60, 3.0f, "%d",colCount);
 					if (colflag == true) {
 						colA->GetObject3d()->SetParent(colB->GetObject3d());
@@ -166,4 +166,3 @@ bool CollisionManager::Raycast(const Ray& ray, unsigned short attribute, Raycast
 
 	return result;
 }
-

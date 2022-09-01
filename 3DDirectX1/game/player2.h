@@ -27,7 +27,7 @@ public:
 	/// </summary>
 	/// <param name="info">Õ“Ëî•ñ</param>
 	void OnCollision(const CollisionInfo& info) override;
-
+	
 private:
 	bool onGround = true;
 	// —‰ºƒxƒNƒgƒ‹

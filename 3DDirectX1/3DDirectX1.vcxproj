@@ -184,7 +184,6 @@
     <ClCompile Include="others\CollisionPrimitive.cpp" />
     <ClCompile Include="others\Ease.cpp" />
     <ClCompile Include="others\MeshCollider.cpp" />
-    <ClCompile Include="others\RaycastHit.cpp" />
     <ClCompile Include="others\SphereCollider.cpp" />
     <ClCompile Include="others\TouchableObject.cpp" />
     <ClCompile Include="scene\ClearScene.cpp" />

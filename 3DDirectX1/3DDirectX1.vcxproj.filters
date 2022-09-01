@@ -184,9 +184,6 @@
     <ClCompile Include="3d\Mesh.cpp">
       <Filter>Library\3d\obj</Filter>
     </ClCompile>
-    <ClCompile Include="others\RaycastHit.cpp">
-      <Filter>Library\others\collision</Filter>
-    </ClCompile>
     <ClCompile Include="others\TouchableObject.cpp">
       <Filter>Library\others\collision</Filter>
     </ClCompile>

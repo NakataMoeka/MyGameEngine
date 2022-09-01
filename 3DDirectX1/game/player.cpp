@@ -113,7 +113,7 @@ void Player::Move()
 	obb.m_fLength[1] = 1;
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
-
+	playerObj->Update();
 }
 
 void Player::Ball()
@@ -152,12 +152,13 @@ void Player::Jump()
 		playerPos.y += fallV.m128_f32[1];
 		playerPos.z += fallV.m128_f32[2];
 	}
-	// ジャンプ操作
+	 //ジャンプ操作
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		onGround = false;
 		const float jumpVYFist = 0.2f;
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
+	playerObj->Update();
 	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(playerObj->GetCollider());
 	assert(sphereCollider);
 
@@ -175,19 +176,10 @@ void Player::Jump()
 		// 接地を維持
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
+			//下の処理を記入すると-nan(ind)って出て画面にOBJが表示されない
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
-			// 行列の更新など
 			playerObj->SetPosition(playerPos);
-			playerObj->SetRotation(playerAngle);
-			playerObj->Quaternion();
-			playerObj->SetScale({ 1,1,1 });
 			playerObj->Update();
-			SphereObj->SetPosition(spherePos);
-			SphereObj->SetScale(sphereSize);
-			SphereObj->SetRotation(sphereAngle);
-			SphereObj->Quaternion();
-			SphereObj->Update();
-
 		}
 		// 地面がないので落下
 		else {
@@ -201,17 +193,8 @@ void Player::Jump()
 			// 着地
 			onGround = true;
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
-			// 行列の更新など
 			playerObj->SetPosition(playerPos);
-			playerObj->SetRotation(playerAngle);
-			playerObj->Quaternion();
-			playerObj->SetScale({ 1,1,1 });
 			playerObj->Update();
-			SphereObj->SetPosition(spherePos);
-			SphereObj->SetScale(sphereSize);
-			SphereObj->SetRotation(sphereAngle);
-			SphereObj->Quaternion();
-			SphereObj->Update();
 		}
 	}
 
@@ -274,6 +257,7 @@ void Player::Update()
 	playerObj->Quaternion();
 	playerObj->SetScale({ 1,1,1 });
 	playerObj->Update();
+
 	dashSprite->SetColor({1, 1, 1, fade});
 }
 
