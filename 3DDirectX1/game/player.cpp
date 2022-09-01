@@ -44,10 +44,10 @@ void Player::Init()
 
 		// コライダーの追加
 	float radius = 3.0f;
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 
-	playerObj->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
+	playerObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), radius));
 	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	playerObj->Quaternion();
 	SphereObj->Quaternion();
@@ -130,6 +130,7 @@ void Player::Ball()
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	//target = { bossTarget.m128_f32[0], bossTarget.m128_f32[1], bossTarget.m128_f32[2] };
 	spherePos.x = f.x;
+	spherePos.y = f.y + 3;
 	spherePos.z = f.z;
 #pragma endregion
 
@@ -172,7 +173,7 @@ void Player::Jump()
 	// 接地状態
 	if (onGround) {
 		// スムーズに坂を下る為の吸着距離
-		const float adsDistance = 0.2f;
+		const float adsDistance = 0.5f;
 		// 接地を維持
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;

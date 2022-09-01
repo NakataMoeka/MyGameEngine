@@ -43,7 +43,7 @@ private:
 	OBB obb[2];
 	Sphere cSphere[2];
 	float r = 2;
-	XMFLOAT3 position[2] = { {10,0,0},{-10,0,0} };
+	XMFLOAT3 position[2] = { {10,2,0},{-10,2,0} };
 	XMFLOAT3 size = {1,1,1 };
 	XMVECTOR rota = { 0,0,0,0 };
 	bool ColFlag[2] = { false,false };
