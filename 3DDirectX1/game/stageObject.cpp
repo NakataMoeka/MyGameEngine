@@ -18,11 +18,17 @@ void StageObject::Initialize()
 
 void StageObject::Init()
 {
+	position = { 0,2,0 };
+	size = { 10,10,10 };
+	rota = { 0,90,0 };
 }
 
 void StageObject::Update()
 {
 	slope->Quaternion();
+	slope->SetScale(size);
+	slope->SetRotation(rota);
+	slope->SetPosition(position);
 	slope->Update();
 }
 

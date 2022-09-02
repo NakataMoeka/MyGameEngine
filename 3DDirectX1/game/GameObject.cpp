@@ -30,7 +30,7 @@ void GameObject::Init()
 			//positionは何なのかcenterには何を代入するのか
 				// コライダーの追加
 		float radius = 2.0f;
-		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
+		//cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
 
 		cube[i]->SetPosition(position[i]);
 		cube[i]->SetScale(size);
