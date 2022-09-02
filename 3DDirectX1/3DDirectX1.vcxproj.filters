@@ -187,6 +187,9 @@
     <ClCompile Include="others\TouchableObject.cpp">
       <Filter>Library\others\collision</Filter>
     </ClCompile>
+    <ClCompile Include="game\stageObject.cpp">
+      <Filter>Game\Onject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -414,6 +417,9 @@
     </ClInclude>
     <ClInclude Include="others\CollisionAttribute.h">
       <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="game\stageObject.h">
+      <Filter>Game\Onject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

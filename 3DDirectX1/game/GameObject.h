@@ -6,6 +6,7 @@
 /// <summary>
 /// ステージに配置されているオブジェクトのクラス
 /// </summary>
+class TouchableObject;
 class GameObject
 {
 private:
@@ -38,7 +39,9 @@ public:
 	Object3d* GetObject(int i) { return cube[i]; }
 private:
 	Object3d* cube[2];
+	TouchableObject* slope;
 	Model* modelCube;
+	Model* modelSlope;
 	Box cBox[2];
 	OBB obb[2];
 	Sphere cSphere[2];

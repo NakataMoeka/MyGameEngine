@@ -176,7 +176,7 @@ void GameScene::Update()
 	object3d4->SetPosition({ 0,0,0 });
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
-	object3d4->SetRotation({ 5,0,0 });
+	object3d4->SetRotation({ 0,0,0 });
 	object3d4->Quaternion();
 	object3d4->Update();
 	player->Update();
