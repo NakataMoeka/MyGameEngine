@@ -173,7 +173,7 @@ void Player::Jump()
 	// 接地状態
 	if (onGround) {
 		// スムーズに坂を下る為の吸着距離
-		const float adsDistance = 0.5f;
+		const float adsDistance = 0.2f;
 		// 接地を維持
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;

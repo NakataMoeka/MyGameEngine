@@ -20,9 +20,7 @@ void GameObject::Initialize()
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	}
-	modelSlope = Model::Create("Slope", false);
-	slope = TouchableObject::Create(modelSlope);
-	slope->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+
 }
 
 void GameObject::Init()
@@ -53,8 +51,7 @@ void GameObject::Init()
 		
 	}
 
-	slope->Quaternion();
-	slope->Update();
+
 }
 
 void GameObject::Update()
@@ -78,10 +75,7 @@ void GameObject::Update()
 			cube[i]->SetRotation(rota);
 			cube[i]->Update();
 	}
-	slope->SetScale({ 10,10,10 });
-	slope->SetPosition({ 0,5,0 });
-	slope->Quaternion();
-	slope->Update();
+	
 }
 
 void GameObject::Draw()
@@ -89,7 +83,7 @@ void GameObject::Draw()
 	for (int i = 0; i < 2; i++) {
 		cube[i]->Draw();
 	}
-	slope->Draw();
+
 }
 
 void GameObject::Delete(int i)

@@ -114,8 +114,11 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	player->Initialize();
 	gameObject = new GameObject;//newすればエラー吐かない
 	gameObject->Initialize();
+	stageObj = new StageObject;//newすればエラー吐かない
+	stageObj->Initialize();
 	player->Init();
 	gameObject->Init();
+	stageObj->Init();
 	distance = 20.0f;
 }
 
@@ -179,6 +182,7 @@ void GameScene::Update()
 	object3d4->SetRotation({ 0,0,0 });
 	object3d4->Quaternion();
 	object3d4->Update();
+	stageObj->Update();
 	player->Update();
 
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
@@ -226,6 +230,7 @@ void GameScene::Draw()
 	//object3d2->Draw();
 	player->Draw();
 	gameObject->Draw();
+	stageObj->Draw();
 
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
