@@ -19,7 +19,7 @@ void StageObject::Initialize()
 void StageObject::Init()
 {
 	position = { 0,2,0 };
-	size = { 10,10,10 };
+	size = { 100,100,100 };
 	rota = { 0,90,0 };
 }
 
