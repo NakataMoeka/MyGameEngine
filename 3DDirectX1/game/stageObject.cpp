@@ -10,7 +10,7 @@ StageObject::~StageObject()
 
 void StageObject::Initialize()
 {
-	modelSlope = Model::Create("Slope", false);
+	modelSlope = Model::Create("Cone", false);
 	slope = TouchableObject::Create(modelSlope);
 	slope->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
