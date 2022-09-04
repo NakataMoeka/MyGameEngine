@@ -18,9 +18,9 @@ void StageObject::Initialize()
 
 void StageObject::Init()
 {
-	position = { 0,0,0 };
+	position = { 0,0,10 };
 	size = { 5,5,5 };
-	rota = { 0,90,0 };
+	rota = { 0,0,0 };
 }
 
 void StageObject::Update()
