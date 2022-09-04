@@ -18,8 +18,8 @@ void StageObject::Initialize()
 
 void StageObject::Init()
 {
-	position = { 0,2,0 };
-	size = { 100,100,100 };
+	position = { 0,0,0 };
+	size = { 5,5,5 };
 	rota = { 0,90,0 };
 }
 
