@@ -371,11 +371,18 @@
     <ClInclude Include="others\RaycastHit.h" />
     <ClInclude Include="others\SphereCollider.h" />
     <ClInclude Include="others\TouchableObject.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="scene\ClearScene.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\SceneManager.h" />
     <ClInclude Include="scene\SelectScene.h" />
     <ClInclude Include="scene\TitleScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DirectXEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\engine.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

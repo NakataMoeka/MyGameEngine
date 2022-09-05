@@ -122,6 +122,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	distance = 20.0f;
 	for (int i = 0; i < 3; i++) {
 		IsHit[i] = false;
+		Alive[i] = true;
 	}
 }
 
@@ -151,19 +152,25 @@ void GameScene::Update()
 	for (int i = 0; i < 3; i++) {
 		IsHit[i] = false;
 
+		if (Alive[i] == true) {
+			if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
+				IsHit[i] = true;
+				HitCount++;
+				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+				Alive[i] = false;
+			}
+			if (IsHit[i] == true) {
+				gameObject->GetObject(i)->SetParent(player->GetObject());
+			}
+			if (HitCount == 1) {
+				gameObject->GetObject(i)->transformParent();
+				HitCount = 0;
+				IsHit[i] = false;
+				Tsize++;
 
-		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
-			IsHit[i] = true;
-			HitCount++;
-			//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+			}
 		}
-		if (IsHit[i] == true) {
-			gameObject->GetObject(i)->SetParent(player->GetObject());
-		}
-		if (HitCount == 1) {
-			gameObject->GetObject(i)->transformParent();
-			HitCount = 0;
-		}
+
 	}
 
 	object3d3->SetScale({ 2,2,2 });
@@ -175,6 +182,7 @@ void GameScene::Update()
 	object3d4->Quaternion();
 	object3d4->Update();
 	stageObj->Update();
+	//player->SetTsize(Tsize);
 	player->Update();
 
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
@@ -234,10 +242,12 @@ void GameScene::DrawFront()
 	sprite->PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
 	player->DrawSprite();
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
-	DebugText::GetInstance()->Printf(100, 80, 3.0f, "%f", player->GetPlayerPos().y);
+	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
+	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f",Tsize);
+	//DebugText::GetInstance()->Printf(100, 80, 3.0f, "%d", Alive[1]);
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
-
+	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
+	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	sprite->PostDraw();
 }

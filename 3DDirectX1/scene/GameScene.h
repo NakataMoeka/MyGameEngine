@@ -95,6 +95,8 @@ private: // メンバ変数
 	float b = 0;
 	bool IsHit[3];
 	int HitCount=0;
+	bool Alive[3];
 	bool parentFlag = false;
+	float Tsize = 1;
 	float distance = 20.0f;//プレイヤーとカメラの距離
 };

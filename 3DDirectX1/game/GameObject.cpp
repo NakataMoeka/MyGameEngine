@@ -88,7 +88,7 @@ void GameObject::Draw()
 
 void GameObject::Delete(int i)
 {
-	//delete cBox[i];
+	//cSphere[i].
 }
 
 float GameObject::GetMat()
