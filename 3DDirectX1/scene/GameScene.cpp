@@ -116,6 +116,10 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	gameObject->Initialize();
 	stageObj = new StageObject;//newすればエラー吐かない
 	stageObj->Initialize();
+}
+
+void GameScene::Init()
+{
 	player->Init();
 	gameObject->Init();
 	stageObj->Init();
@@ -124,12 +128,6 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 		IsHit[i] = false;
 		Alive[i] = true;
 	}
-}
-
-void GameScene::Init()
-{
-	//player->Init();
-	//gameObject->Init();
 }
 
 void GameScene::Update()
@@ -211,9 +209,9 @@ void GameScene::Update()
 void GameScene::DrawBG()
 {
 	//背景
-	sprite->PreDraw(dxCommon->GetCmdList());
+	Sprite::PreDraw(dxCommon->GetCmdList());
 	sprite->Draw();
-	sprite->PostDraw();
+	Sprite::PostDraw();
 	dxCommon->ClearDepthBuffer();
 	colMan->CheckAllCollisions();
 }
@@ -239,7 +237,7 @@ void GameScene::Draw()
 void GameScene::DrawFront()
 {
 	//前景
-	sprite->PreDraw(dxCommon->GetCmdList());
+	Sprite::PreDraw(dxCommon->GetCmdList());
 	//sprite->Draw();
 	player->DrawSprite();
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
@@ -249,7 +247,7 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
-	sprite->PostDraw();
+	Sprite:: PostDraw();
 }
 void GameScene::CreateParticles()
 {

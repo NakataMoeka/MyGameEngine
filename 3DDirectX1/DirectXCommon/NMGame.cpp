@@ -4,7 +4,7 @@ void NMGame::Initialize()
 {
 	Framework::Initialize();
 	//ƒQ[ƒ€ƒV[ƒ“‚Ì‰Šú‰»
-	gameScene = new GameScene();
+	gameScene = new SceneManager();
 	gameScene->Initialize(dxcommon, audio);
 
 }
