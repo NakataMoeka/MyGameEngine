@@ -113,8 +113,8 @@ void Audio::SEPlayWave(const SoundData& soundData)
 	buf.Flags = XAUDIO2_END_OF_STREAM;
 
 
-	result = pSourceVoice->SubmitSourceBuffer(&buf);
-	result = pSourceVoice->Start();
+	result = pSourceSEVoice->SubmitSourceBuffer(&buf);
+	result = pSourceSEVoice->Start();
 }
 
 
