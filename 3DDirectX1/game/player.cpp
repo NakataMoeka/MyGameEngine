@@ -39,7 +39,7 @@ void Player::Init()
 	obb.m_fLength[1] = 1;
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
-	//playerPos={ 0,-0.8,0 };
+	playerPos={ 0,0,-50 };
 	playerPos.y = 0;
 	spherePos.y = 0;
 		// コライダーの追加
@@ -218,7 +218,7 @@ void Player::Jump()
 	Ray ray2;
 	ray2.start = sphereCollider2->center;
 	ray2.start.m128_f32[1] += sphereCollider2->GetRadius();
-	ray2.dir = { 0,-1,0,0 };
+	ray2.dir = { 0,-0.7,0,0 };
 	RaycastHit raycastHit2;
 
 	// 接地状態
