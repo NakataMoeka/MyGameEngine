@@ -41,10 +41,10 @@ void Player::Init()
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	//playerPos={ 0,-0.8,0 };
 	playerPos.y = 0;
-
+	spherePos.y = 0;
 		// コライダーの追加
 	float radius = 3.0f;
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 
 	playerObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), radius));
@@ -130,7 +130,7 @@ void Player::Ball()
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	//target = { bossTarget.m128_f32[0], bossTarget.m128_f32[1], bossTarget.m128_f32[2] };
 	spherePos.x = f.x;
-	spherePos.y = f.y + 3;
+	//spherePos.y = f.y + 3;
 	spherePos.z = f.z;
 #pragma endregion
 
@@ -139,9 +139,7 @@ void Player::Ball()
 
 void Player::Jump()
 {
-
-
-		// 落下処理
+		// 落下処理プレイヤー
 	if (!onGround) {
 		// 下向き加速度
 		const float fallAcc = -0.01f;
@@ -156,7 +154,7 @@ void Player::Jump()
 	 //ジャンプ操作
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		onGround = false;
-		const float jumpVYFist = 0.2f;
+		const float jumpVYFist = 1.0f;
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
 	playerObj->Update();
@@ -199,6 +197,58 @@ void Player::Jump()
 		}
 	}
 
+	// 落下処理球
+	if (!onGround2) {
+		// 下向き加速度
+		const float fallAcc2 = -0.01f;
+		const float fallVYMin2 = -0.5f;
+		// 加速
+		fallV2.m128_f32[1] = max(fallV.m128_f32[1] + fallAcc2, fallVYMin2);
+		// 移動
+		spherePos.x += fallV2.m128_f32[0];
+		spherePos.y += fallV2.m128_f32[1];
+		spherePos.z += fallV2.m128_f32[2];
+	}
+
+	SphereObj->Update();
+	SphereCollider* sphereCollider2 = dynamic_cast<SphereCollider*>(SphereObj->GetCollider());
+	assert(sphereCollider2);
+
+	//// 球の上端から球の下端までのレイキャスト
+	Ray ray2;
+	ray2.start = sphereCollider2->center;
+	ray2.start.m128_f32[1] += sphereCollider2->GetRadius();
+	ray2.dir = { 0,-1,0,0 };
+	RaycastHit raycastHit2;
+
+	// 接地状態
+	if (onGround2) {
+		// スムーズに坂を下る為の吸着距離
+		const float adsDistance2 = 0.2f;
+		// 接地を維持
+		if (CollisionManager::GetInstance()->Raycast(ray2, COLLISION_ATTR_LANDSHAPE, &raycastHit2, sphereCollider2->GetRadius() * 2.0f + adsDistance2)) {
+			onGround2 = true;
+			//下の処理を記入すると-nan(ind)って出て画面にOBJが表示されない
+			spherePos.y -= (raycastHit2.distance - sphereCollider2->GetRadius() * 2.0f);
+			SphereObj->SetPosition(spherePos);
+			SphereObj->Update();
+		}
+		// 地面がないので落下
+		else {
+			onGround2 = false;
+			fallV2 = {};
+		}
+	}
+	// 落下状態
+	else if (fallV2.m128_f32[1] <= 0.0f) {
+		if (CollisionManager::GetInstance()->Raycast(ray2, COLLISION_ATTR_LANDSHAPE, &raycastHit2, sphereCollider2->GetRadius() * 2.0f)) {
+			// 着地
+			onGround2 = true;
+			spherePos.y -= (raycastHit2.distance - sphereCollider2->GetRadius() * 2.0f);
+			SphereObj->SetPosition(spherePos);
+			SphereObj->Update();
+		}
+	}
 
 }
 
