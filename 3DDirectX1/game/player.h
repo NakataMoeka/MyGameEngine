@@ -85,7 +85,4 @@ private://変数
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV;
 
-	bool onGround2 = true;
-	// 落下ベクトル
-	DirectX::XMVECTOR fallV2;
 };
