@@ -124,25 +124,22 @@ void Player::Ball()
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
-	//rotM *= XMMatrixRotationX(XMConvertToRadians(sphereAngle.m128_f32[0]));
 	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
 	XMVECTOR bossTarget = {playerPos.x,playerPos.y,playerPos.z };
 	XMVECTOR v3 = bossTarget + v;
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
-	//target = { bossTarget.m128_f32[0], bossTarget.m128_f32[1], bossTarget.m128_f32[2] };
 	spherePos.x = f.x;
+	//ジャンプをしない時だけY軸の追従をする
 	if (JumpFlag == false) {
 		spherePos.y = f.y + 3;
 	}
 	spherePos.z = f.z;
 #pragma endregion
-
-
 }
 
 void Player::Jump()
 {
-		// 落下処理プレイヤー
+		// 落下処理
 	if (!onGround) {
 		// 下向き加速度
 		const float fallAcc = -0.01f;
@@ -180,6 +177,7 @@ void Player::Jump()
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
 			//下の処理を記入すると-nan(ind)って出て画面にOBJが表示されない
+			//解決した(Updateの順番が悪かった)
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 			playerObj->SetPosition(playerPos);
 			playerObj->Update();

@@ -98,10 +98,11 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
 
 	Sprite::LoadTexture(1, L"Resources/background.png");
-
+	Sprite::LoadTexture(4, L"Resources/UI/TimeUI.png");
+	Sprite::LoadTexture(5, L"Resources/UI/TimeUI2.png");
 	sprite = Sprite::CreateSprite(1, { 0,0 });
-
-
+	timeSprite = Sprite::CreateSprite(4, { 1100,100 });
+	timeSprite2 = Sprite::CreateSprite(5, { 1100,100 });
 	sound1 = Audio::SoundLoadWave("Resources/ショット.wav");
 	sound2 = Audio::SoundLoadWave("Resources/World_Heritage.wav");
 	//audio->SoundPlayWave(sound1);
@@ -192,17 +193,24 @@ void GameScene::Update()
 	gameObject->Update();
 
 	particleMan->Update();
-	object3d2->SetPosition(playerPosition);
-	object3d2->SetRotation({ 0,90,0 });
+	//object3d2->SetPosition(playerPosition);
+	//object3d2->SetRotation({ 0,90,0 });
 
 	//object3d->Update();
-	object3d2->Update();
+	//object3d2->Update();
 	object3d3->Update();
 
 	lightGroup->Update();
 	//for (int i = 0; i < 2; i++) {
 	//	colMan->ColSphere(gameObject->GetObject(i)->collider, player->GetObject()->collider);
 	//}
+	timeSprite->SetAnchorPoint({ 0.5,0.5 });
+	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
+	TimeCount++;
+	if (TimeCount % 10 == 0) {
+		TimeRot+=0.1;
+	}
+	timeSprite2->SetRotation(TimeRot);
 	colMan->CheckAllCollisions();
 }
 
@@ -238,7 +246,8 @@ void GameScene::DrawFront()
 {
 	//前景
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	//sprite->Draw();
+	timeSprite->Draw();
+	timeSprite2->Draw();
 	player->DrawSprite();
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
 	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f",Tsize);

@@ -62,7 +62,8 @@ private: // メンバ変数
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
 	Sprite* sprite = nullptr;
-
+	Sprite* timeSprite = nullptr;//円
+	Sprite* timeSprite2 = nullptr;//バー
 	Object3d* object3d = nullptr;
 	Model* model = nullptr;
 
@@ -87,16 +88,13 @@ private: // メンバ変数
 
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
 
-	int HP = 50;
-	const int HPRecovery = 10;
-	int pg = 0;
-	bool pFlag = false;
-	float a = 0;
-	float b = 0;
+
 	bool IsHit[3];
 	int HitCount=0;
 	bool Alive[3];
 	bool parentFlag = false;
 	float Tsize = 1;
 	float distance = 20.0f;//プレイヤーとカメラの距離
+	float TimeRot = 0;
+	int TimeCount = 0;
 };
