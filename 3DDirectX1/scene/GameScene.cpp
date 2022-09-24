@@ -206,8 +206,11 @@ void GameScene::Update()
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	TimeCount++;
 	//TimeUI
+	//5分(18000/60)は0.03
+	//10分(36000/60)は0.0015
+	//25分(90000/60)は0.0006(多分)
 	if (TimeRot<360) {
-		TimeRot+=0.015;
+		TimeRot+=0.0015;
 	}
 	if (clearTimer > 0) {
 		clearTimer-=1.5;
