@@ -205,10 +205,8 @@ void GameScene::Update()
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	TimeCount++;
-	//10分で360度回転
-	//1分で36度回転
-	//1秒で0.6度回転
-	if (TimeRot<36000) {
+	//TimeUI
+	if (TimeRot<360) {
 		TimeRot+=0.015;
 	}
 	if (clearTimer > 0) {
