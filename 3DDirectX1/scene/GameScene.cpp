@@ -201,15 +201,22 @@ void GameScene::Update()
 	object3d3->Update();
 
 	lightGroup->Update();
-	//for (int i = 0; i < 2; i++) {
-	//	colMan->ColSphere(gameObject->GetObject(i)->collider, player->GetObject()->collider);
-	//}
+
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	TimeCount++;
-	if (TimeCount % 10 == 0) {
-		TimeRot+=0.1;
+	if (TimeRot<360) {
+		TimeRot+=0.006;
 	}
+	if (clearTimer > 0) {
+		clearTimer-=1.5;
+	}
+	//if (clearTimer > 32400) {
+	//	clearTimer2 = 10;
+	//}
+	//else {
+		clearTimer2 = clearTimer / 60;
+	//}
 	timeSprite2->SetRotation(TimeRot);
 	colMan->CheckAllCollisions();
 }
@@ -255,6 +262,8 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
+	DebugText::GetInstance()->Printf(960, 150, 3.0f, "%f", TimeRot);
+	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d",clearTimer2);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite:: PostDraw();
 }

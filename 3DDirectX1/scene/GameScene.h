@@ -97,4 +97,6 @@ private: // メンバ変数
 	float distance = 20.0f;//プレイヤーとカメラの距離
 	float TimeRot = 0;
 	int TimeCount = 0;
+	float clearTimer = 36000;//1800/60が30秒
+	int clearTimer2 = 0;
 };
