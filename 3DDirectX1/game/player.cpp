@@ -41,7 +41,9 @@ void Player::Init()
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	playerPos={ 0,20,-50 };
 	spherePos.y = 3;
-
+	playerAngle = { 0,0,0,0 };
+	sphereAngle = { 0,0,0,0 };
+	sphereSize = { 1,1,1 };
 		// コライダーの追加
 	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), radius));
