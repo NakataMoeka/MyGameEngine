@@ -27,20 +27,19 @@ void GameObject::Init()
 {
 
 	for (int i = 0; i < OBJNomber; i++) {
-			//positionは何なのかcenterには何を代入するのか
-				// コライダーの追加
+
+	
 		float radius = 2.0f;
-		//cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,0,0,0 }), radius));
 		position[0] = { 10,2,0 };
 		position[1] = { 0,10,10 };
 		position[2] = { -10, 2, 0 };
 		position[3] = { -50,2,-40 };
 		position[4] = { 0, 2, 10 };
-		position[5] = { -10, 2, 20 };
+		position[5] = { -10, 2, 60 };
 		position[6] = { 50,2,30 };
 		position[7] = { 0, 2, 50 };
-		position[8] = { -10, 2, 0 };
-		position[10] = { 80, 2, -20 };
+		position[8] = { -30, 2, 20 };
+		position[9] = { 30, 2, -20 };
 		size = { 1,1,1 };
 		rota = { 0,0,0,0 };
 		cube[i]->SetPosition(position[i]);

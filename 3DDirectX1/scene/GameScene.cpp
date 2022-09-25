@@ -283,6 +283,7 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
+	DebugText::GetInstance()->Printf(100, 320, 3.0f, "%f:%f",player->GetPlayerPos().x,player->GetPlayerPos().z);
 	DebugText::GetInstance()->Printf(960, 150, 3.0f, "%f", TimeRot);
 	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d",clearTimer2);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
