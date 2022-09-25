@@ -290,9 +290,10 @@ void Object3d::Update()
 		matWorld *= matBillboard;
 		matWorld *= matTrans; // ワールド行列に平行移動を反映
 	}
-
-	if (parent != nullptr) {
-		matWorld *= parent->matWorld;
+	if (parentFlag == true) {
+		if (parent != nullptr) {
+			matWorld *= parent->matWorld;
+		}
 	}
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();

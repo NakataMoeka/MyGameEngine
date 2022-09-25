@@ -105,6 +105,7 @@ public:
 	BaseCollider* GetCollider() { return collider; }
 	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
 	void transformParent();
+	bool SetParentFlag(bool pFlag) { return this->parentFlag = pFlag; }
 	// コライダー
 	BaseCollider* collider = nullptr;
 protected:
@@ -143,6 +144,6 @@ protected:
 	// ビルボード
 	bool isBillboard = false;
 
-
+	bool parentFlag = false;
 };
 

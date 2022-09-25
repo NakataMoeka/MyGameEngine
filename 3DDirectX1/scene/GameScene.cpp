@@ -128,6 +128,7 @@ void GameScene::Init()
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
 		Alive[i] = true;
+		gameObject->GetObject(i)->SetParentFlag(false);
 	}
 	clearFlag = false;
 	overFlag = false;
@@ -164,6 +165,7 @@ void GameScene::Update()
 				HitCount++;
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 				Alive[i] = false;
+				gameObject->GetObject(i)->SetParentFlag(true);
 			}
 			if (IsHit[i] == true) {
 				gameObject->GetObject(i)->SetParent(player->GetObject());
