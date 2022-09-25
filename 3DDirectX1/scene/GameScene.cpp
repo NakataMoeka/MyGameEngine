@@ -133,6 +133,9 @@ void GameScene::Init()
 	clearFlag = false;
 	overFlag = false;
 	Tsize = 1;
+	Tsize2 = Tsize;
+	TCount = 0;
+
 	TimeRot = 0;
 	TimeCount = 0;
 	clearTimer = 18000;//1800/60が30秒
@@ -180,6 +183,45 @@ void GameScene::Update()
 		}
 
 	}
+	Tsize2 = Tsize;
+	if (Tsize2 % 10 == 0) {
+		TCount++;
+	}
+	else {
+		TCount = 0;
+	}
+	if (TCount == 1) {
+		distance += 10;
+	}
+
+	timeSprite->SetAnchorPoint({ 0.5,0.5 });
+	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
+	TimeCount++;
+	//TimeUI
+	//5分(18000/60)は0.03
+	//10分(36000/60)は0.0015
+	//25分(90000/60)は0.0006(多分)
+	if (TimeRot < 360) {
+		TimeRot += 0.03;
+	}
+	if (clearTimer > 0) {
+		clearTimer -= 1.5;
+	}
+	else if (clearTimer <= 0) {
+		if (Tsize < 11) {
+			DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
+			overFlag = true;
+		}
+		else if (Tsize >= 11) {
+			DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
+			clearFlag = true;
+		}
+	}
+
+	//else {
+	clearTimer2 = clearTimer / 60;
+	//}
+	timeSprite2->SetRotation(TimeRot);
 
 	object3d3->SetScale({ 2,2,2 });
 	object3d4->SetScale({ 2,2,2 });
@@ -190,7 +232,6 @@ void GameScene::Update()
 	object3d4->Quaternion();
 	object3d4->Update();
 	stageObj->Update();
-	//player->SetTsize(Tsize);
 	player->Update();
 
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
@@ -210,35 +251,6 @@ void GameScene::Update()
 	object3d3->Update();
 
 	lightGroup->Update();
-
-	timeSprite->SetAnchorPoint({ 0.5,0.5 });
-	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
-	TimeCount++;
-	//TimeUI
-	//5分(18000/60)は0.03
-	//10分(36000/60)は0.0015
-	//25分(90000/60)は0.0006(多分)
-	if (TimeRot<360) {
-		TimeRot+=0.03;
-	}
-	if (clearTimer > 0) {
-		clearTimer-=1.5;
-	}
-	else if (clearTimer <= 0) {
-		if (Tsize < 11) {
-			DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
-			overFlag = true;
-	}
-		else if (Tsize >= 11) {
-			DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
-			clearFlag = true;
-		}
-	}
-
-	//else {
-		clearTimer2 = clearTimer / 60;
-	//}
-	timeSprite2->SetRotation(TimeRot);
 	colMan->CheckAllCollisions();
 }
 

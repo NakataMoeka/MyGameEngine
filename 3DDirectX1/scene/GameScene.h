@@ -98,6 +98,9 @@ private: // メンバ変数
 	bool Alive[OBJNumber];
 	bool parentFlag = false;
 	float Tsize = 1;
+	int Tsize2 = 1;
+	int TCount = 0;
+	bool TFlag = false;
 	float distance = 20.0f;//プレイヤーとカメラの距離
 	float TimeRot = 0;
 	int TimeCount = 0;

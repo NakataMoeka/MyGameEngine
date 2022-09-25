@@ -28,8 +28,8 @@ void GameObject::Init()
 
 	for (int i = 0; i < OBJNomber; i++) {
 
-	
 		float radius = 2.0f;
+		//csv‚Å‚â‚é‚Â‚à‚è
 		position[0] = { 10,2,0 };
 		position[1] = { 0,10,10 };
 		position[2] = { -10, 2, 0 };
