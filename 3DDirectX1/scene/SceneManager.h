@@ -15,12 +15,13 @@
 #include"LightGroup.h"
 #include"TitleScene.h"
 #include"GameScene.h"
+#include"ClearScene.h"
 class SceneManager
 {
 public:
 	enum Scene
 	{
-		TITLE, GAME, END, CLEAR
+		TITLE, GAME, END,
 	};
 	//‹N“®‚µ‚½‚çˆê‰ñ‚µ‚©s‚í‚ê‚È‚¢‰Šú‰»(ƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ‚È‚Ç)
 	void Initialize(DXCommon* dxCommon, Audio* audio);
@@ -40,5 +41,6 @@ private:
 	Scene scene = TITLE;
 	TitleScene* titleScene;
 	GameScene* gameScene;
+	ClearScene* clearScene;
 };
 

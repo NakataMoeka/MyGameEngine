@@ -125,10 +125,17 @@ void GameScene::Init()
 	gameObject->Init();
 	stageObj->Init();
 	distance = 20.0f;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
 		Alive[i] = true;
 	}
+	clearFlag = false;
+	overFlag = false;
+	Tsize = 1;
+	TimeRot = 0;
+	TimeCount = 0;
+	clearTimer = 18000;//1800/60が30秒
+	clearTimer2 = 0;
 }
 
 void GameScene::Update()
@@ -139,16 +146,16 @@ void GameScene::Update()
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
 
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
-		object3d2->PlayAnimation();
-	}
+	//if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
+	//	object3d2->PlayAnimation();
+	//}
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetSpherePos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
 
 		if (Alive[i] == true) {
@@ -210,14 +217,22 @@ void GameScene::Update()
 	//10分(36000/60)は0.0015
 	//25分(90000/60)は0.0006(多分)
 	if (TimeRot<360) {
-		TimeRot+=0.0015;
+		TimeRot+=0.03;
 	}
 	if (clearTimer > 0) {
 		clearTimer-=1.5;
 	}
-	//if (clearTimer > 32400) {
-	//	clearTimer2 = 10;
-	//}
+	else if (clearTimer <= 0) {
+		if (Tsize < 11) {
+			DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
+			overFlag = true;
+	}
+		else if (Tsize >= 11) {
+			DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
+			clearFlag = true;
+		}
+	}
+
 	//else {
 		clearTimer2 = clearTimer / 60;
 	//}

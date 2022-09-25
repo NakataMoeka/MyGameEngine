@@ -50,6 +50,10 @@ public: // メンバ関数
 	void DrawFront();
 	//パーティクル
 	void CreateParticles();
+	bool GetClearFlag() { return clearFlag; }
+	bool GetOverFlag() { return overFlag; }
+	bool SetClearFlag(bool clearFlag) { return this->clearFlag=clearFlag; }
+	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
 
@@ -88,15 +92,17 @@ private: // メンバ変数
 
 	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
 
-
-	bool IsHit[3];
+	static const int OBJNumber = 10;
+	bool IsHit[OBJNumber];
 	int HitCount=0;
-	bool Alive[3];
+	bool Alive[OBJNumber];
 	bool parentFlag = false;
 	float Tsize = 1;
 	float distance = 20.0f;//プレイヤーとカメラの距離
 	float TimeRot = 0;
 	int TimeCount = 0;
-	float clearTimer = 36000;//1800/60が30秒
+	float clearTimer = 18000;//1800/60が30秒
 	int clearTimer2 = 0;
+	bool clearFlag = false;
+	bool overFlag = false;
 };

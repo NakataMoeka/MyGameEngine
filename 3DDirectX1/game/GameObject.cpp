@@ -15,7 +15,7 @@ GameObject::~GameObject()
 
 void GameObject::Initialize()
 {
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < OBJNomber; i++) {
 		modelCube = Model::Create("cube", false);
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
@@ -26,7 +26,7 @@ void GameObject::Initialize()
 void GameObject::Init()
 {
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < OBJNomber; i++) {
 			//positionは何なのかcenterには何を代入するのか
 				// コライダーの追加
 		float radius = 2.0f;
@@ -57,7 +57,7 @@ void GameObject::Init()
 void GameObject::Update()
 {
 //ここでSetすると離れてくっつくからしないように!!
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < OBJNomber; i++) {
 		cSphere[i].radius = r;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
@@ -80,7 +80,7 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < OBJNomber; i++) {
 		cube[i]->Draw();
 	}
 

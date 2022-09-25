@@ -38,6 +38,8 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	}
 	// デバッグテキスト初期化
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
+	camera->SetTarget({ 0, 0.0f, 0 });
+	camera->SetEye({ 0, 0, -10 });
 }
 
 void TitleScene::Init()

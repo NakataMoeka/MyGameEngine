@@ -4,10 +4,14 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 {
 	titleScene = new TitleScene();
 	titleScene->Initialize(dxCommon, audio);
+	clearScene = new ClearScene();
+	clearScene->Initialize(dxCommon, audio);
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, audio);
+
 	titleScene->Init();
-	gameScene->Init();
+	//gameScene->Init();
+	//clearScene->Init();
 }
 
 void SceneManager::Init()
@@ -24,7 +28,26 @@ void SceneManager::Update()
 		titleScene->Update();
 	}
 	else if (scene == GAME) {
+		if (gameScene->GetClearFlag() == true) {
+			clearScene->Init();
+			clearScene->SetClearFlag(true);
+			scene = END;
+		}
+		if (gameScene->GetOverFlag() == true) {
+			clearScene->Init();
+			clearScene->SetOverFlag(true);
+			scene = END;
+		}
 		gameScene->Update();
+	}
+	else if (scene == END) {
+		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+			clearScene->SetClearFlag(false);
+			clearScene->SetOverFlag(false);
+			titleScene->Init();
+			scene = TITLE;
+		}
+		clearScene->Update();
 	}
 }
 
@@ -36,6 +59,9 @@ void SceneManager::DrawBG()
 	else if (scene == GAME) {
 		gameScene->DrawBG();
 	}
+	else if (scene == END) {
+		clearScene->DrawBG();
+	}
 }
 
 void SceneManager::Draw()
@@ -46,6 +72,9 @@ void SceneManager::Draw()
 	else if (scene == GAME) {
 		gameScene->Draw();
 	}
+	else if (scene == END) {
+		clearScene->Draw();
+	}
 }
 
 void SceneManager::DrawFront()
@@ -55,5 +84,8 @@ void SceneManager::DrawFront()
 	}
 	else if (scene == GAME) {
 		gameScene->DrawFront();
+	}
+	else if (scene == END) {
+		clearScene->DrawFront();
 	}
 }

@@ -32,20 +32,22 @@ public:
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize() { return size; }
 	XMFLOAT3 SetSize(XMFLOAT3 size) { return this->size = size; }
-
+	int GetOBJNumber() { return OBJNomber; }
 	float GetMat();
-	bool SetColFlag(bool ColFlag,int i) { return this->ColFlag[i] = ColFlag; }
 	Object3d* GetObject(int i) { return cube[i]; }
 private:
-	Object3d* cube[3];
+	static const int OBJNomber = 10;
+	Object3d* cube[OBJNomber];
 	Model* modelCube;
 	Box cBox[2];
 	OBB obb[2];
-	Sphere cSphere[3];
+	Sphere cSphere[OBJNomber];
 	float r = 2;
-	XMFLOAT3 position[3] = { {10,2,0},{0,10,10} ,{-10,2,0} };
+
+	XMFLOAT3 position[OBJNomber] = { {10,2,0},{0,10,10} ,{-10,2,0}
+	,{-50,2,-40},{0,2,10} ,{-10,2,20}
+	,{50,2,30},{0,2,50} ,{-10,2,0} ,{80,2,-20}};
 	XMFLOAT3 size = {1,1,1 };
 	XMVECTOR rota = { 0,0,0,0 };
-	bool ColFlag[3] = { false,false,false };
 };
 

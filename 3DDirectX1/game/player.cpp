@@ -39,8 +39,7 @@ void Player::Init()
 	obb.m_fLength[1] = 1;
 	obb.m_fLength[2] = 1;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
-	playerPos={ 0,0,-50 };
-	playerPos.y = 0;
+	playerPos={ 0,20,-50 };
 	spherePos.y = 3;
 
 		// コライダーの追加
