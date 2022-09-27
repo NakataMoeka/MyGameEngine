@@ -70,6 +70,9 @@ public:
 	virtual bool Initialize();
 
 	void Quaternion();
+
+	void UpdateWorldMatrix();
+
 	virtual void Update();
 
 	virtual void Draw();

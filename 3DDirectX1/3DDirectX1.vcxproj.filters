@@ -422,6 +422,9 @@
       <Filter>Game\Onject</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="others\QueryCallback.h">
+      <Filter>Library\others\collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXEngine.rc">

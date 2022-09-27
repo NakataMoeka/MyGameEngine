@@ -368,6 +368,7 @@
     <ClInclude Include="others\CollisionType.h" />
     <ClInclude Include="others\Ease.h" />
     <ClInclude Include="others\MeshCollider.h" />
+    <ClInclude Include="others\QueryCallback.h" />
     <ClInclude Include="others\RaycastHit.h" />
     <ClInclude Include="others\SphereCollider.h" />
     <ClInclude Include="others\TouchableObject.h" />

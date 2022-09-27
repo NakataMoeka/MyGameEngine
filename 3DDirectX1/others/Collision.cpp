@@ -87,7 +87,7 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		*closest = triangle.p0 + p0_p1 * v + p0_p2 * w;
 	}
 
-	bool Collision::CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter)
+	bool Collision::CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter, DirectX::XMVECTOR* reject)
 	{
 		XMVECTOR p;
 		ClosestPtPoint2Triangle(sphere.center, triangle, &p);
@@ -96,6 +96,13 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		if (v.m128_f32[0]> sphere.radius* sphere.radius) return false;
 		if (inter) {
 			*inter = p;
+		}
+		// 押し出すベクトルを計算
+		if (reject) {
+			float ds = XMVector3Dot(sphere.center, triangle.normal).m128_f32[0];
+			float dt = XMVector3Dot(triangle.p0, triangle.normal).m128_f32[0];
+			float rejectLen = dt - ds + sphere.radius;
+			*reject = triangle.normal * rejectLen;
 		}
 		return true;
 	}
@@ -217,7 +224,7 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 		return  sqLength < r* r;
 	}
 
-	bool Collision::CheckSphere2Sphere2(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter)
+	bool Collision::CheckSphere2Sphere2(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter, DirectX::XMVECTOR* reject)
 	{
 		// 中心点の距離の２乗 <= 半径の和の２乗　なら交差
 		float dist = XMVector3LengthSq(sphereA.center - sphereB.center).m128_f32[0];
@@ -230,6 +237,12 @@ bool Collision::CheackSphere2Plane(const Sphere& sphere, const Plane& plane, Dir
 				// Aの半径が0の時座標はBの中心　Bの半径が0の時座標はAの中心　となるよう補完
 				float t = sphereB.radius / (sphereA.radius + sphereB.radius);
 				*inter = XMVectorLerp(sphereA.center, sphereB.center, t);
+			}
+			// 押し出すベクトルを計算
+			if (reject) {
+				float rejectLen = sphereA.radius + sphereB.radius - sqrtf(dist);
+				*reject = XMVector3Normalize(sphereA.center - sphereB.center);
+				*reject *= rejectLen;
 			}
 			return true;
 		}

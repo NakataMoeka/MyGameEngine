@@ -262,39 +262,48 @@ void Object3d::Quaternion()
 		, XMConvertToRadians(rotation.m128_f32[2]));
 	//rotV = XMQuaternionRotationRollPitchYawFromVector(rotation);
 }
-
-void Object3d::Update()
-{
+void Object3d::UpdateWorldMatrix() {
 	assert(camera);
 
-	HRESULT result;
-	
-	
-	//XMVECTOR rotV = XMQuaternionRotationRollPitchYaw(rotation.m128_f32[0], rotation.m128_f32[1], rotation.m128_f32[2]);
-	
+	XMMATRIX matScale, matRot, matTrans;
 
+	// スケール、回転、平行移動行列の計算
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();
 	matRot = XMMatrixRotationQuaternion(rotV);
-	matTrans = XMMatrixTranslation(position.x,position.y, position.z);	//平行移動行列を再計算
+	matTrans = XMMatrixTranslation(position.x, position.y, position.z);
 
-	matWorld = XMMatrixIdentity();
-	matWorld *= matScale;
-	matWorld *= matRot;
-	matWorld *= matTrans;
-	if (isBillboard) {
+	// ワールド行列の合成
+	if (isBillboard && camera) {
 		const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
+
 		matWorld = XMMatrixIdentity();
 		matWorld *= matScale; // ワールド行列にスケーリングを反映
 		matWorld *= matRot; // ワールド行列に回転を反映
 		matWorld *= matBillboard;
 		matWorld *= matTrans; // ワールド行列に平行移動を反映
 	}
+	else {
+		matWorld = XMMatrixIdentity(); // 変形をリセット
+		matWorld *= matScale; // ワールド行列にスケーリングを反映
+		matWorld *= matRot; // ワールド行列に回転を反映
+		matWorld *= matTrans; // ワールド行列に平行移動を反映
+	}
+
+	// 親オブジェクトがあれば
 	if (parentFlag == true) {
 		if (parent != nullptr) {
 			matWorld *= parent->matWorld;
 		}
 	}
+}
+void Object3d::Update()
+{
+	assert(camera);
+
+	HRESULT result;
+	
+	UpdateWorldMatrix();
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
 	const XMFLOAT3& cameraPos = camera->GetEye();
@@ -342,6 +351,7 @@ void Object3d::SetCollider(BaseCollider* collider)
 	this->collider = collider;
 	// コリジョンマネージャに追加
 	CollisionManager::GetInstance()->AddCollider(collider);
+	UpdateWorldMatrix();
 	collider->Update();
 }
 
