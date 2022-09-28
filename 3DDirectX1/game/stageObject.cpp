@@ -39,7 +39,7 @@ void StageObject::Update()
 		slope[i]->Update();
 	}
 	Block->Quaternion();
-	Block->SetScale({5,5,5});
+	Block->SetScale({ 5,30,5 });
 	Block->SetRotation({0,0,0,0});
 	Block->SetPosition({30,2,20});
 	Block->Update();
