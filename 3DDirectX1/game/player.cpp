@@ -46,11 +46,12 @@ void Player::Init()
 	sphereSize = { 1,1,1 };
 		// コライダーの追加
 	float radius = 3.0f;
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), radius));
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 
 	playerObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), radius));
 	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
+	
 	playerObj->Quaternion();
 	SphereObj->Quaternion();
 	SphereObj->Update();
@@ -163,6 +164,8 @@ void Player::Jump()
 	playerObj->GetCollider()->Update();
 	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(playerObj->GetCollider());
 	assert(sphereCollider);
+	SphereCollider* sphereCollider2 = dynamic_cast<SphereCollider*>(SphereObj->GetCollider());
+	assert(sphereCollider2);
 	// クエリーコールバッククラス
 	class PlayerQueryCallback : public QueryCallback
 	{
@@ -193,15 +196,26 @@ void Player::Jump()
 	};
 
 	PlayerQueryCallback callback(sphereCollider);
-
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
 	// 交差による排斥分動かす
 	playerPos.x += callback.move.m128_f32[0];
 	playerPos.y += callback.move.m128_f32[1];
 	playerPos.z += callback.move.m128_f32[2];
+	playerObj->SetPosition(playerPos);
 	playerObj->UpdateWorldMatrix();
 	playerObj->GetCollider()->Update();
+
+	PlayerQueryCallback callback2(sphereCollider2);
+	// 球と地形の交差を全検索
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
+	// 交差による排斥分動かす
+	spherePos.x += callback2.move.m128_f32[0];
+	spherePos.y += callback2.move.m128_f32[1];
+	spherePos.z += callback2.move.m128_f32[2];
+	SphereObj->SetPosition(spherePos);
+	SphereObj->UpdateWorldMatrix();
+	SphereObj->GetCollider()->Update();
 	//// 球の上端から球の下端までのレイキャスト
 	Ray ray;
 	ray.start = sphereCollider->center;
