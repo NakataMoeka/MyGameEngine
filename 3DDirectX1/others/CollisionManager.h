@@ -2,7 +2,7 @@
 
 #include "CollisionPrimitive.h"
 #include "RaycastHit.h"
-
+#include"QueryCallback.h"
 #include <d3d12.h>
 #include <forward_list>
 
@@ -29,9 +29,10 @@ public:// メンバ関数
 	void ColSphere(BaseCollider*colA,BaseCollider* colB);
 	bool Raycast(const Ray& ray, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
 	bool Raycast(const Ray& ray, unsigned short attribute, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
+	
+	void QuerySphere(const Sphere& sphere, QueryCallback* callback, unsigned short attribute = (unsigned short)0xffffffff);
 
-	int GetColCount() { return colCount; }
-	bool GetColflag() { return colflag; }
+
 private:
 	CollisionManager() = default;
 	CollisionManager(const CollisionManager&) = delete;
@@ -40,7 +41,6 @@ private:
 
 	// コライダーのリスト
 	std::forward_list<BaseCollider*> colliders;
-	int colCount = 0;
-	bool colflag = false;
+
 };
 

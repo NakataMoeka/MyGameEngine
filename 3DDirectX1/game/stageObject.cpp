@@ -11,6 +11,10 @@ StageObject::~StageObject()
 void StageObject::Initialize()
 {
 	modelSlope = Model::Create("Cone", false);
+	modelBlock = Model::Create("cube", false);
+	Block = TouchableObject::Create(modelBlock);
+	Block->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+
 	for (int i = 0; i < 2; i++) {
 		slope[i] = TouchableObject::Create(modelSlope);
 		slope[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
@@ -34,6 +38,11 @@ void StageObject::Update()
 		slope[i]->SetPosition(position[i]);
 		slope[i]->Update();
 	}
+	Block->Quaternion();
+	Block->SetScale({5,5,5});
+	Block->SetRotation({0,0,0,0});
+	Block->SetPosition({30,2,20});
+	Block->Update();
 }
 
 void StageObject::Draw()
@@ -41,4 +50,5 @@ void StageObject::Draw()
 	for (int i = 0; i < 2; i++) {
 		slope[i]->Draw();
 	}
+	Block->Draw();
 }

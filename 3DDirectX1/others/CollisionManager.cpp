@@ -85,18 +85,8 @@ void CollisionManager::ColSphere(BaseCollider* colA, BaseCollider* colB)
 				if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
 					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
 					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-					//当たったらコライダーを削除したい(オブジェクトの)
-					colflag = true;
-					colCount++;
-					// DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-					DebugText::GetInstance()->Printf(100, 60, 3.0f, "%d",colCount);
-					if (colflag == true) {
-						colA->GetObject3d()->SetParent(colB->GetObject3d());
-					}
-					if (colCount == 1) {
-						colA->GetObject3d()->transformParent();
-						colCount = 0;
-					}
+
+
 				}
 			}
 		
@@ -165,4 +155,65 @@ bool CollisionManager::Raycast(const Ray& ray, unsigned short attribute, Raycast
 	}
 
 	return result;
+}
+
+void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback, unsigned short attribute)
+{
+	assert(callback);
+
+	std::forward_list<BaseCollider*>::iterator it;
+
+	// 全てのコライダーと総当りチェック
+	it = colliders.begin();
+	for (; it != colliders.end(); ++it) {
+		BaseCollider* col = *it;
+
+		// 属性が合わなければスキップ
+		if (!(col->attribute & attribute)) {
+			continue;
+		}
+
+		// 球
+		if (col->GetShapeType() == COLLISIONSHAPE_SPHERE) {
+			Sphere* sphereB = dynamic_cast<Sphere*>(col);
+
+			XMVECTOR tempInter;
+			XMVECTOR tempReject;
+			if (!Collision::CheckSphere2Sphere2(sphere, *sphereB, &tempInter, &tempReject)) continue;
+
+			// 交差情報をセット
+			QueryHit info;
+			info.collider = col;
+			info.object = col->GetObject3d();
+			info.inter = tempInter;
+			info.reject = tempReject;
+
+			// クエリーコールバック呼び出し
+			if (!callback->OnQueryHit(info)) {
+				// 戻り値がfalseの場合、継続せず終了
+				return;
+			}
+		}
+		// メッシュ
+		else if (col->GetShapeType() == COLLISIONSHAPE_MESH) {
+			MeshCollider* meshCollider = dynamic_cast<MeshCollider*>(col);
+
+			XMVECTOR tempInter;
+			XMVECTOR tempReject;
+			if (!meshCollider->CheckCollisionSphere(sphere, &tempInter, &tempReject)) continue;
+
+			// 交差情報をセット
+			QueryHit info;
+			info.collider = col;
+			info.object = col->GetObject3d();
+			info.inter = tempInter;
+			info.reject = tempReject;
+
+			// クエリーコールバック呼び出し
+			if (!callback->OnQueryHit(info)) {
+				// 戻り値がfalseの場合、継続せず終了
+				return;
+			}
+		}
+	}
 }
