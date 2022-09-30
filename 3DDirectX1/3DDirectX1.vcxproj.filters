@@ -190,6 +190,9 @@
     <ClCompile Include="game\stageObject.cpp">
       <Filter>Game\Onject</Filter>
     </ClCompile>
+    <ClCompile Include="others\CSV.cpp">
+      <Filter>Library\others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -424,6 +427,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="others\QueryCallback.h">
       <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="others\CSV.h">
+      <Filter>Library\others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

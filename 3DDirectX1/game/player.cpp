@@ -41,9 +41,11 @@ void Player::Init()
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	playerPos={ 0,20,-50 };
 	spherePos.y = 3;
+	spherePos.x = playerPos.x;
 	playerAngle = { 0,0,0,0 };
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 1,1,1 };
+	moveFlag = false;
 		// コライダーの追加
 	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
@@ -71,6 +73,7 @@ void Player::Move()
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
+	moveFlag = false;
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
@@ -86,25 +89,37 @@ void Player::Move()
 	{
 		playerPos.x += moveUD.m128_f32[0];
 		playerPos.z += moveUD.m128_f32[2];
+		spherePos.x += moveUD.m128_f32[0];
+		spherePos.z += moveUD.m128_f32[2];
 		sphereAngle.m128_f32[0] += 10;
+		moveFlag = true;
 	}
 	else if (Input::GetInstance()->PushKey(DIK_S))
 	{
 		playerPos.x -= moveUD.m128_f32[0];
 		playerPos.z -= moveUD.m128_f32[2];
+		spherePos.x -= moveUD.m128_f32[0];
+		spherePos.z -= moveUD.m128_f32[2];
 		sphereAngle.m128_f32[0] -= 10;
+		moveFlag = true;
 	}
 	else if (Input::GetInstance()->PushKey(DIK_D))
 	{
 		playerPos.x += moveLR.m128_f32[0];
 		playerPos.z += moveLR.m128_f32[2];
+		spherePos.x += moveLR.m128_f32[0];
+		spherePos.z += moveLR.m128_f32[2];
 		sphereAngle.m128_f32[2] += 10;
+		moveFlag = true;
 	}
 	else if (Input::GetInstance()->PushKey(DIK_A))
 	{
 		playerPos.x -= moveLR.m128_f32[0];
 		playerPos.z -= moveLR.m128_f32[2];
+		spherePos.x -= moveLR.m128_f32[0];
+		spherePos.z -= moveLR.m128_f32[2];
 		sphereAngle.m128_f32[2] -= 10;
+		moveFlag = true;
 	}
 
 	sphere.radius = r;
@@ -130,12 +145,15 @@ void Player::Ball()
 	XMVECTOR bossTarget = {playerPos.x,playerPos.y,playerPos.z };
 	XMVECTOR v3 = bossTarget + v;
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
-	spherePos.x = f.x;
 	//ジャンプをしない時だけY軸の追従をする
 	if (JumpFlag == false) {
 		spherePos.y = f.y + 3;
 	}
-	spherePos.z = f.z;
+	if (moveFlag == false) {
+		spherePos.x = f.x;
+		spherePos.z = f.z;
+	}
+
 #pragma endregion
 }
 

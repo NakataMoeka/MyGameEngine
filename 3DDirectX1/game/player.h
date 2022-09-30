@@ -84,5 +84,5 @@ private://•Ï”
 	bool onGround = true;
 	// —‰ºƒxƒNƒgƒ‹
 	DirectX::XMVECTOR fallV;
-
+	bool moveFlag = false;
 };
