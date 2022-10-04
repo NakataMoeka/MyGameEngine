@@ -76,13 +76,13 @@ void Player::Move()
 	moveFlag = false;
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
-		//sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
+		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
 		playerAngle.m128_f32[1] += moveAngle.m128_f32[1];
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
-		//sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
+		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 		playerAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
