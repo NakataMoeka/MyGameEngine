@@ -37,6 +37,8 @@ public:
 	Sphere GetSphere() { return sphere; }
 	OBB GetOBB() { return obb; }
 	Object3d* GetObject() { return SphereObj; }
+	XMFLOAT3 SetSphereSize(XMFLOAT3 sphereSize) { return this->sphereSize = sphereSize; }
+	float SetSpherePos(float spherePos) { return this->spherePos.y = spherePos; }
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetTransFlag(bool transFlag) { return this->transFlag = transFlag; }

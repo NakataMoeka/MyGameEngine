@@ -13,7 +13,7 @@ Player::~Player()
 }
 void Player::Initialize()
 {
-	model = Model::Create("car", false);
+	model = Model::Create("player", false);
 	playerObj = Object3d::Create(model);
 	model2 = Model::Create("bullet", true);
 	SphereObj = Object3d::Create(model2);
@@ -76,13 +76,13 @@ void Player::Move()
 	moveFlag = false;
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
-		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
+		//sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
 		playerAngle.m128_f32[1] += moveAngle.m128_f32[1];
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
-		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
+		//sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 		playerAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 	}
 	if (Input::GetInstance()->PushKey(DIK_W))
@@ -137,7 +137,7 @@ void Player::Move()
 void Player::Ball()
 {
 #pragma region カメラ追従とほぼ同じ
-	XMVECTOR v0 = { 0,0,10,0 };
+	XMVECTOR v0 = { 0,0,15,0 };
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));

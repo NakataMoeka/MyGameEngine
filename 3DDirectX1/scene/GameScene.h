@@ -109,5 +109,7 @@ private: // メンバ変数
 	int clearTimer2 = 0;
 	bool clearFlag = false;
 	bool overFlag = false;
+	float sphereSize = 1;
+	float spherePosY = 3;
 
 };

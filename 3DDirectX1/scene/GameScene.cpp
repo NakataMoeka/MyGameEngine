@@ -62,7 +62,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	FbxObject3d::SetCamera(camera);
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
-	colMan=CollisionManager::GetInstance();
+	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
@@ -191,7 +191,7 @@ void GameScene::Update()
 		TCount = 0;
 	}
 	if (TCount == 1) {
-		distance += 10;
+		distance += 5;
 	}
 
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
@@ -228,9 +228,10 @@ void GameScene::Update()
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
 	stageObj->Update();
+
 	player->Update();
 
-	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
+	//camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
 
 	//camera->SetEye(cameraPos);
 	//camera->SetTarget(player->GetSpherePos());
@@ -285,16 +286,16 @@ void GameScene::DrawFront()
 	timeSprite2->Draw();
 	player->DrawSprite();
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
-	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f",Tsize);
+	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
 	//DebugText::GetInstance()->Printf(100, 80, 3.0f, "%d", Alive[1]);
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
-	DebugText::GetInstance()->Printf(100, 320, 3.0f, "%f:%f",player->GetPlayerPos().x,player->GetPlayerPos().z);
+	DebugText::GetInstance()->Printf(100, 320, 3.0f, "%f:%f", player->GetPlayerPos().x, player->GetPlayerPos().z);
 	DebugText::GetInstance()->Printf(960, 150, 3.0f, "%f", TimeRot);
-	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d",clearTimer2);
+	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
-	Sprite:: PostDraw();
+	Sprite::PostDraw();
 }
 void GameScene::CreateParticles()
 {
