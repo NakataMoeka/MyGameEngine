@@ -32,6 +32,8 @@ private:
 	Model* modelSlope;
 	TouchableObject* Block;
 	Model* modelBlock;
+	TouchableObject* Ground;
+	Model* modelGround;
 	XMFLOAT3 position[2] = { {0,0,0} ,{0,0,-50} };
 	XMFLOAT3 size = { 1,1,1 };
 	XMVECTOR rota = { 0,0,0,0 };

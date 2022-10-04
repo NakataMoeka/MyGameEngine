@@ -17,6 +17,7 @@
 #include"player.h"
 #include"GameObject.h"
 #include"stageObject.h"
+#include"Collision.h"
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -108,4 +109,5 @@ private: // メンバ変数
 	int clearTimer2 = 0;
 	bool clearFlag = false;
 	bool overFlag = false;
+
 };

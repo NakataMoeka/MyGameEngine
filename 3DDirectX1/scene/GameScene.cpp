@@ -224,13 +224,9 @@ void GameScene::Update()
 	timeSprite2->SetRotation(TimeRot);
 
 	object3d3->SetScale({ 2,2,2 });
-	object3d4->SetScale({ 2,2,2 });
-	object3d4->SetPosition({ 0,0,0 });
+
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
-	object3d4->SetRotation({ 0,0,0 });
-	object3d4->Quaternion();
-	object3d4->Update();
 	stageObj->Update();
 	player->Update();
 
@@ -270,7 +266,6 @@ void GameScene::Draw()
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
 	object3d3->Draw();
-	object3d4->Draw();
 
 	//object3d->Draw();
 	//object3d2->Draw();

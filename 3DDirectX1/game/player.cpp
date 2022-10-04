@@ -149,10 +149,10 @@ void Player::Ball()
 	if (JumpFlag == false) {
 		spherePos.y = f.y + 3;
 	}
-	if (moveFlag == false) {
+	//if (moveFlag == false) {
 		spherePos.x = f.x;
 		spherePos.z = f.z;
-	}
+	//}
 
 #pragma endregion
 }

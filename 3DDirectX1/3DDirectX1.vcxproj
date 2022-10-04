@@ -185,6 +185,7 @@
     <ClCompile Include="others\CSV.cpp" />
     <ClCompile Include="others\Ease.cpp" />
     <ClCompile Include="others\MeshCollider.cpp" />
+    <ClCompile Include="others\SpatialPartitioning.cpp" />
     <ClCompile Include="others\SphereCollider.cpp" />
     <ClCompile Include="others\TouchableObject.cpp" />
     <ClCompile Include="scene\ClearScene.cpp" />
@@ -372,6 +373,7 @@
     <ClInclude Include="others\MeshCollider.h" />
     <ClInclude Include="others\QueryCallback.h" />
     <ClInclude Include="others\RaycastHit.h" />
+    <ClInclude Include="others\SpatialPartitioning.h" />
     <ClInclude Include="others\SphereCollider.h" />
     <ClInclude Include="others\TouchableObject.h" />
     <ClInclude Include="resource.h" />
