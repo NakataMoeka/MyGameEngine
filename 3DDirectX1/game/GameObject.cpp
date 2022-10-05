@@ -15,7 +15,7 @@ GameObject::~GameObject()
 
 void GameObject::Initialize()
 {
-	for (int i = 0; i < OBJNomber; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 		modelCube = Model::Create("cube", false);
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
@@ -26,7 +26,7 @@ void GameObject::Initialize()
 void GameObject::Init()
 {
 
-	for (int i = 0; i < OBJNomber; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 
 		float radius = 2.0f;
 		//csv‚Å‚â‚é‚Â‚à‚è
@@ -40,10 +40,10 @@ void GameObject::Init()
 		position[7] = { 0, 2, 50 };
 		position[8] = { -30, 2, 20 };
 		position[9] = { 30, 2, -20 };
-		size = { 1,1,1 };
+		size[i] = {1,1,1};
 		rota = { 0,0,0,0 };
 		cube[i]->SetPosition(position[i]);
-		cube[i]->SetScale(size);
+		cube[i]->SetScale(size[i]);
 		cube[i]->Quaternion();
 		cube[i]->SetRotation(rota);
 		cube[i]->Update();
@@ -67,7 +67,7 @@ void GameObject::Init()
 void GameObject::Update()
 {
 //‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
-	for (int i = 0; i < OBJNomber; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 		cSphere[i].radius = r;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
@@ -85,12 +85,16 @@ void GameObject::Update()
 			cube[i]->SetRotation(rota);
 			cube[i]->Update();
 	}
-	
+	cSphere[6].radius = 3;
+	cSphere[6].center = XMVectorSet(cube[6]->GetMatWorld().r[3].m128_f32[0], cube[6]->GetMatWorld().r[3].m128_f32[1], cube[6]->GetMatWorld().r[3].m128_f32[2], 1);
+
+	cube[6]->SetScale({ size2,size2,size2 });
+	cube[6]->Update();
 }
 
 void GameObject::Draw()
 {
-	for (int i = 0; i < OBJNomber; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->Draw();
 	}
 

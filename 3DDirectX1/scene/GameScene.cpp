@@ -164,8 +164,9 @@ void GameScene::Update()
 
 		if (Alive[i] == true) {
 			if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
-				IsHit[i] = true;
-				HitCount++;
+					IsHit[i] = true;
+					HitCount++;
+
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 				Alive[i] = false;
 				gameObject->GetObject(i)->SetParentFlag(true);

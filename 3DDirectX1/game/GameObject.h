@@ -30,24 +30,24 @@ public:
 	Sphere GetCSphere(int i) { return cSphere[i]; }
 	XMFLOAT3 GetPos(int i) { return position[i]; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
-	XMFLOAT3 GetSize() { return size; }
-	XMFLOAT3 SetSize(XMFLOAT3 size) { return this->size = size; }
-	int GetOBJNumber() { return OBJNomber; }
+
+	int GetOBJNumber() { return OBJNumber; }
 	float GetMat();
 	Object3d* GetObject(int i) { return cube[i]; }
 private:
-	static const int OBJNomber = 10;
-	Object3d* cube[OBJNomber];
+	static const int OBJNumber = 10;
+	Object3d* cube[OBJNumber];
 	Model* modelCube;
 	Box cBox[2];
 	OBB obb[2];
-	Sphere cSphere[OBJNomber];
+	Sphere cSphere[OBJNumber];
 	float r = 2;
 
-	XMFLOAT3 position[OBJNomber] = { {10,2,0},{0,10,10} ,{-10,2,0}
+	XMFLOAT3 position[OBJNumber] = { {10,2,0},{0,10,10} ,{-10,2,0}
 	,{-50,2,-40},{0,2,10} ,{-10,2,20}
 	,{50,2,30},{0,2,50} ,{-10,2,0} ,{80,2,-20}};
-	XMFLOAT3 size = {1,1,1 };
+	XMFLOAT3 size[OBJNumber];
 	XMVECTOR rota = { 0,0,0,0 };
+	float size2 = 5;
 };
 
