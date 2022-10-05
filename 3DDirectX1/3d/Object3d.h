@@ -93,6 +93,8 @@ public:
 
 	void SetRotation(XMVECTOR rotation) { this->rotation = rotation; }
 
+	const XMFLOAT3& GetScale() {return scale; }
+
 	void SetScale(XMFLOAT3 scale) { this->scale = scale; }
 
 	// ƒ‚ƒfƒ‹‚Æ‚Ì˜AŒg

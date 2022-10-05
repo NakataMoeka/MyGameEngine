@@ -3,6 +3,7 @@
 #include"Model.h"
 #include"Collision.h"
 #include<DirectXMath.h>
+#include"CSV.h"
 /// <summary>
 /// ステージに配置されているオブジェクトのクラス
 /// </summary>
@@ -30,12 +31,14 @@ public:
 	Sphere GetCSphere(int i) { return cSphere[i]; }
 	XMFLOAT3 GetPos(int i) { return position[i]; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
-
+	XMFLOAT3 GetSize(int i) { return size[i]; }
 	int GetOBJNumber() { return OBJNumber; }
 	float GetMat();
 	Object3d* GetObject(int i) { return cube[i]; }
 private:
+	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//沸き地のマップ
 	static const int OBJNumber = 10;
+	static const int OBJType = 2;
 	Object3d* cube[OBJNumber];
 	Model* modelCube;
 	Box cBox[2];
@@ -46,8 +49,7 @@ private:
 	XMFLOAT3 position[OBJNumber] = { {10,2,0},{0,10,10} ,{-10,2,0}
 	,{-50,2,-40},{0,2,10} ,{-10,2,20}
 	,{50,2,30},{0,2,50} ,{-10,2,0} ,{80,2,-20}};
-	XMFLOAT3 size[OBJNumber];
+	XMFLOAT3 size[OBJType] = { {1,1,1},{5,5,5} };
 	XMVECTOR rota = { 0,0,0,0 };
-	float size2 = 5;
 };
 

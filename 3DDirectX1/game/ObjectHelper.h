@@ -10,6 +10,14 @@ using XMFLOAT3 = DirectX::XMFLOAT3;
 using XMFLOAT4 = DirectX::XMFLOAT4;
 using XMMATRIX = DirectX::XMMATRIX;
 using XMVECTOR = DirectX::XMVECTOR;
+enum OBJType
+{
+	Cube = 1,
+	BigCube,
+	S,
+	BigS,
+
+};
 struct object
 {
 	Sphere sphere;//当たり判定用の球
@@ -18,4 +26,5 @@ struct object
 	XMFLOAT3 pos = {};//位置
 	XMVECTOR rot = {};//角度(クォータニオンを使用しているため、XMVECTOR)
 	XMFLOAT3 size = {};//見た目のサイズ(oSizeとは違う)
+	int type = 0;
 };
