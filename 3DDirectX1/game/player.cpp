@@ -334,9 +334,49 @@ void Player::Update()
 	dashSprite->SetColor({1, 1, 1, fade});
 }
 
-void Player::OnCollision(const CollisionInfo& info)
+void Player::OnCollision()
 {
-	SphereObj->OnCollision(info);
+	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(playerObj->GetCollider());
+	assert(sphereCollider);
+	// クエリーコールバッククラス
+	class PlayerQueryCallback : public QueryCallback
+	{
+	public:
+		PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
+
+		// 衝突時コールバック関数
+		bool OnQueryHit(const QueryHit& info) {
+
+			const XMVECTOR up = { 0,1,0,0 };
+
+			XMVECTOR rejectDir = XMVector3Normalize(info.reject);
+			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
+
+			// 地面判定しきい値
+			const float threshold = cosf(XMConvertToRadians(30.0f));
+
+			if (-threshold < cos && cos < threshold) {
+				sphere->center += info.reject;
+				move += info.reject;
+			}
+
+			return true;
+		}
+
+		Sphere* sphere = nullptr;
+		DirectX::XMVECTOR move = {};
+	};
+
+	PlayerQueryCallback callback(sphereCollider);
+	// 球と地形の交差を全検索
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+	// 交差による排斥分動かす
+	playerPos.x += callback.move.m128_f32[0];
+	playerPos.y += callback.move.m128_f32[1];
+	playerPos.z += callback.move.m128_f32[2];
+	playerObj->SetPosition(playerPos);
+	playerObj->UpdateWorldMatrix();
+	playerObj->GetCollider()->Update();
 }
 
 

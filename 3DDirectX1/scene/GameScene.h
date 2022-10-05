@@ -112,4 +112,6 @@ private: // メンバ変数
 	float sphereSize = 1;
 	float spherePosY = 3;
 
+	XMFLOAT3 oldPos;
+
 };

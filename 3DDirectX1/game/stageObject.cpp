@@ -30,6 +30,7 @@ void StageObject::Init()
 	position[1] = { 0,0,-50 };
 	size = { 5,5,5 };
 	rota = { 0,0,0 };
+
 }
 
 void StageObject::Update()

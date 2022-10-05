@@ -170,6 +170,10 @@ void GameScene::Update()
 					Alive[i] = false;
 					gameObject->GetObject(i)->SetParentFlag(true);
 				}
+				else {
+				//押し戻し処理をする
+					
+				}
 
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 			}

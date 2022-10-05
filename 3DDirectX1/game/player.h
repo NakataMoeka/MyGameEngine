@@ -24,7 +24,7 @@ public:
 	void Initialize();//一回だけの初期化
 	void Init();//シーンチェンジ時にもする初期化
 	void Update();
-	void OnCollision(const CollisionInfo& info);
+	void OnCollision();
 	void Draw();
 	void DrawSprite();
 
@@ -39,6 +39,8 @@ public:
 	Object3d* GetObject() { return SphereObj; }
 	XMFLOAT3 SetSphereSize(XMFLOAT3 sphereSize) { return this->sphereSize = sphereSize; }
 	float SetSpherePos(float spherePos) { return this->spherePos.y = spherePos; }
+	XMFLOAT3 SetPlayerPos(XMFLOAT3 playerPos) { return this->playerPos = playerPos; }
+
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetTransFlag(bool transFlag) { return this->transFlag = transFlag; }
