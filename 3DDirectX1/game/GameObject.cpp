@@ -34,17 +34,17 @@ void GameObject::Init()
 		position[1] = { 0,10,10 };
 		position[2] = { -10, 2, 0 };
 		position[3] = { -50,2,-40 };
-		position[4] = { 0, 2, 10 };
+		position[4] = { -30, 2, 10 };
 		position[5] = { -10, 2, 60 };
 		position[6] = { 50,2,30 };
 		position[7] = { 0, 2, 50 };
 		position[8] = { -30, 2, 20 };
 		position[9] = { 30, 2, -20 };
-		size[1] = {1,1,1};
-		size[2] = { 5,5,5 };
+		size[0] = {1,1,1};
+		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };
 		cube[i]->SetPosition(position[i]);
-		cube[i]->SetScale(size[1]);
+		cube[i]->SetScale(size[0]);
 		cube[i]->Quaternion();
 		cube[i]->SetRotation(rota);
 		cube[i]->Update();
@@ -89,7 +89,7 @@ void GameObject::Update()
 	cSphere[6].radius = 3;
 	cSphere[6].center = XMVectorSet(cube[6]->GetMatWorld().r[3].m128_f32[0], cube[6]->GetMatWorld().r[3].m128_f32[1], cube[6]->GetMatWorld().r[3].m128_f32[2], 1);
 
-	cube[6]->SetScale(size[2]);
+	cube[6]->SetScale(size[1]);
 	cube[6]->Update();
 }
 

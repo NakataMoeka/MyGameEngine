@@ -103,7 +103,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 	timeSprite = Sprite::CreateSprite(4, { 1100,100 });
 	timeSprite2 = Sprite::CreateSprite(5, { 1100,100 });
-	sound1 = Audio::SoundLoadWave("Resources/ショット.wav");
+	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/World_Heritage.wav");
 	//audio->SoundPlayWave(sound1);
 	//audio->SoundPlayWave(sound2);
@@ -178,6 +178,7 @@ void GameScene::Update()
 			}
 			if (HitCount == 1) {
 				gameObject->GetObject(i)->transformParent();
+				audio->SEPlayWave(sound1);
 				HitCount = 0;
 				IsHit[i] = false;
 				Tsize++;
