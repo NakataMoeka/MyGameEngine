@@ -35,9 +35,9 @@ void Player::Init()
 	obb.m_NormaDirect[0] = { SphereObj->GetMatRot().r[0].m128_f32[0],SphereObj->GetMatRot().r[0].m128_f32[1] ,SphereObj->GetMatRot().r[0].m128_f32[2] };
 	obb.m_NormaDirect[1] = { SphereObj->GetMatRot().r[1].m128_f32[0],SphereObj->GetMatRot().r[1].m128_f32[1] ,SphereObj->GetMatRot().r[1].m128_f32[2] };
 	obb.m_NormaDirect[2] = { SphereObj->GetMatRot().r[2].m128_f32[0],SphereObj->GetMatRot().r[2].m128_f32[1] ,SphereObj->GetMatRot().r[2].m128_f32[2] };
-	obb.m_fLength[0] = 1;
-	obb.m_fLength[1] = 1;
-	obb.m_fLength[2] = 1;
+	obb.m_fLength[0] = sphereSize.x / 2;
+	obb.m_fLength[1] = sphereSize.y / 2;
+	obb.m_fLength[2] = sphereSize.z / 2;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	playerPos={ 0,20,-50 };
 	spherePos.y = 3;
@@ -128,8 +128,8 @@ void Player::Move()
 	obb.m_NormaDirect[1] = { SphereObj->GetMatRot().r[1].m128_f32[0],SphereObj->GetMatRot().r[1].m128_f32[1] ,SphereObj->GetMatRot().r[1].m128_f32[2] };
 	obb.m_NormaDirect[2] = { SphereObj->GetMatRot().r[2].m128_f32[0],SphereObj->GetMatRot().r[2].m128_f32[1] ,SphereObj->GetMatRot().r[2].m128_f32[2] };
 	obb.m_fLength[0] = sphereSize.x / 2;
-	obb.m_fLength[1] = sphereSize.x / 2;
-	obb.m_fLength[2] = sphereSize.x / 2;
+	obb.m_fLength[1] = sphereSize.y / 2;
+	obb.m_fLength[2] = sphereSize.z / 2;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	playerObj->Update();
 }

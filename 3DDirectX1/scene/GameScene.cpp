@@ -165,9 +165,9 @@ void GameScene::Update()
 		if (Alive[i] == true) {
 			if (Collision::CheckOBB2OBB(player->GetOBB(), gameObject->GetOBB(i))) {
 				if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
-					IsHit[i] = true;
-					HitCount++;
-					Alive[i] = false;
+					//IsHit[i] = true;
+					//HitCount++;
+					//Alive[i] = false;
 					gameObject->GetObject(i)->SetParentFlag(true);
 				}
 				else {
