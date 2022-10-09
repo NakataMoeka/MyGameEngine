@@ -50,15 +50,15 @@ void GameObject::Init()
 		cube[i]->SetRotation(rota);
 		cube[i]->Update();
 			cSphere[i].radius = r;
-			//cSphere[i].center = XMVectorSet(position[i].x, position[i].y, position[i].z, 1);
+			cSphere[i].center = XMVectorSet(position[i].x, position[i].y, position[i].z, 1);
 			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			//obb[i].m_NormaDirect[0] = { cube[i]->GetMatRot().r[0].m128_f32[0],cube[i]->GetMatRot().r[0].m128_f32[1] ,cube[i]->GetMatRot().r[0].m128_f32[2] };
-			//obb[i].m_NormaDirect[1] = { cube[i]->GetMatRot().r[1].m128_f32[0],cube[i]->GetMatRot().r[1].m128_f32[1] ,cube[i]->GetMatRot().r[1].m128_f32[2] };
-			//obb[i].m_NormaDirect[2] = { cube[i]->GetMatRot().r[2].m128_f32[0],cube[i]->GetMatRot().r[2].m128_f32[1] ,cube[i]->GetMatRot().r[2].m128_f32[2] };
-			//obb[i].m_fLength[0] = 0.5;
-			//obb[i].m_fLength[1] = 0.5;
-			//obb[i].m_fLength[2] = 0.5;
-			//obb[i].m_Pos = { position[i].x, position[i].y, position[i].z};
+			obb[i].m_NormaDirect[0] = { cube[i]->GetMatRot().r[0].m128_f32[0],cube[i]->GetMatRot().r[0].m128_f32[1] ,cube[i]->GetMatRot().r[0].m128_f32[2] };
+			obb[i].m_NormaDirect[1] = { cube[i]->GetMatRot().r[1].m128_f32[0],cube[i]->GetMatRot().r[1].m128_f32[1] ,cube[i]->GetMatRot().r[1].m128_f32[2] };
+			obb[i].m_NormaDirect[2] = { cube[i]->GetMatRot().r[2].m128_f32[0],cube[i]->GetMatRot().r[2].m128_f32[1] ,cube[i]->GetMatRot().r[2].m128_f32[2] };
+			obb[i].m_fLength[0] = size[i].x / 2;
+			obb[i].m_fLength[1] = size[i].x / 2;
+			obb[i].m_fLength[2] = size[i].x / 2;
+			obb[i].m_Pos = { position[i].x, position[i].y, position[i].z};
 
 		
 	}

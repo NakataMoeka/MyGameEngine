@@ -163,7 +163,7 @@ void GameScene::Update()
 		IsHit[i] = false;
 
 		if (Alive[i] == true) {
-			if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
+			if (Collision::CheckOBB2OBB(player->GetOBB(), gameObject->GetOBB(i))) {
 				if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
 					IsHit[i] = true;
 					HitCount++;

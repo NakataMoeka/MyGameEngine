@@ -196,6 +196,9 @@
     <ClCompile Include="others\SpatialPartitioning.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="game\pushCollision.cpp">
+      <Filter>Game\Onject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -436,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="others\SpatialPartitioning.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\pushCollision.h">
+      <Filter>Game\Onject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

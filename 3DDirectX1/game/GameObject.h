@@ -42,7 +42,7 @@ private:
 	Object3d* cube[OBJNumber];
 	Model* modelCube;
 	Box cBox[2];
-	OBB obb[2];
+	OBB obb[OBJNumber];
 	Sphere cSphere[OBJNumber];
 	float r = 2;
 
