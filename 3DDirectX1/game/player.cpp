@@ -89,45 +89,41 @@ void Player::Move()
 
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
-		if (moveFlag == true) {
 			playerPos.x += moveUD.m128_f32[0];
 			playerPos.z += moveUD.m128_f32[2];
 			spherePos.x += moveUD.m128_f32[0];
 			spherePos.z += moveUD.m128_f32[2];
-		}
+		
 			sphereAngle.m128_f32[0] += 10;
 		
 	}
 	else if (Input::GetInstance()->PushKey(DIK_S))
 	{
-		if (moveFlag == true) {
 			playerPos.x -= moveUD.m128_f32[0];
 			playerPos.z -= moveUD.m128_f32[2];
 			spherePos.x -= moveUD.m128_f32[0];
 			spherePos.z -= moveUD.m128_f32[2];
-		}
+		
 		sphereAngle.m128_f32[0] -= 10;
 	
 	}
 	else if (Input::GetInstance()->PushKey(DIK_D))
 	{
-		if (moveFlag == true) {
 			playerPos.x += moveLR.m128_f32[0];
 			playerPos.z += moveLR.m128_f32[2];
 			spherePos.x += moveLR.m128_f32[0];
 			spherePos.z += moveLR.m128_f32[2];
-		}
+		
 		sphereAngle.m128_f32[2] += 10;
 	
 	}
 	else if (Input::GetInstance()->PushKey(DIK_A))
 	{
-		if (moveFlag == true) {
 			playerPos.x -= moveLR.m128_f32[0];
 			playerPos.z -= moveLR.m128_f32[2];
 			spherePos.x -= moveLR.m128_f32[0];
 			spherePos.z -= moveLR.m128_f32[2];
-		}
+		
 		sphereAngle.m128_f32[2] -= 10;
 	}
 
