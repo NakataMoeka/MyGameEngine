@@ -43,7 +43,7 @@ public:
 
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
-	bool SetTransFlag(bool transFlag) { return this->transFlag = transFlag; }
+	bool GetMFlag() { return moveFlag; }
 	float GetJspeed() { return jspeed; }
 	bool GetOnGround() { return onGround; }
 private://プレイヤーの動き系
@@ -73,7 +73,6 @@ private://変数
 	OBB obb;
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 	float r = 3;
-	bool transFlag = false;
 	bool JumpFlag = false;
 	bool gFlag = false;
 	float g = 0.0098;
@@ -88,5 +87,5 @@ private://変数
 	bool onGround = true;
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV;
-	bool moveFlag = false;
+	bool moveFlag = true;
 };

@@ -46,7 +46,7 @@ void Player::Init()
 	playerAngle = { 0,0,0,0 };
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 1,1,1 };
-	moveFlag = false;
+	moveFlag = true;
 		// コライダーの追加
 	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
@@ -74,7 +74,7 @@ void Player::Move()
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
-	moveFlag = false;
+
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
@@ -86,41 +86,49 @@ void Player::Move()
 		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 		playerAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 	}
+
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
-		playerPos.x += moveUD.m128_f32[0];
-		playerPos.z += moveUD.m128_f32[2];
-		spherePos.x += moveUD.m128_f32[0];
-		spherePos.z += moveUD.m128_f32[2];
-		sphereAngle.m128_f32[0] += 10;
-		moveFlag = true;
+		if (moveFlag == true) {
+			playerPos.x += moveUD.m128_f32[0];
+			playerPos.z += moveUD.m128_f32[2];
+			spherePos.x += moveUD.m128_f32[0];
+			spherePos.z += moveUD.m128_f32[2];
+		}
+			sphereAngle.m128_f32[0] += 10;
+		
 	}
 	else if (Input::GetInstance()->PushKey(DIK_S))
 	{
-		playerPos.x -= moveUD.m128_f32[0];
-		playerPos.z -= moveUD.m128_f32[2];
-		spherePos.x -= moveUD.m128_f32[0];
-		spherePos.z -= moveUD.m128_f32[2];
+		if (moveFlag == true) {
+			playerPos.x -= moveUD.m128_f32[0];
+			playerPos.z -= moveUD.m128_f32[2];
+			spherePos.x -= moveUD.m128_f32[0];
+			spherePos.z -= moveUD.m128_f32[2];
+		}
 		sphereAngle.m128_f32[0] -= 10;
-		moveFlag = true;
+	
 	}
 	else if (Input::GetInstance()->PushKey(DIK_D))
 	{
-		playerPos.x += moveLR.m128_f32[0];
-		playerPos.z += moveLR.m128_f32[2];
-		spherePos.x += moveLR.m128_f32[0];
-		spherePos.z += moveLR.m128_f32[2];
+		if (moveFlag == true) {
+			playerPos.x += moveLR.m128_f32[0];
+			playerPos.z += moveLR.m128_f32[2];
+			spherePos.x += moveLR.m128_f32[0];
+			spherePos.z += moveLR.m128_f32[2];
+		}
 		sphereAngle.m128_f32[2] += 10;
-		moveFlag = true;
+	
 	}
 	else if (Input::GetInstance()->PushKey(DIK_A))
 	{
-		playerPos.x -= moveLR.m128_f32[0];
-		playerPos.z -= moveLR.m128_f32[2];
-		spherePos.x -= moveLR.m128_f32[0];
-		spherePos.z -= moveLR.m128_f32[2];
+		if (moveFlag == true) {
+			playerPos.x -= moveLR.m128_f32[0];
+			playerPos.z -= moveLR.m128_f32[2];
+			spherePos.x -= moveLR.m128_f32[0];
+			spherePos.z -= moveLR.m128_f32[2];
+		}
 		sphereAngle.m128_f32[2] -= 10;
-		moveFlag = true;
 	}
 
 	sphere.radius = r;
@@ -133,29 +141,13 @@ void Player::Move()
 	obb.m_fLength[2] = sphereSize.z / 2;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	playerObj->Update();
+	//playerが壁に当たったらsphere動かないようにしたい
+	//sphereが壁に当たったらplayerが動かないようにしたい
 }
 
 void Player::Ball()
 {
-#pragma region カメラ追従とほぼ同じ
-	XMVECTOR v0 = { 0,0,15,0 };
-	//angleラジアンだけy軸まわりに回転。半径は-100
-	XMMATRIX rotM = XMMatrixIdentity();
-	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
-	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
-	XMVECTOR bossTarget = {playerPos.x,playerPos.y,playerPos.z };
-	XMVECTOR v3 = bossTarget + v;
-	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
-	////ジャンプをしない時だけY軸の追従をする
-	//if (JumpFlag == false) {
-	//	spherePos.y = f.y + 3;
-	//}
-	////if (moveFlag == false) {
-	//	spherePos.x = f.x;
-	//	spherePos.z = f.z;
-	////}
 
-#pragma endregion
 }
 
 void Player::Jump()
@@ -190,7 +182,6 @@ void Player::Jump()
 	{
 	public:
 		PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
-
 		// 衝突時コールバック関数
 		bool OnQueryHit(const QueryHit& info) {
 
@@ -205,20 +196,23 @@ void Player::Jump()
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
 				move += info.reject;
+				moveFlag2 = false;
 			}
-
+			else {
+				moveFlag2 = true;
+			}
 			return true;
 		}
 
 		Sphere* sphere = nullptr;
 		DirectX::XMVECTOR move = {};
+		bool moveFlag2 = true;
 	};
 
 	PlayerQueryCallback callback(sphereCollider);
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-
 	// 交差による排斥分動かす
 	playerPos.x += callback.move.m128_f32[0];
 	playerPos.y += callback.move.m128_f32[1];
@@ -231,7 +225,12 @@ void Player::Jump()
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback, COLLISION_ATTR_OBJECT);
-
+	if (callback.moveFlag2 == false|| callback2.moveFlag2 == false) {
+		moveFlag = false;
+	}
+	//else if (callback.moveFlag2 == true || callback2.moveFlag2 == true) {
+	//	moveFlag = true;
+	//}
 	// 交差による排斥分動かす
 	spherePos.x += callback2.move.m128_f32[0];
 	spherePos.y += callback2.move.m128_f32[1];
@@ -343,47 +342,7 @@ void Player::Update()
 
 void Player::OnCollision()
 {
-	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(playerObj->GetCollider());
-	assert(sphereCollider);
-	// クエリーコールバッククラス
-	class PlayerQueryCallback : public QueryCallback
-	{
-	public:
-		PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
 
-		// 衝突時コールバック関数
-		bool OnQueryHit(const QueryHit& info) {
-
-			const XMVECTOR up = { 0,1,0,0 };
-
-			XMVECTOR rejectDir = XMVector3Normalize(info.reject);
-			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
-
-			// 地面判定しきい値
-			const float threshold = cosf(XMConvertToRadians(30.0f));
-
-			if (-threshold < cos && cos < threshold) {
-				sphere->center += info.reject;
-				move += info.reject;
-			}
-
-			return true;
-		}
-
-		Sphere* sphere = nullptr;
-		DirectX::XMVECTOR move = {};
-	};
-
-	PlayerQueryCallback callback(sphereCollider);
-	// 球と地形の交差を全検索
-	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-	// 交差による排斥分動かす
-	playerPos.x += callback.move.m128_f32[0];
-	playerPos.y += callback.move.m128_f32[1];
-	playerPos.z += callback.move.m128_f32[2];
-	playerObj->SetPosition(playerPos);
-	playerObj->UpdateWorldMatrix();
-	playerObj->GetCollider()->Update();
 }
 
 
