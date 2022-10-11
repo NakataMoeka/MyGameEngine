@@ -63,8 +63,8 @@ void GameObject::Init()
 
 
 	}
-	cube[6]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0}), 2));
-	cube[6]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+	cube[6]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3));
+	cube[6]->GetCollider()->SetAttribute(COLLISION_ATTR_LANDSHAPE);
 
 }
 
@@ -85,6 +85,7 @@ void GameObject::Update()
 
 		//cube[i]->SetPosition(position[i]);
 			//cube[i]->SetScale(size);
+
 		cube[i]->Quaternion();
 		cube[i]->SetRotation(rota);
 		cube[i]->Update();
