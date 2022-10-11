@@ -136,13 +136,30 @@ void Player::Move()
 	obb.m_fLength[2] = sphereSize.z / 2;
 	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
 	playerObj->Update();
-	//playerが壁に当たったらsphere動かないようにしたい
-	//sphereが壁に当たったらplayerが動かないようにしたい
+	//回転を追従させたい
 }
 
 void Player::Ball()
 {
+#pragma region カメラ追従とほぼ同じ
+	XMVECTOR v0 = { 0,0,15,0 };
+	//angleラジアンだけy軸まわりに回転。半径は-100
+	XMMATRIX rotM = XMMatrixIdentity();
+	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
+	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
+	XMVECTOR bossTarget = { playerPos.x,playerPos.y,playerPos.z };
+	XMVECTOR v3 = bossTarget + v;
+	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
+	////ジャンプをしない時だけY軸の追従をする
+	if (JumpFlag == false) {
+		spherePos.y = f.y + 3;
+	}
+	//if (moveFlag == false) {
+	spherePos.x = f.x;
+	spherePos.z = f.z;
+	//}
 
+#pragma endregion
 }
 
 void Player::Jump()
