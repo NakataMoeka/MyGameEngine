@@ -64,6 +64,7 @@ void GameObject::Init()
 
 
 	}
+	//d‚­‚È‚é
 	cube[6]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3.5));
 	cube[6]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 
