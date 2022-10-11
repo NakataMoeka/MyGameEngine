@@ -43,7 +43,6 @@ public:
 
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
-	bool GetMFlag() { return moveFlag; }
 	float GetJspeed() { return jspeed; }
 	bool GetOnGround() { return onGround; }
 private://プレイヤーの動き系
@@ -84,8 +83,12 @@ private://変数
 	int dashTime = 0;
 	const int dashTimeMax = 20;
 	float fade = 1;
+
 	bool onGround = true;
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV;
-	bool moveFlag = true;
+	
+	bool onGround2 = true;
+	// 落下ベクトル
+	DirectX::XMVECTOR fallV2;
 };

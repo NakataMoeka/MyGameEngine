@@ -46,7 +46,7 @@ void Player::Init()
 	playerAngle = { 0,0,0,0 };
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 1,1,1 };
-	moveFlag = true;
+	//moveFlag = true;
 		// コライダーの追加
 	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
@@ -270,6 +270,42 @@ void Player::Jump()
 		}
 	}
 	playerObj->Update();
+	// 球の上端から球の下端までのレイキャスト
+	Ray ray2;
+	ray2.start = sphereCollider2->center;
+	ray2.start.m128_f32[1] += sphereCollider2->GetRadius();
+	ray2.dir = { 0,-1,0,0 };
+	RaycastHit raycastHit2;
+	// 接地状態
+	if (onGround2) {
+		// スムーズに坂を下る為の吸着距離
+		const float adsDistance2 = 0.2f;
+		// 接地を維持
+		if (CollisionManager::GetInstance()->Raycast(ray2, COLLISION_ATTR_LANDSHAPE, &raycastHit2, sphereCollider2->GetRadius() * 2.0f + adsDistance2)) {
+			onGround2 = true;
+			//下の処理を記入すると-nan(ind)って出て画面にOBJが表示されない
+			//解決した(Updateの順番が悪かった)
+			spherePos.y -= (raycastHit2.distance - sphereCollider2->GetRadius() * 2.0f);
+			SphereObj->SetPosition(spherePos);
+			SphereObj->Update();
+		}
+		// 地面がないので落下
+		else {
+			onGround2 = false;
+			fallV2 = {};
+		}
+	}
+	// 落下状態
+	else if (fallV2.m128_f32[1] <= 0.0f) {
+		if (CollisionManager::GetInstance()->Raycast(ray2, COLLISION_ATTR_LANDSHAPE, &raycastHit2, sphereCollider2->GetRadius() * 2.0f)) {
+			// 着地
+			onGround2 = true;
+			spherePos.y -= (raycastHit2.distance - sphereCollider2->GetRadius() * 2.0f);
+			SphereObj->SetPosition(spherePos);
+			SphereObj->Update();
+		}
+	}
+	SphereObj->Update();
 }
 
 void Player::Dash()
