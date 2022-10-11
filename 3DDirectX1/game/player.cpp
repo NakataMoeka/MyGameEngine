@@ -196,17 +196,12 @@ void Player::Jump()
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
 				move += info.reject;
-				moveFlag2 = false;
-			}
-			else {
-				moveFlag2 = true;
 			}
 			return true;
 		}
 
 		Sphere* sphere = nullptr;
 		DirectX::XMVECTOR move = {};
-		bool moveFlag2 = true;
 	};
 
 	PlayerQueryCallback callback(sphereCollider);
@@ -217,6 +212,10 @@ void Player::Jump()
 	playerPos.x += callback.move.m128_f32[0];
 	playerPos.y += callback.move.m128_f32[1];
 	playerPos.z += callback.move.m128_f32[2];
+	// åç∑Ç…ÇÊÇÈîrêÀï™ìÆÇ©Ç∑
+	spherePos.x += callback.move.m128_f32[0];
+	spherePos.y += callback.move.m128_f32[1];
+	spherePos.z += callback.move.m128_f32[2];
 	playerObj->SetPosition(playerPos);
 	playerObj->UpdateWorldMatrix();
 	playerObj->GetCollider()->Update();
@@ -224,14 +223,13 @@ void Player::Jump()
 	PlayerQueryCallback callback2(sphereCollider2);
 	// ãÖÇ∆ínå`ÇÃåç∑ÇëSåüçı
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
-	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback, COLLISION_ATTR_OBJECT);
-	if (callback.moveFlag2 == false|| callback2.moveFlag2 == false) {
-		moveFlag = false;
-	}
-	//else if (callback.moveFlag2 == true || callback2.moveFlag2 == true) {
-	//	moveFlag = true;
-	//}
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+
+
 	// åç∑Ç…ÇÊÇÈîrêÀï™ìÆÇ©Ç∑
+	playerPos.x += callback2.move.m128_f32[0];
+	playerPos.y += callback2.move.m128_f32[1];
+	playerPos.z += callback2.move.m128_f32[2];
 	spherePos.x += callback2.move.m128_f32[0];
 	spherePos.y += callback2.move.m128_f32[1];
 	spherePos.z += callback2.move.m128_f32[2];
