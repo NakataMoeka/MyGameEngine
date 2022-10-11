@@ -52,6 +52,7 @@ void GameObject::Init()
 		cube[i]->Update();
 		//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
 		cSphere[i].radius = r;
+		cSphere[6].radius = 4;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		obb[i].m_NormaDirect[0] = { cube[i]->GetMatRot().r[0].m128_f32[0],cube[i]->GetMatRot().r[0].m128_f32[1] ,cube[i]->GetMatRot().r[0].m128_f32[2] };
 		obb[i].m_NormaDirect[1] = { cube[i]->GetMatRot().r[1].m128_f32[0],cube[i]->GetMatRot().r[1].m128_f32[1] ,cube[i]->GetMatRot().r[1].m128_f32[2] };
@@ -63,8 +64,8 @@ void GameObject::Init()
 
 
 	}
-	cube[6]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3));
-	cube[6]->GetCollider()->SetAttribute(COLLISION_ATTR_LANDSHAPE);
+	cube[6]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3.5));
+	cube[6]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 
 }
 

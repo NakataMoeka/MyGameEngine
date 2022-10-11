@@ -216,6 +216,8 @@ void Player::Jump()
 	PlayerQueryCallback callback(sphereCollider);
 	// ‹…‚Æ’nŒ`‚ÌŒğ·‚ğ‘SŒŸõ
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+
 	// Œğ·‚É‚æ‚é”rË•ª“®‚©‚·
 	playerPos.x += callback.move.m128_f32[0];
 	playerPos.y += callback.move.m128_f32[1];

@@ -35,7 +35,7 @@ void CollisionManager::CheckAllCollisions()
 				if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
 					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
 					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-					DebugText::GetInstance()->Printf(100, 60, 3.0f, "Love");
+					//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Love");
 
 				}
 			}
