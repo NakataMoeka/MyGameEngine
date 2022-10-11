@@ -42,6 +42,7 @@ void Player::Init()
 	playerPos={ 0,20,-50 };
 	spherePos.y = 3;
 	spherePos.x = playerPos.x;
+	spherePos.z = playerPos.z+10;
 	playerAngle = { 0,0,0,0 };
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 1,1,1 };
@@ -145,14 +146,14 @@ void Player::Ball()
 	XMVECTOR bossTarget = {playerPos.x,playerPos.y,playerPos.z };
 	XMVECTOR v3 = bossTarget + v;
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
-	//ƒWƒƒƒ“ƒv‚ğ‚µ‚È‚¢‚¾‚¯Y²‚Ì’Ç]‚ğ‚·‚é
-	if (JumpFlag == false) {
-		spherePos.y = f.y + 3;
-	}
-	//if (moveFlag == false) {
-		spherePos.x = f.x;
-		spherePos.z = f.z;
+	////ƒWƒƒƒ“ƒv‚ğ‚µ‚È‚¢‚¾‚¯Y²‚Ì’Ç]‚ğ‚·‚é
+	//if (JumpFlag == false) {
+	//	spherePos.y = f.y + 3;
 	//}
+	////if (moveFlag == false) {
+	//	spherePos.x = f.x;
+	//	spherePos.z = f.z;
+	////}
 
 #pragma endregion
 }
@@ -229,6 +230,8 @@ void Player::Jump()
 	PlayerQueryCallback callback2(sphereCollider2);
 	// ‹…‚Æ’nŒ`‚ÌŒğ·‚ğ‘SŒŸõ
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback, COLLISION_ATTR_OBJECT);
+
 	// Œğ·‚É‚æ‚é”rË•ª“®‚©‚·
 	spherePos.x += callback2.move.m128_f32[0];
 	spherePos.y += callback2.move.m128_f32[1];
@@ -305,6 +308,8 @@ void Player::Dash()
 
 		playerPos.x += movedash.m128_f32[0];
 		playerPos.z += movedash.m128_f32[2];
+		spherePos.x += movedash.m128_f32[0];
+		spherePos.z += movedash.m128_f32[2];
 		if (fade > 0) {
 			fade -= 0.05f;
 		}
