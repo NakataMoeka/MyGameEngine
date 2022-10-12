@@ -228,9 +228,6 @@ void Player::Jump()
 	spherePos.x += callback.move.m128_f32[0];
 	spherePos.y += callback.move.m128_f32[1];
 	spherePos.z += callback.move.m128_f32[2];
-	playerObj->SetPosition(playerPos);
-	playerObj->UpdateWorldMatrix();
-	playerObj->GetCollider()->Update();
 
 	PlayerQueryCallback callback2(sphereCollider2);
 	// 球と地形の交差を全検索
@@ -248,6 +245,9 @@ void Player::Jump()
 	SphereObj->SetPosition(spherePos);
 	SphereObj->UpdateWorldMatrix();
 	SphereObj->GetCollider()->Update();
+	playerObj->SetPosition(playerPos);
+	playerObj->UpdateWorldMatrix();
+	playerObj->GetCollider()->Update();
 	//// 球の上端から球の下端までのレイキャスト
 	Ray ray;
 	ray.start = sphereCollider->center;
