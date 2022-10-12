@@ -30,6 +30,9 @@ void Player::Initialize()
 
 void Player::Init()
 {
+	for (int i = 0; i < OBJNumber; i++) {
+		colFlag[i] = false;
+	}
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	obb.m_NormaDirect[0] = { SphereObj->GetMatRot().r[0].m128_f32[0],SphereObj->GetMatRot().r[0].m128_f32[1] ,SphereObj->GetMatRot().r[0].m128_f32[2] };
@@ -203,7 +206,7 @@ void Player::Jump()
 			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
 
 			// 地面判定しきい値
-			const float threshold = cosf(XMConvertToRadians(60.0f));
+			const float threshold = cosf(XMConvertToRadians(30.0f));
 
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
@@ -218,30 +221,40 @@ void Player::Jump()
 
 	PlayerQueryCallback callback(sphereCollider);
 	// 球と地形の交差を全検索
+
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
-	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-	// 交差による排斥分動かす
-	playerPos.x += callback.move.m128_f32[0];
-	playerPos.y += callback.move.m128_f32[1];
-	playerPos.z += callback.move.m128_f32[2];
-	// 交差による排斥分動かす
-	spherePos.x += callback.move.m128_f32[0];
-	spherePos.y += callback.move.m128_f32[1];
-	spherePos.z += callback.move.m128_f32[2];
+	for (int i = 0; i < OBJNumber; i++) {
+		if (colFlag[i] == false) {
+			CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+		}
+	}
+			// 交差による排斥分動かす
+			playerPos.x += callback.move.m128_f32[0];
+			playerPos.y += callback.move.m128_f32[1];
+			playerPos.z += callback.move.m128_f32[2];
+			// 交差による排斥分動かす
+			spherePos.x += callback.move.m128_f32[0];
+			spherePos.y += callback.move.m128_f32[1];
+			spherePos.z += callback.move.m128_f32[2];
+
 
 	PlayerQueryCallback callback2(sphereCollider2);
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
-	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+	for (int i = 0; i < OBJNumber; i++) {
+		if (colFlag[i] == false) {
+			CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+		}
+	}
+	
+			// 交差による排斥分動かす
+			playerPos.x += callback2.move.m128_f32[0];
+			playerPos.y += callback2.move.m128_f32[1];
+			playerPos.z += callback2.move.m128_f32[2];
+			spherePos.x += callback2.move.m128_f32[0];
+			spherePos.y += callback2.move.m128_f32[1];
+			spherePos.z += callback2.move.m128_f32[2];
 
-
-	// 交差による排斥分動かす
-	playerPos.x += callback2.move.m128_f32[0];
-	playerPos.y += callback2.move.m128_f32[1];
-	playerPos.z += callback2.move.m128_f32[2];
-	spherePos.x += callback2.move.m128_f32[0];
-	spherePos.y += callback2.move.m128_f32[1];
-	spherePos.z += callback2.move.m128_f32[2];
 	SphereObj->SetPosition(spherePos);
 	SphereObj->UpdateWorldMatrix();
 	SphereObj->GetCollider()->Update();

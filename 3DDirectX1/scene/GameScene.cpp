@@ -168,11 +168,13 @@ void GameScene::Update()
 					IsHit[i] = true;
 					HitCount++;
 					Alive[i] = false;
+					player->SetColFlag(true, i);
 					gameObject->GetObject(i)->SetParentFlag(true);
 				}
 
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 			}
+			//くっついたアイテムにもくっつくようにしたい後々
 			if (IsHit[i] == true) {
 				gameObject->GetObject(i)->SetParent(player->GetObject());
 			}

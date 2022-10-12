@@ -45,6 +45,7 @@ public:
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	float GetJspeed() { return jspeed; }
 	bool GetOnGround() { return onGround; }
+	bool SetColFlag(bool ColFlag,int i) { return this->colFlag[i] = ColFlag; }
 private://プレイヤーの動き系
 	void Move();//移動
 	void Ball();//ボール関係
@@ -91,4 +92,6 @@ private://変数
 	bool onGround2 = true;
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV2;
+	static const int OBJNumber = 10;
+	bool colFlag[OBJNumber];
 };

@@ -17,7 +17,7 @@ GameObject::~GameObject()
 void GameObject::Initialize()
 {
 	for (int i = 0; i < OBJNumber; i++) {
-		modelCube = Model::Create("cube", false);
+		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	}
@@ -65,8 +65,8 @@ void GameObject::Init()
 
 	}
 	//d‚­‚È‚é
-	cube[6]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3.5));
-	cube[6]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+	//cube[6]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3.5));
+//	cube[6]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 
 }
 
