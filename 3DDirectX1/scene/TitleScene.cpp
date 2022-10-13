@@ -44,23 +44,72 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(11, L"Resources/UI/TitleB.png");
 	Sprite::LoadTexture(10, L"Resources/UI/Title.png");
 	Sprite::LoadTexture(12, L"Resources/UI/Title2.png");
+	Sprite::LoadTexture(13, L"Resources/UI/Title3.png");
+	Sprite::LoadTexture(14, L"Resources/UI/TitleB2.png");
 	TSprite = Sprite::CreateSprite(10, { 300,100 });
 	TBSprite = Sprite::CreateSprite(11, { 0,0 });
-	TSSprite = Sprite::CreateSprite(12, { 400,500 });
+	TSSprite = Sprite::CreateSprite(12, { 450,500 });
+	TS2Sprite = Sprite::CreateSprite(13, { 450,600 });
+	TB2Sprite = Sprite::CreateSprite(14, { 0,0 });
 }
 
 void TitleScene::Init()
 {
+	SceneNum = 0;
+	Scene = 0;
+	SCangeFlag = false;
+	TSSprite->SetSize({ 300,110 });
+	TS2Sprite->SetSize({ 180,50 });
+	TSSprite->SetPosition({ 450,500 });
+	TS2Sprite->SetPosition({ 500,600 });
 }
 
 void TitleScene::Update()
 {
+	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
+	{
+		SceneNum = 1;
+	}
+	else if (Input::GetInstance()->TriggerKey(DIK_UPARROW)) {
+		SceneNum = 0;
+	}
+	if (SceneNum == 0) {
+		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+			SCangeFlag = true;
+		}
+		TSSprite->SetSize({ 300,110 });
+		TS2Sprite->SetSize({180,50 });
+		TSSprite->SetPosition({ 450,500 });
+		TS2Sprite->SetPosition({ 500,600 });
+	}
+	else if (SceneNum == 1) {
+		if (Scene == 0) {
+			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				Scene = 1;
+			}
+		}
+		else if (Scene == 1) {
+			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				Scene = 0;
+			}
+		}
+		TSSprite->SetSize({ 150,55 });
+		TS2Sprite->SetSize({360,100 });
+		TSSprite->SetPosition({ 530,550 });
+		TS2Sprite->SetPosition({ 450,600 });
+	}
+
 }
 
 void TitleScene::DrawBG()
 {
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	TBSprite->Draw();
+	if (Scene == 0) {
+		TBSprite->Draw();
+	}
+	if (Scene == 1) {
+		TB2Sprite->Draw();
+	}
 	Sprite::PostDraw();
 }
 
@@ -71,9 +120,12 @@ void TitleScene::Draw()
 void TitleScene::DrawFront()
 {
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	TSprite->Draw();
-	TSSprite->Draw();
-	//DebugText::GetInstance()->Printf(200, 200, 3.0f, "TITLE");
+	if (Scene == 0) {
+		TSprite->Draw();
+		TSSprite->Draw();
+		TS2Sprite->Draw();
+	}
+	DebugText::GetInstance()->Printf(0, 0, 3.0f, "%d",SceneNum);
 	//DebugText::GetInstance()->Printf(200, 500, 3.0f, "PUSH SPACE");
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();

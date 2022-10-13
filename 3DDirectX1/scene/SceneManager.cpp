@@ -21,7 +21,7 @@ void SceneManager::Init()
 void SceneManager::Update()
 {
 	if (scene == TITLE) {
-		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+		if (titleScene->GetSCangeFlag() == true) {
 			gameScene->Init();
 			scene = GAME;
 		}

@@ -32,6 +32,7 @@ public:
 	void DrawFront();
 	//パーティクル
 	void CreateParticles();
+	bool GetSCangeFlag() { return SCangeFlag; }
 private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
@@ -40,6 +41,13 @@ private:
 	LightGroup* lightGroup = nullptr;
 	Sprite* TSprite = nullptr;
 	Sprite* TBSprite = nullptr;
+	Sprite* TB2Sprite = nullptr;
 	Sprite* TSSprite = nullptr;
+	Sprite* TS2Sprite = nullptr;
+	bool SCangeFlag = false;
+	int SceneNum = 0;
+	int Scene = 0;
+
+
 };
 
