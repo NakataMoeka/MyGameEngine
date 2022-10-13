@@ -42,29 +42,33 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	camera->SetEye({ 0, 0, -10 });
 
 	Sprite::LoadTexture(11, L"Resources/UI/TitleB.png");
-	Sprite::LoadTexture(10, L"Resources/UI/Title.png");
+	Sprite::LoadTexture(10, L"Resources/UI/title.png");
 	Sprite::LoadTexture(12, L"Resources/UI/Title2.png");
 	Sprite::LoadTexture(13, L"Resources/UI/Title3.png");
 	Sprite::LoadTexture(14, L"Resources/UI/TitleB2.png");
-	TSprite = Sprite::CreateSprite(10, { 300,100 });
+	TSprite = Sprite::CreateSprite(10, { 0,0 });
 	TBSprite = Sprite::CreateSprite(11, { 0,0 });
 	TSSprite = Sprite::CreateSprite(12, { 450,500 });
 	TS2Sprite = Sprite::CreateSprite(13, { 450,600 });
 	TB2Sprite = Sprite::CreateSprite(14, { 0,0 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/BGM/famipop.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/SE/Œˆ’èƒ{ƒ^ƒ“‚ð‰Ÿ‚·26.wav");
+	sound3 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");
 }
 
 void TitleScene::Init()
 {
 	SceneNum = 0;
 	Scene = 0; 
+	TaCount = 0;
 	SCangeFlag = false;
 	TSSprite->SetSize({ 300,110 });
 	TS2Sprite->SetSize({ 180,50 });
 	TSSprite->SetPosition({ 450,500 });
 	TS2Sprite->SetPosition({ 500,600 });
-	TSprite->SetTextureRect({ 0,0 }, { 170, 170 });
+	TSprite->SetPosition({ 300,100 });
+	TSprite->SetSize({ 128,128 });
+	TSprite->SetTextureRect({ 0 ,0 }, { 0+146,170 });
 	audio->SoundPlayWave(sound1);
 	audio->SetBGMVolume(0.3f);
 }
@@ -74,9 +78,11 @@ void TitleScene::Update()
 	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
 	{
 		SceneNum = 1;
+		audio->SEPlayWave(sound3);
 	}
 	else if (Input::GetInstance()->TriggerKey(DIK_UPARROW)) {
 		SceneNum = 0;
+		audio->SEPlayWave(sound3);
 	}
 	if (SceneNum == 0) {
 		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
@@ -108,7 +114,11 @@ void TitleScene::Update()
 		TSSprite->SetPosition({ 530,550 });
 		TS2Sprite->SetPosition({ 450,600 });
 	}
-	TSprite->SetTextureRect({ 0,0 }, { 170, 170 });
+	if (TaCount < 5) {
+		TaCount+=0.5;
+	}
+	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 146*TaCount,170 });
+	TSprite->SetSize({ 730,170 });
 }
 
 void TitleScene::DrawBG()

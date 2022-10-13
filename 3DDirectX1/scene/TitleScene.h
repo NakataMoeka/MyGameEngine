@@ -39,6 +39,7 @@ private:
 
 	SoundData sound1;
 	SoundData sound2;
+	SoundData sound3;
 	const int debugTextTexNumber = 0;
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;
@@ -52,7 +53,7 @@ private:
 	bool SCangeFlag = false;
 	int SceneNum = 0;
 	int Scene = 0;
-
+	float TaCount=0;
 
 };
 
