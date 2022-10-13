@@ -40,6 +40,13 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
+
+	Sprite::LoadTexture(11, L"Resources/UI/TitleB.png");
+	Sprite::LoadTexture(10, L"Resources/UI/Title.png");
+	Sprite::LoadTexture(12, L"Resources/UI/Title2.png");
+	TSprite = Sprite::CreateSprite(10, { 300,100 });
+	TBSprite = Sprite::CreateSprite(11, { 0,0 });
+	TSSprite = Sprite::CreateSprite(12, { 400,500 });
 }
 
 void TitleScene::Init()
@@ -52,6 +59,9 @@ void TitleScene::Update()
 
 void TitleScene::DrawBG()
 {
+	Sprite::PreDraw(dxCommon->GetCmdList());
+	TBSprite->Draw();
+	Sprite::PostDraw();
 }
 
 void TitleScene::Draw()
@@ -61,8 +71,10 @@ void TitleScene::Draw()
 void TitleScene::DrawFront()
 {
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	DebugText::GetInstance()->Printf(200, 200, 3.0f, "TITLE");
-	DebugText::GetInstance()->Printf(200, 500, 3.0f, "PUSH SPACE");
+	TSprite->Draw();
+	TSSprite->Draw();
+	//DebugText::GetInstance()->Printf(200, 200, 3.0f, "TITLE");
+	//DebugText::GetInstance()->Printf(200, 500, 3.0f, "PUSH SPACE");
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

@@ -38,5 +38,8 @@ private:
 	const int debugTextTexNumber = 0;
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;
+	Sprite* TSprite = nullptr;
+	Sprite* TBSprite = nullptr;
+	Sprite* TSSprite = nullptr;
 };
 
