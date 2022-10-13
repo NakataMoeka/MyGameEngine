@@ -51,17 +51,22 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	TSSprite = Sprite::CreateSprite(12, { 450,500 });
 	TS2Sprite = Sprite::CreateSprite(13, { 450,600 });
 	TB2Sprite = Sprite::CreateSprite(14, { 0,0 });
+	sound1 = Audio::SoundLoadWave("Resources/Music/BGM/famipop.wav");
+	sound2 = Audio::SoundLoadWave("Resources/Music/SE/Œˆ’èƒ{ƒ^ƒ“‚ð‰Ÿ‚·26.wav");
 }
 
 void TitleScene::Init()
 {
 	SceneNum = 0;
-	Scene = 0;
+	Scene = 0; 
 	SCangeFlag = false;
 	TSSprite->SetSize({ 300,110 });
 	TS2Sprite->SetSize({ 180,50 });
 	TSSprite->SetPosition({ 450,500 });
 	TS2Sprite->SetPosition({ 500,600 });
+	TSprite->SetTextureRect({ 0,0 }, { 170, 170 });
+	audio->SoundPlayWave(sound1);
+	audio->SetBGMVolume(0.3f);
 }
 
 void TitleScene::Update()
@@ -76,6 +81,8 @@ void TitleScene::Update()
 	if (SceneNum == 0) {
 		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 			SCangeFlag = true;
+			audio->SEPlayWave(sound2);
+			audio->StopWave();
 		}
 		TSSprite->SetSize({ 300,110 });
 		TS2Sprite->SetSize({180,50 });
@@ -85,20 +92,23 @@ void TitleScene::Update()
 	else if (SceneNum == 1) {
 		if (Scene == 0) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				audio->SEPlayWave(sound2);
 				Scene = 1;
 			}
 		}
 		else if (Scene == 1) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				audio->SEPlayWave(sound2);
 				Scene = 0;
 			}
 		}
+		
 		TSSprite->SetSize({ 150,55 });
 		TS2Sprite->SetSize({360,100 });
 		TSSprite->SetPosition({ 530,550 });
 		TS2Sprite->SetPosition({ 450,600 });
 	}
-
+	TSprite->SetTextureRect({ 0,0 }, { 170, 170 });
 }
 
 void TitleScene::DrawBG()
