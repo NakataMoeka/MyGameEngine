@@ -6,7 +6,7 @@
 #include <d3dx12.h>
 #include <cstdlib>
 #include "WinApp.h"
-
+#include <chrono>
 class DXCommon {
 public:
 	void Initialize(WinApp* winapp);
@@ -43,4 +43,8 @@ private:
 	std::vector<ComPtr<ID3D12Resource>> backBuffers;
 	ComPtr<ID3D12Resource> depthBuffer;//これをメンバ変数にしないと例外スローが起こるので注意!!
 	UINT64 fenceVal = 0;
+	float deltaTime = 0.0f;
+	float frameRate = 0.0f;
+	float commandWaitTime = 0.0f;
+	std::chrono::steady_clock::time_point lastUpdate;
 };
