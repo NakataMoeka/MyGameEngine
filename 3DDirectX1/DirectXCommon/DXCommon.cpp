@@ -56,6 +56,7 @@ void DXCommon::preDraw()
 
 	//シザー短形の設定
 	cmdList->RSSetScissorRects(1, &CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height));
+#if _DEBUG FPSの見える化
 	// 経過時間計測
 	auto now = std::chrono::steady_clock::now();
 	deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - lastUpdate).count() / 1000000.0f;
@@ -74,7 +75,7 @@ void DXCommon::preDraw()
 			SetWindowTextA(winapp->GetHwnd(), str);
 		}
 	}
-
+#endif
 }
 
 void DXCommon::postDraw()
