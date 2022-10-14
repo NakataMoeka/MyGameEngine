@@ -216,7 +216,7 @@ void Player::Jump()
 		}
 
 		Sphere* sphere = nullptr;
-		DirectX::XMVECTOR move = {};
+		DirectX::XMVECTOR move = {0,0,0,0};
 	};
 
 	PlayerQueryCallback callback(sphereCollider);
@@ -359,7 +359,7 @@ void Player::Dash()
 		{
 			dashCoolTime = dashCoolTimeMax;
 		}
-		XMVECTOR movedash = { 0,0,2,0 };//前後方向用の移動ベクトル
+		XMVECTOR movedash = { 0,0,1.5,0 };//前後方向用の移動ベクトル
 		
 		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
 		movedash = XMVector3TransformNormal(movedash, matRot);
