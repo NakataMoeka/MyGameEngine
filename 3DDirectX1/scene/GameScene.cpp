@@ -159,6 +159,7 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
+	//当たり判定
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
 
@@ -189,6 +190,7 @@ void GameScene::Update()
 		}
 
 	}
+	//時間
 	Tsize2 = Tsize;
 	if (Tsize2 % 10 == 0) {
 		TCount++;

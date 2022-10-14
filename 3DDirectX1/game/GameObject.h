@@ -26,7 +26,6 @@ public:
 	void Update();
 	void Draw();
 	void Delete(int i);
-	Box	GetCBox(int i) { return cBox[i]; }
 	OBB GetOBB(int i) { return obb[i]; }
 	Sphere GetCSphere(int i) { return cSphere[i]; }
 	XMFLOAT3 GetPos(int i) { return position[i]; }
@@ -36,16 +35,17 @@ public:
 	float GetMat();
 	Object3d* GetObject(int i) { return cube[i]; }
 private:
-	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//沸き地のマップ
+	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
 	static const int OBJNumber = 10;
 	static const int OBJType = 2;
 	Object3d* cube[OBJNumber];
 	Model* modelCube;
-	Box cBox[2];
-	OBB obb[OBJNumber];
-	Sphere cSphere[OBJNumber];
+
+	OBB obb[OBJNumber];//バグが起きているためOBBは使いません
+	Sphere cSphere[OBJNumber];//当たり判定のやつ
 	float r = 2;
 
+	//サイズ角度位置
 	XMFLOAT3 position[OBJNumber] = { {10,2,0},{0,10,10} ,{-10,2,0}
 	,{-50,2,-40},{30,2,10} ,{-10,2,20}
 	,{50,2,30},{0,2,50} ,{-10,2,0} ,{80,2,-20}};

@@ -43,7 +43,6 @@ public:
 
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
-	float GetJspeed() { return jspeed; }
 	bool GetOnGround() { return onGround; }
 	bool SetColFlag(bool ColFlag,int i) { return this->colFlag[i] = ColFlag; }
 private://プレイヤーの動き系
@@ -52,12 +51,15 @@ private://プレイヤーの動き系
 	void Jump();//ジャンプ
 	void Dash();//ダッシュ
 private://変数
+	//プレイヤーのモデル
 	Object3d* playerObj=nullptr;
 	Model* model=nullptr;
+	//球のモデル
 	Object3d* SphereObj=nullptr;
 	Model* model2=nullptr;
-
+	//集中線
 	Sprite* dashSprite=nullptr;
+	//サイズ表示の円
 	Sprite* sizeSprite=nullptr;
 	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
@@ -66,17 +68,14 @@ private://変数
 	XMVECTOR sphereAngle = { 0,0,0,0 };
 	XMFLOAT3 sphereSize = { 1,1,1 };
 	float cameraAngle = 0;
-	Sphere sphere;
 	
-	float radAD = 0.0f;
-	float radWS = 0.0f;
-	OBB obb;
+	Sphere sphere;//当たり判定のやつ
+
+	OBB obb;//バグが起こっているため使わない
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 	float r = 3;
-	bool JumpFlag = false;
-	bool gFlag = false;
-	float g = 0.0098;
-	float jspeed;
+
+	//ダッシュ関連の変数
 	bool dashFlag = false;
 	float dashSpeed = 2.0f;
 	int dashCoolTime = 0;
@@ -84,7 +83,8 @@ private://変数
 	int dashTime = 0;
 	const int dashTimeMax = 20;
 	float fade = 1;
-
+	//ジャンプ＆地面との当たり判定系
+	bool JumpFlag = false;
 	bool onGround = true;
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV;
@@ -92,6 +92,8 @@ private://変数
 	bool onGround2 = true;
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV2;
+	
 	static const int OBJNumber = 10;
+	
 	bool colFlag[OBJNumber];
 };

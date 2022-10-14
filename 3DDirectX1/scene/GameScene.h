@@ -91,18 +91,23 @@ private: // メンバ変数
 
 	const int debugTextTexNumber = 0;
 
-	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
 
 	static const int OBJNumber = 10;
+	//当たり判定
 	bool IsHit[OBJNumber];
 	int HitCount=0;
 	bool Alive[OBJNumber];
 	bool parentFlag = false;
+	
+	//サイズ
 	float Tsize = 1;
 	int Tsize2 = 1;
 	int TCount = 0;
 	bool TFlag = false;
+
 	float distance = 20.0f;//プレイヤーとカメラの距離
+	
+	//タイマー系
 	float TimeRot = 0;
 	int TimeCount = 0;
 	float clearTimer = 18000;//1800/60が30秒
@@ -111,7 +116,5 @@ private: // メンバ変数
 	bool overFlag = false;
 	float sphereSize = 1;
 	float spherePosY = 3;
-
-	XMFLOAT3 oldPos;
 
 };
