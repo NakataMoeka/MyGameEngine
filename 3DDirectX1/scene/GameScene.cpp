@@ -211,7 +211,7 @@ void GameScene::Update()
 		TimeRot += 0.03;
 	}
 	if (clearTimer > 0) {
-		clearTimer -= 1.5;
+		clearTimer -= 1.0;
 	}
 	else if (clearTimer <= 0) {
 		if (Tsize < 11) {
