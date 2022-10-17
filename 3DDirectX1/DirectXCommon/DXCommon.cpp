@@ -57,11 +57,7 @@ void DXCommon::preDraw()
 	//シザー短形の設定
 	cmdList->RSSetScissorRects(1, &CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height));
 #if _DEBUG FPSの見える化
-	// 経過時間計測
-	auto now = std::chrono::steady_clock::now();
-	deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - lastUpdate).count() / 1000000.0f;
-	frameRate = 1.0f / deltaTime;
-	lastUpdate = now;
+
 	// FPS,CPU使用率表示
 	{
 		static int count = 0;
@@ -69,9 +65,8 @@ void DXCommon::preDraw()
 		// 一秒に一度更新
 		if (++count > FPS_BASIS) {
 			count = 0;
-			float cputime = deltaTime - commandWaitTime;
 			char str[50];
-			sprintf_s(str, "fps=%03.0f cpu usage=%06.2f%%", frameRate, cputime * FPS_BASIS * 100.0f);
+			sprintf_s(str, "fps=%03.0f", FPS::GetInstance()->GetFPS());
 			SetWindowTextA(winapp->GetHwnd(), str);
 		}
 	}
@@ -262,7 +257,7 @@ void DXCommon::InitializeSwapchain()
 void DXCommon::InitializeRenderTargetView()
 {
 	HRESULT result;
-	
+
 
 	// 各種設定をしてデスクリプタヒープを生成
 	D3D12_DESCRIPTOR_HEAP_DESC heapDesc{};
@@ -295,12 +290,12 @@ void DXCommon::InitializeRenderTargetView()
 void DXCommon::InitializeDepthBuffer()
 {
 	HRESULT result;
-	
+
 	// 深度バッファリソース設定
 	CD3DX12_RESOURCE_DESC depthResDesc = CD3DX12_RESOURCE_DESC::Tex2D(
 		DXGI_FORMAT_D32_FLOAT,
-		WinApp:: window_width,
-		WinApp:: window_height,
+		WinApp::window_width,
+		WinApp::window_height,
 		1, 0,
 		1, 0,
 		D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL);

@@ -15,7 +15,7 @@ public:
 	void Ran();
 	//インスタンスの取得
 	static FPS* GetInstance();
-
+	float GetFPS() { return fps; }
 	//コピーコンストラクタ、代入演算子無効化
 	FPS(const FPS& obj) = delete;
 	FPS& operator=(const FPS& obj) = delete;
