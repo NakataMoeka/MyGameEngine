@@ -196,11 +196,6 @@
     <ClCompile Include="scene\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DirectXTex\DirectXTex_Desktop_2019_Win10.vcxproj">
-      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\shaders\Blur.hlsli" />
     <None Include="Resources\shaders\color.hlsli" />
     <None Include="Resources\shaders\FBX.hlsli" />
@@ -390,6 +385,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\engine.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
+      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
