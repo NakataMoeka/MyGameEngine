@@ -22,9 +22,10 @@ void Player::Initialize()
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Sprite::LoadTexture(2, L"Resources/dash.png");
 	Sprite::LoadTexture(3, L"Resources/UI/sizeUI.png");
+	Sprite::LoadTexture(4, L"Resources/UI/chikyuu.png");
 	dashSprite = Sprite::CreateSprite(2, { 0,0 });
 	sizeSprite = Sprite::CreateSprite(3, { 100,100 });
-
+	earthSprite = Sprite::CreateSprite(4, { 1000,500 });
 
 }
 
@@ -418,4 +419,5 @@ void Player::DrawSprite()
 	if (dashFlag == true) {
 		dashSprite->Draw();
 	}
+	earthSprite->Draw();
 }

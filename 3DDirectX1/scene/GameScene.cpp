@@ -98,11 +98,11 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
 
 	Sprite::LoadTexture(1, L"Resources/background.png");
-	Sprite::LoadTexture(4, L"Resources/UI/TimeUI.png");
-	Sprite::LoadTexture(5, L"Resources/UI/TimeUI2.png");
+	Sprite::LoadTexture(6, L"Resources/UI/TimeUI.png");
+	Sprite::LoadTexture(7, L"Resources/UI/TimeUI2.png");
 	sprite = Sprite::CreateSprite(1, { 0,0 });
-	timeSprite = Sprite::CreateSprite(4, { 1100,100 });
-	timeSprite2 = Sprite::CreateSprite(5, { 1100,100 });
+	timeSprite = Sprite::CreateSprite(6, { 1100,100 });
+	timeSprite2 = Sprite::CreateSprite(7, { 1100,100 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/World_Heritage.wav");
 	//audio->SoundPlayWave(sound1);

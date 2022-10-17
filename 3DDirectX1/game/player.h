@@ -61,6 +61,8 @@ private://変数
 	Sprite* dashSprite=nullptr;
 	//サイズ表示の円
 	Sprite* sizeSprite=nullptr;
+	//地球
+	Sprite* earthSprite = nullptr;
 	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
 	XMFLOAT3 spherePos = { 0,0,0 };
