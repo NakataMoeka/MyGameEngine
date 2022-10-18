@@ -190,17 +190,19 @@ void GameScene::Update()
 			}
 		}
 		//if (gameObject->GetObject(i)->GetParentFlag()==true) {
-		//	if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere2(i))) {
-		//		if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
-		//			IsHit[i] = true;
-		//			HitCount++;
-		//			//Alive[i] = false;
-		//			player->SetColFlag(true, i);
-		//			gameObject->GetObject(i)->SetParentFlag(true);
-		//		}
-
-		//		DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-		//	}
+		//右と左の数値が同じだからずっとヒットしている。
+		//なので右と左は同じ数値が入らないようにすればいいのでは
+			if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere2(i+1))) {
+				//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
+					//IsHit[i] = true;
+					//HitCount++;
+					//Alive[i] = false;
+					//player->SetColFlag(true, i);
+					//gameObject->GetObject(i)->SetParentFlag(true);
+				//}
+				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+		//		
+			}
 		//	//くっついたアイテムにもくっつくようにしたい後々
 		//	//ペアレントフラグを使えば行ける気がするナリー
 		//	if (IsHit[i] == true) {
