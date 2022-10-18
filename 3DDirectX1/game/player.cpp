@@ -177,7 +177,7 @@ void Player::Ball()
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	////ƒWƒƒƒ“ƒv‚ğ‚µ‚È‚¢‚¾‚¯Y²‚Ì’Ç]‚ğ‚·‚é
 	if (JumpFlag == false) {
-		spherePos.y = f.y + 3;
+		spherePos.y = f.y + 4;
 	}
 	//if (moveFlag == false) {
 	spherePos.x = f.x;
