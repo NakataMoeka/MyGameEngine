@@ -102,4 +102,5 @@ private://•Ï”
 	bool colFlag[OBJNumber];
 
 	float PlayerWalkCount=0;
+	float CountWalk = 0;
 };

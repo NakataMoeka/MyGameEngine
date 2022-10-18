@@ -36,6 +36,7 @@ void Player::Init()
 		colFlag[i] = false;
 	}
 	PlayerWalkCount = 0;
+	CountWalk = 0;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	obb.m_NormaDirect[0] = { SphereObj->GetMatRot().r[0].m128_f32[0],SphereObj->GetMatRot().r[0].m128_f32[1] ,SphereObj->GetMatRot().r[0].m128_f32[2] };
@@ -136,12 +137,19 @@ void Player::Move()
 		Input::GetInstance()->PushKey(DIK_A)||
 		Input::GetInstance()->PushKey(DIK_D))
 	{
-		if (PlayerWalkCount < 7) {
-			PlayerWalkCount++;
+		if (CountWalk < 5) {
+			CountWalk++;
 		}
-		if (PlayerWalkCount == 6) {
-			PlayerWalkCount = 0;
+		if (CountWalk == 5) {
+			if (PlayerWalkCount < 6) {
+				PlayerWalkCount++;
+			}
+			if (PlayerWalkCount == 6) {
+				PlayerWalkCount = 0;
+			}
+			CountWalk = 0;
 		}
+	
 	}
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
