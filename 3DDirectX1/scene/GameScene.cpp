@@ -155,7 +155,7 @@ void GameScene::Update()
 	//}
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
-	lightGroup->SetCircleShadowCasterPos(0, player->GetSpherePos());
+	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
 
@@ -189,10 +189,18 @@ void GameScene::Update()
 
 			}
 		}
-		//if (gameObject->GetObject(i)->GetParentFlag()==true) {
-		//右と左の数値が同じだからずっとヒットしている。
-		//なので右と左は同じ数値が入らないようにすればいいのでは
-			if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere2(i+1))) {
+	
+	}
+	//当たり判定
+	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
+		for (int j = 0; j < gameObject->GetOBJNumber(); j++) {
+			//if (gameObject->GetObject(i)->GetParentFlag()==true) {
+			//右と左の数値が同じだからずっとヒットしている。
+			//なので右と左は同じ数値が入らないようにすればいいのでは
+			/*j = i;
+			++j;
+			gameObject->GetCSphere(i);*/
+			if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere2(j))) {
 				//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
 					//IsHit[i] = true;
 					//HitCount++;
@@ -201,8 +209,9 @@ void GameScene::Update()
 					//gameObject->GetObject(i)->SetParentFlag(true);
 				//}
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-		//		
+				//		
 			}
+		}
 		//	//くっついたアイテムにもくっつくようにしたい後々
 		//	//ペアレントフラグを使えば行ける気がするナリー
 		//	if (IsHit[i] == true) {
@@ -327,7 +336,7 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
-	DebugText::GetInstance()->Printf(100, 320, 3.0f, "%f:%f", player->GetPlayerPos().x, player->GetPlayerPos().z);
+	DebugText::GetInstance()->Printf(100, 320, 3.0f, "%f", player->GetPlayerPos().y);
 	//DebugText::GetInstance()->Printf(960, 150, 3.0f, "%d", player->GetMFlag());
 	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
