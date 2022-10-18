@@ -377,7 +377,6 @@ void Object3d::transformParent()
 	matWorld_Invers = XMMatrixInverse(nullptr, parent->matWorld);
 	//子供のワールド座標と親のワールド座標の逆行列を乗算
 	matWorld_parent = matWorld * matWorld_Invers;
-	//matWorld_parent = XMMatrixMultiply(matWorld, matWorld_Invers);
 	//分解する
 	XMMatrixDecompose(&scaleV, &rotationV, &positionV, matWorld_parent);
 	//親のワールド座標に分解したものを乗算

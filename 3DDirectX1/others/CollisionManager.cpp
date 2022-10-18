@@ -36,7 +36,8 @@ void CollisionManager::CheckAllCollisions()
 					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
 					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
 					//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Love");
-
+				/*	colB->GetObject3d()->SetParentFlag(true);
+					colB->GetObject3d()->SetParent(colA->GetObject3d());*/
 				}
 			}
 			else if (colA->GetShapeType() == COLLISIONSHAPE_MESH &&

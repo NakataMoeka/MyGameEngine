@@ -65,12 +65,13 @@ void GameObject::Init()
 		obb[i].m_fLength[1] = 0.5;
 		obb[i].m_fLength[2] = 0.5;
 		obb[i].m_Pos = { position[i].x, position[i].y, position[i].z};
-
+	/*	cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3.5));
+		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);*/
 
 	}
 	//d‚­‚È‚é
-	//cube[6]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3.5));
-//	cube[6]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+
+
 
 }
 
