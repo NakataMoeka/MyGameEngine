@@ -28,6 +28,7 @@ public:
 	void Delete(int i);
 	OBB GetOBB(int i) { return obb[i]; }
 	Sphere GetCSphere(int i) { return cSphere[i]; }
+	Sphere GetCSphere2(int i) { return cSphere2[i]; }
 	XMFLOAT3 GetPos(int i) { return position[i]; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize(int i) { return size[i]; }
@@ -43,6 +44,7 @@ private:
 
 	OBB obb[OBJNumber];//バグが起きているためOBBは使いません
 	Sphere cSphere[OBJNumber];//当たり判定のやつ
+	Sphere cSphere2[OBJNumber];//当たり判定のやつ
 	float r = 2;
 
 	//サイズ角度位置
