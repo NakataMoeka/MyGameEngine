@@ -23,10 +23,11 @@ void Player::Initialize()
 	Sprite::LoadTexture(2, L"Resources/dash.png");
 	Sprite::LoadTexture(3, L"Resources/UI/sizeUI.png");
 	Sprite::LoadTexture(4, L"Resources/UI/chikyuu.png");
+	Sprite::LoadTexture(5, L"Resources/UI/Player.png");
 	dashSprite = Sprite::CreateSprite(2, { 0,0 });
 	sizeSprite = Sprite::CreateSprite(3, { 100,100 });
 	earthSprite = Sprite::CreateSprite(4, { 1000,500 });
-
+	playerSprite = Sprite::CreateSprite(5, { 1100,530 });
 }
 
 void Player::Init()
@@ -34,6 +35,7 @@ void Player::Init()
 	for (int i = 0; i < OBJNumber; i++) {
 		colFlag[i] = false;
 	}
+	PlayerWalkCount = 0;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	obb.m_NormaDirect[0] = { SphereObj->GetMatRot().r[0].m128_f32[0],SphereObj->GetMatRot().r[0].m128_f32[1] ,SphereObj->GetMatRot().r[0].m128_f32[2] };
@@ -129,7 +131,18 @@ void Player::Move()
 		
 		sphereAngle.m128_f32[2] -= 10;
 	}
-
+	if (Input::GetInstance()->PushKey(DIK_W)||
+		Input::GetInstance()->PushKey(DIK_S)||
+		Input::GetInstance()->PushKey(DIK_A)||
+		Input::GetInstance()->PushKey(DIK_D))
+	{
+		if (PlayerWalkCount < 7) {
+			PlayerWalkCount++;
+		}
+		if (PlayerWalkCount == 6) {
+			PlayerWalkCount = 0;
+		}
+	}
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	obb.m_NormaDirect[0] = { SphereObj->GetMatRot().r[0].m128_f32[0],SphereObj->GetMatRot().r[0].m128_f32[1] ,SphereObj->GetMatRot().r[0].m128_f32[2] };
@@ -398,6 +411,8 @@ void Player::Update()
 	playerObj->Update();
 
 	dashSprite->SetColor({1, 1, 1, fade});
+	playerSprite->SetSize({ 140,200 });
+	playerSprite->SetTextureRect({ 0 + 580 * PlayerWalkCount,0 }, { 580,810 });
 }
 
 void Player::OnCollision()
@@ -420,4 +435,5 @@ void Player::DrawSprite()
 		dashSprite->Draw();
 	}
 	earthSprite->Draw();
+	playerSprite->Draw();
 }

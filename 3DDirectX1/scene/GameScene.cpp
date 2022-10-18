@@ -124,7 +124,7 @@ void GameScene::Init()
 	player->Init();
 	gameObject->Init();
 	stageObj->Init();
-	distance = 20.0f;
+	distance = 10.0f;
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
 		Alive[i] = true;
