@@ -59,7 +59,7 @@ void Player::Init()
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 
-	playerObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), radius));
+	playerObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2.0f));
 	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	
 	playerObj->Quaternion();
