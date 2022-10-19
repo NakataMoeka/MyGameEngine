@@ -41,7 +41,7 @@ void GameObject::Init()
 		position[7] = { 0, 2, 50 };
 		position[8] = { -30, 2, 20 };
 		position[9] = { 30, 2, -20 };
-		size[0] = { 1,1,1 };
+		size[0] = { 3,3,3 };
 		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };
 	
