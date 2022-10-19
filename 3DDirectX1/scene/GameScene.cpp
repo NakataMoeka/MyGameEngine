@@ -71,7 +71,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	object3d3 = Object3d::Create(model3);
 	object3d4 = TouchableObject::Create(model4);
 	model = Model::Create("bullet", false);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("player");
+	model2 = FbxLoader::GetInstance()->LoadModelFromFile("block");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
