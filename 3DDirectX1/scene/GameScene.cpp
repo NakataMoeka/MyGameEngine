@@ -191,42 +191,7 @@ void GameScene::Update()
 		}
 	
 	}
-	//当たり判定
-	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
-		for (int j = i+1; j < gameObject->GetOBJNumber(); j++) {
-			//if (gameObject->GetObject(i)->GetParentFlag()==true) {
-			//右と左の数値が同じだからずっとヒットしている。
-			//なので右と左は同じ数値が入らないようにすればいいのでは
-			/*j = i;
-			++j;
-			gameObject->GetCSphere(i);*/
-			if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere2(j))) {
-				//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
-					IsHit[i] = true;
-					HitCount++;
-					//Alive[i] = false;
-					player->SetColFlag(true, i);
-					gameObject->GetObject(i)->SetParentFlag(true);
-				//}
-				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-				//		
-			}
-		}
-		//	//くっついたアイテムにもくっつくようにしたい後々
-		//	//ペアレントフラグを使えば行ける気がするナリー
-			if (IsHit[i] == true) {
-				gameObject->GetObject(i)->SetParent(gameObject->GetObject(i));
-			}
-			if (HitCount == 1) {
-				gameObject->GetObject(i)->transformParent();
-				audio->SEPlayWave(sound1);
-				HitCount = 0;
-				IsHit[i] = false;
-				Tsize++;
 
-			}
-		//}
-	}
 	//時間
 	Tsize2 = Tsize;
 	if (Tsize2 % 10 == 0) {
@@ -293,7 +258,8 @@ void GameScene::Update()
 	object3d3->Update();
 
 	lightGroup->Update();
-	colMan->CheckAllCollisions();
+	//colMan->CheckAllCollisions();
+	colMan->ColSphere();
 }
 
 void GameScene::DrawBG()

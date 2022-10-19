@@ -3,7 +3,7 @@
 #include "Collision.h"
 #include"DebugText.h"
 #include "MeshCollider.h"
-
+#include "CollisionAttribute.h"
 using namespace DirectX;
 
 CollisionManager* CollisionManager::GetInstance()
@@ -29,15 +29,19 @@ void CollisionManager::CheckAllCollisions()
 			// ともに球
 			if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
 				colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
-				Sphere* SphereA = dynamic_cast<Sphere*>(colA);
-				Sphere* SphereB = dynamic_cast<Sphere*>(colB);
-				DirectX::XMVECTOR inter;
-				if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
-					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-					//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Love");
-				/*	colB->GetObject3d()->SetParentFlag(true);
-					colB->GetObject3d()->SetParent(colA->GetObject3d());*/
+				if (colA->attribute==colB->attribute) {
+					
+						Sphere* SphereA = dynamic_cast<Sphere*>(colA);
+						Sphere* SphereB = dynamic_cast<Sphere*>(colB);
+						DirectX::XMVECTOR inter;
+						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
+							colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
+							colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+							//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Love");
+						/*	colB->GetObject3d()->SetParentFlag(true);
+							colB->GetObject3d()->SetParent(colA->GetObject3d());*/
+						}
+			
 				}
 			}
 			else if (colA->GetShapeType() == COLLISIONSHAPE_MESH &&
@@ -58,6 +62,39 @@ void CollisionManager::CheckAllCollisions()
 				if (meshCollider->CheckCollisionSphere(*sphere, &inter)) {
 					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
 					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+				}
+			}
+		}
+	}
+}
+
+void CollisionManager::ColSphere()
+{
+
+	std::forward_list<BaseCollider*>::iterator itA;
+	std::forward_list<BaseCollider*>::iterator itB;
+
+	// 全ての組み合わせについて総当りチェック
+	itA = colliders.begin();
+	for (; itA != colliders.end(); ++itA) {
+		itB = itA;
+		++itB;
+		for (; itB != colliders.end(); ++itB) {
+			BaseCollider* colA = *itA;
+			BaseCollider* colB = *itB;
+			if (colA->attribute == colB->attribute) {
+				// ともに球
+				if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
+					colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
+					Sphere* SphereA = dynamic_cast<Sphere*>(colA);
+					Sphere* SphereB = dynamic_cast<Sphere*>(colB);
+					DirectX::XMVECTOR inter;
+					if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
+					
+						DebugText::GetInstance()->Printf(100, 60, 3.0f, "Love");
+						/*	colB->GetObject3d()->SetParentFlag(true);
+							colB->GetObject3d()->SetParent(colA->GetObject3d());*/
+					}
 				}
 			}
 		}
