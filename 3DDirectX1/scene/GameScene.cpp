@@ -252,7 +252,7 @@ void GameScene::Update()
 	particleMan->Update();
 	object3d2->SetPosition({100,0,0});
 	object3d2->SetRotation({ 0,90,0 });
-
+	object3d2->SetScale({ 0.05,0.05,0.05 });
 	//object3d->Update();
 	object3d2->Update();
 	object3d3->Update();
