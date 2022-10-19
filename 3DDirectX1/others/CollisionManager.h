@@ -41,6 +41,8 @@ private:
 
 	// コライダーのリスト
 	std::forward_list<BaseCollider*> colliders;
+	bool IsHit = false;
+	int HitCount=0;
 
 };
 

@@ -90,10 +90,24 @@ void CollisionManager::ColSphere()
 					Sphere* SphereB = dynamic_cast<Sphere*>(colB);
 					DirectX::XMVECTOR inter;
 					if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-					
-						DebugText::GetInstance()->Printf(100, 60, 3.0f, "Love");
+						IsHit = true;
+						HitCount++;
+						
+						colB->GetObject3d()->SetParentFlag(true);
+						DebugText::GetInstance()->Printf(100, 60, 3.0f, "%f",colB->GetObject3d()->GetPosition().x);
 						/*	colB->GetObject3d()->SetParentFlag(true);
 							colB->GetObject3d()->SetParent(colA->GetObject3d());*/
+					}
+					if (IsHit == true) {
+						colB->GetObject3d()->SetParent(colA->GetObject3d());
+					}
+					if (HitCount == 1) {
+						colB->GetObject3d()->transformParent();
+					
+						HitCount = 0;
+						IsHit = false;
+
+
 					}
 				}
 			}
