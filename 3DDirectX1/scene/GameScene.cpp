@@ -71,7 +71,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	object3d3 = Object3d::Create(model3);
 	object3d4 = TouchableObject::Create(model4);
 	model = Model::Create("bullet", false);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
+	model2 = FbxLoader::GetInstance()->LoadModelFromFile("player");
 	object3d = Object3d::Create(model);
 	object3d2 = new FbxObject3d();
 	object3d2->Initialize();
@@ -150,9 +150,9 @@ void GameScene::Update()
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
 
-	//if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
-	//	object3d2->PlayAnimation();
-	//}
+	if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
+		object3d2->PlayAnimation();
+	}
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
@@ -250,11 +250,11 @@ void GameScene::Update()
 	gameObject->Update();
 
 	particleMan->Update();
-	//object3d2->SetPosition(playerPosition);
-	//object3d2->SetRotation({ 0,90,0 });
+	object3d2->SetPosition({100,0,0});
+	object3d2->SetRotation({ 0,90,0 });
 
 	//object3d->Update();
-	//object3d2->Update();
+	object3d2->Update();
 	object3d3->Update();
 
 	lightGroup->Update();
@@ -280,7 +280,7 @@ void GameScene::Draw()
 	object3d3->Draw();
 
 	//object3d->Draw();
-	//object3d2->Draw();
+	object3d2->Draw();
 	player->Draw();
 	gameObject->Draw();
 	stageObj->Draw();
