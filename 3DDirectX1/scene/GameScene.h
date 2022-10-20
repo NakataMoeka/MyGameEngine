@@ -55,6 +55,7 @@ public: // メンバ関数
 	bool GetOverFlag() { return overFlag; }
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag=clearFlag; }
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
+	bool GetBFlag() { return Bflag; }
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
 
@@ -117,4 +118,5 @@ private: // メンバ変数
 	float sphereSize = 1;
 	float spherePosY = 3;
 
+	bool Bflag = false;//ブラーを掛けるか否か
 };

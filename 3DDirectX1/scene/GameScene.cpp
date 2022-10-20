@@ -132,6 +132,7 @@ void GameScene::Init()
 	}
 	clearFlag = false;
 	overFlag = false;
+	Bflag = false;
 	Tsize = 1;
 	Tsize2 = Tsize;
 	TCount = 0;
@@ -192,16 +193,18 @@ void GameScene::Update()
 	
 	}
 
-	//時間
+	//プレイヤーの大きさ
 	Tsize2 = Tsize;
 	if (Tsize2 % 10 == 0) {
 		TCount++;
 	}
 	else {
 		TCount = 0;
+		Bflag = false;
 	}
 	if (TCount == 1) {
 		distance += 5;
+		Bflag = true;;
 	}
 
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });

@@ -35,12 +35,13 @@ public:
 	void Draw();
 	//‘OŒi‰æ‘œ•`‰æ
 	void DrawFront();
-	
+	bool GetBFlag() { return Bflag; }
 private:
 	//Å‰‚ÌƒV[ƒ“
 	Scene scene = TITLE;
 	TitleScene* titleScene;
 	GameScene* gameScene;
 	ClearScene* clearScene;
+	bool Bflag = false;
 };
 

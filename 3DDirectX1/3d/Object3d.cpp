@@ -380,10 +380,8 @@ void Object3d::transformParent()
 	//分解する
 	XMMatrixDecompose(&scaleV, &rotationV, &positionV, matWorld_parent);
 	//親のワールド座標に分解したものを乗算
-	//XMVECTOR scaleV2, rotationV2, positionV2;
 	XMStoreFloat3(&scale, scaleV);
 	rotation = rotationV;
 	XMStoreFloat3(&position, positionV);
 
-	
 }

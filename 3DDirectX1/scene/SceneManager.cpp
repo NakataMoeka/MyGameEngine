@@ -10,6 +10,7 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	gameScene->Initialize(dxCommon, audio);
 
 	titleScene->Init();
+	Bflag = false;
 	//gameScene->Init();
 	//clearScene->Init();
 }
@@ -48,6 +49,12 @@ void SceneManager::Update()
 			scene = TITLE;
 		}
 		clearScene->Update();
+	}
+	if (gameScene->GetBFlag() == true) {
+		Bflag = true;
+	}
+	else if (gameScene->GetBFlag() == false) {
+		Bflag = false;
 	}
 }
 
