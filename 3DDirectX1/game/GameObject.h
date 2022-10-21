@@ -26,6 +26,7 @@ public:
 	void Update();
 	void Draw();
 	void Delete(int i);
+	//GetterSetter
 	OBB GetOBB(int i) { return obb[i]; }
 	Sphere GetCSphere(int i) { return cSphere[i]; }
 	Sphere GetCSphere2(int i) { return cSphere2[i]; }
@@ -45,7 +46,7 @@ private:
 	OBB obb[OBJNumber];//バグが起きているためOBBは使いません
 	Sphere cSphere[OBJNumber];//当たり判定のやつ
 	Sphere cSphere2[OBJNumber];//当たり判定のやつ
-	float r = 2;
+	float r = 2;//
 
 	//サイズ角度位置
 	XMFLOAT3 position[OBJNumber] = { {10,2,0},{0,10,10} ,{-10,2,0}

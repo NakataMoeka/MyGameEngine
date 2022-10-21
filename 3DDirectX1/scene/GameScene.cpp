@@ -176,8 +176,6 @@ void GameScene::Update()
 
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 			}
-			//くっついたアイテムにもくっつくようにしたい後々
-			//ペアレントフラグを使えば行ける気がするナリー
 			if (IsHit[i] == true) {
 				gameObject->GetObject(i)->SetParent(player->GetObject());
 			}
