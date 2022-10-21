@@ -99,19 +99,19 @@ void CollisionManager::ColSphere()
 							IsHit = true;
 							HitCount++;
 							colB->GetObject3d()->SetParentFlag(true);
-							DebugText::GetInstance()->Printf(100, 60, 3.0f, "%f", colB->GetObject3d()->GetPosition().x);
+							DebugText::GetInstance()->Printf(100, 60, 3.0f, "%f", Tsize);
 							/*	colB->GetObject3d()->SetParentFlag(true);
 								colB->GetObject3d()->SetParent(colA->GetObject3d());*/
 						}
 						if (IsHit == true) {
+							Tsize++;
 							colB->GetObject3d()->SetParent(colA->GetObject3d());
 						}
 						if (HitCount == 1) {
 							colB->GetObject3d()->transformParent();
-
 							HitCount = 0;
 							IsHit = false;
-
+							
 
 						}
 					}

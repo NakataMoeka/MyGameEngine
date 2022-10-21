@@ -185,7 +185,6 @@ void GameScene::Update()
 				HitCount = 0;
 				IsHit[i] = false;
 				Tsize++;
-
 			}
 		}
 	

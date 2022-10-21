@@ -151,5 +151,6 @@ protected:
 	bool isBillboard = false;
 
 	bool parentFlag = false;
+	float Tsize;
 };
 

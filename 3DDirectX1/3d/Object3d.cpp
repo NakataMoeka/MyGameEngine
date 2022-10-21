@@ -383,5 +383,5 @@ void Object3d::transformParent()
 	XMStoreFloat3(&scale, scaleV);
 	rotation = rotationV;
 	XMStoreFloat3(&position, positionV);
-
+	Tsize++;
 }

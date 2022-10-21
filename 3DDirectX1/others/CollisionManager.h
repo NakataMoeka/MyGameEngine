@@ -44,5 +44,6 @@ private:
 	bool IsHit = false;
 	int HitCount=0;
 	bool HitAlive = true;
+	float Tsize=0;
 };
 
