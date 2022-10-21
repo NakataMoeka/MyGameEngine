@@ -31,8 +31,8 @@ public:// ÉÅÉìÉoä÷êî
 	bool Raycast(const Ray& ray, unsigned short attribute, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
 	
 	void QuerySphere(const Sphere& sphere, QueryCallback* callback, unsigned short attribute = (unsigned short)0xffffffff);
-
-
+	
+	bool GetAudioFlag() { return audioFlag; }
 private:
 	CollisionManager() = default;
 	CollisionManager(const CollisionManager&) = delete;
@@ -45,5 +45,6 @@ private:
 	int HitCount=0;
 	bool HitAlive = true;
 	float Tsize=0;
+	bool audioFlag = false;
 };
 
