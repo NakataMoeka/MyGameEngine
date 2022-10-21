@@ -33,6 +33,8 @@ public:// ƒƒ“ƒoŠÖ”
 	void QuerySphere(const Sphere& sphere, QueryCallback* callback, unsigned short attribute = (unsigned short)0xffffffff);
 	
 	bool GetAudioFlag() { return audioFlag; }
+	float GetTsize() { return Tsize; }
+	float GetHitCount() { return HitCount; }
 private:
 	CollisionManager() = default;
 	CollisionManager(const CollisionManager&) = delete;

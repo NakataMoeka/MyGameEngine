@@ -191,6 +191,9 @@ void GameScene::Update()
 	}
 
 	//プレイヤーの大きさ
+	if (colMan->GetHitCount() >= 1) {
+		Tsize += colMan->GetTsize();
+	}
 	Tsize2 = Tsize;
 	if (Tsize2 % 10 == 0) {
 		TCount++;

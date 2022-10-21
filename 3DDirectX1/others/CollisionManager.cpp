@@ -105,7 +105,6 @@ void CollisionManager::ColSphere()
 							audioFlag = true;
 						}
 						if (IsHit == true) {
-							Tsize++;
 							colB->GetObject3d()->SetParent(colA->GetObject3d());
 						}
 						if (HitCount == 1) {
@@ -113,9 +112,7 @@ void CollisionManager::ColSphere()
 							HitCount = 0;
 							IsHit = false;
 							audioFlag = false;
-						}
-						else {
-							audioFlag = false;
+							Tsize++;
 						}
 					}
 
