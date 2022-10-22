@@ -93,27 +93,12 @@ void CollisionManager::ColSphere()
 					Sphere* SphereA = dynamic_cast<Sphere*>(colA);
 					Sphere* SphereB = dynamic_cast<Sphere*>(colB);
 					DirectX::XMVECTOR inter;
-					//オブジェクトが両方球にくっついていたら当たり判定はしない
-					if (colB->GetObject3d()->GetParentFlag() == false) {
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-							IsHit = true;
-							HitCount++;
-							colB->GetObject3d()->SetParentFlag(true);
+						
 							/*	colB->GetObject3d()->SetParentFlag(true);
 								colB->GetObject3d()->SetParent(colA->GetObject3d());*/
-							audioFlag = true;
 						}
-						if (IsHit == true) {
-							colB->GetObject3d()->SetParent(colA->GetObject3d());
-						}
-						if (HitCount == 1) {
-							colB->GetObject3d()->transformParent();
-							HitCount = 0;
-							IsHit = false;
-							audioFlag = false;
-							Tsize++;
-						}
-					}
+					
 
 				}
 			}

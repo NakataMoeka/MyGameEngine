@@ -189,11 +189,39 @@ void GameScene::Update()
 		}
 	
 	}
+	////当たり判定
+	//for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
+	//	for (int j = 0; j < gameObject->GetOBJNumber(); j++) {
+	//		if (i == j) {
+	//			continue;
+	//		}
+	//		
+	//		IsHit[j] = false;
+	//		
+	//			if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere(j))) {
+	//				//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
+	//				IsHit[j] = true;
+	//				HitCount++;
+	//				//player->SetColFlag(true, i);
+	//				gameObject->GetObject(j)->SetParentFlag(true);
+	//				//}
 
+	//				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	//			}
+	//			if (IsHit[j] == true) {
+	//				gameObject->GetObject(j)->SetParent(gameObject->GetObject(i));
+	//			}
+	//			if (HitCount == 1) {
+	//				gameObject->GetObject(j)->transformParent();
+	//				//audio->SEPlayWave(sound1);
+	//				HitCount = 0;
+	//				IsHit[j] = false;
+	//				Tsize++;
+	//			}
+	//	}
+	//}
 	//プレイヤーの大きさ
-	if (colMan->GetHitCount() >= 1) {
-		Tsize += colMan->GetTsize();
-	}
+
 	Tsize2 = Tsize;
 	if (Tsize2 % 10 == 0) {
 		TCount++;
