@@ -99,7 +99,6 @@ void CollisionManager::ColSphere()
 							IsHit = true;
 							HitCount++;
 							colB->GetObject3d()->SetParentFlag(true);
-							DebugText::GetInstance()->Printf(100, 60, 3.0f, "%f", Tsize);
 							/*	colB->GetObject3d()->SetParentFlag(true);
 								colB->GetObject3d()->SetParent(colA->GetObject3d());*/
 							audioFlag = true;
@@ -120,6 +119,7 @@ void CollisionManager::ColSphere()
 			}
 		}
 	}
+	DebugText::GetInstance()->Printf(100, 60, 3.0f, "%f", Tsize);
 }
 
 bool CollisionManager::Raycast(const Ray& ray, RaycastHit* hitInfo, float maxDistance)
