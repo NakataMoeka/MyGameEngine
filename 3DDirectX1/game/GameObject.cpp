@@ -47,6 +47,7 @@ void GameObject::Init()
 	
 		cube[i]->SetPosition(position[i]);
 		cube[i]->SetScale(size[0]);
+		cube[6]->SetScale(size[1]);
 		cube[i]->Quaternion();
 		cube[i]->SetRotation(rota);
 		cube[i]->Update();
@@ -65,8 +66,8 @@ void GameObject::Init()
 		obb[i].m_fLength[1] = 0.5;
 		obb[i].m_fLength[2] = 0.5;
 		obb[i].m_Pos = { position[i].x, position[i].y, position[i].z};
-		//cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3));
-		//cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 3));
+		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 
 	}
 	//d‚­‚È‚é
@@ -92,16 +93,9 @@ void GameObject::Update()
 
 		//cube[i]->SetPosition(position[i]);
 			//cube[i]->SetScale(size);
-
-		cube[i]->Quaternion();
-		cube[i]->SetRotation(rota);
 		cube[i]->Update();
 	}
-	cSphere[6].radius = 3;
-	cSphere[6].center = XMVectorSet(cube[6]->GetMatWorld().r[3].m128_f32[0], cube[6]->GetMatWorld().r[3].m128_f32[1], cube[6]->GetMatWorld().r[3].m128_f32[2], 1);
 
-	cube[6]->SetScale(size[1]);
-	cube[6]->Update();
 }
 
 void GameObject::Draw()
