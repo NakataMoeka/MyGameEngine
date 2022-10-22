@@ -18,12 +18,12 @@ void NMGame::Update()
 	//if (Input::GetInstance()->TriggerKey(DIK_2)/*ここにGetterを書くつもり*/) {
 	//	postEffect->CreateGraphicsPipeline(L"Resources/shaders/PostEffectColorPS.hlsl", L"Resources/shaders/PostEffectColorVS.hlsl");
 	//}
-	if (gameScene->GetBFlag()==true) {
-		postEffect->CreateGraphicsPipeline(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
-	}
-	else if (gameScene->GetBFlag() == false){
-		postEffect->CreateGraphicsPipeline(L"Resources/shaders/PostEffectTestPS.hlsl", L"Resources/shaders/PostEffectTestVS.hlsl");
-	}
+	//if (gameScene->GetBFlag()==true) {
+	//	postEffect->CreateGraphicsPipeline(L"Resources/shaders/BlurPS.hlsl", L"Resources/shaders/BlurVS.hlsl");
+	//}
+	//else if (gameScene->GetBFlag() == false){
+	//	postEffect->CreateGraphicsPipeline(L"Resources/shaders/PostEffectTestPS.hlsl", L"Resources/shaders/PostEffectTestVS.hlsl");
+	//}
 	//ゲームシーンの毎フレーム処理
 	gameScene->Update();
 }
