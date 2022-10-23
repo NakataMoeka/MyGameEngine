@@ -285,7 +285,7 @@ void GameScene::Update()
 	object3d2->SetRotation({ 0,0,0 });
 	object3d2->SetScale({ 0.05,0.05,0.05 });
 	//object3d->Update();
-	object3d2->Update();
+	//object3d2->Update();
 	object3d3->Update();
 
 	lightGroup->Update();
@@ -314,7 +314,7 @@ void GameScene::Draw()
 	object3d3->Draw();
 
 	//object3d->Draw();
-	object3d2->Draw();
+	//object3d2->Draw();
 	player->Draw();
 	gameObject->Draw();
 	stageObj->Draw();
