@@ -95,8 +95,6 @@ void CollisionManager::ColSphere()
 					DirectX::XMVECTOR inter;
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
 						
-							/*	colB->GetObject3d()->SetParentFlag(true);
-								colB->GetObject3d()->SetParent(colA->GetObject3d());*/
 						}
 					
 
@@ -104,7 +102,6 @@ void CollisionManager::ColSphere()
 			}
 		}
 	}
-	DebugText::GetInstance()->Printf(100, 60, 3.0f, "%f", Tsize);
 }
 
 bool CollisionManager::Raycast(const Ray& ray, RaycastHit* hitInfo, float maxDistance)

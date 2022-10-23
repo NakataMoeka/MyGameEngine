@@ -189,37 +189,37 @@ void GameScene::Update()
 		}
 	
 	}
-	////当たり判定
-	//for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
-	//	for (int j = 0; j < gameObject->GetOBJNumber(); j++) {
-	//		if (i == j) {
-	//			continue;
-	//		}
-	//		
-	//		IsHit[j] = false;
-	//		
-	//			if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere(j))) {
-	//				//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
-	//				IsHit[j] = true;
-	//				HitCount++;
-	//				//player->SetColFlag(true, i);
-	//				gameObject->GetObject(j)->SetParentFlag(true);
-	//				//}
+	//当たり判定
+	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
+		for (int j = 1; j < gameObject->GetOBJNumber(); j++) {
+			/*if (i == j) {
+				continue;
+			}*/
+			
+			IsHit[j] = false;
+			
+				if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(0), gameObject->GetCSphere2(j))) {
+					//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
+					IsHit[j] = true;
+					HitCount++;
+					//player->SetColFlag(true, i);
+					gameObject->GetObject(j)->SetParentFlag(true);
+					//}
 
-	//				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-	//			}
-	//			if (IsHit[j] == true) {
-	//				gameObject->GetObject(j)->SetParent(gameObject->GetObject(i));
-	//			}
-	//			if (HitCount == 1) {
-	//				gameObject->GetObject(j)->transformParent();
-	//				//audio->SEPlayWave(sound1);
-	//				HitCount = 0;
-	//				IsHit[j] = false;
-	//				Tsize++;
-	//			}
-	//	}
-	//}
+					DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+				}
+				if (IsHit[j] == true) {
+					gameObject->GetObject(j)->SetParent(gameObject->GetObject(0));
+				}
+				if (HitCount == 1) {
+					gameObject->GetObject(j)->transformParent();
+					audio->SEPlayWave(sound1);
+					HitCount = 0;
+					IsHit[j] = false;
+					Tsize++;
+				}
+		}
+	}
 	//プレイヤーの大きさ
 
 	Tsize2 = Tsize;
