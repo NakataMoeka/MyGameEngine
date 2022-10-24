@@ -166,13 +166,13 @@ void GameScene::Update()
 
 		if (Alive[i] == true) {
 			if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
-				//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
+				if (Tsize +2>= gameObject->GetObject(i)->GetScale().x) {
 					IsHit[i] = true;
 					HitCount++;
 					Alive[i] = false;
 					player->SetColFlag(true, i);
 					gameObject->GetObject(i)->SetParentFlag(true);
-				//}
+				}
 
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 			}
@@ -189,37 +189,37 @@ void GameScene::Update()
 		}
 	
 	}
-	//当たり判定
-	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
-		for (int j = 1; j < gameObject->GetOBJNumber(); j++) {
-			/*if (i == j) {
-				continue;
-			}*/
-			
-			IsHit[j] = false;
-			
-				if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(0), gameObject->GetCSphere2(j))) {
-					//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
-					IsHit[j] = true;
-					HitCount++;
-					//player->SetColFlag(true, i);
-					gameObject->GetObject(j)->SetParentFlag(true);
-					//}
+	////当たり判定
+	//for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
+	//	for (int j = 1; j < gameObject->GetOBJNumber(); j++) {
+	//		/*if (i == j) {
+	//			continue;
+	//		}*/
+	//		
+	//		IsHit[j] = false;
+	//		
+	//			if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(0), gameObject->GetCSphere2(j))) {
+	//				if (Tsize+2 >= gameObject->GetObject(i)->GetScale().x) {
+	//				IsHit[j] = true;
+	//				HitCount++;
+	//				//player->SetColFlag(true, i);
+	//				gameObject->GetObject(j)->SetParentFlag(true);
+	//				}
 
-					DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-				}
-				if (IsHit[j] == true) {
-					gameObject->GetObject(j)->SetParent(gameObject->GetObject(0));
-				}
-				if (HitCount == 1) {
-					gameObject->GetObject(j)->transformParent();
-					audio->SEPlayWave(sound1);
-					HitCount = 0;
-					IsHit[j] = false;
-					Tsize++;
-				}
-		}
-	}
+	//				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	//			}
+	//			if (IsHit[j] == true) {
+	//				gameObject->GetObject(j)->SetParent(gameObject->GetObject(0));
+	//			}
+	//			if (HitCount == 1) {
+	//				gameObject->GetObject(j)->transformParent();
+	//				audio->SEPlayWave(sound1);
+	//				HitCount = 0;
+	//				IsHit[j] = false;
+	//				Tsize++;
+	//			}
+	//	}
+	//}
 	//プレイヤーの大きさ
 
 	Tsize2 = Tsize;
@@ -239,11 +239,11 @@ void GameScene::Update()
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	TimeCount++;
 	//TimeUI
-	//5分(18000/60)は0.03
+	//5分(18000/60)は0.02
 	//10分(36000/60)は0.0015
 	//25分(90000/60)は0.0006(多分)
 	if (TimeRot < 360) {
-		TimeRot += 0.03;
+		TimeRot += 0.02;
 	}
 	if (clearTimer > 0) {
 		clearTimer -= 1.0;
@@ -336,7 +336,7 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
-	DebugText::GetInstance()->Printf(100, 320, 3.0f, "%f", player->GetPlayerPos().y);
+	DebugText::GetInstance()->Printf(100, 320, 3.0f, "SPACE:JUMP");
 	//DebugText::GetInstance()->Printf(960, 150, 3.0f, "%d", player->GetMFlag());
 	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
