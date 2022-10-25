@@ -193,7 +193,7 @@ void GameScene::Update()
 				Tsize++;
 			}
 		}
-	
+
 	}
 	//当たり判定
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
@@ -202,11 +202,11 @@ void GameScene::Update()
 
 			IsHit2[i] = false;
 
-				if (i != j) {
-					if (Alive2[i] == true) {
+			if (i != j) {
+				if (Alive2[i] == true) {
 					if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere(j))) {
 						//if (Tsize+2 >= gameObject->GetObject(i)->GetScale().x) {
-						IsHit2[i] = true;
+						IsHit[i] = true;
 						Hit2Count++;
 						//player->SetColFlag(true, j);
 						gameObject->GetObject(i)->SetParentFlag(true);
@@ -217,7 +217,7 @@ void GameScene::Update()
 					}
 				}
 				if (IsHit2[i] == true) {
-				
+
 					gameObject->GetObject(i)->SetParent(gameObject->GetObject(j));
 				}
 				if (Hit2Count == 1) {
@@ -293,7 +293,7 @@ void GameScene::Update()
 	gameObject->Update();
 
 	particleMan->Update();
-	object3d2->SetPosition({100,10,0});
+	object3d2->SetPosition({ 100,10,0 });
 	object3d2->SetRotation({ 0,0,0 });
 	object3d2->SetScale({ 0.05,0.05,0.05 });
 	//object3d->Update();
