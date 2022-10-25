@@ -128,7 +128,9 @@ void GameScene::Init()
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
 		Alive[i] = true;
+		Alive2[i] = true;
 		gameObject->GetObject(i)->SetParentFlag(false);
+		parentFlag[i] = false;
 	}
 	clearFlag = false;
 	overFlag = false;
@@ -136,7 +138,8 @@ void GameScene::Init()
 	Tsize = 1;
 	Tsize2 = Tsize;
 	TCount = 0;
-
+	HitCount = 0;
+	Hit2Count = 0;
 	TimeRot = 0;
 	TimeCount = 0;
 	clearTimer = 18000;//1800/60が30秒
@@ -165,16 +168,18 @@ void GameScene::Update()
 		IsHit[i] = false;
 
 		if (Alive[i] == true) {
-			if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
-				if (Tsize +2>= gameObject->GetObject(i)->GetScale().x) {
+			if (parentFlag[i] == false) {
+				if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
+					//if (Tsize +2>= gameObject->GetObject(i)->GetScale().x) {
 					IsHit[i] = true;
 					HitCount++;
 					Alive[i] = false;
 					player->SetColFlag(true, i);
 					gameObject->GetObject(i)->SetParentFlag(true);
-				}
+					//}
 
-				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+					DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+				}
 			}
 			if (IsHit[i] == true) {
 				gameObject->GetObject(i)->SetParent(player->GetObject());
@@ -198,24 +203,30 @@ void GameScene::Update()
 
 			IsHit[j] = false;
 
-			if (i != j) {
-				if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere2(j))) {
-					//if (Tsize+2 >= gameObject->GetObject(i)->GetScale().x) {
-					IsHit[j] = true;
-					HitCount++;
-					player->SetColFlag(true, j);
-					gameObject->GetObject(j)->SetParentFlag(true);
-					//}
-					DebugText::GetInstance()->Printf(100, 60, 3.0f, "%d",HitCount);
-					//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+				if (i != j) {
+					if (Alive2[j] == true) {
+					if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere2(j))) {
+						//if (Tsize+2 >= gameObject->GetObject(i)->GetScale().x) {
+						IsHit[j] = true;
+						Hit2Count++;
+						//player->SetColFlag(true, j);
+						gameObject->GetObject(j)->SetParentFlag(true);
+						Alive2[j] = false;
+						//}
+						DebugText::GetInstance()->Printf(100, 60, 3.0f, "%d", Hit2Count);
+						//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+					}
 				}
 				if (IsHit[i] == true) {
+				
 					gameObject->GetObject(j)->SetParent(gameObject->GetObject(i));
 				}
-				if (HitCount == 1) {
+				if (Hit2Count == 1) {
 					gameObject->GetObject(j)->transformParent();
+
 					//audio->SEPlayWave(sound1);
-					HitCount = 0;
+					parentFlag[j] = true;
+					Hit2Count = 0;
 					IsHit[j] = false;
 					//Tsize++;
 				}

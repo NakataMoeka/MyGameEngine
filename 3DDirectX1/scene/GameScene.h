@@ -97,9 +97,10 @@ private: // メンバ変数
 	//当たり判定
 	bool IsHit[OBJNumber];
 	int HitCount=0;
+	int Hit2Count = 0;
 	bool Alive[OBJNumber];
 	bool Alive2[OBJNumber];
-	bool parentFlag = false;
+	bool parentFlag[OBJNumber];
 	
 	//サイズ
 	float Tsize = 1;
