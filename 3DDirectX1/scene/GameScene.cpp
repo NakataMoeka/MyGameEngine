@@ -149,7 +149,7 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
-
+	
 
 	//光線方向初期値                  上奥
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
@@ -284,7 +284,7 @@ void GameScene::Update()
 
 	player->Update();
 
-	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().m128_f32[1]);
+	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
 
 	//camera->SetEye(cameraPos);
 	//camera->SetTarget(player->GetSpherePos());

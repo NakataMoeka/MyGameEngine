@@ -5,6 +5,8 @@
 #include<sstream>
 #include<string>
 #include<vector>
+#include "BaseCollider.h"
+#include "CollisionManager.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -188,6 +190,14 @@ void FbxObject3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 
 
 
+FbxObject3d::~FbxObject3d()
+{
+	if (collider) {
+		CollisionManager::GetInstance()->RemoveCollider(collider);
+		delete collider;
+	}
+}
+
 void FbxObject3d::PreDraw(ID3D12GraphicsCommandList* cmdList)
 {
 	// PreDrawとPostDrawがペアで呼ばれていなければエラー
@@ -210,7 +220,7 @@ void FbxObject3d::PostDraw()
 
 void FbxObject3d::Initialize()
 {
-
+	name = typeid(*this).name();
 	HRESULT result;
 
 	result = dev->CreateCommittedResource(
@@ -238,7 +248,7 @@ void FbxObject3d::Initialize()
 	constBuffSkin->Unmap(0, nullptr);
 }
 
-void FbxObject3d::Update()
+void FbxObject3d::UpdateWorldMatrix()
 {
 	assert(camera);
 
@@ -255,7 +265,14 @@ void FbxObject3d::Update()
 	matWorld *= matScale;
 	matWorld *= matRot;
 	matWorld *= matTrans;
+}
 
+void FbxObject3d::Update()
+{
+
+	HRESULT result;
+
+	UpdateWorldMatrix();
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
 	const XMMATRIX& modelTransform = fbxModel->GetModelTransform();
@@ -347,4 +364,25 @@ void FbxObject3d::PlayAnimation()
 	//再生状態にする
 	isPlay = true;
 
+}
+
+void FbxObject3d::SetCollider(BaseCollider* collider)
+{
+	collider->SetObject2(this);
+	this->collider = collider;
+	// コリジョンマネージャに追加
+	CollisionManager::GetInstance()->AddCollider(collider);
+	UpdateWorldMatrix();
+	collider->Update();
+}
+
+XMFLOAT3 FbxObject3d::GetWorldPosition()
+{
+	XMFLOAT3 worldpos;
+
+	worldpos.x = matWorld.r[3].m128_f32[0];
+	worldpos.y = matWorld.r[3].m128_f32[1];
+	worldpos.z = matWorld.r[3].m128_f32[2];
+
+	return worldpos;
 }

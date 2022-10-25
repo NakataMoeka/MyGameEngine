@@ -10,6 +10,8 @@
 #include "FbxModel.h"
 #include "FbxLoader.h"
 #include "Camera.h"
+#include "CollisionInfo.h"
+class BaseCollider;
 class FbxObject3d
 {
 protected: // エイリアス
@@ -46,16 +48,19 @@ public:
 	static void SetCamera(Camera* camera) {
 		FbxObject3d::camera = camera;
 	}
-
+	FbxObject3d() = default;
+	virtual ~FbxObject3d();
 	static void PreDraw(ID3D12GraphicsCommandList* cmdList);
 
 	static void PostDraw();
 
-	void Initialize();
+	virtual void Initialize();
 
-	void Update();
+	void UpdateWorldMatrix();
 
-	void Draw();
+	virtual void Update();
+
+	virtual void Draw();
 
 	void PlayAnimation();
 
@@ -71,16 +76,24 @@ public:
 
 	// モデルとの連携
 	void SetModel(FbxModel* fbxModel) { this->fbxModel = fbxModel; };
+	
+	const XMMATRIX& GetMatWorld() { return matWorld; }
 
+	void SetCollider(BaseCollider* collider);
 
+	//virtual void OnFCollision(const CollisionInfo& info) {}
 
+	XMFLOAT3 GetWorldPosition();
+	BaseCollider* GetCollider() { return collider; }
+
+	BaseCollider* collider = nullptr;
 
 protected:
 	ComPtr<ID3D12Resource> constBuffTransform;
 
 	ComPtr<ID3D12Resource> constBuffSkin;
-private:
-
+protected:
+	const char* name = nullptr;
 	// デバイス
 	static ID3D12Device* dev;
 

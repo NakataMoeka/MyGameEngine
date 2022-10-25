@@ -199,6 +199,9 @@
     <ClCompile Include="game\pushCollision.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="others\SphereColliderFbx.cpp">
+      <Filter>Library\others\collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -442,6 +445,9 @@
     </ClInclude>
     <ClInclude Include="game\pushCollision.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="others\SphereColliderFbx.h">
+      <Filter>Library\others\collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

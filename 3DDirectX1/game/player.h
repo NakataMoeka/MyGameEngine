@@ -4,6 +4,7 @@
 #include"Collision.h"
 #include"Sprite.h"
 #include"SafeDelete.h"
+#include "FbxObject.h"
 /// <summary>
 /// プレイヤー関連のクラス
 /// </summary>
@@ -32,7 +33,7 @@ public:
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMVECTOR GetSphereAngle() { return sphereAngle; }
-	XMVECTOR GetPlayerAngle() { return playerAngle; }
+	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
 	float GetCameraAngle() { return cameraAngle; }
 	Sphere GetSphere() { return sphere; }
 	OBB GetOBB() { return obb; }
@@ -52,8 +53,8 @@ private://プレイヤーの動き系
 	void Dash();//ダッシュ
 private://変数
 	//プレイヤーのモデル
-	Object3d* playerObj=nullptr;
-	Model* model=nullptr;
+	FbxObject3d* playerObj=nullptr;
+	FbxModel* model=nullptr;
 	//球のモデル
 	Object3d* SphereObj=nullptr;
 	Model* model2=nullptr;
@@ -68,7 +69,7 @@ private://変数
 	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
 	XMFLOAT3 spherePos = { 0,0,0 };
-	XMVECTOR playerAngle = { 0,0,0,0 };
+	XMFLOAT3 playerAngle = { 0,0,0};
 	XMVECTOR sphereAngle = { 0,0,0,0 };
 	XMFLOAT3 sphereSize = { 1,1,1 };
 	float cameraAngle = 0;

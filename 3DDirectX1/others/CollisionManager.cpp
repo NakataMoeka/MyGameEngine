@@ -35,11 +35,9 @@ void CollisionManager::CheckAllCollisions()
 						Sphere* SphereB = dynamic_cast<Sphere*>(colB);
 						DirectX::XMVECTOR inter;
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-							colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
-							colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-							//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Love");
-						/*	colB->GetObject3d()->SetParentFlag(true);
-							colB->GetObject3d()->SetParent(colA->GetObject3d());*/
+							/*colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
+							colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));*/
+
 						}
 			
 				}
@@ -50,8 +48,8 @@ void CollisionManager::CheckAllCollisions()
 				Sphere* sphere = dynamic_cast<Sphere*>(colB);
 				DirectX::XMVECTOR inter;
 				if (meshCollider->CheckCollisionSphere(*sphere, &inter)) {
-					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
-					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+					//colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
+					//colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
 				}
 			}
 			else if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
@@ -60,8 +58,10 @@ void CollisionManager::CheckAllCollisions()
 				Sphere* sphere = dynamic_cast<Sphere*>(colA);
 				DirectX::XMVECTOR inter;
 				if (meshCollider->CheckCollisionSphere(*sphere, &inter)) {
-					colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
-					colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+					//colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
+					//colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+	/*				colA->OnCollision(CollisionInfo(colB->GetFbxObject(), colB, inter));
+					colB->OnCollision(CollisionInfo(colA->GetFbxObject(), colA, inter));*/
 				}
 			}
 		}

@@ -2,8 +2,11 @@
 #include"input.h"
 #include <cassert>
 #include "SphereCollider.h"
+#include "SphereColliderFbx.h"
 #include "CollisionManager.h"
 #include "CollisionAttribute.h"
+#include "FbxLoader.h"
+#include "FbxObject.h"
 using namespace DirectX;
 Player::Player()
 {
@@ -13,12 +16,13 @@ Player::~Player()
 }
 void Player::Initialize()
 {
-	model = Model::Create("player", false);
-	playerObj = Object3d::Create(model);
+	model = FbxLoader::GetInstance()->LoadModelFromFile("Player");
+	playerObj = new FbxObject3d();
+	playerObj->Initialize();
+	playerObj->SetModel(model);
 	model2 = Model::Create("bullet", false);
 	SphereObj = Object3d::Create(model2);
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
-	playerObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Sprite::LoadTexture(2, L"Resources/dash.png");
 	Sprite::LoadTexture(3, L"Resources/UI/sizeUI.png");
@@ -50,7 +54,7 @@ void Player::Init()
 	spherePos = { 0,3,-40 };
 	playerPos = {spherePos.x,0,spherePos.z-6 };
 
-	playerAngle = { 0,0,0,0 };
+	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 1,1,1 };
 	//moveFlag = true;
@@ -59,10 +63,9 @@ void Player::Init()
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 
-	playerObj->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2.0f));
+	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,2,0,0 }), 2.0f));
 	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	
-	playerObj->Quaternion();
 	SphereObj->Quaternion();
 	SphereObj->Update();
 	playerObj->Update();
@@ -77,20 +80,20 @@ void Player::Move()
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
 	XMVECTOR moveAngleX = { 10,0,0,0 };//角度のベクトル
 	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル
-	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
+	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
-		playerAngle.m128_f32[1] += moveAngle.m128_f32[1];
+		playerAngle.y += moveAngle.m128_f32[1];
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
 		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
-		playerAngle.m128_f32[1] -= moveAngle.m128_f32[1];
+		playerAngle.y -= moveAngle.m128_f32[1];
 	}
 
 	if (Input::GetInstance()->PushKey(DIK_W))
@@ -210,7 +213,7 @@ void Player::Jump()
 	}
 	playerObj->UpdateWorldMatrix();
 	playerObj->GetCollider()->Update();
-	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(playerObj->GetCollider());
+	SphereColliderFbx* sphereCollider = dynamic_cast<SphereColliderFbx*>(playerObj->GetCollider());
 	assert(sphereCollider);
 	SphereCollider* sphereCollider2 = dynamic_cast<SphereCollider*>(SphereObj->GetCollider());
 	assert(sphereCollider2);
@@ -376,7 +379,7 @@ void Player::Dash()
 		}
 		XMVECTOR movedash = { 0,0,1.5,0 };//前後方向用の移動ベクトル
 		
-		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.m128_f32[1]));//y 軸を中心に回転するマトリックスを作成
+		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 		movedash = XMVector3TransformNormal(movedash, matRot);
 
 		playerPos.x += movedash.m128_f32[0];
@@ -407,8 +410,7 @@ void Player::Update()
 	SphereObj->Update();
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
-	playerObj->Quaternion();
-	playerObj->SetScale({ 1,1,1 });
+	playerObj->SetScale({ 0.05,0.05,0.05 });
 	playerObj->Update();
 
 	dashSprite->SetColor({1, 1, 1, fade});
@@ -416,10 +418,6 @@ void Player::Update()
 	playerSprite->SetTextureRect({ 0 + 580 * PlayerWalkCount,0 }, { 580,810 });
 }
 
-void Player::OnCollision()
-{
-
-}
 
 
 void Player::Draw()
