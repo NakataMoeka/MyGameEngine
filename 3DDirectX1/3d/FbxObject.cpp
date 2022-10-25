@@ -347,23 +347,36 @@ void FbxObject3d::Draw()
 
 void FbxObject3d::PlayAnimation()
 {
+
+
+
+	//再生状態にする
+	isPlay = true;
+
+}
+
+void FbxObject3d::LoadAmimation()
+{
 	FbxScene* fbxScene = fbxModel->GetFbxScene();
 	//0番のアニメーションを取得	
 	FbxAnimStack* animstack = fbxScene->GetSrcObject<FbxAnimStack>(0);
 	//アニメーションの名前取得
 	const char* animstackname = animstack->GetName();
 	//アニメーションの時間情報
-	FbxTakeInfo* takeinfo = fbxScene->GetTakeInfo(animstackname);
-
+	takeinfo = fbxScene->GetTakeInfo(animstackname);
 	//開始時間取得
 	startTime = takeinfo->mLocalTimeSpan.GetStart();
 	//終了時間取得
 	endTime = takeinfo->mLocalTimeSpan.GetStop();
 	//開始時間に合わせる	
 	currentTime = startTime;
-	//再生状態にする
-	isPlay = true;
+}
 
+
+
+void FbxObject3d::Stop()
+{
+	isPlay = false;
 }
 
 void FbxObject3d::SetCollider(BaseCollider* collider)

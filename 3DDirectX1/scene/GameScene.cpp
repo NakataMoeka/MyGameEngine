@@ -155,9 +155,9 @@ void GameScene::Update()
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
 
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
-		object3d2->PlayAnimation();
-	}
+	//if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
+	//	object3d2->PlayAnimation();
+	//}
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
@@ -196,42 +196,42 @@ void GameScene::Update()
 
 	}
 	//当たり判定
-	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
-		for (int j = 0; j < gameObject->GetOBJNumber(); j++) {
+	//for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
+	//	for (int j = 0; j < gameObject->GetOBJNumber(); j++) {
 
 
-			IsHit2[i] = false;
+	//		IsHit2[i] = false;
 
-			if (i != j) {
-				if (Alive2[i] == true) {
-					if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere(j))) {
-						//if (Tsize+2 >= gameObject->GetObject(i)->GetScale().x) {
-						IsHit[i] = true;
-						Hit2Count++;
-						//player->SetColFlag(true, j);
-						gameObject->GetObject(i)->SetParentFlag(true);
-						Alive2[i] = false;
-						//}
-						DebugText::GetInstance()->Printf(100, 60, 3.0f, "%d", Hit2Count);
-						//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-					}
-				}
-				if (IsHit2[i] == true) {
+	//		if (i != j) {
+	//			if (Alive2[i] == true) {
+	//				if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere(j))) {
+	//					//if (Tsize+2 >= gameObject->GetObject(i)->GetScale().x) {
+	//					IsHit[i] = true;
+	//					Hit2Count++;
+	//					//player->SetColFlag(true, j);
+	//					gameObject->GetObject(i)->SetParentFlag(true);
+	//					Alive2[i] = false;
+	//					//}
+	//					DebugText::GetInstance()->Printf(100, 60, 3.0f, "%d", Hit2Count);
+	//					//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+	//				}
+	//			}
+	//			if (IsHit2[i] == true) {
 
-					gameObject->GetObject(i)->SetParent(gameObject->GetObject(j));
-				}
-				if (Hit2Count == 1) {
-					gameObject->GetObject(i)->transformParent();
+	//				gameObject->GetObject(i)->SetParent(gameObject->GetObject(j));
+	//			}
+	//			if (Hit2Count == 1) {
+	//				gameObject->GetObject(i)->transformParent();
 
-					//audio->SEPlayWave(sound1);
-					parentFlag[j] = true;
-					Hit2Count = 0;
-					IsHit2[i] = false;
-					//Tsize++;
-				}
-			}
-		}
-	}
+	//				//audio->SEPlayWave(sound1);
+	//				parentFlag[j] = true;
+	//				Hit2Count = 0;
+	//				IsHit2[i] = false;
+	//				//Tsize++;
+	//			}
+	//		}
+	//	}
+	//}
 	//プレイヤーの大きさ
 
 	Tsize2 = Tsize;

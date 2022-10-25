@@ -63,6 +63,8 @@ public:
 	virtual void Draw();
 
 	void PlayAnimation();
+	void LoadAmimation();
+	void Stop();
 
 	const XMFLOAT3& GetPosition() { return position; }
 
@@ -104,7 +106,8 @@ protected:
 	static ComPtr<ID3D12RootSignature> rootsignature;
 	// パイプラインステートオブジェクト
 	static ComPtr<ID3D12PipelineState> pipelinestate;
-
+	
+	FbxTakeInfo* takeinfo;
 
 
 	//ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
