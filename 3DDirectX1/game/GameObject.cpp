@@ -4,6 +4,7 @@
 #include "CollisionAttribute.h"
 #include"TouchableObject.h"
 #include"MeshCollider.h"
+#include"Input.h"
 
 using namespace DirectX;
 GameObject::GameObject()
@@ -92,6 +93,13 @@ void GameObject::Update()
 
 		//cube[i]->SetPosition(position[i]);
 			//cube[i]->SetScale(size);
+		cSphere[i].radius = r;
+		cSphere[6].radius = 4;
+		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+		cSphere2[i].radius = r;
+		cSphere2[6].radius = 4;
+		cSphere2[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+
 		cube[i]->Update();
 	}
 

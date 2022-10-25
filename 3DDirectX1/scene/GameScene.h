@@ -93,11 +93,12 @@ private: // メンバ変数
 	const int debugTextTexNumber = 0;
 
 
-	static const int OBJNumber = 10;
+	static const int OBJNumber = 10;//OBJの最大数を記載
 	//当たり判定
 	bool IsHit[OBJNumber];
 	int HitCount=0;
 	bool Alive[OBJNumber];
+	bool Alive2[OBJNumber];
 	bool parentFlag = false;
 	
 	//サイズ
