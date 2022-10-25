@@ -204,7 +204,7 @@ void GameScene::Update()
 
 				if (i != j) {
 					if (Alive2[j] == true) {
-					if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere2(j))) {
+					if (Collision::CheckSphere2Sphere(gameObject->GetCSphere(i), gameObject->GetCSphere(j))) {
 						//if (Tsize+2 >= gameObject->GetObject(i)->GetScale().x) {
 						IsHit2[j] = true;
 						Hit2Count++;
@@ -216,15 +216,15 @@ void GameScene::Update()
 						//DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 					}
 				}
-				if (IsHit[i] == true) {
+				if (IsHit2[i] == true) {
 				
 					gameObject->GetObject(j)->SetParent(gameObject->GetObject(i));
 				}
 				if (Hit2Count == 1) {
-					///gameObject->GetObject(j)->transformParent();
+					gameObject->GetObject(j)->transformParent();
 
 					//audio->SEPlayWave(sound1);
-					parentFlag[j] = true;
+					//parentFlag[j] = true;
 					Hit2Count = 0;
 					IsHit2[j] = false;
 					//Tsize++;
