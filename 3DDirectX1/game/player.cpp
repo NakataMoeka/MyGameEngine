@@ -20,7 +20,7 @@ void Player::Initialize()
 	playerObj = new FbxObject3d();
 	playerObj->Initialize();
 	playerObj->SetModel(model);
-	playerObj->LoadAmimation();
+	playerObj->LoadAnimation();
 	model2 = Model::Create("bullet", false);
 	SphereObj = Object3d::Create(model2);
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
@@ -154,9 +154,16 @@ void Player::Move()
 			CountWalk = 0;
 		}
 
-		playerObj->PlayAnimation();
+		if (JumpFlag == false) {
+			playerObj->PlayAnimation(1);
+		}
 	}
-
+	else {
+		playerObj->Stop();
+	}
+	if (JumpFlag == true) {
+		playerObj->PlayAnimation(0);
+	}
 	else {
 		playerObj->Stop();
 	}

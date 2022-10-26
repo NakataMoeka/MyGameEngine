@@ -38,6 +38,11 @@ public:
 		XMMATRIX bones[MAX_BONES];
 
 	};
+	struct animationData
+	{
+		FbxTakeInfo* takeinfo;
+		FbxAnimStack* animstack;
+	};
 
 
 
@@ -62,10 +67,10 @@ public:
 
 	virtual void Draw();
 
-	void PlayAnimation();
-	void LoadAmimation();
+	void PlayAnimation(int No);
+	void LoadAnimation();
 	void Stop();
-
+	bool SetLoop(bool loop) { return this->Loop = loop; }
 	const XMFLOAT3& GetPosition() { return position; }
 
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
@@ -107,7 +112,7 @@ protected:
 	// パイプラインステートオブジェクト
 	static ComPtr<ID3D12PipelineState> pipelinestate;
 	
-	FbxTakeInfo* takeinfo;
+	
 
 
 	//ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
@@ -141,5 +146,7 @@ protected:
 	FbxTime currentTime;
 	//アニメーション再生中
 	bool isPlay = false;
+	bool Loop = false;
+	std::vector<animationData>animation;
 };
 

@@ -345,31 +345,40 @@ void FbxObject3d::Draw()
 
 }
 
-void FbxObject3d::PlayAnimation()
-{
-
-
-
-	//再生状態にする
-	isPlay = true;
-
-}
-
-void FbxObject3d::LoadAmimation()
+void FbxObject3d::LoadAnimation()
 {
 	FbxScene* fbxScene = fbxModel->GetFbxScene();
-	//0番のアニメーションを取得	
-	FbxAnimStack* animstack = fbxScene->GetSrcObject<FbxAnimStack>(0);
-	//アニメーションの名前取得
-	const char* animstackname = animstack->GetName();
-	//アニメーションの時間情報
-	takeinfo = fbxScene->GetTakeInfo(animstackname);
-	//開始時間取得
-	startTime = takeinfo->mLocalTimeSpan.GetStart();
-	//終了時間取得
-	endTime = takeinfo->mLocalTimeSpan.GetStop();
-	//開始時間に合わせる	
-	currentTime = startTime;
+	//アニメーションカウント
+	int sceneCount = fbxScene->GetSrcObjectCount<FbxAnimStack>();
+	for (int i = 0; i < sceneCount; i++)
+	{
+		//仮データ
+		animationData aData;
+		//i番のアニメーション取得
+		aData.animstack = fbxScene->GetSrcObject<FbxAnimStack>(i);
+		//アニメーションの名前を取得
+		const char* animstackname = aData.animstack->GetName();
+		//アニメーションの時間情報
+		aData.takeinfo = fbxScene->GetTakeInfo(animstackname);
+		//開始時間取得
+		startTime = aData.takeinfo->mLocalTimeSpan.GetStart();
+		//終了時間取得
+		endTime = aData.takeinfo->mLocalTimeSpan.GetStop();
+		//開始時間に合わせる
+		currentTime = startTime;
+		//仮データを実データに入れる
+		animation.push_back(aData);
+	}
+}
+
+void FbxObject3d::PlayAnimation(int No)
+{
+	FbxScene* fbxScene = fbxModel->GetFbxScene();
+	//アニメーションの変更
+	fbxScene->SetCurrentAnimationStack(animation[No].animstack);
+	
+	//再生中状態にする
+	isPlay = true;
 }
 
 
