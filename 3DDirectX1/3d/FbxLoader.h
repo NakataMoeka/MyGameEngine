@@ -72,5 +72,7 @@ private:
 	FbxImporter* fbxImporter = nullptr;
 	// ディレクトリを含んだファイルパスからファイル名を抽出する
 	std::string ExtractFileName(const std::string& path);
+	// コントロールポイントのデータ
+	std::vector<std::vector<int>> controlPointsData;
 
 };
