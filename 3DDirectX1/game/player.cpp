@@ -375,7 +375,7 @@ void Player::Dash()
 		dashCoolTime = 0;
 		dashFlag = false;
 	}
-	if (Input::GetInstance()->TriggerKey(DIK_UPARROW)&&dashFlag==false)
+	if (Input::GetInstance()->TriggerKey(DIK_UPARROW)&& Input::GetInstance()->PushKey(DIK_W) &&dashFlag==false)
 	{
 		dashTime = dashTimeMax;
 		fade = 1;
