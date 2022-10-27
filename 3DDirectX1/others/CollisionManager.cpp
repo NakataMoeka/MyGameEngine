@@ -29,17 +29,17 @@ void CollisionManager::CheckAllCollisions()
 			// ともに球
 			if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
 				colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
-				if (colA->attribute==colB->attribute) {
-					
-						Sphere* SphereA = dynamic_cast<Sphere*>(colA);
-						Sphere* SphereB = dynamic_cast<Sphere*>(colB);
-						DirectX::XMVECTOR inter;
-						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-							/*colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
-							colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));*/
+				if (colA->attribute == colB->attribute) {
 
-						}
-			
+					Sphere* SphereA = dynamic_cast<Sphere*>(colA);
+					Sphere* SphereB = dynamic_cast<Sphere*>(colB);
+					DirectX::XMVECTOR inter;
+					if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
+						//colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
+						//colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+
+					}
+
 				}
 			}
 			else if (colA->GetShapeType() == COLLISIONSHAPE_MESH &&
@@ -60,8 +60,6 @@ void CollisionManager::CheckAllCollisions()
 				if (meshCollider->CheckCollisionSphere(*sphere, &inter)) {
 					//colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
 					//colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-	/*				colA->OnCollision(CollisionInfo(colB->GetFbxObject(), colB, inter));
-					colB->OnCollision(CollisionInfo(colA->GetFbxObject(), colA, inter));*/
 				}
 			}
 		}
@@ -93,15 +91,31 @@ void CollisionManager::ColSphere()
 					Sphere* SphereA = dynamic_cast<Sphere*>(colA);
 					Sphere* SphereB = dynamic_cast<Sphere*>(colB);
 					DirectX::XMVECTOR inter;
+					//オブジェクトが両方球にくっついていたら当たり判定はしない
+					if (colB->GetObject3d()->GetParentFlag() == false) {
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-						
+							IsHit = true;
+							HitCount++;
+							colB->GetObject3d()->SetParentFlag(true);
+							audioFlag = true;
 						}
-					
+						if (IsHit == true) {
+							colB->GetObject3d()->SetParent(colA->GetObject3d());
+						}
+						if (HitCount == 1) {
+							colB->GetObject3d()->transformParent();
+							HitCount = 0;
+							IsHit = false;
+							audioFlag = false;
+							Tsize++;
+						}
+					}
 
 				}
 			}
 		}
 	}
+	DebugText::GetInstance()->Printf(100, 60, 3.0f, "%f", Tsize);
 }
 
 bool CollisionManager::Raycast(const Ray& ray, RaycastHit* hitInfo, float maxDistance)

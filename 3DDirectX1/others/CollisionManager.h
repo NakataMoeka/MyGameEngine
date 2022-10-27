@@ -23,15 +23,15 @@ public:// メンバ関数
 		colliders.remove(collider);
 	}
 
-	
+
 	void CheckAllCollisions();
 	//オブジェクト指定できる球と球の当たり判定
 	void ColSphere();
 	bool Raycast(const Ray& ray, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
 	bool Raycast(const Ray& ray, unsigned short attribute, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
-	
+
 	void QuerySphere(const Sphere& sphere, QueryCallback* callback, unsigned short attribute = (unsigned short)0xffffffff);
-	
+
 	bool GetAudioFlag() { return audioFlag; }
 	float GetTsize() { return Tsize; }
 	float GetHitCount() { return HitCount; }
@@ -44,9 +44,8 @@ private:
 	// コライダーのリスト
 	std::forward_list<BaseCollider*> colliders;
 	bool IsHit = false;
-	int HitCount=0;
+	int HitCount = 0;
 	bool HitAlive = true;
-	float Tsize=0;
+	float Tsize = 0;
 	bool audioFlag = false;
 };
-
