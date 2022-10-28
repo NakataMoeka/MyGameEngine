@@ -351,6 +351,7 @@ void Object3d::SetCollider(BaseCollider* collider)
 	this->collider = collider;
 	// コリジョンマネージャに追加
 	CollisionManager::GetInstance()->AddCollider(collider);
+	//重い原因②
 	UpdateWorldMatrix();
 	collider->Update();
 }
