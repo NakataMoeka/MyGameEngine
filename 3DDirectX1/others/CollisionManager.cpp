@@ -110,6 +110,7 @@ void CollisionManager::ColSphere()
 
 				}
 			}
+		
 		}
 	}
 	DebugText::GetInstance()->Printf(100, 80, 3.0f, "%f", Tsize);

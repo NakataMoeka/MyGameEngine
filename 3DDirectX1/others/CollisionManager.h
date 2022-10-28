@@ -36,6 +36,7 @@ public:// ƒƒ“ƒoŠÖ”
 	float GetTsize() { return Tsize; }
 	float GetHitCount() { return HitCount; }
 	bool GetHit() { return IsHit; }
+	bool SetParentFlag(bool parentFlag){ return parentFlag = false; }
 private:
 	CollisionManager() = default;
 	CollisionManager(const CollisionManager&) = delete;

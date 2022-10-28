@@ -127,12 +127,11 @@ void GameScene::Init()
 	distance = 10.0f;
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
-		IsHit2[i] = false;
 		Alive[i] = true;
-		Alive2[i] = true;
 		gameObject->GetObject(i)->SetParentFlag(false);
 		parentFlag[i] = false;
 	}
+	colMan->SetParentFlag(false);
 	clearFlag = false;
 	overFlag = false;
 	Bflag = false;
@@ -140,7 +139,6 @@ void GameScene::Init()
 	Tsize2 = Tsize;
 	TCount = 0;
 	HitCount = 0;
-	Hit2Count = 0;
 	TimeRot = 0;
 	TimeCount = 0;
 	clearTimer = 18000;//1800/60が30秒
@@ -197,10 +195,7 @@ void GameScene::Update()
 	}
 	
 	//プレイヤーの大きさ
-	if (colMan->GetHit() == true) {
-		Tsize += colMan->GetTsize();
-
-	}
+	
 	Tsize2 = Tsize;
 	if (Tsize2 % 10 == 0) {
 		TCount++;
