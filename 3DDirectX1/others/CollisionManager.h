@@ -35,6 +35,7 @@ public:// ƒƒ“ƒoŠÖ”
 	bool GetAudioFlag() { return audioFlag; }
 	float GetTsize() { return Tsize; }
 	float GetHitCount() { return HitCount; }
+	bool GetHit() { return IsHit; }
 private:
 	CollisionManager() = default;
 	CollisionManager(const CollisionManager&) = delete;

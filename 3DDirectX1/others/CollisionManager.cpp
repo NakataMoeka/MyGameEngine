@@ -83,10 +83,6 @@ void CollisionManager::ColSphere()
 			BaseCollider* colB = *itB;
 			if (colA->attribute == colB->attribute) {
 				// ともに球
-				//美味しいヤミー❗️✨🤟😁👍感謝❗️🙌✨感謝❗️🙌✨
-				//またいっぱい食べたいな❗️🍖😋🍴✨
-				//デリシャッ‼️🙏✨ｼｬ‼️🙏✨ ｼｬ‼️🙏✨ ｼｬ‼️🙏✨ ｼｬ‼️🙏✨ ｼｬ‼️🙏✨ ｼｬｯｯ‼
-				//ハッピー🌟スマイル❗️👉😁👈
 				if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
 					colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
 					Sphere* SphereA = dynamic_cast<Sphere*>(colA);
@@ -108,7 +104,7 @@ void CollisionManager::ColSphere()
 							HitCount = 0;
 							IsHit = false;
 							audioFlag = false;
-							Tsize++;
+							Tsize++;//これをゲームシーン内で加算する方法求
 						}
 					}
 
