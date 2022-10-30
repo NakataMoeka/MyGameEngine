@@ -128,9 +128,8 @@ void GameScene::Init()
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
 		Alive[i] = true;
-		gameObject->GetObject(i)->SetParentFlag(false);
 	}
-	colMan->SetParentFlag(false);
+	//colMan->SetParentFlag(false);
 	clearFlag = false;
 	overFlag = false;
 	Bflag = false;

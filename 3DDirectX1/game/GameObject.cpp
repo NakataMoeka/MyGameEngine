@@ -70,6 +70,7 @@ void GameObject::Init()
 		//コライダーをセットすると劇的に重くなる
 		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		cube[i]->SetParentFlag(false);
 	}
 	//重くなる
 
