@@ -107,6 +107,13 @@ void GameObject::Update()
 
 }
 
+void GameObject::RC()
+{
+	for (int i = 0; i < OBJNumber; i++) {
+		cube[i]->RemoveCollider();
+	}
+}
+
 void GameObject::Draw()
 {
 	for (int i = 0; i < OBJNumber; i++) {

@@ -124,13 +124,12 @@ void GameScene::Init()
 	player->Init();
 	gameObject->Init();
 	stageObj->Init();
-	colMan->Init();
 	distance = 10.0f;
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
 		Alive[i] = true;
 	}
-	//colMan->SetParentFlag(false);
+	colMan->SetParentFlag(false);
 	clearFlag = false;
 	overFlag = false;
 	Bflag = false;
@@ -215,6 +214,7 @@ void GameScene::Update()
 
 	if (Input::GetInstance()->TriggerKey(DIK_R)) {
 		clearFlag = true;
+		gameObject->RC();
 	}
 
 	if (TimeRot < 360) {
@@ -227,10 +227,12 @@ void GameScene::Update()
 		if (Tsize2 < 11) {
 			DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
 			overFlag = true;
+			gameObject->RC();
 		}
 		else if (Tsize2 >= 11) {
 			DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
 			clearFlag = true;
+			gameObject->RC();
 		}
 	}
 

@@ -356,6 +356,14 @@ void Object3d::SetCollider(BaseCollider* collider)
 	collider->Update();
 }
 
+void Object3d::RemoveCollider()
+{
+	//if (collider) {
+		CollisionManager::GetInstance()->RemoveCollider(collider);
+		//delete collider;
+	//}
+}
+
 XMFLOAT3 Object3d::GetWorldPosition()
 {
 	XMFLOAT3 worldpos;

@@ -24,6 +24,7 @@ public:
 	void Initialize();
 	void Init();
 	void Update();
+	void RC();
 	void Draw();
 	void Delete(int i);
 	//GetterSetter

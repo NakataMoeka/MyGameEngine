@@ -97,13 +97,13 @@ void CollisionManager::ColSphere()
 					Sphere* SphereB = dynamic_cast<Sphere*>(colB);
 					DirectX::XMVECTOR inter;
 					//オブジェクトが両方球にくっついていたら当たり判定はしない
-					//if (colB->GetObject3d()->GetParentFlag() == false) {
+					if (colB->GetObject3d()->GetParentFlag() == false) {
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-							/*			IsHit = true;
+										IsHit = true;
 										HitCount++;
 										PFlag = true;
 										colB->GetObject3d()->SetParentFlag(PFlag);
-										audioFlag = true;*/
+										audioFlag = true;
 							DebugText::GetInstance()->Printf(100, 40, 3.0f, "%Hit");
 						}
 						if (IsHit == true) {
@@ -115,7 +115,7 @@ void CollisionManager::ColSphere()
 							IsHit = false;
 							Tsize++;//これをゲームシーン内で加算する方法求
 						}
-					//}
+					}
 
 				}
 			}
