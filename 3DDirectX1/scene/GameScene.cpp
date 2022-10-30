@@ -152,9 +152,9 @@ void GameScene::Update()
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
 
-	//if (Input::GetInstance()->TriggerKey(DIK_SPACE) || Input::GetInstance()->IsButtonDown(ButtonA)) {
-	//	object3d2->PlayAnimation();
-	//}
+	if (Input::GetInstance()->TriggerKey(DIK_R)) {
+	clearFlag = true;
+	}
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());

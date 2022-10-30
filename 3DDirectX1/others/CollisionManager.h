@@ -38,7 +38,7 @@ public:// ƒƒ“ƒoŠÖ”
 	float SetTsize(float Tsize2) { return this->Tsize2 = Tsize2; }
 	float GetHitCount() { return HitCount; }
 	bool GetHit() { return IsHit; }
-	bool SetParentFlag(bool parentFlag){ return parentFlag = false; }
+	bool SetParentFlag(bool parentFlag) { return this->PFlag = parentFlag; }
 private:
 	CollisionManager() = default;
 	CollisionManager(const CollisionManager&) = delete;
@@ -54,4 +54,5 @@ private:
 	bool audioFlag = false;
 	float Tsize2 = 0;
 	float Tsize3;
+	bool PFlag=false;
 };

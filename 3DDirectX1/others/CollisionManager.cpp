@@ -93,7 +93,8 @@ void CollisionManager::ColSphere()
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
 							IsHit = true;
 							HitCount++;
-							colB->GetObject3d()->SetParentFlag(true);
+							PFlag = true;
+							colB->GetObject3d()->SetParentFlag(PFlag);
 							audioFlag = true;
 						}
 						if (IsHit == true) {
