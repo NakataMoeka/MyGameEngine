@@ -96,12 +96,10 @@ private: // メンバ変数
 	static const int OBJNumber = 10;//OBJの最大数を記載
 	//当たり判定
 	bool IsHit[OBJNumber];
-	bool IsHit2[OBJNumber];
 	int HitCount=0;
-	int Hit2Count = 0;
 	bool Alive[OBJNumber];
-	bool Alive2[OBJNumber];
-	bool parentFlag[OBJNumber];
+
+
 	
 	//サイズ
 	float Tsize = 1;

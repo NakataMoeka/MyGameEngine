@@ -34,6 +34,7 @@ public:// ƒƒ“ƒoŠÖ”
 
 	bool GetAudioFlag() { return audioFlag; }
 	float GetTsize() { return Tsize; }
+	float SetTsize(float Tsize2) { return this->Tsize2 = Tsize2; }
 	float GetHitCount() { return HitCount; }
 	bool GetHit() { return IsHit; }
 	bool SetParentFlag(bool parentFlag){ return parentFlag = false; }
@@ -50,4 +51,5 @@ private:
 	bool HitAlive = true;
 	float Tsize = 0;
 	bool audioFlag = false;
+	float Tsize2 = 0;
 };

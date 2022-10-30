@@ -113,7 +113,8 @@ void CollisionManager::ColSphere()
 		
 		}
 	}
-	DebugText::GetInstance()->Printf(100, 80, 3.0f, "%f", Tsize);
+
+	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize+Tsize2);
 }
 
 bool CollisionManager::Raycast(const Ray& ray, RaycastHit* hitInfo, float maxDistance)
