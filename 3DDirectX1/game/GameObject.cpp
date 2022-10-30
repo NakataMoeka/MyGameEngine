@@ -67,7 +67,7 @@ void GameObject::Init()
 		obb[i].m_fLength[1] = 0.5;
 		obb[i].m_fLength[2] = 0.5;
 		obb[i].m_Pos = { position[i].x, position[i].y, position[i].z};
-		//コライダーをセットすると劇的に重くなる
+
 		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		cube[i]->SetParentFlag(false);
