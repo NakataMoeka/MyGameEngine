@@ -124,6 +124,7 @@ void GameScene::Init()
 	player->Init();
 	gameObject->Init();
 	stageObj->Init();
+	colMan->Init();
 	distance = 10.0f;
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		IsHit[i] = false;
@@ -150,10 +151,6 @@ void GameScene::Update()
 	//光線方向初期値                  上奥
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
-
-	if (Input::GetInstance()->TriggerKey(DIK_R)) {
-	clearFlag = true;
-	}
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
@@ -215,6 +212,11 @@ void GameScene::Update()
 	//5分(18000/60)は0.02
 	//10分(36000/60)は0.0015
 	//25分(90000/60)は0.0006(多分)
+
+	if (Input::GetInstance()->TriggerKey(DIK_R)) {
+		clearFlag = true;
+	}
+
 	if (TimeRot < 360) {
 		TimeRot += 0.02;
 	}

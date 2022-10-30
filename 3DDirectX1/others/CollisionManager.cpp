@@ -12,6 +12,11 @@ CollisionManager* CollisionManager::GetInstance()
 	return &instance;
 }
 
+void CollisionManager::Init()
+{
+	PFlag = false;
+}
+
 void CollisionManager::CheckAllCollisions()
 {
 	//重い一番の原因
@@ -110,7 +115,7 @@ void CollisionManager::ColSphere()
 
 				}
 			}
-		
+
 		}
 	}
 	Tsize3 = Tsize + Tsize2;

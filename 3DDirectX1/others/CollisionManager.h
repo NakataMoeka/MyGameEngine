@@ -23,7 +23,7 @@ public:// メンバ関数
 		colliders.remove(collider);
 	}
 
-
+	void Init();
 	void CheckAllCollisions();
 	//オブジェクト指定できる球と球の当たり判定
 	void ColSphere();

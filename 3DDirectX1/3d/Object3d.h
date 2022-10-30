@@ -111,7 +111,7 @@ public:
 	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
 	void transformParent();
 	bool SetParentFlag(bool pFlag) { return this->parentFlag = pFlag; }
-	bool GetParentFlag() { return parentFlag; }
+	bool GetParentFlag() { return parentFlag; }//クリア後にまたはじめるとここで例外スロー起こる
 	// コライダー
 	BaseCollider* collider = nullptr;
 protected:
