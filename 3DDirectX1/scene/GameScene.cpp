@@ -196,7 +196,7 @@ void GameScene::Update()
 	
 	//プレイヤーの大きさ
 	
-	Tsize2 = Tsize;
+	Tsize2 = colMan->GetTsize();
 	if (Tsize2 % 10 == 0) {
 		TCount++;
 	}
@@ -223,11 +223,11 @@ void GameScene::Update()
 		clearTimer -= 1.0;
 	}
 	else if (clearTimer <= 0) {
-		if (Tsize < 11) {
+		if (Tsize2 < 11) {
 			DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
 			overFlag = true;
 		}
-		else if (Tsize >= 11) {
+		else if (Tsize2 >= 11) {
 			DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
 			clearFlag = true;
 		}
