@@ -103,7 +103,6 @@ void CollisionManager::ColSphere()
 							colB->GetObject3d()->transformParent();
 							HitCount = 0;
 							IsHit = false;
-							audioFlag = false;
 							Tsize++;//これをゲームシーン内で加算する方法求
 						}
 					}

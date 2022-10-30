@@ -33,6 +33,7 @@ public:// ƒƒ“ƒoŠÖ”
 	void QuerySphere(const Sphere& sphere, QueryCallback* callback, unsigned short attribute = (unsigned short)0xffffffff);
 
 	bool GetAudioFlag() { return audioFlag; }
+	bool SetAudioFlag(bool audioFlag) { return this->audioFlag=audioFlag; }
 	float GetTsize() { return Tsize; }
 	float SetTsize(float Tsize2) { return this->Tsize2 = Tsize2; }
 	float GetHitCount() { return HitCount; }

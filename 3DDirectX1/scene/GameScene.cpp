@@ -264,9 +264,10 @@ void GameScene::Update()
 
 	lightGroup->Update();
 	colMan->ColSphere();
-	//if (colMan->GetAudioFlag() == true) {
-	//	audio->SEPlayWave(sound1);
-	//}
+	if (colMan->GetAudioFlag() == true) {
+		audio->SEPlayWave(sound1);
+		colMan->SetAudioFlag(false);
+	}
 }
 
 void GameScene::DrawBG()
