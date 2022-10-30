@@ -129,7 +129,6 @@ void GameScene::Init()
 		IsHit[i] = false;
 		Alive[i] = true;
 		gameObject->GetObject(i)->SetParentFlag(false);
-		parentFlag[i] = false;
 	}
 	colMan->SetParentFlag(false);
 	clearFlag = false;
@@ -189,6 +188,7 @@ void GameScene::Update()
 				HitCount = 0;
 				IsHit[i] = false;
 				Tsize++;
+				colMan->SetTsize(Tsize);
 			}
 		}
 
@@ -304,7 +304,7 @@ void GameScene::DrawFront()
 	timeSprite2->Draw();
 	player->DrawSprite();
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
-	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
+	//DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
 	//DebugText::GetInstance()->Printf(100, 80, 3.0f, "%d", Alive[1]);
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
