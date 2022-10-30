@@ -115,7 +115,7 @@ void CollisionManager::ColSphere()
 							IsHit = false;
 							Tsize++;//これをゲームシーン内で加算する方法求
 						}
-					}
+				}
 
 				}
 			}

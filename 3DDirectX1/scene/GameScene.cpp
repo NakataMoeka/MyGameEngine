@@ -130,6 +130,7 @@ void GameScene::Init()
 		Alive[i] = true;
 	}
 	colMan->SetParentFlag(false);
+	colMan->SetTsize(0);
 	clearFlag = false;
 	overFlag = false;
 	Bflag = false;
@@ -183,12 +184,11 @@ void GameScene::Update()
 				HitCount = 0;
 				IsHit[i] = false;
 				Tsize++;
-				colMan->SetTsize(Tsize);
 			}
 		}
 
 	}
-	
+	colMan->SetTsize2(Tsize);
 	//プレイヤーの大きさ
 	
 	Tsize2 = colMan->GetTsize();

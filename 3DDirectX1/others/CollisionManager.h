@@ -35,7 +35,8 @@ public:// ƒƒ“ƒoŠÖ”
 	bool GetAudioFlag() { return audioFlag; }
 	bool SetAudioFlag(bool audioFlag) { return this->audioFlag=audioFlag; }
 	float GetTsize() { return Tsize3; }
-	float SetTsize(float Tsize2) { return this->Tsize2 = Tsize2; }
+	float SetTsize2(float Tsize2) { return this->Tsize2 = Tsize2; }
+	float SetTsize(float Tsize) { return this->Tsize = Tsize; }
 	float GetHitCount() { return HitCount; }
 	bool GetHit() { return IsHit; }
 	bool SetParentFlag(bool parentFlag) { return this->PFlag = parentFlag; }
