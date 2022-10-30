@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+#myRule
+*.wpix
+*.bat
+LE3B_19_ナカタ_モエカ.txt
