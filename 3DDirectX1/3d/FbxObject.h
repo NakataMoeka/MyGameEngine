@@ -59,18 +59,20 @@ public:
 
 	static void PostDraw();
 
-	virtual void Initialize();
+	virtual void Initialize();//初期化
 
-	void UpdateWorldMatrix();
+	void UpdateWorldMatrix();//アプデ
 
-	virtual void Update();
+	virtual void Update();//アプデ
 
-	virtual void Draw();
+	virtual void Draw();//描画
 
+	//アニメーション関係
 	void PlayAnimation(int No);
 	void LoadAnimation();
 	void Stop();
 	bool SetLoop(bool loop) { return this->Loop = loop; }
+
 	const XMFLOAT3& GetPosition() { return position; }
 
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
@@ -86,8 +88,9 @@ public:
 	
 	const XMMATRIX& GetMatWorld() { return matWorld; }
 
-	void SetCollider(BaseCollider* collider);
-	void RemoveCollider();
+	void SetCollider(BaseCollider* collider);//コライダーの追加
+	
+	void RemoveCollider();//コライダーの消去
 	//virtual void OnFCollision(const CollisionInfo& info) {}
 
 	XMFLOAT3 GetWorldPosition();

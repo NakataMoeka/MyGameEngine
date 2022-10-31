@@ -24,11 +24,9 @@ public:
 	void Initialize();
 	void Init();
 	void Update();
-	void RC();
+	void RC();//コライダー消すやつ
 	void Draw();
-	void Delete(int i);
 	//GetterSetter
-	OBB GetOBB(int i) { return obb[i]; }
 	Sphere GetCSphere(int i) { return cSphere[i]; }
 	Sphere GetCSphere2(int i) { return cSphere2[i]; }
 	XMFLOAT3 GetPos(int i) { return position[i]; }
@@ -44,7 +42,6 @@ private:
 	Object3d* cube[OBJNumber];
 	Model* modelCube;
 
-	OBB obb[OBJNumber];//バグが起きているためOBBは使いません
 	Sphere cSphere[OBJNumber];//当たり判定のやつ
 	Sphere cSphere2[OBJNumber];//当たり判定のやつ
 	float r = 3;//

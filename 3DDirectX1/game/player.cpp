@@ -44,13 +44,7 @@ void Player::Init()
 	CountWalk = 0;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-	obb.m_NormaDirect[0] = { SphereObj->GetMatRot().r[0].m128_f32[0],SphereObj->GetMatRot().r[0].m128_f32[1] ,SphereObj->GetMatRot().r[0].m128_f32[2] };
-	obb.m_NormaDirect[1] = { SphereObj->GetMatRot().r[1].m128_f32[0],SphereObj->GetMatRot().r[1].m128_f32[1] ,SphereObj->GetMatRot().r[1].m128_f32[2] };
-	obb.m_NormaDirect[2] = { SphereObj->GetMatRot().r[2].m128_f32[0],SphereObj->GetMatRot().r[2].m128_f32[1] ,SphereObj->GetMatRot().r[2].m128_f32[2] };
-	obb.m_fLength[0] = sphereSize.x / 2;
-	obb.m_fLength[1] = sphereSize.y / 2;
-	obb.m_fLength[2] = sphereSize.z / 2;
-	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
+	
 	
 	spherePos = { 0,3,-40 };
 	playerPos = {spherePos.x,0,spherePos.z-6 };
@@ -58,7 +52,6 @@ void Player::Init()
 	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 1,1,1 };
-	//moveFlag = true;
 		// コライダーの追加
 	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
@@ -168,13 +161,7 @@ void Player::Move()
 	
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-	obb.m_NormaDirect[0] = { SphereObj->GetMatRot().r[0].m128_f32[0],SphereObj->GetMatRot().r[0].m128_f32[1] ,SphereObj->GetMatRot().r[0].m128_f32[2] };
-	obb.m_NormaDirect[1] = { SphereObj->GetMatRot().r[1].m128_f32[0],SphereObj->GetMatRot().r[1].m128_f32[1] ,SphereObj->GetMatRot().r[1].m128_f32[2] };
-	obb.m_NormaDirect[2] = { SphereObj->GetMatRot().r[2].m128_f32[0],SphereObj->GetMatRot().r[2].m128_f32[1] ,SphereObj->GetMatRot().r[2].m128_f32[2] };
-	obb.m_fLength[0] = sphereSize.x / 2;
-	obb.m_fLength[1] = sphereSize.y / 2;
-	obb.m_fLength[2] = sphereSize.z / 2;
-	obb.m_Pos = { spherePos.x,spherePos.y, spherePos.z };
+
 	playerObj->Update();
 	//回転を追従させたい
 }

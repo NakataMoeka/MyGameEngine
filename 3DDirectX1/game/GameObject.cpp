@@ -60,13 +60,6 @@ void GameObject::Init()
 		cSphere2[6].radius = 4;
 		cSphere2[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
-		obb[i].m_NormaDirect[0] = { cube[i]->GetMatRot().r[0].m128_f32[0],cube[i]->GetMatRot().r[0].m128_f32[1] ,cube[i]->GetMatRot().r[0].m128_f32[2] };
-		obb[i].m_NormaDirect[1] = { cube[i]->GetMatRot().r[1].m128_f32[0],cube[i]->GetMatRot().r[1].m128_f32[1] ,cube[i]->GetMatRot().r[1].m128_f32[2] };
-		obb[i].m_NormaDirect[2] = { cube[i]->GetMatRot().r[2].m128_f32[0],cube[i]->GetMatRot().r[2].m128_f32[1] ,cube[i]->GetMatRot().r[2].m128_f32[2] };
-		obb[i].m_fLength[0] = 0.5;
-		obb[i].m_fLength[1] = 0.5;
-		obb[i].m_fLength[2] = 0.5;
-		obb[i].m_Pos = { position[i].x, position[i].y, position[i].z};
 
 		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
@@ -82,19 +75,7 @@ void GameObject::Update()
 {
 	//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
 	for (int i = 0; i < OBJNumber; i++) {
-	/*	cSphere[i].radius = r;
-		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);*/
-
-		//obb[i].m_NormaDirect[0] = { cube[i]->GetMatRot().r[0].m128_f32[0],cube[i]->GetMatRot().r[0].m128_f32[1] ,cube[i]->GetMatRot().r[0].m128_f32[2] };
-		//obb[i].m_NormaDirect[1] = { cube[i]->GetMatRot().r[1].m128_f32[0],cube[i]->GetMatRot().r[1].m128_f32[1] ,cube[i]->GetMatRot().r[1].m128_f32[2] };
-		//obb[i].m_NormaDirect[2] = { cube[i]->GetMatRot().r[2].m128_f32[0],cube[i]->GetMatRot().r[2].m128_f32[1] ,cube[i]->GetMatRot().r[2].m128_f32[2] };
-		//obb[i].m_fLength[0] = 0.5;
-		//obb[i].m_fLength[1] = 0.5;
-		//obb[i].m_fLength[2] = 0.5;
-		//obb[i].m_Pos = { position[i].x, position[i].y, position[i].z };
-
-		//cube[i]->SetPosition(position[i]);
-			//cube[i]->SetScale(size);
+	
 		cSphere[i].radius = r;
 		cSphere[6].radius = 4;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);

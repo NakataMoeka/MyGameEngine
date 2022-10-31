@@ -24,28 +24,25 @@ public:
 	~Player();
 	void Initialize();//一回だけの初期化
 	void Init();//シーンチェンジ時にもする初期化
-	void Update();
-	void OnCollision();
-	void Draw();
-	void DrawSprite();
-	void RC();
-	//Getter
+	void Update();//アプデ
+	void Draw();//モデルの描画
+	void DrawSprite();//画像の描画
+	void RC();//コライダーを消すやつ
+	
+	//GetterSetter
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMVECTOR GetSphereAngle() { return sphereAngle; }
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
-	float GetCameraAngle() { return cameraAngle; }
 	Sphere GetSphere() { return sphere; }
-	OBB GetOBB() { return obb; }
 	Object3d* GetObject() { return SphereObj; }
 	XMFLOAT3 SetSphereSize(XMFLOAT3 sphereSize) { return this->sphereSize = sphereSize; }
 	float SetSpherePos(float spherePos) { return this->spherePos.y = spherePos; }
 	XMFLOAT3 SetPlayerPos(XMFLOAT3 playerPos) { return this->playerPos = playerPos; }
-
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
-	bool GetOnGround() { return onGround; }
 	bool SetColFlag(bool ColFlag,int i) { return this->colFlag[i] = ColFlag; }
+
 private://プレイヤーの動き系
 	void Move();//移動
 	void Ball();//ボール関係
@@ -72,11 +69,9 @@ private://変数
 	XMFLOAT3 playerAngle = { 0,0,0};
 	XMVECTOR sphereAngle = { 0,0,0,0 };
 	XMFLOAT3 sphereSize = { 1,1,1 };
-	float cameraAngle = 0;
 	
 	Sphere sphere;//当たり判定のやつ
 
-	OBB obb;//バグが起こっているため使わない
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 	float r = 3;
 

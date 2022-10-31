@@ -79,37 +79,30 @@ public:
 
 	const XMMATRIX& GetMatWorld() { return matWorld; }
 
-	void SetCollider(BaseCollider* collider);
-	void RemoveCollider();
+	void SetCollider(BaseCollider* collider);//コライダーの追加
+
+	void RemoveCollider();//コライダー消去
+
 	virtual void OnCollision(const CollisionInfo& info) {}
 
+	void transformParent();//ペアレント用関数
+
+	//GetterSetter
 	XMFLOAT3 GetWorldPosition();
-
 	const XMFLOAT3& GetPosition() { return position; }
-
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
-
 	const XMVECTOR& GetRotation() { return rotation; }
-
 	void SetRotation(XMVECTOR rotation) { this->rotation = rotation; }
-
 	const XMFLOAT3& GetScale() {return scale; }
-
 	void SetScale(XMFLOAT3 scale) { this->scale = scale; }
-
 	// モデルとの連携
 	void SetModel(Model* model) { this->model = model; };
-
-
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
 	void SetParent(Object3d* parent) { this->parent = parent; }
-
 	XMMATRIX GetMatRot() { return matRot; }
 	XMMATRIX GetMatTrans() { return matTrans; }
 	inline Model* GetModel() { return model; }
 	BaseCollider* GetCollider() { return collider; }
-	//unityのペアレントがしたい(親オブジェのサイズに影響しない&当たった場所にくっつく)
-	void transformParent();
 	bool SetParentFlag(bool pFlag) { return this->parentFlag = pFlag; }
 	bool GetParentFlag() { return parentFlag; }//クリア後にまたはじめるとここで例外スロー起こる
 	// コライダー
