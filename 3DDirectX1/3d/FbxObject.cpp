@@ -398,6 +398,11 @@ void FbxObject3d::SetCollider(BaseCollider* collider)
 	collider->Update();
 }
 
+void FbxObject3d::RemoveCollider()
+{
+	CollisionManager::GetInstance()->RemoveCollider(collider);
+}
+
 XMFLOAT3 FbxObject3d::GetWorldPosition()
 {
 	XMFLOAT3 worldpos;

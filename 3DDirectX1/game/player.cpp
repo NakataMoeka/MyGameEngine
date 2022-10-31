@@ -448,3 +448,9 @@ void Player::DrawSprite()
 	earthSprite->Draw();
 	playerSprite->Draw();
 }
+
+void Player::RC()
+{
+	SphereObj->RemoveCollider();
+	playerObj->RemoveCollider();
+}

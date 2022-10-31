@@ -28,7 +28,7 @@ public:
 	void OnCollision();
 	void Draw();
 	void DrawSprite();
-
+	void RC();
 	//Getter
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }

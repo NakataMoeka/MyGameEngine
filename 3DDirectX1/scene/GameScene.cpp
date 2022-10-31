@@ -215,6 +215,7 @@ void GameScene::Update()
 	if (Input::GetInstance()->TriggerKey(DIK_R)) {
 		clearFlag = true;
 		gameObject->RC();
+		player->RC();
 	}
 
 	if (TimeRot < 360) {
@@ -228,11 +229,13 @@ void GameScene::Update()
 			DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
 			overFlag = true;
 			gameObject->RC();
+			player->RC();
 		}
 		else if (Tsize2 >= 11) {
 			DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
 			clearFlag = true;
 			gameObject->RC();
+			player->RC();
 		}
 	}
 

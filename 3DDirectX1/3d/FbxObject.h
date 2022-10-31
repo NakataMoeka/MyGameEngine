@@ -87,7 +87,7 @@ public:
 	const XMMATRIX& GetMatWorld() { return matWorld; }
 
 	void SetCollider(BaseCollider* collider);
-
+	void RemoveCollider();
 	//virtual void OnFCollision(const CollisionInfo& info) {}
 
 	XMFLOAT3 GetWorldPosition();
