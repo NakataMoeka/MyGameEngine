@@ -30,16 +30,14 @@ public:
 	void Draw();
 	//前景画像描画
 	void DrawFront();
-	//パーティクル
-	void CreateParticles();
 	bool GetSCangeFlag() { return SCangeFlag; }
 private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
 
-	SoundData sound1;
-	SoundData sound2;
-	SoundData sound3;
+	SoundData sound1={};
+	SoundData sound2={};
+	SoundData sound3={};
 	const int debugTextTexNumber = 0;
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;

@@ -36,11 +36,11 @@ public:
 	float GetMat();
 	Object3d* GetObject(int i) { return cube[i]; }
 private:
-	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
+	//int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
 	static const int OBJNumber = 10;
 	static const int OBJType = 2;
-	Object3d* cube[OBJNumber];
-	Model* modelCube;
+	Object3d* cube[OBJNumber]={};
+	Model* modelCube = nullptr;
 
 	Sphere cSphere[OBJNumber];//当たり判定のやつ
 	Sphere cSphere2[OBJNumber];//当たり判定のやつ

@@ -41,7 +41,6 @@ public: // メンバ関数
 
 	GameScene();
 
-
 	~GameScene();
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
 	void Initialize(DXCommon* dxCommon, Audio* audio);
@@ -68,8 +67,8 @@ private: // メンバ変数
 
 	Audio* audio = nullptr;
 
-	SoundData sound1;
-	SoundData sound2;
+	SoundData sound1={};
+	SoundData sound2={};
 
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;

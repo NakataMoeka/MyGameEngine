@@ -18,6 +18,7 @@ GameObject::~GameObject()
 void GameObject::Initialize()
 {
 	for (int i = 0; i < OBJNumber; i++) {
+		cube[i] = nullptr;
 		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");

@@ -30,8 +30,6 @@ public:
 	void Draw();
 	//前景画像描画
 	void DrawFront();
-	//パーティクル
-	void CreateParticles();
 	bool GetClearFlag() { return clearFlag; }
 	bool GetOverFlag() { return overFlag; }
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
