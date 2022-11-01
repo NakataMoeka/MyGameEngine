@@ -18,6 +18,7 @@
 #include"GameObject.h"
 #include"stageObject.h"
 #include"Collision.h"
+#include<vector>
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -31,7 +32,12 @@ private:
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
 public: // メンバ関数
-
+	struct CollisionVariable
+	{
+		//当たり判定
+		bool IsHit = false;
+		bool Alive=true;
+	};
 
 	GameScene();
 
@@ -86,20 +92,17 @@ private: // メンバ変数
 
 	CollisionManager* colMan = nullptr;
 
-	Player* player;
-	GameObject* gameObject;
-	StageObject* stageObj;
+	Player* player=nullptr;
+	GameObject* gameObject=nullptr;
+	StageObject* stageObj=nullptr;
 
 	const int debugTextTexNumber = 0;
 
 
 	static const int OBJNumber = 10;//OBJの最大数を記載
-	//当たり判定
-	bool IsHit[OBJNumber];
 	int HitCount=0;
-	bool Alive[OBJNumber];
 
-
+	std::vector<CollisionVariable*>cData;
 	
 	//サイズ
 	float Tsize = 1;

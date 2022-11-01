@@ -11,6 +11,7 @@
 #include"MeshCollider.h"
 GameScene::GameScene()
 {
+
 }
 
 GameScene::~GameScene()
@@ -126,8 +127,7 @@ void GameScene::Init()
 	stageObj->Init();
 	distance = 10.0f;
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
-		IsHit[i] = false;
-		Alive[i] = true;
+		cData.push_back(new CollisionVariable);
 	}
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
@@ -159,15 +159,15 @@ void GameScene::Update()
 
 	//当たり判定
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
-		IsHit[i] = false;
+		cData[i]->IsHit = false;
 
-		if (Alive[i] == true) {
+		if (cData[i]->Alive == true) {
 			if (gameObject->GetObject(i)->GetParentFlag()==false) {
 				if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
 					//if (Tsize +2>= gameObject->GetObject(i)->GetScale().x) {
-					IsHit[i] = true;
+					cData[i]->IsHit = true;
 					HitCount++;
-					Alive[i] = false;
+					cData[i]->Alive = false;
 					player->SetColFlag(true, i);
 					gameObject->GetObject(i)->SetParentFlag(true);
 					//}
@@ -175,14 +175,14 @@ void GameScene::Update()
 					DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 				}
 			}
-			if (IsHit[i] == true) {
+			if (cData[i]->IsHit == true) {
 				gameObject->GetObject(i)->SetParent(player->GetObject());
 			}
 			if (HitCount == 1) {
 				gameObject->GetObject(i)->transformParent();
 				audio->SEPlayWave(sound1);
 				HitCount = 0;
-				IsHit[i] = false;
+				cData[i]->IsHit = false;
 				Tsize++;
 			}
 		}
@@ -313,7 +313,7 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
 	DebugText::GetInstance()->Printf(100, 320, 3.0f, "SPACE:JUMP");
-	DebugText::GetInstance()->Printf(960, 150, 3.0f, "%d", colMan->GetHit());
+	DebugText::GetInstance()->Printf(960, 150, 3.0f, "%d", cData.size());
 	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
