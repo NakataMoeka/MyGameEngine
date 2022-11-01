@@ -252,7 +252,6 @@ void FbxObject3d::UpdateWorldMatrix()
 {
 	assert(camera);
 
-	HRESULT result;
 	XMMATRIX matScale, matRot, matTrans;
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();

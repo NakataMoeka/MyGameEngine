@@ -135,7 +135,7 @@ void GameScene::Init()
 	overFlag = false;
 	Bflag = false;
 	Tsize = 1;
-	Tsize2 = Tsize;
+	Tsize2 = (int)Tsize;
 	TCount = 0;
 	HitCount = 0;
 	TimeRot = 0;
@@ -154,8 +154,8 @@ void GameScene::Update()
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
-	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5, 0.6, 0));
-	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0, 0.5));
+	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
+	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 
 	//当たり判定
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
@@ -191,7 +191,7 @@ void GameScene::Update()
 	colMan->SetTsize2(Tsize);
 	//プレイヤーの大きさ
 	
-	Tsize2 = colMan->GetTsize();
+	Tsize2 = (int)colMan->GetTsize();
 	if (Tsize2 % 10 == 0) {
 		TCount++;
 	}
@@ -219,10 +219,10 @@ void GameScene::Update()
 	}
 
 	if (TimeRot < 360) {
-		TimeRot += 0.02;
+		TimeRot += 0.02f;
 	}
 	if (clearTimer > 0) {
-		clearTimer -= 1.0;
+		clearTimer -= 1.0f;
 	}
 	else if (clearTimer <= 0) {
 		if (Tsize2 < 11) {
@@ -240,11 +240,11 @@ void GameScene::Update()
 	}
 
 	//else {
-	clearTimer2 = clearTimer / 60;
+	clearTimer2 = (int)(clearTimer / 60.0f);
 	//}
 	timeSprite2->SetRotation(TimeRot);
 
-	object3d3->SetScale({ 2,2,2 });
+	object3d3->SetScale({ 2.0f,2.0f,2.0f });
 
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
@@ -261,11 +261,7 @@ void GameScene::Update()
 	gameObject->Update();
 
 	particleMan->Update();
-	object3d2->SetPosition({ 100,10,0 });
-	object3d2->SetRotation({ 0,0,0 });
-	object3d2->SetScale({ 0.05,0.05,0.05 });
-	//object3d->Update();
-	//object3d2->Update();
+;
 	object3d3->Update();
 
 	lightGroup->Update();

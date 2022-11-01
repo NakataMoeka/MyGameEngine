@@ -409,7 +409,7 @@ void Player::Update()
 	SphereObj->Update();
 	playerObj->SetPosition(playerPos);
 	playerObj->SetRotation(playerAngle);
-	playerObj->SetScale({ 0.05,0.05,0.05 });
+	playerObj->SetScale({ 0.05f,0.05f,0.05f });
 	playerObj->Update();
 
 	dashSprite->SetColor({1, 1, 1, fade});
