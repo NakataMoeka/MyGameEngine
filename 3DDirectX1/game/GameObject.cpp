@@ -103,10 +103,6 @@ void GameObject::Draw()
 
 }
 
-void GameObject::Delete(int i)
-{
-	//cSphere[i].
-}
 
 float GameObject::GetMat()
 {
