@@ -61,20 +61,29 @@ public: // メンバ関数
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag=clearFlag; }
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
 	bool GetBFlag() { return Bflag; }
+	bool GetTitleFlag() { return TitleFlag; }
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
 
 
 	Audio* audio = nullptr;
 
-	SoundData sound1={};
-	SoundData sound2={};
-
+	SoundData sound1 = {};
+	SoundData sound2 = {};
+	SoundData sound3 = {};
+	SoundData sound4 = {};
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
+	
 	Sprite* sprite = nullptr;
 	Sprite* timeSprite = nullptr;//円
 	Sprite* timeSprite2 = nullptr;//バー
+	Sprite* PoseSprite = nullptr;
+	Sprite* TitleBackSprite = nullptr;
+	Sprite* BackSprite = nullptr;
+	Sprite* InfoSprite = nullptr;
+	Sprite* PBSprite = nullptr;
+
 	Object3d* object3d = nullptr;
 	Model* model = nullptr;
 
@@ -122,4 +131,8 @@ private: // メンバ変数
 	float spherePosY = 3;
 
 	bool Bflag = false;//ブラーを掛けるか否か
+	
+	bool PoseFlag = false;//ゲーム中断フラグ
+	bool TitleFlag = false;//タイトルに戻るフラグ
+	int PS = 0;//ポーズ時のやつ
 };

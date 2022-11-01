@@ -39,6 +39,10 @@ void SceneManager::Update()
 			clearScene->SetOverFlag(true);
 			scene = END;
 		}
+		if (gameScene->GetTitleFlag() == true) {
+			titleScene->Init();
+			scene = TITLE;
+		}
 		gameScene->Update();
 	}
 	else if (scene == END) {

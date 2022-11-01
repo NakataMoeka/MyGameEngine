@@ -87,15 +87,15 @@ private://変数
 	bool JumpFlag = false;
 	bool onGround = true;
 	// 落下ベクトル
-	DirectX::XMVECTOR fallV;
+	DirectX::XMVECTOR fallV={};
 	
 	bool onGround2 = true;
 	// 落下ベクトル
-	DirectX::XMVECTOR fallV2;
+	DirectX::XMVECTOR fallV2={};
 	
 	static const int OBJNumber = 10;
 	
-	bool colFlag[OBJNumber];
+	bool colFlag[OBJNumber]={};
 
 	float PlayerWalkCount=0;
 	float CountWalk = 0;

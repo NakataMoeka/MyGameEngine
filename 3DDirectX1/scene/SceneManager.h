@@ -39,9 +39,9 @@ public:
 private:
 	//ç≈èâÇÃÉVÅ[Éì
 	Scene scene = TITLE;
-	TitleScene* titleScene;
-	GameScene* gameScene;
-	ClearScene* clearScene;
+	TitleScene* titleScene=nullptr;
+	GameScene* gameScene=nullptr;
+	ClearScene* clearScene=nullptr;
 	bool Bflag = false;
 };
 

@@ -102,11 +102,23 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(1, L"Resources/background.png");
 	Sprite::LoadTexture(6, L"Resources/UI/TimeUI.png");
 	Sprite::LoadTexture(7, L"Resources/UI/TimeUI2.png");
+	Sprite::LoadTexture(20, L"Resources/UI/Pose.png");
+	Sprite::LoadTexture(21, L"Resources/UI/TitleBack.png");
+	Sprite::LoadTexture(22, L"Resources/UI/Back.png");
+	Sprite::LoadTexture(23, L"Resources/UI/Info.png");
+	Sprite::LoadTexture(24, L"Resources/UI/PoseBack.png");
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 	timeSprite = Sprite::CreateSprite(6, { 1100,100 });
 	timeSprite2 = Sprite::CreateSprite(7, { 1100,100 });
+	PoseSprite = Sprite::CreateSprite(20, { 0,0 });
+	TitleBackSprite = Sprite::CreateSprite(21, { 0,0 });
+	BackSprite = Sprite::CreateSprite(22, { 0,0 });
+	InfoSprite = Sprite::CreateSprite(23, { 0,0 });
+	PBSprite = Sprite::CreateSprite(24, { 0,0 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/World_Heritage.wav");
+	sound3 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
+	sound4 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");
 	//audio->SoundPlayWave(sound1);
 	//audio->SoundPlayWave(sound2);
 	//audio->SetBGMVolume(0.5f);
@@ -143,11 +155,14 @@ void GameScene::Init()
 	TimeCount = 0;
 	clearTimer = 18000;//1800/60が30秒
 	clearTimer2 = 0;
+	PoseFlag = false;//ゲーム中断フラグ
+	TitleFlag = false;//タイトルに戻るフラグ
+	PS = 0;
 }
 
 void GameScene::Update()
 {
-	
+
 
 	//光線方向初期値                  上奥
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
@@ -163,7 +178,7 @@ void GameScene::Update()
 		cData[i]->IsHit = false;
 
 		if (cData[i]->Alive == true) {
-			if (gameObject->GetObject(i)->GetParentFlag()==false) {
+			if (gameObject->GetObject(i)->GetParentFlag() == false) {
 				if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
 					//if (Tsize +2>= gameObject->GetObject(i)->GetScale().x) {
 					cData[i]->IsHit = true;
@@ -191,7 +206,7 @@ void GameScene::Update()
 	}
 	colMan->SetTsize2(Tsize);
 	//プレイヤーの大きさ
-	
+
 	Tsize2 = (int)colMan->GetTsize();
 	if (Tsize2 % 10 == 0) {
 		TCount++;
@@ -213,31 +228,72 @@ void GameScene::Update()
 	//10分(36000/60)は0.0015
 	//25分(90000/60)は0.0006(多分)
 
-	if (Input::GetInstance()->TriggerKey(DIK_R)) {
-		clearFlag = true;
-		gameObject->RC();
-		player->RC();
+	if (PoseFlag == false) {
+		if (Input::GetInstance()->TriggerKey(DIK_R))
+		{
+			PoseFlag = true;
+			audio->SEPlayWave(sound3);
+
+		}
+	}
+	if (PoseFlag == true) {
+		if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
+		{
+			PS = 1;
+			audio->SEPlayWave(sound4);
+		}
+		else if (Input::GetInstance()->TriggerKey(DIK_UPARROW)) {
+			PS = 0;
+			audio->SEPlayWave(sound4);
+		}
+
+		if (PS == 0) {
+			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				PoseFlag = false;
+				audio->SEPlayWave(sound3);
+			}
+			BackSprite->SetSize({ 500,110 });
+			TitleBackSprite->SetSize({ 350,55 });
+			BackSprite->SetPosition({ 400,500 });
+			TitleBackSprite->SetPosition({ 500,600 });
+		}
+		else if (PS == 1) {
+			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				TitleFlag = true;
+				audio->SEPlayWave(sound3);
+			}
+			BackSprite->SetSize({ 250,55 });
+			TitleBackSprite->SetSize({ 500,110 });
+			BackSprite->SetPosition({ 500,550 });
+			TitleBackSprite->SetPosition({ 400,600 });
+		}
 	}
 
-	if (TimeRot < 360) {
-		TimeRot += 0.02f;
-	}
-	if (clearTimer > 0) {
-		clearTimer -= 1.0f;
-	}
-	else if (clearTimer <= 0) {
-		if (Tsize2 < 11) {
-			DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
-			overFlag = true;
-			gameObject->RC();
-			player->RC();
+
+	else if (PoseFlag == false) {
+		if (TimeRot < 360) {
+			TimeRot += 0.02f;
 		}
-		else if (Tsize2 >= 11) {
-			DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
-			clearFlag = true;
-			gameObject->RC();
-			player->RC();
+		if (clearTimer > 0) {
+			clearTimer -= 1.0f;
 		}
+		else if (clearTimer <= 0) {
+			if (Tsize2 < 11) {
+				DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
+				overFlag = true;
+				gameObject->RC();
+				player->RC();
+			}
+			else if (Tsize2 >= 11) {
+				DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
+				clearFlag = true;
+				gameObject->RC();
+				player->RC();
+			}
+		}
+		stageObj->Update();
+		player->Update();
+		gameObject->Update();
 	}
 
 	//else {
@@ -249,20 +305,20 @@ void GameScene::Update()
 
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
-	stageObj->Update();
 
-	player->Update();
-
+	if (TitleFlag == true) {
+		gameObject->RC();
+		player->RC();
+	}
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
 
 	//camera->SetEye(cameraPos);
 	//camera->SetTarget(player->GetSpherePos());
 	camera->Update();
 
-	gameObject->Update();
 
 	particleMan->Update();
-;
+	;
 	object3d3->Update();
 
 	lightGroup->Update();
@@ -307,6 +363,13 @@ void GameScene::DrawFront()
 	timeSprite->Draw();
 	timeSprite2->Draw();
 	player->DrawSprite();
+	if (PoseFlag == true) {
+		PBSprite->Draw();
+		PoseSprite->Draw();
+		TitleBackSprite->Draw();
+		BackSprite->Draw();
+		InfoSprite->Draw();
+	}
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
 	//DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
 	//DebugText::GetInstance()->Printf(100, 80, 3.0f, "%d", Alive[1]);

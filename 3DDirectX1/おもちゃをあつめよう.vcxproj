@@ -184,7 +184,6 @@
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
     <ClCompile Include="game\GameObject.cpp" />
     <ClCompile Include="game\player.cpp" />
-    <ClCompile Include="game\pushCollision.cpp" />
     <ClCompile Include="game\stageObject.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -364,7 +363,6 @@
     <ClInclude Include="game\GameObject.h" />
     <ClInclude Include="game\ObjectHelper.h" />
     <ClInclude Include="game\player.h" />
-    <ClInclude Include="game\pushCollision.h" />
     <ClInclude Include="game\stageObject.h" />
     <ClInclude Include="input\input.h" />
     <ClInclude Include="others\BaseCollider.h" />

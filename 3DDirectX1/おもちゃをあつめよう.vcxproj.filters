@@ -196,9 +196,6 @@
     <ClCompile Include="others\SpatialPartitioning.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="game\pushCollision.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
     <ClCompile Include="others\SphereColliderFbx.cpp">
       <Filter>Library\others\collision</Filter>
     </ClCompile>
@@ -442,9 +439,6 @@
     </ClInclude>
     <ClInclude Include="others\SpatialPartitioning.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="game\pushCollision.h">
-      <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="others\SphereColliderFbx.h">
       <Filter>Library\others\collision</Filter>
