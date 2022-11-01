@@ -56,7 +56,7 @@ void DXCommon::preDraw()
 
 	//シザー短形の設定
 	cmdList->RSSetScissorRects(1, &CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height));
-#if _DEBUG FPSの見える化
+
 
 	// FPS,CPU使用率表示
 	{
@@ -70,7 +70,7 @@ void DXCommon::preDraw()
 			SetWindowTextA(winapp->GetHwnd(), str);
 		}
 	}
-#endif
+
 }
 
 void DXCommon::postDraw()

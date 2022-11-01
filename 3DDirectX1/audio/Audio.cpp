@@ -28,7 +28,6 @@ bool Audio::Initialize()
 
 SoundData Audio::SoundLoadWave(const char* filename)
 {
-	HRESULT result;
 
 	//1.ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
 

@@ -23,7 +23,7 @@ private:
 	FPS() {};
 	~FPS() {};
 
-	const float MIN_FREAM_TIME = 1.0 / 60.0;
+	const float MIN_FREAM_TIME = 1.0f / 60.0f;
 	float frameTime = 0;
 	LARGE_INTEGER timeStart;
 	LARGE_INTEGER timeEnd;
