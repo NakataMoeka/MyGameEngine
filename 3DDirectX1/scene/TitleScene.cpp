@@ -117,7 +117,7 @@ void TitleScene::Update()
 	if (TaCount < 5) {
 		TaCount+=0.5;
 	}
-	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 146*TaCount,170 });
+	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 146 * TaCount,170 });
 	TSprite->SetSize({ 730,170 });
 }
 

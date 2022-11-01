@@ -44,22 +44,22 @@ void Player::Init()
 	CountWalk = 0;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-	
-	
+
+
 	spherePos = { 0,3,-40 };
-	playerPos = {spherePos.x,0,spherePos.z-6 };
+	playerPos = { spherePos.x,0,spherePos.z - 6 };
 
 	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 1,1,1 };
-		// コライダーの追加
+	// コライダーの追加
 	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 
 	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,2,0,0 }), 2.0f));
 	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
-	
+
 	SphereObj->Quaternion();
 	SphereObj->Update();
 	playerObj->Update();
@@ -92,41 +92,41 @@ void Player::Move()
 
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
-			playerPos.x += moveUD.m128_f32[0];
-			playerPos.z += moveUD.m128_f32[2];
-			spherePos.x += moveUD.m128_f32[0];
-			spherePos.z += moveUD.m128_f32[2];
-		
-			sphereAngle.m128_f32[0] += 10;
-		
+		playerPos.x += moveUD.m128_f32[0];
+		playerPos.z += moveUD.m128_f32[2];
+		spherePos.x += moveUD.m128_f32[0];
+		spherePos.z += moveUD.m128_f32[2];
+
+		sphereAngle.m128_f32[0] += 10;
+
 	}
 	else if (Input::GetInstance()->PushKey(DIK_S))
 	{
-			playerPos.x -= moveUD.m128_f32[0];
-			playerPos.z -= moveUD.m128_f32[2];
-			spherePos.x -= moveUD.m128_f32[0];
-			spherePos.z -= moveUD.m128_f32[2];
-		
+		playerPos.x -= moveUD.m128_f32[0];
+		playerPos.z -= moveUD.m128_f32[2];
+		spherePos.x -= moveUD.m128_f32[0];
+		spherePos.z -= moveUD.m128_f32[2];
+
 		sphereAngle.m128_f32[0] -= 10;
-	
+
 	}
 	else if (Input::GetInstance()->PushKey(DIK_D))
 	{
-			playerPos.x += moveLR.m128_f32[0];
-			playerPos.z += moveLR.m128_f32[2];
-			spherePos.x += moveLR.m128_f32[0];
-			spherePos.z += moveLR.m128_f32[2];
-		
+		playerPos.x += moveLR.m128_f32[0];
+		playerPos.z += moveLR.m128_f32[2];
+		spherePos.x += moveLR.m128_f32[0];
+		spherePos.z += moveLR.m128_f32[2];
+
 		sphereAngle.m128_f32[2] += 10;
-	
+
 	}
 	else if (Input::GetInstance()->PushKey(DIK_A))
 	{
-			playerPos.x -= moveLR.m128_f32[0];
-			playerPos.z -= moveLR.m128_f32[2];
-			spherePos.x -= moveLR.m128_f32[0];
-			spherePos.z -= moveLR.m128_f32[2];
-		
+		playerPos.x -= moveLR.m128_f32[0];
+		playerPos.z -= moveLR.m128_f32[2];
+		spherePos.x -= moveLR.m128_f32[0];
+		spherePos.z -= moveLR.m128_f32[2];
+
 		sphereAngle.m128_f32[2] -= 10;
 	}
 	if (Input::GetInstance()->PushKey(DIK_W) ||
@@ -134,23 +134,23 @@ void Player::Move()
 		Input::GetInstance()->PushKey(DIK_A) ||
 		Input::GetInstance()->PushKey(DIK_D))
 	{
-	
-			if (CountWalk < 5) {
-				CountWalk++;
+
+		if (CountWalk < 5) {
+			CountWalk++;
+		}
+		if (CountWalk == 5) {
+			if (PlayerWalkCount < 6) {
+				PlayerWalkCount++;
 			}
-			if (CountWalk == 5) {
-				if (PlayerWalkCount < 6) {
-					PlayerWalkCount++;
-				}
-				if (PlayerWalkCount == 6) {
-					PlayerWalkCount = 0;
-				}
-				CountWalk = 0;
+			if (PlayerWalkCount == 6) {
+				PlayerWalkCount = 0;
 			}
-			if (JumpFlag == false) {
-				playerObj->PlayAnimation(1);
-			}
-	
+			CountWalk = 0;
+		}
+		if (JumpFlag == false) {
+			playerObj->PlayAnimation(1);
+		}
+
 	}
 	else {
 		playerObj->Stop();
@@ -158,7 +158,7 @@ void Player::Move()
 	if (JumpFlag == true) {
 		playerObj->PlayAnimation(0);
 	}
-	
+
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 
@@ -191,7 +191,7 @@ void Player::Ball()
 
 void Player::Jump()
 {
-		// 落下処理
+	// 落下処理
 	if (!onGround) {
 		// 下向き加速度
 		const float fallAcc = -0.01f;
@@ -203,7 +203,7 @@ void Player::Jump()
 		playerPos.y += fallV.m128_f32[1];
 		playerPos.z += fallV.m128_f32[2];
 	}
-	 //ジャンプ操作
+	//ジャンプ操作
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		onGround = false;
 		JumpFlag = true;
@@ -240,7 +240,7 @@ void Player::Jump()
 		}
 
 		Sphere* sphere = nullptr;
-		DirectX::XMVECTOR move = {0,0,0,0};
+		DirectX::XMVECTOR move = { 0,0,0,0 };
 	};
 
 	PlayerQueryCallback callback(sphereCollider);
@@ -248,29 +248,29 @@ void Player::Jump()
 
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
 
-			// 交差による排斥分動かす
-			playerPos.x += callback.move.m128_f32[0];
-			playerPos.y += callback.move.m128_f32[1];
-			playerPos.z += callback.move.m128_f32[2];
-			// 交差による排斥分動かす
-			spherePos.x += callback.move.m128_f32[0];
-			spherePos.y += callback.move.m128_f32[1];
-			spherePos.z += callback.move.m128_f32[2];
+	// 交差による排斥分動かす
+	playerPos.x += callback.move.m128_f32[0];
+	playerPos.y += callback.move.m128_f32[1];
+	playerPos.z += callback.move.m128_f32[2];
+	// 交差による排斥分動かす
+	spherePos.x += callback.move.m128_f32[0];
+	spherePos.y += callback.move.m128_f32[1];
+	spherePos.z += callback.move.m128_f32[2];
 
 
 	PlayerQueryCallback callback2(sphereCollider2);
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
-	
-	
-	
-			// 交差による排斥分動かす
-			playerPos.x += callback2.move.m128_f32[0];
-			playerPos.y += callback2.move.m128_f32[1];
-			playerPos.z += callback2.move.m128_f32[2];
-			spherePos.x += callback2.move.m128_f32[0];
-			spherePos.y += callback2.move.m128_f32[1];
-			spherePos.z += callback2.move.m128_f32[2];
+
+
+
+	// 交差による排斥分動かす
+	playerPos.x += callback2.move.m128_f32[0];
+	playerPos.y += callback2.move.m128_f32[1];
+	playerPos.z += callback2.move.m128_f32[2];
+	spherePos.x += callback2.move.m128_f32[0];
+	spherePos.y += callback2.move.m128_f32[1];
+	spherePos.z += callback2.move.m128_f32[2];
 
 	SphereObj->SetPosition(spherePos);
 	SphereObj->UpdateWorldMatrix();
@@ -362,7 +362,7 @@ void Player::Dash()
 		dashCoolTime = 0;
 		dashFlag = false;
 	}
-	if (Input::GetInstance()->TriggerKey(DIK_UPARROW)&& Input::GetInstance()->PushKey(DIK_W) &&dashFlag==false)
+	if (Input::GetInstance()->TriggerKey(DIK_UPARROW) && Input::GetInstance()->PushKey(DIK_W) && dashFlag == false)
 	{
 		dashTime = dashTimeMax;
 		fade = 1;
@@ -377,7 +377,7 @@ void Player::Dash()
 			dashCoolTime = dashCoolTimeMax;
 		}
 		XMVECTOR movedash = { 0,0,1.5,0 };//前後方向用の移動ベクトル
-		
+
 		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 		movedash = XMVector3TransformNormal(movedash, matRot);
 
@@ -412,7 +412,7 @@ void Player::Update()
 	playerObj->SetScale({ 0.05f,0.05f,0.05f });
 	playerObj->Update();
 
-	dashSprite->SetColor({1, 1, 1, fade});
+	dashSprite->SetColor({ 1, 1, 1, fade });
 	playerSprite->SetSize({ 140,200 });
 	playerSprite->SetTextureRect({ 0 + 580 * PlayerWalkCount,0 }, { 580,810 });
 }
@@ -423,7 +423,7 @@ void Player::Draw()
 {
 	playerObj->Draw();
 	SphereObj->Draw();
-	
+
 }
 
 void Player::DrawSprite()

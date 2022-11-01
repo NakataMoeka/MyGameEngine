@@ -229,16 +229,13 @@ void GameScene::Update()
 	//25分(90000/60)は0.0006(多分)
 
 	if (PoseFlag == false) {
-		if (Input::GetInstance()->TriggerKey(DIK_R))
-		{
+		if (Input::GetInstance()->TriggerKey(DIK_R)) {
 			PoseFlag = true;
 			audio->SEPlayWave(sound3);
-
 		}
 	}
 	if (PoseFlag == true) {
-		if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
-		{
+		if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW)) {
 			PS = 1;
 			audio->SEPlayWave(sound4);
 		}
