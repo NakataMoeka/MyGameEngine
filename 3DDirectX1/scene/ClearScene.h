@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "FbxObject.h"
 #include"LightGroup.h"
+#include"Ease.h"
 /// <summary>
 /// タイトル表示
 /// </summary>
@@ -34,13 +35,27 @@ public:
 	bool GetOverFlag() { return overFlag; }
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
+	bool GetPushFlag() { return pushFlag; }
 private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
 	const int debugTextTexNumber = 0;
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;
+
+	Sprite* overTextSprite = nullptr;
+	Sprite* clearTextSprite = nullptr;
+	Sprite* overSprite = nullptr;
+	Sprite* clearSprite = nullptr;
+	Sprite* motherASprite = nullptr;
+	Sprite* motherSSprite = nullptr;
+	Sprite* Space = nullptr;
+	Sprite* back = nullptr;
 	bool clearFlag = false;
 	bool overFlag = false;
+	XMFLOAT2 pos = { 300,800 };
+	Eas* eas;
+	float easeTimer = 0;
+	bool pushFlag = false;
 };
 

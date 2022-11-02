@@ -124,6 +124,7 @@ void TitleScene::Update()
 void TitleScene::DrawBG()
 {
 	Sprite::PreDraw(dxCommon->GetCmdList());
+	dxCommon->ClearDepthBuffer();
 	if (Scene == 0) {
 		TBSprite->Draw();
 	}

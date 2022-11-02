@@ -231,7 +231,7 @@ void GameScene::Update()
 	//5分(18000/60)は0.02
 	//10分(36000/60)は0.0015
 	//25分(90000/60)は0.0006(多分)
-	//tn,ut,ci,shp,kn,em,zm,syo,,gr,os
+	//tn,ut,ci,shp,kn,em,zm,syo,rb,gr,os
 	if (PoseFlag == false) {
 		if (Input::GetInstance()->TriggerKey(DIK_R)) {
 			PoseFlag = true;
@@ -301,7 +301,20 @@ void GameScene::Update()
 		player->Update();
 		gameObject->Update();
 	}
-
+#if _DEBUG
+	if (Input::GetInstance()->TriggerKey(DIK_Q)) {
+		overFlag = true;
+		audio->StopWave();
+		gameObject->RC();
+		player->RC();
+	}
+	else if (Input::GetInstance()->TriggerKey(DIK_E)) {
+		clearFlag = true;
+		audio->StopWave();
+		gameObject->RC();
+		player->RC();
+	}
+#endif
 	//else {
 	clearTimer2 = (int)(clearTimer / 60.0f);
 	//}

@@ -46,11 +46,14 @@ void SceneManager::Update()
 		gameScene->Update();
 	}
 	else if (scene == END) {
-		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-			clearScene->SetClearFlag(false);
-			clearScene->SetOverFlag(false);
-			titleScene->Init();
-			scene = TITLE;
+		if (clearScene->GetPushFlag() == true) {
+			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				clearScene->SetClearFlag(false);
+				clearScene->SetOverFlag(false);
+				titleScene->Init();
+				clearScene->Init();
+				scene = TITLE;
+			}
 		}
 		clearScene->Update();
 	}
