@@ -108,6 +108,7 @@ private: // メンバ変数
 
 
 	static const int OBJNumber = 10;//OBJの最大数を記載
+	
 	int HitCount=0;
 
 	std::vector<CollisionVariable*>cData;

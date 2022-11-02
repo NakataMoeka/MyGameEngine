@@ -116,7 +116,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	InfoSprite = Sprite::CreateSprite(23, { 0,0 });
 	PBSprite = Sprite::CreateSprite(24, { 0,0 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
-	sound2 = Audio::SoundLoadWave("Resources/World_Heritage.wav");
+	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
 	sound4 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");
 	//audio->SoundPlayWave(sound1);
@@ -141,6 +141,8 @@ void GameScene::Init()
 	distance = 10.0f;
 	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
 		cData.push_back(new CollisionVariable);
+		cData[i]->Alive = true;
+		cData[i]->IsHit = false;
 	}
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
@@ -158,6 +160,8 @@ void GameScene::Init()
 	PoseFlag = false;//ゲーム中断フラグ
 	TitleFlag = false;//タイトルに戻るフラグ
 	PS = 0;
+	audio->SoundPlayWave(sound2);
+	audio->SetBGMVolume(0.5f);
 }
 
 void GameScene::Update()
@@ -227,7 +231,7 @@ void GameScene::Update()
 	//5分(18000/60)は0.02
 	//10分(36000/60)は0.0015
 	//25分(90000/60)は0.0006(多分)
-
+	//tn,ut,ci,shp,kn,em,zm,syo,,gr,os
 	if (PoseFlag == false) {
 		if (Input::GetInstance()->TriggerKey(DIK_R)) {
 			PoseFlag = true;
@@ -257,6 +261,9 @@ void GameScene::Update()
 		else if (PS == 1) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 				TitleFlag = true;
+				audio->StopWave();
+				gameObject->RC();
+				player->RC();
 				audio->SEPlayWave(sound3);
 			}
 			BackSprite->SetSize({ 250,55 });
@@ -278,12 +285,14 @@ void GameScene::Update()
 			if (Tsize2 < 11) {
 				DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
 				overFlag = true;
+				audio->StopWave();
 				gameObject->RC();
 				player->RC();
 			}
 			else if (Tsize2 >= 11) {
 				DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
 				clearFlag = true;
+				audio->StopWave();
 				gameObject->RC();
 				player->RC();
 			}
