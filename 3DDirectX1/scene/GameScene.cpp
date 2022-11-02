@@ -301,7 +301,8 @@ void GameScene::Update()
 		player->Update();
 		gameObject->Update();
 	}
-#if _DEBUG
+#if _DEBUG 
+	//デバッグでクリアとゲームオーバー見るために作ったやつ
 	if (Input::GetInstance()->TriggerKey(DIK_Q)) {
 		overFlag = true;
 		audio->StopWave();
