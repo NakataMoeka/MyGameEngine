@@ -36,12 +36,15 @@ public:
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
 	bool GetPushFlag() { return pushFlag; }
+	bool SetAudioFlag(bool audioFlag) { return this->audioFlag = audioFlag; }
 private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
 	const int debugTextTexNumber = 0;
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;
+
+	SoundData sound1 = {};
 
 	Sprite* overTextSprite = nullptr;
 	Sprite* clearTextSprite = nullptr;
@@ -51,11 +54,13 @@ private:
 	Sprite* motherSSprite = nullptr;
 	Sprite* Space = nullptr;
 	Sprite* back = nullptr;
+
 	bool clearFlag = false;
 	bool overFlag = false;
 	XMFLOAT2 pos = { 300,800 };
 	Eas* eas;
-	float easeTimer = 0;
-	bool pushFlag = false;
+	float easeTimer = 0;//イージングのタイマー
+	bool pushFlag = false;//ボタンを押せるようにする
+	bool audioFlag = false;//音鳴らすか
 };
 

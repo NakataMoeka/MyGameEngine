@@ -52,6 +52,7 @@ void SceneManager::Update()
 				clearScene->SetOverFlag(false);
 				titleScene->Init();
 				clearScene->Init();
+				clearScene->SetAudioFlag(true);
 				scene = TITLE;
 			}
 		}

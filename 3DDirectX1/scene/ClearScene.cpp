@@ -61,6 +61,7 @@ void ClearScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	camera->SetEye({ 0, 0, -10 });
 	
 	eas = new Eas();
+	sound1 = Audio::SoundLoadWave("Resources/Music/SE/Œˆ’èƒ{ƒ^ƒ“‚ð‰Ÿ‚·26.wav");
 }
 
 void ClearScene::Init()
@@ -68,6 +69,7 @@ void ClearScene::Init()
 	easeTimer = 0;
 	pos = { 300,800 };
 	pushFlag = false;
+	audioFlag = false;
 }
 
 void ClearScene::Update()
@@ -79,7 +81,9 @@ void ClearScene::Update()
 	if (pos.y <= 100) {
 		pushFlag = true;
 	}
-
+	if (audioFlag == true) {
+		audio->SEPlayWave(sound1);
+	}
 
 	motherASprite->SetPosition({ 800,200 });
 	motherSSprite->SetPosition({ 800,200 });
