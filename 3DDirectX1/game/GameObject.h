@@ -35,7 +35,9 @@ public:
 	int GetOBJNumber() { return OBJNumber; }
 	float GetMat();
 	Object3d* GetObject(int i) { return cube[i]; }
-private:
+private://Update()‚É‚Ü‚Æ‚ß‚é‚à‚Ì
+	void move();//ˆÚ“®
+private://•Ï”
 	//int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ”z’u—p(—\’è)
 	static const int OBJNumber = 10;
 	static const int OBJType = 2;

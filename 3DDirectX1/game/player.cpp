@@ -247,7 +247,7 @@ void Player::Jump()
 	// 球と地形の交差を全検索
 
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
-
+	
 	// 交差による排斥分動かす
 	playerPos.x += callback.move.m128_f32[0];
 	playerPos.y += callback.move.m128_f32[1];
@@ -261,8 +261,12 @@ void Player::Jump()
 	PlayerQueryCallback callback2(sphereCollider2);
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
-
-
+	for (int i = 0; i < OBJNumber; i++) {
+		if (colFlag[i] == false) {
+			CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+			CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+		}
+	}
 
 	// 交差による排斥分動かす
 	playerPos.x += callback2.move.m128_f32[0];

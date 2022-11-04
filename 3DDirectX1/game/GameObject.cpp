@@ -109,3 +109,9 @@ float GameObject::GetMat()
 {
 	return 	cube[0]->GetMatRot().r[3].m128_f32[0];
 }
+
+void GameObject::move()
+{
+	//ランダムに動かす(オブジェクト中心から半径(距離未定)以内で動かす)
+
+}

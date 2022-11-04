@@ -43,7 +43,7 @@ public:
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetColFlag(bool ColFlag,int i) { return this->colFlag[i] = ColFlag; }
 
-private://プレイヤーの動き系
+private://Update()にまとめるもの
 	void Move();//移動
 	void Ball();//ボール関係
 	void Jump();//ジャンプ
@@ -93,7 +93,7 @@ private://変数
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV2={};
 	
-	static const int OBJNumber = 10;
+	static const int OBJNumber = 500;
 	
 	bool colFlag[OBJNumber]={};
 
