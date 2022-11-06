@@ -183,18 +183,17 @@ void GameScene::Update()
 
 		if (cData[i]->Alive == true) {
 			if (gameObject->GetObject(i)->GetParentFlag() == false) {
-				//if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
-					if (Tsize +2>= gameObject->GetObject(i)->GetScale().x) {
+				if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
+					//if (Tsize +2>= gameObject->GetObject(i)->GetScale().x) {
 					cData[i]->IsHit = true;
 					HitCount++;
 					cData[i]->Alive = false;
 					player->SetColFlag(true, i);
 					gameObject->GetObject(i)->SetParentFlag(true);
+				//}
+				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 				}
-
-					DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
-				}
-			//}
+			}
 			if (cData[i]->IsHit == true) {
 				gameObject->GetObject(i)->SetParent(player->GetObject());
 			}
