@@ -74,6 +74,33 @@ void GameObject::Init()
 
 void GameObject::Update()
 {
+	// クエリーコールバッククラス
+	class PlayerQueryCallback : public QueryCallback
+	{
+	public:
+		PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
+		// 衝突時コールバック関数
+		bool OnQueryHit(const QueryHit& info) {
+
+			const XMVECTOR up = { 0,1,0,0 };
+
+			XMVECTOR rejectDir = XMVector3Normalize(info.reject);
+			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
+
+			// 地面判定しきい値
+			const float threshold = cosf(XMConvertToRadians(30.0f));
+
+			if (-threshold < cos && cos < threshold) {
+				sphere->center += info.reject;
+				move += info.reject;
+			}
+			return true;
+		}
+
+		Sphere* sphere = nullptr;
+		DirectX::XMVECTOR move = { 0,0,0,0 };
+	};
+
 	//ここでSetすると離れてくっつくからしないように!!
 	for (int i = 0; i < OBJNumber; i++) {
 	
@@ -83,7 +110,21 @@ void GameObject::Update()
 		cSphere2[i].radius = r;
 		cSphere2[6].radius = 4;
 		cSphere2[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+		SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(cube[i]->GetCollider());
+		assert(sphereCollider);
 
+
+		PlayerQueryCallback callback(sphereCollider);
+		// 球と地形の交差を全検索
+
+		CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+		XMFLOAT3 posback[OBJNumber];
+		posback[i] = {cube[i]->GetMatWorld().r[3].m128_f32[0] ,cube[i]->GetMatWorld().r[3].m128_f32[1] ,cube[i]->GetMatWorld().r[3].m128_f32[2]};
+		// 交差による排斥分動かす
+		posback[i].x += callback.move.m128_f32[0];
+		posback[i].y += callback.move.m128_f32[1];
+		posback[i].z += callback.move.m128_f32[2];
+		//cube[i]->SetPosition(posback[i]);
 		cube[i]->Update();
 	}
 
