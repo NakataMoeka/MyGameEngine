@@ -85,6 +85,7 @@ bool MeshCollider::CheckCollisionSphere(const Sphere& sphere, DirectX::XMVECTOR*
 
 	return false;
 }
+
 bool MeshCollider::CheckCollisionRay(const Ray& ray, float* distance, DirectX::XMVECTOR* inter)
 {
 	// オブジェクトのローカル座標系でのレイを得る

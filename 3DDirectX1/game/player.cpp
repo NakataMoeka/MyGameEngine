@@ -57,7 +57,7 @@ void Player::Init()
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 
-	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,2,0,0 }), 2.0f));
+	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,0.6f,0,0 }), 0.6f));
 	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 
 	SphereObj->Quaternion();
@@ -207,7 +207,7 @@ void Player::Jump()
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		onGround = false;
 		JumpFlag = true;
-		const float jumpVYFist = 1.0f;
+		const float jumpVYFist = 0.2f;
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
 	playerObj->UpdateWorldMatrix();
@@ -230,7 +230,7 @@ void Player::Jump()
 			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
 
 			// 地面判定しきい値
-			const float threshold = cosf(XMConvertToRadians(30.0f));
+			const float threshold = cosf(XMConvertToRadians(10.0f));
 
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
@@ -276,13 +276,8 @@ void Player::Jump()
 	spherePos.y += callback2.move.m128_f32[1];
 	spherePos.z += callback2.move.m128_f32[2];
 
-	SphereObj->SetPosition(spherePos);
-	SphereObj->UpdateWorldMatrix();
-	SphereObj->GetCollider()->Update();
-	playerObj->SetPosition(playerPos);
-	playerObj->UpdateWorldMatrix();
-	playerObj->GetCollider()->Update();
-	//// 球の上端から球の下端までのレイキャスト
+
+	// 球の上端から球の下端までのレイキャスト
 	Ray ray;
 	ray.start = sphereCollider->center;
 	ray.start.m128_f32[1] += sphereCollider->GetRadius();
@@ -296,18 +291,13 @@ void Player::Jump()
 		// 接地を維持
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
-			//下の処理を記入すると-nan(ind)って出て画面にOBJが表示されない
-			//解決した(Updateの順番が悪かった)
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
-			playerObj->SetPosition(playerPos);
-			playerObj->Update();
 		}
 		// 地面がないので落下
 		else {
 			onGround = false;
 			fallV = {};
 		}
-		JumpFlag = false;
 	}
 	// 落下状態
 	else if (fallV.m128_f32[1] <= 0.0f) {
@@ -315,16 +305,14 @@ void Player::Jump()
 			// 着地
 			onGround = true;
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
-			playerObj->SetPosition(playerPos);
-			playerObj->Update();
 		}
 	}
-	playerObj->Update();
+
 	//// 球の上端から球の下端までのレイキャスト
 	//Ray ray2;
 	//ray2.start = sphereCollider2->center;
 	//ray2.start.m128_f32[1] += sphereCollider2->GetRadius();
-	//ray2.dir = { 0,-1,0,0 };
+	//ray2.dir = { 0,-1.0,0,0 };
 	//RaycastHit raycastHit2;
 	//// 接地状態
 	//if (onGround2) {
