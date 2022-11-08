@@ -240,7 +240,7 @@ void Player::Jump()
 		}
 
 		Sphere* sphere = nullptr;
-		DirectX::XMVECTOR move = { 0,0,0,0 };
+		DirectX::XMVECTOR move = { };
 	};
 
 	PlayerQueryCallback callback(sphereCollider);

@@ -110,20 +110,20 @@ void GameObject::Update()
 		cSphere2[i].radius = r;
 		cSphere2[6].radius = 4;
 		cSphere2[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(cube[i]->GetCollider());
-		assert(sphereCollider);
+		//SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(cube[i]->GetCollider());
+		//assert(sphereCollider);
 
 
-		PlayerQueryCallback callback(sphereCollider);
-		// 球と地形の交差を全検索
+		//PlayerQueryCallback callback(sphereCollider);
+		//// 球と地形の交差を全検索
 
-		CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-		XMFLOAT3 posback[OBJNumber];
-		posback[i] = {cube[i]->GetMatWorld().r[3].m128_f32[0] ,cube[i]->GetMatWorld().r[3].m128_f32[1] ,cube[i]->GetMatWorld().r[3].m128_f32[2]};
-		// 交差による排斥分動かす
-		posback[i].x += callback.move.m128_f32[0];
-		posback[i].y += callback.move.m128_f32[1];
-		posback[i].z += callback.move.m128_f32[2];
+		//CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+		//XMFLOAT3 posback[OBJNumber];
+		//posback[i] = {cube[i]->GetMatWorld().r[3].m128_f32[0] ,cube[i]->GetMatWorld().r[3].m128_f32[1] ,cube[i]->GetMatWorld().r[3].m128_f32[2]};
+		//// 交差による排斥分動かす
+		//posback[i].x += callback.move.m128_f32[0];
+		//posback[i].y += callback.move.m128_f32[1];
+		//posback[i].z += callback.move.m128_f32[2];
 		//cube[i]->SetPosition(posback[i]);
 		cube[i]->Update();
 	}

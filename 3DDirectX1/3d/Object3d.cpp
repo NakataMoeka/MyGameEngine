@@ -227,7 +227,6 @@ Object3d* Object3d::Create(Model* model)
 	if (!object3d->Initialize()) {
 		delete object3d;
 		assert(0);
-		return nullptr;
 	}
 
 	if (model) {

@@ -13,7 +13,7 @@ private:
 	//using XMMATRIX = DirectX::XMMATRIX;
 	//using XMVECTOR = DirectX::XMVECTOR;
 public:
-	static bool CheackSphere2Plane(const Sphere& sphere, const Plane& plane,
+	static bool CheckSphere2Plane(const Sphere& sphere, const Plane& plane,
 		DirectX::XMVECTOR* inter = nullptr);
 
 	static void ClosestPtPoint2Triangle(const DirectX::XMVECTOR& point,
