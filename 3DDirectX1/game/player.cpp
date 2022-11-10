@@ -207,7 +207,7 @@ void Player::Jump()
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		onGround = false;
 		JumpFlag = true;
-		const float jumpVYFist = 0.2f;
+		const float jumpVYFist = 1.0f;
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
 	playerObj->UpdateWorldMatrix();
@@ -230,7 +230,7 @@ void Player::Jump()
 			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
 
 			// ’n–Ê”»’è‚µ‚«‚¢’l
-			const float threshold = cosf(XMConvertToRadians(10.0f));
+			const float threshold = cosf(XMConvertToRadians(60.0f));
 
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;

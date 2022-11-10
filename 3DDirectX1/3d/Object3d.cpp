@@ -126,7 +126,7 @@ void Object3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 	// ラスタライザステート
 	gpipeline.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
 	//gpipeline.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
-	//gpipeline.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
+	//gpipeline.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;//ワイヤーフレームになるよー
 	// デプスステンシルステート
 	gpipeline.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 
@@ -164,7 +164,7 @@ void Object3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
 
 	// ルートパラメータ
-	CD3DX12_ROOT_PARAMETER rootparams[4];
+	CD3DX12_ROOT_PARAMETER rootparams[4] = {};
 	rootparams[0].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_ALL);
 	rootparams[1].InitAsConstantBufferView(1, 0, D3D12_SHADER_VISIBILITY_ALL);
 	rootparams[2].InitAsDescriptorTable(1, &descRangeSRV, D3D12_SHADER_VISIBILITY_ALL);
