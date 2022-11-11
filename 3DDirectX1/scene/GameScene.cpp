@@ -184,13 +184,13 @@ void GameScene::Update()
 		if (cData[i]->Alive == true) {
 			if (gameObject->GetObject(i)->GetParentFlag() == false) {
 				if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i))) {
-					if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
+					//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
 					cData[i]->IsHit = true;
 					HitCount++;
 					cData[i]->Alive = false;
 					player->SetColFlag(true, i);
 					gameObject->GetObject(i)->SetParentFlag(true);
-				}
+				//}
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 				}
 			}
@@ -399,7 +399,8 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
 	DebugText::GetInstance()->Printf(100, 320, 3.0f, "SPACE:JUMP");
-	DebugText::GetInstance()->Printf(960, 150, 3.0f, "%d", cData.size());
+	DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
+		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
 	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();

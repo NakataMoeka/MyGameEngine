@@ -33,16 +33,16 @@ void GameObject::Init()
 
 		float radius = 2.0f;
 		//csv‚Å‚â‚é‚Â‚à‚è
-		position[0] = { 10,2,0 };
-		position[1] = { 0,10,10 };
-		position[2] = { -10, 2, 0 };
-		position[3] = { -50,2,-40 };
-		position[4] = { -30, 2, 10 };
-		position[5] = { -10, 2, 60 };
-		position[6] = { 50,2,30 };
-		position[7] = { 0, 2, 50 };
-		position[8] = { -30, 2, 20 };
-		position[9] = { 30, 2, -20 };
+		position[0] = { 10,40,0 };
+		position[1] = { 0,40,10 };
+		position[2] = { -10, 40, 0 };
+		position[3] = { -50,40,-40 };
+		position[4] = { -30, 40, 10 };
+		position[5] = { -10, 40, 60 };
+		position[6] = { 50,40,30 };
+		position[7] = { 0, 40, 50 };
+		position[8] = { -30, 40, 20 };
+		position[9] = { 30, 40, -20 };
 		size[0] = { 3,3,3 };
 		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };

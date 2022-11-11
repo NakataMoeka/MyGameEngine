@@ -21,10 +21,10 @@ void StageObject::Initialize()
 	Home = TouchableObject::Create(modelHome);
 	Home->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
-	for (int i = 0; i < 2; i++) {
-		slope[i] = TouchableObject::Create(modelSlope);
-		slope[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	}
+	//for (int i = 0; i < 2; i++) {
+	//	slope[i] = TouchableObject::Create(modelSlope);
+	//	slope[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	//}
 }
 
 void StageObject::Init()
@@ -38,13 +38,13 @@ void StageObject::Init()
 
 void StageObject::Update()
 {
-	for (int i = 0; i < 2; i++) {
+	/*for (int i = 0; i < 2; i++) {
 		slope[i]->Quaternion();
 		slope[i]->SetScale(size);
 		slope[i]->SetRotation(rota);
 		slope[i]->SetPosition(position[i]);
 		slope[i]->Update();
-	}
+	}*/
 	//Block->Quaternion();
 	//Block->SetScale({ 5,70,5 });
 	//Block->SetRotation({0,0,0,0});
@@ -60,9 +60,9 @@ void StageObject::Update()
 
 void StageObject::Draw()
 {
-	for (int i = 0; i < 2; i++) {
+	/*for (int i = 0; i < 2; i++) {
 		slope[i]->Draw();
-	}
+	}*/
 	//Block->Draw();
 	Ground->Draw();
 	Home->Draw();
