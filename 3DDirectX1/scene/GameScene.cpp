@@ -324,7 +324,7 @@ void GameScene::Update()
 	//}
 	timeSprite2->SetRotation(TimeRot);
 
-	object3d3->SetScale({ 2.0f,2.0f,2.0f });
+	object3d3->SetScale({ 4.0f,4.0f,4.0f });
 
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ

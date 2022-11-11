@@ -47,7 +47,7 @@ void Player::Init()
 
 
 	spherePos = { 0,3,-40 };
-	playerPos = { spherePos.x,0,spherePos.z - 6 };
+	playerPos = { spherePos.x,50,spherePos.z - 6 };
 
 	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };

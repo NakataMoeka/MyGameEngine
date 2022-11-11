@@ -50,7 +50,7 @@ void StageObject::Update()
 	//Block->SetRotation({0,0,0,0});
 	//Block->SetPosition({30,2,20});
 	//Block->Update();
-	Ground->SetScale({ 2,2,2 });
+	Ground->SetScale({ 4,4,4 });
 	Ground->SetPosition({ 0,0,0 });
 	Ground->SetRotation({ 0,0,0 });
 	Ground->Quaternion();
