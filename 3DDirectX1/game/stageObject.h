@@ -30,8 +30,8 @@ public:
 private:
 	TouchableObject* slope[2];
 	Model* modelSlope;
-	TouchableObject* Block;
-	Model* modelBlock;
+	TouchableObject* Kotatu;
+	Model* modelKotatu;
 	TouchableObject* Ground;
 	Model* modelGround;
 	TouchableObject* Home;

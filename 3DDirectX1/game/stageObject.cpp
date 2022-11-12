@@ -11,11 +11,11 @@ StageObject::~StageObject()
 void StageObject::Initialize()
 {
 	modelSlope = Model::Create("Cone", false);
-	modelBlock = Model::Create("cube", false);
+	modelKotatu = Model::Create("Kotatu", false);
 	modelGround = Model::Create("ground", false);
 	modelHome = Model::Create("home", false);
-	//Block = TouchableObject::Create(modelBlock);
-	//Block->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	Kotatu = TouchableObject::Create(modelKotatu);
+	Kotatu->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Ground = TouchableObject::Create(modelGround);
 	Ground->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Home = TouchableObject::Create(modelHome);
@@ -48,8 +48,8 @@ void StageObject::Update()
 	//Block->Quaternion();
 	//Block->SetScale({ 5,70,5 });
 	//Block->SetRotation({0,0,0,0});
-	//Block->SetPosition({30,2,20});
-	//Block->Update();
+	Kotatu->SetPosition({0,38,-80});
+	Kotatu->Update();
 	Ground->SetScale({ 4,4,4 });
 	Ground->SetPosition({ 0,0,0 });
 	Ground->SetRotation({ 0,0,0 });
@@ -63,7 +63,7 @@ void StageObject::Draw()
 	/*for (int i = 0; i < 2; i++) {
 		slope[i]->Draw();
 	}*/
-	//Block->Draw();
+	Kotatu->Draw();
 	Ground->Draw();
 	Home->Draw();
 }
