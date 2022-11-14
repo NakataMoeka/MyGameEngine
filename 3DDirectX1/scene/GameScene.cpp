@@ -161,7 +161,7 @@ void GameScene::Init()
 	TitleFlag = false;//タイトルに戻るフラグ
 	PS = 0;
 	audio->SoundPlayWave(sound2);
-	audio->SetBGMVolume(0.5f);
+	audio->SetBGMVolume(0.0f);
 }
 
 void GameScene::Update()
