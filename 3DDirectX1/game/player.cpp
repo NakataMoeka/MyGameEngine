@@ -268,7 +268,7 @@ void Player::Jump()
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
 	
 	for (int i = 0; i < OBJNumber; i++) {
-		if (colFlag[i] == false) {
+		if (colFlag[i] == true) {
 			CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
 			CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
 		}
@@ -376,7 +376,7 @@ void Player::Dash()
 		{
 			dashCoolTime = dashCoolTimeMax;
 		}
-		XMVECTOR movedash = { 0,0,1.5,0 };//前後方向用の移動ベクトル
+		XMVECTOR movedash = { 0,0,1.5,0 };//ダッシュ用の移動ベクトル
 
 		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 		movedash = XMVector3TransformNormal(movedash, matRot);

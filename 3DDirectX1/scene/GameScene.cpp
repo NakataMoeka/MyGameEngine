@@ -208,9 +208,15 @@ void GameScene::Update()
 		}
 		if (gameObject->GetObject(i)->GetParentFlag()==true)
 		{
+			player->SetColFlag(false, i);
+
+		}
+		else if (gameObject->GetObject(i)->GetParentFlag() == false)
+		{
 			player->SetColFlag(true, i);
 		}
 	}
+	DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject(0)->GetParentFlag());
 
 	colMan->SetTsize2(Tsize);
 	//プレイヤーの大きさ
