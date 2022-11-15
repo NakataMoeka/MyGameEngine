@@ -36,11 +36,11 @@ void GameObject::Init()
 		for (size_t i = 0; i < MAP_WIDTH; i++)
 		{
 			num = 0;
-			if (spawnMap[j][i] > 1)
+			if (spawnMap[j][i] >= 1)
 			{
-				//oData.push_back(new object);
-				//num = (int)oData.size() - 1;
-				//oData[num]->pos = { 0 + (float)i * 10,oData[num]->pos.y, 0 + (float)j * (-10) };
+				oData.push_back(new object);
+				num = (int)oData.size() - 1;
+				position[num] = {-180 + (float)i * 10,40, 0 + (float)j * (-10)};
 
 			}
 		}
@@ -49,16 +49,7 @@ void GameObject::Init()
 
 		float radius = 2.0f;
 		//csv‚Å‚â‚é‚Â‚à‚è
-		position[0] = { 10,40,0 };
-		position[1] = { 0,40,10 };
-		position[2] = { -10, 40, 0 };
-		position[3] = { -50,40,-40 };
-		position[4] = { -30, 40, 10 };
-		position[5] = { -10, 40, 60 };
-		position[6] = { 50,40,30 };
-		position[7] = { 0, 40, 50 };
-		position[8] = { -30, 40, 20 };
-		position[9] = { 30, 40, -20 };
+
 		size[0] = { 3,3,3 };
 		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };
