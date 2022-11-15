@@ -45,13 +45,13 @@ void Camera::FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX, float ang
 	rotM *= XMMatrixRotationY(XMConvertToRadians(angleY));
 	rotM *= XMMatrixRotationX(XMConvertToRadians(angleX));
 	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
-	XMVECTOR bossTarget = { position.x,position.y,position.z };
-	XMVECTOR v3 = bossTarget + v;
+	XMVECTOR PTarget = { position.x,position.y,position.z };
+	XMVECTOR v3 = PTarget + v;
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
-	target= { bossTarget.m128_f32[0], bossTarget.m128_f32[1], bossTarget.m128_f32[2] };
-	eye = f;
-	SetEye(eye);
-	SetTarget(target);
+	FTarget = { PTarget.m128_f32[0], PTarget.m128_f32[1],PTarget.m128_f32[2] };
+	FEye = f;
+	SetEye(FEye);
+	SetTarget(FTarget);
 
 }
 

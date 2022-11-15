@@ -125,6 +125,12 @@ void GameObject::Update()
 		//posback[i].y += callback.move.m128_f32[1];
 		//posback[i].z += callback.move.m128_f32[2];
 		//cube[i]->SetPosition(posback[i]);
+		//if (cube[i]->GetParentFlag() == false) {
+		//	cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		//}
+		//else if (cube[i]->GetParentFlag() == true) {
+		//	cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
+		//}
 		cube[i]->Update();
 	}
 

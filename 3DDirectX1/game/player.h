@@ -77,6 +77,7 @@ private://変数
 
 	//ダッシュ関連の変数
 	bool dashFlag = false;
+	bool dashMoveFlag = false;
 	float dashSpeed = 2.0f;
 	int dashCoolTime = 0;
 	const int dashCoolTimeMax = 20;

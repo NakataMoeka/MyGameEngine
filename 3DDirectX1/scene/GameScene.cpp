@@ -44,6 +44,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	// 3Dオブジェクトにカメラをセット
 	Object3d::SetCamera(camera);
+	FbxObject3d::SetCamera(camera);
 	FbxObject3d::SetDev(dxCommon->Getdev());
 	//ライト生成
 	lightGroup = LightGroup::Create();
@@ -62,7 +63,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	//lightGroup->SetSpotLightActive(0, true);
 	lightGroup->SetCircleShadowActive(0, true);
 
-	FbxObject3d::SetCamera(camera);
+
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
@@ -334,9 +335,6 @@ void GameScene::Update()
 		player->RC();
 	}
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
-
-	//camera->SetEye(cameraPos);
-	//camera->SetTarget(player->GetSpherePos());
 	camera->Update();
 
 
