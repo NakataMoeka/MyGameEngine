@@ -3,7 +3,7 @@
 #include"Model.h"
 #include"Collision.h"
 #include<DirectXMath.h>
-#include"CSV.h"
+#include"LoadCSV.h"
 #include<array>
 #include"ObjectHelper.h"
 /// <summary>

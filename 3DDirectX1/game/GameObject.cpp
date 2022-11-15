@@ -29,7 +29,7 @@ void GameObject::Initialize()
 void GameObject::Init()
 {
 
-	//LoadCSV(spawnMap, "Resources/objMap.csv");
+	LoadCSV(spawnMap, "Resources/objMap.csv");
 	int  num = 0;
 	for (size_t j = 0; j < MAP_HEIGHT; j++)
 	{

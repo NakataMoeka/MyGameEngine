@@ -190,7 +190,7 @@
     <ClCompile Include="others\Collision.cpp" />
     <ClCompile Include="others\CollisionManager.cpp" />
     <ClCompile Include="others\CollisionPrimitive.cpp" />
-    <ClCompile Include="others\CSV.cpp" />
+    <ClCompile Include="others\LoadCSV.cpp" />
     <ClCompile Include="others\Ease.cpp" />
     <ClCompile Include="others\MeshCollider.cpp" />
     <ClCompile Include="others\SphereCollider.cpp" />
@@ -371,7 +371,7 @@
     <ClInclude Include="others\CollisionManager.h" />
     <ClInclude Include="others\CollisionPrimitive.h" />
     <ClInclude Include="others\CollisionType.h" />
-    <ClInclude Include="others\CSV.h" />
+    <ClInclude Include="others\LoadCSV.h" />
     <ClInclude Include="others\Ease.h" />
     <ClInclude Include="others\MeshCollider.h" />
     <ClInclude Include="others\QueryCallback.h" />
