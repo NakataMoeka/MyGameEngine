@@ -28,9 +28,8 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
-	char* Filepath = (char*)"";
-	Filepath = (char*)"Resources/objMap.csv";
-	LoadCSV(spawnMap, Filepath);
+
+	//LoadCSV(spawnMap, "Resources/objMap.csv");
 	int  num = 0;
 	for (size_t j = 0; j < MAP_HEIGHT; j++)
 	{
@@ -163,9 +162,9 @@ void GameObject::Draw()
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->Draw();
 	}
-	//for (size_t i = 0; i < oData.size(); i++) {
-	//	cube[i]->Draw();
-	//}
+	for (size_t i = 0; i < oData.size(); i++) {
+		cube[i]->Draw();
+	}
 }
 
 
