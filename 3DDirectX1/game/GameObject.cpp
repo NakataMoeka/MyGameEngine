@@ -30,7 +30,7 @@ void GameObject::Init()
 {
 	char* Filepath = (char*)"";
 	Filepath = (char*)"Resources/objMap.csv";
-	//LoadCSV(spawnMap, Filepath);
+	LoadCSV(spawnMap, Filepath);
 	int  num = 0;
 	for (size_t j = 0; j < MAP_HEIGHT; j++)
 	{
