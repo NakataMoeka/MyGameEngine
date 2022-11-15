@@ -4,6 +4,7 @@
 #include"Collision.h"
 #include<DirectXMath.h>
 #include"CSV.h"
+#include<array>
 /// <summary>
 /// ステージに配置されているオブジェクトのクラス
 /// </summary>
@@ -40,12 +41,14 @@ private://Update()にまとめるもの
 private://変数
 	//int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
 	static const int OBJNumber = 10;
+	static const int OBJMax = 10;
 	static const int OBJType = 2;
-	Object3d* cube[OBJNumber]={};
+	std::array < Object3d*,OBJNumber> cube = {};
+	std::array < Object3d*, OBJNumber> moveObj = {};
 	Model* modelCube = nullptr;
-
-	Sphere cSphere[OBJNumber];//当たり判定のやつ
-	Sphere cSphere2[OBJNumber];//当たり判定のやつ
+	Model* modelMove = nullptr;
+	std::array < Sphere, OBJNumber> cSphere;//当たり判定のやつ
+	std::array < Sphere, OBJNumber> cSphere2;//当たり判定のやつ
 	float r = 3;//
 	//サイズ角度位置
 	XMFLOAT3 pos{ 10,2,0 };

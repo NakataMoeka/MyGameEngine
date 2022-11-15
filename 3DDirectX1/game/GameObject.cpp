@@ -17,7 +17,7 @@ GameObject::~GameObject()
 
 void GameObject::Initialize()
 {
-	for (int i = 0; i < OBJNumber; i++) {
+	for (int i = 0; i < OBJMax; i++) {
 		cube[i] = nullptr;
 		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
@@ -29,7 +29,7 @@ void GameObject::Initialize()
 void GameObject::Init()
 {
 
-	for (int i = 0; i < OBJNumber; i++) {
+	for (int i = 0; i < OBJMax; i++) {
 
 		float radius = 2.0f;
 		//csv‚Å‚â‚é‚Â‚à‚è
@@ -102,7 +102,7 @@ void GameObject::Update()
 	};
 
 	//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
-	for (int i = 0; i < OBJNumber; i++) {
+	for (int i = 0; i < OBJMax; i++) {
 	
 		cSphere[i].radius = r;
 		cSphere[6].radius = 4;
@@ -118,7 +118,7 @@ void GameObject::Update()
 		//// ‹…‚Æ’nŒ`‚ÌŒğ·‚ğ‘SŒŸõ
 
 		//CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-		//XMFLOAT3 posback[OBJNumber];
+		//XMFLOAT3 posback[OBJMax];
 		//posback[i] = {cube[i]->GetMatWorld().r[3].m128_f32[0] ,cube[i]->GetMatWorld().r[3].m128_f32[1] ,cube[i]->GetMatWorld().r[3].m128_f32[2]};
 		//// Œğ·‚É‚æ‚é”rË•ª“®‚©‚·
 		//posback[i].x += callback.move.m128_f32[0];
@@ -138,14 +138,14 @@ void GameObject::Update()
 
 void GameObject::RC()
 {
-	for (int i = 0; i < OBJNumber; i++) {
+	for (int i = 0; i < OBJMax; i++) {
 		cube[i]->RemoveCollider();
 	}
 }
 
 void GameObject::Draw()
 {
-	for (int i = 0; i < OBJNumber; i++) {
+	for (int i = 0; i < OBJMax; i++) {
 		cube[i]->Draw();
 	}
 

@@ -264,6 +264,7 @@ void Player::Jump()
 	PlayerQueryCallback callback2(sphereCollider2);
 	// ‹…‚Æ’nŒ`‚ÌŒð·‚ð‘SŒŸõ
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
+	
 	for (int i = 0; i < OBJNumber; i++) {
 		if (colFlag[i] == false) {
 			CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);

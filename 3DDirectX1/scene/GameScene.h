@@ -107,7 +107,7 @@ private: // メンバ変数
 	const int debugTextTexNumber = 0;
 
 
-	static const int OBJNumber = 10;//OBJの最大数を記載
+	static const int OBJNumber = 100;//OBJの最大数を記載
 	
 	int HitCount=0;
 

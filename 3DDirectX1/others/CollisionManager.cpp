@@ -104,13 +104,13 @@ void CollisionManager::ColSphere()
 							colB->GetObject3d()->transformParent();
 							HitCount = 0;
 							IsHit = false;
-							Tsize++;//これをゲームシーン内で加算する方法求
+							Tsize++;
 						}
 				}
 
 				}
 			}
-
+			DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", PFlag);
 		}
 	}
 	Tsize3 = Tsize + Tsize2;

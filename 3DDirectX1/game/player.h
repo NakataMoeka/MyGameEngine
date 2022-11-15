@@ -5,6 +5,7 @@
 #include"Sprite.h"
 #include"SafeDelete.h"
 #include "FbxObject.h"
+#include<array>
 /// <summary>
 /// プレイヤー関連のクラス
 /// </summary>
@@ -94,9 +95,9 @@ private://変数
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV2={};
 	
-	static const int OBJNumber = 500;
+	static const int OBJNumber = 100;
 	
-	bool colFlag[OBJNumber]={};
+	std::array < bool, OBJNumber> colFlag = {};
 
 	float PlayerWalkCount=0;
 	float CountWalk = 0;
