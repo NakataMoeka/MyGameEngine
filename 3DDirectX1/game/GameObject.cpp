@@ -17,7 +17,7 @@ GameObject::~GameObject()
 
 void GameObject::Initialize()
 {
-	for (int i = 0; i < OBJMax; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 		cube[i] = nullptr;
 		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
@@ -29,7 +29,7 @@ void GameObject::Initialize()
 void GameObject::Init()
 {
 
-	for (int i = 0; i < OBJMax; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 
 		float radius = 2.0f;
 		//csvでやるつもり
@@ -75,34 +75,34 @@ void GameObject::Init()
 void GameObject::Update()
 {
 	// クエリーコールバッククラス
-	class PlayerQueryCallback : public QueryCallback
-	{
-	public:
-		PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
-		// 衝突時コールバック関数
-		bool OnQueryHit(const QueryHit& info) {
+	//class PlayerQueryCallback : public QueryCallback
+	//{
+	//public:
+	//	PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
+	//	// 衝突時コールバック関数
+	//	bool OnQueryHit(const QueryHit& info) {
 
-			const XMVECTOR up = { 0,1,0,0 };
+	//		const XMVECTOR up = { 0,1,0,0 };
 
-			XMVECTOR rejectDir = XMVector3Normalize(info.reject);
-			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
+	//		XMVECTOR rejectDir = XMVector3Normalize(info.reject);
+	//		float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
 
-			// 地面判定しきい値
-			const float threshold = cosf(XMConvertToRadians(30.0f));
+	//		// 地面判定しきい値
+	//		const float threshold = cosf(XMConvertToRadians(30.0f));
 
-			if (-threshold < cos && cos < threshold) {
-				sphere->center += info.reject;
-				move += info.reject;
-			}
-			return true;
-		}
+	//		if (-threshold < cos && cos < threshold) {
+	//			sphere->center += info.reject;
+	//			move += info.reject;
+	//		}
+	//		return true;
+	//	}
 
-		Sphere* sphere = nullptr;
-		DirectX::XMVECTOR move = { 0,0,0,0 };
-	};
+	//	Sphere* sphere = nullptr;
+	//	DirectX::XMVECTOR move = { 0,0,0,0 };
+	//};
 
 	//ここでSetすると離れてくっつくからしないように!!
-	for (int i = 0; i < OBJMax; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 	
 		cSphere[i].radius = r;
 		cSphere[6].radius = 4;
@@ -118,7 +118,7 @@ void GameObject::Update()
 		//// 球と地形の交差を全検索
 
 		//CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-		//XMFLOAT3 posback[OBJMax];
+		//XMFLOAT3 posback[OBJNumber];
 		//posback[i] = {cube[i]->GetMatWorld().r[3].m128_f32[0] ,cube[i]->GetMatWorld().r[3].m128_f32[1] ,cube[i]->GetMatWorld().r[3].m128_f32[2]};
 		//// 交差による排斥分動かす
 		//posback[i].x += callback.move.m128_f32[0];
@@ -138,14 +138,14 @@ void GameObject::Update()
 
 void GameObject::RC()
 {
-	for (int i = 0; i < OBJMax; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->RemoveCollider();
 	}
 }
 
 void GameObject::Draw()
 {
-	for (int i = 0; i < OBJMax; i++) {
+	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->Draw();
 	}
 

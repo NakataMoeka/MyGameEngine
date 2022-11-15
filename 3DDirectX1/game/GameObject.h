@@ -5,6 +5,7 @@
 #include<DirectXMath.h>
 #include"CSV.h"
 #include<array>
+#include"ObjectHelper.h"
 /// <summary>
 /// ステージに配置されているオブジェクトのクラス
 /// </summary>
@@ -39,9 +40,11 @@ public:
 private://Update()にまとめるもの
 	void move();//移動
 private://変数
+	//敵配列
+	std::vector<object*>oData;
 	//int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
 	static const int OBJNumber = 10;
-	static const int OBJMax = 10;
+	static const int OBJMax = 100;
 	static const int OBJType = 2;
 	std::array < Object3d*,OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};

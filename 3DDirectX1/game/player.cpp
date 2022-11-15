@@ -132,35 +132,37 @@ void Player::Move()
 			sphereAngle.m128_f32[2] -= 10;
 		}
 	}
-	if (Input::GetInstance()->PushKey(DIK_W) ||
-		Input::GetInstance()->PushKey(DIK_S) ||
-		Input::GetInstance()->PushKey(DIK_A) ||
-		Input::GetInstance()->PushKey(DIK_D))
-	{
+		if (Input::GetInstance()->PushKey(DIK_W) ||
+			Input::GetInstance()->PushKey(DIK_S) ||
+			Input::GetInstance()->PushKey(DIK_A) ||
+			Input::GetInstance()->PushKey(DIK_D))
+		{
 
-		if (CountWalk < 5) {
-			CountWalk++;
-		}
-		if (CountWalk == 5) {
-			if (PlayerWalkCount < 6) {
-				PlayerWalkCount++;
+			if (CountWalk < 5) {
+				CountWalk++;
 			}
-			if (PlayerWalkCount == 6) {
-				PlayerWalkCount = 0;
+			if (CountWalk == 5) {
+				if (PlayerWalkCount < 6) {
+					PlayerWalkCount++;
+				}
+				if (PlayerWalkCount == 6) {
+					PlayerWalkCount = 0;
+				}
+				CountWalk = 0;
 			}
-			CountWalk = 0;
-		}
-		if (JumpFlag == false) {
-			playerObj->PlayAnimation(1);
-		}
+			
+			if (JumpFlag == false) {
+				playerObj->PlayAnimation(1);
+			}
 
-	}
-	else {
-		playerObj->Stop();
-	}
-	if (JumpFlag == true) {
-		playerObj->PlayAnimation(0);
-	}
+		}
+		else {
+			playerObj->Stop();
+		}
+	
+	//if (JumpFlag == true) {
+	//	playerObj->PlayAnimation(0);
+	//}
 
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);

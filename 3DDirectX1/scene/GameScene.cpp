@@ -189,7 +189,7 @@ void GameScene::Update()
 					cData[i]->IsHit = true;
 					HitCount++;
 					cData[i]->Alive = false;
-					player->SetColFlag(true, i);
+					//player->SetColFlag(true, i);
 					gameObject->GetObject(i)->SetParentFlag(true);
 				//}
 				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
