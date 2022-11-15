@@ -42,7 +42,7 @@ private://Update()にまとめるもの
 private://変数
 	//敵配列
 	std::vector<object*>oData;
-	//int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
+	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
 	static const int OBJNumber = 10;
 	static const int OBJMax = 100;
 	static const int OBJType = 2;

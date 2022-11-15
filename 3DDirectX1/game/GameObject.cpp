@@ -28,7 +28,24 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
+	char* Filepath = (char*)"";
+	Filepath = (char*)"Resources/objMap.csv";
+	//LoadCSV(spawnMap, Filepath);
+	int  num = 0;
+	for (size_t j = 0; j < MAP_HEIGHT; j++)
+	{
+		for (size_t i = 0; i < MAP_WIDTH; i++)
+		{
+			num = 0;
+			if (spawnMap[j][i] > 1)
+			{
+				//oData.push_back(new object);
+				//num = (int)oData.size() - 1;
+				//oData[num]->pos = { 0 + (float)i * 10,oData[num]->pos.y, 0 + (float)j * (-10) };
 
+			}
+		}
+	}
 	for (int i = 0; i < OBJNumber; i++) {
 
 		float radius = 2.0f;
@@ -67,8 +84,6 @@ void GameObject::Init()
 		cube[i]->SetParentFlag(false);
 	}
 	//èdÇ≠Ç»ÇÈ
-
-
 
 }
 
@@ -148,7 +163,9 @@ void GameObject::Draw()
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->Draw();
 	}
-
+	//for (size_t i = 0; i < oData.size(); i++) {
+	//	cube[i]->Draw();
+	//}
 }
 
 
