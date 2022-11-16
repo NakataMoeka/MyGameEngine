@@ -29,8 +29,8 @@ public:
 	void RC();//コライダー消すやつ
 	void Draw();
 	//GetterSetter
-	Sphere GetCSphere(int i) { return cSphere[i]; }
-	Sphere GetCSphere2(int i) { return cSphere2[i]; }
+	Sphere GetCSphere(int i, int j);
+
 	XMFLOAT3 GetPos(int i) { return position[i]; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize(int i) { return size[i]; }

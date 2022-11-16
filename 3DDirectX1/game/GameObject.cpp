@@ -158,6 +158,17 @@ void GameObject::Draw()
 	}
 }
 
+Sphere GameObject::GetCSphere(int i, int j)
+{
+	if (j == 0) {
+		return cSphere[i];
+	}
+	else {
+		return cSphere2[i];
+	};
+	//return;
+}
+
 
 float GameObject::GetMat()
 {
