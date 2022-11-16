@@ -140,13 +140,18 @@ void GameScene::Init()
 	gameObject->Init();
 	stageObj->Init();
 	distance = 10.0f;
-	for (int j = 0; j < 2; j++) {
-		for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
+	for (int i = (int)cData.size() - 1; i >= 0; i--)
+	{
+		delete cData[i];
+		cData.erase(cData.begin() + i);
+	}
+	//for (int j = 0; j < 2; j++) {
+		for (int i = 0; i <OBJNumber; i++) {
 			cData.push_back(new CollisionVariable);
 			cData[i]->Alive = true;
 			cData[i]->IsHit = false;
 		}
-	}
+	//}
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
 	clearFlag = false;

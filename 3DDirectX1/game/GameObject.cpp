@@ -172,11 +172,11 @@ void GameObject::RC()
 		delete oData[i];
 		oData.erase(oData.begin() + i);
 	}
-	for (int i = (int)oData2.size() - 1; i >= 0; i--)
-	{
-		delete oData2[i];
-		oData2.erase(oData2.begin() + i);
-	}
+	//for (int i = (int)oData2.size() - 1; i >= 0; i--)
+	//{
+	//	delete oData2[i];
+	//	oData2.erase(oData2.begin() + i);
+	//}
 }
 
 void GameObject::Draw()
