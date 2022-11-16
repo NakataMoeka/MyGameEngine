@@ -94,7 +94,6 @@ void CollisionManager::ColSphere()
 										PFlag = true;
 										colB->GetObject3d()->SetParentFlag(true);
 										audioFlag = true;
-							DebugText::GetInstance()->Printf(100, 40, 3.0f, "Hit");
 						}
 						if (IsHit == true) {
 							colB->GetObject3d()->SetParent(colA->GetObject3d());
@@ -109,7 +108,6 @@ void CollisionManager::ColSphere()
 
 				}
 			}
-			DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", PFlag);
 		}
 	}
 	Tsize3 = Tsize + Tsize2;
