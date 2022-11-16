@@ -5,11 +5,11 @@
 class DebugText
 {
 public: // 定数の宣言    
-	static const int maxCharCount = 256;    // 最大文字数
+	static const int maxCharCount = 512;    // 最大文字数
 	static const int fontWidth = 9;         // フォント画像内1文字分の横幅
 	static const int fontHeight = 18;       // フォント画像内1文字分の縦幅
 	static const int fontLineCount = 14;    // フォント画像内1行分の文字数
-	static const int bufferSize = 256;	// 書式付き文字列展開用バッファサイズ
+	static const int bufferSize = 512;	// 書式付き文字列展開用バッファサイズ
 
 public: // メンバ関数
 
