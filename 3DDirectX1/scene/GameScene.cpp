@@ -140,7 +140,7 @@ void GameScene::Init()
 	gameObject->Init();
 	stageObj->Init();
 	distance = 10.0f;
-	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
+	for (int i = 0; i < gameObject->GetOBJCount(); i++) {
 		cData.push_back(new CollisionVariable);
 		cData[i]->Alive = true;
 		cData[i]->IsHit = false;
@@ -179,44 +179,46 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 
 	//当たり判定
-	for (int i = 0; i < gameObject->GetOBJNumber(); i++) {
-		cData[i]->IsHit = false;
+	for (int i = 0; i < gameObject->GetOBJCount(); i++) {
+		for (int j = 0; j < 2; i++) {
+			cData[i]->IsHit = false;
 
-		if (cData[i]->Alive == true) {
-			if (gameObject->GetObject(i)->GetParentFlag() == false) {
-				if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i,0))) {
-					//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
-					cData[i]->IsHit = true;
-					HitCount++;
-					cData[i]->Alive = false;
-					//player->SetColFlag(true, i);
-					gameObject->GetObject(i)->SetParentFlag(true);
-				//}
-				DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+			if (cData[i]->Alive == true) {
+				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
+					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
+						//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
+						cData[i]->IsHit = true;
+						HitCount++;
+						cData[i]->Alive = false;
+						//player->SetColFlag(true, i);
+						gameObject->GetObject3d(i, j)->SetParentFlag(true);
+						//}
+						DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+					}
+				}
+				if (cData[i]->IsHit == true) {
+					gameObject->GetObject3d(i, j)->SetParent(player->GetObject());
+				}
+				if (HitCount == 1) {
+					gameObject->GetObject3d(i, j)->transformParent();
+					audio->SEPlayWave(sound1);
+					HitCount = 0;
+					cData[i]->IsHit = false;
+					Tsize++;
 				}
 			}
-			if (cData[i]->IsHit == true) {
-				gameObject->GetObject(i)->SetParent(player->GetObject());
-			}
-			if (HitCount == 1) {
-				gameObject->GetObject(i)->transformParent();
-				audio->SEPlayWave(sound1);
-				HitCount = 0;
-				cData[i]->IsHit = false;
-				Tsize++;
-			}
-		}
-		if (gameObject->GetObject(i)->GetParentFlag()==true)
-		{
-			player->SetColFlag(false, i);
+			if (gameObject->GetObject3d(i, j)->GetParentFlag() == true)
+			{
+				player->SetColFlag(false, i);
 
-		}
-		else if (gameObject->GetObject(i)->GetParentFlag() == false)
-		{
-			player->SetColFlag(true, i);
+			}
+			else if (gameObject->GetObject3d(i, j)->GetParentFlag() == false)
+			{
+				player->SetColFlag(true, i);
+			}
 		}
 	}
-	DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject(0)->GetParentFlag());
+	//DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject3d(0,0)->GetParentFlag());
 
 	colMan->SetTsize2(Tsize);
 	//プレイヤーの大きさ

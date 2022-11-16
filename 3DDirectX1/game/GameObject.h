@@ -20,7 +20,12 @@ private:
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
 	using XMVECTOR = DirectX::XMVECTOR;
+
+	//オブジェクト配列
+	std::vector<object*>oData;
+	std::vector<object*>oData2;
 public:
+
 	GameObject();
 	~GameObject();
 	void Initialize();
@@ -34,19 +39,18 @@ public:
 	XMFLOAT3 GetPos(int i) { return position[i]; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize(int i) { return size[i]; }
-	int GetOBJNumber() { return OBJNumber; }
+	int GetOBJCount();
 	float GetMat();
-	Object3d* GetObject(int i) { return cube[i]; }
+	Object3d* GetObject3d(int i, int j);
 private://Update()にまとめるもの
 	void move();//移動
 private://変数
-	//敵配列
-	std::vector<object*>oData;
+
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
 	static const int OBJNumber = 10;
 	static const int OBJMax = 100;
 	static const int OBJType = 2;
-	std::array < Object3d*,OBJNumber> cube = {};
+	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
 	Model* modelCube = nullptr;
 	Model* modelMove = nullptr;
@@ -56,6 +60,7 @@ private://変数
 	//サイズ角度位置
 	XMFLOAT3 pos{ 10,2,0 };
 	XMFLOAT3 position[OBJNumber] = {};
+	XMFLOAT3 position2[OBJNumber] = {};
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };
 	XMVECTOR rota = { 0,0,0,0 };
 };
