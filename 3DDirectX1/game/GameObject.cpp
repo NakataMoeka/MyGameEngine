@@ -31,7 +31,7 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
-	LoadCSV(spawnMap, "Resources/objMap2.csv");
+	LoadCSV(spawnMap, "Resources/objMap.csv");
 	int  num = 0;
 	for (size_t j = 0; j < MAP_HEIGHT; j++)
 	{
@@ -194,7 +194,7 @@ float GameObject::GetMat()
 int GameObject::GetOBJCount(int j)
 {
 	if (j == 0) {
-		return 10;
+		return (int)oData.size();
 	}
 	else {
 		return 4;
