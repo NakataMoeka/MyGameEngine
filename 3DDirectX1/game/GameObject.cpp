@@ -30,16 +30,7 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
-	for (int i = (int)oData.size() - 1; i >= 0; i--)
-	{
-		delete oData[i];
-		oData.erase(oData.begin() + i);
-	}
-	for (int i = (int)oData2.size() - 1; i >= 0; i--)
-	{
-		delete oData2[i];
-		oData2.erase(oData2.begin() + i);
-	}
+	
 
 	LoadCSV(spawnMap, "Resources/objMap2.csv");
 	int  num = 0;
@@ -175,6 +166,16 @@ void GameObject::RC()
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->RemoveCollider();
 		moveObj[i]->RemoveCollider();
+	}
+	for (int i = (int)oData.size() - 1; i >= 0; i--)
+	{
+		delete oData[i];
+		oData.erase(oData.begin() + i);
+	}
+	for (int i = (int)oData2.size() - 1; i >= 0; i--)
+	{
+		delete oData2[i];
+		oData2.erase(oData2.begin() + i);
 	}
 }
 
