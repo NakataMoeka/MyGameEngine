@@ -267,12 +267,12 @@ void Player::Jump()
 	// ãÖÇ∆ínå`ÇÃåç∑ÇëSåüçı
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
 	
-	for (int i = 0; i < OBJNumber; i++) {
-		if (colFlag[i] == true) {
-			CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-			CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
-		}
-	}
+	//for (int i = 0; i < OBJNumber; i++) {
+	//	if (colFlag[i] == true) {
+	//		CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+	//		CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+	//	}
+	//}
 
 	// åç∑Ç…ÇÊÇÈîrêÀï™ìÆÇ©Ç∑
 	playerPos.x += callback2.move.m128_f32[0];

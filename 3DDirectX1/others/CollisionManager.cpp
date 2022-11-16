@@ -72,7 +72,6 @@ void CollisionManager::ColSphere()
 	std::forward_list<BaseCollider*>::iterator itB;
 
 	// 全ての組み合わせについて総当りチェック
-	//例外スローが起こる理由
 	itA = colliders.begin();
 	for (; itA != colliders.end(); ++itA) {
 		itB = itA;
