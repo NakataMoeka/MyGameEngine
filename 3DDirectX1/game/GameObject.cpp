@@ -197,7 +197,7 @@ int GameObject::GetOBJCount(int j)
 		return (int)oData.size();
 	}
 	else {
-		return 4;
+		return (int)oData2.size();
 	};
 }
 Sphere GameObject::GetCSphere(int i, int j)

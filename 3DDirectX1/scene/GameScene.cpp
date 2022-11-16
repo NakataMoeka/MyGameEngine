@@ -229,6 +229,7 @@ void GameScene::Update()
 	//DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject3d(0,0)->GetParentFlag());
 
 	colMan->SetTsize2(Tsize);
+
 	//プレイヤーの大きさ
 
 	Tsize2 = (int)colMan->GetTsize();
