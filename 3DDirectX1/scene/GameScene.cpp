@@ -192,35 +192,35 @@ void GameScene::Update()
 			cData[i]->IsHit = false;
 
 			if (cData[i]->Alive == true) {
-				if (gameObject->GetObject3d(i, 0)->GetParentFlag() == false) {
-					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, 0))) {
+				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
+					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
 						//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
 						cData[i]->IsHit = true;
 						HitCount++;
 						cData[i]->Alive = false;
 						//player->SetColFlag(true, i);
-						gameObject->GetObject3d(i, 0)->SetParentFlag(true);
+						gameObject->GetObject3d(i, j)->SetParentFlag(true);
 						//}
 						DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 					}
 				}
 				if (cData[i]->IsHit == true) {
-					gameObject->GetObject3d(i, 0)->SetParent(player->GetObject());
+					gameObject->GetObject3d(i, j)->SetParent(player->GetObject());
 				}
 				if (HitCount == 1) {
-					gameObject->GetObject3d(i, 0)->transformParent();
+					gameObject->GetObject3d(i, j)->transformParent();
 					audio->SEPlayWave(sound1);
 					HitCount = 0;
 					cData[i]->IsHit = false;
 					Tsize++;
 				}
 			}
-			if (gameObject->GetObject3d(i, 0)->GetParentFlag() == true)
+			if (gameObject->GetObject3d(i, j)->GetParentFlag() == true)
 			{
 				player->SetColFlag(false, i);
 
 			}
-			else if (gameObject->GetObject3d(i, 0)->GetParentFlag() == false)
+			else if (gameObject->GetObject3d(i, j)->GetParentFlag() == false)
 			{
 				player->SetColFlag(true, i);
 			}

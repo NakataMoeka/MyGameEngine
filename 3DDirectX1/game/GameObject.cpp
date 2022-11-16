@@ -71,11 +71,7 @@ void GameObject::Init()
 
 		//Ç±Ç±Ç…èëÇ©Ç»Ç¢Ç∆ÉoÉOÇÈ
 		cSphere[i].radius = r;
-		cSphere[6].radius = 4;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		cSphere2[i].radius = r;
-		cSphere2[6].radius = 4;
-		cSphere2[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
 
 		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
@@ -86,6 +82,11 @@ void GameObject::Init()
 		moveObj[i]->SetPosition(oData2[i]->pos);
 		moveObj[i]->SetScale(size[0]);
 		moveObj[i]->Update();
+		cSphere2[i].radius = r;
+		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
+		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
+		moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		moveObj[i]->SetParentFlag(false);
 	}
 	//èdÇ≠Ç»ÇÈ
 
@@ -126,11 +127,9 @@ void GameObject::Update()
 	for (int i = 0; i < OBJNumber; i++) {
 
 		cSphere[i].radius = r;
-		cSphere[6].radius = 4;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		cSphere2[i].radius = r;
-		cSphere2[6].radius = 4;
-		cSphere2[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		//SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(cube[i]->GetCollider());
 		//assert(sphereCollider);
 
@@ -162,6 +161,7 @@ void GameObject::RC()
 {
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->RemoveCollider();
+		moveObj[i]->RemoveCollider();
 	}
 	for (int i = (int)oData.size() - 1; i >= 0; i--)
 	{
