@@ -39,7 +39,7 @@ public:
 	XMFLOAT3 GetPos(int i) { return position[i]; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize(int i) { return size[i]; }
-	int GetOBJCount();
+	int GetOBJCount(int j);
 	float GetMat();
 	Object3d* GetObject3d(int i, int j);
 private://Update()にまとめるもの
@@ -56,6 +56,7 @@ private://変数
 	Model* modelMove = nullptr;
 	std::array < Sphere, OBJNumber> cSphere;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere2;//当たり判定のやつ
+
 	float r = 3;//
 	//サイズ角度位置
 	XMFLOAT3 pos{ 10,2,0 };
