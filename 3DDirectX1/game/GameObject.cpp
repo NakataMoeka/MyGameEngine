@@ -78,8 +78,8 @@ void GameObject::Init()
 		moveObj[i]->SetPosition(oData2[i]->pos);
 		moveObj[i]->Update();
 		
-		cSphere2[i].radius = r;
-		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
+	/*	cSphere2[i].radius = r;
+		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);*/
 
 		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
 		moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
