@@ -21,15 +21,25 @@ void GameObject::Initialize()
 		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		modelMove = Model::Create("car", false);
+/*		modelMove = Model::Create("car", false);
 		moveObj[i] = Object3d::Create(modelMove);
 		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	}
+	*/}
 
 }
 
 void GameObject::Init()
 {
+	for (int i = (int)oData.size() - 1; i >= 0; i--)
+	{
+		delete oData[i];
+		oData.erase(oData.begin() + i);
+	}
+	//for (int i = (int)oData2.size() - 1; i >= 0; i--)
+	//{
+	//	delete oData2[i];
+	//	oData2.erase(oData2.begin() + i);
+	//}
 
 	LoadCSV(spawnMap, "Resources/objMap2.csv");
 	int  num = 0;
@@ -48,9 +58,9 @@ void GameObject::Init()
 			}
 			if (spawnMap[j][i] == 2)
 			{
-				oData2.push_back(new object);
+	/*			oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
-				oData2[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
+				oData2[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };*/
 
 			}
 		}
@@ -75,15 +85,15 @@ void GameObject::Init()
 		cube[i]->SetParentFlag(false);
 	}
 	for (int i = 0; i < oData2.size(); i++) {
-		moveObj[i]->SetPosition(oData2[i]->pos);
-		moveObj[i]->Update();
-		
-	/*	cSphere2[i].radius = r;
-		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);*/
+		//moveObj[i]->SetPosition(oData2[i]->pos);
+		//moveObj[i]->Update();
+		//
+		//cSphere2[i].radius = r;
+		//cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
-		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
-		moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-		moveObj[i]->SetParentFlag(false);
+		//moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
+		//moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		//moveObj[i]->SetParentFlag(false);
 	}
 	//èdÇ≠Ç»ÇÈ
 
@@ -153,16 +163,16 @@ void GameObject::Update()
 	for (int i = 0; i < oData.size(); i++) {
 		cube[i]->Update();
 	}
-	for (int i = 0; i < oData2.size(); i++) {
+	/*for (int i = 0; i < oData2.size(); i++) {
 		moveObj[i]->Update();
-	}
+	}*/
 }
 
 void GameObject::RC()
 {
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->RemoveCollider();
-		cube[i]->RemoveCollider();
+		//moveObj[i]->RemoveCollider();
 	}
 }
 
@@ -171,9 +181,9 @@ void GameObject::Draw()
 	for (int i = 0; i < oData.size(); i++) {
 		cube[i]->Draw();
 	}
-	for (int i = 0; i < oData2.size(); i++) {
-		moveObj[i]->Draw();
-	}
+	//for (int i = 0; i < oData2.size(); i++) {
+	//	moveObj[i]->Draw();
+	//}
 }
 
 Sphere GameObject::GetCSphere(int i, int j)
@@ -196,7 +206,7 @@ Sphere GameObject::GetCSphere(int i, int j)
 int GameObject::GetOBJCount()
 {
 	int num = 0;
-	num = (int)oData.size() + (int)oData2.size();
+	num = (int)oData.size();
 	return num;
 }
 
