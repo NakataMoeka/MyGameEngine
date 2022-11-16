@@ -18,10 +18,13 @@ GameObject::~GameObject()
 void GameObject::Initialize()
 {
 	for (int i = 0; i < OBJNumber; i++) {
-		cube[i] = nullptr;
 		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		modelMove = Model::Create("car", false);
+		moveObj[i] = Object3d::Create(modelMove);
+		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+
 	}
 
 }
@@ -55,30 +58,17 @@ void GameObject::Init()
 		}
 	}
 
-	for (int i = 0; i < OBJNumber; i++) {
+	for (int i = 0; i < oData.size(); i++) {
 
 		float radius = 2.0f;
-		//csv‚Å‚â‚é‚Â‚à‚è
-		//position[0] = { 10,40,0 };
-		//position[1] = { 0,40,10 };
-		//position[2] = { -10, 40, 0 };
-		//position[3] = { -50,40,-40 };
-		//position[4] = { -30, 40, 10 };
-		//position[5] = { -10, 40, 60 };
-		//position[6] = { 50,40,30 };
-		//position[7] = { 0, 40, 50 };
-		//position[8] = { -30, 40, 20 };
-		//position[9] = { 30, 40, -20 };
 		size[0] = { 3,3,3 };
 		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };
 
 		cube[i]->SetPosition(oData[i]->pos);
 		cube[i]->SetScale(size[0]);
-		cube[6]->SetScale(size[1]);
-		cube[i]->Quaternion();
-		cube[i]->SetRotation(rota);
 		cube[i]->Update();
+
 		//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
 		cSphere[i].radius = r;
 		cSphere[6].radius = 4;
@@ -91,6 +81,11 @@ void GameObject::Init()
 		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		cube[i]->SetParentFlag(false);
+	}
+	for (int i = 0; i < oData2.size(); i++) {
+		moveObj[i]->SetPosition(oData2[i]->pos);
+		moveObj[i]->SetScale(size[0]);
+		moveObj[i]->Update();
 	}
 	//d‚­‚È‚é
 
@@ -158,6 +153,7 @@ void GameObject::Update()
 		//	cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 		//}
 		cube[i]->Update();
+		moveObj[i]->Update();
 	}
 
 }
@@ -167,12 +163,25 @@ void GameObject::RC()
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->RemoveCollider();
 	}
+	for (int i = (int)oData.size() - 1; i >= 0; i--)
+	{
+		delete oData[i];
+		oData.erase(oData.begin() + i);
+	}
+	for (int i = (int)oData2.size() - 1; i >= 0; i--)
+	{
+		delete oData2[i];
+		oData2.erase(oData2.begin() + i);
+	}
 }
 
 void GameObject::Draw()
 {
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i]->Draw();
+	}
+	for (int i = 0; i < OBJNumber; i++) {
+		moveObj[i]->Draw();
 	}
 
 }
