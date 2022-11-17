@@ -82,94 +82,70 @@ void GameObject::Init()
 		moveObj[i]->SetPosition(oData2[i]->pos);
 		moveObj[i]->SetScale(size[0]);
 		moveObj[i]->Update();
-		cSphere2[i].radius = r;
+		position2[i] = moveObj[i]->GetPosition();
+		cSphere2[i].radius = 4;
 		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
+		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 4));
 		moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		moveObj[i]->SetParentFlag(false);
 	}
 	//重くなる
 
-
+	moveFlag = false;
 
 }
 
 void GameObject::Update()
 {
-	// クエリーコールバッククラス
-	class PlayerQueryCallback : public QueryCallback
-	{
-	public:
-		PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
-		// 衝突時コールバック関数
-		bool OnQueryHit(const QueryHit& info) {
-
-			const XMVECTOR up = { 0,1,0,0 };
-
-			XMVECTOR rejectDir = XMVector3Normalize(info.reject);
-			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
-
-			// 地面判定しきい値
-			const float threshold = cosf(XMConvertToRadians(30.0f));
-
-			if (-threshold < cos && cos < threshold) {
-				sphere->center += info.reject;
-				move += info.reject;
-			}
-			return true;
-		}
-
-		Sphere* sphere = nullptr;
-		DirectX::XMVECTOR move = { 0,0,0,0 };
-	};
-
-	//ここでSetすると離れてくっつくからしないように!!
+   //ここでSetすると離れてくっつくからしないように!!
 	for (int i = 0; i < OBJNumber; i++) {
 
 		cSphere[i].radius = r;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		cSphere2[i].radius = r;
-		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		//SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(cube[i]->GetCollider());
-		//assert(sphereCollider);
-
-
-		//PlayerQueryCallback callback(sphereCollider);
-		//// 球と地形の交差を全検索
-
-		//CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-		//XMFLOAT3 posback[OBJNumber];
-		//posback[i] = {cube[i]->GetMatWorld().r[3].m128_f32[0] ,cube[i]->GetMatWorld().r[3].m128_f32[1] ,cube[i]->GetMatWorld().r[3].m128_f32[2]};
-		//// 交差による排斥分動かす
-		//posback[i].x += callback.move.m128_f32[0];
-		//posback[i].y += callback.move.m128_f32[1];
-		//posback[i].z += callback.move.m128_f32[2];
-		//cube[i]->SetPosition(posback[i]);
-		//if (cube[i]->GetParentFlag() == false) {
-		//	cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-		//}
-		//else if (cube[i]->GetParentFlag() == true) {
-		//	cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
-		//}
 		cube[i]->Update();
+	
+	}
+	for (int i = 0; i < oData2.size(); i++) {
+		cSphere2[i].radius = 4;
+		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
+		
+		//移動のやつ(うまくいかないif分がいうこと聞かない)
+		if (moveObj[i]->GetParentFlag() == false) {
+	/*		if (moveObj[i]->GetPosition().z == position2[i].z + 10) {
+				moveFlag = false;
+			}
+			else if (moveObj[i]->GetPosition().z == position2[i].z - 10) {
+				moveFlag = true;
+			}*/
+			if (moveFlag == false) {
+				if (moveObj[i]->GetPosition().z < position2[i].z + 10) {
+					oData2[i]->pos.z += 0.5;
+				}
+			}
+			/*else if (moveFlag == true) {
+				if (moveObj[i]->GetPosition().z > position2[i].z - 10) {
+					oData2[i]->pos.z -= 0.5;
+				}
+			}*/
+
+			moveObj[i]->SetPosition(oData2[i]->pos);
+		}
+	
 		moveObj[i]->Update();
 	}
-
 }
 
 void GameObject::RC()
 {
-	for (int i = 0; i < OBJNumber; i++) {
-		cube[i]->RemoveCollider();
-		moveObj[i]->RemoveCollider();
-	}
 	for (int i = (int)oData.size() - 1; i >= 0; i--)
 	{
+		cube[i]->RemoveCollider();
 		delete oData[i];
 		oData.erase(oData.begin() + i);
 	}
 	for (int i = (int)oData2.size() - 1; i >= 0; i--)
 	{
+		moveObj[i]->RemoveCollider();
 		delete oData2[i];
 		oData2.erase(oData2.begin() + i);
 	}
@@ -177,10 +153,12 @@ void GameObject::RC()
 
 void GameObject::Draw()
 {
-	for (int i = 0; i < OBJNumber; i++) {
+	for (int i = (int)oData.size() - 1; i >= 0; i--)
+	{
 		cube[i]->Draw();
 	}
-	for (int i = 0; i < OBJNumber; i++) {
+	for (int i = (int)oData2.size() - 1; i >= 0; i--)
+	{
 		moveObj[i]->Draw();
 	}
 
@@ -219,7 +197,7 @@ Object3d* GameObject::GetObject3d(int i, int j)
 		return moveObj[i];
 	};
 }
-void GameObject::move()
+void GameObject::move(int i)
 {
 	//ランダムに動かす(オブジェクト中心から半径(距離未定)以内で動かす)
 

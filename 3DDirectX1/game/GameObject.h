@@ -36,19 +36,18 @@ public:
 	//GetterSetter
 	Sphere GetCSphere(int i, int j);
 
-	XMFLOAT3 GetPos(int i) { return position[i]; }
+	XMFLOAT3 GetPos(int i) { return position2[i]; }
 	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize(int i) { return size[i]; }
 	int GetOBJCount(int j);
 	float GetMat();
 	Object3d* GetObject3d(int i, int j);
 private://Update()‚É‚Ü‚Æ‚ß‚é‚à‚Ì
-	void move();//ˆÚ“®
+	void move(int i);//ˆÚ“®
 private://•Ï”
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ”z’u—p(—\’è)
-	static const int OBJNumber = 30;
-	static const int OBJMax = 100;
+	static const int OBJNumber = 100;//obj‚ÌÅ‘å”
 	static const int OBJType = 2;
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
@@ -64,5 +63,6 @@ private://•Ï”
 	XMFLOAT3 position2[OBJNumber] = {};
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };
 	XMVECTOR rota = { 0,0,0,0 };
+	bool moveFlag = true;
 };
 
