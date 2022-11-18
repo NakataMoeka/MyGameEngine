@@ -64,5 +64,6 @@ private://ïœêî
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };
 	XMVECTOR rota = { 0,0,0,0 };
 	bool moveFlag = true;
+	float oSpeed = 0;
 };
 

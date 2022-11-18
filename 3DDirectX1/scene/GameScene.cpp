@@ -145,13 +145,13 @@ void GameScene::Init()
 		delete cData[i];
 		cData.erase(cData.begin() + i);
 	}
-	//for (int j = 0; j < 2; j++) {
-		for (int i = 0; i <OBJNumber; i++) {
+	for (int j = 0; j < 2; j++) {
+		for (int i = 0; i <gameObject->GetOBJCount(j); i++) {
 			cData.push_back(new CollisionVariable);
 			cData[i]->Alive = true;
 			cData[i]->IsHit = false;
 		}
-	//}
+	}
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
 	clearFlag = false;
@@ -413,7 +413,8 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
-	DebugText::GetInstance()->Printf(100, 320, 3.0f, "%f", gameObject->GetPos(0).z);
+	DebugText::GetInstance()->Printf(100, 320, 3.0f, "SPACE:JUMP");
+	DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", gameObject->GetOBJCount(1));
 	DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
 		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
 	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);

@@ -92,7 +92,7 @@ void GameObject::Init()
 	//d‚­‚È‚é
 
 	moveFlag = false;
-
+	oSpeed = 0;
 }
 
 void GameObject::Update()
@@ -111,22 +111,16 @@ void GameObject::Update()
 		
 		//ˆÚ“®‚Ì‚â‚Â(‚¤‚Ü‚­‚¢‚©‚È‚¢if•ª‚ª‚¢‚¤‚±‚Æ•·‚©‚È‚¢)
 		if (moveObj[i]->GetParentFlag() == false) {
-	/*		if (moveObj[i]->GetPosition().z == position2[i].z + 10) {
-				moveFlag = false;
-			}
-			else if (moveObj[i]->GetPosition().z == position2[i].z - 10) {
-				moveFlag = true;
-			}*/
-			if (moveFlag == false) {
+			oData2[i]->pos.z += oSpeed;
+			
 				if (moveObj[i]->GetPosition().z < position2[i].z + 10) {
-					oData2[i]->pos.z += 0.5;
+					oSpeed = 0.5f;
 				}
-			}
-			/*else if (moveFlag == true) {
-				if (moveObj[i]->GetPosition().z > position2[i].z - 10) {
-					oData2[i]->pos.z -= 0.5;
+		
+				else if (moveObj[i]->GetPosition().z > position2[i].z - 10) {
+					oSpeed = -0.5f;
 				}
-			}*/
+		
 
 			moveObj[i]->SetPosition(oData2[i]->pos);
 		}
@@ -134,6 +128,7 @@ void GameObject::Update()
 		moveObj[i]->Update();
 	}
 }
+
 
 void GameObject::RC()
 {
