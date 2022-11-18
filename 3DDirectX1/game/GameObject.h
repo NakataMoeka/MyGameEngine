@@ -42,6 +42,10 @@ public:
 	int GetOBJCount(int j);
 	float GetMat();
 	Object3d* GetObject3d(int i, int j);
+	bool GetAlive(int i, int j);
+	bool GetHIT(int i, int j);
+	bool SetAlive(int i, int j,bool alive);
+	bool SetHIT(int i, int j,bool Hit);
 private://Update()‚É‚Ü‚Æ‚ß‚é‚à‚Ì
 	void move(int i);//ˆÚ“®
 private://•Ï”

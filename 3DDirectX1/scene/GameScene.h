@@ -32,12 +32,7 @@ private:
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
 public: // メンバ関数
-	struct CollisionVariable
-	{
-		//当たり判定
-		bool IsHit = false;
-		bool Alive=true;
-	};
+
 
 	GameScene();
 
@@ -111,7 +106,6 @@ private: // メンバ変数
 	
 	int HitCount=0;
 
-	std::vector<CollisionVariable*>cData;
 	
 	//サイズ
 	float Tsize = 1;

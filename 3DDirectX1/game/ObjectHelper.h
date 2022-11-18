@@ -19,5 +19,7 @@ struct object
 	XMFLOAT3 pos = {};//位置
 	XMVECTOR rot = {};//角度(クォータニオンを使用しているため、XMVECTOR)
 	XMFLOAT3 size = {};//見た目のサイズ(oSizeとは違う)
+	bool Alive = true;
+	bool IsHit = false;
 	int type = 0;
 };

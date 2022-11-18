@@ -140,18 +140,7 @@ void GameScene::Init()
 	gameObject->Init();
 	stageObj->Init();
 	distance = 10.0f;
-	for (int i = (int)cData.size() - 1; i >= 0; i--)
-	{
-		delete cData[i];
-		cData.erase(cData.begin() + i);
-	}
-	//for (int j = 0; j < 2; j++) {
-		for (int i = 0; i <OBJNumber; i++) {
-			cData.push_back(new CollisionVariable);
-			cData[i]->Alive = true;
-			cData[i]->IsHit = false;
-		}
-	//}
+
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
 	clearFlag = false;
@@ -189,29 +178,29 @@ void GameScene::Update()
 	for (int j = 0; j < 2; j++) {
 	for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
 		
-			cData[i]->IsHit = false;
+		gameObject->SetHIT(i, j,false);
 
-			if (cData[i]->Alive == true) {
+			if (gameObject->GetAlive(i, j) == true) {
 				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
 					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
 						//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
-						cData[i]->IsHit = true;
+						gameObject->SetHIT(i, j, true);
 						HitCount++;
-						cData[i]->Alive = false;
+						gameObject->SetAlive(i, j, false);
 						//player->SetColFlag(true, i);
 						gameObject->GetObject3d(i, j)->SetParentFlag(true);
 						//}
 						DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
 					}
 				}
-				if (cData[i]->IsHit == true) {
+				if (gameObject->GetHIT(i, j) == true) {
 					gameObject->GetObject3d(i, j)->SetParent(player->GetObject());
 				}
 				if (HitCount == 1) {
 					gameObject->GetObject3d(i, j)->transformParent();
 					audio->SEPlayWave(sound1);
 					HitCount = 0;
-					cData[i]->IsHit = false;
+					gameObject->SetHIT(i, j, false);
 					Tsize++;
 				}
 			}

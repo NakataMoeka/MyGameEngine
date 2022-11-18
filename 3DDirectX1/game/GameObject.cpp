@@ -44,14 +44,16 @@ void GameObject::Init()
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
 				oData[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
-
+				oData[num]->Alive = true;
+				oData[num]->IsHit = false;
 			}
 			if (spawnMap[j][i] == 2)
 			{
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
 				oData2[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
-
+				oData2[num]->Alive = true;
+				oData2[num]->IsHit = false;
 			}
 
 
@@ -203,8 +205,41 @@ Object3d* GameObject::GetObject3d(int i, int j)
 		return moveObj[i];
 	};
 }
-void GameObject::move(int i)
+bool GameObject::GetAlive(int i, int j)
 {
-	//ランダムに動かす(オブジェクト中心から半径(距離未定)以内で動かす)
+	if (j == 0) {
+		return oData[i]->Alive;
+	}
+	else {
+		return oData2[i]->Alive;
+	};
+}
+bool GameObject::GetHIT(int i, int j)
+{
+	if (j == 0) {
+		return oData[i]->IsHit;
+	}
+	else {
+		return oData2[i]->IsHit;
+	};
+}
 
+bool GameObject::SetAlive(int i, int j, bool alive)
+{
+	if (j == 0) {
+		return this->oData[i]->Alive=alive;
+	}
+	else {
+		return this->oData2[i]->Alive=alive;
+	};
+}
+
+bool GameObject::SetHIT(int i, int j, bool Hit)
+{
+	if (j == 0) {
+		return this->oData[i]->IsHit = Hit;
+	}
+	else {
+		return this->oData2[i]->IsHit = Hit;
+	};
 }
