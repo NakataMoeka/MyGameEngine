@@ -145,13 +145,13 @@ void GameScene::Init()
 		delete cData[i];
 		cData.erase(cData.begin() + i);
 	}
-	for (int j = 0; j < 2; j++) {
-		for (int i = 0; i <gameObject->GetOBJCount(j); i++) {
+	//for (int j = 0; j < 2; j++) {
+		for (int i = 0; i <OBJNumber; i++) {
 			cData.push_back(new CollisionVariable);
 			cData[i]->Alive = true;
 			cData[i]->IsHit = false;
 		}
-	}
+	//}
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
 	clearFlag = false;
@@ -169,7 +169,7 @@ void GameScene::Init()
 	TitleFlag = false;//タイトルに戻るフラグ
 	PS = 0;
 	audio->SoundPlayWave(sound2);
-	audio->SetBGMVolume(0.0f);
+	audio->SetBGMVolume(0.2f);
 }
 
 void GameScene::Update()

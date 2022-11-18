@@ -70,7 +70,7 @@ void TitleScene::Init()
 	TSprite->SetSize({ 128,128 });
 	TSprite->SetTextureRect({ 0 ,0 }, { 0+146,170 });
 	audio->SoundPlayWave(sound1);
-	audio->SetBGMVolume(0.0f);
+	audio->SetBGMVolume(0.2f);
 }
 
 void TitleScene::Update()
