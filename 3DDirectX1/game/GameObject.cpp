@@ -111,19 +111,22 @@ void GameObject::Update()
 		if (moveObj[i]->GetParentFlag() == false) {
 
 			oData2[i]->pos.z += oSpeed;
-
-			if (moveObj[i]->GetPosition().z < position2[i].z + 10) {
+			if (moveObj[i]->GetPosition().z == position2[i].z + 10){
+				moveFlag = true;
+			}
+			if (moveObj[i]->GetPosition().z == position2[i].z - 10) {
+				moveFlag = false;
+			}
+			if (moveFlag == false) {
 				oSpeed = 0.5f;
 			}
-			else {
-				oSpeed = 0;
-			}
-			if (moveObj[i]->GetPosition().z > position2[i].z - 10) {
+			else if (moveFlag == true) {
 				oSpeed = -0.5f;
 			}
-			else {
+	/*		else {
 				oSpeed = 0;
-			}
+			}*/
+	
 
 
 
