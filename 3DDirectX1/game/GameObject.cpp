@@ -97,34 +97,42 @@ void GameObject::Init()
 
 void GameObject::Update()
 {
-   //‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
+	//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
 	for (int i = 0; i < OBJNumber; i++) {
 
 		cSphere[i].radius = r;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		cube[i]->Update();
-	
+
 	}
 	for (int i = 0; i < oData2.size(); i++) {
-		cSphere2[i].radius = 4;
-		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		
+
 		//ˆÚ“®‚Ì‚â‚Â(‚¤‚Ü‚­‚¢‚©‚È‚¢if•ª‚ª‚¢‚¤‚±‚Æ•·‚©‚È‚¢)
-	/*	if (moveObj[i]->GetParentFlag() == false) {
+		if (moveObj[i]->GetParentFlag() == false) {
+
 			oData2[i]->pos.z += oSpeed;
-			
-				if (moveObj[i]->GetPosition().z < position2[i].z + 10) {
-					oSpeed = 0.5f;
-				}
-		
-				else if (moveObj[i]->GetPosition().z > position2[i].z - 10) {
-					oSpeed = -0.5f;
-				}
-		
+
+			if (moveObj[i]->GetPosition().z < position2[i].z + 10) {
+				oSpeed = 0.5f;
+			}
+			else {
+				oSpeed = 0;
+			}
+			if (moveObj[i]->GetPosition().z > position2[i].z - 10) {
+				oSpeed = -0.5f;
+			}
+			else {
+				oSpeed = 0;
+			}
+
+
 
 			moveObj[i]->SetPosition(oData2[i]->pos);
-		}*/
-	
+			cSphere2[i].radius = 4;
+			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
+
+		}
+
 		moveObj[i]->Update();
 	}
 }
