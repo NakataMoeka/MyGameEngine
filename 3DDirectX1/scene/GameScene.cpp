@@ -303,7 +303,7 @@ void GameScene::Update()
 			clearTimer -= 1.0f;
 		}
 		else if (clearTimer <= 0) {
-			if (Tsize2 < 11) {
+			if (Tsize2 < 20) {
 				DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
 				overFlag = true;
 				audio->StopWave();

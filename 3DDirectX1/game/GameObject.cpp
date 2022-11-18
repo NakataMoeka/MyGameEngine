@@ -110,7 +110,7 @@ void GameObject::Update()
 		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		
 		//ˆÚ“®‚Ì‚â‚Â(‚¤‚Ü‚­‚¢‚©‚È‚¢if•ª‚ª‚¢‚¤‚±‚Æ•·‚©‚È‚¢)
-		if (moveObj[i]->GetParentFlag() == false) {
+	/*	if (moveObj[i]->GetParentFlag() == false) {
 			oData2[i]->pos.z += oSpeed;
 			
 				if (moveObj[i]->GetPosition().z < position2[i].z + 10) {
@@ -123,7 +123,7 @@ void GameObject::Update()
 		
 
 			moveObj[i]->SetPosition(oData2[i]->pos);
-		}
+		}*/
 	
 		moveObj[i]->Update();
 	}
