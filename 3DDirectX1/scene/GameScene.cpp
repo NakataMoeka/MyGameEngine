@@ -179,14 +179,11 @@ void GameScene::Update()
 	for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
 		
 		gameObject->SetHIT(i, j,false);
-
-			if (gameObject->GetAlive(i, j) == true) {
 				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
 					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
 						//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
 						gameObject->SetHIT(i, j, true);
 						HitCount++;
-						gameObject->SetAlive(i, j, false);
 						//player->SetColFlag(true, i);
 						gameObject->GetObject3d(i, j)->SetParentFlag(true);
 						//}
@@ -203,7 +200,7 @@ void GameScene::Update()
 					gameObject->SetHIT(i, j, false);
 					Tsize++;
 				}
-			}
+			
 			if (gameObject->GetObject3d(i, j)->GetParentFlag() == true)
 			{
 				player->SetColFlag(false, i);
