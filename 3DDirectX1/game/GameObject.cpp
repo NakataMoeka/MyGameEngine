@@ -61,7 +61,7 @@ void GameObject::Init()
 	for (int i = 0; i < oData.size(); i++) {
 
 		float radius = 2.0f;
-		size[0] = { 3,3,3 };
+		size[0] = { 2,2,2 };
 		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };
 

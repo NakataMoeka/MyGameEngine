@@ -22,8 +22,8 @@ private:
 	using XMVECTOR = DirectX::XMVECTOR;
 
 	//オブジェクト配列
-	std::vector<object*>oData;
-	std::vector<object*>oData2;
+	std::vector<object*>oData;//ブロック
+	std::vector<object*>oData2;//車
 public:
 
 	GameObject();
