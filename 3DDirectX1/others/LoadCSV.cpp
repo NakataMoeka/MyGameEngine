@@ -8,9 +8,9 @@ int LoadCSV(int map[MAP_HEIGHT][MAP_WIDTH], const char* FilePath, int LoadStopNu
 		return -1;
 	}
 
-	for (size_t y = 0; y < MAP_HEIGHT; y++)
+	for (int y = 0; y < MAP_HEIGHT; y++)
 	{
-		for (size_t x = 0; x < MAP_WIDTH; x++)
+		for (int x = 0; x < MAP_WIDTH; x++)
 		{
 			// ‰Šú‰»
 			map[y][x] = 0;
@@ -19,7 +19,7 @@ int LoadCSV(int map[MAP_HEIGHT][MAP_WIDTH], const char* FilePath, int LoadStopNu
 
 	FILE* fileHandle;
 	errno_t err;
-	char string[256] = { 0 };
+	char string[512] = { 0 };
 
 	err = fopen_s(&fileHandle, FilePath, "r");
 	if (err != 0)
@@ -32,13 +32,13 @@ int LoadCSV(int map[MAP_HEIGHT][MAP_WIDTH], const char* FilePath, int LoadStopNu
 	for (int y = 0; y < MAP_HEIGHT;)
 	{
 		bool end = false;
-		fgets(string, 256, fileHandle);
+		fgets(string, 512, fileHandle);
 		for (int x = 0, i = 0; x < MAP_WIDTH; i++)
 		{
 			if (string[i] == '\0')
 			{
 				// “Ç‚Ýž‚ÝI—¹
-				fgets(string, 256, fileHandle);
+				fgets(string, 512, fileHandle);
 				i = 0;
 			}
 			else if (string[i] == '\n')
