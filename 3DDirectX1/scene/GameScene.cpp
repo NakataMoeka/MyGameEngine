@@ -400,9 +400,9 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
 	DebugText::GetInstance()->Printf(100, 320, 3.0f, "SPACE:JUMP");
-	DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", gameObject->GetOBJCount(1));
-	DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
-		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
+	//DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", gameObject->GetOBJCount(1));
+	//DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
+		//player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
 	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();

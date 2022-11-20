@@ -146,7 +146,7 @@ void TitleScene::DrawFront()
 		TSSprite->Draw();
 		TS2Sprite->Draw();
 	}
-	DebugText::GetInstance()->Printf(0, 0, 3.0f, "%d",SceneNum);
+	//DebugText::GetInstance()->Printf(0, 0, 3.0f, "%d",SceneNum);
 	//DebugText::GetInstance()->Printf(200, 500, 3.0f, "PUSH SPACE");
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();

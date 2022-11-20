@@ -70,11 +70,11 @@ void GameObject::Init()
 		cube[i]->Update();
 
 		//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
-		cSphere[i].radius = r;
+		cSphere[i].radius = 1;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
 
-		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
+		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		cube[i]->SetParentFlag(false);
 	}
@@ -83,9 +83,9 @@ void GameObject::Init()
 		moveObj[i]->SetScale(size[0]);
 		moveObj[i]->Update();
 		position2[i] = moveObj[i]->GetPosition();
-		cSphere2[i].radius = 4;
+		cSphere2[i].radius = 1;
 		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 4));
+		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1));
 		moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		moveObj[i]->SetParentFlag(false);
 	}
@@ -100,7 +100,7 @@ void GameObject::Update()
 	//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
 	for (int i = 0; i < OBJNumber; i++) {
 
-		cSphere[i].radius = r;
+		cSphere[i].radius = 1;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		cube[i]->Update();
 
@@ -114,7 +114,7 @@ void GameObject::Update()
 			if (moveObj[i]->GetPosition().z == position2[i].z + 10){
 				moveFlag = true;
 			}
-			if (moveObj[i]->GetPosition().z == position2[i].z - 10) {
+			else if (moveObj[i]->GetPosition().z == position2[i].z - 10) {
 				moveFlag = false;
 			}
 			if (moveFlag == false) {
@@ -131,7 +131,7 @@ void GameObject::Update()
 
 
 			moveObj[i]->SetPosition(oData2[i]->pos);
-			cSphere2[i].radius = 4;
+			cSphere2[i].radius = 1;
 			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
 		}
