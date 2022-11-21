@@ -49,7 +49,10 @@ public:
 	inline void RemoveAttribute(unsigned short attribute) {
 		this->attribute &= !attribute;
 	}
-
+	inline int SetNum(int num) {
+		return this->Num = num;
+	}
+	inline int GetNum() { return Num; }
 protected:
 	Object3d* object3d = nullptr;
 	FbxObject3d* Fobject = nullptr;
@@ -57,5 +60,7 @@ protected:
 	CollisionShapeType shapeType = SHAPE_UNKNOWN;
 	// “–‚½‚è”»’è‘®«
 	unsigned short attribute = 0b1111111111111111;
+	//í—Ş
+	int Num = 0;
 };
 

@@ -63,7 +63,7 @@ void GameObject::Init()
 	for (int i = 0; i < oData.size(); i++) {
 
 		float radius = 2.0f;
-		size[0] = { 3,3,3 };
+		size[0] = { 2,2,2 };
 		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };
 
@@ -78,7 +78,9 @@ void GameObject::Init()
 
 		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		cube[i]->GetCollider()->SetNum(0);
 		cube[i]->SetParentFlag(false);
+
 	}
 	for (int i = 0; i < oData2.size(); i++) {
 		moveObj[i]->SetPosition(oData2[i]->pos);
@@ -89,6 +91,7 @@ void GameObject::Init()
 		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1));
 		moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		moveObj[i]->GetCollider()->SetNum(1);
 		moveObj[i]->SetParentFlag(false);
 	}
 	//èdÇ≠Ç»ÇÈ

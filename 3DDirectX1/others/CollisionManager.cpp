@@ -89,11 +89,11 @@ void CollisionManager::ColSphere()
 					//オブジェクトが両方球にくっついていたら当たり判定はしない
 					if (colB->GetObject3d()->GetParentFlag() == false) {
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-										IsHit = true;
-										HitCount++;
-										PFlag = true;
-										colB->GetObject3d()->SetParentFlag(true);
-										audioFlag = true;
+							IsHit = true;
+							HitCount++;
+							PFlag = true;
+							colB->GetObject3d()->SetParentFlag(true);
+							audioFlag = true;
 						}
 						if (IsHit == true) {
 							colB->GetObject3d()->SetParent(colA->GetObject3d());
@@ -104,12 +104,21 @@ void CollisionManager::ColSphere()
 							IsHit = false;
 							Tsize += oSize;
 						}
-				}
+					}
 
 				}
 			}
+			if (colB->GetNum() == 0) {
+				oSize = 1;
+				//DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", (int)oSize);
+			}
+			else if (colB->GetNum() == 1) {
+				oSize = 3;
+				//DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", (int)oSize);
+			}
 		}
 	}
+
 	Tsize3 = Tsize + Tsize2;
 
 }
