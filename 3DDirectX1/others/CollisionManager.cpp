@@ -102,7 +102,7 @@ void CollisionManager::ColSphere()
 							colB->GetObject3d()->transformParent();
 							HitCount = 0;
 							IsHit = false;
-							Tsize++;
+							Tsize += oSize;
 						}
 				}
 

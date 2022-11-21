@@ -198,9 +198,12 @@ void GameScene::Update()
 				audio->SEPlayWave(sound1);
 				HitCount = 0;
 				gameObject->SetHIT(i, j, false);
-				Tsize++;
+				Tsize+=gameObject->GetOSize(i,j);
 			}
-
+			
+			
+				
+			
 			if (gameObject->GetObject3d(i, j)->GetParentFlag() == true)
 			{
 				player->SetColFlag(false, i);
@@ -214,10 +217,12 @@ void GameScene::Update()
 	}
 	//DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject3d(0,0)->GetParentFlag());
 
+	
 	colMan->SetTsize2(Tsize);
 
 	//プレイヤーの大きさ
 	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", colMan->GetTsize());
+
 	Tsize2 = (int)colMan->GetTsize();
 	if (Tsize2 % 10 == 0) {
 		TCount++;
@@ -400,7 +405,7 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
 	DebugText::GetInstance()->Printf(100, 320, 3.0f, "SPACE:JUMP");
-	//DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", gameObject->GetOBJCount(1));
+	DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d",colMan->GetoSize());
 	//DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
 		//player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
 	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);

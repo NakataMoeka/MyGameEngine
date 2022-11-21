@@ -45,6 +45,7 @@ void GameObject::Init()
 				num = (int)oData.size() - 1;
 				oData[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
 				oData[num]->IsHit = false;
+				oData[num]->oSize = 1.0f;
 			}
 			if (spawnMap[j][i] == 2)
 			{
@@ -52,6 +53,7 @@ void GameObject::Init()
 				num = (int)oData2.size() - 1;
 				oData2[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
 				oData2[num]->IsHit = false;
+				oData2[num]->oSize = 3.0f;
 			}
 
 
@@ -61,7 +63,7 @@ void GameObject::Init()
 	for (int i = 0; i < oData.size(); i++) {
 
 		float radius = 2.0f;
-		size[0] = { 2,2,2 };
+		size[0] = { 3,3,3 };
 		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };
 
@@ -215,5 +217,15 @@ bool GameObject::SetHIT(int i, int j, bool Hit)
 	}
 	else {
 		return this->oData2[i]->IsHit = Hit;
+	};
+}
+
+float GameObject::GetOSize(int i, int j)
+{
+	if (j == 0) {
+		return this->oData[i]->oSize;
+	}
+	else {
+		return this->oData2[i]->oSize;
 	};
 }

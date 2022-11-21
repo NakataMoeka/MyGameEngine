@@ -40,6 +40,8 @@ public:// ƒƒ“ƒoŠÖ”
 	int GetHitCount() { return HitCount; }
 	bool GetHit() { return IsHit; }
 	bool SetParentFlag(bool parentFlag) { return this->PFlag = parentFlag; }
+	float SetoSize(float size) { return this->oSize=size; }
+	float GetoSize() { return oSize; }
 private:
 	CollisionManager() = default;
 	CollisionManager(const CollisionManager&) = delete;
@@ -56,4 +58,5 @@ private:
 	float Tsize2 = 0;
 	float Tsize3;
 	bool PFlag=false;
+	float oSize=0;
 };
