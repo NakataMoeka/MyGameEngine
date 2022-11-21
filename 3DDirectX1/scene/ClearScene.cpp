@@ -38,7 +38,7 @@ void ClearScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	}
 	// デバッグテキスト初期化
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
-	
+
 	Sprite::LoadTexture(30, L"Resources/UI/mother1.png");
 	Sprite::LoadTexture(31, L"Resources/UI/mother2.png");
 	Sprite::LoadTexture(32, L"Resources/UI/over.png");
@@ -47,7 +47,7 @@ void ClearScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(35, L"Resources/UI/mother_smile.png");
 	Sprite::LoadTexture(36, L"Resources/UI/space.png");
 	Sprite::LoadTexture(37, L"Resources/UI/back2.png");
-	
+
 	overTextSprite = Sprite::CreateSprite(30, { 0,0 });
 	clearTextSprite = Sprite::CreateSprite(31, { 0,0 });
 	overSprite = Sprite::CreateSprite(32, { 0,0 });
@@ -56,10 +56,10 @@ void ClearScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	motherSSprite = Sprite::CreateSprite(35, { 0,0 });
 	Space = Sprite::CreateSprite(36, { 0,0 });
 	back = Sprite::CreateSprite(37, { 0,0 });
-	
+
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
-	
+
 	eas = new Eas();
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
 }
@@ -74,10 +74,10 @@ void ClearScene::Init()
 
 void ClearScene::Update()
 {
-	if (easeTimer < 100){
+	if (easeTimer < 100) {
 		easeTimer++;
 	}
-	pos.y = eas->ease(800, 100,easeTimer, 100, 1);
+	pos.y = eas->ease(800, 100, easeTimer, 100, 1);
 	if (pos.y <= 100) {
 		pushFlag = true;
 	}
@@ -122,9 +122,9 @@ void ClearScene::DrawFront()
 		motherASprite->Draw();
 	}
 	if (pushFlag == true) {
-		
-			Space->Draw();
-		
+
+		Space->Draw();
+
 	}
 	//DebugText::GetInstance()->Printf(200, 500, 3.0f, "PUSH SPACE");
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());

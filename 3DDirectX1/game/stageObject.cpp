@@ -29,7 +29,7 @@ void StageObject::Initialize()
 
 void StageObject::Init()
 {
-	position[0] = {0,0,10};
+	position[0] = { 0,0,10 };
 	position[1] = { 0,0,-50 };
 	size = { 5,5,5 };
 	rota = { 0,0,0 };
@@ -48,7 +48,7 @@ void StageObject::Update()
 	//Block->Quaternion();
 	//Block->SetScale({ 5,70,5 });
 	//Block->SetRotation({0,0,0,0});
-	Kotatu->SetPosition({0,38,-80});
+	Kotatu->SetPosition({ 0,38,-80 });
 	Kotatu->Update();
 	Ground->SetScale({ 4,4,4 });
 	Ground->SetPosition({ 0,0,0 });
