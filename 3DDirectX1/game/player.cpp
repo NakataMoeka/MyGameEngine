@@ -132,34 +132,34 @@ void Player::Move()
 			sphereAngle.m128_f32[2] -= 10;
 		}
 	}
-		if (Input::GetInstance()->PushKey(DIK_W) ||
-			Input::GetInstance()->PushKey(DIK_S) ||
-			Input::GetInstance()->PushKey(DIK_A) ||
-			Input::GetInstance()->PushKey(DIK_D))
-		{
+	if (Input::GetInstance()->PushKey(DIK_W) ||
+		Input::GetInstance()->PushKey(DIK_S) ||
+		Input::GetInstance()->PushKey(DIK_A) ||
+		Input::GetInstance()->PushKey(DIK_D))
+	{
 
-			if (CountWalk < 5) {
-				CountWalk++;
+		if (CountWalk < 5) {
+			CountWalk++;
+		}
+		if (CountWalk == 5) {
+			if (PlayerWalkCount < 6) {
+				PlayerWalkCount++;
 			}
-			if (CountWalk == 5) {
-				if (PlayerWalkCount < 6) {
-					PlayerWalkCount++;
-				}
-				if (PlayerWalkCount == 6) {
-					PlayerWalkCount = 0;
-				}
-				CountWalk = 0;
+			if (PlayerWalkCount == 6) {
+				PlayerWalkCount = 0;
 			}
-			
-			if (JumpFlag == false) {
-				playerObj->PlayAnimation(1);
-			}
+			CountWalk = 0;
+		}
 
+		if (JumpFlag == false) {
+			playerObj->PlayAnimation(1);
 		}
-		else {
-			playerObj->Stop();
-		}
-	
+
+	}
+	else {
+		playerObj->Stop();
+	}
+
 	//if (JumpFlag == true) {
 	//	playerObj->PlayAnimation(0);
 	//}
@@ -252,7 +252,7 @@ void Player::Jump()
 	// 球と地形の交差を全検索
 
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
-	
+
 	// 交差による排斥分動かす
 	playerPos.x += callback.move.m128_f32[0];
 	playerPos.y += callback.move.m128_f32[1];
@@ -266,7 +266,7 @@ void Player::Jump()
 	PlayerQueryCallback callback2(sphereCollider2);
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
-	
+
 	//for (int i = 0; i < OBJNumber; i++) {
 	//	if (colFlag[i] == true) {
 	//		CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);

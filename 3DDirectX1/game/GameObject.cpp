@@ -107,11 +107,11 @@ void GameObject::Update()
 	}
 	for (int i = 0; i < oData2.size(); i++) {
 
-		//ˆÚ“®‚Ì‚â‚Â(‚¤‚Ü‚­‚¢‚©‚È‚¢if•ª‚ª‚¢‚¤‚±‚Æ•·‚©‚È‚¢)
+		//obj‚ÌˆÚ“®ˆ—
 		if (moveObj[i]->GetParentFlag() == false) {
 
 			oData2[i]->pos.z += oSpeed;
-			if (moveObj[i]->GetPosition().z == position2[i].z + 10){
+			if (moveObj[i]->GetPosition().z == position2[i].z + 10) {
 				moveFlag = true;
 			}
 			else if (moveObj[i]->GetPosition().z == position2[i].z - 10) {
@@ -123,12 +123,6 @@ void GameObject::Update()
 			else if (moveFlag == true) {
 				oSpeed = -0.5f;
 			}
-	/*		else {
-				oSpeed = 0;
-			}*/
-	
-
-
 
 			moveObj[i]->SetPosition(oData2[i]->pos);
 			cSphere2[i].radius = 1;

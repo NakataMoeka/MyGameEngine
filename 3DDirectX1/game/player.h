@@ -29,7 +29,7 @@ public:
 	void Draw();//モデルの描画
 	void DrawSprite();//画像の描画
 	void RC();//コライダーを消すやつ
-	
+
 	//GetterSetter
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
@@ -42,7 +42,7 @@ public:
 	XMFLOAT3 SetPlayerPos(XMFLOAT3 playerPos) { return this->playerPos = playerPos; }
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
-	bool SetColFlag(bool ColFlag,int i) { return this->colFlag[i] = ColFlag; }
+	bool SetColFlag(bool ColFlag, int i) { return this->colFlag[i] = ColFlag; }
 
 private://Update()にまとめるもの
 	void Move();//移動
@@ -51,15 +51,15 @@ private://Update()にまとめるもの
 	void Dash();//ダッシュ
 private://変数
 	//プレイヤーのモデル
-	FbxObject3d* playerObj=nullptr;
-	FbxModel* model=nullptr;
+	FbxObject3d* playerObj = nullptr;
+	FbxModel* model = nullptr;
 	//球のモデル
-	Object3d* SphereObj=nullptr;
-	Model* model2=nullptr;
+	Object3d* SphereObj = nullptr;
+	Model* model2 = nullptr;
 	//集中線
-	Sprite* dashSprite=nullptr;
+	Sprite* dashSprite = nullptr;
 	//サイズ表示の円
-	Sprite* sizeSprite=nullptr;
+	Sprite* sizeSprite = nullptr;
 	//地球
 	Sprite* earthSprite = nullptr;
 	//プレイヤー
@@ -67,10 +67,10 @@ private://変数
 	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
 	XMFLOAT3 spherePos = { 0,0,0 };
-	XMFLOAT3 playerAngle = { 0,0,0};
+	XMFLOAT3 playerAngle = { 0,0,0 };
 	XMVECTOR sphereAngle = { 0,0,0,0 };
 	XMFLOAT3 sphereSize = { 1,1,1 };
-	
+
 	Sphere sphere;//当たり判定のやつ
 
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
@@ -89,16 +89,16 @@ private://変数
 	bool JumpFlag = false;
 	bool onGround = true;
 	// 落下ベクトル
-	DirectX::XMVECTOR fallV={};
-	
+	DirectX::XMVECTOR fallV = {};
+
 	bool onGround2 = true;
 	// 落下ベクトル
-	DirectX::XMVECTOR fallV2={};
-	
+	DirectX::XMVECTOR fallV2 = {};
+
 	static const int OBJNumber = 100;
-	
+
 	std::array < bool, OBJNumber> colFlag = {};
 
-	float PlayerWalkCount=0;
+	float PlayerWalkCount = 0;
 	float CountWalk = 0;
 };

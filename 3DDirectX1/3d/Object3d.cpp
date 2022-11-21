@@ -241,7 +241,7 @@ bool Object3d::Initialize()
 
 	assert(dev);
 	name = typeid(*this).name();
-		HRESULT result;
+	HRESULT result;
 
 	result = dev->CreateCommittedResource(
 		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
@@ -301,7 +301,7 @@ void Object3d::Update()
 	assert(camera);
 
 	HRESULT result;
-	
+
 	UpdateWorldMatrix();
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
@@ -339,7 +339,7 @@ void Object3d::Draw()
 	cmdList->SetGraphicsRootSignature(pipelineSet.rootsignature.Get());
 	// 定数バッファビューをセット
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
-	lightGroup->Draw(cmdList,3);
+	lightGroup->Draw(cmdList, 3);
 	// モデル描画
 	model->Draw(cmdList);
 }
@@ -358,8 +358,8 @@ void Object3d::SetCollider(BaseCollider* collider)
 void Object3d::RemoveCollider()
 {
 	//if (collider) {
-		CollisionManager::GetInstance()->RemoveCollider(collider);
-		//delete collider;
+	CollisionManager::GetInstance()->RemoveCollider(collider);
+	//delete collider;
 	//}
 }
 
@@ -380,7 +380,7 @@ void Object3d::transformParent()
 	//1回のみ通る
 
 	XMVECTOR scaleV, rotationV, positionV;
-	
+
 	//親を逆行列にする
 	matWorld_Invers = XMMatrixInverse(nullptr, parent->matWorld);
 	//子供のワールド座標と親のワールド座標の逆行列を乗算

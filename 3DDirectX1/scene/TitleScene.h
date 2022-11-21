@@ -35,23 +35,23 @@ private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
 
-	SoundData sound1={};
-	SoundData sound2={};
-	SoundData sound3={};
+	SoundData sound1 = {};
+	SoundData sound2 = {};
+	SoundData sound3 = {};
 	const int debugTextTexNumber = 0;
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;
-	
+
 	Sprite* TSprite = nullptr;
 	Sprite* TBSprite = nullptr;
 	Sprite* TB2Sprite = nullptr;
 	Sprite* TSSprite = nullptr;
 	Sprite* TS2Sprite = nullptr;
-	
+
 	bool SCangeFlag = false;
 	int SceneNum = 0;
 	int Scene = 0;
-	float TaCount=0;
+	float TaCount = 0;
 
 };
 

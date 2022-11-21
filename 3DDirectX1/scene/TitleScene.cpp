@@ -59,7 +59,7 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 void TitleScene::Init()
 {
 	SceneNum = 0;
-	Scene = 0; 
+	Scene = 0;
 	TaCount = 0;
 	SCangeFlag = false;
 	TSSprite->SetSize({ 300,110 });
@@ -68,7 +68,7 @@ void TitleScene::Init()
 	TS2Sprite->SetPosition({ 500,600 });
 	TSprite->SetPosition({ 300,100 });
 	TSprite->SetSize({ 128,128 });
-	TSprite->SetTextureRect({ 0 ,0 }, { 0+146,170 });
+	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 146,170 });
 	audio->SoundPlayWave(sound1);
 	audio->SetBGMVolume(0.2f);
 }
@@ -91,7 +91,7 @@ void TitleScene::Update()
 			audio->StopWave();
 		}
 		TSSprite->SetSize({ 300,110 });
-		TS2Sprite->SetSize({180,50 });
+		TS2Sprite->SetSize({ 180,50 });
 		TSSprite->SetPosition({ 450,500 });
 		TS2Sprite->SetPosition({ 500,600 });
 	}
@@ -108,14 +108,14 @@ void TitleScene::Update()
 				Scene = 0;
 			}
 		}
-		
+
 		TSSprite->SetSize({ 150,55 });
-		TS2Sprite->SetSize({360,100 });
+		TS2Sprite->SetSize({ 360,100 });
 		TSSprite->SetPosition({ 530,550 });
 		TS2Sprite->SetPosition({ 450,600 });
 	}
 	if (TaCount < 5) {
-		TaCount+=0.5;
+		TaCount += 0.5;
 	}
 	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 146 * TaCount,170 });
 	TSprite->SetSize({ 730,170 });
