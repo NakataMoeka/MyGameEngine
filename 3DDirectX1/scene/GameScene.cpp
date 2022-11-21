@@ -294,14 +294,14 @@ void GameScene::Update()
 			clearTimer -= 1.0f;
 		}
 		else if (clearTimer <= 0) {
-			if (Tsize2 < 20) {
+			if (Tsize2 < 30) {
 				DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
 				overFlag = true;
 				audio->StopWave();
 				gameObject->RC();
 				player->RC();
 			}
-			else if (Tsize2 >= 11) {
+			else if (Tsize2 >= 30) {
 				DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
 				clearFlag = true;
 				audio->StopWave();
