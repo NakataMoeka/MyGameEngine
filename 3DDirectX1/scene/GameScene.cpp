@@ -232,7 +232,7 @@ void GameScene::Update()
 		Bflag = false;
 	}
 	if (TCount == 1) {
-		distance += 5;
+		distance += 2;
 		Bflag = true;;
 	}
 

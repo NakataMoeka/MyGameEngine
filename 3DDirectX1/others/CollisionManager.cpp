@@ -79,6 +79,14 @@ void CollisionManager::ColSphere()
 		for (; itB != colliders.end(); ++itB) {
 			BaseCollider* colA = *itA;
 			BaseCollider* colB = *itB;
+			if (colB->GetNum() == 0) {
+				oSize = 1;
+				//DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", (int)oSize);
+			}
+			else if (colB->GetNum() == 1) {
+				oSize = 3;
+				//DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", (int)oSize);
+			}
 			if (colA->attribute == colB->attribute) {
 				// ともに球
 				if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
@@ -108,14 +116,7 @@ void CollisionManager::ColSphere()
 
 				}
 			}
-			if (colB->GetNum() == 0) {
-				oSize = 1;
-				//DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", (int)oSize);
-			}
-			else if (colB->GetNum() == 1) {
-				oSize = 3;
-				//DebugText::GetInstance()->Printf(100, 420, 3.0f, "%d", (int)oSize);
-			}
+			
 		}
 	}
 
