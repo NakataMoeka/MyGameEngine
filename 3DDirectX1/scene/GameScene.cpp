@@ -202,7 +202,7 @@ void GameScene::Update()
 					//player->SetColFlag(true, i);
 					gameObject->GetObject3d(i, j)->SetParentFlag(true);
 					//}
-					DebugText::GetInstance()->Printf(100, 60, 3.0f, "Hit");
+					DebugText::GetInstance()->Printf(100, 60, 3.0f,{1,1,1,1}, "Hit");
 				}
 			}
 			if (gameObject->GetHIT(i, j) == true) {
@@ -237,7 +237,7 @@ void GameScene::Update()
 	colMan->SetTsize2(Tsize);
 
 	//プレイヤーの大きさ
-	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%dcm", (int)colMan->GetTsize());
+	DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "%dcm", (int)colMan->GetTsize());
 
 	Tsize2 = (int)colMan->GetTsize();
 	if (Tsize2 % 10 == 0) {
@@ -262,7 +262,7 @@ void GameScene::Update()
 	//25分(90000/60)は0.0006(多分)
 	//tn,ut,ci,shp,kn,em,zm,syo,rb,gr,os
 
-#pragma region ポーズ	など
+#pragma region ポーズなど
 	if (PoseFlag == false) {
 		if (Input::GetInstance()->TriggerKey(DIK_R)) {
 			PoseFlag = true;
@@ -324,14 +324,14 @@ void GameScene::Update()
 		}
 		else if (dt <= 0) {
 			if (Tsize2 < 30) {
-				DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
+				DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 				overFlag = true;
 				audio->StopWave();
 				gameObject->RC();
 				player->RC();
 			}
 			else if (Tsize2 >= 30) {
-				DebugText::GetInstance()->Printf(500, 400, 3.0f, "Clear");
+				DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
 				clearFlag = true;
 				audio->StopWave();
 				gameObject->RC();
@@ -428,22 +428,22 @@ void GameScene::DrawFront()
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
 	//DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
 	//DebugText::GetInstance()->Printf(100, 80, 3.0f, "%d", Alive[1]);
-	DebugText::GetInstance()->Printf(100, 200, 3.0f, "WASD:MOVE");
-	DebugText::GetInstance()->Printf(100, 240, 3.0f, "LRARROW:ANGLE");
-	DebugText::GetInstance()->Printf(100, 280, 3.0f, "UPARROW:DASH");
-	DebugText::GetInstance()->Printf(100, 320, 3.0f, "SPACE:JUMP");
+	DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "WASD:MOVE");
+	DebugText::GetInstance()->Printf(100, 240, 3.0f, { 1,1,1,1 }, "LRARROW:ANGLE");
+	DebugText::GetInstance()->Printf(100, 280, 3.0f, { 1,1,1,1 }, "UPARROW:DASH");
+	DebugText::GetInstance()->Printf(100, 320, 3.0f, { 1,1,1,1 }, "SPACE:JUMP");
 
 	//DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
 		//player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
 
 	if (((int)dt / 60 == 0)) {
 		timeSprite3->Draw();
-		DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", (int)dt);
+		DebugText::GetInstance()->Printf(960, 50, 3.0f, { 1.0f,0.5f,0,1 }, "%d", (int)dt);
 	}
 	else
 	{
 		timeSprite->Draw();
-		DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", ((int)dt / 60) + 1);
+		DebugText::GetInstance()->Printf(960, 50, 3.0f, { 1,1,1,1 }, "%d", (int)(dt / 60) + 1);
 	}
 	timeSprite2->Draw();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
