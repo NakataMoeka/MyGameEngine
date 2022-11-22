@@ -83,10 +83,10 @@ void GameObject::Init()
 
 	}
 	for (int i = 0; i < oData2.size(); i++) {
+		position2[i] = moveObj[i]->GetPosition();
 		moveObj[i]->SetPosition(oData2[i]->pos);
 		moveObj[i]->SetScale(size[0]);
 		moveObj[i]->Update();
-		position2[i] = moveObj[i]->GetPosition();
 		cSphere2[i].radius = 1;
 		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1));
@@ -114,6 +114,8 @@ void GameObject::Update()
 
 		//obj‚ÌˆÚ“®ˆ—
 		if (moveObj[i]->GetParentFlag() == false) {
+			cSphere2[i].radius = 1;
+			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
 			oData2[i]->pos.z += oSpeed;
 			if (moveObj[i]->GetPosition().z == position2[i].z + 10) {
@@ -130,11 +132,8 @@ void GameObject::Update()
 			}
 
 			moveObj[i]->SetPosition(oData2[i]->pos);
-			cSphere2[i].radius = 1;
-			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-
+	
 		}
-
 		moveObj[i]->Update();
 	}
 }

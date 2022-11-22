@@ -20,4 +20,5 @@ struct object
 	XMVECTOR rot = {};//角度(クォータニオンを使用しているため、XMVECTOR)
 	XMFLOAT3 size = {};//見た目のサイズ(oSizeとは違う)
 	bool IsHit = false;//くっついたか否か
+	bool moveFlag = false;//動くobjのフラグ
 };
