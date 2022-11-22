@@ -168,7 +168,7 @@ void GameScene::Init()
 	audio->SoundPlayWave(sound2);
 	audio->SetBGMVolume(0.2f);
 	total = 0.0;
-	SetTime = 30;
+	SetTime = 180;
 	start = clock() / CLOCKS_PER_SEC;
 	dt = SetTime;
 }
@@ -259,7 +259,7 @@ void GameScene::Update()
 	//25分(90000/60)は0.0006(多分)
 	//tn,ut,ci,shp,kn,em,zm,syo,rb,gr,os
 
-#pragma region ポーズ	
+#pragma region ポーズ	など
 	if (PoseFlag == false) {
 		if (Input::GetInstance()->TriggerKey(DIK_R)) {
 			PoseFlag = true;
@@ -303,9 +303,7 @@ void GameScene::Update()
 
 
 	else if (PoseFlag == false) {
-		if (TimeRot < 360) {
-			TimeRot += 0.02f;
-		}
+		TimeRot = (float)dt * 2;
 		if (dt > 0) {
 			end = clock() / CLOCKS_PER_SEC;
 			total = end - start;
@@ -350,7 +348,7 @@ void GameScene::Update()
 #endif
 
 
-	timeSprite2->SetRotation(TimeRot);
+	timeSprite2->SetRotation(-TimeRot);
 
 	object3d3->SetScale({ 4.0f,4.0f,4.0f });
 
