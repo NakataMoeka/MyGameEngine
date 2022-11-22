@@ -19,6 +19,7 @@
 #include"stageObject.h"
 #include"Collision.h"
 #include<vector>
+#include<array>
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -78,6 +79,10 @@ private: // メンバ変数
 	Sprite* BackSprite = nullptr;
 	Sprite* InfoSprite = nullptr;
 	Sprite* PBSprite = nullptr;
+	//サイズ表示用のやつ
+	std::array < Sprite*, 4>Number = {};//数字。4つなのはcmとmの一の位と十の位があるため。
+	Sprite* Meters = nullptr;
+	Sprite* Centimeter = nullptr;
 
 	Object3d* object3d = nullptr;
 	Model* model = nullptr;
@@ -120,6 +125,13 @@ private: // メンバ変数
 	int TimeCount = 0;
 	float clearTimer = 18000;//1800/60が30秒
 	int clearTimer2 = 0;
+
+	double start;
+	double end;
+	double dt;
+	double total;
+	double SetTime;
+
 	bool clearFlag = false;
 	bool overFlag = false;
 	float sphereSize = 1;

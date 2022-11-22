@@ -9,7 +9,7 @@
 #include"CollisionManager.h"
 #include"TouchableObject.h"
 #include"MeshCollider.h"
-
+#include<time.h>
 GameScene::GameScene()
 {
 
@@ -108,6 +108,9 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(22, L"Resources/UI/Back.png");
 	Sprite::LoadTexture(23, L"Resources/UI/Info.png");
 	Sprite::LoadTexture(24, L"Resources/UI/PoseBack.png");
+	Sprite::LoadTexture(25, L"Resources/UI/number/Number.png");
+	Sprite::LoadTexture(26, L"Resources/UI/number/m.png");
+	Sprite::LoadTexture(27, L"Resources/UI/number/cm.png");
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 	timeSprite = Sprite::CreateSprite(6, { 1100,100 });
 	timeSprite2 = Sprite::CreateSprite(7, { 1100,100 });
@@ -116,6 +119,11 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	BackSprite = Sprite::CreateSprite(22, { 0,0 });
 	InfoSprite = Sprite::CreateSprite(23, { 0,0 });
 	PBSprite = Sprite::CreateSprite(24, { 0,0 });
+	for (int i = 0; i < 4; i++) {
+		Number[i] = Sprite::CreateSprite(25, { 0,0 });
+	}
+	Meters = Sprite::CreateSprite(26, { 0,0 });
+	Centimeter = Sprite::CreateSprite(25, { 0,0 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
@@ -152,13 +160,17 @@ void GameScene::Init()
 	HitCount = 0;
 	TimeRot = 0;
 	TimeCount = 0;
-	clearTimer = 18000;//1800/60が30秒
-	clearTimer2 = 0;
+	start = (double)time(NULL);
+	
 	PoseFlag = false;//ゲーム中断フラグ
 	TitleFlag = false;//タイトルに戻るフラグ
 	PS = 0;
 	audio->SoundPlayWave(sound2);
 	audio->SetBGMVolume(0.2f);
+	total = 0.0;
+	SetTime = 30;
+	start = clock() / CLOCKS_PER_SEC;
+	dt = SetTime;
 }
 
 void GameScene::Update()
@@ -174,7 +186,7 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 
-	//当たり判定
+#pragma region	当たり判定
 	for (int j = 0; j < 2; j++) {
 		for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
 
@@ -198,12 +210,12 @@ void GameScene::Update()
 				audio->SEPlayWave(sound1);
 				HitCount = 0;
 				gameObject->SetHIT(i, j, false);
-				Tsize+=gameObject->GetOSize(i,j);
+				Tsize += gameObject->GetOSize(i, j);
 			}
-			
-			
-				
-			
+
+
+
+
 			if (gameObject->GetObject3d(i, j)->GetParentFlag() == true)
 			{
 				player->SetColFlag(false, i);
@@ -215,13 +227,14 @@ void GameScene::Update()
 			}
 		}
 	}
+#pragma endregion
 	//DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject3d(0,0)->GetParentFlag());
 
-	
+
 	colMan->SetTsize2(Tsize);
 
 	//プレイヤーの大きさ
-	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", colMan->GetTsize());
+	DebugText::GetInstance()->Printf(100, 40, 3.0f, "%dcm", (int)colMan->GetTsize());
 
 	Tsize2 = (int)colMan->GetTsize();
 	if (Tsize2 % 10 == 0) {
@@ -240,10 +253,13 @@ void GameScene::Update()
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	TimeCount++;
 	//TimeUI
+	//3分
 	//5分(18000/60)は0.02
 	//10分(36000/60)は0.0015
 	//25分(90000/60)は0.0006(多分)
 	//tn,ut,ci,shp,kn,em,zm,syo,rb,gr,os
+
+#pragma region ポーズ	
 	if (PoseFlag == false) {
 		if (Input::GetInstance()->TriggerKey(DIK_R)) {
 			PoseFlag = true;
@@ -290,10 +306,13 @@ void GameScene::Update()
 		if (TimeRot < 360) {
 			TimeRot += 0.02f;
 		}
-		if (clearTimer > 0) {
-			clearTimer -= 1.0f;
+		if (dt > 0) {
+			end = clock() / CLOCKS_PER_SEC;
+			total = end - start;
+			dt = SetTime - total;
+
 		}
-		else if (clearTimer <= 0) {
+		else if (dt <= 0) {
 			if (Tsize2 < 30) {
 				DebugText::GetInstance()->Printf(500, 400, 3.0f, "GameOver");
 				overFlag = true;
@@ -313,6 +332,7 @@ void GameScene::Update()
 		player->Update();
 		gameObject->Update();
 	}
+#pragma endregion
 #if _DEBUG 
 	//デバッグでクリアとゲームオーバー見るために作ったやつ
 	if (Input::GetInstance()->TriggerKey(DIK_Q)) {
@@ -328,9 +348,8 @@ void GameScene::Update()
 		player->RC();
 	}
 #endif
-	//else {
-	clearTimer2 = (int)(clearTimer / 60.0f);
-	//}
+
+
 	timeSprite2->SetRotation(TimeRot);
 
 	object3d3->SetScale({ 4.0f,4.0f,4.0f });
@@ -408,7 +427,7 @@ void GameScene::DrawFront()
 
 	//DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
 		//player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
-	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", clearTimer2);
+	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", (int)dt);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }
