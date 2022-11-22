@@ -438,12 +438,12 @@ void GameScene::DrawFront()
 
 	if (((int)dt / 60 == 0)) {
 		timeSprite3->Draw();
-		DebugText::GetInstance()->Printf(960, 50, 3.0f, { 1.0f,0.5f,0,1 }, "%d", (int)dt);
+		DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1.0f,0.5f,0,1 }, "%d", (int)dt);
 	}
 	else
 	{
 		timeSprite->Draw();
-		DebugText::GetInstance()->Printf(960, 50, 3.0f, { 1,1,1,1 }, "%d", (int)(dt / 60) + 1);
+		DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1,1,1,1 }, "%d", (int)(dt / 60) + 1);
 	}
 	timeSprite2->Draw();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
