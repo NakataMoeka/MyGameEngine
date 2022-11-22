@@ -111,9 +111,11 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(25, L"Resources/UI/number/Number.png");
 	Sprite::LoadTexture(26, L"Resources/UI/number/m.png");
 	Sprite::LoadTexture(27, L"Resources/UI/number/cm.png");
+	Sprite::LoadTexture(28, L"Resources/UI/TimeUI_2.png");
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 	timeSprite = Sprite::CreateSprite(6, { 1100,100 });
 	timeSprite2 = Sprite::CreateSprite(7, { 1100,100 });
+	timeSprite3 = Sprite::CreateSprite(28, { 1100,100 });
 	PoseSprite = Sprite::CreateSprite(20, { 0,0 });
 	TitleBackSprite = Sprite::CreateSprite(21, { 0,0 });
 	BackSprite = Sprite::CreateSprite(22, { 0,0 });
@@ -123,7 +125,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 		Number[i] = Sprite::CreateSprite(25, { 0,0 });
 	}
 	Meters = Sprite::CreateSprite(26, { 0,0 });
-	Centimeter = Sprite::CreateSprite(25, { 0,0 });
+	Centimeter = Sprite::CreateSprite(27, { 0,0 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
@@ -161,7 +163,7 @@ void GameScene::Init()
 	TimeRot = 0;
 	TimeCount = 0;
 	start = (double)time(NULL);
-	
+
 	PoseFlag = false;//ゲーム中断フラグ
 	TitleFlag = false;//タイトルに戻るフラグ
 	PS = 0;
@@ -171,6 +173,7 @@ void GameScene::Init()
 	SetTime = 180;
 	start = clock() / CLOCKS_PER_SEC;
 	dt = SetTime;
+	TR = (float)dt;
 }
 
 void GameScene::Update()
@@ -251,7 +254,7 @@ void GameScene::Update()
 
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
-	TimeCount++;
+	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
 	//TimeUI
 	//3分
 	//5分(18000/60)は0.02
@@ -303,7 +306,16 @@ void GameScene::Update()
 
 
 	else if (PoseFlag == false) {
-		TimeRot = (float)dt * 2;
+		if (dt > 60) {
+			TR = (float)dt;
+		}
+		else if (dt == 60) {
+			TimeRot = 180;
+		}
+		else if (dt <= 60) {
+			TR = (float)dt * 3;
+		}
+		TimeRot = TR * 2;
 		if (dt > 0) {
 			end = clock() / CLOCKS_PER_SEC;
 			total = end - start;
@@ -405,8 +417,6 @@ void GameScene::DrawFront()
 {
 	//前景
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	timeSprite->Draw();
-	timeSprite2->Draw();
 	player->DrawSprite();
 	if (PoseFlag == true) {
 		PBSprite->Draw();
@@ -425,7 +435,17 @@ void GameScene::DrawFront()
 
 	//DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
 		//player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
-	DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", (int)dt);
+
+	if (((int)dt / 60 == 0)) {
+		timeSprite3->Draw();
+		DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", (int)dt);
+	}
+	else
+	{
+		timeSprite->Draw();
+		DebugText::GetInstance()->Printf(960, 50, 3.0f, "%d", ((int)dt / 60) + 1);
+	}
+	timeSprite2->Draw();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

@@ -73,6 +73,7 @@ private: // メンバ変数
 
 	Sprite* sprite = nullptr;
 	Sprite* timeSprite = nullptr;//円
+	Sprite* timeSprite3 = nullptr;//円
 	Sprite* timeSprite2 = nullptr;//バー
 	Sprite* PoseSprite = nullptr;
 	Sprite* TitleBackSprite = nullptr;
@@ -123,9 +124,7 @@ private: // メンバ変数
 	//タイマー系
 	float TimeRot = 0;
 	int TimeCount = 0;
-	float clearTimer = 18000;//1800/60が30秒
-	int clearTimer2 = 0;
-
+	float TR;
 	double start;
 	double end;
 	double dt;
