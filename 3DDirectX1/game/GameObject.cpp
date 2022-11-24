@@ -59,23 +59,18 @@ void GameObject::Init()
 
 		}
 	}
-
+	size[0] = { 2,2,2 };
+	size[1] = { 5,5,5 };
 	for (int i = 0; i < oData.size(); i++) {
 
 		float radius = 2.0f;
-		size[0] = { 2,2,2 };
-		size[1] = { 5,5,5 };
 		rota = { 0,0,0,0 };
-
 		cube[i]->SetPosition(oData[i]->pos);
 		cube[i]->SetScale(size[0]);
 		cube[i]->Update();
-
 		//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
 		cSphere[i].radius = 1;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-
-
 		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		cube[i]->GetCollider()->SetNum(0);

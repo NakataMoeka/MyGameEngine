@@ -164,9 +164,9 @@ void Player::Move()
 	//}
 
 
-	//if (JumpFlag == true) {
-	//	playerObj->PlayAnimation(0);
-	//}
+	if (JumpFlag == true) {
+		playerObj->PlayAnimation(0);
+	}
 
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
