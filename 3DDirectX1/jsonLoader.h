@@ -1,11 +1,8 @@
 #pragma once
-#include<json.hpp>
 
-#include <DirectXMath.h>
+#include <string>
 #include <vector>
-#include"Model.h"
-#include<map>
-#include"Object3d.h"
+#include <DirectXMath.h>
 struct LevelData {
 
 	struct ObjectData {
@@ -26,8 +23,6 @@ struct LevelData {
 class json_Loader
 {
 private: // エイリアス
-	// Microsoft::WRL::を省略
-	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 	// DirectX::を省略
 	using XMFLOAT2 = DirectX::XMFLOAT2;
 	using XMFLOAT3 = DirectX::XMFLOAT3;
@@ -40,7 +35,5 @@ public:
 	/// </summary>
 	/// <param name="fileName">ファイルの名前</param>
 	static LevelData* jsonLoad(const std::string& file_Name);
-	//モデルデータコンテナ
-	static std::map<std::string, Model> models;
-	std::vector<Object3d*> objects;
+
 };

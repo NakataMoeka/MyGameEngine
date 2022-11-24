@@ -163,12 +163,16 @@ void GameScene::Update()
 
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
-	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 	for (auto& object : objects) {
+		object->SetPosition({ 0, 0, 0 });
 		object->Update();
 	}
+	object3d3->Update();
+	camera->Update();
+
+
 }
 
 void GameScene::DrawBG()

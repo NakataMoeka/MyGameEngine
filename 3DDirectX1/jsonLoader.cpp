@@ -1,9 +1,10 @@
 #include "jsonLoader.h"
 #include <fstream>
 #include<cassert>
-#include <string>
+#include <json.hpp>
+
 using namespace DirectX;
-using namespace Microsoft::WRL;
+
 using namespace std;
 LevelData* json_Loader::jsonLoad(const std::string& file_Name)
 {

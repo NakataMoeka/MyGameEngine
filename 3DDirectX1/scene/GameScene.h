@@ -14,14 +14,12 @@
 #include "Camera.h"
 #include "FbxObject.h"
 #include"LightGroup.h"
-#include"player.h"
-#include"GameObject.h"
-#include"stageObject.h"
+
 #include"Collision.h"
 #include<vector>
 #include<array>
 #include<map>
-#include"../3DDirectX1/jsonLoader.h"
+struct LevelData;
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -98,9 +96,6 @@ private: // メンバ変数
 
 	CollisionManager* colMan = nullptr;
 
-	Player* player = nullptr;
-	GameObject* gameObject = nullptr;
-	StageObject* stageObj = nullptr;
 
 	Model* modelCube = nullptr;
 
