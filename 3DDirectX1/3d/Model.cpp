@@ -110,6 +110,7 @@ void Model::LoadTextures()
 
 void Model::LoadModel(const std::string& modelname, bool smoothing)
 {
+
 	const string filename = modelname + ".obj";
 	const string directoryPath = baseDirectory + modelname + "/";
 

@@ -1,11 +1,15 @@
 #include "jsonLoader.h"
 #include <fstream>
 #include<cassert>
-void json_Loader::jsonLoad(const std::string& fileName)
+#include <string>
+using namespace DirectX;
+using namespace Microsoft::WRL;
+using namespace std;
+LevelData* json_Loader::jsonLoad(const std::string& file_Name)
 {
 	//json
 //連結してフルパスを得る
-	const std::string fullpath = std::string("Resources/") + fileName + ".json";
+	const std::string fullpath = std::string("Resources/") + file_Name + ".json";
 	std::ifstream file;
 	file.open(fullpath);
 	if (file.fail()) {
@@ -57,12 +61,16 @@ void json_Loader::jsonLoad(const std::string& fileName)
 				objectData.scaling.m128_f32[1] = (float)transform["scaling"][2];
 				objectData.scaling.m128_f32[2] = (float)transform["scaling"][0];
 				objectData.scaling.m128_f32[3] = 0.0f;
-				// TODO: オブジェクト走査を再帰関数にまとめ、再帰呼出しで枝を走査する
-				if (object.contains("children"))
-				{
-				}
+
 
 			}
+			// TODO: オブジェクト走査を再帰関数にまとめ、再帰呼出しで枝を走査する
+			if (object.contains("children"))
+			{
+			}
 		}
+
 	}
+
+	return levelData;
 }
