@@ -166,11 +166,24 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 	for (auto& object : objects) {
-		//camera->FollowCamera(object->GetPosition(), { 0,0,-30 }, 0, 0);
+		DebugText::GetInstance()->Printf(100, 420, 3.0f, {1,1,1,1}, "%f,%f,%f",
+			object->GetPosition().x, object->GetPosition().y, object->GetPosition().z);
 		object->Update();
 	}
 	object3d3->Update();
-
+	if (Input::GetInstance()->PushKey(DIK_W)) {
+		cPos.z++;
+	}
+	else if (Input::GetInstance()->PushKey(DIK_S)) {
+		cPos.z--;
+	}
+	else if (Input::GetInstance()->PushKey(DIK_A)) {
+		cPos.x--;
+	}
+	else if (Input::GetInstance()->PushKey(DIK_D)) {
+		cPos.x++;
+	}
+	camera->FollowCamera(cPos, { 0,0,-30 }, 0, 0);
 	camera->Update();
 
 

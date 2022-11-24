@@ -105,4 +105,5 @@ private: // メンバ変数
 	LevelData* levelData = nullptr;
 	std::map<std::string, Model*> models;
 	std::vector<Object3d*> objects;
+	XMFLOAT3 cPos{ 0,0,0 };
 };
