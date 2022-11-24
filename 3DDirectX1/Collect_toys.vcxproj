@@ -79,12 +79,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)2d\;$(ProjectDir)3d\;$(ProjectDir)camera\;$(ProjectDir)DirectXCommon\;$(ProjectDir)input\;$(ProjectDir)audio\;$(ProjectDir)scene\;$(ProjectDir)others\;$(ProjectDir)game\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)2d\;$(ProjectDir)3d\;$(ProjectDir)camera\;$(ProjectDir)DirectXCommon\;$(ProjectDir)input\;$(ProjectDir)audio\;$(ProjectDir)scene\;$(ProjectDir)others\;$(ProjectDir)game\;$(ProjectDir)lib\n_json;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)2d\;$(ProjectDir)3d\;$(ProjectDir)camera\;$(ProjectDir)DirectXCommon\;$(ProjectDir)input\;$(ProjectDir)audio\;$(ProjectDir)scene\;$(ProjectDir)others\;$(ProjectDir)game\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)2d\;$(ProjectDir)3d\;$(ProjectDir)camera\;$(ProjectDir)DirectXCommon\;$(ProjectDir)input\;$(ProjectDir)audio\;$(ProjectDir)scene\;$(ProjectDir)others\;$(ProjectDir)game\;$(ProjectDir)lib\n_json;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -186,6 +186,7 @@
     <ClCompile Include="game\player.cpp" />
     <ClCompile Include="game\stageObject.cpp" />
     <ClCompile Include="input\input.cpp" />
+    <ClCompile Include="jsonLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="others\Collision.cpp" />
     <ClCompile Include="others\CollisionManager.cpp" />
@@ -364,6 +365,7 @@
     <ClInclude Include="game\player.h" />
     <ClInclude Include="game\stageObject.h" />
     <ClInclude Include="input\input.h" />
+    <ClInclude Include="jsonLoader.h" />
     <ClInclude Include="others\BaseCollider.h" />
     <ClInclude Include="others\Collision.h" />
     <ClInclude Include="others\CollisionAttribute.h" />

@@ -10,6 +10,7 @@
 #include"TouchableObject.h"
 #include"MeshCollider.h"
 #include<time.h>
+
 GameScene::GameScene()
 {
 
@@ -142,6 +143,8 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	gameObject->Initialize();
 	stageObj = new StageObject;//newすればエラー吐かない
 	stageObj->Initialize();
+
+
 }
 
 void GameScene::Init()
