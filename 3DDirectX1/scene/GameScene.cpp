@@ -115,31 +115,35 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	//audio->SetBGMVolume(0.5f);
 	// カメラ注視点をセット
 	levelData = json_Loader::jsonLoad("untitled");
-	modelCube = Model::Create("cube", false);
-	models.insert(std::make_pair("cube", modelCube));
+	modelCube = Model::Create("Cube", false);
+	models.insert(std::make_pair("Cube", modelCube));
+	// レベルデータからオブジェクトを生成、配置
 	for (auto& objectData : levelData->objects) {
-		//ファイル名から登録済みモデルを検索
+		// ファイル名から登録済みモデルを検索
 		Model* model = nullptr;
 		decltype(models)::iterator it = models.find(objectData.fileName);
 		if (it != models.end()) {
 			model = it->second;
 		}
-		//モデルを指定して3dオブジェクトを生成
+
+		// モデルを指定して3Dオブジェクトを生成
 		Object3d* newObject = Object3d::Create(model);
-		//座標
-		XMFLOAT3 pos;
-		XMStoreFloat3(&pos, objectData.translation);
+
+		// 座標
+		DirectX::XMFLOAT3 pos;
+		DirectX::XMStoreFloat3(&pos, objectData.translation);
 		newObject->SetPosition(pos);
-		//回転角
-		XMFLOAT3 rot;
-		XMStoreFloat3(&rot, objectData.rotation);
-		XMVECTOR rotV = XMVectorSet(rot.x, rot.y, rot.z, 0);
-		newObject->SetRotation(rotV);
-		//サイズ
-		XMFLOAT3 scale;
-		XMStoreFloat3(&scale, objectData.scaling);
-		newObject->SetPosition(scale);
-		//配列に登録
+
+		// 回転角
+		//quaternionを使用しているので変換しない
+		newObject->SetRotation(objectData.rotation);
+
+		// 座標
+		DirectX::XMFLOAT3 scale;
+		DirectX::XMStoreFloat3(&scale, objectData.scaling);
+		newObject->SetScale(scale);
+
+		// 配列に登録
 		objects.push_back(newObject);
 	}
 	camera->SetTarget({ 0, 0.0f, 0 });
@@ -168,6 +172,8 @@ void GameScene::Update()
 	for (auto& object : objects) {
 		DebugText::GetInstance()->Printf(100, 420, 3.0f, {1,1,1,1}, "%f,%f,%f",
 			object->GetPosition().x, object->GetPosition().y, object->GetPosition().z);
+		DebugText::GetInstance()->Printf(100, 100, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+			object->GetScale().x, object->GetScale().y, object->GetScale().z);
 		object->Update();
 	}
 	object3d3->Update();
