@@ -189,6 +189,12 @@ void GameScene::Update()
 	else if (Input::GetInstance()->PushKey(DIK_D)) {
 		cPos.x++;
 	}
+	else if (Input::GetInstance()->PushKey(DIK_Q)) {
+		cPos.y--;
+	}
+	else if (Input::GetInstance()->PushKey(DIK_E)) {
+		cPos.y++;
+	}
 	camera->FollowCamera(cPos, { 0,0,-30 }, 0, 0);
 	camera->Update();
 
@@ -209,13 +215,14 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 
+	for (auto& object : objects) {
+		object->Draw();
+	}
 	object3d3->Draw();
 
 	//object3d->Draw();
 	//object3d2->Draw();
-	for (auto& object : objects) {
-		object->Draw();
-	}
+	
 
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
