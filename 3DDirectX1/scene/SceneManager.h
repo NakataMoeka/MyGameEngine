@@ -16,12 +16,13 @@
 #include"TitleScene.h"
 #include"GameScene.h"
 #include"ClearScene.h"
+#include"SelectScene.h"
 class SceneManager
 {
 public:
 	enum Scene
 	{
-		TITLE, GAME, END,
+		TITLE,SELECT, GAME, END,
 	};
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
 	void Initialize(DXCommon* dxCommon, Audio* audio);
@@ -40,6 +41,7 @@ private:
 	//最初のシーン
 	Scene scene = TITLE;
 	TitleScene* titleScene=nullptr;
+	SelectScene* selectScene = nullptr;
 	GameScene* gameScene=nullptr;
 	ClearScene* clearScene=nullptr;
 	bool Bflag = false;

@@ -12,11 +12,13 @@
 #include "Camera.h"
 #include "FbxObject.h"
 #include"LightGroup.h"
+#include<array>
 /// <summary>
-/// ステージセレクト
+/// ステージセレクト　
 /// </summary>
 class SelectScene
 {
+public:
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
 	void Initialize(DXCommon* dxCommon, Audio* audio);
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
@@ -31,5 +33,13 @@ class SelectScene
 	void DrawFront();
 	//パーティクル
 	void CreateParticles();
+private:
+	DXCommon* dxCommon = nullptr;
+	Audio* audio = nullptr;
+	const int debugTextTexNumber = 0;
+	Camera* camera = nullptr;
+	LightGroup* lightGroup = nullptr;
+	std::array < Sprite*, 5> backSprite = {};
+	int spriteCount = 0;
 };
 

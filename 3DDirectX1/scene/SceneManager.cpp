@@ -4,6 +4,8 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 {
 	titleScene = new TitleScene();
 	titleScene->Initialize(dxCommon, audio);
+	selectScene = new SelectScene();
+	selectScene->Initialize(dxCommon, audio);
 	clearScene = new ClearScene();
 	clearScene->Initialize(dxCommon, audio);
 	gameScene = new GameScene();
@@ -23,10 +25,18 @@ void SceneManager::Update()
 {
 	if (scene == TITLE) {
 		if (titleScene->GetSCangeFlag() == true) {
+			selectScene->Init();
+			scene = SELECT;
+
+		}
+		titleScene->Update();
+	}
+	else if (scene == SELECT) {
+		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 			gameScene->Init();
 			scene = GAME;
 		}
-		titleScene->Update();
+		selectScene->Update();
 	}
 	else if (scene == GAME) {
 		if (gameScene->GetClearFlag() == true) {
@@ -70,6 +80,9 @@ void SceneManager::DrawBG()
 {
 	if (scene == TITLE) {
 		titleScene->DrawBG();
+	}
+	else if (scene == SELECT) {
+		selectScene->DrawBG();
 	}
 	else if (scene == GAME) {
 		gameScene->DrawBG();

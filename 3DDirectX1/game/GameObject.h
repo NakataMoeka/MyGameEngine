@@ -42,7 +42,6 @@ public:
 	int GetOBJCount(int j);
 	float GetMat();
 	Object3d* GetObject3d(int i, int j);
-	bool GetAlive(int i, int j);
 	bool GetHIT(int i, int j);
 	bool SetHIT(int i, int j,bool Hit);
 	float GetOSize(int i, int j);
