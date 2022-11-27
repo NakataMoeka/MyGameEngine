@@ -36,8 +36,8 @@ public:
 	//GetterSetter
 	Sphere GetCSphere(int i, int j);
 
-	XMFLOAT3 GetPos(int i) { return position2[i]; }
-	XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
+	//XMFLOAT3 GetPos(int i) { return position2[i]; }
+	//XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize(int i) { return size[i]; }
 	int GetOBJCount(int j);
 	float GetMat();
@@ -63,8 +63,8 @@ private://変数
 	float r = 3;//
 	//サイズ角度位置
 	XMFLOAT3 pos{ 10,2,0 };
-	XMFLOAT3 position[OBJNumber] = {};
-	XMFLOAT3 position2[OBJNumber] = {};
+	
+	
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };
 	XMVECTOR rota = { 0,0,0,0 };
 	bool moveFlag = true;

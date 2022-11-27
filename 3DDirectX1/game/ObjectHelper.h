@@ -17,6 +17,7 @@ struct object
 	float oSize;//オブジェクトのサイズ(球を大きくするために設定するやつ)
 	//これより下にpositionなど書いていく
 	XMFLOAT3 pos = {};//位置
+	XMFLOAT3 o_pos = {};
 	XMVECTOR rot = {};//角度(クォータニオンを使用しているため、XMVECTOR)
 	XMFLOAT3 size = {};//見た目のサイズ(oSizeとは違う)
 	bool IsHit = false;//くっついたか否か
