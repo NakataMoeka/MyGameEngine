@@ -61,6 +61,7 @@ void SelectScene::Initialize(DXCommon* dxCommon, Audio* audio)
 void SelectScene::Init()
 {
 	spriteCount = 0;
+	stageNum = 0;
 	SCangeFlag = false;
 	SAFlag = 0;
 }
