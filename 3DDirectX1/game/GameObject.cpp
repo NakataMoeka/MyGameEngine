@@ -138,12 +138,14 @@ void GameObject::RC()
 {
 	for (int i = (int)oData.size() - 1; i >= 0; i--)
 	{
+		cube[i]->SetParentFlag(false);
 		cube[i]->RemoveCollider();
 		delete oData[i];
 		oData.erase(oData.begin() + i);
 	}
 	for (int i = (int)oData2.size() - 1; i >= 0; i--)
 	{
+		moveObj[i]->SetParentFlag(false);
 		moveObj[i]->RemoveCollider();
 		delete oData2[i];
 		oData2.erase(oData2.begin() + i);
