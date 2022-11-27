@@ -32,7 +32,8 @@ void SceneManager::Update()
 		titleScene->Update();
 	}
 	else if (scene == SELECT) {
-		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+		if (selectScene->GetSCangeFlag() == true) {
+			gameScene->InitStageNum(selectScene->GetStageNum());
 			gameScene->Init();
 			scene = GAME;
 		}
@@ -110,6 +111,9 @@ void SceneManager::DrawFront()
 	if (scene == TITLE) {
 		titleScene->DrawFront();
 	}
+	else if (scene == SELECT) {
+		selectScene->DrawFront();
+	}
 	else if (scene == GAME) {
 		gameScene->DrawFront();
 	}
@@ -118,6 +122,4 @@ void SceneManager::DrawFront()
 	}
 }
 
-void SceneManager::InitTH()
-{
-}
+

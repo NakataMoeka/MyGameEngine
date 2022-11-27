@@ -1,4 +1,5 @@
 #include "SelectScene.h"
+#include"Input.h"
 
 void SelectScene::Initialize(DXCommon* dxCommon, Audio* audio)
 {	//u
@@ -46,28 +47,74 @@ void SelectScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(43, L"Resources/UI/Select3.png");
 	Sprite::LoadTexture(44, L"Resources/UI/Select4.png");
 
+	Sprite::LoadTexture(45, L"Resources/UI/SelectUI.png");
+
 	backSprite[0] = Sprite::CreateSprite(40, { 0,0 });
 	backSprite[1] = Sprite::CreateSprite(41, { 0,0 });
 	backSprite[2] = Sprite::CreateSprite(42, { 0,0 });
 	backSprite[3] = Sprite::CreateSprite(43, { 0,0 });
 	backSprite[4] = Sprite::CreateSprite(44, { 0,0 });
-
+	backSprite[5] = Sprite::CreateSprite(40, { 0,0 });
+	SelectUI = Sprite::CreateSprite(45, { 0,0 });
 }
 
 void SelectScene::Init()
 {
 	spriteCount = 0;
+	SCangeFlag = false;
+	SAFlag = 0;
 }
 
 void SelectScene::Update()
 {
+	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
+	{
+		if (stageNum < 3) {
+			stageNum++;
+
+			spriteCount = 0;
+			SAFlag = 1;
+		}
+	}
+	else if (Input::GetInstance()->TriggerKey(DIK_UPARROW))
+	{
+		if (stageNum > 0) {
+			stageNum--;
+
+			spriteCount = 5;
+			SAFlag = 2;
+		}
+	}
+	if (SAFlag == 1) {
+		if (spriteCount < 5) {
+			spriteCount += 0.5f;
+		}
+		else if (spriteCount == 5) {
+			SAFlag = 0;
+		}
+
+	}
+	else if (SAFlag == 2) {
+		if (spriteCount > 0) {
+			spriteCount -= 0.5f;
+		}
+		else if (spriteCount == 0) {
+			SAFlag = 0;
+		}
+
+	}
+	else if (SAFlag == 0) {
+		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+			SCangeFlag = true;
+		}
+	}
 }
 
 void SelectScene::DrawBG()
 {
 	Sprite::PreDraw(dxCommon->GetCmdList());
 	dxCommon->ClearDepthBuffer();
-	backSprite[spriteCount]->Draw();
+	backSprite[(int)spriteCount]->Draw();
 	Sprite::PostDraw();
 }
 
@@ -77,6 +124,14 @@ void SelectScene::Draw()
 
 void SelectScene::DrawFront()
 {
+	Sprite::PreDraw(dxCommon->GetCmdList());
+	SelectUI->Draw();
+	if (SAFlag == 0) {
+		DebugText::GetInstance()->Printf(600, 300, 6.0f, { 0,0,0,1 }, "%d", stageNum);
+	}
+	DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
+	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
+	Sprite::PostDraw();
 }
 
 void SelectScene::CreateParticles()

@@ -23,6 +23,7 @@ public:
 	~StageObject();
 	void Initialize();
 	void Init();
+	void stageInit(int stageNum);
 	void Update();
 	void Draw();
 

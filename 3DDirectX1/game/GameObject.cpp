@@ -31,35 +31,6 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
-	LoadCSV(spawnMap, "Resources/objMap.csv");
-	int  num = 0;
-	for (size_t j = 0; j < MAP_HEIGHT; j++)
-	{
-		for (size_t i = 0; i < MAP_WIDTH; i++)
-		{
-			num = 0;
-
-			if (spawnMap[j][i] == 1)
-			{
-				oData.push_back(new object);
-				num = (int)oData.size() - 1;
-				oData[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
-				oData[num]->IsHit = false;
-				oData[num]->oSize = 1.0f;
-			}
-			if (spawnMap[j][i] == 2)
-			{
-				oData2.push_back(new object);
-				num = (int)oData2.size() - 1;
-				oData2[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
-				oData2[num]->o_pos = pos;
-				oData2[num]->IsHit = false;
-				oData2[num]->oSize = 3.0f;
-			}
-
-
-		}
-	}
 	size[0] = { 2,2,2 };
 	size[1] = { 5,5,5 };
 	for (int i = 0; i < oData.size(); i++) {
@@ -96,6 +67,47 @@ void GameObject::Init()
 	oSpeed = 0;
 }
 
+void GameObject::stageInit(int stageNum)
+{
+	if (stageNum == 1) {
+		LoadCSV(spawnMap, "Resources/objMap.csv");
+	}
+	else if (stageNum == 2) {
+
+	}
+	else if (stageNum == 3) {
+
+	}
+	int  num = 0;
+	for (size_t j = 0; j < MAP_HEIGHT; j++)
+	{
+		for (size_t i = 0; i < MAP_WIDTH; i++)
+		{
+			num = 0;
+
+			if (spawnMap[j][i] == 1)
+			{
+				oData.push_back(new object);
+				num = (int)oData.size() - 1;
+				oData[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
+				oData[num]->IsHit = false;
+				oData[num]->oSize = 1.0f;
+			}
+			if (spawnMap[j][i] == 2)
+			{
+				oData2.push_back(new object);
+				num = (int)oData2.size() - 1;
+				oData2[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
+				oData2[num]->o_pos = pos;
+				oData2[num]->IsHit = false;
+				oData2[num]->oSize = 3.0f;
+			}
+
+
+		}
+	}
+}
+
 void GameObject::Update()
 {
 	//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
@@ -128,7 +140,7 @@ void GameObject::Update()
 			}
 
 			moveObj[i]->SetPosition(oData2[i]->pos);
-	
+
 		}
 		moveObj[i]->Update();
 	}

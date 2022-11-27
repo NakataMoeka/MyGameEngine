@@ -30,6 +30,7 @@ public:
 	~GameObject();
 	void Initialize();
 	void Init();
+	void stageInit(int stageNum);
 	void Update();
 	void RC();//コライダー消すやつ
 	void Draw();

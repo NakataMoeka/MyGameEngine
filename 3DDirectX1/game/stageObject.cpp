@@ -29,15 +29,31 @@ void StageObject::Init()
 
 }
 
+void StageObject::stageInit(int stageNum)
+{
+	if (stageNum == 1) {
+		Kotatu->SetPosition({ 0,38,-80 });
+		Kotatu->Update();
+		Ground->SetScale({ 6,6,6 });
+		Ground->SetPosition({ 0,0,0 });
+		Ground->SetRotation({ 0,0,0 });
+		Ground->Quaternion();
+		Ground->Update();
+		Home->Update();
+	}
+	else if (stageNum == 2) {
+
+	}
+	else if (stageNum == 3) {
+
+	}
+}
+
 void StageObject::Update()
 {
 
-	Kotatu->SetPosition({ 0,38,-80 });
 	Kotatu->Update();
-	Ground->SetScale({ 6,6,6 });
-	Ground->SetPosition({ 0,0,0 });
-	Ground->SetRotation({ 0,0,0 });
-	Ground->Quaternion();
+
 	Ground->Update();
 	Home->Update();
 }

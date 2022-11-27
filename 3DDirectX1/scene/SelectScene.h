@@ -33,13 +33,19 @@ public:
 	void DrawFront();
 	//パーティクル
 	void CreateParticles();
+	int GetStageNum() { return stageNum; }
+	bool GetSCangeFlag() { return SCangeFlag; }
 private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
 	const int debugTextTexNumber = 0;
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;
-	std::array < Sprite*, 5> backSprite = {};
-	int spriteCount = 0;
+	std::array < Sprite*, 6> backSprite = {};
+	Sprite* SelectUI = nullptr;
+	float spriteCount = 0;
+	int stageNum = 0;
+	bool SCangeFlag = false;
+	int SAFlag = 0;//アニメーション用のフラグ
 };
 

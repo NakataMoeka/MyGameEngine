@@ -152,7 +152,9 @@ void GameScene::InitTH()
 void GameScene::Init()
 {
 	player->Init();
+	gameObject->stageInit(1);
 	gameObject->Init();
+	stageObj->stageInit(1);
 	stageObj->Init();
 	distance = 10.0f;
 
@@ -179,6 +181,10 @@ void GameScene::Init()
 	start = clock() / CLOCKS_PER_SEC;
 	dt = SetTime;
 	TR = (float)dt;
+}
+
+void GameScene::InitStageNum(int stageNum)
+{
 }
 
 void GameScene::Update()

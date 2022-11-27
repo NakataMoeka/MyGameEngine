@@ -44,6 +44,8 @@ public: // メンバ関数
 	void InitTH();
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init();
+	//ステージ初期化
+	void InitStageNum(int stageNum);
 	//繰り返し処理
 	void Update();
 	//背景画像描画
@@ -60,6 +62,7 @@ public: // メンバ関数
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
 	bool GetBFlag() { return Bflag; }
 	bool GetTitleFlag() { return TitleFlag; }
+	int SetStageNum(int stageNum) { return this->stageNum = stageNum; }
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
 
@@ -143,4 +146,7 @@ private: // メンバ変数
 	bool PoseFlag = false;//ゲーム中断フラグ
 	bool TitleFlag = false;//タイトルに戻るフラグ
 	int PS = 0;//ポーズ時のやつ
+
+	//ステージナンバー
+	int stageNum = 0;
 };
