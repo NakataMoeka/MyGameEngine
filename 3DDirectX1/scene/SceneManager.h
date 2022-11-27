@@ -17,12 +17,17 @@
 #include"GameScene.h"
 #include"ClearScene.h"
 #include"SelectScene.h"
+#include <thread>
 class SceneManager
 {
 public:
 	enum Scene
 	{
 		TITLE,SELECT, GAME, END,
+	};
+	enum Load_Situation
+	{
+		NOLOAD,NOWLOAD,ENDLOAD,
 	};
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
 	void Initialize(DXCommon* dxCommon, Audio* audio);
@@ -45,5 +50,10 @@ private:
 	GameScene* gameScene=nullptr;
 	ClearScene* clearScene=nullptr;
 	bool Bflag = false;
+	
+	//ロード画面作りたい
+	std::thread t = {};
+
+	Load_Situation Load_s = NOLOAD;
 };
 
