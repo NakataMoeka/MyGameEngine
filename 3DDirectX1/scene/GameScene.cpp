@@ -128,7 +128,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 		// モデルを指定して3Dオブジェクトを生成
 		Object3d* newObject = Object3d::Create(model);
-
+		newObject->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 		// 座標
 		DirectX::XMFLOAT3 pos;
 		DirectX::XMStoreFloat3(&pos, objectData.translation);
