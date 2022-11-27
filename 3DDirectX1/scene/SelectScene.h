@@ -41,6 +41,11 @@ private:
 	const int debugTextTexNumber = 0;
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;
+
+	SoundData sound1 = {};
+	SoundData sound2 = {};
+	SoundData sound3 = {};
+
 	std::array < Sprite*, 6> backSprite = {};
 	Sprite* SelectUI = nullptr;
 	float spriteCount = 0;

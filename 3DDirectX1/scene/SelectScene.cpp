@@ -56,6 +56,9 @@ void SelectScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	backSprite[4] = Sprite::CreateSprite(44, { 0,0 });
 	backSprite[5] = Sprite::CreateSprite(40, { 0,0 });
 	SelectUI = Sprite::CreateSprite(45, { 0,0 });
+	sound1 = Audio::SoundLoadWave("Resources/Music/BGM/famipop.wav");
+	sound2 = Audio::SoundLoadWave("Resources/Music/SE/Œˆ’èƒ{ƒ^ƒ“‚ð‰Ÿ‚·26.wav");
+	sound3 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");
 }
 
 void SelectScene::Init()
@@ -72,18 +75,18 @@ void SelectScene::Update()
 	{
 		if (stageNum < 3) {
 			stageNum++;
-
 			spriteCount = 0;
 			SAFlag = 1;
+			audio->SEPlayWave(sound3);
 		}
 	}
 	else if (Input::GetInstance()->TriggerKey(DIK_UPARROW))
 	{
 		if (stageNum > 0) {
 			stageNum--;
-
 			spriteCount = 5;
 			SAFlag = 2;
+			audio->SEPlayWave(sound3);
 		}
 	}
 	if (SAFlag == 1) {
@@ -107,6 +110,7 @@ void SelectScene::Update()
 	else if (SAFlag == 0) {
 		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 			SCangeFlag = true;
+			audio->SEPlayWave(sound2);
 		}
 	}
 }
@@ -130,7 +134,7 @@ void SelectScene::DrawFront()
 	if (SAFlag == 0) {
 		DebugText::GetInstance()->Printf(600, 300, 6.0f, { 0,0,0,1 }, "%d", stageNum);
 	}
-	DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
+	//DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }
