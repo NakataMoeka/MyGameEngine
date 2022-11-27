@@ -69,6 +69,26 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
+	// デバッグテキスト用テクスチャ読み込み
+	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
+		assert(0);
+		return;
+	}
+	// デバッグテキスト初期化
+	DebugText::GetInstance()->Initialize(debugTextTexNumber);
+
+
+	//audio->SoundPlayWave(sound1);
+	//audio->SoundPlayWave(sound2);
+	//audio->SetBGMVolume(0.5f);
+	// カメラ注視点をセット
+	camera->SetTarget({ 0, 0.0f, 0 });
+	camera->SetEye({ 0, 0, -10 });
+
+}
+
+void GameScene::InitTH()
+{
 	model3 = Model::Create("skydome", true);
 	model4 = Model::Create("ground", false);
 	object3d3 = Object3d::Create(model3);
@@ -91,15 +111,6 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	//object3d->Update();
 
 	//object3d2->Update();
-
-	// デバッグテキスト用テクスチャ読み込み
-	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
-		assert(0);
-		return;
-	}
-	// デバッグテキスト初期化
-	DebugText::GetInstance()->Initialize(debugTextTexNumber);
-
 	Sprite::LoadTexture(1, L"Resources/background.png");
 	Sprite::LoadTexture(6, L"Resources/UI/TimeUI.png");
 	Sprite::LoadTexture(7, L"Resources/UI/TimeUI2.png");
@@ -130,12 +141,6 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
 	sound4 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");
-	//audio->SoundPlayWave(sound1);
-	//audio->SoundPlayWave(sound2);
-	//audio->SetBGMVolume(0.5f);
-	// カメラ注視点をセット
-	camera->SetTarget({ 0, 0.0f, 0 });
-	camera->SetEye({ 0, 0, -10 });
 	player = new Player;//newすればエラー吐かない
 	player->Initialize();
 	gameObject = new GameObject;//newすればエラー吐かない
@@ -202,7 +207,7 @@ void GameScene::Update()
 					//player->SetColFlag(true, i);
 					gameObject->GetObject3d(i, j)->SetParentFlag(true);
 					//}
-					DebugText::GetInstance()->Printf(100, 60, 3.0f,{1,1,1,1}, "Hit");
+					DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 				}
 			}
 			if (gameObject->GetHIT(i, j) == true) {

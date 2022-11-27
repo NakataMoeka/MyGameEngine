@@ -41,6 +41,7 @@ public:
 	void Draw();
 	//‘OŒi‰æ‘œ•`‰æ
 	void DrawFront();
+	void InitTH();
 	bool GetBFlag() { return Bflag; }
 private:
 	//Å‰‚ÌƒV[ƒ“
@@ -55,5 +56,6 @@ private:
 	std::thread t = {};
 
 	Load_Situation Load_s = NOLOAD;
+	bool LoadFlag = false;
 };
 

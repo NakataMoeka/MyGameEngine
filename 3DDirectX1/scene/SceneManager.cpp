@@ -10,7 +10,7 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	clearScene->Initialize(dxCommon, audio);
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, audio);
-
+	gameScene->InitTH();
 	titleScene->Init();
 	Bflag = false;
 	//gameScene->Init();
@@ -116,4 +116,8 @@ void SceneManager::DrawFront()
 	else if (scene == END) {
 		clearScene->DrawFront();
 	}
+}
+
+void SceneManager::InitTH()
+{
 }
