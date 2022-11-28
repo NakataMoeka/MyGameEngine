@@ -19,6 +19,7 @@
 #include<vector>
 #include<array>
 #include"Timer.h"
+#include"Pose.h"
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -60,7 +61,7 @@ public: // メンバ関数
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
 	bool GetBFlag() { return Bflag; }
-	bool GetTitleFlag() { return TitleFlag; }
+	bool GetTitleFlag();
 	int SetStageNum(int stageNum) { return this->stageNum = stageNum; }
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
@@ -77,11 +78,6 @@ private: // メンバ変数
 
 	Sprite* sprite = nullptr;
 
-	Sprite* PoseSprite = nullptr;
-	Sprite* TitleBackSprite = nullptr;
-	Sprite* BackSprite = nullptr;
-	Sprite* InfoSprite = nullptr;
-	Sprite* PBSprite = nullptr;
 	//サイズ表示用のやつ
 	std::array < Sprite*, 4>Number = {};//数字。4つなのはcmとmの一の位と十の位があるため。
 	Sprite* Meters = nullptr;
@@ -108,7 +104,7 @@ private: // メンバ変数
 	StageObject* stageObj = nullptr;
 
 	Timer* timer = nullptr;
-
+	Pose* pose = nullptr;
 	const int debugTextTexNumber = 0;
 
 
@@ -132,9 +128,7 @@ private: // メンバ変数
 
 	bool Bflag = false;//ブラーを掛けるか否か
 
-	bool PoseFlag = false;//ゲーム中断フラグ
-	bool TitleFlag = false;//タイトルに戻るフラグ
-	int PS = 0;//ポーズ時のやつ
+
 
 	//ステージナンバー
 	int stageNum = 0;

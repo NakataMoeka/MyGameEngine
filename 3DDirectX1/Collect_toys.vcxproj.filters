@@ -77,6 +77,9 @@
     <Filter Include="Game\Object">
       <UniqueIdentifier>{a62df537-8e27-4eb1-8cab-5444c316321b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\gameScene">
+      <UniqueIdentifier>{95bcd190-42bc-4eb1-9de1-10dd4a91a5fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\DebugText.cpp">
@@ -197,7 +200,10 @@
       <Filter>Library\others\collision</Filter>
     </ClCompile>
     <ClCompile Include="game\Timer.cpp">
-      <Filter>Game</Filter>
+      <Filter>Game\gameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="game\Pose.cpp">
+      <Filter>Game\gameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -441,7 +447,10 @@
       <Filter>Library\others\collision</Filter>
     </ClInclude>
     <ClInclude Include="game\Timer.h">
-      <Filter>Game</Filter>
+      <Filter>Game\gameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="game\Pose.h">
+      <Filter>Game\gameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

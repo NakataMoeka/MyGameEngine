@@ -84,7 +84,8 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
-
+	pose = new Pose;
+	pose->Initialize(audio);
 }
 
 void GameScene::InitTH()
@@ -113,21 +114,12 @@ void GameScene::InitTH()
 	//object3d2->Update();
 	Sprite::LoadTexture(1, L"Resources/background.png");
 
-	Sprite::LoadTexture(20, L"Resources/UI/Pose.png");
-	Sprite::LoadTexture(21, L"Resources/UI/TitleBack.png");
-	Sprite::LoadTexture(22, L"Resources/UI/Back.png");
-	Sprite::LoadTexture(23, L"Resources/UI/Info.png");
-	Sprite::LoadTexture(24, L"Resources/UI/PoseBack.png");
 	Sprite::LoadTexture(25, L"Resources/UI/number/Number.png");
 	Sprite::LoadTexture(26, L"Resources/UI/number/m.png");
 	Sprite::LoadTexture(27, L"Resources/UI/number/cm.png");
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 
-	PoseSprite = Sprite::CreateSprite(20, { 0,0 });
-	TitleBackSprite = Sprite::CreateSprite(21, { 0,0 });
-	BackSprite = Sprite::CreateSprite(22, { 0,0 });
-	InfoSprite = Sprite::CreateSprite(23, { 0,0 });
-	PBSprite = Sprite::CreateSprite(24, { 0,0 });
+
 	for (int i = 0; i < 4; i++) {
 		Number[i] = Sprite::CreateSprite(25, { 0,0 });
 	}
@@ -135,8 +127,6 @@ void GameScene::InitTH()
 	Centimeter = Sprite::CreateSprite(27, { 0,0 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
-	sound3 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
-	sound4 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");
 	player = new Player;//newすればエラー吐かない
 	player->Initialize();
 	gameObject = new GameObject;//newすればエラー吐かない
@@ -145,6 +135,7 @@ void GameScene::InitTH()
 	stageObj->Initialize();
 	timer = new Timer;
 	timer->Initialize();
+
 }
 
 void GameScene::Init()
@@ -155,6 +146,7 @@ void GameScene::Init()
 	stageObj->stageInit(1);
 	stageObj->Init();
 	timer->Init();
+	pose->Init();
 	distance = 10.0f;
 
 	colMan->SetParentFlag(false);
@@ -168,9 +160,7 @@ void GameScene::Init()
 	HitCount = 0;
 
 
-	PoseFlag = false;//ゲーム中断フラグ
-	TitleFlag = false;//タイトルに戻るフラグ
-	PS = 0;
+
 	audio->SoundPlayWave(sound2);
 	audio->SetBGMVolume(0.2f);
 
@@ -265,51 +255,13 @@ void GameScene::Update()
 	//tn,ut,ci,shp,kn,em,zm,syo,rb,gr,os
 
 #pragma region ポーズなど
-	if (PoseFlag == false) {
-		if (Input::GetInstance()->TriggerKey(DIK_R)) {
-			PoseFlag = true;
-			audio->SEPlayWave(sound3);
-		}
-	}
-	if (PoseFlag == true) {
-		
-		if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW)) {
-			PS = 1;
-			audio->SEPlayWave(sound4);
-		}
-		else if (Input::GetInstance()->TriggerKey(DIK_UPARROW)) {
-			PS = 0;
-			audio->SEPlayWave(sound4);
-		}
 
-		if (PS == 0) {
-			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-				PoseFlag = false;
-				audio->SEPlayWave(sound3);
-			}
-			BackSprite->SetSize({ 500,110 });
-			TitleBackSprite->SetSize({ 350,55 });
-			BackSprite->SetPosition({ 400,500 });
-			TitleBackSprite->SetPosition({ 500,600 });
-		}
-		else if (PS == 1) {
-			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-				TitleFlag = true;
-				audio->StopWave();
-				gameObject->RC();
-				player->RC();
-				audio->SEPlayWave(sound3);
-			}
-			BackSprite->SetSize({ 250,55 });
-			TitleBackSprite->SetSize({ 500,110 });
-			BackSprite->SetPosition({ 500,550 });
-			TitleBackSprite->SetPosition({ 400,600 });
-		}
-	}
+	pose->Update();
 
+	player->SetPFlag(pose->GetJFlag());
 
-	else if (PoseFlag == false) {
-
+	if (pose->GetPFlag() == false) {
+		//player->SetPFlag(false);
 		timer->Update();
 		if (timer->GetDT() <= 0) {
 			if (Tsize2 < 30) {
@@ -356,7 +308,7 @@ void GameScene::Update()
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
 
-	if (TitleFlag == true) {
+	if (pose->GetTFlag() == true) {
 		gameObject->RC();
 		player->RC();
 	}
@@ -409,12 +361,8 @@ void GameScene::DrawFront()
 	player->DrawSprite();
 
 	timer->Draw();
-	if (PoseFlag == true) {
-		PBSprite->Draw();
-		PoseSprite->Draw();
-		TitleBackSprite->Draw();
-		BackSprite->Draw();
-		InfoSprite->Draw();
+	if (pose->GetPFlag() == true) {
+		pose->Draw();
 	}
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
 	//DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
@@ -452,4 +400,9 @@ void GameScene::CreateParticles()
 		// 追加
 		particleMan->Add(60, pos, vel, acc, 1.0f, 0.0f);
 	}
+}
+
+bool GameScene::GetTitleFlag()
+{
+	return pose->GetTFlag();
 }

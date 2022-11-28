@@ -43,7 +43,7 @@ public:
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetColFlag(bool ColFlag, int i) { return this->colFlag[i] = ColFlag; }
-
+	bool SetPFlag(bool pFlag) { return this->pFlag = pFlag; }
 private://Update()‚É‚Ü‚Æ‚ß‚é‚à‚Ì
 	void Move();//ˆÚ“®
 	void Ball();//ƒ{[ƒ‹ŠÖŒW
@@ -101,4 +101,5 @@ private://•Ï”
 
 	float PlayerWalkCount = 0;
 	float CountWalk = 0;
+	bool pFlag = false;
 };

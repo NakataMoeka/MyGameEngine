@@ -46,7 +46,7 @@ void Player::Init()
 	CountWalk = 0;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-
+	pFlag = false;
 
 	spherePos = { 0,3,-40 };
 	playerPos = { 0,50,-40 };
@@ -214,10 +214,12 @@ void Player::Jump()
 	}
 	//ƒWƒƒƒ“ƒv‘€ì
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-		onGround = false;
-		JumpFlag = true;
-		const float jumpVYFist = 1.0f;
-		fallV = { 0, jumpVYFist, 0, 0 };
+		if (pFlag == false) {
+			onGround = false;
+			JumpFlag = true;
+			const float jumpVYFist = 1.0f;
+			fallV = { 0, jumpVYFist, 0, 0 };
+		}
 	}
 	playerObj->UpdateWorldMatrix();
 	playerObj->GetCollider()->Update();
