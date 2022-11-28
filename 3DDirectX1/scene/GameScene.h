@@ -3,11 +3,9 @@
 
 #include"SafeDelete.h"
 #include <DirectXMath.h>
-#include"input.h"
 #include"Sprite.h"
 #include"Audio.h"
 #include"DXCommon.h"
-#include"DebugText.h"
 #include"Object3d.h"
 #include "ParticleManager.h"
 #include"Model.h"
@@ -20,6 +18,7 @@
 #include"Collision.h"
 #include<vector>
 #include<array>
+#include"Timer.h"
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -77,9 +76,7 @@ private: // メンバ変数
 	ParticleManager* particleMan = nullptr;
 
 	Sprite* sprite = nullptr;
-	Sprite* timeSprite = nullptr;//円
-	Sprite* timeSprite3 = nullptr;//円
-	Sprite* timeSprite2 = nullptr;//バー
+
 	Sprite* PoseSprite = nullptr;
 	Sprite* TitleBackSprite = nullptr;
 	Sprite* BackSprite = nullptr;
@@ -110,6 +107,8 @@ private: // メンバ変数
 	GameObject* gameObject = nullptr;
 	StageObject* stageObj = nullptr;
 
+	Timer* timer = nullptr;
+
 	const int debugTextTexNumber = 0;
 
 
@@ -126,20 +125,10 @@ private: // メンバ変数
 
 	float distance = 20.0f;//プレイヤーとカメラの距離
 
-	//タイマー系
-	float TimeRot = 0;
-	int TimeCount = 0;
-	float TR;
-	double start;
-	double end;
-	double dt;
-	double total;
-	double SetTime;
+
 
 	bool clearFlag = false;
 	bool overFlag = false;
-	float sphereSize = 1;
-	float spherePosY = 3;
 
 	bool Bflag = false;//ブラーを掛けるか否か
 

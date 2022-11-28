@@ -196,6 +196,9 @@
     <ClCompile Include="others\SphereColliderFbx.cpp">
       <Filter>Library\others\collision</Filter>
     </ClCompile>
+    <ClCompile Include="game\Timer.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -436,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="others\SphereColliderFbx.h">
       <Filter>Library\others\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="game\Timer.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

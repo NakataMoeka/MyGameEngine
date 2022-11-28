@@ -112,8 +112,7 @@ void GameScene::InitTH()
 
 	//object3d2->Update();
 	Sprite::LoadTexture(1, L"Resources/background.png");
-	Sprite::LoadTexture(6, L"Resources/UI/TimeUI.png");
-	Sprite::LoadTexture(7, L"Resources/UI/TimeUI2.png");
+
 	Sprite::LoadTexture(20, L"Resources/UI/Pose.png");
 	Sprite::LoadTexture(21, L"Resources/UI/TitleBack.png");
 	Sprite::LoadTexture(22, L"Resources/UI/Back.png");
@@ -122,11 +121,8 @@ void GameScene::InitTH()
 	Sprite::LoadTexture(25, L"Resources/UI/number/Number.png");
 	Sprite::LoadTexture(26, L"Resources/UI/number/m.png");
 	Sprite::LoadTexture(27, L"Resources/UI/number/cm.png");
-	Sprite::LoadTexture(28, L"Resources/UI/TimeUI_2.png");
 	sprite = Sprite::CreateSprite(1, { 0,0 });
-	timeSprite = Sprite::CreateSprite(6, { 1100,100 });
-	timeSprite2 = Sprite::CreateSprite(7, { 1100,100 });
-	timeSprite3 = Sprite::CreateSprite(28, { 1100,100 });
+
 	PoseSprite = Sprite::CreateSprite(20, { 0,0 });
 	TitleBackSprite = Sprite::CreateSprite(21, { 0,0 });
 	BackSprite = Sprite::CreateSprite(22, { 0,0 });
@@ -147,6 +143,8 @@ void GameScene::InitTH()
 	gameObject->Initialize();
 	stageObj = new StageObject;//newすればエラー吐かない
 	stageObj->Initialize();
+	timer = new Timer;
+	timer->Initialize();
 }
 
 void GameScene::Init()
@@ -156,6 +154,7 @@ void GameScene::Init()
 	gameObject->Init();
 	stageObj->stageInit(1);
 	stageObj->Init();
+	timer->Init();
 	distance = 10.0f;
 
 	colMan->SetParentFlag(false);
@@ -167,20 +166,14 @@ void GameScene::Init()
 	Tsize2 = (int)Tsize;
 	TCount = 0;
 	HitCount = 0;
-	TimeRot = 0;
-	TimeCount = 0;
-	start = (double)time(NULL);
+
 
 	PoseFlag = false;//ゲーム中断フラグ
 	TitleFlag = false;//タイトルに戻るフラグ
 	PS = 0;
 	audio->SoundPlayWave(sound2);
 	audio->SetBGMVolume(0.2f);
-	total = 0.0;
-	SetTime = 180;
-	start = clock() / CLOCKS_PER_SEC;
-	dt = SetTime;
-	TR = (float)dt;
+
 }
 
 void GameScene::InitStageNum(int stageNum)
@@ -263,9 +256,7 @@ void GameScene::Update()
 		Bflag = true;;
 	}
 
-	timeSprite->SetAnchorPoint({ 0.5,0.5 });
-	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
-	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
+
 	//TimeUI
 	//3分
 	//5分(18000/60)は0.02
@@ -281,6 +272,7 @@ void GameScene::Update()
 		}
 	}
 	if (PoseFlag == true) {
+		
 		if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW)) {
 			PS = 1;
 			audio->SEPlayWave(sound4);
@@ -317,23 +309,9 @@ void GameScene::Update()
 
 
 	else if (PoseFlag == false) {
-		if (dt > 60) {
-			TR = (float)dt;
-		}
-		else if (dt == 60) {
-			TimeRot = 180;
-		}
-		else if (dt <= 60) {
-			TR = (float)dt * 3;
-		}
-		TimeRot = TR * 2;
-		if (dt > 0) {
-			end = clock() / CLOCKS_PER_SEC;
-			total = end - start;
-			dt = SetTime - total;
 
-		}
-		else if (dt <= 0) {
+		timer->Update();
+		if (timer->GetDT() <= 0) {
 			if (Tsize2 < 30) {
 				DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 				overFlag = true;
@@ -371,7 +349,7 @@ void GameScene::Update()
 #endif
 
 
-	timeSprite2->SetRotation(-TimeRot);
+
 
 	object3d3->SetScale({ 4.0f,4.0f,4.0f });
 
@@ -429,6 +407,8 @@ void GameScene::DrawFront()
 	//前景
 	Sprite::PreDraw(dxCommon->GetCmdList());
 	player->DrawSprite();
+
+	timer->Draw();
 	if (PoseFlag == true) {
 		PBSprite->Draw();
 		PoseSprite->Draw();
@@ -443,20 +423,9 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 240, 3.0f, { 1,1,1,1 }, "LRARROW:ANGLE");
 	DebugText::GetInstance()->Printf(100, 280, 3.0f, { 1,1,1,1 }, "UPARROW:DASH");
 	DebugText::GetInstance()->Printf(100, 320, 3.0f, { 1,1,1,1 }, "SPACE:JUMP");
-
+	DebugText::GetInstance()->Printf(100, 360, 3.0f, { 1,1,1,1 }, "R:POSE");
 	//DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
 		//player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
-
-	if (((int)dt / 60 == 0)) {
-		timeSprite3->Draw();
-		DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1.0f,0.5f,0,1 }, "%d", (int)dt);
-	}
-	else
-	{
-		timeSprite->Draw();
-		DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1,1,1,1 }, "%d", (int)(dt / 60) + 1);
-	}
-	timeSprite2->Draw();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }
