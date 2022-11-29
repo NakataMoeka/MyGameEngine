@@ -205,6 +205,9 @@
     <ClCompile Include="game\Pose.cpp">
       <Filter>Game\gameScene</Filter>
     </ClCompile>
+    <ClCompile Include="game\Tutorial.cpp">
+      <Filter>Game\gameScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -450,6 +453,9 @@
       <Filter>Game\gameScene</Filter>
     </ClInclude>
     <ClInclude Include="game\Pose.h">
+      <Filter>Game\gameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="game\Tutorial.h">
       <Filter>Game\gameScene</Filter>
     </ClInclude>
   </ItemGroup>

@@ -334,11 +334,11 @@ void GameScene::DrawFront()
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
 	//DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
 	//DebugText::GetInstance()->Printf(100, 80, 3.0f, "%d", Alive[1]);
-	DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "WASD:MOVE");
-	DebugText::GetInstance()->Printf(100, 240, 3.0f, { 1,1,1,1 }, "LRARROW:ANGLE");
-	DebugText::GetInstance()->Printf(100, 280, 3.0f, { 1,1,1,1 }, "UPARROW:DASH");
-	DebugText::GetInstance()->Printf(100, 320, 3.0f, { 1,1,1,1 }, "SPACE:JUMP");
-	DebugText::GetInstance()->Printf(100, 360, 3.0f, { 1,1,1,1 }, "R:POSE");
+	//DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "WASD:MOVE");
+	//DebugText::GetInstance()->Printf(100, 240, 3.0f, { 1,1,1,1 }, "LRARROW:ANGLE");
+	//DebugText::GetInstance()->Printf(100, 280, 3.0f, { 1,1,1,1 }, "UPARROW:DASH");
+	//DebugText::GetInstance()->Printf(100, 320, 3.0f, { 1,1,1,1 }, "SPACE:JUMP");
+	//DebugText::GetInstance()->Printf(100, 360, 3.0f, { 1,1,1,1 }, "R:POSE");
 	//DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
 		//player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());

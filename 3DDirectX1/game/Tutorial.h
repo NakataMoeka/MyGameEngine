@@ -12,6 +12,6 @@ public:
 	void Updata();
 	void Draw();
 private:
-	std::array < Sprite*, 6> TutorialSprite = {};
+	std::array < Sprite*, 7> TutorialSprite = {};
 };
 
