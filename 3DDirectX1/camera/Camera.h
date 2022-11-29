@@ -21,7 +21,7 @@ public: // ƒƒ“ƒoŠÖ”
 	virtual ~Camera() = default;
 
 	virtual void Update();
-
+	//’Ç]
 	void FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX = 0, float angleY = 0);
 
 	void UpdateViewMatrix();

@@ -17,14 +17,7 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-	safe_delete(object3d);
-	safe_delete(object3d2);
-	safe_delete(object3d3);
-	safe_delete(object3d4);
-	safe_delete(model);
-	safe_delete(model2);
-	safe_delete(model3);
-	safe_delete(model4);
+
 	safe_delete(sprite);
 	safe_delete(particleMan);
 	safe_delete(lightGroup);
@@ -90,28 +83,9 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 void GameScene::InitTH()
 {
-	model3 = Model::Create("skydome", true);
-	model4 = Model::Create("ground", false);
-	object3d3 = Object3d::Create(model3);
-	object3d4 = TouchableObject::Create(model4);
-	model = Model::Create("bullet", false);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("Player");
-	object3d = Object3d::Create(model);
-	object3d2 = new FbxObject3d();
-	object3d2->Initialize();
-	object3d2->SetModel(model2);
-
 
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
-	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	object3d3->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	object3d4->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
-	object3d2->SetRotation({ 0,45,0 });
-
-	//object3d->Update();
-
-	//object3d2->Update();
 	Sprite::LoadTexture(1, L"Resources/background.png");
 
 	Sprite::LoadTexture(25, L"Resources/UI/number/Number.png");
@@ -246,14 +220,6 @@ void GameScene::Update()
 		Bflag = true;;
 	}
 
-
-	//TimeUI
-	//3分
-	//5分(18000/60)は0.02
-	//10分(36000/60)は0.0015
-	//25分(90000/60)は0.0006(多分)
-	//tn,ut,ci,shp,kn,em,zm,syo,rb,gr,os
-
 #pragma region ポーズなど
 
 	pose->Update();
@@ -302,9 +268,6 @@ void GameScene::Update()
 
 
 
-
-	object3d3->SetScale({ 4.0f,4.0f,4.0f });
-
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
 
@@ -314,11 +277,7 @@ void GameScene::Update()
 	}
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
 	camera->Update();
-
-
 	particleMan->Update();
-	object3d3->Update();
-
 	lightGroup->Update();
 	colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
@@ -341,11 +300,6 @@ void GameScene::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
-
-	object3d3->Draw();
-
-	//object3d->Draw();
-	//object3d2->Draw();
 	player->Draw();
 	gameObject->Draw();
 	stageObj->Draw();

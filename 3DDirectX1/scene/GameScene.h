@@ -83,17 +83,6 @@ private: // メンバ変数
 	Sprite* Meters = nullptr;
 	Sprite* Centimeter = nullptr;
 
-	Object3d* object3d = nullptr;
-	Model* model = nullptr;
-
-	FbxObject3d* object3d2 = nullptr;
-	FbxModel* model2 = nullptr;
-
-	Object3d* object3d3 = nullptr;
-	Model* model3 = nullptr;
-
-	TouchableObject* object3d4 = nullptr;
-	Model* model4 = nullptr;
 
 	LightGroup* lightGroup = nullptr;
 

@@ -36,6 +36,8 @@ private:
 	TouchableObject* Ground;
 	Model* modelGround;
 	TouchableObject* Home;
+	Model* modelSkydome;
+	Object3d* skydome = nullptr;
 	Model* modelHome;
 	XMFLOAT3 position[2] = { {0,0,0} ,{0,0,-50} };
 	XMFLOAT3 size = { 1,1,1 };
