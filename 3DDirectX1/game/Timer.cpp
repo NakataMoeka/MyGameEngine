@@ -23,6 +23,10 @@ void Timer::Init()
 	dt = SetTime;
 	TR = (float)dt;
 	poseFlag = false;
+	timeSprite->SetAnchorPoint({ 0.5,0.5 });
+	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
+	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
+	timeSprite2->SetRotation(-TimeRot);
 }
 void Timer::Update()
 {
