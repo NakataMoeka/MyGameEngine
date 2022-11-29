@@ -233,21 +233,23 @@ void GameScene::Update()
 
 	if (pose->GetPFlag() == false) {
 		//player->SetPFlag(false);
-		timer->Update();
-		if (timer->GetDT() <= 0) {
-			if (Tsize2 < 30) {
-				DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
-				overFlag = true;
-				audio->StopWave();
-				gameObject->RC();
-				player->RC();
-			}
-			else if (Tsize2 >= 30) {
-				DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
-				clearFlag = true;
-				audio->StopWave();
-				gameObject->RC();
-				player->RC();
+		if (stageNum != 0) {
+			timer->Update();
+			if (timer->GetDT() <= 0) {
+				if (Tsize2 < 30) {
+					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
+					overFlag = true;
+					audio->StopWave();
+					gameObject->RC();
+					player->RC();
+				}
+				else if (Tsize2 >= 30) {
+					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
+					clearFlag = true;
+					audio->StopWave();
+					gameObject->RC();
+					player->RC();
+				}
 			}
 		}
 		stageObj->Update();
