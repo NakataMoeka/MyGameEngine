@@ -56,7 +56,7 @@ void SelectScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	backSprite[4] = Sprite::CreateSprite(44, { 0,0 });
 	backSprite[5] = Sprite::CreateSprite(40, { 0,0 });
 	SelectUI = Sprite::CreateSprite(45, { 0,0 });
-	sound1 = Audio::SoundLoadWave("Resources/Music/BGM/famipop.wav");
+	sound1 = Audio::SoundLoadWave("Resources/Music/SE/ビープ音1.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");
 }
@@ -109,8 +109,14 @@ void SelectScene::Update()
 	}
 	else if (SAFlag == 0) {
 		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-			SCangeFlag = true;
-			audio->SEPlayWave(sound2);
+			if (stageNum == 0 || stageNum == 1) {
+				SCangeFlag = true;
+				audio->SEPlayWave(sound2);
+			}
+			else {
+				audio->SEPlayWave(sound1);
+			}
+
 		}
 	}
 }
@@ -133,7 +139,11 @@ void SelectScene::DrawFront()
 	SelectUI->Draw();
 	if (SAFlag == 0) {
 		DebugText::GetInstance()->Printf(600, 300, 6.0f, { 0,0,0,1 }, "%d", stageNum);
+		if (stageNum == 2 || stageNum == 3) {
+			DebugText::GetInstance()->Printf(250, 400, 6.0f, { 0,0,0,1 }, "MADA,ASOBENAIYO");
+		}
 	}
+
 	//DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();

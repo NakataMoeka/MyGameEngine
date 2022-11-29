@@ -45,7 +45,7 @@ private:
 	SoundData sound1 = {};
 	SoundData sound2 = {};
 	SoundData sound3 = {};
-
+	SoundData sound4 = {};
 	std::array < Sprite*, 6> backSprite = {};
 	Sprite* SelectUI = nullptr;
 	float spriteCount = 0;
