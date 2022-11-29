@@ -10,7 +10,7 @@ StageObject::~StageObject()
 
 void StageObject::Initialize()
 {
-	modelSlope = Model::Create("Cone", false);
+	
 	modelKotatu = Model::Create("Kotatu", false);
 	modelGround = Model::Create("road", false);
 	modelHome = Model::Create("home", false);
@@ -22,7 +22,6 @@ void StageObject::Initialize()
 	skydome->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Home = TouchableObject::Create(modelHome);
 	Home->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Home->SetTouchCollider();
 	Kotatu = TouchableObject::Create(modelKotatu);
 	Kotatu->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Kotatu->SetTouchCollider();
@@ -38,6 +37,7 @@ void StageObject::stageInit(int stageNum)
 {
 	this->stageNum = stageNum;
 	if (stageNum == 0) {
+
 		Ground->SetScale({ 6,6,6 });
 		Ground->SetPosition({ 0,0,0 });
 		Ground->SetRotation({ 0,0,0 });
@@ -48,7 +48,8 @@ void StageObject::stageInit(int stageNum)
 		skydome->Update();
 	}
 	else if (stageNum == 1) {
-	
+		Home->SetTouchCollider();
+		Kotatu->SetTouchCollider();
 		Kotatu->SetPosition({ 0,38,-80 });
 		Kotatu->Update();
 		Ground->SetScale({ 6,6,6 });

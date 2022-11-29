@@ -29,16 +29,15 @@ public:
 	void RC();//コライダー消すやつ
 
 private:
-	TouchableObject* slope[2];
-	Model* modelSlope;
-	TouchableObject* Kotatu;
-	Model* modelKotatu;
-	TouchableObject* Ground;
-	Model* modelGround;
-	TouchableObject* Home;
-	Model* modelSkydome;
+
+	TouchableObject* Kotatu = nullptr;
+	Model* modelKotatu = nullptr;
+	TouchableObject* Ground = nullptr;
+	Model* modelGround = nullptr;
+	TouchableObject* Home = nullptr;
+	Model* modelSkydome = nullptr;
 	Object3d* skydome = nullptr;
-	Model* modelHome;
+	Model* modelHome = nullptr;
 	XMFLOAT3 position[2] = { {0,0,0} ,{0,0,-50} };
 	XMFLOAT3 size = { 1,1,1 };
 	XMVECTOR rota = { 0,0,0,0 };
