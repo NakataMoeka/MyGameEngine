@@ -24,7 +24,6 @@ void StageObject::Initialize()
 	Home->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Kotatu = TouchableObject::Create(modelKotatu);
 	Kotatu->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Kotatu->SetTouchCollider();
 
 }
 
