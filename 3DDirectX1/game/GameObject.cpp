@@ -69,6 +69,7 @@ void GameObject::Init()
 
 void GameObject::stageInit(int stageNum)
 {
+	this->stageNum = stageNum;
 	if (stageNum == 0) {
 	}
 	if (stageNum == 1) {
@@ -112,39 +113,41 @@ void GameObject::stageInit(int stageNum)
 
 void GameObject::Update()
 {
-	//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
-	for (int i = 0; i < OBJNumber; i++) {
+	if (stageNum == 1) {
+		//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
+		for (int i = 0; i < OBJNumber; i++) {
 
-		cSphere[i].radius = 1;
-		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		cube[i]->Update();
-
-	}
-	for (int i = 0; i < oData2.size(); i++) {
-
-		//obj‚ÌˆÚ“®ˆ—
-		if (moveObj[i]->GetParentFlag() == false) {
-			cSphere2[i].radius = 1;
-			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-
-			oData2[i]->pos.z += oSpeed;
-			if (moveObj[i]->GetPosition().z > oData2[i]->o_pos.z + 10) {
-				moveFlag = true;
-			}
-			else if (moveObj[i]->GetPosition().z < oData2[i]->o_pos.z - 10) {
-				moveFlag = false;
-			}
-			if (moveFlag == false) {
-				oSpeed = 0.5f;
-			}
-			else if (moveFlag == true) {
-				oSpeed = -0.5f;
-			}
-
-			moveObj[i]->SetPosition(oData2[i]->pos);
+			cSphere[i].radius = 1;
+			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cube[i]->Update();
 
 		}
-		moveObj[i]->Update();
+		for (int i = 0; i < oData2.size(); i++) {
+
+			//obj‚ÌˆÚ“®ˆ—
+			if (moveObj[i]->GetParentFlag() == false) {
+				cSphere2[i].radius = 1;
+				cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
+
+				oData2[i]->pos.z += oSpeed;
+				if (moveObj[i]->GetPosition().z > oData2[i]->o_pos.z + 10) {
+					moveFlag = true;
+				}
+				else if (moveObj[i]->GetPosition().z < oData2[i]->o_pos.z - 10) {
+					moveFlag = false;
+				}
+				if (moveFlag == false) {
+					oSpeed = 0.5f;
+				}
+				else if (moveFlag == true) {
+					oSpeed = -0.5f;
+				}
+
+				moveObj[i]->SetPosition(oData2[i]->pos);
+
+			}
+			moveObj[i]->Update();
+		}
 	}
 }
 
@@ -169,13 +172,16 @@ void GameObject::RC()
 
 void GameObject::Draw()
 {
-	for (int i = (int)oData.size() - 1; i >= 0; i--)
-	{
-		cube[i]->Draw();
-	}
-	for (int i = (int)oData2.size() - 1; i >= 0; i--)
-	{
-		moveObj[i]->Draw();
+	if (stageNum == 1) {
+
+		for (int i = (int)oData.size() - 1; i >= 0; i--)
+		{
+			cube[i]->Draw();
+		}
+		for (int i = (int)oData2.size() - 1; i >= 0; i--)
+		{
+			moveObj[i]->Draw();
+		}
 	}
 
 }

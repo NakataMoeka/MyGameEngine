@@ -21,18 +21,26 @@ TouchableObject* TouchableObject::Create(Model* model)
 
 bool TouchableObject::Initialize(Model* model)
 {
+	this->model = model;
 	if (!Object3d::Initialize())
 	{
 		return false;
 	}
 
-	SetModel(model);
 
+
+	return true;
+}
+
+void TouchableObject::SetTouchCollider()
+{
+	SetModel(model);
 	// コライダーの追加
 	MeshCollider* collider = new MeshCollider;
 	SetCollider(collider);
 	collider->ConstructTriangles(model);
 	collider->SetAttribute(COLLISION_ATTR_LANDSHAPE);
-
-	return true;
 }
+
+
+

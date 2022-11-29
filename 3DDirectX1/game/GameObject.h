@@ -69,5 +69,6 @@ private://•Ï”
 	XMVECTOR rota = { 0,0,0,0 };
 	bool moveFlag = true;
 	float oSpeed = 0;
+	int stageNum = 0;
 };
 

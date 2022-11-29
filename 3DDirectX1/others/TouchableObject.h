@@ -8,5 +8,9 @@ public:
 	static TouchableObject* Create(Model* model = nullptr);
 
 	bool Initialize(Model* model);
+	void SetTouchCollider();
+	void RCollider();
+private:
+	Model* model = nullptr;
 };
 

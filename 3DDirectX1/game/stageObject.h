@@ -26,7 +26,7 @@ public:
 	void stageInit(int stageNum);
 	void Update();
 	void Draw();
-
+	void RC();//コライダー消すやつ
 
 private:
 	TouchableObject* slope[2];

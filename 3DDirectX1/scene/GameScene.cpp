@@ -242,6 +242,7 @@ void GameScene::Update()
 					audio->StopWave();
 					gameObject->RC();
 					player->RC();
+					stageObj->RC();
 				}
 				else if (Tsize2 >= 30) {
 					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
@@ -249,6 +250,7 @@ void GameScene::Update()
 					audio->StopWave();
 					gameObject->RC();
 					player->RC();
+					stageObj->RC();
 				}
 			}
 		}
@@ -264,12 +266,14 @@ void GameScene::Update()
 		audio->StopWave();
 		gameObject->RC();
 		player->RC();
+		stageObj->RC();
 	}
 	else if (Input::GetInstance()->TriggerKey(DIK_E)) {
 		clearFlag = true;
 		audio->StopWave();
 		gameObject->RC();
 		player->RC();
+		stageObj->RC();
 	}
 #endif
 
@@ -281,6 +285,7 @@ void GameScene::Update()
 	if (pose->GetTFlag() == true) {
 		gameObject->RC();
 		player->RC();
+		stageObj->RC();
 	}
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
 	camera->Update();
