@@ -187,6 +187,7 @@
     <ClCompile Include="game\Pose.cpp" />
     <ClCompile Include="game\stageObject.cpp" />
     <ClCompile Include="game\Timer.cpp" />
+    <ClCompile Include="game\Tutorial.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="others\Collision.cpp" />
@@ -367,6 +368,7 @@
     <ClInclude Include="game\Pose.h" />
     <ClInclude Include="game\stageObject.h" />
     <ClInclude Include="game\Timer.h" />
+    <ClInclude Include="game\Tutorial.h" />
     <ClInclude Include="input\input.h" />
     <ClInclude Include="others\BaseCollider.h" />
     <ClInclude Include="others\Collision.h" />

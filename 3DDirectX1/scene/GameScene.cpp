@@ -109,15 +109,17 @@ void GameScene::InitTH()
 	stageObj->Initialize();
 	timer = new Timer;
 	timer->Initialize();
+	tutorial = new Tutorial();
+	tutorial->Initialize();
 
 }
 
 void GameScene::Init()
 {
 	player->Init();
-	gameObject->stageInit(1);
+
 	gameObject->Init();
-	stageObj->stageInit(1);
+
 	stageObj->Init();
 	timer->Init();
 	pose->Init();
@@ -142,6 +144,9 @@ void GameScene::Init()
 
 void GameScene::InitStageNum(int stageNum)
 {
+	this->stageNum = stageNum;
+	gameObject->stageInit(stageNum);
+	stageObj->stageInit(stageNum);
 }
 
 void GameScene::Update()
@@ -303,7 +308,6 @@ void GameScene::Draw()
 	player->Draw();
 	gameObject->Draw();
 	stageObj->Draw();
-
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 
@@ -313,7 +317,9 @@ void GameScene::DrawFront()
 	//前景
 	Sprite::PreDraw(dxCommon->GetCmdList());
 	player->DrawSprite();
-
+	if (stageNum == 0) {
+		tutorial->Draw();
+	}
 	timer->Draw();
 	if (pose->GetPFlag() == true) {
 		pose->Draw();

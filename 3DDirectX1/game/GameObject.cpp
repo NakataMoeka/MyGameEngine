@@ -69,6 +69,8 @@ void GameObject::Init()
 
 void GameObject::stageInit(int stageNum)
 {
+	if (stageNum == 0) {
+	}
 	if (stageNum == 1) {
 		LoadCSV(spawnMap, "Resources/objMap.csv");
 	}

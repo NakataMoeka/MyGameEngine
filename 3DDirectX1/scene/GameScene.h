@@ -20,6 +20,7 @@
 #include<array>
 #include"Timer.h"
 #include"Pose.h"
+#include"Tutorial.h"
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -94,6 +95,7 @@ private: // メンバ変数
 
 	Timer* timer = nullptr;
 	Pose* pose = nullptr;
+	Tutorial* tutorial = nullptr;
 	const int debugTextTexNumber = 0;
 
 
