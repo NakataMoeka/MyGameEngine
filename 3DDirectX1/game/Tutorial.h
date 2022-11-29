@@ -9,7 +9,7 @@ class Tutorial
 public:
 	void Initialize();
 	void Init();
-	void Updata();
+	void Update();
 	void Draw();
 private:
 	std::array < Sprite*, 7> TutorialSprite = {};

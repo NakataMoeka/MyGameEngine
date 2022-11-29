@@ -22,7 +22,7 @@ void Tutorial::Init()
 {
 }
 
-void Tutorial::Updata()
+void Tutorial::Update()
 {
 }
 
