@@ -126,10 +126,10 @@ void GameObject::Update()
 			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
 			oData2[i]->pos.z += oSpeed;
-			if (moveObj[i]->GetPosition().z == oData2[i]->o_pos.z + 10) {
+			if (moveObj[i]->GetPosition().z > oData2[i]->o_pos.z + 10) {
 				moveFlag = true;
 			}
-			else if (moveObj[i]->GetPosition().z == oData2[i]->o_pos.z - 10) {
+			else if (moveObj[i]->GetPosition().z < oData2[i]->o_pos.z - 10) {
 				moveFlag = false;
 			}
 			if (moveFlag == false) {
