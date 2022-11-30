@@ -169,12 +169,14 @@ void GameScene::Update()
 			gameObject->SetHIT(i, j, false);
 			if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
 				if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
-					//if (Tsize >= gameObject->GetObject(i)->GetScale().x) {
-					gameObject->SetHIT(i, j, true);
-					HitCount++;
-					//player->SetColFlag(true, i);
-					gameObject->GetObject3d(i, j)->SetParentFlag(true);
-					//}
+
+					if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10||gameObject->GetOSize(i, j) == 1) {
+						gameObject->SetHIT(i, j, true);
+						HitCount++;
+						//player->SetColFlag(true, i);
+						gameObject->GetObject3d(i, j)->SetParentFlag(true);
+					}
+
 					DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 				}
 			}
@@ -277,8 +279,6 @@ void GameScene::Update()
 	}
 #endif
 
-
-
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
 
@@ -317,7 +317,6 @@ void GameScene::Draw()
 	stageObj->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
-
 }
 void GameScene::DrawFront()
 {
