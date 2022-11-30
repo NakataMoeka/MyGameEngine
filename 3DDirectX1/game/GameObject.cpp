@@ -93,7 +93,7 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
-				if (stageNum == 1) {
+				if (stageNum == 0) {
 					oData[num]->pos = { -180 + (float)i * 10,5, 0 + (float)j * (-10) };
 				}
 				else if (stageNum == 1) {
