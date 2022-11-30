@@ -39,7 +39,7 @@ void Camera::Update()
 
 void Camera::FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX, float angleY)
 {
-	XMVECTOR v0 = {d.x,d.y,d.z,0 };
+	XMVECTOR v0 = {d.x,d.y,d.z };
 	//angleƒ‰ƒWƒAƒ“‚¾‚¯y²‚Ü‚í‚è‚É‰ñ“]B”¼Œa‚Í-100
 	XMMATRIX rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(angleY));

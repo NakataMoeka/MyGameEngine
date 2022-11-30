@@ -85,8 +85,9 @@ void CollisionManager::ColSphere()
 			else if (colB->GetNum() == 1) {
 				oSize = 3;
 			}
-			if (colA->attribute == colB->attribute) {
+			if (colB->attribute==4U) {
 				// ともに球
+				//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 				if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
 					colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
 					Sphere* SphereA = dynamic_cast<Sphere*>(colA);
@@ -102,7 +103,7 @@ void CollisionManager::ColSphere()
 								colB->GetObject3d()->SetParentFlag(true);
 								audioFlag = true;
 							}
-
+							
 
 						}
 						if (IsHit == true) {

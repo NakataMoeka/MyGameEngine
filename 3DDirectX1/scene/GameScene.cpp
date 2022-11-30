@@ -173,7 +173,7 @@ void GameScene::Update()
 					if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10||gameObject->GetOSize(i, j) == 1) {
 						gameObject->SetHIT(i, j, true);
 						HitCount++;
-						player->SetColFlag(true, i, j);
+						//player->SetColFlag(true, i, j);
 						gameObject->GetObject3d(i, j)->SetParentFlag(true);
 					}
 
@@ -199,8 +199,6 @@ void GameScene::Update()
 	}
 #pragma endregion
 	//DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject3d(0,0)->GetParentFlag());
-
-
 	colMan->SetTsize2(Tsize);
 
 	//プレイヤーの大きさ

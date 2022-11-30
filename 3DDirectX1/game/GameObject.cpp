@@ -41,9 +41,9 @@ void GameObject::Init()
 		cube[i]->SetScale(size[0]);
 		cube[i]->Update();
 		//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
-		cSphere[i].radius = 1;
+		cSphere[i].radius = 1.2f;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1));
+		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.2f));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		cube[i]->GetCollider()->SetNum(0);
 		cube[i]->SetParentFlag(false);
@@ -117,8 +117,11 @@ void GameObject::Update()
 		//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
 		for (int i = 0; i < OBJNumber; i++) {
 
-			cSphere[i].radius = 1;
+			cSphere[i].radius = 1.2f;
 			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			if (cube[i]->GetParentFlag() == true) {
+				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+			}
 			cube[i]->Update();
 
 		}
@@ -142,9 +145,11 @@ void GameObject::Update()
 				else if (moveFlag == true) {
 					oSpeed = -0.5f;
 				}*/
-
 				moveObj[i]->SetPosition(oData2[i]->pos);
 
+			}
+			if (moveObj[i]->GetParentFlag() == true) {
+				moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
 			moveObj[i]->Update();
 		}

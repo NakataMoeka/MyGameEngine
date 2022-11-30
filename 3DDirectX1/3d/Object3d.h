@@ -104,7 +104,7 @@ public:
 	inline Model* GetModel() { return model; }
 	BaseCollider* GetCollider() { return collider; }
 	bool SetParentFlag(bool pFlag) { return this->parentFlag = pFlag; }
-	bool GetParentFlag() { return parentFlag; }//クリア後にまたはじめるとここで例外スロー起こる
+	bool GetParentFlag() { return parentFlag; }
 	// コライダー
 	BaseCollider* collider = nullptr;
 protected:

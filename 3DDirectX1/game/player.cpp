@@ -37,11 +37,11 @@ void Player::Initialize()
 
 void Player::Init()
 {
-	for (int i = 0; i < OBJNumber; i++) {
+	/*for (int i = 0; i < OBJNumber; i++) {
 		for (int j = 0; j < OBJNumber; j++) {
 			colFlag[i][j] = false;
 		}
-	}
+	}*/
 	dashMoveFlag = false;
 	dashFlag = false;
 	PlayerWalkCount = 0;
@@ -60,10 +60,10 @@ void Player::Init()
 	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
-
+	SphereObj->SetParentFlag(false);
 	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,0.6f,0,0 }), 0.6f));
-	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
-
+	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_SPHERE);
+	//playerObj->SetParentFlag(false);
 	SphereObj->Quaternion();
 	SphereObj->Update();
 	playerObj->Update();
@@ -275,14 +275,14 @@ void Player::Jump()
 	// ‹…‚Æ’nŒ`‚ÌŒð·‚ð‘SŒŸõ
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
 
-	for (int i = 0; i < OBJNumber; i++) {
-		for (int j = 0; j < OBJNumber; j++) {
-			if (colFlag[i][j] == true) {
+	//for (int i = 0; i < OBJNumber; i++) {
+	//	for (int j = 0; j < OBJNumber; j++) {
+	//		if (colFlag[i][j] == true) {
 				CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
 				CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
-			}
-		}
-	}
+	//	}
+	//	}
+	//}
 
 	// Œð·‚É‚æ‚é”rË•ª“®‚©‚·
 	playerPos.x += callback2.move.m128_f32[0];
@@ -408,6 +408,7 @@ void Player::Dash()
 
 void Player::Update()
 {
+	SphereObj->SetParentFlag(false);
 	Move();
 	Jump();
 	Ball();
