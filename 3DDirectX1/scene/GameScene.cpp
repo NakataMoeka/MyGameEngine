@@ -277,6 +277,14 @@ void GameScene::Update()
 		player->RC();
 		stageObj->RC();
 	}
+	if (stageNum == 0) {
+		if (tutorial->GetTCount() == 1) {
+			if (player->GetPlayerPos().z >= 0) {
+				tutorial->SetTCount(2);
+			}
+		}
+		tutorial->Update();
+	}
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 	particleMan->Update();
@@ -328,8 +336,8 @@ void GameScene::DrawFront()
 	//DebugText::GetInstance()->Printf(100, 280, 3.0f, { 1,1,1,1 }, "UPARROW:DASH");
 	//DebugText::GetInstance()->Printf(100, 320, 3.0f, { 1,1,1,1 }, "SPACE:JUMP");
 	//DebugText::GetInstance()->Printf(100, 360, 3.0f, { 1,1,1,1 }, "R:POSE");
-	//DebugText::GetInstance()->Printf(460, 150, 3.0f, "%f,%f,%f",
-		//player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
+	DebugText::GetInstance()->Printf(460, 150, 3.0f,{1,1,1,1}, "%f,%f,%f",
+		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z );
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

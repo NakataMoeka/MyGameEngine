@@ -71,6 +71,7 @@ void GameObject::stageInit(int stageNum)
 {
 	this->stageNum = stageNum;
 	if (stageNum == 0) {
+		LoadCSV(spawnMap, "Resources/objMap2.csv");
 	}
 	if (stageNum == 1) {
 		LoadCSV(spawnMap, "Resources/objMap.csv");
@@ -92,7 +93,12 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
-				oData[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
+				if (stageNum == 1) {
+					oData[num]->pos = { -180 + (float)i * 10,5, 0 + (float)j * (-10) };
+				}
+				else if (stageNum == 1) {
+					oData[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
+				}
 				oData[num]->IsHit = false;
 				oData[num]->oSize = 1.0f;
 			}
@@ -113,7 +119,19 @@ void GameObject::stageInit(int stageNum)
 
 void GameObject::Update()
 {
-	if (stageNum == 1) {
+	if(stageNum==0){
+		for (int i = 0; i < OBJNumber; i++) {
+
+			cSphere[i].radius = 1.2f;
+			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			if (cube[i]->GetParentFlag() == true) {
+				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+			}
+			
+			cube[i]->Update();
+		}
+	}
+	else if (stageNum == 1) {
 		//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
 		for (int i = 0; i < OBJNumber; i++) {
 
@@ -177,7 +195,13 @@ void GameObject::RC()
 
 void GameObject::Draw()
 {
-	if (stageNum == 1) {
+	if (stageNum == 0) {
+		for (int i = (int)oData.size() - 1; i >= 0; i--)
+		{
+			cube[i]->Draw();
+		}
+	}
+	else if (stageNum == 1) {
 
 		for (int i = (int)oData.size() - 1; i >= 0; i--)
 		{
