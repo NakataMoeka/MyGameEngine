@@ -54,9 +54,9 @@ void GameObject::Init()
 		moveObj[i]->SetScale(size[0]);
 		moveObj[i]->Update();
 		oData2[i]->o_pos = moveObj[i]->GetPosition();
-		cSphere2[i].radius = 1;
+		cSphere2[i].radius = 2;
 		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1));
+		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
 		moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		moveObj[i]->GetCollider()->SetNum(1);
 		moveObj[i]->SetParentFlag(false);
@@ -129,7 +129,7 @@ void GameObject::Update()
 
 			//obj‚ÌˆÚ“®ˆ—
 			if (moveObj[i]->GetParentFlag() == false) {
-				cSphere2[i].radius = 1;
+				cSphere2[i].radius = 2;
 				cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 
 				/*oData2[i]->pos.z += oSpeed;
