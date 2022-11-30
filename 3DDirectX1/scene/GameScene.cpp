@@ -173,7 +173,7 @@ void GameScene::Update()
 					if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10||gameObject->GetOSize(i, j) == 1) {
 						gameObject->SetHIT(i, j, true);
 						HitCount++;
-						//player->SetColFlag(true, i);
+						player->SetColFlag(true, i, j);
 						gameObject->GetObject3d(i, j)->SetParentFlag(true);
 					}
 
@@ -194,15 +194,7 @@ void GameScene::Update()
 
 
 
-			if (gameObject->GetObject3d(i, j)->GetParentFlag() == true)
-			{
-				player->SetColFlag(false, i);
 
-			}
-			else if (gameObject->GetObject3d(i, j)->GetParentFlag() == false)
-			{
-				player->SetColFlag(true, i);
-			}
 		}
 	}
 #pragma endregion

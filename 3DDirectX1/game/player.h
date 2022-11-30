@@ -42,7 +42,7 @@ public:
 	XMFLOAT3 SetPlayerPos(XMFLOAT3 playerPos) { return this->playerPos = playerPos; }
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
-	bool SetColFlag(bool ColFlag, int i) { return this->colFlag[i] = ColFlag; }
+	bool SetColFlag(bool ColFlag, int i,int j) { return this->colFlag[i][j] = ColFlag; }
 	bool SetPFlag(bool pFlag) { return this->pFlag = pFlag; }
 private://Update()‚É‚Ü‚Æ‚ß‚é‚à‚Ì
 	void Move();//ˆÚ“®
@@ -97,7 +97,7 @@ private://•Ï”
 
 	static const int OBJNumber = 100;
 
-	std::array < bool, OBJNumber> colFlag = {};
+	bool colFlag[OBJNumber][OBJNumber] = {};
 
 	float PlayerWalkCount = 0;
 	float CountWalk = 0;
