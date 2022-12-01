@@ -108,6 +108,7 @@ void GameObject::stageInit(int stageNum)
 				num = (int)oData2.size() - 1;
 				oData2[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
 				oData2[num]->o_pos = pos;
+				oData2[num]->rot = { 0,0,0,0 };
 				oData2[num]->IsHit = false;
 				oData2[num]->oSize = 3.0f;
 			}
@@ -146,25 +147,13 @@ void GameObject::Update()
 		for (int i = 0; i < oData2.size(); i++) {
 
 			//obj‚ÌˆÚ“®ˆ—
+			cSphere2[i].radius = 2;
+			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
+
 			if (moveObj[i]->GetParentFlag() == false) {
-				cSphere2[i].radius = 2;
-				cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-
-				/*oData2[i]->pos.z += oSpeed;
-				if (moveObj[i]->GetPosition().z > oData2[i]->o_pos.z + 10) {
-					moveFlag = true;
-				}
-				else if (moveObj[i]->GetPosition().z < oData2[i]->o_pos.z - 10) {
-					moveFlag = false;
-				}
-				if (moveFlag == false) {
-					oSpeed = 0.5f;
-				}
-				else if (moveFlag == true) {
-					oSpeed = -0.5f;
-				}*/
-				moveObj[i]->SetPosition(oData2[i]->pos);
-
+				oData2[i]->rot.m128_f32[1] += 2;
+				moveObj[i]->Quaternion();
+				moveObj[i]->SetRotation(oData2[i]->rot);
 			}
 			if (moveObj[i]->GetParentFlag() == true) {
 				moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);

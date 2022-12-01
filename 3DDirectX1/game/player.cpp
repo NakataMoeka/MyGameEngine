@@ -108,7 +108,7 @@ void Player::Move()
 			spherePos.z += moveUD.m128_f32[2];
 
 			sphereAngle.m128_f32[0] += moveAngleX.m128_f32[0];
-
+			sphereAngle.m128_f32[0] += moveAngleZ.m128_f32[0];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_S))
 		{
@@ -118,7 +118,7 @@ void Player::Move()
 			spherePos.z -= moveUD.m128_f32[2];
 
 			sphereAngle.m128_f32[0] -= moveAngleX.m128_f32[0];
-
+			sphereAngle.m128_f32[0] -= moveAngleZ.m128_f32[0];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_D))
 		{
@@ -128,6 +128,7 @@ void Player::Move()
 			spherePos.z += moveLR.m128_f32[2];
 
 			sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
+			sphereAngle.m128_f32[2] -= moveAngleX.m128_f32[2];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_A))
 		{
@@ -137,6 +138,7 @@ void Player::Move()
 			spherePos.z -= moveLR.m128_f32[2];
 
 			sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
+			sphereAngle.m128_f32[2] -= moveAngleX.m128_f32[2];
 		}
 	}
 
