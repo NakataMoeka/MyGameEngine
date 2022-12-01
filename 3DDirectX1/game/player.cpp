@@ -86,18 +86,17 @@ void Player::Move()
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
 	moveAngleX = XMVector3TransformNormal(moveAngleX, matRot2);
 	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot2);
-	moveAngle2 = XMVector3TransformNormal(moveAngle2, matRot2);
 
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
-		//sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
-		playerAngle.y += moveAngle2.m128_f32[1];
+		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
+		playerAngle.y += moveAngle.m128_f32[1];
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
-		//sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
-		playerAngle.y -= moveAngle2.m128_f32[1];
+		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
+		playerAngle.y -= moveAngle.m128_f32[1];
 	}
 	//if (JumpFlag == false) {
 	if (dashMoveFlag == false) {
@@ -188,7 +187,7 @@ void Player::Ball()
 	XMVECTOR v0 = { 0,0,15,0 };
 	//angleÉâÉWÉAÉìÇæÇØyé≤Ç‹ÇÌÇËÇ…âÒì]ÅBîºåaÇÕ-100
 	XMMATRIX rotM = XMMatrixIdentity();
-	rotM *= XMMatrixRotationY(XMConvertToRadians(playerAngle.y));
+	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
 	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
 	XMVECTOR bossTarget = { playerPos.x,playerPos.y,playerPos.z };
 	XMVECTOR v3 = bossTarget + v;
