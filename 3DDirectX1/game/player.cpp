@@ -76,93 +76,98 @@ void Player::Move()
 	XMVECTOR moveUD = { 0,0,0.5,0 };//前後方向用の移動ベクトル
 	XMVECTOR moveLR = { 0.5,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
-	XMVECTOR moveAngleX = { 10,0,0,0 };//角度のベクトル
-	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル
+	XMVECTOR moveAngle2 = { 0,1,0,0 };//角度のベクトル
+	XMVECTOR moveAngleX = { 100,0,0,0 };//角度のベクトル(球のx軸回転)
+	XMVECTOR moveAngleZ = { 0,0,100,0 };//角度のベクトル(球のz軸回転)
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
+	XMMATRIX matRot2 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
 	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
+	moveAngleX = XMVector3TransformNormal(moveAngleX, matRot2);
+	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot2);
+	moveAngle2 = XMVector3TransformNormal(moveAngle2, matRot2);
+
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
-		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
-		playerAngle.y += moveAngle.m128_f32[1];
+		//sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
+		playerAngle.y += moveAngle2.m128_f32[1];
 
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
-		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
-		playerAngle.y -= moveAngle.m128_f32[1];
+		//sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
+		playerAngle.y -= moveAngle2.m128_f32[1];
 	}
 	//if (JumpFlag == false) {
-		if (dashMoveFlag == false) {
-			if (Input::GetInstance()->PushKey(DIK_W))
-			{
-				playerPos.x += moveUD.m128_f32[0];
-				playerPos.z += moveUD.m128_f32[2];
-				spherePos.x += moveUD.m128_f32[0];
-				spherePos.z += moveUD.m128_f32[2];
-
-				sphereAngle.m128_f32[0] += 10;
-
-			}
-			else if (Input::GetInstance()->PushKey(DIK_S))
-			{
-				playerPos.x -= moveUD.m128_f32[0];
-				playerPos.z -= moveUD.m128_f32[2];
-				spherePos.x -= moveUD.m128_f32[0];
-				spherePos.z -= moveUD.m128_f32[2];
-
-				sphereAngle.m128_f32[0] -= 10;
-
-			}
-			else if (Input::GetInstance()->PushKey(DIK_D))
-			{
-				playerPos.x += moveLR.m128_f32[0];
-				playerPos.z += moveLR.m128_f32[2];
-				spherePos.x += moveLR.m128_f32[0];
-				spherePos.z += moveLR.m128_f32[2];
-
-				sphereAngle.m128_f32[2] += 10;
-
-			}
-			else if (Input::GetInstance()->PushKey(DIK_A))
-			{
-				playerPos.x -= moveLR.m128_f32[0];
-				playerPos.z -= moveLR.m128_f32[2];
-				spherePos.x -= moveLR.m128_f32[0];
-				spherePos.z -= moveLR.m128_f32[2];
-
-				sphereAngle.m128_f32[2] -= 10;
-			}
-		}
-
-		if (Input::GetInstance()->PushKey(DIK_W) ||
-			Input::GetInstance()->PushKey(DIK_S) ||
-			Input::GetInstance()->PushKey(DIK_A) ||
-			Input::GetInstance()->PushKey(DIK_D))
+	if (dashMoveFlag == false) {
+		if (Input::GetInstance()->PushKey(DIK_W))
 		{
+			playerPos.x += moveUD.m128_f32[0];
+			playerPos.z += moveUD.m128_f32[2];
+			spherePos.x += moveUD.m128_f32[0];
+			spherePos.z += moveUD.m128_f32[2];
 
-			if (CountWalk < 5) {
-				CountWalk++;
-			}
-			if (CountWalk == 5) {
-				if (PlayerWalkCount < 6) {
-					PlayerWalkCount++;
-				}
-				if (PlayerWalkCount == 6) {
-					PlayerWalkCount = 0;
-				}
-				CountWalk = 0;
-			}
-
-
-			playerObj->PlayAnimation(1);
-
+			sphereAngle.m128_f32[0] += moveAngleX.m128_f32[0];
 
 		}
-		else {
-			playerObj->Stop();
+		else if (Input::GetInstance()->PushKey(DIK_S))
+		{
+			playerPos.x -= moveUD.m128_f32[0];
+			playerPos.z -= moveUD.m128_f32[2];
+			spherePos.x -= moveUD.m128_f32[0];
+			spherePos.z -= moveUD.m128_f32[2];
+
+			sphereAngle.m128_f32[0] -= moveAngleX.m128_f32[0];
+
 		}
+		else if (Input::GetInstance()->PushKey(DIK_D))
+		{
+			playerPos.x += moveLR.m128_f32[0];
+			playerPos.z += moveLR.m128_f32[2];
+			spherePos.x += moveLR.m128_f32[0];
+			spherePos.z += moveLR.m128_f32[2];
+
+			sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
+		}
+		else if (Input::GetInstance()->PushKey(DIK_A))
+		{
+			playerPos.x -= moveLR.m128_f32[0];
+			playerPos.z -= moveLR.m128_f32[2];
+			spherePos.x -= moveLR.m128_f32[0];
+			spherePos.z -= moveLR.m128_f32[2];
+
+			sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
+		}
+	}
+
+	if (Input::GetInstance()->PushKey(DIK_W) ||
+		Input::GetInstance()->PushKey(DIK_S) ||
+		Input::GetInstance()->PushKey(DIK_A) ||
+		Input::GetInstance()->PushKey(DIK_D))
+	{
+
+		if (CountWalk < 5) {
+			CountWalk++;
+		}
+		if (CountWalk == 5) {
+			if (PlayerWalkCount < 6) {
+				PlayerWalkCount++;
+			}
+			if (PlayerWalkCount == 6) {
+				PlayerWalkCount = 0;
+			}
+			CountWalk = 0;
+		}
+
+
+		playerObj->PlayAnimation(1);
+
+
+	}
+	else {
+		playerObj->Stop();
+	}
 	//}
 
 
@@ -183,7 +188,7 @@ void Player::Ball()
 	XMVECTOR v0 = { 0,0,15,0 };
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
-	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
+	rotM *= XMMatrixRotationY(XMConvertToRadians(playerAngle.y));
 	XMVECTOR v = XMVector3TransformNormal(v0, rotM);
 	XMVECTOR bossTarget = { playerPos.x,playerPos.y,playerPos.z };
 	XMVECTOR v3 = bossTarget + v;
@@ -278,8 +283,8 @@ void Player::Jump()
 	//for (int i = 0; i < OBJNumber; i++) {
 	//	for (int j = 0; j < OBJNumber; j++) {
 	//		if (colFlag[i][j] == true) {
-				CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-				CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
 	//	}
 	//	}
 	//}
