@@ -54,6 +54,10 @@ void SceneManager::Update()
 			titleScene->Init();
 			scene = TITLE;
 		}
+		if (gameScene->GetTSFlag() == true) {
+			selectScene->Init();
+			scene = SELECT;
+		}
 		gameScene->Update();
 	}
 	else if (scene == END) {

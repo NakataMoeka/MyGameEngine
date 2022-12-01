@@ -21,15 +21,23 @@ void Tutorial::Initialize()
 void Tutorial::Init()
 {
 	countFlag = false;
+	endFlag = false;
 }
 
 void Tutorial::Update()
 {
-	if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
-		if (TutorialCount < 6) {
+	if (countFlag == false) {
+		if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
+			if (TutorialCount < 6) {
 				TutorialCount++;
+			}
 		}
+	}
+	if (TutorialCount == 6) {
+		if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
 
+			endFlag = true;
+		}
 	}
 	//else if (Input::GetInstance()->TriggerKey(DIK_LEFTARROW)) {
 	//	if (TutorialCount > 0) {

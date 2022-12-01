@@ -64,6 +64,7 @@ public: // メンバ関数
 	bool GetBFlag() { return Bflag; }
 	bool GetTitleFlag();
 	int SetStageNum(int stageNum) { return this->stageNum = stageNum; }
+	bool GetTSFlag() { return TSFlag; }
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
 
@@ -102,8 +103,6 @@ private: // メンバ変数
 	static const int OBJNumber = 100;//OBJの最大数を記載
 
 	int HitCount = 0;
-
-
 	//サイズ
 	float Tsize = 1;
 	int Tsize2 = 1;
@@ -119,8 +118,7 @@ private: // メンバ変数
 
 	bool Bflag = false;//ブラーを掛けるか否か
 
-
-
 	//ステージナンバー
 	int stageNum = 0;
+	bool TSFlag;
 };

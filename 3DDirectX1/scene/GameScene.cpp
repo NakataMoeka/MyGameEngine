@@ -134,7 +134,7 @@ void GameScene::Init()
 	Tsize2 = (int)Tsize;
 	TCount = 0;
 	HitCount = 0;
-
+	TSFlag = false;
 
 
 	audio->SoundPlayWave(sound2);
@@ -190,15 +190,12 @@ void GameScene::Update()
 				gameObject->SetHIT(i, j, false);
 				Tsize += gameObject->GetOSize(i, j);
 			}
-
-
-
-
-
 		}
 	}
 #pragma endregion
 	//DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject3d(0,0)->GetParentFlag());
+
+#pragma region	サイズ
 	colMan->SetTsize2(Tsize);
 
 	//プレイヤーの大きさ
@@ -216,7 +213,7 @@ void GameScene::Update()
 		distance += 2;
 		Bflag = true;;
 	}
-
+#pragma endregion
 #pragma region ポーズなど
 
 	pose->Update();
@@ -273,18 +270,39 @@ void GameScene::Update()
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
 
 	if (pose->GetTFlag() == true) {
+		audio->StopWave();
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
 	}
+#pragma region チュートリアル
 	if (stageNum == 0) {
 		if (tutorial->GetTCount() == 1) {
 			if (player->GetPlayerPos().z >= 0) {
 				tutorial->SetTCount(2);
+			
 			}
+			tutorial->SetCountFlag(true);
+		}
+		else if (tutorial->GetTCount() == 3) {
+			if (gameObject->GetObject3d(0, 0)->GetParentFlag() == true) {
+				tutorial->SetTCount(4);
+			}
+			tutorial->SetCountFlag(true);
+		}
+		else {
+			tutorial->SetCountFlag(false);
+		}
+		if (tutorial->GetEndFlag() == true) {
+			TSFlag = true;
+			audio->StopWave();
+			gameObject->RC();
+			player->RC();
+			stageObj->RC();
 		}
 		tutorial->Update();
 	}
+#pragma endregion
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 	particleMan->Update();

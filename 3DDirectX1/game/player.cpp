@@ -77,8 +77,8 @@ void Player::Move()
 	XMVECTOR moveLR = { 0.5,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
 	XMVECTOR moveAngle2 = { 0,1,0,0 };//角度のベクトル
-	XMVECTOR moveAngleX = { 100,0,0,0 };//角度のベクトル(球のx軸回転)
-	XMVECTOR moveAngleZ = { 0,0,100,0 };//角度のベクトル(球のz軸回転)
+	XMVECTOR moveAngleX = { 10,0,0,0 };//角度のベクトル(球のx軸回転)
+	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル(球のz軸回転)
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 	XMMATRIX matRot2 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
 	moveUD = XMVector3TransformNormal(moveUD, matRot);
@@ -107,8 +107,8 @@ void Player::Move()
 			spherePos.x += moveUD.m128_f32[0];
 			spherePos.z += moveUD.m128_f32[2];
 
-			sphereAngle.m128_f32[0] += moveAngleX.m128_f32[0];
-			sphereAngle.m128_f32[0] += moveAngleZ.m128_f32[0];
+			sphereAngle.m128_f32[0] += 10;
+			//sphereAngle.m128_f32[0] += moveAngleZ.m128_f32[0];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_S))
 		{
@@ -117,8 +117,8 @@ void Player::Move()
 			spherePos.x -= moveUD.m128_f32[0];
 			spherePos.z -= moveUD.m128_f32[2];
 
-			sphereAngle.m128_f32[0] -= moveAngleX.m128_f32[0];
-			sphereAngle.m128_f32[0] -= moveAngleZ.m128_f32[0];
+			sphereAngle.m128_f32[0] +=10;
+			//sphereAngle.m128_f32[0] += moveAngleZ.m128_f32[0];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_D))
 		{
@@ -127,8 +127,8 @@ void Player::Move()
 			spherePos.x += moveLR.m128_f32[0];
 			spherePos.z += moveLR.m128_f32[2];
 
-			sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
-			sphereAngle.m128_f32[2] -= moveAngleX.m128_f32[2];
+			//sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
+			sphereAngle.m128_f32[2] += 10;
 		}
 		else if (Input::GetInstance()->PushKey(DIK_A))
 		{
@@ -137,8 +137,8 @@ void Player::Move()
 			spherePos.x -= moveLR.m128_f32[0];
 			spherePos.z -= moveLR.m128_f32[2];
 
-			sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
-			sphereAngle.m128_f32[2] -= moveAngleX.m128_f32[2];
+			//sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
+			sphereAngle.m128_f32[2] -= 10;
 		}
 	}
 
