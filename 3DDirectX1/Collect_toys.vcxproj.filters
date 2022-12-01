@@ -62,9 +62,6 @@
     <Filter Include="Game\scene">
       <UniqueIdentifier>{c1923a4d-0c3d-4ea4-a17e-16ddd50df236}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\player">
-      <UniqueIdentifier>{9191c314-550f-469e-bbb6-db002c93363e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Library\others\collision">
       <UniqueIdentifier>{e07f5ec7-ceef-4321-83db-e4ee7794b159}</UniqueIdentifier>
     </Filter>
@@ -73,9 +70,6 @@
     </Filter>
     <Filter Include="Library\Common\Frame">
       <UniqueIdentifier>{64f12138-5e11-4a54-8f1f-eeac2a4f0a1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object">
-      <UniqueIdentifier>{a62df537-8e27-4eb1-8cab-5444c316321b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +121,6 @@
     <ClCompile Include="3d\Object3d.cpp">
       <Filter>Library\3d\obj</Filter>
     </ClCompile>
-    <ClCompile Include="game\player.cpp">
-      <Filter>Game\player</Filter>
-    </ClCompile>
     <ClCompile Include="others\Collision.cpp">
       <Filter>Library\others\collision</Filter>
     </ClCompile>
@@ -153,9 +144,6 @@
     </ClCompile>
     <ClCompile Include="2d\SpriteAnimation.cpp">
       <Filter>Library\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="game\GameObject.cpp">
-      <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="scene\ClearScene.cpp">
       <Filter>Game\scene</Filter>
@@ -186,9 +174,6 @@
     </ClCompile>
     <ClCompile Include="others\TouchableObject.cpp">
       <Filter>Library\others\collision</Filter>
-    </ClCompile>
-    <ClCompile Include="game\stageObject.cpp">
-      <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="others\LoadCSV.cpp">
       <Filter>Library\others</Filter>
@@ -340,9 +325,6 @@
     <ClInclude Include="3d\Object3d.h">
       <Filter>Library\3d\obj</Filter>
     </ClInclude>
-    <ClInclude Include="game\player.h">
-      <Filter>Game\player</Filter>
-    </ClInclude>
     <ClInclude Include="3d\PointLight.h">
       <Filter>Library\3d\light</Filter>
     </ClInclude>
@@ -375,12 +357,6 @@
     </ClInclude>
     <ClInclude Include="2d\SpriteAnimation.h">
       <Filter>Library\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="game\GameObject.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="game\ObjectHelper.h">
-      <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="scene\ClearScene.h">
       <Filter>Game\scene</Filter>
@@ -426,9 +402,6 @@
     </ClInclude>
     <ClInclude Include="others\CollisionAttribute.h">
       <Filter>Library\others\collision</Filter>
-    </ClInclude>
-    <ClInclude Include="game\stageObject.h">
-      <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="others\QueryCallback.h">

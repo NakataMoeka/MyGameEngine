@@ -1,6 +1,6 @@
 #include "WinApp.h"
 #include"../resource.h"
-const wchar_t WinApp::windowClassName[] = L"おもちゃをあつめよう";
+const wchar_t WinApp::windowClassName[] = L"Json";
 
 LRESULT WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 	// メッセージで分岐

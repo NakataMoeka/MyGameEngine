@@ -114,7 +114,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	//audio->SoundPlayWave(sound2);
 	//audio->SetBGMVolume(0.5f);
 	// カメラ注視点をセット
-	levelData = json_Loader::jsonLoad("untitled");
+	levelData = json_Loader::jsonLoad("NM");
 	modelCube = Model::Create("Cube", false);
 	models.insert(std::make_pair("Cube", modelCube));
 	// レベルデータからオブジェクトを生成、配置
@@ -147,7 +147,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 		objects.push_back(newObject);
 	}
 	camera->SetTarget({ 0, 0.0f, 0 });
-	camera->SetEye({ 0, 0, -10 });
+	camera->SetEye({ 0, 0, -20 });
 
 
 
@@ -170,32 +170,10 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 	for (auto& object : objects) {
-		DebugText::GetInstance()->Printf(100, 420, 3.0f, {1,1,1,1}, "%f,%f,%f",
-			object->GetPosition().x, object->GetPosition().y, object->GetPosition().z);
-		DebugText::GetInstance()->Printf(100, 100, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
-			object->GetScale().x, object->GetScale().y, object->GetScale().z);
 		object->Update();
 	}
 	object3d3->Update();
-	if (Input::GetInstance()->PushKey(DIK_W)) {
-		cPos.z++;
-	}
-	else if (Input::GetInstance()->PushKey(DIK_S)) {
-		cPos.z--;
-	}
-	else if (Input::GetInstance()->PushKey(DIK_A)) {
-		cPos.x--;
-	}
-	else if (Input::GetInstance()->PushKey(DIK_D)) {
-		cPos.x++;
-	}
-	else if (Input::GetInstance()->PushKey(DIK_Q)) {
-		cPos.y--;
-	}
-	else if (Input::GetInstance()->PushKey(DIK_E)) {
-		cPos.y++;
-	}
-	camera->FollowCamera(cPos, { 0,0,-30 }, 0, 0);
+	
 	camera->Update();
 
 
