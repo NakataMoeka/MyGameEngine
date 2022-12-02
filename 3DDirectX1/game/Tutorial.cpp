@@ -9,13 +9,15 @@ void Tutorial::Initialize()
 	Sprite::LoadTexture(54, L"Resources/UI/Tutorial5.png");
 	Sprite::LoadTexture(55, L"Resources/UI/Tutorial6.png");
 	Sprite::LoadTexture(56, L"Resources/UI/Tutorial7.png");
-	TutorialSprite[0] = Sprite::CreateSprite(50, { 200,500 });
-	TutorialSprite[1] = Sprite::CreateSprite(51, { 200,500 });
-	TutorialSprite[2] = Sprite::CreateSprite(52, { 200,500 });
-	TutorialSprite[3] = Sprite::CreateSprite(53, { 200,500 });
-	TutorialSprite[4] = Sprite::CreateSprite(54, { 200,500 });
-	TutorialSprite[5] = Sprite::CreateSprite(55, { 200,500 });
-	TutorialSprite[6] = Sprite::CreateSprite(56, { 200,500 });
+	Sprite::LoadTexture(57, L"Resources/UI/TutorialUI.png");
+	TutorialSprite[0] = Sprite::CreateSprite(50, { 200,400 });
+	TutorialSprite[1] = Sprite::CreateSprite(51, { 200,400 });
+	TutorialSprite[2] = Sprite::CreateSprite(52, { 200,400 });
+	TutorialSprite[3] = Sprite::CreateSprite(53, { 200,400 });
+	TutorialSprite[4] = Sprite::CreateSprite(54, { 200,400 });
+	TutorialSprite[5] = Sprite::CreateSprite(55, { 200,400 });
+	TutorialSprite[6] = Sprite::CreateSprite(56, { 200,400 });
+	TutorialUI = Sprite::CreateSprite(57, { 700,550 });
 }
 
 void Tutorial::Init()
@@ -32,14 +34,12 @@ void Tutorial::Update()
 			if (TutorialCount < 6) {
 				TutorialCount++;
 			}
+			else if (TutorialCount == 6) {
+				endFlag = true;
+			}
 		}
 	}
-	if (TutorialCount == 6) {
-		if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
-
-			endFlag = true;
-		}
-	}
+	
 	if (TutorialCount == 1 || TutorialCount >= 3) {
 		moveFlag = true;
 	}
@@ -58,4 +58,7 @@ void Tutorial::Draw()
 	//for (int i = 0; i < 7; i++) {
 	TutorialSprite[TutorialCount]->Draw();
 	//}
+	if (TutorialCount != 1 && TutorialCount != 3) {
+		TutorialUI->Draw();
+	}
 }

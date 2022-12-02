@@ -18,6 +18,7 @@ public:
 	bool GetMoveFlag() { return moveFlag; }
 private:
 	std::array < Sprite*, 7> TutorialSprite = {};
+	Sprite* TutorialUI = nullptr;
 	int TutorialCount = 0;
 	bool countFlag = false;
 	bool endFlag = false;//チュートリアル終了フラグ

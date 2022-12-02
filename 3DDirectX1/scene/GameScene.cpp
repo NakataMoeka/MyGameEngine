@@ -163,32 +163,34 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 
 #pragma region	当たり判定
-	for (int j = 0; j < 2; j++) {
-		for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
+	if (tutorial->GetTCount() != 1) {
+		for (int j = 0; j < 2; j++) {
+			for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
 
-			gameObject->SetHIT(i, j, false);
-			if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
-				if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
-
-					if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10||gameObject->GetOSize(i, j) == 1) {
-						gameObject->SetHIT(i, j, true);
-						HitCount++;
-						//player->SetColFlag(true, i, j);
-						gameObject->GetObject3d(i, j)->SetParentFlag(true);
-					}
-
-					DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
-				}
-			}
-			if (gameObject->GetHIT(i, j) == true) {
-				gameObject->GetObject3d(i, j)->SetParent(player->GetObject3d());
-			}
-			if (HitCount == 1) {
-				gameObject->GetObject3d(i, j)->transformParent();
-				audio->SEPlayWave(sound1);
-				HitCount = 0;
 				gameObject->SetHIT(i, j, false);
-				Tsize += gameObject->GetOSize(i, j);
+				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
+					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
+
+						if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10 || gameObject->GetOSize(i, j) == 1) {
+							gameObject->SetHIT(i, j, true);
+							HitCount++;
+							//player->SetColFlag(true, i, j);
+							gameObject->GetObject3d(i, j)->SetParentFlag(true);
+						}
+
+						DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
+					}
+				}
+				if (gameObject->GetHIT(i, j) == true) {
+					gameObject->GetObject3d(i, j)->SetParent(player->GetObject3d());
+				}
+				if (HitCount == 1) {
+					gameObject->GetObject3d(i, j)->transformParent();
+					audio->SEPlayWave(sound1);
+					HitCount = 0;
+					gameObject->SetHIT(i, j, false);
+					Tsize += gameObject->GetOSize(i, j);
+				}
 			}
 		}
 	}
@@ -247,6 +249,12 @@ void GameScene::Update()
 		player->Update();
 		gameObject->Update();
 	}
+	if (pose->GetTFlag() == true) {
+		audio->StopWave();
+		gameObject->RC();
+		player->RC();
+		stageObj->RC();
+	}
 #pragma endregion
 #if _DEBUG 
 	//デバッグでクリアとゲームオーバー見るために作ったやつ
@@ -269,12 +277,6 @@ void GameScene::Update()
 	//object3d->SetRotation({ a,0,b });
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
 
-	if (pose->GetTFlag() == true) {
-		audio->StopWave();
-		gameObject->RC();
-		player->RC();
-		stageObj->RC();
-	}
 #pragma region チュートリアル
 	if (stageNum == 0) {
 		if (tutorial->GetTCount() == 1) {
@@ -309,6 +311,7 @@ void GameScene::Update()
 		tutorial->Update();
 	}
 #pragma endregion
+
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
 	camera->Update();
 	particleMan->Update();
