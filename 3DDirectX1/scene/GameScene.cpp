@@ -181,7 +181,7 @@ void GameScene::Update()
 				}
 			}
 			if (gameObject->GetHIT(i, j) == true) {
-				gameObject->GetObject3d(i, j)->SetParent(player->GetObject());
+				gameObject->GetObject3d(i, j)->SetParent(player->GetObject3d());
 			}
 			if (HitCount == 1) {
 				gameObject->GetObject3d(i, j)->transformParent();
@@ -299,6 +299,12 @@ void GameScene::Update()
 			gameObject->RC();
 			player->RC();
 			stageObj->RC();
+		}
+		if (tutorial->GetMoveFlag() == true) {
+			player->SetWalkFlag(true);
+		}
+		else if (tutorial->GetMoveFlag() == false) {
+			player->SetWalkFlag(false);
 		}
 		tutorial->Update();
 	}

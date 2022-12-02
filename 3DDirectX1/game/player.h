@@ -36,14 +36,16 @@ public:
 	XMVECTOR GetSphereAngle() { return sphereAngle; }
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
 	Sphere GetSphere() { return sphere; }
-	Object3d* GetObject() { return SphereObj; }
+	Object3d* GetObject3d() { return SphereObj; }
 	XMFLOAT3 SetSphereSize(XMFLOAT3 sphereSize) { return this->sphereSize = sphereSize; }
 	float SetSpherePos(float spherePos) { return this->spherePos.y = spherePos; }
 	XMFLOAT3 SetPlayerPos(XMFLOAT3 playerPos) { return this->playerPos = playerPos; }
 	float GetTsize() { return Tsize; }
 	float SetTsize(float tsize) { return this->Tsize = tsize; }
-	//bool SetColFlag(bool ColFlag, int i,int j) { return this->colFlag[i][j] = ColFlag; }
+	bool SetWalkFlag(bool walkFlag) { return this->walkFlag = walkFlag; }
 	bool SetPFlag(bool pFlag) { return this->pFlag = pFlag; }
+
+
 private://Update()にまとめるもの
 	void Move();//移動
 	void Ball();//ボール関係
@@ -101,5 +103,6 @@ private://変数
 
 	float PlayerWalkCount = 0;
 	float CountWalk = 0;
-	bool pFlag = false;
+	bool pFlag = false;//ポーズ用のフラグ
+	bool walkFlag = true;//チュートリアル用の歩けるか判定フラグ
 };

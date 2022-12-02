@@ -49,7 +49,7 @@ void Player::Init()
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	pFlag = false;
-
+	walkFlag = true;
 	spherePos = { 0,3,-40 };
 	playerPos = { 0,50,-40 };
 
@@ -117,7 +117,7 @@ void Player::Move()
 			spherePos.x -= moveUD.m128_f32[0];
 			spherePos.z -= moveUD.m128_f32[2];
 
-			sphereAngle.m128_f32[0] +=10;
+			sphereAngle.m128_f32[0] -=10;
 			//sphereAngle.m128_f32[0] += moveAngleZ.m128_f32[0];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_D))
@@ -176,10 +176,7 @@ void Player::Move()
 		playerObj->PlayAnimation(0);
 	}
 
-	sphere.radius = r;
-	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 
-	playerObj->Update();
 	//‰ñ“]‚ð’Ç]‚³‚¹‚½‚¢
 }
 
@@ -222,11 +219,13 @@ void Player::Jump()
 	}
 	//ƒWƒƒƒ“ƒv‘€ì
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-		if (pFlag == false) {
-			onGround = false;
-			JumpFlag = true;
-			const float jumpVYFist = 1.0f;
-			fallV = { 0, jumpVYFist, 0, 0 };
+		if (walkFlag == true) {
+			if (pFlag == false) {
+				onGround = false;
+				JumpFlag = true;
+				const float jumpVYFist = 1.0f;
+				fallV = { 0, jumpVYFist, 0, 0 };
+			}
 		}
 	}
 	playerObj->UpdateWorldMatrix();
@@ -415,11 +414,15 @@ void Player::Dash()
 void Player::Update()
 {
 	SphereObj->SetParentFlag(false);
-	Move();
-	Jump();
+	if (walkFlag == true) {
+		Move();
+		Dash();
+	}
 	Ball();
-	Dash();
-
+	Jump();
+	sphere.radius = r;
+	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
+	
 	sizeSprite->SetAnchorPoint({ 0.5, 0.5 });
 
 	SphereObj->SetPosition(spherePos);

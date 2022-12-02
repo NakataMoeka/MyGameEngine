@@ -65,6 +65,7 @@ public: // メンバ関数
 	bool GetTitleFlag();
 	int SetStageNum(int stageNum) { return this->stageNum = stageNum; }
 	bool GetTSFlag() { return TSFlag; }
+
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
 

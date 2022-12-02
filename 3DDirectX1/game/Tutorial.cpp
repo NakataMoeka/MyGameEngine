@@ -22,6 +22,7 @@ void Tutorial::Init()
 {
 	countFlag = false;
 	endFlag = false;
+	moveFlag = false;
 }
 
 void Tutorial::Update()
@@ -38,6 +39,12 @@ void Tutorial::Update()
 
 			endFlag = true;
 		}
+	}
+	if (TutorialCount == 1 || TutorialCount >= 3) {
+		moveFlag = true;
+	}
+	else {
+		moveFlag = false;
 	}
 	//else if (Input::GetInstance()->TriggerKey(DIK_LEFTARROW)) {
 	//	if (TutorialCount > 0) {

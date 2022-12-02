@@ -15,10 +15,12 @@ public:
 	int SetTCount(int TutorialCount) { return this->TutorialCount=TutorialCount; }
 	bool SetCountFlag(bool countFlag) { return this->countFlag = countFlag; }
 	bool GetEndFlag() { return endFlag; }
+	bool GetMoveFlag() { return moveFlag; }
 private:
 	std::array < Sprite*, 7> TutorialSprite = {};
 	int TutorialCount = 0;
 	bool countFlag = false;
 	bool endFlag = false;//チュートリアル終了フラグ
+	bool moveFlag = false;
 };
 
