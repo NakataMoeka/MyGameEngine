@@ -315,7 +315,7 @@ void GameScene::Update()
 	camera->Update();
 	particleMan->Update();
 	lightGroup->Update();
-	colMan->ColSphere();
+	//colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);

@@ -145,6 +145,8 @@ void GameObject::Update()
 				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
 			cube[i]->Quaternion();
+			cube[i]->SetRotation(rota);
+			cube[0]->SetRotation({ 0,90,0 });
 			cube[i]->Update();
 
 		}

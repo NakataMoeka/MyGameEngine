@@ -283,8 +283,8 @@ void Player::Jump()
 	//for (int i = 0; i < OBJNumber; i++) {
 	//	for (int j = 0; j < OBJNumber; j++) {
 	//		if (colFlag[i][j] == true) {
-	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+	//CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+	//CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
 	//	}
 	//	}
 	//}
