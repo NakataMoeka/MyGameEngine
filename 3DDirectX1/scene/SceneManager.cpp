@@ -73,11 +73,11 @@ void SceneManager::Update()
 			}
 		}
 		if (gameScene->GetTitleFlag() == true) {
-			changeSFlag = true;
-			if (changeEFlag == true) {
+			//changeSFlag = true;
+			//if (changeEFlag == true) {
 				titleScene->Init();
 				scene = TITLE;
-			}
+			//}
 		}
 		if (gameScene->GetTSFlag() == true) {
 			changeSFlag = true;
