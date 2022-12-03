@@ -39,11 +39,13 @@ void GameObject::Init()
 		rota = { 0,0,0,0 };
 		cube[i]->SetPosition(oData[i]->pos);
 		cube[i]->SetScale(size[0]);
+		cube[0]->SetRotation({ 0,90,0,0 });
+		cube[i]->Quaternion();
 		cube[i]->Update();
 		//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
-		cSphere[i].radius = 1.2f;
+		cSphere[i].radius = 6.0f;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.2f));
+		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2.0f));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		cube[i]->GetCollider()->SetNum(0);
 		cube[i]->SetParentFlag(false);
@@ -52,6 +54,7 @@ void GameObject::Init()
 	for (int i = 0; i < oData2.size(); i++) {
 		moveObj[i]->SetPosition(oData2[i]->pos);
 		moveObj[i]->SetScale(size[0]);
+		moveObj[i]->Quaternion();
 		moveObj[i]->Update();
 		oData2[i]->o_pos = moveObj[i]->GetPosition();
 		cSphere2[i].radius = 2;
@@ -123,7 +126,7 @@ void GameObject::Update()
 	if(stageNum==0){
 		for (int i = 0; i < OBJNumber; i++) {
 
-			cSphere[i].radius = 1.2f;
+			cSphere[i].radius = 2.0f;
 			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			if (cube[i]->GetParentFlag() == true) {
 				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -141,6 +144,7 @@ void GameObject::Update()
 			if (cube[i]->GetParentFlag() == true) {
 				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
+			cube[i]->Quaternion();
 			cube[i]->Update();
 
 		}
@@ -158,6 +162,7 @@ void GameObject::Update()
 			if (moveObj[i]->GetParentFlag() == true) {
 				moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
+			moveObj[i]->Quaternion();
 			moveObj[i]->Update();
 		}
 	}
