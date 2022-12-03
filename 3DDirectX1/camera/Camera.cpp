@@ -1,11 +1,13 @@
 #include "Camera.h"
-
+#include "CollisionManager.h"
+#include "CollisionAttribute.h"
+#include "DebugText.h"
 using namespace DirectX;
 
 Camera::Camera(int window_width, int window_height)
 {
 	aspectRatio = (float)window_width / window_height;
-	
+
 	//ビュー行列の計算
 	UpdateViewMatrix();
 
@@ -39,7 +41,7 @@ void Camera::Update()
 
 void Camera::FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX, float angleY)
 {
-	XMVECTOR v0 = {d.x,d.y,d.z };
+	XMVECTOR v0 = { d.x,d.y,d.z };
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(angleY));
@@ -134,6 +136,64 @@ void Camera::UpdateProjectionMatrix()
 		aspectRatio,
 		0.1f, 1000.0f
 	);
+}
+
+void Camera::CameraCollision()
+{
+	sphere.radius = 10;
+	sphere.center = XMVectorSet(eye.x, eye.y, eye.z, 1);
+	class PlayerQueryCallback : public QueryCallback
+	{
+	public:
+		PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
+		bool QcolFlag = false;
+		// 衝突時コールバック関数
+		bool OnQueryHit(const QueryHit& info) {
+
+			const XMVECTOR up = { 0,1,0,0 };
+
+			XMVECTOR rejectDir = XMVector3Normalize(info.reject);
+			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
+
+			// 地面判定しきい値
+			const float threshold = cosf(XMConvertToRadians(60.0f));
+
+			if (-threshold < cos && cos < threshold) {
+				sphere->center += info.reject;
+				move += info.reject;
+				DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "OP");
+				QcolFlag = true;
+			}
+
+			return true;
+		}
+
+		Sphere* sphere = nullptr;
+		DirectX::XMVECTOR move = { };
+	};
+
+	PlayerQueryCallback callback(&sphere);
+	// 球と地形の交差を全検索
+
+	CollisionManager::GetInstance()->QuerySphere(sphere, &callback, COLLISION_ATTR_LANDSHAPE);
+
+	// 交差による排斥分動かす
+	eye.x += callback.move.m128_f32[0];
+	eye.y += callback.move.m128_f32[1];
+	eye.z += callback.move.m128_f32[2];
+	if (callback.QcolFlag == true) {
+		colFlag = true;
+	}
+	else {
+		colFlag = false;
+	}
+}
+
+void Camera::SetCameraCollider()
+{
+	colFlag = false;
+	sphere.radius = 10;
+	sphere.center = XMVectorSet(eye.x, eye.y, eye.z, 1);
 }
 
 void Camera::MoveEyeVector(const XMFLOAT3& move)

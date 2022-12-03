@@ -182,6 +182,7 @@
     <ClCompile Include="DirectXCommon\Framework.cpp" />
     <ClCompile Include="DirectXCommon\NMGame.cpp" />
     <ClCompile Include="DirectXCommon\WinApp.cpp" />
+    <ClCompile Include="game\Change.cpp" />
     <ClCompile Include="game\GameObject.cpp" />
     <ClCompile Include="game\player.cpp" />
     <ClCompile Include="game\Pose.cpp" />
@@ -362,6 +363,7 @@
     <ClInclude Include="DirectXCommon\NMGame.h" />
     <ClInclude Include="DirectXCommon\SafeDelete.h" />
     <ClInclude Include="DirectXCommon\WinApp.h" />
+    <ClInclude Include="game\Change.h" />
     <ClInclude Include="game\GameObject.h" />
     <ClInclude Include="game\ObjectHelper.h" />
     <ClInclude Include="game\player.h" />

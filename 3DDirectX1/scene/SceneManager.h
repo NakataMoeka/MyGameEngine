@@ -35,6 +35,7 @@ public:
 	void Init();
 	//繰り返し処理
 	void Update();
+	void SceneChange();
 	//背景画像描画
 	void DrawBG();
 	//オブジェクト描画
@@ -45,6 +46,7 @@ public:
 	bool GetBFlag() { return Bflag; }
 private:
 	//最初のシーン
+	DXCommon* dxCommon = nullptr;
 	Scene scene = TITLE;
 	TitleScene* titleScene=nullptr;
 	SelectScene* selectScene = nullptr;
@@ -52,6 +54,10 @@ private:
 	ClearScene* clearScene=nullptr;
 	bool Bflag = false;
 	
+	Sprite*	Change = nullptr;
+	float fade = 0;
+	bool changeSFlag = false;
+	bool changeEFlag = false;
 	//ロード画面作りたい
 	std::thread t = {};
 

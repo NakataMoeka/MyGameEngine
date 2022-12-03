@@ -2,6 +2,14 @@
 #include"Input.h"
 void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 {
+	assert(dxCommon);
+	assert(audio);
+
+	this->dxCommon = dxCommon;
+
+	Sprite::LoadTexture(60, L"Resources/white.jpg");
+	Change = Sprite::CreateSprite(60, { 0,0 });
+	Change->SetSize({ 1280,720 });
 	titleScene = new TitleScene();
 	titleScene->Initialize(dxCommon, audio);
 	selectScene = new SelectScene();
@@ -13,6 +21,7 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	gameScene->InitTH();
 	titleScene->Init();
 	Bflag = false;
+	fade = 0.0f;
 	//gameScene->Init();
 	//clearScene->Init();
 }
@@ -25,50 +34,71 @@ void SceneManager::Update()
 {
 	if (scene == TITLE) {
 		if (titleScene->GetSCangeFlag() == true) {
-			selectScene->Init();
-			scene = SELECT;
-
+			changeSFlag = true;
+			if (changeEFlag == true) {
+				selectScene->Init();
+				scene = SELECT;
+			}
 		}
 		titleScene->Update();
 	}
 	else if (scene == SELECT) {
 		if (selectScene->GetSCangeFlag() == true) {
-			gameScene->InitStageNum(selectScene->GetStageNum());
-			gameScene->Init();
-			scene = GAME;
+		
+			changeSFlag = true;
+			if (changeEFlag == true) {
+				gameScene->InitStageNum(selectScene->GetStageNum());
+				gameScene->Init();
+				scene = GAME;
+			}
 		}
 		selectScene->Update();
 	}
 	else if (scene == GAME) {
 		if (gameScene->GetClearFlag() == true) {
-			clearScene->Init();
-			clearScene->SetClearFlag(true);
-			scene = END;
+			changeSFlag = true;
+			if (changeEFlag == true) {
+				clearScene->SetClearFlag(true);
+				clearScene->Init();
+				scene = END;
+			}
+
 		}
 		if (gameScene->GetOverFlag() == true) {
-			clearScene->Init();
-			clearScene->SetOverFlag(true);
-			scene = END;
+			changeSFlag = true;
+			if (changeEFlag == true) {
+				clearScene->SetOverFlag(true);
+				clearScene->Init();
+				scene = END;
+			}
 		}
 		if (gameScene->GetTitleFlag() == true) {
-			titleScene->Init();
-			scene = TITLE;
+			changeSFlag = true;
+			if (changeEFlag == true) {
+				titleScene->Init();
+				scene = TITLE;
+			}
 		}
 		if (gameScene->GetTSFlag() == true) {
-			selectScene->Init();
-			scene = SELECT;
+			changeSFlag = true;
+			if (changeEFlag == true) {
+				selectScene->Init();
+				scene = SELECT;
+			}
 		}
 		gameScene->Update();
 	}
 	else if (scene == END) {
 		if (clearScene->GetPushFlag() == true) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-				clearScene->SetClearFlag(false);
-				clearScene->SetOverFlag(false);
-				titleScene->Init();
-				clearScene->Init();
-				clearScene->SetAudioFlag(true);
-				scene = TITLE;
+				//changeSFlag = true;
+				//if (changeEFlag == true) {
+					clearScene->SetClearFlag(false);
+					clearScene->SetOverFlag(false);
+					clearScene->SetAudioFlag(true);
+					titleScene->Init();
+					scene = TITLE;
+				//}
 			}
 		}
 		clearScene->Update();
@@ -78,6 +108,31 @@ void SceneManager::Update()
 	}
 	else if (gameScene->GetBFlag() == false) {
 		Bflag = false;
+	}
+	SceneChange();
+}
+
+void SceneManager::SceneChange()
+{
+	Change->SetColor({ 1, 1, 1, fade });
+	if (changeSFlag == true) {
+		if (fade < 1) {
+			fade += 0.1f;
+		}
+		if (fade >= 1) {
+			fade = 1.0f;
+			changeSFlag = false;
+			changeEFlag = true;
+		}
+	}
+	if (changeEFlag == true) {
+		if (fade >= 0) {
+			fade -= 0.1f;
+		}
+		if (fade <= 0) {
+			changeEFlag = false;
+			fade = 0.0f;
+		}
 	}
 }
 
@@ -124,6 +179,11 @@ void SceneManager::DrawFront()
 	else if (scene == END) {
 		clearScene->DrawFront();
 	}
+	Sprite::PreDraw(dxCommon->GetCmdList());
+	//if (changeFlag == true) {
+	Change->Draw();
+	//}
+	Sprite::PostDraw();
 }
 
 

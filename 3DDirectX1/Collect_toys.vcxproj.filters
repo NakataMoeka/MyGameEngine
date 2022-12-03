@@ -208,6 +208,9 @@
     <ClCompile Include="game\Tutorial.cpp">
       <Filter>Game\gameScene</Filter>
     </ClCompile>
+    <ClCompile Include="game\Change.cpp">
+      <Filter>Game\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -457,6 +460,9 @@
     </ClInclude>
     <ClInclude Include="game\Tutorial.h">
       <Filter>Game\gameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="game\Change.h">
+      <Filter>Game\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

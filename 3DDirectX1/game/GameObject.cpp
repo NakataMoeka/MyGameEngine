@@ -131,7 +131,6 @@ void GameObject::Update()
 			if (cube[i]->GetParentFlag() == true) {
 				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
-			
 			cube[i]->Update();
 		}
 	}

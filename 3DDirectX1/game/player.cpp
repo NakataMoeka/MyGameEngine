@@ -7,6 +7,7 @@
 #include "CollisionAttribute.h"
 #include "FbxLoader.h"
 #include "FbxObject.h"
+#include"DebugText.h"
 using namespace DirectX;
 Player::Player()
 {
@@ -253,6 +254,7 @@ void Player::Jump()
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
 				move += info.reject;
+				DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "OP");
 			}
 			return true;
 		}
@@ -284,7 +286,7 @@ void Player::Jump()
 	//	for (int j = 0; j < OBJNumber; j++) {
 	//		if (colFlag[i][j] == true) {
 	//CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-	//CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
 	//	}
 	//	}
 	//}
