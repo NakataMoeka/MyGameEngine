@@ -249,7 +249,7 @@ void GameScene::Update()
 		gameObject->Update();
 	}
 	if (pose->GetTFlag() == true) {
-		audio->StopWave();
+		//audio->StopWave();
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();

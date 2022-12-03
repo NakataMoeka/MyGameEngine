@@ -36,6 +36,8 @@ void SceneManager::Update()
 		if (titleScene->GetSCangeFlag() == true) {
 			changeSFlag = true;
 			if (changeEFlag == true) {
+				clearScene->SetClearFlag(false);
+				clearScene->SetOverFlag(false);
 				selectScene->Init();
 				scene = SELECT;
 			}
@@ -73,11 +75,11 @@ void SceneManager::Update()
 			}
 		}
 		if (gameScene->GetTitleFlag() == true) {
-			//changeSFlag = true;
-			//if (changeEFlag == true) {
+			changeSFlag = true;
+			if (changeEFlag == true) {
 				titleScene->Init();
 				scene = TITLE;
-			//}
+			}
 		}
 		if (gameScene->GetTSFlag() == true) {
 			changeSFlag = true;
@@ -92,11 +94,11 @@ void SceneManager::Update()
 		if (clearScene->GetPushFlag() == true) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 				//changeSFlag = true;
+
+				clearScene->SetAudioFlag(true);
+				titleScene->Init();
 				//if (changeEFlag == true) {
-					clearScene->SetClearFlag(false);
-					clearScene->SetOverFlag(false);
-					clearScene->SetAudioFlag(true);
-					titleScene->Init();
+
 					scene = TITLE;
 				//}
 			}
