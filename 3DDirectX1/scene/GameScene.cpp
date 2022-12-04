@@ -312,10 +312,11 @@ void GameScene::Update()
 #pragma endregion
 
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
+	camera->CameraCollision();
 	camera->Update();
 	particleMan->Update();
 	lightGroup->Update();
-	//colMan->ColSphere();
+	colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);

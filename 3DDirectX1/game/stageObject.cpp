@@ -47,7 +47,6 @@ void StageObject::stageInit(int stageNum)
 		skydome->Update();
 	}
 	else if (stageNum == 1) {
-		Home->SetTouchCollider();
 		Kotatu->SetTouchCollider();
 		Kotatu->SetPosition({ 0,38,-80 });
 		Kotatu->Update();
@@ -56,6 +55,7 @@ void StageObject::stageInit(int stageNum)
 		Ground->SetRotation({ 0,0,0 });
 		Ground->Quaternion();
 		Ground->Update();
+		Home->SetTouchCollider();
 		Home->Update();
 		skydome->SetPosition({ 0.0f,100.0f,0.0f });
 		skydome->SetScale({ 4.0f,4.0f,4.0f });

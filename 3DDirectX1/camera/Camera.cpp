@@ -140,61 +140,18 @@ void Camera::UpdateProjectionMatrix()
 
 void Camera::CameraCollision()
 {
-	sphere.radius = 10;
-	sphere.center = XMVectorSet(eye.x, eye.y, eye.z, 1);
-	class PlayerQueryCallback : public QueryCallback
-	{
-	public:
-		PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
-		bool QcolFlag = false;
-		// 衝突時コールバック関数
-		bool OnQueryHit(const QueryHit& info) {
-
-			const XMVECTOR up = { 0,1,0,0 };
-
-			XMVECTOR rejectDir = XMVector3Normalize(info.reject);
-			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
-
-			// 地面判定しきい値
-			const float threshold = cosf(XMConvertToRadians(60.0f));
-
-			if (-threshold < cos && cos < threshold) {
-				sphere->center += info.reject;
-				move += info.reject;
-				DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "OP");
-				QcolFlag = true;
-			}
-
-			return true;
-		}
-
-		Sphere* sphere = nullptr;
-		DirectX::XMVECTOR move = { };
-	};
-
-	PlayerQueryCallback callback(&sphere);
-	// 球と地形の交差を全検索
-
-	CollisionManager::GetInstance()->QuerySphere(sphere, &callback, COLLISION_ATTR_LANDSHAPE);
-
-	// 交差による排斥分動かす
-	eye.x += callback.move.m128_f32[0];
-	eye.y += callback.move.m128_f32[1];
-	eye.z += callback.move.m128_f32[2];
-	if (callback.QcolFlag == true) {
-		colFlag = true;
-	}
-	else {
-		colFlag = false;
+	Ray ray;
+	ray.start = { eye.x,eye.y,eye.z ,1 };
+	XMFLOAT3 cd = { target.x - eye.x,target.y - eye.y,target.z - eye.z };
+	XMFLOAT3 cdN = { cd.x / cd.x,cd.y / cd.y,cd.z / cd.z };
+	ray.dir = { cdN.x,cdN.y,cdN.z,1 };
+	RaycastHit raycastHit;
+	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit,30.0f)) {
+		DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
 	}
 }
 
-void Camera::SetCameraCollider()
-{
-	colFlag = false;
-	sphere.radius = 10;
-	sphere.center = XMVectorSet(eye.x, eye.y, eye.z, 1);
-}
+
 
 void Camera::MoveEyeVector(const XMFLOAT3& move)
 {

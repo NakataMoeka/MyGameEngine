@@ -29,7 +29,6 @@ public: // ƒƒ“ƒoŠÖ”
 	void UpdateProjectionMatrix();
 
 	void CameraCollision();
-	void SetCameraCollider();
 	inline const XMMATRIX& GetViewMatrix() {
 		return matView;
 	}
@@ -69,7 +68,7 @@ public: // ƒƒ“ƒoŠÖ”
 	inline void SetUp(XMFLOAT3 up) {
 		this->up = up; viewDirty = true;
 	}
-	bool GetColFlag() { return colFlag; }
+
 	void MoveEyeVector(const XMFLOAT3& move);
 	void MoveEyeVector(const XMVECTOR& move);
 
@@ -102,6 +101,4 @@ protected: // ƒƒ“ƒo•Ï”
 
 	XMFLOAT3 FEye;
 	XMFLOAT3 FTarget;
-	Sphere sphere;
-	bool colFlag = false;
 };
