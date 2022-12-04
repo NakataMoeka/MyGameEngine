@@ -141,12 +141,12 @@ void Camera::UpdateProjectionMatrix()
 void Camera::CameraCollision()
 {
 	Ray ray;
-	ray.start = { eye.x,eye.y,eye.z ,1 };
-	XMFLOAT3 cd = { target.x - eye.x,target.y - eye.y,target.z - eye.z };
+	ray.start = { target.x,target.y,target.z ,1 };
+	XMFLOAT3 cd = { eye.x - target.x,eye.y - target.y,eye.z - target.z };
 	XMFLOAT3 cdN = { cd.x / cd.x,cd.y / cd.y,cd.z / cd.z };
 	ray.dir = { cdN.x,cdN.y,cdN.z,1 };
 	RaycastHit raycastHit;
-	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit,30.0f)) {
+	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit)) {
 		DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
 	}
 }
