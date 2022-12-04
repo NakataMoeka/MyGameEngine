@@ -35,8 +35,8 @@ public:
 	bool GetOverFlag() { return overFlag; }
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
-	bool GetPushFlag() { return pushFlag; }
-	bool SetAudioFlag(bool audioFlag) { return this->audioFlag = audioFlag; }
+	bool GetSCangeFlag() { return SCangeFlag; }
+
 private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
@@ -61,6 +61,6 @@ private:
 	Eas* eas;
 	float easeTimer = 0;//イージングのタイマー
 	bool pushFlag = false;//ボタンを押せるようにする
-	bool audioFlag = false;//音鳴らすか
+	bool SCangeFlag = false;
 };
 

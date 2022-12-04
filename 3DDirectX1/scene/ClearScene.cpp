@@ -69,7 +69,7 @@ void ClearScene::Init()
 	easeTimer = 0;
 	pos = { 300,800 };
 	pushFlag = false;
-	audioFlag = false;
+	SCangeFlag = false;
 }
 
 void ClearScene::Update()
@@ -81,8 +81,13 @@ void ClearScene::Update()
 	if (pos.y <= 100) {
 		pushFlag = true;
 	}
-	if (audioFlag == true) {
-		audio->SEPlayWave(sound1);
+	if (pushFlag == true) {
+		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+			SCangeFlag = true;
+			audio->SEPlayWave(sound1);
+			clearFlag = false;
+			overFlag = false;
+		}
 	}
 
 	motherASprite->SetPosition({ 800,200 });

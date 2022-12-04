@@ -36,8 +36,6 @@ void SceneManager::Update()
 		if (titleScene->GetSCangeFlag() == true) {
 			changeSFlag = true;
 			if (changeEFlag == true) {
-				clearScene->SetClearFlag(false);
-				clearScene->SetOverFlag(false);
 				selectScene->Init();
 				scene = SELECT;
 			}
@@ -46,7 +44,7 @@ void SceneManager::Update()
 	}
 	else if (scene == SELECT) {
 		if (selectScene->GetSCangeFlag() == true) {
-		
+
 			changeSFlag = true;
 			if (changeEFlag == true) {
 				gameScene->InitStageNum(selectScene->GetStageNum());
@@ -91,27 +89,24 @@ void SceneManager::Update()
 		gameScene->Update();
 	}
 	else if (scene == END) {
-		if (clearScene->GetPushFlag() == true) {
-			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-				//changeSFlag = true;
 
-				clearScene->SetAudioFlag(true);
+		if (clearScene->GetSCangeFlag() == true) {
+			changeSFlag = true;
+			if (changeEFlag == true) {
 				titleScene->Init();
-				//if (changeEFlag == true) {
-
-					scene = TITLE;
-				//}
+				scene = TITLE;
 			}
 		}
 		clearScene->Update();
 	}
-	if (gameScene->GetBFlag() == true) {
-		Bflag = true;
-	}
-	else if (gameScene->GetBFlag() == false) {
-		Bflag = false;
-	}
-	SceneChange();
+
+if (gameScene->GetBFlag() == true) {
+	Bflag = true;
+}
+else if (gameScene->GetBFlag() == false) {
+	Bflag = false;
+}
+SceneChange();
 }
 
 void SceneManager::SceneChange()
