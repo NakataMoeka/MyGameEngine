@@ -184,7 +184,7 @@ void Player::Move()
 void Player::Ball()
 {
 #pragma region カメラ追従とほぼ同じ
-	XMVECTOR v0 = { 0,0,15,0 };
+	XMVECTOR v0 = { 0,0,5,0 };
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
@@ -254,7 +254,7 @@ void Player::Jump()
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
 				move += info.reject;
-				//DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "OP");
+				DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "OP");
 			}
 			return true;
 		}
@@ -267,21 +267,21 @@ void Player::Jump()
 	// 球と地形の交差を全検索
 
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
-
-	// 交差による排斥分動かす
-	playerPos.x += callback.move.m128_f32[0];
-	playerPos.y += callback.move.m128_f32[1];
-	playerPos.z += callback.move.m128_f32[2];
-	// 交差による排斥分動かす
-	spherePos.x += callback.move.m128_f32[0];
-	spherePos.y += callback.move.m128_f32[1];
-	spherePos.z += callback.move.m128_f32[2];
-
-
 	PlayerQueryCallback callback2(sphereCollider2);
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
 
+	// 交差による排斥分動かす
+	playerPos.x += callback2.move.m128_f32[0];
+	playerPos.y += callback2.move.m128_f32[1];
+	playerPos.z += callback2.move.m128_f32[2];
+	// 交差による排斥分動かす
+	spherePos.x += callback2.move.m128_f32[0];
+	spherePos.y += callback2.move.m128_f32[1];
+	spherePos.z += callback2.move.m128_f32[2];
+
+
+	
 	//for (int i = 0; i < OBJNumber; i++) {
 	//	for (int j = 0; j < OBJNumber; j++) {
 	//		if (colFlag[i][j] == true) {

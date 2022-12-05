@@ -75,6 +75,8 @@ public: // メンバ関数
 	void MoveVector(const XMFLOAT3& move);
 	void MoveVector(const XMVECTOR& move);
 
+	bool GetCCFlag() { return ccFlag; }
+	float GetDistance() { return distance; }
 protected: // メンバ変数
 	// ビュー行列
 	XMMATRIX matView = DirectX::XMMatrixIdentity();
@@ -101,4 +103,7 @@ protected: // メンバ変数
 
 	XMFLOAT3 FEye;
 	XMFLOAT3 FTarget;
+	bool ccFlag = false;//カメラこリジョン用のフラグ
+
+	float distance;
 };

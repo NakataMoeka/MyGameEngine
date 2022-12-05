@@ -142,12 +142,22 @@ void Camera::CameraCollision()
 {
 	Ray ray;
 	ray.start = { target.x,target.y,target.z ,1 };
-	XMFLOAT3 cd = { eye.x - target.x,eye.y - target.y,eye.z - target.z };
-	XMFLOAT3 cdN = { cd.x / cd.x,cd.y / cd.y,cd.z / cd.z };
-	ray.dir = { cdN.x,cdN.y,cdN.z,1 };
+	XMVECTOR cd = { eye.x - target.x,eye.y - target.y,eye.z - target.z,0 };
+	//XMVECTOR cd = { 0,0,-1,0 };
+
+	cd = XMVector3Normalize(cd);
+	ray.dir = cd;
+	DebugText::GetInstance()->Printf(100, 300, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+		ray.dir.m128_f32[0], ray.dir.m128_f32[1],ray.dir.m128_f32[2]);
 	RaycastHit raycastHit;
-	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit)) {
+
+	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, 10.0f)) {
 		DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
+		ccFlag = true;
+		distance = raycastHit.distance;
+	}
+	else {
+		ccFlag = false;
 	}
 }
 
@@ -212,4 +222,6 @@ void Camera::MoveVector(const XMVECTOR& move)
 	SetEye(eye_moved);
 	SetTarget(target_moved);
 }
+
+
 

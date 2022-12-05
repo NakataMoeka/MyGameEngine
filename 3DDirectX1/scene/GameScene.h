@@ -112,7 +112,7 @@ private: // メンバ変数
 
 	float distance = 20.0f;//プレイヤーとカメラの距離
 
-
+	float distanceC = 20.0f;//カメラ用のやつ
 
 	bool clearFlag = false;
 	bool overFlag = false;

@@ -124,7 +124,7 @@ void GameScene::Init()
 	timer->Init();
 	pose->Init();
 	distance = 10.0f;
-
+	distanceC = 10.0f;
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
 	clearFlag = false;
@@ -281,7 +281,7 @@ void GameScene::Update()
 		if (tutorial->GetTCount() == 1) {
 			if (player->GetPlayerPos().z >= 0) {
 				tutorial->SetTCount(2);
-			
+
 			}
 			tutorial->SetCountFlag(true);
 		}
@@ -311,8 +311,16 @@ void GameScene::Update()
 	}
 #pragma endregion
 
-	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distance }, 0, player->GetPlayerAngle().y);
+	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distanceC }, 0, player->GetPlayerAngle().y);
 	camera->CameraCollision();
+	if (camera->GetCCFlag() == true) {
+		if (camera->GetDistance() > 3) {
+			distanceC = camera->GetDistance();
+		}
+	}
+	else if (camera->GetCCFlag() == false) {
+		distanceC = distance;
+	}
 	camera->Update();
 	particleMan->Update();
 	lightGroup->Update();
