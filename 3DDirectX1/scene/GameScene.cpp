@@ -314,9 +314,9 @@ void GameScene::Update()
 	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distanceC }, 0, player->GetPlayerAngle().y);
 	camera->CameraCollision();
 	if (camera->GetCCFlag() == true) {
-		if (camera->GetDistance() > 3) {
+		//if (camera->GetDistance() > 3) {
 			distanceC = camera->GetDistance();
-		}
+		//}
 	}
 	else if (camera->GetCCFlag() == false) {
 		distanceC = distance;

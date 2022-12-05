@@ -56,13 +56,13 @@ void Player::Init()
 
 	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };
-	sphereSize = { 1,1,1 };
+	sphereSize = { 0.5,0.5,0.5 };
 	// コライダーの追加
 	float radius = 3.0f;
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), radius));
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	SphereObj->SetParentFlag(false);
-	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,0.6f,0,0 }), 0.6f));
+	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,1.0f,0,0 }), 1.0f));
 	playerObj->GetCollider()->SetAttribute(COLLISION_ATTR_SPHERE);
 	//playerObj->SetParentFlag(false);
 	SphereObj->Quaternion();
@@ -194,7 +194,7 @@ void Player::Ball()
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	////ジャンプをしない時だけY軸の追従をする
 	//if (JumpFlag == false) {
-	spherePos.y = f.y + 4;
+	spherePos.y = f.y + 2;
 	//}
 	//if (moveFlag == false) {
 	spherePos.x = f.x;
@@ -272,14 +272,22 @@ void Player::Jump()
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
 
 	// 交差による排斥分動かす
+	playerPos.x += callback.move.m128_f32[0];
+	playerPos.y += callback.move.m128_f32[1];
+	playerPos.z += callback.move.m128_f32[2];
+	// 交差による排斥分動かす
+	spherePos.x += callback.move.m128_f32[0];
+	spherePos.y += callback.move.m128_f32[1];
+	spherePos.z += callback.move.m128_f32[2];
+	playerObj->GetCollider()->Update();
+	SphereObj->GetCollider()->Update();
+	// 交差による排斥分動かす
 	playerPos.x += callback2.move.m128_f32[0];
 	playerPos.y += callback2.move.m128_f32[1];
 	playerPos.z += callback2.move.m128_f32[2];
-	// 交差による排斥分動かす
 	spherePos.x += callback2.move.m128_f32[0];
 	spherePos.y += callback2.move.m128_f32[1];
 	spherePos.z += callback2.move.m128_f32[2];
-
 
 	
 	//for (int i = 0; i < OBJNumber; i++) {
@@ -291,13 +299,6 @@ void Player::Jump()
 	//	}
 	//}
 
-	// 交差による排斥分動かす
-	playerPos.x += callback2.move.m128_f32[0];
-	playerPos.y += callback2.move.m128_f32[1];
-	playerPos.z += callback2.move.m128_f32[2];
-	spherePos.x += callback2.move.m128_f32[0];
-	spherePos.y += callback2.move.m128_f32[1];
-	spherePos.z += callback2.move.m128_f32[2];
 
 
 	// 球の上端から球の下端までのレイキャスト
