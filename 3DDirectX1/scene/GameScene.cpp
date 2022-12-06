@@ -311,7 +311,8 @@ void GameScene::Update()
 	}
 #pragma endregion
 
-	camera->FollowCamera(player->GetPlayerPos(), XMFLOAT3{ 0,2,-distanceC }, 0, player->GetPlayerAngle().y);
+	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+2,player->GetPlayerPos().z}
+	, XMFLOAT3{0,4,-distanceC}, 0, player->GetPlayerAngle().y);
 	camera->CameraCollision();
 	if (camera->GetCCFlag() == true) {
 		//if (camera->GetDistance() > 3) {

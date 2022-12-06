@@ -60,7 +60,7 @@ void Player::Init()
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 0.8f,0.8f,0.8f };
 	// コライダーの追加
-	float radius = 2.0f;
+	float radius = 3.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	SphereObj->SetParentFlag(false);
@@ -273,6 +273,10 @@ void Player::Jump()
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_LANDSHAPE);
 
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
+	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
+
+
 	// 交差による排斥分動かす
 	playerPos.x += callback.move.m128_f32[0];
 	playerPos.y += callback.move.m128_f32[1];
@@ -295,8 +299,6 @@ void Player::Jump()
 	//for (int i = 0; i < OBJNumber; i++) {
 	//	for (int j = 0; j < OBJNumber; j++) {
 	//		if (colFlag[i][j] == true) {
-	//CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
-	//CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
 	//	}
 	//	}
 	//}
