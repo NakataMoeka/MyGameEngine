@@ -147,8 +147,8 @@ void Camera::CameraCollision()
 
 	cd = XMVector3Normalize(cd);
 	ray.dir = cd;
-	DebugText::GetInstance()->Printf(100, 300, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
-		ray.dir.m128_f32[0], ray.dir.m128_f32[1],ray.dir.m128_f32[2]);
+	/*DebugText::GetInstance()->Printf(100, 300, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+		ray.dir.m128_f32[0], ray.dir.m128_f32[1],ray.dir.m128_f32[2]);*/
 	RaycastHit raycastHit;
 
 	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, 10.0f)) {

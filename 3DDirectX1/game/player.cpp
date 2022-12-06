@@ -14,6 +14,8 @@ Player::Player()
 }
 Player::~Player()
 {
+	safe_delete(playerObj);
+	safe_delete(SphereObj);
 }
 void Player::Initialize()
 {
@@ -56,9 +58,9 @@ void Player::Init()
 
 	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };
-	sphereSize = { 0.5,0.5,0.5 };
+	sphereSize = { 0.8f,0.8f,0.8f };
 	// コライダーの追加
-	float radius = 3.0f;
+	float radius = 2.0f;
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	SphereObj->SetParentFlag(false);
@@ -194,7 +196,7 @@ void Player::Ball()
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	////ジャンプをしない時だけY軸の追従をする
 	//if (JumpFlag == false) {
-	spherePos.y = f.y + 2;
+	spherePos.y = f.y + 3;
 	//}
 	//if (moveFlag == false) {
 	spherePos.x = f.x;
@@ -254,7 +256,7 @@ void Player::Jump()
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
 				move += info.reject;
-				DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "OP");
+				//DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "OP");
 			}
 			return true;
 		}

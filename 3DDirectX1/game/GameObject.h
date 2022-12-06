@@ -6,6 +6,7 @@
 #include"LoadCSV.h"
 #include<array>
 #include"ObjectHelper.h"
+#include"safedelete.h"
 /// <summary>
 /// ステージに配置されているオブジェクトのクラス
 /// </summary>
@@ -51,7 +52,7 @@ private://Update()にまとめるもの
 private://変数
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
-	static const int OBJNumber = 100;//objの最大数
+	static const int OBJNumber = 50;//objの最大数
 	static const int OBJType = 2;
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
