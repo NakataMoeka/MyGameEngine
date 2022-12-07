@@ -10,6 +10,9 @@ void Timer::Initialize()
 	timeSprite = Sprite::CreateSprite(6, { 1100,100 });
 	timeSprite2 = Sprite::CreateSprite(7, { 1100,100 });
 	timeSprite3 = Sprite::CreateSprite(28, { 1100,100 });
+	for (int i = 0; i < 2; i++) {
+		TimeNum[i] = Sprite::CreateSprite(25, { 1000,50 });
+	}
 }
 
 void Timer::Init()
@@ -23,6 +26,7 @@ void Timer::Init()
 	dt = SetTime;
 	TR = (float)dt;
 	poseFlag = false;
+	tSC = (int)(dt / 60) + 1;
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
@@ -47,23 +51,41 @@ void Timer::Update()
 			dt = SetTime - total;
 
 		}
-	
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetRotation(-TimeRot);
+	TimeNum[0]->SetSize({32,32});
+	TimeNum[1]->SetSize({ 32,32 });
+	TimeNum[1]->SetPosition({ 960,50 });
+	if (((int)dt / 60 != 0)) {
+		tSC = (int)(dt / 60) + 1;
+		TimeNum[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
+	}
+	else {
+		tC = (int)dt / 10;
+		tSC = (int)dt % 10;
+		TimeNum[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
+		TimeNum[1]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,45 });
+		TimeNum[0]->SetColor({ 1.0f,0.5f,0,1 });
+		TimeNum[1]->SetColor({ 1.0f,0.5f,0,1 });
+	}
 }
 
 void Timer::Draw()
 {
 	if (((int)dt / 60 == 0)) {
 		timeSprite3->Draw();
-		DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1.0f,0.5f,0,1 }, "%d", (int)dt);
+		//DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1.0f,0.5f,0,1 }, "%d", (int)dt);
+		TimeNum[0]->Draw();
+		TimeNum[1]->Draw();
 	}
 	else
 	{
 		timeSprite->Draw();
-		DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1,1,1,1 }, "%d", (int)(dt / 60) + 1);
+		//DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1,1,1,1 }, "%d", (int)(dt / 60) + 1);
+		TimeNum[0]->Draw();
 	}
+	
 	timeSprite2->Draw();
 }
