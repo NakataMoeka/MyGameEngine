@@ -5,7 +5,7 @@
 #include"TouchableObject.h"
 #include"MeshCollider.h"
 #include"Input.h"
-
+#include<time.h>
 using namespace DirectX;
 GameObject::GameObject()
 {
@@ -43,6 +43,7 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
+	srand((unsigned)time(NULL));
 	size[0] = { 1.5f,1.5f,1.5f };
 	size[1] = { 5,5,5 };
 	for (int i = 0; i < oData.size(); i++) {
@@ -51,8 +52,8 @@ void GameObject::Init()
 		rota = { 0,0,0,0 };
 		cube[i]->SetPosition(oData[i]->pos);
 		cube[i]->SetScale(size[0]);
-		cube[0]->SetRotation({ 0,90,0,0 });
 		cube[i]->Quaternion();
+		cube[i]->SetRotation(oData[i]->rot);
 		cube[i]->Update();
 		//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
 		cSphere[i].radius = 6.0f;
@@ -114,6 +115,8 @@ void GameObject::stageInit(int stageNum)
 				else if (stageNum == 1) {
 					oData[num]->pos = { -180 + (float)i * 10,36, 0 + (float)j * (-10) };
 				}
+				oData[num]->rot = { 0,0,0,0 };
+				oData[num]->rot.m128_f32[1] = rand() / (float)360;
 				oData[num]->IsHit = false;
 				oData[num]->oSize = 1.0f;
 			}
@@ -136,7 +139,7 @@ void GameObject::stageInit(int stageNum)
 void GameObject::Update()
 {
 	if (stageNum == 0) {
-		for (int i = 0; i < OBJNumber; i++) {
+		for (int i = 0; i < oData.size(); i++) {
 
 			cSphere[i].radius = 2.0f;
 			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
@@ -148,16 +151,18 @@ void GameObject::Update()
 	}
 	else if (stageNum == 1) {
 		//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
-		for (int i = 0; i < OBJNumber; i++) {
+		for (int i = 0; i < oData.size(); i++) {
 
 			cSphere[i].radius = 1.0f;
 			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			if (cube[i]->GetParentFlag() == true) {
 				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
+
+			cube[i]->SetRotation(oData[i]->rot);
 			cube[i]->Quaternion();
-			cube[i]->SetRotation(rota);
-			cube[0]->SetRotation({ 0,90,0 });
+			
+			//cube[0]->SetRotation({ 0,90,0 });
 			cube[i]->Update();
 
 		}
