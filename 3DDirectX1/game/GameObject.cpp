@@ -43,7 +43,6 @@ void GameObject::Initialize()
 
 void GameObject::Init()
 {
-	srand((unsigned)time(NULL));
 	size[0] = { 1.5f,1.5f,1.5f };
 	size[1] = { 5,5,5 };
 	for (int i = 0; i < oData.size(); i++) {
@@ -85,6 +84,8 @@ void GameObject::Init()
 
 void GameObject::stageInit(int stageNum)
 {
+	srand((unsigned)time(NULL));
+	randRot = 0;
 	this->stageNum = stageNum;
 	if (stageNum == 0) {
 		LoadCSV(spawnMap, "Resources/objMap2.csv");
@@ -116,7 +117,9 @@ void GameObject::stageInit(int stageNum)
 					oData[num]->pos = { -180 + (float)i * 10,36, 0 + (float)j * (-10) };
 				}
 				oData[num]->rot = { 0,0,0,0 };
-				oData[num]->rot.m128_f32[1] = rand() / (float)360;
+				randRot = rand() / 360;
+				oData[num]->rot.m128_f32[1] = (float)randRot;
+
 				oData[num]->IsHit = false;
 				oData[num]->oSize = 1.0f;
 			}
