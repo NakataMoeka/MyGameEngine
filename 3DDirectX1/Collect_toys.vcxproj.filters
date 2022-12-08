@@ -211,6 +211,9 @@
     <ClCompile Include="game\Change.cpp">
       <Filter>Game\scene</Filter>
     </ClCompile>
+    <ClCompile Include="game\SphereSize.cpp">
+      <Filter>Game\gameScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -463,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="game\Change.h">
       <Filter>Game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="game\SphereSize.h">
+      <Filter>Game\gameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

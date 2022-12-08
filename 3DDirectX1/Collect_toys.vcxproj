@@ -186,6 +186,7 @@
     <ClCompile Include="game\GameObject.cpp" />
     <ClCompile Include="game\player.cpp" />
     <ClCompile Include="game\Pose.cpp" />
+    <ClCompile Include="game\SphereSize.cpp" />
     <ClCompile Include="game\stageObject.cpp" />
     <ClCompile Include="game\Timer.cpp" />
     <ClCompile Include="game\Tutorial.cpp" />
@@ -368,6 +369,7 @@
     <ClInclude Include="game\ObjectHelper.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="game\Pose.h" />
+    <ClInclude Include="game\SphereSize.h" />
     <ClInclude Include="game\stageObject.h" />
     <ClInclude Include="game\Timer.h" />
     <ClInclude Include="game\Tutorial.h" />

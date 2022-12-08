@@ -21,6 +21,7 @@
 #include"Timer.h"
 #include"Pose.h"
 #include"Tutorial.h"
+#include"SphereSize.h"
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -81,12 +82,6 @@ private: // メンバ変数
 
 	Sprite* sprite = nullptr;
 
-	//サイズ表示用のやつ
-	std::array < Sprite*, 4>Number = {};//数字。4つなのはcmとmの一の位と十の位があるため。
-	Sprite* Meters = nullptr;
-	Sprite* Centimeter = nullptr;
-
-
 	LightGroup* lightGroup = nullptr;
 
 	CollisionManager* colMan = nullptr;
@@ -97,7 +92,9 @@ private: // メンバ変数
 
 	Timer* timer = nullptr;
 	Pose* pose = nullptr;
+	SphereSize* sphereSize = nullptr;
 	Tutorial* tutorial = nullptr;
+
 	const int debugTextTexNumber = 0;
 
 

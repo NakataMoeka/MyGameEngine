@@ -94,11 +94,6 @@ void GameScene::InitTH()
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 
 
-	for (int i = 0; i < 4; i++) {
-		Number[i] = Sprite::CreateSprite(25, { 0,0 });
-	}
-	Meters = Sprite::CreateSprite(26, { 0,0 });
-	Centimeter = Sprite::CreateSprite(27, { 0,0 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	player = new Player;//newすればエラー吐かない
@@ -111,18 +106,19 @@ void GameScene::InitTH()
 	timer->Initialize();
 	tutorial = new Tutorial();
 	tutorial->Initialize();
-
+	sphereSize = new SphereSize();
+	sphereSize->Initialize();
 }
 
 void GameScene::Init()
 {
 	player->Init();
-
 	gameObject->Init();
-
 	stageObj->Init();
+
 	timer->Init();
 	pose->Init();
+	sphereSize->Init();
 	distance = 10.0f;
 	distanceC = 10.0f;
 	colMan->SetParentFlag(false);
@@ -200,19 +196,12 @@ void GameScene::Update()
 	colMan->SetTsize2(Tsize);
 
 	//プレイヤーの大きさ
-	DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "%dcm", (int)colMan->GetTsize());
+	
 
-	Tsize2 = (int)colMan->GetTsize();
-	if (Tsize2 % 10 == 0) {
-		TCount++;
-	}
-	else {
-		TCount = 0;
-		Bflag = false;
-	}
-	if (TCount == 1) {
+	sphereSize->SetTsize((int)colMan->GetTsize());
+
+	if (sphereSize->GetTcount() == 1) {
 		distance += 2;
-		Bflag = true;;
 	}
 #pragma endregion
 #pragma region ポーズなど
@@ -225,8 +214,9 @@ void GameScene::Update()
 		//player->SetPFlag(false);
 		if (stageNum != 0) {
 			timer->Update();
+
 			if (timer->GetDT() <= 0) {
-				if (Tsize2 < 30) {
+				if (sphereSize->GetTsize() < 30) {
 					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 					overFlag = true;
 					audio->StopWave();
@@ -234,7 +224,7 @@ void GameScene::Update()
 					player->RC();
 					stageObj->RC();
 				}
-				else if (Tsize2 >= 30) {
+				else if (sphereSize->GetTsize() >= 30) {
 					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
 					clearFlag = true;
 					audio->StopWave();
@@ -254,6 +244,7 @@ void GameScene::Update()
 		player->RC();
 		stageObj->RC();
 	}
+	sphereSize->Update();
 #pragma endregion
 #if _DEBUG 
 	//デバッグでクリアとゲームオーバー見るために作ったやつ
@@ -377,7 +368,7 @@ void GameScene::DrawFront()
 	*/
 	/*DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
 		player->GetObject3d()->GetRotation().m128_f32[0], player->GetObject3d()->GetRotation().m128_f32[1], player->GetObject3d()->GetRotation().m128_f32[2]);*/
-
+	sphereSize->Draw();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }
