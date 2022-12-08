@@ -352,7 +352,7 @@ void FbxObject3d::LoadAnimation()
 	for (int i = 0; i < sceneCount; i++)
 	{
 		//仮データ
-		animationData aData;
+		animationData aData = {};
 		//i番のアニメーション取得
 		aData.animstack = fbxScene->GetSrcObject<FbxAnimStack>(i);
 		//アニメーションの名前を取得

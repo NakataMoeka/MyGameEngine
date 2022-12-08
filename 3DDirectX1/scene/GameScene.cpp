@@ -88,9 +88,6 @@ void GameScene::InitTH()
 
 	Sprite::LoadTexture(1, L"Resources/background.png");
 
-	Sprite::LoadTexture(25, L"Resources/UI/number/Number.png");
-	Sprite::LoadTexture(26, L"Resources/UI/number/m.png");
-	Sprite::LoadTexture(27, L"Resources/UI/number/cm.png");
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 
 

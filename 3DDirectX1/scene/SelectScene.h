@@ -52,5 +52,6 @@ private:
 	int stageNum = 0;
 	bool SCangeFlag = false;
 	int SAFlag = 0;//アニメーション用のフラグ
+
 };
 
