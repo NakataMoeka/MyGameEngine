@@ -140,6 +140,7 @@ void GameScene::InitStageNum(int stageNum)
 	this->stageNum = stageNum;
 	gameObject->stageInit(stageNum);
 	stageObj->stageInit(stageNum);
+	sphereSize->InitStage(30);
 }
 
 void GameScene::Update()
