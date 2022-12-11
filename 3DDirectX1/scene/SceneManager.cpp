@@ -107,6 +107,10 @@ else if (gameScene->GetBFlag() == false) {
 	Bflag = false;
 }
 SceneChange();
+auto count = std::thread::hardware_concurrency();
+
+	assert(count<2);
+
 }
 
 void SceneManager::SceneChange()
