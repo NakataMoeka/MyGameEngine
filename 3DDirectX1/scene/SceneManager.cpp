@@ -108,9 +108,9 @@ else if (gameScene->GetBFlag() == false) {
 }
 SceneChange();
 auto count = std::thread::hardware_concurrency();
-
+#if _DEBUG
 	assert(count<2);
-
+#endif
 }
 
 void SceneManager::SceneChange()
