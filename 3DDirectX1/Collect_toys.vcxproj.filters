@@ -208,13 +208,12 @@
     <ClCompile Include="game\Tutorial.cpp">
       <Filter>Game\gameScene</Filter>
     </ClCompile>
-    <ClCompile Include="game\Change.cpp">
-      <Filter>Game\scene</Filter>
-    </ClCompile>
     <ClCompile Include="game\SphereSize.cpp">
       <Filter>Game\gameScene</Filter>
     </ClCompile>
-    <ClCompile Include="scene\Loading.cpp" />
+    <ClCompile Include="scene\Loading.cpp">
+      <Filter>Game\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -465,13 +464,12 @@
     <ClInclude Include="game\Tutorial.h">
       <Filter>Game\gameScene</Filter>
     </ClInclude>
-    <ClInclude Include="game\Change.h">
-      <Filter>Game\scene</Filter>
-    </ClInclude>
     <ClInclude Include="game\SphereSize.h">
       <Filter>Game\gameScene</Filter>
     </ClInclude>
-    <ClInclude Include="scene\Loading.h" />
+    <ClInclude Include="scene\Loading.h">
+      <Filter>Game\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXEngine.rc">

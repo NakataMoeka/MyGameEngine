@@ -11,9 +11,9 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(60, L"Resources/white.jpg");
 	Change = Sprite::CreateSprite(60, { 0,0 });
 	Change->SetSize({ 1280,720 });
-	Sprite::LoadTexture(61, L"Resources/UI/Load.png");
-	loadingS = Sprite::CreateSprite(61, { 0,0 });
-	loadingS->SetSize({ 1280,720 });
+	//Sprite::LoadTexture(61, L"Resources/UI/Load.png");
+	//loadingS = Sprite::CreateSprite(61, { 0,0 });
+	//loadingS->SetSize({ 1280,720 });
 	titleScene = new TitleScene();
 	titleScene->Initialize(dxCommon, audio);
 	selectScene = new SelectScene();
@@ -23,7 +23,8 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, audio);
 	//gameScene->InitTH();
-
+	loadScene = new Loading();
+	loadScene->Initialize(dxCommon, audio);
 	Bflag = false;
 	fade = 0.0f;
 	//gameScene->Init();
@@ -179,6 +180,10 @@ void SceneManager::DrawBG()
 	else if (scene == END) {
 		clearScene->DrawBG();
 	}
+	else if (scene == LOAD) {
+
+		loadScene->DrawBG();
+	}
 }
 
 void SceneManager::Draw()
@@ -192,6 +197,7 @@ void SceneManager::Draw()
 	else if (scene == END) {
 		clearScene->Draw();
 	}
+
 }
 
 void SceneManager::DrawFront()
@@ -210,9 +216,8 @@ void SceneManager::DrawFront()
 		clearScene->DrawFront();
 	}
 	else if (scene == LOAD) {
-		Sprite::PreDraw(dxCommon->GetCmdList());
-		loadingS->Draw();
-		Sprite::PostDraw();
+		
+		loadScene->DrawFront();
 	}
 	
 	Sprite::PreDraw(dxCommon->GetCmdList());

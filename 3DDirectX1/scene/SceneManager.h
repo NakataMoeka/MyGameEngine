@@ -17,6 +17,7 @@
 #include"GameScene.h"
 #include"ClearScene.h"
 #include"SelectScene.h"
+#include"Loading.h"
 #include <thread>
 #include<mutex>
 class SceneManager
@@ -59,6 +60,7 @@ private:
 	SelectScene* selectScene = nullptr;
 	GameScene* gameScene = nullptr;
 	ClearScene* clearScene = nullptr;
+	Loading* loadScene = nullptr;
 	bool Bflag = false;
 
 	Sprite* Change = nullptr;
