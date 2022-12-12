@@ -26,7 +26,7 @@ protected: // エイリアス
 	using XMVECTOR = DirectX::XMVECTOR;
 
 public:
-	
+
 	// パイプラインセット
 	struct PipelineSet
 	{
@@ -49,7 +49,7 @@ public:
 
 	virtual ~Object3d();
 
-	static void StaticInitialize(ID3D12Device* dev, Camera* camera= nullptr);
+	static void StaticInitialize(ID3D12Device* dev, Camera* camera = nullptr);
 
 	void CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs);
 
@@ -93,7 +93,7 @@ public:
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
 	const XMVECTOR& GetRotation() { return rotation; }
 	void SetRotation(XMVECTOR rotation) { this->rotation = rotation; }
-	const XMFLOAT3& GetScale() {return scale; }
+	const XMFLOAT3& GetScale() { return scale; }
 	void SetScale(XMFLOAT3 scale) { this->scale = scale; }
 	// モデルとの連携
 	void SetModel(Model* model) { this->model = model; };
@@ -143,7 +143,6 @@ protected:
 	// ビルボード
 	bool isBillboard = false;
 
-	bool parentFlag = false;
-	float Tsize;
+	bool parentFlag = false;//ペアレントしているかのフラグ
 };
 

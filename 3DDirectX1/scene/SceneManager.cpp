@@ -30,6 +30,8 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	//clearScene->Init();
 	Load_s = NOLOAD;
 	LoadFlagF = true;
+	scene = LOAD;
+
 }
 
 void SceneManager::Init()
@@ -41,6 +43,7 @@ void SceneManager::Update()
 
 
 	if (scene == TITLE) {
+		
 		if (titleScene->GetSCangeFlag() == true) {
 			changeSFlag = true;
 			if (changeEFlag == true) {
@@ -129,15 +132,13 @@ void SceneManager::Update()
 			t.join();
 			scene = TITLE;
 			titleScene->Init();
+			Load_s = NOLOAD;
+			LoadFlagF = false;
 			break;
 		default:
 			break;
 		}
 	}
-	
-		
-
-
 }
 
 void SceneManager::SceneChange()
@@ -224,7 +225,6 @@ void SceneManager::DrawFront()
 void SceneManager::InitTH()
 {
 	gameScene->InitTH();
-	Load_s = ENDLOAD;
 }
 
 void SceneManager::SetLockFlag(bool _)
@@ -244,6 +244,7 @@ void SceneManager::AsyncLoad()
 	InitTH();
 	auto sleepTime = std::chrono::seconds(10);
 	std::this_thread::sleep_for(sleepTime);
+	Load_s = ENDLOAD;
 	SetLockFlag(true);
 }
 

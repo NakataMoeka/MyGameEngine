@@ -53,7 +53,7 @@ private:
 	//最初のシーン
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
-	Scene scene = TITLE;
+	Scene scene = LOAD;
 
 	TitleScene* titleScene = nullptr;
 	SelectScene* selectScene = nullptr;
@@ -68,6 +68,7 @@ private:
 	//ロード画面作りたい
 	Sprite* loadingS = nullptr;
 	std::thread t = {};
+	std::thread t2 = {};
 	std::mutex isLoadedMutex;
 	Load_Situation Load_s = NOLOAD;
 	bool LoadFlag = false;

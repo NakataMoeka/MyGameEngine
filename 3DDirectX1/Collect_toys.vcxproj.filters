@@ -214,6 +214,7 @@
     <ClCompile Include="game\SphereSize.cpp">
       <Filter>Game\gameScene</Filter>
     </ClCompile>
+    <ClCompile Include="scene\Loading.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -470,6 +471,7 @@
     <ClInclude Include="game\SphereSize.h">
       <Filter>Game\gameScene</Filter>
     </ClInclude>
+    <ClInclude Include="scene\Loading.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXEngine.rc">

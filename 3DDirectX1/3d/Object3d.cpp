@@ -376,9 +376,6 @@ XMFLOAT3 Object3d::GetWorldPosition()
 
 void Object3d::transformParent()
 {
-	//ÇÌÇ©ÇÁÇ»Ç¢Ç¢Ç¢Ç¢Ç¢Ç¢\(^o^)/
-	//1âÒÇÃÇ›í ÇÈ
-
 	XMVECTOR scaleV, rotationV, positionV;
 
 	//êeÇãtçsóÒÇ…Ç∑ÇÈ
