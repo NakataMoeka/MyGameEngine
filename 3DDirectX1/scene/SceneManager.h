@@ -31,6 +31,7 @@ public:
 	{
 		NOLOAD, NOWLOAD, ENDLOAD,
 	};
+	~SceneManager();
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
 	void Initialize(DXCommon* dxCommon, Audio* audio);
 	//そのシーンを通るたびに何度も行われる初期化(位置など)

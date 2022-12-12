@@ -34,5 +34,7 @@ private:
 	Audio* audio = nullptr;
 	Sprite* loadingS = nullptr;//ƒ[ƒh’†‚Ì•¶š
 	Sprite* loadBack = nullptr;//”wŒi
+	int loadCount = 0;
+	int LoadCountCount = 0;
 };
 

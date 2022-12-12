@@ -9,10 +9,12 @@ void Loading::Initialize(DXCommon* dxCommon, Audio* audio)
 	this->audio = audio;
 	Sprite::LoadTexture(61, L"Resources/UI/Load.png");
 	loadingS = Sprite::CreateSprite(61, { 0,0 });
-	loadingS->SetSize({ 1280,720 });
+	//loadingS->SetSize({ 1280,720 });
 	Sprite::LoadTexture(62, L"Resources/UI/Select0.png");
 	loadBack = Sprite::CreateSprite(62, { 0,0 });
 	//loadBack->SetSize({ 1280,720 });
+	loadCount = 0;
+	LoadCountCount = 0;
 }
 
 void Loading::Init()
@@ -21,6 +23,22 @@ void Loading::Init()
 
 void Loading::Update()
 {
+	if (LoadCountCount < 10) {
+		LoadCountCount++;
+	}
+	else if (LoadCountCount == 10) {
+		LoadCountCount = 0;
+	}
+	if (LoadCountCount == 10) {
+		if (loadCount < 4) {
+			loadCount++;
+		}
+		else if (loadCount == 4) {
+			loadCount = 0;
+		}
+	}
+	loadingS->SetSize({ 1280,720 });
+	loadingS->SetTextureRect({ 0 + 1280 * (float)loadCount,0 }, {1280,720 });
 }
 
 void Loading::DrawBG()

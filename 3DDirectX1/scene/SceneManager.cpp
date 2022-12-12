@@ -1,5 +1,9 @@
 #include "SceneManager.h"
 #include"Input.h"
+SceneManager::~SceneManager()
+{
+
+}
 void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 {
 	assert(dxCommon);
@@ -111,7 +115,9 @@ void SceneManager::Update()
 		}
 		clearScene->Update();
 	}
-
+	else if (scene == LOAD) {
+		loadScene->Update();
+	}
 	if (gameScene->GetBFlag() == true) {
 		Bflag = true;
 	}
