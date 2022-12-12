@@ -2,7 +2,9 @@
 #include"Input.h"
 SceneManager::~SceneManager()
 {
-
+#if _DEBUG
+	t.detach();
+#endif
 }
 void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 {
