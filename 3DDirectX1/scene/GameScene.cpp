@@ -151,10 +151,8 @@ void GameScene::InitStageNum(int stageNum)
 void GameScene::Update()
 {
 
-
 	//光線方向初期値                  上奥
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
-
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());

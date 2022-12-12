@@ -6,10 +6,14 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	assert(audio);
 
 	this->dxCommon = dxCommon;
+	this->audio = audio;
 
 	Sprite::LoadTexture(60, L"Resources/white.jpg");
 	Change = Sprite::CreateSprite(60, { 0,0 });
 	Change->SetSize({ 1280,720 });
+	Sprite::LoadTexture(61, L"Resources/UI/Load.png");
+	loadingS = Sprite::CreateSprite(61, { 0,0 });
+	loadingS->SetSize({ 1280,720 });
 	titleScene = new TitleScene();
 	titleScene->Initialize(dxCommon, audio);
 	selectScene = new SelectScene();
@@ -18,12 +22,14 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	clearScene->Initialize(dxCommon, audio);
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, audio);
-	gameScene->InitTH();
-	titleScene->Init();
+	//gameScene->InitTH();
+
 	Bflag = false;
 	fade = 0.0f;
 	//gameScene->Init();
 	//clearScene->Init();
+	Load_s = NOLOAD;
+	LoadFlagF = true;
 }
 
 void SceneManager::Init()
@@ -32,6 +38,8 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
+
+
 	if (scene == TITLE) {
 		if (titleScene->GetSCangeFlag() == true) {
 			changeSFlag = true;
@@ -100,17 +108,36 @@ void SceneManager::Update()
 		clearScene->Update();
 	}
 
-if (gameScene->GetBFlag() == true) {
-	Bflag = true;
-}
-else if (gameScene->GetBFlag() == false) {
-	Bflag = false;
-}
-SceneChange();
-auto count = std::thread::hardware_concurrency();
-#if _DEBUG
-	assert(count<2);
-#endif
+	if (gameScene->GetBFlag() == true) {
+		Bflag = true;
+	}
+	else if (gameScene->GetBFlag() == false) {
+		Bflag = false;
+	}
+	SceneChange();
+	if (LoadFlagF == true) {
+		switch (Load_s)
+		{
+		case SceneManager::NOLOAD:
+			t = std::thread([&] {AsyncLoad(); });
+			scene = LOAD;
+			Load_s = NOWLOAD;
+			break;
+		case SceneManager::NOWLOAD:
+			break;
+		case SceneManager::ENDLOAD:
+			t.join();
+			scene = TITLE;
+			titleScene->Init();
+			break;
+		default:
+			break;
+		}
+	}
+	
+		
+
+
 }
 
 void SceneManager::SceneChange()
@@ -168,6 +195,7 @@ void SceneManager::Draw()
 
 void SceneManager::DrawFront()
 {
+	
 	if (scene == TITLE) {
 		titleScene->DrawFront();
 	}
@@ -180,11 +208,43 @@ void SceneManager::DrawFront()
 	else if (scene == END) {
 		clearScene->DrawFront();
 	}
+	else if (scene == LOAD) {
+		Sprite::PreDraw(dxCommon->GetCmdList());
+		loadingS->Draw();
+		Sprite::PostDraw();
+	}
+	
 	Sprite::PreDraw(dxCommon->GetCmdList());
 	//if (changeFlag == true) {
 	Change->Draw();
 	//}
 	Sprite::PostDraw();
+}
+
+void SceneManager::InitTH()
+{
+	gameScene->InitTH();
+	Load_s = ENDLOAD;
+}
+
+void SceneManager::SetLockFlag(bool _)
+{
+	std::lock_guard<std::mutex>  lock(isLoadedMutex);
+	LoadFlag = _;
+}
+
+bool SceneManager::GetLockFlag()
+{
+	std::lock_guard<std::mutex>  lock(isLoadedMutex);
+	return LoadFlag;
+}
+
+void SceneManager::AsyncLoad()
+{
+	InitTH();
+	auto sleepTime = std::chrono::seconds(10);
+	std::this_thread::sleep_for(sleepTime);
+	SetLockFlag(true);
 }
 
 
