@@ -222,12 +222,14 @@ void Player::Jump()
 	}
 	//ƒWƒƒƒ“ƒv‘€ì
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-		if (walkFlag == true) {
-			if (pFlag == false) {
-				onGround = false;
-				JumpFlag = true;
-				const float jumpVYFist = 1.0f;
-				fallV = { 0, jumpVYFist, 0, 0 };
+		if (dashFlag == false) {
+			if (walkFlag == true) {
+				if (pFlag == false) {
+					onGround = false;
+					JumpFlag = true;
+					const float jumpVYFist = 1.0f;
+					fallV = { 0, jumpVYFist, 0, 0 };
+				}
 			}
 		}
 	}

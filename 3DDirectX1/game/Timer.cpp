@@ -49,7 +49,6 @@ void Timer::Update()
 			end = clock() / CLOCKS_PER_SEC;
 			total = end - start;
 			dt = SetTime - total;
-
 		}
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });

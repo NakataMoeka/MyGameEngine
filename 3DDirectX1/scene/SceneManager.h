@@ -71,7 +71,6 @@ private:
 	//ƒ[ƒh‰æ–Êì‚è‚½‚¢
 	Sprite* loadingS = nullptr;
 	std::thread t = {};
-	std::thread t2 = {};
 	std::mutex isLoadedMutex;
 	Load_Situation Load_s = NOLOAD;
 	bool LoadFlag = false;
