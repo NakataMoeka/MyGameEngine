@@ -2,10 +2,12 @@
 #include"Input.h"
 SceneManager::~SceneManager()
 {
-//#if _DEBUG
-	//t.detach();
+	//#if _DEBUG
+	if (LoadFlagF == true) {
+		t.detach();
+	}
 	t.~thread();
-//#endif
+	//#endif
 }
 void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 {
@@ -51,7 +53,7 @@ void SceneManager::Update()
 
 
 	if (scene == TITLE) {
-		
+
 		if (titleScene->GetSCangeFlag() == true) {
 			changeSFlag = true;
 			if (changeEFlag == true) {
@@ -211,7 +213,7 @@ void SceneManager::Draw()
 
 void SceneManager::DrawFront()
 {
-	
+
 	if (scene == TITLE) {
 		titleScene->DrawFront();
 	}
@@ -225,10 +227,10 @@ void SceneManager::DrawFront()
 		clearScene->DrawFront();
 	}
 	else if (scene == LOAD) {
-		
+
 		loadScene->DrawFront();
 	}
-	
+
 	Sprite::PreDraw(dxCommon->GetCmdList());
 	//if (changeFlag == true) {
 	Change->Draw();
