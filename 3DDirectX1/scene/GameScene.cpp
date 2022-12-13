@@ -144,7 +144,7 @@ void GameScene::InitStageNum(int stageNum)
 		sphereSize->InitStage(0);
 	}
 	else if (stageNum == 1) {
-		sphereSize->InitStage(30);
+		sphereSize->InitStage(60);
 	}
 }
 
@@ -161,7 +161,7 @@ void GameScene::Update()
 
 #pragma region	当たり判定
 	if (tutorial->GetTCount() != 1) {
-		for (int j = 0; j < 2; j++) {
+		for (int j = 0; j < 3; j++) {
 			for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
 
 				gameObject->SetHIT(i, j, false);
@@ -217,7 +217,7 @@ void GameScene::Update()
 			timer->Update();
 
 			if (timer->GetDT() <= 0) {
-				if (sphereSize->GetTsize() < 30) {
+				if (sphereSize->GetTsize() < 60) {
 					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 					overFlag = true;
 					audio->StopWave();
@@ -225,7 +225,7 @@ void GameScene::Update()
 					player->RC();
 					stageObj->RC();
 				}
-				else if (sphereSize->GetTsize() >= 30) {
+				else if (sphereSize->GetTsize() >= 60) {
 					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
 					clearFlag = true;
 					audio->StopWave();

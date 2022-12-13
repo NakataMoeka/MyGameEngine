@@ -85,6 +85,9 @@ void CollisionManager::ColSphere()
 			else if (colB->GetNum() == 1) {
 				oSize = 3;
 			}
+			else if (colB->GetNum() == 2) {
+				oSize = 4;
+			}
 			if (colB->attribute==4U) {
 				// ともに球
 				//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");

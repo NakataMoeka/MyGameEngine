@@ -25,6 +25,7 @@ private:
 	//オブジェクト配列
 	std::vector<object*>oData;//ブロック
 	std::vector<object*>oData2;//車
+	std::vector<object*>oData3;//スピナー
 public:
 
 	GameObject();
@@ -56,11 +57,13 @@ private://変数
 	static const int OBJType = 2;
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
+	std::array < Object3d*, OBJNumber> Spinner = {};
 	Model* modelCube = nullptr;
 	Model* modelMove = nullptr;
+	Model* modelSpinner = nullptr;
 	std::array < Sphere, OBJNumber> cSphere;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere2;//当たり判定のやつ
-
+	std::array < Sphere, OBJNumber> cSphere3;//当たり判定のやつ
 	float r = 3;//
 	//サイズ角度位置
 	XMFLOAT3 pos{ 10,2,0 };
