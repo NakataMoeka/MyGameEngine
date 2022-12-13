@@ -165,12 +165,14 @@ void Player::Move()
 		}
 
 
-		playerObj->PlayAnimation(1);
+		playerObj->PlayAnimation(2);
 
 
 	}
 	else {
-		playerObj->Stop();
+		if (JumpFlag == false) {
+			playerObj->PlayAnimation(1);
+		}
 	}
 	//}
 
@@ -178,7 +180,7 @@ void Player::Move()
 	if (JumpFlag == true) {
 		playerObj->PlayAnimation(0);
 	}
-
+	
 
 	//‰ñ“]‚ð’Ç]‚³‚¹‚½‚¢
 }
