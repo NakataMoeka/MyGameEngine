@@ -42,9 +42,9 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	camera->SetEye({ 0, 0, -10 });
 
 	Sprite::LoadTexture(11, L"Resources/UI/TitleB.png");
-	Sprite::LoadTexture(10, L"Resources/UI/title.png");
-	Sprite::LoadTexture(12, L"Resources/UI/Title2.png");
-	Sprite::LoadTexture(13, L"Resources/UI/Title3.png");
+	Sprite::LoadTexture(10, L"Resources/UI/title/title.png");
+	Sprite::LoadTexture(12, L"Resources/UI/title/Title2.png");
+	Sprite::LoadTexture(13, L"Resources/UI/title/Title3.png");
 	Sprite::LoadTexture(14, L"Resources/UI/TitleB2.png");
 	TSprite = Sprite::CreateSprite(10, { 0,0 });
 	TBSprite = Sprite::CreateSprite(11, { 0,0 });
@@ -66,7 +66,7 @@ void TitleScene::Init()
 	TS2Sprite->SetSize({ 180,50 });
 	TSSprite->SetPosition({ 450,500 });
 	TS2Sprite->SetPosition({ 500,600 });
-	TSprite->SetPosition({ 300,100 });
+	TSprite->SetPosition({ 250,100 });
 	TSprite->SetSize({ 128,128 });
 	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 146,170 });
 	audio->SoundPlayWave(sound1);
@@ -117,8 +117,8 @@ void TitleScene::Update()
 	if (TaCount < 5) {
 		TaCount += 0.5;
 	}
-	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 146 * TaCount,170 });
-	TSprite->SetSize({ 730,170 });
+	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 150 * TaCount,130 });
+	TSprite->SetSize({ 770,130 });
 }
 
 void TitleScene::DrawBG()

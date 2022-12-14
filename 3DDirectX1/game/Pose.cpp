@@ -8,12 +8,12 @@ void Pose::Initialize(Audio* audio)
 	assert(audio);
 
 	this->audio = audio;
-	Sprite::LoadTexture(20, L"Resources/UI/Pose.png");
-	Sprite::LoadTexture(21, L"Resources/UI/TitleBack.png");
-	Sprite::LoadTexture(22, L"Resources/UI/Back.png");
+	Sprite::LoadTexture(20, L"Resources/UI/title/pose.png");
+	Sprite::LoadTexture(21, L"Resources/UI/title/TitleBack.png");
+	Sprite::LoadTexture(22, L"Resources/UI/title/Back.png");
 	Sprite::LoadTexture(23, L"Resources/UI/Info.png");
 	Sprite::LoadTexture(24, L"Resources/UI/PoseBack.png");
-	PoseSprite = Sprite::CreateSprite(20, { 0,0 });
+	PoseSprite = Sprite::CreateSprite(20, { 500,0 });
 	TitleBackSprite = Sprite::CreateSprite(21, { 0,0 });
 	BackSprite = Sprite::CreateSprite(22, { 0,0 });
 	InfoSprite = Sprite::CreateSprite(23, { 0,0 });

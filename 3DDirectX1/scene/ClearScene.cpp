@@ -41,11 +41,11 @@ void ClearScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	Sprite::LoadTexture(30, L"Resources/UI/mother1.png");
 	Sprite::LoadTexture(31, L"Resources/UI/mother2.png");
-	Sprite::LoadTexture(32, L"Resources/UI/over.png");
-	Sprite::LoadTexture(33, L"Resources/UI/clear.png");
+	Sprite::LoadTexture(32, L"Resources/UI/title/over.png");
+	Sprite::LoadTexture(33, L"Resources/UI/title/clear.png");
 	Sprite::LoadTexture(34, L"Resources/UI/mother_angry.png");
 	Sprite::LoadTexture(35, L"Resources/UI/mother_smile.png");
-	Sprite::LoadTexture(36, L"Resources/UI/space.png");
+	Sprite::LoadTexture(36, L"Resources/UI/title/space.png");
 	Sprite::LoadTexture(37, L"Resources/UI/back2.png");
 
 	overTextSprite = Sprite::CreateSprite(30, { 0,0 });
@@ -67,7 +67,7 @@ void ClearScene::Initialize(DXCommon* dxCommon, Audio* audio)
 void ClearScene::Init()
 {
 	easeTimer = 0;
-	pos = { 300,800 };
+	pos = { 350,800 };
 	pushFlag = false;
 	SCangeFlag = false;
 }
