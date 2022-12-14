@@ -152,7 +152,7 @@ void Camera::CameraCollision()
 	RaycastHit raycastHit;
 
 	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, 10.0f)) {
-		DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
+		//DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
 		ccFlag = true;
 		distance = raycastHit.distance;
 	}

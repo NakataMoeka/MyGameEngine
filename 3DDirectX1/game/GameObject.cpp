@@ -85,7 +85,7 @@ void GameObject::Init()
 	}
 	for (int i = 0; i < oData3.size(); i++) {
 		Spinner[i]->SetPosition(oData3[i]->pos);
-		Spinner[i]->SetScale(size[0]);
+		Spinner[i]->SetScale({0.8f,0.8f,0.8f});
 		Spinner[i]->Quaternion();
 		Spinner[i]->Update();
 		cSphere3[i].radius = 3;
