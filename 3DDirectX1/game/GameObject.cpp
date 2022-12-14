@@ -55,7 +55,7 @@ void GameObject::Init()
 	size[1] = { 5,5,5 };
 	for (int i = 0; i < oData.size(); i++) {
 
-		float radius = 2.0f;
+		float radius = 1.0f;
 		rota = { 0,0,0,0 };
 		cube[i]->SetPosition(oData[i]->pos);
 		cube[i]->SetScale(size[0]);
@@ -63,7 +63,7 @@ void GameObject::Init()
 		cube[i]->SetRotation(oData[i]->rot);
 		cube[i]->Update();
 		//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
-		cSphere[i].radius = 6.0f;
+		cSphere[i].radius = 1.0f;
 		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,1,0,0 }), 1.0f));
 		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
@@ -88,9 +88,9 @@ void GameObject::Init()
 		Spinner[i]->SetScale(size[0]);
 		Spinner[i]->Quaternion();
 		Spinner[i]->Update();
-		cSphere3[i].radius = 2;
+		cSphere3[i].radius = 3;
 		cSphere3[i].center = XMVectorSet(Spinner[i]->GetMatWorld().r[3].m128_f32[0], Spinner[i]->GetMatWorld().r[3].m128_f32[1], Spinner[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		Spinner[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
+		Spinner[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 3));
 		Spinner[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		Spinner[i]->GetCollider()->SetNum(2);
 		Spinner[i]->SetParentFlag(false);
@@ -172,7 +172,7 @@ void GameObject::Update()
 	if (stageNum == 0) {
 		for (int i = 0; i < oData.size(); i++) {
 
-			cSphere[i].radius = 2.0f;
+			cSphere[i].radius = 1.0f;
 			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			if (cube[i]->GetParentFlag() == true) {
 				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -213,7 +213,7 @@ void GameObject::Update()
 		}
 		for (int i = 0; i < oData3.size(); i++) {
 
-			cSphere3[i].radius = 1.0f;
+			cSphere3[i].radius = 3.0f;
 			cSphere3[i].center = XMVectorSet(Spinner[i]->GetMatWorld().r[3].m128_f32[0], Spinner[i]->GetMatWorld().r[3].m128_f32[1], Spinner[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			if (Spinner[i]->GetParentFlag() == true) {
 				Spinner[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -248,7 +248,7 @@ void GameObject::RC()
 		Spinner[i]->SetParentFlag(false);
 		Spinner[i]->RemoveCollider();
 		delete oData3[i];
-		oData2.erase(oData3.begin() + i);
+		oData3.erase(oData3.begin() + i);
 	}
 }
 
