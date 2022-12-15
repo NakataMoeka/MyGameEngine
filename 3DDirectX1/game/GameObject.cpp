@@ -37,13 +37,13 @@ void GameObject::Initialize()
 	for (int i = 0; i < OBJNumber; i++) {
 		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
-		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
 		modelMove = Model::Create("car", false);
 		moveObj[i] = Object3d::Create(modelMove);
-		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
 		modelSpinner = Model::Create("Spinner", false);
 		Spinner[i] = Object3d::Create(modelSpinner);
-		Spinner[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		Spinner[i]->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
 
 	}
 
@@ -78,7 +78,7 @@ void GameObject::Init()
 		moveObj[i]->Update();
 		cSphere2[i].radius = 2;
 		cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2));
+		moveObj[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 2));
 		moveObj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		moveObj[i]->GetCollider()->SetNum(1);
 		moveObj[i]->SetParentFlag(false);
@@ -133,7 +133,7 @@ void GameObject::stageInit(int stageNum)
 					oData[num]->pos = { -180 + (float)i * 10,5, 0 + (float)j * (-10) };
 				}
 				else if (stageNum == 1) {
-					oData[num]->pos = { -180 + (float)i * 10,36, 0 + (float)j * (-10) };
+					oData[num]->pos = { -180 + (float)i * 10,35, 0 + (float)j * (-10) };
 				}
 				oData[num]->rot = { 0,0,0,0 };
 				randRot = rand() / 360;
@@ -146,7 +146,7 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
-				oData2[num]->pos = { -180 + (float)i * 10,40, 0 + (float)j * (-10) };
+				oData2[num]->pos = { -180 + (float)i * 10,37, 0 + (float)j * (-10) };
 				oData2[num]->rot = { 0,0,0,0 };
 				oData2[num]->IsHit = false;
 				oData2[num]->oSize = 3.0f;

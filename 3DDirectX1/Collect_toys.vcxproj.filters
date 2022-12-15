@@ -243,6 +243,9 @@
     <None Include="Resources\shaders\PostEffectColor.hlsli">
       <Filter>HLSL\2d\posteffect</Filter>
     </None>
+    <None Include="Resources\shaders\nonShadow.hlsli">
+      <Filter>HLSL\3d\obj</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\FBXPS.hlsl">
@@ -301,6 +304,12 @@
     </FxCompile>
     <FxCompile Include="Resources\shaders\PostEffectColorVS.hlsl">
       <Filter>HLSL\2d\posteffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\nonShadowPS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\nonShadowVS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

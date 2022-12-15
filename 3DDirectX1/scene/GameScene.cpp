@@ -46,15 +46,15 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	// 3Dオブエクトにライトをセット
 	// 
-	lightGroup->SetDirLightActive(0, true);
-	lightGroup->SetDirLightActive(1, true);
-	lightGroup->SetDirLightActive(2, true);
+	lightGroup->SetDirLightActive(0, false);
+	lightGroup->SetDirLightActive(1, false);
+	lightGroup->SetDirLightActive(2, false);
 	lightGroup->SetDirLightDir(0, XMVECTOR{ 0,0,1,0 });
 	lightGroup->SetDirLightDir(1, XMVECTOR{ 0,-1,0,0 });
 	lightGroup->SetDirLightDir(2, XMVECTOR{ 1,0,0,0 });
 	//lightGroup->SetPointLightActive(0, true);
 	//lightGroup->SetSpotLightActive(0, true);
-	lightGroup->SetCircleShadowActive(0, true);
+	lightGroup->SetCircleShadowActive(0, false);
 
 
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
@@ -154,10 +154,10 @@ void GameScene::Update()
 	//光線方向初期値                  上奥
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
-	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
+	/*lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowCasterPos(0, player->GetPlayerPos());
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
-	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
+	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));*/
 
 #pragma region	当たり判定
 	if (tutorial->GetTCount() != 1) {
@@ -304,16 +304,16 @@ void GameScene::Update()
 #pragma endregion
 
 	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+2,player->GetPlayerPos().z}
-	, XMFLOAT3{0,4,-distanceC}, 0, player->GetPlayerAngle().y);
-	camera->CameraCollision();
-	if (camera->GetCCFlag() == true) {
-		//if (camera->GetDistance() > 3) {
-			distanceC = camera->GetDistance();
-		//}
-	}
-	else if (camera->GetCCFlag() == false) {
-		distanceC = distance;
-	}
+	, XMFLOAT3{0,4,-distance}, 0, player->GetPlayerAngle().y);
+	//camera->CameraCollision();
+	//if (camera->GetCCFlag() == true) {
+	//	//if (camera->GetDistance() > 3) {
+	//		distanceC = camera->GetDistance();
+	//	//}
+	//}
+	//else if (camera->GetCCFlag() == false) {
+	//	distanceC = distance;
+	//}
 	camera->Update();
 	particleMan->Update();
 	lightGroup->Update();
