@@ -27,7 +27,7 @@ void Player::Initialize()
 	model2 = Model::Create("bullet", false);
 	SphereObj = Object3d::Create(model2);
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
-	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
+	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Sprite::LoadTexture(2, L"Resources/dash.png");
 	Sprite::LoadTexture(3, L"Resources/UI/sizeUI.png");
 	Sprite::LoadTexture(4, L"Resources/UI/chikyuu.png");

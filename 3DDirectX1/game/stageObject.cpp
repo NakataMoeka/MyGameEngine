@@ -16,14 +16,14 @@ void StageObject::Initialize()
 	modelHome = Model::Create("home", false);
 	modelSkydome = Model::Create("skydome", true);
 	Ground = TouchableObject::Create(modelGround);
-	Ground->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
+	Ground->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Ground->SetTouchCollider();
 	skydome = Object3d::Create(modelSkydome);
-	skydome->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
+	skydome->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Home = TouchableObject::Create(modelHome);
-	Home->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
+	Home->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Kotatu = TouchableObject::Create(modelKotatu);
-	Kotatu->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
+	Kotatu->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 }
 
