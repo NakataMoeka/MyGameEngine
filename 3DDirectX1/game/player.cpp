@@ -54,6 +54,7 @@ void Player::Init()
 	pFlag = false;
 	walkFlag = true;
 	JumpFlag = false;
+	onGround = true;
 	spherePos = { 0,3,-40 };
 	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };
@@ -223,7 +224,7 @@ void Player::Jump()
 {
 	// 落下処理
 	if (!onGround) {
-		//if (JumpFlag == true) {
+		if (JumpFlag == true) {
 			// 下向き加速度
 			const float fallAcc = -0.01f;
 			const float fallVYMin = -0.5f;
@@ -233,7 +234,7 @@ void Player::Jump()
 			playerPos.x += fallV.m128_f32[0];
 			playerPos.y += fallV.m128_f32[1];
 			playerPos.z += fallV.m128_f32[2];
-		//}
+		}
 	}
 	//ジャンプ操作
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
@@ -273,7 +274,7 @@ void Player::Jump()
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
 				move += info.reject;
-				//DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "OP");
+				
 			}
 			return true;
 		}
@@ -284,7 +285,7 @@ void Player::Jump()
 
 	PlayerQueryCallback callback(sphereCollider);
 	// 球と地形の交差を全検索
-
+	DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "%d",JumpFlag);
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
 	PlayerQueryCallback callback2(sphereCollider2);
 	// 球と地形の交差を全検索
@@ -336,21 +337,22 @@ void Player::Jump()
 		// 接地を維持
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
+			JumpFlag = false;
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 		}
 		// 地面がないので落下
 		else {
 			onGround = false;
 			fallV = {};
+			JumpFlag = true;
 		}
-		JumpFlag = false;
 	}
 	// 落下状態
 	else if (fallV.m128_f32[1] <= 0.0f) {
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f)) {
 			// 着地
 			onGround = true;
-			JumpFlag = false;
+			//JumpFlag = false;
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 		}
 	}
