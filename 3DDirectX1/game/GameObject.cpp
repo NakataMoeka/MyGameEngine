@@ -88,9 +88,9 @@ void GameObject::Init()
 		Spinner[i]->SetScale({0.8f,0.8f,0.8f});
 		Spinner[i]->Quaternion();
 		Spinner[i]->Update();
-		cSphere3[i].radius = 3;
+		cSphere3[i].radius = 2;
 		cSphere3[i].center = XMVectorSet(Spinner[i]->GetMatWorld().r[3].m128_f32[0], Spinner[i]->GetMatWorld().r[3].m128_f32[1], Spinner[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		Spinner[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 3));
+		Spinner[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 2));
 		Spinner[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		Spinner[i]->GetCollider()->SetNum(2);
 		Spinner[i]->SetParentFlag(false);
@@ -213,7 +213,7 @@ void GameObject::Update()
 		}
 		for (int i = 0; i < oData3.size(); i++) {
 
-			cSphere3[i].radius = 3.0f;
+			cSphere3[i].radius = 2.0f;
 			cSphere3[i].center = XMVectorSet(Spinner[i]->GetMatWorld().r[3].m128_f32[0], Spinner[i]->GetMatWorld().r[3].m128_f32[1], Spinner[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			if (Spinner[i]->GetParentFlag() == true) {
 				Spinner[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);

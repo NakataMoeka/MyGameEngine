@@ -142,6 +142,9 @@ void SelectScene::DrawFront()
 		if (stageNum == 2 || stageNum == 3) {
 			DebugText::GetInstance()->Printf(250, 400, 6.0f, { 0,0,0,1 }, "MADA,ASOBENAIYO");
 		}
+		else if (stageNum == 0) {
+			DebugText::GetInstance()->Printf(400, 400, 6.0f, { 0,0,0,1 }, "Tutorial");
+		}
 	}
 
 	//DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
