@@ -41,9 +41,9 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	FbxObject3d::SetDev(dxCommon->Getdev());
 	//ライト生成
 	lightGroup = LightGroup::Create();
-
+	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
 	Object3d::SetLight(lightGroup);
-
+	FbxObject3d::SetLight(lightGroup);
 	// 3Dオブエクトにライトをセット
 	// 
 	lightGroup->SetDirLightActive(0, true);
@@ -57,7 +57,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	lightGroup->SetCircleShadowActive(0, true);
 
 
-	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
+	
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
@@ -155,7 +155,7 @@ void GameScene::Update()
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
-	lightGroup->SetCircleShadowCasterPos(0, { player->GetPlayerPos().x,player->GetPlayerPos().y+5.0f,player->GetPlayerPos().z});
+	lightGroup->SetCircleShadowCasterPos(0, { player->GetPlayerPos().x,player->GetPlayerPos().y+8.0f,player->GetPlayerPos().z});
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 

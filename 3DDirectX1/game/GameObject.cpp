@@ -37,13 +37,13 @@ void GameObject::Initialize()
 	for (int i = 0; i < OBJNumber; i++) {
 		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
-		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
+		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 		modelMove = Model::Create("car", false);
 		moveObj[i] = Object3d::Create(modelMove);
-		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
+		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 		modelSpinner = Model::Create("Spinner", false);
 		Spinner[i] = Object3d::Create(modelSpinner);
-		Spinner[i]->CreateGraphicsPipeline(L"Resources/shaders/nonShadowPS.hlsl", L"Resources/shaders/nonShadowVS.hlsl");
+		Spinner[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 	}
 

@@ -11,6 +11,8 @@
 #include "FbxLoader.h"
 #include "Camera.h"
 #include "CollisionInfo.h"
+#include"LightGroup.h"
+
 class BaseCollider;
 class FbxObject3d
 {
@@ -52,6 +54,9 @@ public:
 	}
 	static void SetCamera(Camera* camera) {
 		FbxObject3d::camera = camera;
+	}
+	static void SetLight(LightGroup* lightGroup) {
+		FbxObject3d::lightGroup = lightGroup;
 	}
 	FbxObject3d() = default;
 	virtual ~FbxObject3d();
@@ -138,7 +143,7 @@ protected:
 
 	// カメラ
 	static Camera* camera;
-
+	static LightGroup* lightGroup;
 	//1フレームの時間
 	FbxTime frameTime;
 	//アニメーション開始時間	
