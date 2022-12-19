@@ -53,9 +53,8 @@ void Player::Init()
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	pFlag = false;
 	walkFlag = true;
+	JumpFlag = false;
 	spherePos = { 0,3,-40 };
-	playerPos = { 0,50,-40 };
-
 	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 0.8f,0.8f,0.8f };
@@ -69,8 +68,20 @@ void Player::Init()
 	//playerObj->SetParentFlag(false);
 	SphereObj->Quaternion();
 	SphereObj->Update();
-	playerObj->Update();
+	
 
+}
+
+void Player::stageInit(int stageNo)
+{
+	if (stageNo == 0) {
+		playerPos = { 0,0,-40 };
+	}
+	else if (stageNo == 1) {
+		playerPos = { 0,35,-40 };
+	}
+	playerObj->SetPosition(playerPos);
+	playerObj->Update();
 }
 
 
@@ -212,15 +223,17 @@ void Player::Jump()
 {
 	// 落下処理
 	if (!onGround) {
-		// 下向き加速度
-		const float fallAcc = -0.01f;
-		const float fallVYMin = -0.5f;
-		// 加速
-		fallV.m128_f32[1] = max(fallV.m128_f32[1] + fallAcc, fallVYMin);
-		// 移動
-		playerPos.x += fallV.m128_f32[0];
-		playerPos.y += fallV.m128_f32[1];
-		playerPos.z += fallV.m128_f32[2];
+		//if (JumpFlag == true) {
+			// 下向き加速度
+			const float fallAcc = -0.01f;
+			const float fallVYMin = -0.5f;
+			// 加速
+			fallV.m128_f32[1] = max(fallV.m128_f32[1] + fallAcc, fallVYMin);
+			// 移動
+			playerPos.x += fallV.m128_f32[0];
+			playerPos.y += fallV.m128_f32[1];
+			playerPos.z += fallV.m128_f32[2];
+		//}
 	}
 	//ジャンプ操作
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
@@ -323,7 +336,6 @@ void Player::Jump()
 		// 接地を維持
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
-			JumpFlag = false;
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 		}
 		// 地面がないので落下
@@ -331,6 +343,7 @@ void Player::Jump()
 			onGround = false;
 			fallV = {};
 		}
+		JumpFlag = false;
 	}
 	// 落下状態
 	else if (fallV.m128_f32[1] <= 0.0f) {

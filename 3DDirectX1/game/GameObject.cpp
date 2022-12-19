@@ -41,7 +41,7 @@ void GameObject::Initialize()
 		modelMove = Model::Create("car", false);
 		moveObj[i] = Object3d::Create(modelMove);
 		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		modelSpinner = Model::Create("Spinner", false);
+		modelSpinner = Model::Create("bear", false);
 		Spinner[i] = Object3d::Create(modelSpinner);
 		Spinner[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
@@ -130,7 +130,7 @@ void GameObject::stageInit(int stageNum)
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
 				if (stageNum == 0) {
-					oData[num]->pos = { -180 + (float)i * 10,5, 0 + (float)j * (-10) };
+					oData[num]->pos = { -180 + (float)i * 10,0, 0 + (float)j * (-10) };
 				}
 				else if (stageNum == 1) {
 					oData[num]->pos = { -180 + (float)i * 10,35, 0 + (float)j * (-10) };

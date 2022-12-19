@@ -138,6 +138,7 @@ void GameScene::Init()
 void GameScene::InitStageNum(int stageNum)
 {
 	this->stageNum = stageNum;
+	player->stageInit(stageNum);
 	gameObject->stageInit(stageNum);
 	stageObj->stageInit(stageNum);
 	if (stageNum == 0) {
