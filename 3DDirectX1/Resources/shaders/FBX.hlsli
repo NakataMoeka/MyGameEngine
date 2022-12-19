@@ -17,14 +17,6 @@ cbuffer skinning: register(b3)
 	matrix matSkinning[MAX_BONES];
 };
 
-
-cbuffer cbuff1 : register(b1)
-{
-	float3 m_ambient:packoffset(c0);
-	float3 m_diffuse:packoffset(c1);
-	float3 m_specular:packoffset(c2);
-	float m_alpha : packoffset(c2.w);
-};
 // •½sŒõŒ¹‚Ì”
 static const int DIRLIGHT_NUM = 3;
 
