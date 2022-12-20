@@ -285,7 +285,7 @@ void Player::Jump()
 
 	PlayerQueryCallback callback(sphereCollider);
 	// 球と地形の交差を全検索
-	DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "%d",JumpFlag);
+	//DebugText::GetInstance()->Printf(100, 40, 3.0f, { 1,1,1,1 }, "%d",JumpFlag);
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
 	PlayerQueryCallback callback2(sphereCollider2);
 	// 球と地形の交差を全検索

@@ -117,7 +117,7 @@ void GameScene::Init()
 	pose->Init();
 	sphereSize->Init();
 	distance = 10.0f;
-	distanceC = 10.0f;
+	distanceY = 2.0f;
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
 	clearFlag = false;
@@ -204,6 +204,7 @@ void GameScene::Update()
 
 	if (sphereSize->GetTcount() == 1) {
 		distance += 2;
+		distanceY += 0.5f;
 	}
 #pragma endregion
 #pragma region ポーズなど
@@ -304,7 +305,7 @@ void GameScene::Update()
 	}
 #pragma endregion
 
-	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+2,player->GetPlayerPos().z}
+	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+distanceY,player->GetPlayerPos().z}
 	, XMFLOAT3{0,4,-distance}, 0, player->GetPlayerAngle().y);
 	//camera->CameraCollision();
 	//if (camera->GetCCFlag() == true) {
