@@ -375,8 +375,8 @@ void GameScene::DrawFront()
 	/*DebugText::GetInstance()->Printf(460, 150, 3.0f,{1,1,1,1}, "%f,%f,%f",
 	gameObject->GetObject3d(0,0)->GetRotation().m128_f32[0], gameObject->GetObject3d(0, 0)->GetRotation().m128_f32[1], gameObject->GetObject3d(0, 0)->GetRotation().m128_f32[2]);
 	*/
-	DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
-		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z);
+	/*DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z);*/
 	sphereSize->Draw();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
