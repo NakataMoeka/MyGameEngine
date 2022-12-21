@@ -138,8 +138,57 @@ void Camera::UpdateProjectionMatrix()
 	);
 }
 
-void Camera::CameraCollision()
+void Camera::CameraCollision(XMFLOAT3 position, XMFLOAT3 angle)
 {
+
+	//sphere.radius = 1;
+	//sphere.center = XMVectorSet(eye.x, eye.y, eye.z, 1);
+	//class PlayerQueryCallback : public QueryCallback
+	//{
+	//public:
+	//	PlayerQueryCallback(Sphere* sphere) : sphere(sphere) {};
+	//	bool QcolFlag = false;
+	//	// 衝突時コールバック関数
+	//	bool OnQueryHit(const QueryHit& info) {
+
+	//		const XMVECTOR up = { 0,1,0,0 };
+
+	//		XMVECTOR rejectDir = XMVector3Normalize(info.reject);
+	//		float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
+
+	//		// 地面判定しきい値
+	//		const float threshold = cosf(XMConvertToRadians(30.0f));
+
+	//		if (-threshold < cos && cos < threshold) {
+	//			sphere->center += info.reject;
+	//			move += info.reject;
+	//			QcolFlag = true;
+	//		
+	//		}
+
+	//		return true;
+	//	}
+
+	//	Sphere* sphere = nullptr;
+	//	DirectX::XMVECTOR move = { };
+	//};
+
+	//PlayerQueryCallback callback(&sphere);
+	//// 球と地形の交差を全検索
+
+	//CollisionManager::GetInstance()->QuerySphere(sphere, &callback, COLLISION_ATTR_LANDSHAPE);
+
+	//// 交差による排斥分動かす
+	//eye.x += callback.move.m128_f32[0];
+	//eye.y += callback.move.m128_f32[1];
+	//eye.z += callback.move.m128_f32[2];
+	//if (callback.QcolFlag == true) {
+	//	colFlag = true;
+	//}
+	//else {
+	//	colFlag = false;
+	//}
+	//target = position;
 	Ray ray;
 	ray.start = { target.x,target.y,target.z ,1 };
 	XMVECTOR cd = { eye.x - target.x,eye.y - target.y,eye.z - target.z,0 };
@@ -147,18 +196,26 @@ void Camera::CameraCollision()
 
 	cd = XMVector3Normalize(cd);
 	ray.dir = cd;
-	/*DebugText::GetInstance()->Printf(100, 300, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
-		ray.dir.m128_f32[0], ray.dir.m128_f32[1],ray.dir.m128_f32[2]);*/
+	DebugText::GetInstance()->Printf(100, 300, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+		ray.dir.m128_f32[0], ray.dir.m128_f32[1],ray.dir.m128_f32[2]);
 	RaycastHit raycastHit;
-
+	DebugText::GetInstance()->Printf(100, 400, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+		ray.start.m128_f32[0], ray.start.m128_f32[1], ray.start.m128_f32[2]);
+	
 	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, 10.0f)) {
-		//DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
-		ccFlag = true;
 		distance = raycastHit.distance;
+		ccFlag = true;
 	}
 	else {
 		ccFlag = false;
 	}
+	//if(distance>0&&distance<=9.0f){
+	//	ccFlag = true;
+	//}
+	//else {
+	//	ccFlag = false;
+	//}
+	DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
 }
 
 

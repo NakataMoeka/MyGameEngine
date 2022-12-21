@@ -110,7 +110,8 @@ private: // メンバ変数
 	float distance = 20.0f;//プレイヤーとカメラの距離
 
 	float distanceY = 20.0f;//カメラの位置
-
+	float distanceC = 20.0f;//カメラの位置
+	float distanceCY = 20.0f;//カメラの位置
 	bool clearFlag = false;
 	bool overFlag = false;
 
@@ -119,4 +120,5 @@ private: // メンバ変数
 	//ステージナンバー
 	int stageNum = 0;
 	bool TSFlag;
+
 };

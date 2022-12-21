@@ -28,7 +28,7 @@ public: // メンバ関数
 
 	void UpdateProjectionMatrix();
 
-	void CameraCollision();
+	void CameraCollision(XMFLOAT3 position, XMFLOAT3 angle);
 	inline const XMMATRIX& GetViewMatrix() {
 		return matView;
 	}
@@ -77,6 +77,7 @@ public: // メンバ関数
 
 	bool GetCCFlag() { return ccFlag; }
 	float GetDistance() { return distance; }
+	bool GetColFlag() { return colFlag; }
 protected: // メンバ変数
 	// ビュー行列
 	XMMATRIX matView = DirectX::XMMatrixIdentity();
@@ -103,6 +104,9 @@ protected: // メンバ変数
 
 	XMFLOAT3 FEye;
 	XMFLOAT3 FTarget;
+
+	Sphere sphere;
+	bool colFlag = false;
 	bool ccFlag = false;//カメラこリジョン用のフラグ
 
 	float distance;

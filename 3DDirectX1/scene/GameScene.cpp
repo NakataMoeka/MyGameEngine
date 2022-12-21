@@ -117,9 +117,12 @@ void GameScene::Init()
 	pose->Init();
 	sphereSize->Init();
 	distance = 10.0f;
+	distanceC = 10.0f;
 	distanceY = 2.0f;
+	distanceCY = 4.0f;
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
+
 	clearFlag = false;
 	overFlag = false;
 	Bflag = false;
@@ -237,6 +240,7 @@ void GameScene::Update()
 				}
 			}
 		}
+
 		stageObj->Update();
 		player->Update();
 		gameObject->Update();
@@ -305,17 +309,19 @@ void GameScene::Update()
 	}
 #pragma endregion
 
-	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+distanceY,player->GetPlayerPos().z}
-	, XMFLOAT3{0,4,-distance}, 0, player->GetPlayerAngle().y);
-	//camera->CameraCollision();
-	//if (camera->GetCCFlag() == true) {
-	//	//if (camera->GetDistance() > 3) {
-	//		distanceC = camera->GetDistance();
-	//	//}
-	//}
-	//else if (camera->GetCCFlag() == false) {
-	//	distanceC = distance;
-	//}
+	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+2+distanceY,player->GetPlayerPos().z}
+	, XMFLOAT3{0,distanceCY,-distanceC}, 0, player->GetPlayerAngle().y);
+	camera->CameraCollision(player->GetPlayerPos(),player->GetPlayerAngle());
+	if (camera->GetCCFlag() == true) {
+		//if (camera->GetDistance() <=8) {
+		distanceC = camera->GetDistance();
+		distanceCY = 0;
+		//}
+	}
+	else if (camera->GetCCFlag() == false) {
+		distanceCY = 4;
+		distanceC = distance;
+	}
 	camera->Update();
 	particleMan->Update();
 	lightGroup->Update();
