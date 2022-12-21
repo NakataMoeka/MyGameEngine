@@ -196,13 +196,13 @@ void Camera::CameraCollision(XMFLOAT3 position, XMFLOAT3 angle)
 
 	cd = XMVector3Normalize(cd);
 	ray.dir = cd;
-	DebugText::GetInstance()->Printf(100, 300, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+	/*DebugText::GetInstance()->Printf(100, 300, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
 		ray.dir.m128_f32[0], ray.dir.m128_f32[1],ray.dir.m128_f32[2]);
-	RaycastHit raycastHit;
-	DebugText::GetInstance()->Printf(100, 400, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
-		ray.start.m128_f32[0], ray.start.m128_f32[1], ray.start.m128_f32[2]);
-	
-	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, 10.0f)) {
+	*/RaycastHit raycastHit;
+	//DebugText::GetInstance()->Printf(100, 400, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+	//	ray.start.m128_f32[0], ray.start.m128_f32[1], ray.start.m128_f32[2]);
+	//
+	if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, 5.0f)) {
 		distance = raycastHit.distance;
 		ccFlag = true;
 	}
@@ -215,7 +215,7 @@ void Camera::CameraCollision(XMFLOAT3 position, XMFLOAT3 angle)
 	//else {
 	//	ccFlag = false;
 	//}
-	DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
+	//DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%f", raycastHit.distance);
 }
 
 

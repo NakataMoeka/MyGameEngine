@@ -28,7 +28,7 @@ GameObject::~GameObject()
 	for (int i = 0; i < OBJNumber; i++) {
 		safe_delete(cube[i]);
 		safe_delete(moveObj[i]);
-		safe_delete(Spinner[i]);
+		safe_delete(Bear[i]);
 	}
 }
 
@@ -41,9 +41,9 @@ void GameObject::Initialize()
 		modelMove = Model::Create("car", false);
 		moveObj[i] = Object3d::Create(modelMove);
 		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		modelSpinner = Model::Create("bear", false);
-		Spinner[i] = Object3d::Create(modelSpinner);
-		Spinner[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		modelBear = Model::Create("bear", false);
+		Bear[i] = Object3d::Create(modelBear);
+		Bear[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 	}
 
@@ -84,16 +84,16 @@ void GameObject::Init()
 		moveObj[i]->SetParentFlag(false);
 	}
 	for (int i = 0; i < oData3.size(); i++) {
-		Spinner[i]->SetPosition(oData3[i]->pos);
-		Spinner[i]->SetScale({0.8f,0.8f,0.8f});
-		Spinner[i]->Quaternion();
-		Spinner[i]->Update();
+		Bear[i]->SetPosition(oData3[i]->pos);
+		Bear[i]->SetScale({0.8f,0.8f,0.8f});
+		Bear[i]->Quaternion();
+		Bear[i]->Update();
 		cSphere3[i].radius = 2;
-		cSphere3[i].center = XMVectorSet(Spinner[i]->GetMatWorld().r[3].m128_f32[0], Spinner[i]->GetMatWorld().r[3].m128_f32[1], Spinner[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		Spinner[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 2));
-		Spinner[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-		Spinner[i]->GetCollider()->SetNum(2);
-		Spinner[i]->SetParentFlag(false);
+		cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1], Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
+		Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 2));
+		Bear[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		Bear[i]->GetCollider()->SetNum(2);
+		Bear[i]->SetParentFlag(false);
 	}
 	//d‚­‚È‚é
 
@@ -130,10 +130,10 @@ void GameObject::stageInit(int stageNum)
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
 				if (stageNum == 0) {
-					oData[num]->pos = { -180 + (float)i * 10,0, 0 + (float)j * (-10) };
+					oData[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
 				}
 				else if (stageNum == 1) {
-					oData[num]->pos = { -180 + (float)i * 10,35, 0 + (float)j * (-10) };
+					oData[num]->pos = { -180 + (float)i * 10,35, 100 + (float)j * (-10) };
 				}
 				oData[num]->rot = { 0,0,0,0 };
 				randRot = rand() / 360;
@@ -146,7 +146,7 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
-				oData2[num]->pos = { -180 + (float)i * 10,37, 0 + (float)j * (-10) };
+				oData2[num]->pos = { -180 + (float)i * 10,37, 100 + (float)j * (-10) };
 				oData2[num]->rot = { 0,0,0,0 };
 				oData2[num]->IsHit = false;
 				oData2[num]->oSize = 3.0f;
@@ -155,7 +155,7 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
-				oData3[num]->pos = { -180 + (float)i * 10,50, 0 + (float)j * (-10) };
+				oData3[num]->pos = { -180 + (float)i * 10,50, 100 + (float)j * (-10) };
 				oData3[num]->rot = { 0,0,0,0 };
 				randRot = rand() / 360;
 				oData3[num]->rot.m128_f32[1] = (float)randRot;
@@ -214,14 +214,14 @@ void GameObject::Update()
 		for (int i = 0; i < oData3.size(); i++) {
 
 			cSphere3[i].radius = 2.0f;
-			cSphere3[i].center = XMVectorSet(Spinner[i]->GetMatWorld().r[3].m128_f32[0], Spinner[i]->GetMatWorld().r[3].m128_f32[1], Spinner[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			if (Spinner[i]->GetParentFlag() == true) {
-				Spinner[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+			cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1], Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			if (Bear[i]->GetParentFlag() == true) {
+				Bear[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
 
-			Spinner[i]->SetRotation(oData3[i]->rot);
-			Spinner[i]->Quaternion();
-			Spinner[i]->Update();
+			Bear[i]->SetRotation(oData3[i]->rot);
+			Bear[i]->Quaternion();
+			Bear[i]->Update();
 		}
 	}
 }
@@ -245,8 +245,8 @@ void GameObject::RC()
 	}
 	for (int i = (int)oData3.size() - 1; i >= 0; i--)
 	{
-		Spinner[i]->SetParentFlag(false);
-		Spinner[i]->RemoveCollider();
+		Bear[i]->SetParentFlag(false);
+		Bear[i]->RemoveCollider();
 		delete oData3[i];
 		oData3.erase(oData3.begin() + i);
 	}
@@ -272,7 +272,7 @@ void GameObject::Draw()
 		}
 		for (int i = (int)oData3.size() - 1; i >= 0; i--)
 		{
-			Spinner[i]->Draw();
+			Bear[i]->Draw();
 		}
 	}
 
@@ -317,7 +317,7 @@ Object3d* GameObject::GetObject3d(int i, int j)
 		return moveObj[i];
 	}
 	else {
-		return Spinner[i];
+		return Bear[i];
 	}
 }
 

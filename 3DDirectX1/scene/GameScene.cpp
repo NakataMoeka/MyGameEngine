@@ -309,7 +309,7 @@ void GameScene::Update()
 	}
 #pragma endregion
 
-	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+2+distanceY,player->GetPlayerPos().z}
+	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+distanceY,player->GetPlayerPos().z}
 	, XMFLOAT3{0,distanceCY,-distanceC}, 0, player->GetPlayerAngle().y);
 	camera->CameraCollision(player->GetPlayerPos(),player->GetPlayerAngle());
 	if (camera->GetCCFlag() == true) {
@@ -375,8 +375,8 @@ void GameScene::DrawFront()
 	/*DebugText::GetInstance()->Printf(460, 150, 3.0f,{1,1,1,1}, "%f,%f,%f",
 	gameObject->GetObject3d(0,0)->GetRotation().m128_f32[0], gameObject->GetObject3d(0, 0)->GetRotation().m128_f32[1], gameObject->GetObject3d(0, 0)->GetRotation().m128_f32[2]);
 	*/
-	/*DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
-		player->GetObject3d()->GetRotation().m128_f32[0], player->GetObject3d()->GetRotation().m128_f32[1], player->GetObject3d()->GetRotation().m128_f32[2]);*/
+	DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
+		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z);
 	sphereSize->Draw();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
