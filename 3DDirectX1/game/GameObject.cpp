@@ -25,6 +25,10 @@ GameObject::~GameObject()
 		delete oData3[i];
 		oData3.erase(oData3.begin() + i);
 	}
+	for (int i = (int)oData4.size() - 1; i >= 0; i--) {
+		delete oData4[i];
+		oData4.erase(oData4.begin() + i);
+	}
 	for (int i = 0; i < OBJNumber; i++) {
 		safe_delete(cube[i]);
 		safe_delete(moveObj[i]);
@@ -34,16 +38,20 @@ GameObject::~GameObject()
 
 void GameObject::Initialize()
 {
+	modelCube = Model::Create("lego", false);
+	modelMove = Model::Create("car", false);
+	modelBear = Model::Create("bear", false);
+	modelRobot = Model::Create("robot", false);
+
 	for (int i = 0; i < OBJNumber; i++) {
-		modelCube = Model::Create("lego", false);
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		modelMove = Model::Create("car", false);
 		moveObj[i] = Object3d::Create(modelMove);
 		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		modelBear = Model::Create("bear", false);
 		Bear[i] = Object3d::Create(modelBear);
 		Bear[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		Robot[i] = Object3d::Create(modelRobot);
+		Robot[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 	}
 
@@ -85,7 +93,7 @@ void GameObject::Init()
 	}
 	for (int i = 0; i < oData3.size(); i++) {
 		Bear[i]->SetPosition(oData3[i]->pos);
-		Bear[i]->SetScale({0.8f,0.8f,0.8f});
+		Bear[i]->SetScale({ 0.8f,0.8f,0.8f });
 		Bear[i]->Quaternion();
 		Bear[i]->Update();
 		cSphere3[i].radius = 2;
@@ -94,6 +102,18 @@ void GameObject::Init()
 		Bear[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		Bear[i]->GetCollider()->SetNum(2);
 		Bear[i]->SetParentFlag(false);
+	}
+	for (int i = 0; i < oData4.size(); i++) {
+		Robot[i]->SetPosition(oData4[i]->pos);
+		Robot[i]->SetScale(size[0]);
+		Robot[i]->Quaternion();
+		Robot[i]->Update();
+		cSphere4[i].radius = 2;
+		cSphere4[i].center = XMVectorSet(Robot[i]->GetMatWorld().r[3].m128_f32[0], Robot[i]->GetMatWorld().r[3].m128_f32[1], Robot[i]->GetMatWorld().r[3].m128_f32[2], 1);
+		Robot[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 2));
+		Robot[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+		Robot[i]->GetCollider()->SetNum(3);
+		Robot[i]->SetParentFlag(false);
 	}
 	//d‚­‚È‚é
 
@@ -162,7 +182,17 @@ void GameObject::stageInit(int stageNum)
 				oData3[num]->IsHit = false;
 				oData3[num]->oSize = 4.0f;
 			}
-
+			if (spawnMap[j][i] == 4)
+			{
+				oData4.push_back(new object);
+				num = (int)oData4.size() - 1;
+				oData4[num]->pos = { -180 + (float)i * 10,37, 100 + (float)j * (-10) };
+				oData4[num]->rot = { 0,0,0,0 };
+				randRot = rand() / 360;
+				oData4[num]->rot.m128_f32[1] = (float)randRot;
+				oData4[num]->IsHit = false;
+				oData4[num]->oSize = 6.0f;
+			}
 		}
 	}
 }
@@ -223,6 +253,18 @@ void GameObject::Update()
 			Bear[i]->Quaternion();
 			Bear[i]->Update();
 		}
+		for (int i = 0; i < oData4.size(); i++) {
+
+			cSphere4[i].radius = 2.0f;
+			cSphere4[i].center = XMVectorSet(Robot[i]->GetMatWorld().r[3].m128_f32[0], Robot[i]->GetMatWorld().r[3].m128_f32[1], Robot[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			if (Robot[i]->GetParentFlag() == true) {
+				Robot[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+			}
+
+			Robot[i]->SetRotation(oData3[i]->rot);
+			Robot[i]->Quaternion();
+			Robot[i]->Update();
+		}
 	}
 }
 
@@ -250,6 +292,13 @@ void GameObject::RC()
 		delete oData3[i];
 		oData3.erase(oData3.begin() + i);
 	}
+	for (int i = (int)oData4.size() - 1; i >= 0; i--)
+	{
+		Robot[i]->SetParentFlag(false);
+		Robot[i]->RemoveCollider();
+		delete oData4[i];
+		oData4.erase(oData4.begin() + i);
+	}
 }
 
 void GameObject::Draw()
@@ -262,17 +311,21 @@ void GameObject::Draw()
 	}
 	else if (stageNum == 1) {
 
-		for (int i = (int)oData.size() - 1; i >= 0; i--)
+		for (int i = 0; i < oData.size(); i++) 
 		{
 			cube[i]->Draw();
 		}
-		for (int i = (int)oData2.size() - 1; i >= 0; i--)
+		for (int i = 0; i < oData2.size(); i++) 
 		{
 			moveObj[i]->Draw();
 		}
-		for (int i = (int)oData3.size() - 1; i >= 0; i--)
+		for (int i = 0; i < oData3.size(); i++) 
 		{
 			Bear[i]->Draw();
+		}
+		for (int i = 0; i < oData4.size(); i++) 
+		{
+			Robot[i]->Draw();
 		}
 	}
 
@@ -288,11 +341,14 @@ int GameObject::GetOBJCount(int j)
 	if (j == 0) {
 		return (int)oData.size();
 	}
-	else if(j==1) {
+	else if (j == 1) {
 		return (int)oData2.size();
 	}
-	else {
+	else if (j == 2) {
 		return (int)oData3.size();
+	}
+	else  {
+		return (int)oData4.size();
 	}
 }
 Sphere GameObject::GetCSphere(int i, int j)
@@ -300,11 +356,14 @@ Sphere GameObject::GetCSphere(int i, int j)
 	if (j == 0) {
 		return cSphere[i];
 	}
-	else if(j==1) {
+	else if (j == 1) {
 		return cSphere2[i];
 	}
-	else {
+	else if (j == 2) {
 		return cSphere3[i];
+	}
+	else {
+		return cSphere4[i];
 	}
 	//return;
 }
@@ -313,11 +372,14 @@ Object3d* GameObject::GetObject3d(int i, int j)
 	if (j == 0) {
 		return cube[i];
 	}
-	else if(j==1) {
+	else if (j == 1) {
 		return moveObj[i];
 	}
-	else {
+	else if (j == 2) {
 		return Bear[i];
+	}
+	else {
+		return Robot[i];
 	}
 }
 
@@ -326,11 +388,14 @@ bool GameObject::GetHIT(int i, int j)
 	if (j == 0) {
 		return oData[i]->IsHit;
 	}
-	else if(j==1) {
+	else if (j == 1) {
 		return oData2[i]->IsHit;
 	}
-	else {
+	else if (j == 2) {
 		return oData3[i]->IsHit;
+	}
+	else {
+		return oData4[i]->IsHit;
 	}
 }
 
@@ -339,11 +404,14 @@ bool GameObject::SetHIT(int i, int j, bool Hit)
 	if (j == 0) {
 		return this->oData[i]->IsHit = Hit;
 	}
-	else if(j==1) {
+	else if (j == 1) {
 		return this->oData2[i]->IsHit = Hit;
 	}
-	else {
+	else if (j == 2) {
 		return this->oData3[i]->IsHit = Hit;
+	}
+	else {
+		return this->oData4[i]->IsHit = Hit;
 	}
 }
 
@@ -352,10 +420,13 @@ float GameObject::GetOSize(int i, int j)
 	if (j == 0) {
 		return this->oData[i]->oSize;
 	}
-	else if(j==1) {
+	else if (j == 1) {
 		return this->oData2[i]->oSize;
 	}
-	else {
+	else if (j == 2) {
 		return this->oData3[i]->oSize;
+	}
+	else {
+		return this->oData4[i]->oSize;
 	}
 }
