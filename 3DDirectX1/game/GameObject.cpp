@@ -186,7 +186,7 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData4.push_back(new object);
 				num = (int)oData4.size() - 1;
-				oData4[num]->pos = { -180 + (float)i * 10,37, 100 + (float)j * (-10) };
+				oData4[num]->pos = { -180 + (float)i * 10,36, 100 + (float)j * (-10) };
 				oData4[num]->rot = { 0,0,0,0 };
 				randRot = rand() / 360;
 				oData4[num]->rot.m128_f32[1] = (float)randRot;
