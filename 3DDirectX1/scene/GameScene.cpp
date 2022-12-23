@@ -206,7 +206,7 @@ void GameScene::Update()
 	sphereSize->SetTsize((int)colMan->GetTsize());
 
 	if (sphereSize->GetTcount() == 1) {
-		distance += 2;
+		distance += 1;
 		distanceY += 0.5f;
 	}
 #pragma endregion
