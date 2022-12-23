@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const std::string Model::baseDirectory = "Resources/OBJ/";
+const std::string Model::baseDirectory = "Resources/object/";
 ID3D12Device* Model::dev = nullptr;
 UINT Model::descriptorHandleIncrementSize = 0;
 

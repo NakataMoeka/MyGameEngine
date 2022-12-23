@@ -2,7 +2,7 @@
 #include <cassert>
 
 using namespace DirectX;
-const std::string FbxLoader::baseDirectory = "Resources/OBJ/";
+const std::string FbxLoader::baseDirectory = "Resources/object/";
 const std::string FbxLoader::defaultTextureFileName = "white1x1.png";
 FbxLoader* FbxLoader::GetInstance()
 {
