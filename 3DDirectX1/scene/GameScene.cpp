@@ -54,7 +54,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	lightGroup->SetDirLightDir(2, XMVECTOR{ 1,0,0,0 });
 	//lightGroup->SetPointLightActive(0, true);
 	//lightGroup->SetSpotLightActive(0, true);
-	lightGroup->SetCircleShadowActive(0, true);
+	lightGroup->SetCircleShadowActive(0, false);
 
 
 	

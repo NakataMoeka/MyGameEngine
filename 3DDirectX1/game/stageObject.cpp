@@ -11,7 +11,7 @@ StageObject::~StageObject()
 void StageObject::Initialize()
 {
 	
-	modelKotatu = Model::Create("Kotatu", false);
+	modelKotatu = Model::Create("Kota", false);
 	modelGround = Model::Create("road", false);
 	modelHome = Model::Create("home", false);
 	modelSkydome = Model::Create("skydome", true);
