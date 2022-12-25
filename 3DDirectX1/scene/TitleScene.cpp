@@ -75,14 +75,16 @@ void TitleScene::Init()
 
 void TitleScene::Update()
 {
-	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
-	{
-		SceneNum = 1;
-		audio->SEPlayWave(sound3);
-	}
-	else if (Input::GetInstance()->TriggerKey(DIK_UPARROW)) {
-		SceneNum = 0;
-		audio->SEPlayWave(sound3);
+	if (Scene == 0) {
+		if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
+		{
+			SceneNum = 1;
+			audio->SEPlayWave(sound3);
+		}
+		else if (Input::GetInstance()->TriggerKey(DIK_UPARROW)) {
+			SceneNum = 0;
+			audio->SEPlayWave(sound3);
+		}
 	}
 	if (SceneNum == 0) {
 		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {

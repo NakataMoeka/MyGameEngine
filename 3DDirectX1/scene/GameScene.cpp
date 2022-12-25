@@ -93,6 +93,7 @@ void GameScene::InitTH()
 
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
+	sound3 = Audio::SoundLoadWave("Resources/Music/SE/door.wav");
 	player = new Player;//newすればエラー吐かない
 	player->Initialize();
 	gameObject = new GameObject;//newすればエラー吐かない
@@ -112,7 +113,7 @@ void GameScene::Init()
 	player->Init();
 	gameObject->Init();
 	stageObj->Init();
-
+	colMan->Init();
 	timer->Init();
 	pose->Init();
 	sphereSize->Init();
@@ -177,7 +178,9 @@ void GameScene::Update()
 							HitCount++;
 							gameObject->GetObject3d(i, j)->SetParentFlag(true);
 						}
-
+						else {
+							audio->SEPlayWave(sound3);
+						}
 						DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 					}
 				}
@@ -210,6 +213,9 @@ void GameScene::Update()
 		distanceY += 0.5f;
 	}
 #pragma endregion
+	
+	
+	
 #pragma region ポーズなど
 
 	pose->Update();

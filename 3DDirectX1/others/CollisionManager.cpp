@@ -16,6 +16,7 @@ void CollisionManager::Init()
 {
 
 	IsHit = false;
+	audioFlag2 = false;
 
 }
 
@@ -216,19 +217,20 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 			XMVECTOR tempInter;
 			XMVECTOR tempReject;
 			if (!Collision::CheckSphere2Sphere2(sphere, *sphereB, &tempInter, &tempReject)) continue;
-
+			
 			// 交差情報をセット
 			QueryHit info;
 			info.collider = col;
 			info.object = col->GetObject3d();
 			info.inter = tempInter;
 			info.reject = tempReject;
-
+		
 			// クエリーコールバック呼び出し
 			if (!callback->OnQueryHit(info)) {
 				// 戻り値がfalseの場合、継続せず終了
 				return;
 			}
+			
 		}
 		// メッシュ
 		else if (col->GetShapeType() == COLLISIONSHAPE_MESH) {
@@ -252,4 +254,5 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 			}
 		}
 	}
+
 }

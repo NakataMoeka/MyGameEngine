@@ -77,6 +77,7 @@ private: // メンバ変数
 	SoundData sound2 = {};
 	SoundData sound3 = {};
 	SoundData sound4 = {};
+	SoundData sound5 = {};
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
 

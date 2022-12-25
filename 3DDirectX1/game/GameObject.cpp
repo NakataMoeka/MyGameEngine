@@ -98,7 +98,7 @@ void GameObject::Init()
 		Bear[i]->Update();
 		cSphere3[i].radius = 2;
 		cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1], Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,5,0,0 }), 2));
+		Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 2));
 		Bear[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		Bear[i]->GetCollider()->SetNum(2);
 		Bear[i]->SetParentFlag(false);
@@ -175,7 +175,7 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
-				oData3[num]->pos = { -180 + (float)i * 10,51, 100 + (float)j * (-10) };
+				oData3[num]->pos = { -180 + (float)i * 10,50, 100 + (float)j * (-10) };
 				oData3[num]->rot = { 0,0,0,0 };
 				randRot = rand() / 360;
 				oData3[num]->rot.m128_f32[1] = (float)randRot;
