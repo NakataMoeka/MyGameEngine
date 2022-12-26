@@ -121,5 +121,6 @@ private: // メンバ変数
 	//ステージナンバー
 	int stageNum = 0;
 	bool TSFlag;
-
+	int cACount = 0;
+	bool caFlag = false;
 };

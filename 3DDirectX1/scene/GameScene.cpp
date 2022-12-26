@@ -57,7 +57,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	lightGroup->SetCircleShadowActive(0, false);
 
 
-	
+
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
@@ -132,8 +132,8 @@ void GameScene::Init()
 	TCount = 0;
 	HitCount = 0;
 	TSFlag = false;
-
-
+	cACount = 0;
+	caFlag = false;
 	audio->SoundPlayWave(sound2);
 	audio->SetBGMVolume(0.2f);
 
@@ -160,7 +160,7 @@ void GameScene::Update()
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
-	lightGroup->SetCircleShadowCasterPos(0, { player->GetPlayerPos().x,player->GetPlayerPos().y+8.0f,player->GetPlayerPos().z});
+	lightGroup->SetCircleShadowCasterPos(0, { player->GetPlayerPos().x,player->GetPlayerPos().y + 8.0f,player->GetPlayerPos().z });
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 
@@ -179,11 +179,17 @@ void GameScene::Update()
 							gameObject->GetObject3d(i, j)->SetParentFlag(true);
 						}
 						else {
-							audio->SEPlayWave(sound3);
+							if (cACount < 1) {
+								cACount++;
+							}
+							
 						}
 						DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 					}
+
+
 				}
+
 				if (gameObject->GetHIT(i, j) == true) {
 					gameObject->GetObject3d(i, j)->SetParent(player->GetObject3d());
 				}
@@ -197,14 +203,24 @@ void GameScene::Update()
 			}
 		}
 	}
+	if (cACount == 1) {
+		caFlag = true;
+	}
+	if (caFlag == true) {
+		audio->SEPlayWave(sound3);
+		caFlag = false;
+		cACount = 0;
+		
+	}
+
 #pragma endregion
-	//DebugText::GetInstance()->Printf(100, 500, 3.0f, "%d", gameObject->GetObject3d(0,0)->GetParentFlag());
+	DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", cACount);
 
 #pragma region	サイズ
 	colMan->SetTsize2(Tsize);
 
 	//プレイヤーの大きさ
-	
+
 
 	sphereSize->SetTsize((int)colMan->GetTsize());
 
@@ -213,9 +229,9 @@ void GameScene::Update()
 		distanceY += 0.5f;
 	}
 #pragma endregion
-	
-	
-	
+
+
+
 #pragma region ポーズなど
 
 	pose->Update();
@@ -315,9 +331,9 @@ void GameScene::Update()
 	}
 #pragma endregion
 
-	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y+distanceY,player->GetPlayerPos().z}
-	, XMFLOAT3{0,distanceCY,-distanceC}, 0, player->GetPlayerAngle().y);
-	camera->CameraCollision(player->GetPlayerPos(),player->GetPlayerAngle());
+	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y + distanceY,player->GetPlayerPos().z }
+	, XMFLOAT3{ 0,distanceCY,-distanceC }, 0, player->GetPlayerAngle().y);
+	camera->CameraCollision(player->GetPlayerPos(), player->GetPlayerAngle());
 	if (camera->GetCCFlag() == true) {
 		//if (camera->GetDistance() <=8) {
 		distanceC = camera->GetDistance();
@@ -337,6 +353,7 @@ void GameScene::Update()
 		colMan->SetAudioFlag(false);
 	}
 }
+
 
 void GameScene::DrawBG()
 {
