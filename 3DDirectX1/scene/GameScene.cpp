@@ -203,7 +203,7 @@ void GameScene::Update()
 			}
 		}
 	}
-	if (cACount == 1) {
+	/*if (cACount == 1) {
 		caFlag = true;
 	}
 	if (caFlag == true) {
@@ -211,7 +211,7 @@ void GameScene::Update()
 		caFlag = false;
 		cACount = 0;
 		
-	}
+	}*/
 
 #pragma endregion
 	DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", cACount);
