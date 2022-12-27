@@ -166,7 +166,7 @@ void GameScene::Update()
 
 #pragma region	当たり判定
 	if (tutorial->GetTCount() != 1) {
-		for (int j = 0; j < 4; j++) {
+		for (int j = 0; j < 5; j++) {
 			for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
 
 				gameObject->SetHIT(i, j, false);

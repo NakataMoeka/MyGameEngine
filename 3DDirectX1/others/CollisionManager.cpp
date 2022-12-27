@@ -84,13 +84,16 @@ void CollisionManager::ColSphere()
 				oSize = 1;
 			}
 			else if (colB->GetNum() == 1) {
-				oSize = 3;
+				oSize = 2;
 			}
 			else if (colB->GetNum() == 2) {
-				oSize = 4;
+				oSize = 3;
 			}
 			else if (colB->GetNum() == 3) {
-				oSize = 6;
+				oSize = 4;
+			}
+			else if (colB->GetNum() == 4) {
+				oSize = 5;
 			}
 			if (colB->attribute==4U) {
 				// ともに球

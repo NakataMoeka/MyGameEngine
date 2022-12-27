@@ -27,6 +27,7 @@ private:
 	std::vector<object*>oData2;//車
 	std::vector<object*>oData3;//クマ
 	std::vector<object*>oData4;//ロボット
+	std::vector<object*>oData5;//カード
 public:
 
 	GameObject();
@@ -60,14 +61,17 @@ private://変数
 	std::array < Object3d*, OBJNumber> moveObj = {};
 	std::array < Object3d*, OBJNumber> Bear = {};
 	std::array < Object3d*, OBJNumber> Robot = {};
+	std::array < Object3d*, OBJNumber> Card = {};
 	Model* modelCube = nullptr;
 	Model* modelMove = nullptr;
 	Model* modelBear = nullptr;
 	Model* modelRobot = nullptr;
+	Model* modelCard = nullptr;
 	std::array < Sphere, OBJNumber> cSphere;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere2;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere3;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere4;//当たり判定のやつ
+	std::array < Sphere, OBJNumber> cSphere5;//当たり判定のやつ
 	float r = 3;//
 	//サイズ角度位置
 	XMFLOAT3 pos{ 10,2,0 };
