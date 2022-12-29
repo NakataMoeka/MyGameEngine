@@ -22,6 +22,7 @@
 #include"Pose.h"
 #include"Tutorial.h"
 #include"SphereSize.h"
+#include"start.h"
 class CollisionManager;
 class TouchableObject;
 class GameScene
@@ -95,6 +96,7 @@ private: // メンバ変数
 	Pose* pose = nullptr;
 	SphereSize* sphereSize = nullptr;
 	Tutorial* tutorial = nullptr;
+	start* st = nullptr;
 
 	const int debugTextTexNumber = 0;
 
@@ -123,4 +125,6 @@ private: // メンバ変数
 	bool TSFlag;
 	int cACount = 0;
 	bool caFlag = false;
+
+	int testCount = 0;//test
 };

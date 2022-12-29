@@ -214,6 +214,9 @@
     <ClCompile Include="scene\Loading.cpp">
       <Filter>Game\scene</Filter>
     </ClCompile>
+    <ClCompile Include="game\start.cpp">
+      <Filter>Game\gameScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -469,6 +472,9 @@
     </ClInclude>
     <ClInclude Include="scene\Loading.h">
       <Filter>Game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="game\start.h">
+      <Filter>Game\gameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

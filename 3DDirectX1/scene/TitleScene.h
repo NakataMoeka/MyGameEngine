@@ -52,6 +52,6 @@ private:
 	int SceneNum = 0;
 	int Scene = 0;
 	float TaCount = 0;
-
+	int testCount = 0;
 };
 

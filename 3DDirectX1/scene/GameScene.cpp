@@ -106,6 +106,8 @@ void GameScene::InitTH()
 	tutorial->Initialize();
 	sphereSize = new SphereSize();
 	sphereSize->Initialize();
+	st = new start();
+	st->Initialize(audio);
 }
 
 void GameScene::Init()
@@ -117,6 +119,7 @@ void GameScene::Init()
 	timer->Init();
 	pose->Init();
 	sphereSize->Init();
+	st->Init();
 	distance = 10.0f;
 	distanceC = 10.0f;
 	distanceY = 2.0f;
@@ -134,6 +137,9 @@ void GameScene::Init()
 	TSFlag = false;
 	cACount = 0;
 	caFlag = false;
+
+
+
 	audio->SoundPlayWave(sound2);
 	audio->SetBGMVolume(0.2f);
 
@@ -182,7 +188,7 @@ void GameScene::Update()
 							if (cACount < 1) {
 								cACount++;
 							}
-							
+
 						}
 						DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 					}
@@ -210,11 +216,11 @@ void GameScene::Update()
 		audio->SEPlayWave(sound3);
 		caFlag = false;
 		cACount = 0;
-		
+
 	}*/
 
 #pragma endregion
-	DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", cACount);
+
 
 #pragma region	サイズ
 	colMan->SetTsize2(Tsize);
@@ -240,33 +246,46 @@ void GameScene::Update()
 
 	if (pose->GetPFlag() == false) {
 		//player->SetPFlag(false);
+
+		
 		if (stageNum != 0) {
-			timer->Update();
-
-			if (timer->GetDT() <= 0) {
-				if (sphereSize->GetTsize() < 60) {
-					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
-					overFlag = true;
-					audio->StopWave();
-					gameObject->RC();
-					player->RC();
-					stageObj->RC();
+			testCount++;
+			st->Update();
+			if (st->GetStartFlag() == true) {
+				timer->Update();
+				timer->SetFlag(false);
+				if (timer->GetDT() <= 0) {
+					if (sphereSize->GetTsize() < 60) {
+						DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
+						overFlag = true;
+						audio->StopWave();
+						gameObject->RC();
+						player->RC();
+						stageObj->RC();
+					}
+					else if (sphereSize->GetTsize() >= 60) {
+						DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
+						clearFlag = true;
+						audio->StopWave();
+						gameObject->RC();
+						player->RC();
+						stageObj->RC();
+					}
 				}
-				else if (sphereSize->GetTsize() >= 60) {
-					DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
-					clearFlag = true;
-					audio->StopWave();
-					gameObject->RC();
-					player->RC();
-					stageObj->RC();
-				}
+				player->SetWalkFlag(true);
 			}
-		}
+			else {
+				timer->SetFlag(true);
+				player->SetWalkFlag(false);
+			}
 
-		stageObj->Update();
+
+		}
 		player->Update();
+		stageObj->Update();
 		gameObject->Update();
 	}
+
 	if (pose->GetTFlag() == true) {
 		//audio->StopWave();
 		gameObject->RC();
@@ -274,6 +293,7 @@ void GameScene::Update()
 		stageObj->RC();
 	}
 	sphereSize->Update();
+	//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
 #pragma endregion
 #if _DEBUG 
 	//デバッグでクリアとゲームオーバー見るために作ったやつ
@@ -401,6 +421,7 @@ void GameScene::DrawFront()
 	/*DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
 		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z);*/
 	sphereSize->Draw();
+	st->Draw();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

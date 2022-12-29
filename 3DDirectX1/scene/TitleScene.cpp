@@ -69,6 +69,7 @@ void TitleScene::Init()
 	TSprite->SetPosition({ 250,100 });
 	TSprite->SetSize({ 128,128 });
 	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 146,170 });
+	testCount = 0;
 	audio->SoundPlayWave(sound1);
 	audio->SetBGMVolume(0.2f);
 }
@@ -119,6 +120,7 @@ void TitleScene::Update()
 	if (TaCount < 5) {
 		TaCount += 0.5;
 	}
+	testCount++;
 	TSprite->SetTextureRect({ 0 ,0 }, { 0 + 150 * TaCount,130 });
 	TSprite->SetSize({ 770,130 });
 }
@@ -149,7 +151,7 @@ void TitleScene::DrawFront()
 		TS2Sprite->Draw();
 	}
 	//DebugText::GetInstance()->Printf(0, 0, 3.0f, "%d",SceneNum);
-	//DebugText::GetInstance()->Printf(200, 500, 3.0f, "PUSH SPACE");
+	//DebugText::GetInstance()->Printf(200, 500, 3.0f, {0,0,0,1}, "%d", testCount);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

@@ -22,10 +22,10 @@ void Timer::Init()
 	start = (double)time(NULL);
 	total = 0.0;
 	SetTime = 180;
-	start = clock() / CLOCKS_PER_SEC;
+
 	dt = SetTime;
 	TR = (float)dt;
-	poseFlag = false;
+	//poseFlag = false;
 	tSC = (int)(dt / 60) + 1;
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
@@ -34,7 +34,10 @@ void Timer::Init()
 }
 void Timer::Update()
 {
-	
+	if (poseFlag == true) {
+		start = clock() / CLOCKS_PER_SEC;
+	}
+	if (poseFlag == false) {
 		if (dt > 60) {
 			TR = (float)dt;
 		}
@@ -45,18 +48,22 @@ void Timer::Update()
 			TR = (float)dt * 3;
 		}
 		TimeRot = TR * 2;
+
 		if (dt > 0) {
 			end = clock() / CLOCKS_PER_SEC;
 			total = end - start;
 			dt = SetTime - total;
 		}
+	}
+
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetRotation(-TimeRot);
-	TimeNum[0]->SetSize({32,32});
+	TimeNum[0]->SetSize({ 32,32 });
 	TimeNum[1]->SetSize({ 32,32 });
 	TimeNum[1]->SetPosition({ 960,50 });
+
 	if (((int)dt / 60 != 0)) {
 		tSC = (int)(dt / 60) + 1;
 		TimeNum[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
@@ -69,6 +76,8 @@ void Timer::Update()
 		TimeNum[0]->SetColor({ 1.0f,0.5f,0,1 });
 		TimeNum[1]->SetColor({ 1.0f,0.5f,0,1 });
 	}
+
+
 }
 
 void Timer::Draw()
@@ -82,9 +91,9 @@ void Timer::Draw()
 	else
 	{
 		timeSprite->Draw();
-		//DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1,1,1,1 }, "%d", (int)(dt / 60) + 1);
+
 		TimeNum[0]->Draw();
 	}
-	
+	//DebugText::GetInstance()->Printf(1000, 50, 3.0f, { 1,1,1,1 }, "%d", (int)dt);
 	timeSprite2->Draw();
 }
