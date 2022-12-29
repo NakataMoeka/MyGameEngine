@@ -1,5 +1,6 @@
 #include "start.h"
 #include <time.h>
+#include"DebugText.h"
 void start::Initialize(Audio* audio)
 {
 	Sprite::LoadTexture(65, L"Resources/UI/number/number2.png");
@@ -15,6 +16,7 @@ void start::Init()
 	SetTime = 8;
 	start = clock() / CLOCKS_PER_SEC;
 	dt = SetTime;
+	tSC = 0;
 	startFlag = false;
 }
 
@@ -30,7 +32,8 @@ void start::Update()
 	}
 	number->SetSize({ 120,120 });
 	Go->SetSize({ 360,120 });
-	number->SetTextureRect({ 0 + 32 * (float)dt,0 }, { 32,45 });
+	tSC = ((int)dt % 10)-2;
+	number->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
 }
 
 void start::Draw()
@@ -43,5 +46,5 @@ void start::Draw()
 			Go->Draw();
 		}
 	}
-
+	//DebugText::GetInstance()->Printf(300, 300, 3.0f, { 1,1,1,1 }, "%d", (int)dt);
 }

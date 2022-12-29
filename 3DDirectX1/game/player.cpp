@@ -444,6 +444,9 @@ void Player::Update()
 		Move();
 		Dash();
 	}
+	else {
+		playerObj->PlayAnimation(1);
+	}
 	Ball();
 	Jump();
 	sphere.radius = r;

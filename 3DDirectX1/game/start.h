@@ -24,6 +24,7 @@ private:
 	double dt;
 	double total;
 	double SetTime;
+	int tSC = 0;
 	bool startFlag = false;//開始カウントダウン終わったか否か
 };
 
