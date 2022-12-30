@@ -177,20 +177,20 @@ void Player::Move()
 		}
 
 
-		playerObj->PlayAnimation(2);
+		playerObj->PlayAnimation(2,true);
 
 
 	}
 	else {
 		if (JumpFlag == false) {
-			playerObj->PlayAnimation(1);
+			playerObj->PlayAnimation(1,true);
 		}
 	}
 	//}
 
 
 	if (JumpFlag == true) {
-		playerObj->PlayAnimation(0);
+		playerObj->PlayAnimation(0,false);
 	}
 	
 
@@ -445,7 +445,7 @@ void Player::Update()
 		Dash();
 	}
 	else {
-		playerObj->PlayAnimation(1);
+		playerObj->PlayAnimation(1,true);
 	}
 	Ball();
 	Jump();

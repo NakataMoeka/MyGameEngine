@@ -160,7 +160,7 @@ void FbxObject3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
 
 	// ルートパラメータ
-	CD3DX12_ROOT_PARAMETER rootparams[4]={};
+	CD3DX12_ROOT_PARAMETER rootparams[4] = {};
 	// CBV（座標変換行列用）
 	rootparams[0].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_ALL);
 	// SRV（テクスチャ）
@@ -312,10 +312,19 @@ void FbxObject3d::Update()
 	//アニメーション
 	if (isPlay) {
 		//1フレーム進める
+
 		currentTime += frameTime;
-		//最後まで再生したら先頭に戻す	
-		if (currentTime > endTime) {
-			currentTime = startTime;
+		if (Loop == true) {
+			//最後まで再生したら先頭に戻す	
+			if (currentTime > endTime) {
+				currentTime = startTime;
+			}
+		}
+		else if (Loop == false) {
+			if (currentTime > endTime) {
+				currentTime = endTime;
+				//isPlay = false;
+			}
 		}
 	}
 }
@@ -372,14 +381,15 @@ void FbxObject3d::LoadAnimation()
 	}
 }
 
-void FbxObject3d::PlayAnimation(int No)
+void FbxObject3d::PlayAnimation(int No, bool loop)
 {
 	FbxScene* fbxScene = fbxModel->GetFbxScene();
 	//アニメーションの変更
 	fbxScene->SetCurrentAnimationStack(animation[No].animstack);
-	
+
 	//再生中状態にする
 	isPlay = true;
+	this->Loop = loop;
 }
 
 

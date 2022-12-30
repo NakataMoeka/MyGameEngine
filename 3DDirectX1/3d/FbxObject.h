@@ -73,10 +73,10 @@ public:
 	virtual void Draw();//•`‰æ
 
 	//ƒAƒjƒ[ƒVƒ‡ƒ“ŠÖŒW
-	void PlayAnimation(int No);
+	void PlayAnimation(int No,bool loop);
 	void LoadAnimation();
 	void Stop();
-	bool SetLoop(bool loop) { return this->Loop = loop; }
+	
 
 	const XMFLOAT3& GetPosition() { return position; }
 
