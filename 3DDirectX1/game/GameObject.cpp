@@ -48,7 +48,7 @@ void GameObject::Initialize()
 	modelMove = Model::Create("car", false);
 	modelBear = Model::Create("bear", false);
 	modelRobot = Model::Create("robot", false);
-	modelCard = Model::Create("erase", false);
+	modelCard = Model::Create("card", false);
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
