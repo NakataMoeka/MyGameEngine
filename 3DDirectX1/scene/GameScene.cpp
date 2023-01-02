@@ -403,6 +403,9 @@ void GameScene::DrawFront()
 	if (stageNum == 0) {
 		tutorial->Draw();
 	}
+	else if (stageNum != 0) {
+		st->Draw();
+	}
 	timer->Draw();
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
@@ -421,7 +424,7 @@ void GameScene::DrawFront()
 	/*DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
 		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z);*/
 	sphereSize->Draw();
-	st->Draw();
+
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

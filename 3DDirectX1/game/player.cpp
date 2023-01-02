@@ -352,7 +352,7 @@ void Player::Jump()
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f)) {
 			// ’…’n
 			onGround = true;
-			//JumpFlag = false;
+			JumpFlag = false;
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 		}
 	}

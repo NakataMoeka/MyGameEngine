@@ -312,18 +312,14 @@ void FbxObject3d::Update()
 	//アニメーション
 	if (isPlay) {
 		//1フレーム進める
-
 		currentTime += frameTime;
-		if (Loop == true) {
-			//最後まで再生したら先頭に戻す	
-			if (currentTime > endTime) {
+		if (currentTime > endTime) {
+			if (Loop == true) {
+				//最後まで再生したら先頭に戻す	
 				currentTime = startTime;
 			}
-		}
-		else if (Loop == false) {
-			if (currentTime > endTime) {
+			else if (Loop == false) {
 				currentTime = endTime;
-				//isPlay = false;
 			}
 		}
 	}
@@ -386,7 +382,6 @@ void FbxObject3d::PlayAnimation(int No, bool loop)
 	FbxScene* fbxScene = fbxModel->GetFbxScene();
 	//アニメーションの変更
 	fbxScene->SetCurrentAnimationStack(animation[No].animstack);
-
 	//再生中状態にする
 	isPlay = true;
 	this->Loop = loop;
