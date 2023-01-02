@@ -10,11 +10,11 @@ void start::Initialize(Audio* audio)
 	Sprite::LoadTexture(68, L"Resources/UI/oshioki.png");
 	Sprite::LoadTexture(69, L"Resources/UI/message.png");
 	Sprite::LoadTexture(70, L"Resources/UI/tutorialUI.png");
-	number = Sprite::CreateSprite(65, { 500,300 });
-	Go = Sprite::CreateSprite(66, { 400,300 });
-	for (int i = 0; i < 3; i++) {
-		message[i] = Sprite::CreateSprite(i + 67, { 200,400 });
-	}
+	number = Sprite::CreateSprite(65, { 550,300 });
+	Go = Sprite::CreateSprite(66, { 450,300 });
+
+	message[0] = Sprite::CreateSprite(67, { 150,400 });
+	message[1] = Sprite::CreateSprite(68, { 300,400 });
 	messageUI = Sprite::CreateSprite(70, { 700,550 });
 }
 
