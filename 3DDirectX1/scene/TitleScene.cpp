@@ -48,8 +48,8 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(14, L"Resources/UI/TitleB2.png");
 	TSprite = Sprite::CreateSprite(10, { 0,0 });
 	TBSprite = Sprite::CreateSprite(11, { 0,0 });
-	TSSprite = Sprite::CreateSprite(12, { 450,500 });
-	TS2Sprite = Sprite::CreateSprite(13, { 450,600 });
+	TSSprite = Sprite::CreateSprite(12, { 500,500 });
+	TS2Sprite = Sprite::CreateSprite(13, { 500,600 });
 	TB2Sprite = Sprite::CreateSprite(14, { 0,0 });
 	sound1 = Audio::SoundLoadWave("Resources/Music/BGM/famipop.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/SE/Œˆ’èƒ{ƒ^ƒ“‚ð‰Ÿ‚·26.wav");
@@ -95,8 +95,8 @@ void TitleScene::Update()
 		}
 		TSSprite->SetSize({ 300,110 });
 		TS2Sprite->SetSize({ 180,50 });
-		TSSprite->SetPosition({ 450,500 });
-		TS2Sprite->SetPosition({ 500,600 });
+		TSSprite->SetPosition({ 500,500 });
+		TS2Sprite->SetPosition({ 560,600 });
 	}
 	else if (SceneNum == 1) {
 		if (Scene == 0) {
@@ -114,8 +114,8 @@ void TitleScene::Update()
 
 		TSSprite->SetSize({ 150,55 });
 		TS2Sprite->SetSize({ 360,100 });
-		TSSprite->SetPosition({ 530,550 });
-		TS2Sprite->SetPosition({ 450,600 });
+		TSSprite->SetPosition({ 560,550 });
+		TS2Sprite->SetPosition({ 460,600 });
 	}
 	if (TaCount < 5) {
 		TaCount += 0.5;

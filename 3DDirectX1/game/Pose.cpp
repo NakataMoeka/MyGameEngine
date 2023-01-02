@@ -13,7 +13,7 @@ void Pose::Initialize(Audio* audio)
 	Sprite::LoadTexture(22, L"Resources/UI/title/Back.png");
 	Sprite::LoadTexture(23, L"Resources/UI/Info.png");
 	Sprite::LoadTexture(24, L"Resources/UI/PoseBack.png");
-	PoseSprite = Sprite::CreateSprite(20, { 500,0 });
+	PoseSprite = Sprite::CreateSprite(20, { 450,0 });
 	TitleBackSprite = Sprite::CreateSprite(21, { 0,0 });
 	BackSprite = Sprite::CreateSprite(22, { 0,0 });
 	InfoSprite = Sprite::CreateSprite(23, { 0,0 });
@@ -59,7 +59,7 @@ void Pose::Update()
 			BackSprite->SetSize({ 500,110 });
 			TitleBackSprite->SetSize({ 350,55 });
 			BackSprite->SetPosition({ 400,500 });
-			TitleBackSprite->SetPosition({ 500,600 });
+			TitleBackSprite->SetPosition({ 490,600 });
 		}
 		else if (PS == 1) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
@@ -67,7 +67,7 @@ void Pose::Update()
 				audio->StopWave();
 				audio->SEPlayWave(sound1);
 			}
-			BackSprite->SetSize({ 250,55 });
+			BackSprite->SetSize({ 260,55 });
 			TitleBackSprite->SetSize({ 500,110 });
 			BackSprite->SetPosition({ 500,550 });
 			TitleBackSprite->SetPosition({ 400,600 });
