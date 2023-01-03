@@ -50,6 +50,7 @@ public:
 	bool GetHIT(int i, int j);
 	bool SetHIT(int i, int j,bool Hit);
 	float GetOSize(int i, int j);
+	XMFLOAT3 GetOPos(int i, int j);
 private://Update()‚É‚Ü‚Æ‚ß‚é‚à‚Ì
 	void move(int i);//ˆÚ“®
 private://•Ï”

@@ -99,7 +99,7 @@ float4 main(VSOutput input) : SV_TARGET
 			float d = dot(casterv, circleShadows[i].dir);
 
 			// ‹——£Œ¸ŠŒW”
-			float atten = saturate(1.0f / (circleShadows[i].atten.x + circleShadows[i].atten.y * d + circleShadows[i].atten.z * d * d));
+			float atten = saturate(0.2f / (circleShadows[i].atten.x + circleShadows[i].atten.y * d + circleShadows[i].atten.z * d * d));
 			// ‹——£‚ªƒ}ƒCƒiƒX‚È‚ç0‚É‚·‚é
 			atten *= step(0, d);
 
@@ -114,7 +114,6 @@ float4 main(VSOutput input) : SV_TARGET
 			float angleatten = smoothstep(circleShadows[i].factorAngleCos.y, circleShadows[i].factorAngleCos.x, cos);
 			// Šp“xŒ¸Š‚ğæZ
 			atten *= angleatten;
-
 			// ‘S‚ÄŒ¸Z‚·‚é
 			shadecolor.rgb -= atten;
 		}

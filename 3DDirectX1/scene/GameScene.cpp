@@ -54,7 +54,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	lightGroup->SetDirLightDir(2, XMVECTOR{ 1,0,0,0 });
 	//lightGroup->SetPointLightActive(0, true);
 	//lightGroup->SetSpotLightActive(0, true);
-	lightGroup->SetCircleShadowActive(0, false);
+	lightGroup->SetCircleShadowActive(0, true);
 
 
 
@@ -166,7 +166,7 @@ void GameScene::Update()
 	//static XMVECTOR lightDir = { 0, 4, 0, 0 };
 
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
-	lightGroup->SetCircleShadowCasterPos(0, { player->GetPlayerPos().x,player->GetPlayerPos().y + 8.0f,player->GetPlayerPos().z });
+	lightGroup->SetCircleShadowCasterPos(0, { player->GetPlayerPos().x,player->GetPlayerPos().y + 1.0f,player->GetPlayerPos().z });
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 

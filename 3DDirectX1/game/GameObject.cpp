@@ -503,3 +503,22 @@ float GameObject::GetOSize(int i, int j)
 		return this->oData5[i]->oSize;
 	}
 }
+
+XMFLOAT3 GameObject::GetOPos(int i, int j)
+{
+	if (j == 0) {
+		return cube[i]->GetPosition();
+	}
+	else if (j == 1) {
+		return moveObj[i]->GetPosition();
+	}
+	else if (j == 2) {
+		return Bear[i]->GetPosition();
+	}
+	else if (j == 3) {
+		return Robot[i]->GetPosition();
+	}
+	else {
+		return Card[i]->GetPosition();
+	}
+}
