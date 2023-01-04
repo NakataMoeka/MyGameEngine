@@ -16,7 +16,6 @@ void CollisionManager::Init()
 {
 
 	IsHit = false;
-	audioFlag2 = false;
 
 }
 

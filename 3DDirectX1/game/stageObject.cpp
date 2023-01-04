@@ -17,7 +17,7 @@ void StageObject::Initialize()
 	modelSkydome = Model::Create("skydome", true);
 	Ground = TouchableObject::Create(modelGround);
 	Ground->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Ground->SetTouchCollider();
+	
 	skydome = Object3d::Create(modelSkydome);
 	skydome->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Home = TouchableObject::Create(modelHome);
@@ -34,6 +34,7 @@ void StageObject::Init()
 
 void StageObject::stageInit(int stageNum)
 {
+	Ground->SetTouchCollider();
 	this->stageNum = stageNum;
 	if (stageNum == 0) {
 
@@ -96,4 +97,5 @@ void StageObject::RC()
 {
 	Kotatu->RemoveCollider();
 	Home->RemoveCollider();
+	Ground->RemoveCollider();
 }
