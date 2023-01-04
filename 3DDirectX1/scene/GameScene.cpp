@@ -251,8 +251,9 @@ void GameScene::Update()
 		if (stageNum != 0) {
 			testCount++;
 			st->Update();
+			timer->Update();
 			if (st->GetStartFlag() == true) {
-				timer->Update();
+				timer->SetSFlag(true);
 				timer->SetFlag(false);
 				if (timer->GetDT() <= 0) {
 					if (sphereSize->GetTsize() < 60) {
@@ -276,6 +277,7 @@ void GameScene::Update()
 			}
 			else {
 				timer->SetFlag(true);
+				timer->SetSFlag(false);
 				player->SetWalkFlag(false);
 			}
 
@@ -406,7 +408,7 @@ void GameScene::DrawFront()
 	else if (stageNum != 0) {
 		st->Draw();
 	}
-	timer->Draw();
+		timer->Draw();
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}

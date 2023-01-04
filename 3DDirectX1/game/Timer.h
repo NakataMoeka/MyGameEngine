@@ -13,6 +13,7 @@ public:
 	void Draw();//モデルの描画
 	double GetDT() { return dt; }
 	bool SetFlag(bool poseFlag) { return this->poseFlag = poseFlag; }
+	bool SetSFlag(bool startFlag) { return this->startFlag = startFlag; }
 private:
 	Sprite* timeSprite = nullptr;//円
 	Sprite* timeSprite3 = nullptr;//円
@@ -28,6 +29,7 @@ private:
 	double total;
 	double SetTime;
 	bool poseFlag = false;
+	bool startFlag = false;
 	int tSC = 0;//1の位カウント
 	int tC = 0;//10の位カウント
 };

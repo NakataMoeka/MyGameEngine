@@ -20,42 +20,45 @@ void Timer::Init()
 	TimeRot = 0;
 	TimeCount = 0;
 	start = (double)time(NULL);
+	start = clock() / CLOCKS_PER_SEC;
 	total = 0.0;
 	SetTime = 180;
-
 	dt = SetTime;
 	TR = (float)dt;
+	
 	//poseFlag = false;
 	tSC = (int)(dt / 60) + 1;
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetRotation(-TimeRot);
+	TimeNum[0]->SetColor({ 1,1,1,1 });
 }
 void Timer::Update()
 {
-	if (poseFlag == true) {
-		start = clock() / CLOCKS_PER_SEC;
-	}
-	if (poseFlag == false) {
-		if (dt > 60) {
-			TR = (float)dt;
+	if (startFlag == true) {
+		if (poseFlag == true) {
+			start = clock() / CLOCKS_PER_SEC;
 		}
-		else if (dt == 60) {
-			TimeRot = 180;
-		}
-		else if (dt <= 60) {
-			TR = (float)dt * 3;
-		}
-		TimeRot = TR * 2;
+		if (poseFlag == false) {
+			if (dt > 60) {
+				TR = (float)dt;
+			}
+			else if (dt == 60) {
+				TimeRot = 180;
+			}
+			else if (dt <= 60) {
+				TR = (float)dt * 3;
+			}
+			TimeRot = TR * 2;
 
-		if (dt > 0) {
-			end = clock() / CLOCKS_PER_SEC;
-			total = end - start;
-			dt = SetTime - total;
+			if (dt > 0) {
+				end = clock() / CLOCKS_PER_SEC;
+				total = end - start;
+				dt = SetTime - total;
+			}
 		}
 	}
-
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
@@ -67,6 +70,7 @@ void Timer::Update()
 	if (((int)dt / 60 != 0)) {
 		tSC = (int)(dt / 60) + 1;
 		TimeNum[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
+		TimeNum[0]->SetColor({ 1,1,1,1 });
 	}
 	else {
 		tC = (int)dt / 10;
