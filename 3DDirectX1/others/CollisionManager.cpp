@@ -94,7 +94,11 @@ void CollisionManager::ColSphere()
 			else if (colB->GetNum() == 4) {
 				oSize = 5;
 			}
+			
+				
+			
 			if (colB->attribute==4U) {
+					//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
 				// ともに球
 				//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 				if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
@@ -112,7 +116,7 @@ void CollisionManager::ColSphere()
 								colB->GetObject3d()->SetParentFlag(true);
 								audioFlag = true;
 							}
-							
+							DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "HIT");
 
 						}
 						if (IsHit == true) {
