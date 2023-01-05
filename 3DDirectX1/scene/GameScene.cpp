@@ -155,7 +155,8 @@ void GameScene::InitStageNum(int stageNum)
 		sphereSize->InitStage(0);
 	}
 	else if (stageNum == 1) {
-		sphereSize->InitStage(60);
+		GoalCount = 160;
+		sphereSize->InitStage(GoalCount);
 	}
 }
 
@@ -256,7 +257,7 @@ void GameScene::Update()
 				timer->SetSFlag(true);
 				timer->SetFlag(false);
 				if (timer->GetDT() <= 0) {
-					if (sphereSize->GetTsize() < 60) {
+					if (sphereSize->GetTsize() < GoalCount) {
 						DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 						overFlag = true;
 						audio->StopWave();
@@ -264,7 +265,7 @@ void GameScene::Update()
 						player->RC();
 						stageObj->RC();
 					}
-					else if (sphereSize->GetTsize() >= 60) {
+					else if (sphereSize->GetTsize() >= GoalCount) {
 						DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
 						clearFlag = true;
 						audio->StopWave();

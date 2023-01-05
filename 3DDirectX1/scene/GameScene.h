@@ -127,4 +127,5 @@ private: // メンバ変数
 	bool caFlag = false;
 
 	int testCount = 0;//test
+	int GoalCount = 0;
 };
