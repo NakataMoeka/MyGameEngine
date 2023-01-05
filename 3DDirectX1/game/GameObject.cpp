@@ -87,8 +87,8 @@ void GameObject::Init()
 
 	}
 	for (int i = 0; i < oData2.size(); i++) {
-		oData2[4]->pos.y = 52;
-		oData2[5]->pos.y = 52;
+		oData2[10]->pos.y = 52;
+		oData2[11]->pos.y = 52;
 		moveObj[i]->SetPosition(oData2[i]->pos);
 		moveObj[i]->SetScale(size[0]);
 		moveObj[i]->Quaternion();

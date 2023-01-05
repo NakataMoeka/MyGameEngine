@@ -56,7 +56,7 @@ private://Update()‚É‚Ü‚Æ‚ß‚é‚à‚Ì
 private://•Ï”
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ”z’u—p(—\’è)
-	static const int OBJNumber = 50;//obj‚ÌÅ‘å”
+	static const int OBJNumber = 80;//obj‚ÌÅ‘å”
 	static const int OBJType = 2;
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
