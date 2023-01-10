@@ -88,8 +88,8 @@ void Player::stageInit(int stageNo)
 
 void Player::Move()
 {
-	XMVECTOR moveUD = { 0,0,0.5,0 };//前後方向用の移動ベクトル
-	XMVECTOR moveLR = { 0.5,0,0,0 };//左右方向の移動用ベクトル
+	XMVECTOR moveUD = { 0,0,0.3f,0 };//前後方向用の移動ベクトル
+	XMVECTOR moveLR = { 0.3f,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
 	XMVECTOR moveAngle2 = { 0,1,0,0 };//角度のベクトル
 	XMVECTOR moveAngleX = { 10,0,0,0 };//角度のベクトル(球のx軸回転)
@@ -269,7 +269,7 @@ void Player::Jump()
 			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
 
 			// 地面判定しきい値
-			const float threshold = cosf(XMConvertToRadians(60.0f));
+			const float threshold = cosf(XMConvertToRadians(30.0f));
 
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;

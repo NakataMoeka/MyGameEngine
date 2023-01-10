@@ -107,7 +107,7 @@ void GameObject::Init()
 		Bear[i]->Update();
 		cSphere3[i].radius = 2;
 		cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1], Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 4));
+		Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }),3));
 		Bear[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		Bear[i]->GetCollider()->SetNum(2);
 		Bear[i]->SetParentFlag(false);

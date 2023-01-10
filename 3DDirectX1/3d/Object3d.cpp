@@ -384,7 +384,7 @@ void Object3d::transformParent()
 	matWorld_parent = matWorld * matWorld_Invers;
 	//分解する
 	XMMatrixDecompose(&scaleV, &rotationV, &positionV, matWorld_parent);
-	//親のワールド座標に分解したものを乗算
+	//親のワールド座標に分解したものを代入
 	XMStoreFloat3(&scale, scaleV);
 	rotation = rotationV;
 	XMStoreFloat3(&position, positionV);
