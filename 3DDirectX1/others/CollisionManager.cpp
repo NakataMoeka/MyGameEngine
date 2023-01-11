@@ -118,7 +118,7 @@ void CollisionManager::ColSphere()
 								colB->GetObject3d()->SetParentFlag(true);
 								audioFlag = true;
 							}
-							DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "HIT");
+							//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "HIT");
 
 						}
 						if (IsHit == true) {

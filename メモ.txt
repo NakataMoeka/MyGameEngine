@@ -1,1 +1,76 @@
-メモ
+	if (dashMoveFlag == false) {
+		if (moveUDFlag == true) {
+			playerPos.x += moveUD.m128_f32[0];
+			playerPos.z += moveUD.m128_f32[2];
+			spherePos.x += moveUD.m128_f32[0];
+			spherePos.z += moveUD.m128_f32[2];
+		}
+		if (moveLRFlag == true) {
+			playerPos.x += moveLR.m128_f32[0];
+			playerPos.z += moveLR.m128_f32[2];
+			spherePos.x += moveLR.m128_f32[0];
+			spherePos.z += moveLR.m128_f32[2];
+		}
+		if (Input::GetInstance()->PushKey(DIK_W))
+		{
+			moveUDFlag = true;
+			speed = 0.5f;
+			sphereAngle.m128_f32[0] += 10;
+		}
+		else if (Input::GetInstance()->PushKey(DIK_S))
+		{
+			moveUDFlag = true;
+			speed = -0.5f;
+			sphereAngle.m128_f32[0] -= 10;
+		}
+		else if (Input::GetInstance()->PushKey(DIK_D))
+		{
+			moveLRFlag = true;
+			speed = 0.5f;
+			sphereAngle.m128_f32[2] += 10;
+		}
+		else if (Input::GetInstance()->PushKey(DIK_A))
+		{
+			moveLRFlag = true;
+			speed = -0.5f;
+			sphereAngle.m128_f32[2] -= 10;
+		}
+	}
+
+	if (Input::GetInstance()->PushKey(DIK_W) ||
+		Input::GetInstance()->PushKey(DIK_S) ||
+		Input::GetInstance()->PushKey(DIK_A) ||
+		Input::GetInstance()->PushKey(DIK_D))
+	{
+		//speed = 0.5f;
+		if (CountWalk < 5) {
+			CountWalk++;
+		}
+		if (CountWalk == 5) {
+			if (PlayerWalkCount < 6) {
+				PlayerWalkCount++;
+			}
+			if (PlayerWalkCount == 6) {
+				PlayerWalkCount = 0;
+			}
+			CountWalk = 0;
+		}
+
+
+		playerObj->PlayAnimation(2, true);
+
+
+	}
+	else {
+		if (JumpFlag == false) {
+			playerObj->PlayAnimation(1, true);
+		}
+		//if (speed > 0) {
+		//	speed -= 0.05f;
+		//}
+		//else {
+			moveUDFlag = false;
+			moveLRFlag = false;
+			speed = 0.0f;
+		//}
+	}

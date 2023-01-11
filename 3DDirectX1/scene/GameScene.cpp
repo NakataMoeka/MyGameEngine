@@ -313,7 +313,7 @@ void GameScene::Update()
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
-}
+	}
 #endif
 
 	//object3d->SetRotation({ a,0,b });
@@ -375,7 +375,7 @@ void GameScene::Update()
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);
 	}
-	}
+}
 
 
 void GameScene::DrawBG()

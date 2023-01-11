@@ -82,6 +82,8 @@ private://•Ï”
 
 	//ˆÚ“®
 	float speed = 0;
+	bool moveUDFlag = false;
+	bool moveLRFlag = false;
 	//‹…‚Ìy²
 	float sphereY = 0;
 
