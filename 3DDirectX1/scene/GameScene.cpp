@@ -138,7 +138,7 @@ void GameScene::Init()
 	cACount = 0;
 	caFlag = false;
 
-
+	SY = 5;
 
 	audio->SoundPlayWave(sound2);
 	audio->SetBGMVolume(0.2f);
@@ -177,20 +177,18 @@ void GameScene::Update()
 			for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
 
 				gameObject->SetHIT(i, j, false);
-				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
-					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
 
+				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
+
+					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
 						if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10 || gameObject->GetOSize(i, j) == 1) {
+							gameObject->GetObject3d(i, j)->SetColFlag(true);
+
 							gameObject->SetHIT(i, j, true);
 							HitCount++;
 							gameObject->GetObject3d(i, j)->SetParentFlag(true);
 						}
-						else {
-							if (cACount < 1) {
-								cACount++;
-							}
 
-						}
 						DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 					}
 
@@ -234,7 +232,9 @@ void GameScene::Update()
 	if (sphereSize->GetTcount() == 1) {
 		distance += 1;
 		distanceY += 0.5f;
+		SY += 1;
 	}
+	player->SetSY(SY);
 #pragma endregion
 
 
@@ -248,7 +248,7 @@ void GameScene::Update()
 	if (pose->GetPFlag() == false) {
 		//player->SetPFlag(false);
 
-		
+
 		if (stageNum != 0) {
 			testCount++;
 			st->Update();
@@ -313,7 +313,7 @@ void GameScene::Update()
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
-	}
+}
 #endif
 
 	//object3d->SetRotation({ a,0,b });
@@ -375,7 +375,7 @@ void GameScene::Update()
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);
 	}
-}
+	}
 
 
 void GameScene::DrawBG()
@@ -409,7 +409,7 @@ void GameScene::DrawFront()
 	else if (stageNum != 0) {
 		st->Draw();
 	}
-		timer->Draw();
+	timer->Draw();
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}

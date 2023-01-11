@@ -84,5 +84,6 @@ private://•Ï”
 	float oSpeed = 0;
 	int randRot = 0;
 	int stageNum = 0;
+
 };
 

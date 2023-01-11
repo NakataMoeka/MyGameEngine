@@ -49,9 +49,11 @@ void Player::Init()
 	dashFlag = false;
 	PlayerWalkCount = 0;
 	CountWalk = 0;
+	speed = 0.3f;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	pFlag = false;
+	sphereY = 0;
 	walkFlag = true;
 	JumpFlag = false;
 	onGround = true;
@@ -69,7 +71,7 @@ void Player::Init()
 	//playerObj->SetParentFlag(false);
 	SphereObj->Quaternion();
 	SphereObj->Update();
-	
+
 
 }
 
@@ -88,10 +90,10 @@ void Player::stageInit(int stageNo)
 
 void Player::Move()
 {
-	XMVECTOR moveUD = { 0,0,0.3f,0 };//前後方向用の移動ベクトル
-	XMVECTOR moveLR = { 0.3f,0,0,0 };//左右方向の移動用ベクトル
-	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
-	XMVECTOR moveAngle2 = { 0,1,0,0 };//角度のベクトル
+	XMVECTOR moveUD = { 0,0,speed,0 };//前後方向用の移動ベクトル
+	XMVECTOR moveLR = { speed,0,0,0 };//左右方向の移動用ベクトル
+	XMVECTOR moveAngle = { 0,0.5,0,0 };//角度のベクトル
+	XMVECTOR moveAngle2 = { 0,0.5,0,0 };//角度のベクトル
 	XMVECTOR moveAngleX = { 10,0,0,0 };//角度のベクトル(球のx軸回転)
 	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル(球のz軸回転)
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
@@ -132,7 +134,7 @@ void Player::Move()
 			spherePos.x -= moveUD.m128_f32[0];
 			spherePos.z -= moveUD.m128_f32[2];
 
-			sphereAngle.m128_f32[0] -=10;
+			sphereAngle.m128_f32[0] -= 10;
 			//sphereAngle.m128_f32[0] += moveAngleZ.m128_f32[0];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_D))
@@ -177,22 +179,22 @@ void Player::Move()
 		}
 
 
-		playerObj->PlayAnimation(2,true);
+		playerObj->PlayAnimation(2, true);
 
 
 	}
 	else {
 		if (JumpFlag == false) {
-			playerObj->PlayAnimation(1,true);
+			playerObj->PlayAnimation(1, true);
 		}
 	}
 	//}
 
 
 	if (JumpFlag == true) {
-		playerObj->PlayAnimation(0,false);
+		playerObj->PlayAnimation(0, false);
 	}
-	
+
 
 	//回転を追従させたい
 }
@@ -200,7 +202,7 @@ void Player::Move()
 void Player::Ball()
 {
 #pragma region カメラ追従とほぼ同じ
-	XMVECTOR v0 = { 0,0,5,0 };
+	XMVECTOR v0 = { 0,0,sphereY,0 };
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
@@ -210,7 +212,7 @@ void Player::Ball()
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	////ジャンプをしない時だけY軸の追従をする
 	//if (JumpFlag == false) {
-	spherePos.y = f.y + 3;
+	spherePos.y = f.y + 3.0f;
 	//}
 	//if (moveFlag == false) {
 	spherePos.x = f.x;
@@ -274,7 +276,7 @@ void Player::Jump()
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
 				move += info.reject;
-				
+
 			}
 			return true;
 		}
@@ -313,7 +315,7 @@ void Player::Jump()
 	spherePos.y += callback2.move.m128_f32[1];
 	spherePos.z += callback2.move.m128_f32[2];
 
-	
+
 	//for (int i = 0; i < OBJNumber; i++) {
 	//	for (int j = 0; j < OBJNumber; j++) {
 	//		if (colFlag[i][j] == true) {
@@ -445,13 +447,13 @@ void Player::Update()
 		Dash();
 	}
 	else {
-		playerObj->PlayAnimation(1,true);
+		playerObj->PlayAnimation(1, true);
 	}
 	Ball();
 	Jump();
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-	
+
 	sizeSprite->SetAnchorPoint({ 0.5, 0.5 });
 
 	SphereObj->SetPosition(spherePos);

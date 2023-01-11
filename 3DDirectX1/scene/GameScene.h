@@ -115,6 +115,9 @@ private: // メンバ変数
 	float distanceY = 20.0f;//カメラの位置
 	float distanceC = 20.0f;//カメラの位置
 	float distanceCY = 20.0f;//カメラの位置
+
+	float SY = 3;
+
 	bool clearFlag = false;
 	bool overFlag = false;
 

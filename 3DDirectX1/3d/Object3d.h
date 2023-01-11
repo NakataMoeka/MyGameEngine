@@ -103,8 +103,10 @@ public:
 	XMMATRIX GetMatTrans() { return matTrans; }
 	inline Model* GetModel() { return model; }
 	BaseCollider* GetCollider() { return collider; }
-	bool SetParentFlag(bool pFlag) { return this->parentFlag = pFlag; }
+	void SetParentFlag(bool pFlag) { this->parentFlag = pFlag; }
+	void SetColFlag(bool cFlag) { this->ColFlag = cFlag; }
 	bool GetParentFlag() { return parentFlag; }
+	bool GetColFlag() { return ColFlag; }
 	// コライダー
 	BaseCollider* collider = nullptr;
 protected:
@@ -144,5 +146,6 @@ protected:
 	bool isBillboard = false;
 
 	bool parentFlag = false;//ペアレントしているかのフラグ
+	bool ColFlag = false;//当たっているかフラグ
 };
 

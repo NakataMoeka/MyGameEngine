@@ -46,6 +46,7 @@ public:
 	bool SetWalkFlag(bool walkFlag) { return this->walkFlag = walkFlag; }
 	bool SetPFlag(bool pFlag) { return this->pFlag = pFlag; }
 
+	float SetSY(float sy) { return this->sphereY = sy; }
 
 private://Update()にまとめるもの
 	void Move();//移動
@@ -78,6 +79,11 @@ private://変数
 
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 	float r = 3;
+
+	//移動
+	float speed = 0;
+	//球のy軸
+	float sphereY = 0;
 
 	//ダッシュ関連の変数
 	bool dashFlag = false;

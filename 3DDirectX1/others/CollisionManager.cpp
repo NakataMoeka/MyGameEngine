@@ -108,8 +108,10 @@ void CollisionManager::ColSphere()
 					DirectX::XMVECTOR inter;
 					//オブジェクトが両方球にくっついていたら当たり判定はしない
 					if (colB->GetObject3d()->GetParentFlag() == false) {
+
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
 							if (Tsize3 >= oSize * 10||oSize==1) {
+								colB->GetObject3d()->SetColFlag(true);
 								IsHit = true;
 								HitCount++;
 								PFlag = true;
