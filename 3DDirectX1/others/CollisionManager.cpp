@@ -94,13 +94,13 @@ void CollisionManager::ColSphere()
 			else if (colB->GetNum() == 4) {
 				oSize = 5;
 			}
-			
-				
-			
-			if (colB->attribute==4U) {
-					//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
-				// ともに球
-				//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
+
+
+
+			if (colB->attribute == 4U) {
+				//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
+			// ともに球
+			//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 				if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
 					colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
 					Sphere* SphereA = dynamic_cast<Sphere*>(colA);
@@ -110,7 +110,7 @@ void CollisionManager::ColSphere()
 					if (colB->GetObject3d()->GetParentFlag() == false) {
 
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-							if (Tsize3 >= oSize * 10||oSize==1) {
+							if (Tsize3 >= oSize * 10 || oSize == 1) {
 								colB->GetObject3d()->SetColFlag(true);
 								IsHit = true;
 								HitCount++;
@@ -121,17 +121,19 @@ void CollisionManager::ColSphere()
 							//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "HIT");
 
 						}
-						if (IsHit == true) {
-							colB->GetObject3d()->SetParent(colA->GetObject3d());
-						}
-						if (HitCount == 1) {
-							colB->GetObject3d()->transformParent();
-							HitCount = 0;
-							IsHit = false;
-							Tsize += oSize;
-						}
 					}
 				}
+				if (IsHit == true) {
+					colB->GetObject3d()->SetParent(colA->GetObject3d());
+				}
+				if (HitCount == 1) {
+					colB->GetObject3d()->transformParent();
+					HitCount = 0;
+					IsHit = false;
+					Tsize += oSize;
+				}
+
+
 			}
 
 		}
@@ -225,20 +227,20 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 			XMVECTOR tempInter;
 			XMVECTOR tempReject;
 			if (!Collision::CheckSphere2Sphere2(sphere, *sphereB, &tempInter, &tempReject)) continue;
-			
+
 			// 交差情報をセット
 			QueryHit info;
 			info.collider = col;
 			info.object = col->GetObject3d();
 			info.inter = tempInter;
 			info.reject = tempReject;
-		
+
 			// クエリーコールバック呼び出し
 			if (!callback->OnQueryHit(info)) {
 				// 戻り値がfalseの場合、継続せず終了
 				return;
 			}
-			
+
 		}
 		// メッシュ
 		else if (col->GetShapeType() == COLLISIONSHAPE_MESH) {

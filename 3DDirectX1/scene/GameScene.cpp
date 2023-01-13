@@ -258,7 +258,7 @@ void GameScene::Update()
 				timer->SetFlag(false);
 				if (timer->GetDT() <= 0) {
 					if (sphereSize->GetTsize() < GoalCount) {
-						DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
+						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 						overFlag = true;
 						audio->StopWave();
 						gameObject->RC();
@@ -266,7 +266,7 @@ void GameScene::Update()
 						stageObj->RC();
 					}
 					else if (sphereSize->GetTsize() >= GoalCount) {
-						DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
+						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
 						clearFlag = true;
 						audio->StopWave();
 						gameObject->RC();
