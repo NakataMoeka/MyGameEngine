@@ -90,7 +90,6 @@ void GameScene::InitTH()
 
 	sprite = Sprite::CreateSprite(1, { 0,0 });
 
-
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/door.wav");
@@ -137,9 +136,10 @@ void GameScene::Init()
 	TSFlag = false;
 	cACount = 0;
 	caFlag = false;
-
-	SY = 5;
-
+	radius = 3;
+	SZV = 5;
+	SY = 3;
+	Ssize = { 0.8f,0.8f,0.8f };
 	audio->SoundPlayWave(sound2);
 	audio->SetBGMVolume(0.2f);
 
@@ -204,6 +204,11 @@ void GameScene::Update()
 					HitCount = 0;
 					gameObject->SetHIT(i, j, false);
 					Tsize += gameObject->GetOSize(i, j);
+					Ssize.x += 0.001f;
+					Ssize.y += 0.001f;
+					Ssize.z += 0.001f;
+					radius += 0.001f;
+					SY += 0.005f;
 				}
 			}
 		}
@@ -228,13 +233,15 @@ void GameScene::Update()
 
 
 	sphereSize->SetTsize((int)colMan->GetTsize());
-
+	player->SetRadius(radius);
+	player->SetSphereSize(Ssize);
+	player->SetSY(SY);
 	if (sphereSize->GetTcount() == 1) {
 		distance += 1;
 		distanceY += 0.5f;
-		SY += 1;
+		SZV += 1;
 	}
-	player->SetSY(SY);
+	player->SetSZV(SZV);
 #pragma endregion
 
 
@@ -290,7 +297,7 @@ void GameScene::Update()
 	}
 
 	if (pose->GetTFlag() == true) {
-		//audio->StopWave();
+		audio->StopWave();
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
@@ -372,8 +379,14 @@ void GameScene::Update()
 	lightGroup->Update();
 	colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
+		Ssize.x += colMan->GetSsize().x;
+		Ssize.y += colMan->GetSsize().y;
+		Ssize.z += colMan->GetSsize().z;
+		radius += colMan->GetRadius();
+		SY += colMan->GetSY();
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);
+
 	}
 }
 

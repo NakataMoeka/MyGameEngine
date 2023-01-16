@@ -14,9 +14,10 @@ CollisionManager* CollisionManager::GetInstance()
 
 void CollisionManager::Init()
 {
-
+	Ssize = { 0,0,0 };
 	IsHit = false;
-
+	radius = 0;
+	SY = 0;
 }
 
 void CollisionManager::CheckAllCollisions()
@@ -131,6 +132,11 @@ void CollisionManager::ColSphere()
 					HitCount = 0;
 					IsHit = false;
 					Tsize += oSize;
+					Ssize.x += 0.001f;
+					Ssize.y += 0.001f;
+					Ssize.z += 0.001f;
+					radius += 0.001f;
+					SY += 0.005f;
 				}
 
 

@@ -50,10 +50,12 @@ void Player::Init()
 	PlayerWalkCount = 0;
 	CountWalk = 0;
 	speed = 0.3f;
+	r = 3.0f;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	pFlag = false;
-	sphereY = 0;
+	sphereZV = 0;
+	sphereY = 3;
 	walkFlag = true;
 	moveUDFlag = false;
 	moveLRFlag = false;
@@ -64,8 +66,7 @@ void Player::Init()
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 0.8f,0.8f,0.8f };
 	// コライダーの追加
-	float radius = 3.0f;
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,r,0,0 }), r));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	SphereObj->SetParentFlag(false);
 	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,1.0f,0,0 }), 1.0f));
@@ -95,16 +96,14 @@ void Player::Move()
 	XMVECTOR moveUD = { 0,0,speed,0 };//前後方向用の移動ベクトル
 	XMVECTOR moveLR = { speed,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,0.5,0,0 };//角度のベクトル
-	XMVECTOR moveAngle2 = { 0,0.5,0,0 };//角度のベクトル
-	XMVECTOR moveAngleX = { 10,0,0,0 };//角度のベクトル(球のx軸回転)
-	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル(球のz軸回転)
+	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 	XMMATRIX matRot2 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
+	XMMATRIX matRot3 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[0]));
 	moveUD = XMVector3TransformNormal(moveUD, matRot2);
 	moveLR = XMVector3TransformNormal(moveLR, matRot2);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
-	moveAngleX = XMVector3TransformNormal(moveAngleX, matRot2);
-	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot2);
+	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot3);
 
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
@@ -122,37 +121,31 @@ void Player::Move()
 
 		if (Input::GetInstance()->PushKey(DIK_W))
 		{
-			playerPos.x += moveUD.m128_f32[0];
-			playerPos.z += moveUD.m128_f32[2];
-			spherePos.x += moveUD.m128_f32[0];
-			spherePos.z += moveUD.m128_f32[2];
+			playerPos = vec(playerPos, moveUD);
+			spherePos = vec(spherePos, moveUD);
+
 			sphereAngle.m128_f32[0] += 10;
 		}
 		else if (Input::GetInstance()->PushKey(DIK_S))
 		{
-			playerPos.x -= moveUD.m128_f32[0];
-			playerPos.z -= moveUD.m128_f32[2];
-			spherePos.x -= moveUD.m128_f32[0];
-			spherePos.z -= moveUD.m128_f32[2];
+			playerPos = vec(playerPos, -moveUD);
+			spherePos = vec(spherePos, -moveUD);
 
 			sphereAngle.m128_f32[0] -= 10;
 		}
 		else if (Input::GetInstance()->PushKey(DIK_D))
 		{
-			playerPos.x += moveLR.m128_f32[0];
-			playerPos.z += moveLR.m128_f32[2];
-			spherePos.x += moveLR.m128_f32[0];
-			spherePos.z += moveLR.m128_f32[2];
+			playerPos = vec(playerPos, moveLR);
+			spherePos = vec(spherePos, moveLR);
 
-			sphereAngle.m128_f32[2] += 10;
+			sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_A))
 		{
-			playerPos.x -= moveLR.m128_f32[0];
-			playerPos.z -= moveLR.m128_f32[2];
-			spherePos.x -= moveLR.m128_f32[0];
-			spherePos.z -= moveLR.m128_f32[2];
-			sphereAngle.m128_f32[2] -= 10;
+			playerPos = vec(playerPos, -moveLR);
+			spherePos = vec(spherePos, -moveLR);
+
+			sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
 		}
 	}
 
@@ -204,10 +197,20 @@ void Player::Move()
 	//回転を追従させたい
 }
 
+XMFLOAT3 Player::vec(XMFLOAT3 pos, XMVECTOR vec)
+{
+	pos.x += vec.m128_f32[0];
+	pos.y += vec.m128_f32[1];
+	pos.z += vec.m128_f32[2];
+	return pos;
+}
+
+
+
 void Player::Ball()
 {
 #pragma region カメラ追従とほぼ同じ
-	XMVECTOR v0 = { 0,0,sphereY,0 };
+	XMVECTOR v0 = { 0,0,sphereZV,0 };
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
 	rotM *= XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
@@ -217,7 +220,7 @@ void Player::Ball()
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	////ジャンプをしない時だけY軸の追従をする
 	//if (JumpFlag == false) {
-	spherePos.y = f.y + 3.0f;
+	spherePos.y = f.y + sphereY;
 	//}
 	//if (moveFlag == false) {
 	spherePos.x = f.x;

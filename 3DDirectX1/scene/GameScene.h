@@ -116,8 +116,8 @@ private: // メンバ変数
 	float distanceC = 20.0f;//カメラの位置
 	float distanceCY = 20.0f;//カメラの位置
 
-	float SY = 3;
-
+	float SZV = 3;//sphereとの
+	float SY = 3;//SphereのY軸高さ
 	bool clearFlag = false;
 	bool overFlag = false;
 
@@ -131,4 +131,6 @@ private: // メンバ変数
 
 	int testCount = 0;//test
 	int GoalCount = 0;
+	XMFLOAT3 Ssize = { 1,1,1 };
+	float radius = 3;
 };

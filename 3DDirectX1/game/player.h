@@ -46,10 +46,12 @@ public:
 	bool SetWalkFlag(bool walkFlag) { return this->walkFlag = walkFlag; }
 	bool SetPFlag(bool pFlag) { return this->pFlag = pFlag; }
 
+	float SetSZV(float szv) { return this->sphereZV = szv; }
 	float SetSY(float sy) { return this->sphereY = sy; }
-
+	float SetRadius(float r) { return this->r = r; }
 private://Update()にまとめるもの
 	void Move();//移動
+	XMFLOAT3 vec(XMFLOAT3 pos,XMVECTOR vec);
 	void Ball();//ボール関係
 	void Jump();//ジャンプ
 	void Dash();//ダッシュ
@@ -84,9 +86,9 @@ private://変数
 	float speed = 0;
 	bool moveUDFlag = false;
 	bool moveLRFlag = false;
-	//球のy軸
-	float sphereY = 0;
-
+	//球のz軸
+	float sphereZV = 0;//球との距離z軸
+	float sphereY = 0;//球y軸高さ
 	//ダッシュ関連の変数
 	bool dashFlag = false;
 	bool dashMoveFlag = false;
