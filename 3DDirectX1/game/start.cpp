@@ -4,6 +4,9 @@
 #include"Input.h"
 void start::Initialize(Audio* audio)
 {
+	assert(audio);
+
+	this->audio = audio;
 	Sprite::LoadTexture(65, L"Resources/UI/number/number2.png");
 	Sprite::LoadTexture(66, L"Resources/UI/number/Go.png");
 	Sprite::LoadTexture(67, L"Resources/UI/message.png");
@@ -12,7 +15,7 @@ void start::Initialize(Audio* audio)
 	Sprite::LoadTexture(70, L"Resources/UI/tutorialUI.png");
 	number = Sprite::CreateSprite(65, { 550,300 });
 	Go = Sprite::CreateSprite(66, { 450,300 });
-
+	sound1 = Audio::SoundLoadWave("Resources/Music/SE/カウントダウン電子音.wav");
 	message[0] = Sprite::CreateSprite(67, { 150,400 });
 	message[1] = Sprite::CreateSprite(68, { 300,400 });
 	messageUI = Sprite::CreateSprite(70, { 700,550 });
@@ -41,6 +44,7 @@ void start::Update()
 		}
 		if (MCount == 2) {
 			GoFlag = true;
+			audio->SEPlayWave(sound1);
 			start = clock() / CLOCKS_PER_SEC;
 		}
 	}

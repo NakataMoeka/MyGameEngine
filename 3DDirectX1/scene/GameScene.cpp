@@ -140,8 +140,7 @@ void GameScene::Init()
 	SZV = 5;
 	SY = 3;
 	Ssize = { 0.8f,0.8f,0.8f };
-	audio->SoundPlayWave(sound2);
-	audio->SetBGMVolume(0.2f);
+	audioCount = 0;
 
 }
 
@@ -261,13 +260,16 @@ void GameScene::Update()
 			st->Update();
 			timer->Update();
 			if (st->GetStartFlag() == true) {
+				if (audioCount < 2) {
+					audioCount++;
+				}
 				timer->SetSFlag(true);
 				timer->SetFlag(false);
 				if (timer->GetDT() <= 0) {
 					if (sphereSize->GetTsize() < GoalCount) {
 						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 						overFlag = true;
-						audio->StopWave();
+						//audio->StopWave();
 						gameObject->RC();
 						player->RC();
 						stageObj->RC();
@@ -275,7 +277,7 @@ void GameScene::Update()
 					else if (sphereSize->GetTsize() >= GoalCount) {
 						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
 						clearFlag = true;
-						audio->StopWave();
+						//audio->StopWave();
 						gameObject->RC();
 						player->RC();
 						stageObj->RC();
@@ -294,10 +296,15 @@ void GameScene::Update()
 		player->Update();
 		stageObj->Update();
 		gameObject->Update();
+
+	}
+	if (audioCount == 1) {
+		audio->SoundPlayWave(sound2);
+		audio->SetBGMVolume(0.2f);
 	}
 
 	if (pose->GetTFlag() == true) {
-		audio->StopWave();
+		//audio->StopWave();
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
@@ -320,7 +327,7 @@ void GameScene::Update()
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
-	}
+}
 #endif
 
 	//object3d->SetRotation({ a,0,b });

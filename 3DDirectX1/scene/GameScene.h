@@ -133,4 +133,5 @@ private: // メンバ変数
 	int GoalCount = 0;
 	XMFLOAT3 Ssize = { 1,1,1 };
 	float radius = 3;
+	int audioCount = 0;
 };

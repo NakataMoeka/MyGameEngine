@@ -16,7 +16,7 @@ public:
 	bool SetStartFlag(bool startFlag) { return this->startFlag=startFlag; }
 private:
 	Audio* audio = nullptr;
-
+	SoundData sound1 = {};
 	Sprite* number = nullptr;
 	Sprite* Go = nullptr;
 	std::array<Sprite*, 3> message = {};
