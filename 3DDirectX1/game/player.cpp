@@ -129,22 +129,30 @@ void Player::Move()
 		spherePos = vec(spherePos, moveLR);
 		if (Input::GetInstance()->PushKey(DIK_W))
 		{
-			speedUD = 0.3f;
+			if (speedUD < 0.2f) {
+				speedUD += 0.005f;
+			}
 			sphereAngle.m128_f32[0] += 10;
 		}
 		else if (Input::GetInstance()->PushKey(DIK_S))
 		{
-			speedUD = -0.3f;
+			if (speedUD > -0.2f) {
+				speedUD -= 0.005f;
+			}
 			sphereAngle.m128_f32[0] -= 10;
 		}
 		else if (Input::GetInstance()->PushKey(DIK_D))
 		{
-			speedLR = 0.3f;
+			if (speedLR < 0.2f) {
+				speedLR += 0.005f;
+			}
 			sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_A))
 		{
-			speedLR = -0.3f;
+			if (speedLR > -0.2f) {
+				speedLR -= 0.005f;
+			}
 			sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
 		}
 	}
@@ -200,7 +208,7 @@ void Player::Move()
 	}
 
 	//}
-	DebugText::GetInstance()->Printf(300, 500, 3.0f, { 1,1,1,1 }, "%f", speedUD);
+	//DebugText::GetInstance()->Printf(300, 500, 3.0f, { 1,1,1,1 }, "%f", speedUD);
 
 	if (JumpFlag == true) {
 		playerObj->PlayAnimation(0, false);
