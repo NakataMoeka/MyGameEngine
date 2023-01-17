@@ -51,7 +51,7 @@ public:
 	float SetRadius(float r) { return this->r = r; }
 private://Update()にまとめるもの
 	void Move();//移動
-	XMFLOAT3 vec(XMFLOAT3 pos,XMVECTOR vec);
+	XMFLOAT3 vec(XMFLOAT3 pos, XMVECTOR vec);
 	void Ball();//ボール関係
 	void Jump();//ジャンプ
 	void Dash();//ダッシュ
@@ -83,7 +83,8 @@ private://変数
 	float r = 3;
 
 	//移動
-	float speed = 0;
+	float speedUD = 0;
+	float speedLR = 0;
 	bool moveUDFlag = false;
 	bool moveLRFlag = false;
 	//球のz軸
@@ -91,6 +92,7 @@ private://変数
 	float sphereY = 0;//球y軸高さ
 	//ダッシュ関連の変数
 	bool dashFlag = false;
+	float dash = 1.5f;
 	bool dashMoveFlag = false;
 	float dashSpeed = 2.0f;
 	int dashCoolTime = 0;

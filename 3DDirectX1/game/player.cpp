@@ -49,8 +49,10 @@ void Player::Init()
 	dashFlag = false;
 	PlayerWalkCount = 0;
 	CountWalk = 0;
-	speed = 0.3f;
+	speedUD = 0.0f;
+	speedLR = 0.0f;
 	r = 3.0f;
+	dash = 1.5f;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	pFlag = false;
@@ -59,6 +61,7 @@ void Player::Init()
 	walkFlag = true;
 	moveUDFlag = false;
 	moveLRFlag = false;
+
 	JumpFlag = false;
 	onGround = true;
 	spherePos = { 0,3,-40 };
@@ -93,8 +96,9 @@ void Player::stageInit(int stageNo)
 
 void Player::Move()
 {
-	XMVECTOR moveUD = { 0,0,speed,0 };//前後方向用の移動ベクトル
-	XMVECTOR moveLR = { speed,0,0,0 };//左右方向の移動用ベクトル
+
+	XMVECTOR moveUD = { 0,0,speedUD,0 };//前後方向用の移動ベクトル
+	XMVECTOR moveLR = { speedLR,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,0.5,0,0 };//角度のベクトル
 	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
@@ -119,32 +123,28 @@ void Player::Move()
 	//if (JumpFlag == false) {
 	if (dashMoveFlag == false) {
 
+		playerPos = vec(playerPos, moveUD);
+		spherePos = vec(spherePos, moveUD);
+		playerPos = vec(playerPos, moveLR);
+		spherePos = vec(spherePos, moveLR);
 		if (Input::GetInstance()->PushKey(DIK_W))
 		{
-			playerPos = vec(playerPos, moveUD);
-			spherePos = vec(spherePos, moveUD);
-
+			speedUD = 0.3f;
 			sphereAngle.m128_f32[0] += 10;
 		}
 		else if (Input::GetInstance()->PushKey(DIK_S))
 		{
-			playerPos = vec(playerPos, -moveUD);
-			spherePos = vec(spherePos, -moveUD);
-
+			speedUD = -0.3f;
 			sphereAngle.m128_f32[0] -= 10;
 		}
 		else if (Input::GetInstance()->PushKey(DIK_D))
 		{
-			playerPos = vec(playerPos, moveLR);
-			spherePos = vec(spherePos, moveLR);
-
+			speedLR = 0.3f;
 			sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
 		}
 		else if (Input::GetInstance()->PushKey(DIK_A))
 		{
-			playerPos = vec(playerPos, -moveLR);
-			spherePos = vec(spherePos, -moveLR);
-
+			speedLR = -0.3f;
 			sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
 		}
 	}
@@ -154,7 +154,7 @@ void Player::Move()
 		Input::GetInstance()->PushKey(DIK_A) ||
 		Input::GetInstance()->PushKey(DIK_D))
 	{
-		speed = 0.3f;
+
 		if (CountWalk < 5) {
 			CountWalk++;
 		}
@@ -170,24 +170,37 @@ void Player::Move()
 
 
 		playerObj->PlayAnimation(2, true);
-
-
 	}
 	else {
 		if (JumpFlag == false) {
 			playerObj->PlayAnimation(1, true);
 		}
-		/*if (speed > 0) {
-			speed -= 0.01f;
+	
+		if (speedUD > 0) {
+			speedUD -= 0.01f;
+		}
+		else if (speedUD < 0) {
+			speedUD += 0.01f;
 		}
 		else {
-			moveUDFlag = false;
-			moveLRFlag = false;
-			speed = 0.0f;
-		}*/
+			speedUD = 0.0f;
+		}
+		if (speedLR > 0) {
+			speedLR -= 0.01f;
+		}
+		else if (speedLR < 0) {
+			speedLR += 0.01f;
+		}
+		else {
+			speedLR = 0.0f;
+		}
+		//playerPos = vec(playerPos, -moveLR);
+		//spherePos = vec(spherePos, -moveLR);
+
 	}
+
 	//}
-	//DebugText::GetInstance()->Printf(300, 500, 3.0f, { 1,1,1,1 }, "%f", speed);
+	DebugText::GetInstance()->Printf(300, 500, 3.0f, { 1,1,1,1 }, "%f", speedUD);
 
 	if (JumpFlag == true) {
 		playerObj->PlayAnimation(0, false);
@@ -419,6 +432,7 @@ void Player::Dash()
 		{
 			dashTime = dashTimeMax;
 			fade = 1;
+			dash = 1.5f;
 			dashFlag = true;
 			dashMoveFlag = true;
 		}
@@ -430,7 +444,7 @@ void Player::Dash()
 			{
 				dashCoolTime = dashCoolTimeMax;
 			}
-			XMVECTOR movedash = { 0,0,1.5,0 };//ダッシュ用の移動ベクトル
+			XMVECTOR movedash = { 0,0,dash,0 };//ダッシュ用の移動ベクトル
 
 			XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 			movedash = XMVector3TransformNormal(movedash, matRot);
@@ -441,6 +455,9 @@ void Player::Dash()
 			spherePos.z += movedash.m128_f32[2];
 			if (fade > 0) {
 				fade -= 0.05f;
+			}
+			if (dash > 0) {
+				dash -= 0.1f;
 			}
 		}
 	}
