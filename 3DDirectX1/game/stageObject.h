@@ -35,9 +35,11 @@ private:
 	TouchableObject* Ground = nullptr;
 	Model* modelGround = nullptr;
 	TouchableObject* Home = nullptr;
+	Model* modelHome = nullptr;
+	TouchableObject* saku = nullptr;
+	Model* modelSaku = nullptr;
 	Model* modelSkydome = nullptr;
 	Object3d* skydome = nullptr;
-	Model* modelHome = nullptr;
 	XMFLOAT3 position[2] = { {0,0,0} ,{0,0,-50} };
 	XMFLOAT3 size = { 1,1,1 };
 	XMVECTOR rota = { 0,0,0,0 };
