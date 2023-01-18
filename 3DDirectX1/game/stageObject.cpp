@@ -65,7 +65,7 @@ void StageObject::stageInit(int stageNum)
 		skydome->SetScale({ 4.0f,4.0f,4.0f });
 		skydome->Update();
 		saku->SetTouchCollider();
-		saku->SetPosition({ -190,58,-48 });
+		saku->SetPosition({ -190,58,-47.5f });
 		saku->SetScale({ 2.0f,2.0f,2.0f });
 		saku->Update();
 	}
