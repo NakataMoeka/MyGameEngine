@@ -113,7 +113,6 @@ void Player::Move()
 	{
 		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
 		playerAngle.y += moveAngle.m128_f32[1];
-
 	}
 	else if (Input::GetInstance()->PushKey(DIK_LEFTARROW))
 	{
@@ -140,7 +139,7 @@ void Player::Move()
 				speedUD -= 0.005f;
 			}
 			sphereAngle.m128_f32[0] -= 10;
-		}
+		} 
 		else if (Input::GetInstance()->PushKey(DIK_D))
 		{
 			if (speedLR < 0.2f) {
