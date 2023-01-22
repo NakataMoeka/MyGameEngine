@@ -55,7 +55,7 @@ void StageObject::stageInit(int stageNum)
 	else if (stageNum == 1) {
 		Kotatu->SetTouchCollider();
 		Kotatu->SetPosition({ 0,38,-80 });
-		Kotatu->SetColor({ 1,0,0,1 });
+		Kotatu->SetColor({ 1,1,1,1 });
 		Kotatu->Update();
 		Ground->SetScale({ 6,6,6 });
 		Ground->SetPosition({ 0,0,0 });
