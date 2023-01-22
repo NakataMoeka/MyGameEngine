@@ -43,7 +43,7 @@ GameObject::~GameObject()
 }
 
 void GameObject::Initialize()
-{
+{  
 	modelCube = Model::Create("lego", false);
 	modelMove = Model::Create("car", false);
 	modelBear = Model::Create("bear", false);

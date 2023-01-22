@@ -308,13 +308,16 @@ void Object3d::Update()
 	const XMFLOAT3& cameraPos = camera->GetEye();
 
 	// 定数バッファへデータ転送
+
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
-	//constMap->mat = matWorld * matViewProjection;	// 行列の合成
 	constMap->viewproj = matViewProjection;
 	constMap->world = matWorld;
 	constMap->cameraPos = cameraPos;
+	constMap->color = color;
 	constBuffB0->Unmap(0, nullptr);
+
+
 	// 当たり判定更新
 	if (collider) {
 		collider->Update();

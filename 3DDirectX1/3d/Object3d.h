@@ -40,9 +40,11 @@ public:
 	struct ConstBufferDataB0
 	{
 		//XMMATRIX mat;	// ３Ｄ変換行列
+		XMFLOAT4 color;
 		XMMATRIX viewproj;//ビュープロジェクション行列
 		XMMATRIX world;//ワールド行列
 		XMFLOAT3 cameraPos;//カメラ座標(ワールド座標)
+	
 	};
 
 	Object3d() = default;
@@ -95,6 +97,7 @@ public:
 	void SetRotation(XMVECTOR rotation) { this->rotation = rotation; }
 	const XMFLOAT3& GetScale() { return scale; }
 	void SetScale(XMFLOAT3 scale) { this->scale = scale; }
+	void SetColor(XMFLOAT4 color) { this->color = color; }
 	// モデルとの連携
 	void SetModel(Model* model) { this->model = model; };
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
@@ -123,7 +126,7 @@ protected:
 	ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
 
 	// 色
-	XMFLOAT4 color = { 1,0,0,1 };
+	XMFLOAT4 color = { 1,1,1,1 };
 	// ローカルスケール
 	XMFLOAT3 scale = { 1,1,1 };
 	// X,Y,Z軸回りのローカル回転角

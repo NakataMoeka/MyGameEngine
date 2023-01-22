@@ -7,7 +7,7 @@ float4 main(VSOutput input) : SV_TARGET
 {
 	// テクスチャマッピング
 	float4 texcolor = tex.Sample(smp, input.uv);
-
+	
 	// 光沢度
 	const float shininess = 4.0f;
 	// 頂点から視点への方向ベクトル
@@ -120,5 +120,5 @@ float4 main(VSOutput input) : SV_TARGET
 	}
 
 	// シェーディングによる色で描画
-	return shadecolor * texcolor;
+	return (shadecolor * texcolor) * color;
 }
