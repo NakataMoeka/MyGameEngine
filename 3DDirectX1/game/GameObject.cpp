@@ -39,6 +39,14 @@ GameObject::~GameObject()
 		safe_delete(Bear[i]);
 		safe_delete(Robot[i]);
 		safe_delete(Card[i]);
+		safe_delete(Pencil[i]);
+		safe_delete(Kendama[i]);
+		safe_delete(Koma[i]);
+		safe_delete(Shogi[i]);
+		safe_delete(Turu[i]);
+		safe_delete(Cont[i]);
+		safe_delete(Game[i]);
+
 	}
 }
 
@@ -399,9 +407,8 @@ void GameObject::Update()
 			if (Game[i]->GetColFlag() == true) {
 				Game[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
-
-			Game[i]->SetRotation(oData[i]->rot);
 			Game[i]->Quaternion();
+			Game[i]->SetRotation(oData[i]->rot);
 			Game[i]->Update();
 		}
 		for (int i = 0; i < oData2.size(); i++) {

@@ -89,6 +89,9 @@ void Player::stageInit(int stageNo)
 	else if (stageNo == 1) {
 		playerPos = { 0,35,-40 };
 	}
+	else if (stageNo == 2) {
+		playerPos = { 0,0,-40 };
+	}
 	playerObj->SetPosition(playerPos);
 	playerObj->Update();
 }
