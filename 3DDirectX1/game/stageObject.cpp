@@ -77,10 +77,16 @@ void StageObject::stageInit(int stageNum)
 		saku->Update();
 	}
 	else if (stageNum == 2) {
-
-	}
-	else if (stageNum == 3) {
-
+		Ground->SetScale({ 6,6,6 });
+		Ground->SetPosition({ 0,0,0 });
+		Ground->SetRotation({ 0,0,0 });
+		Ground->Quaternion();
+		Ground->SetColor({ 1,1,1,1 });
+		Ground->Update();
+		skydome->SetPosition({ 0.0f,100.0f,0.0f });
+		skydome->SetScale({ 4.0f,4.0f,4.0f });
+		skydome->SetColor({ 1,1,1,1 });
+		skydome->Update();
 	}
 }
 

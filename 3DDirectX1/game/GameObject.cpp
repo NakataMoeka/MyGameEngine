@@ -267,7 +267,7 @@ void GameObject::stageInit(int stageNum)
 					oData2[num]->pos = { -180 + (float)i * 10,37, 100 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
-					oData2[num]->pos = { -180 + (float)i * 10,5, 100 + (float)j * (-10) };
+					oData2[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
 				}
 				oData2[num]->rot = { 0,0,0,0 };
 				oData2[num]->IsHit = false;
