@@ -93,21 +93,40 @@ void GameObject::Init()
 	size[1] = { 5,5,5 };
 	for (int i = 0; i < oData.size(); i++) {
 
+
 		float radius = 1.0f;
-		rota = { 0,0,0,0 };
-		cube[i]->SetPosition(oData[i]->pos);
-		cube[i]->SetScale(size[0]);
-		cube[i]->Quaternion();
-		cube[i]->SetRotation(oData[i]->rot);
-		cube[i]->Update();
-		//ここに書かないとバグる
-		cSphere[i].radius = 1.0f;
-		cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,1,0,0 }), 1.0f));
-		cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-		cube[i]->GetCollider()->SetNum(0);
-		cube[i]->SetParentFlag(false);
-		cube[i]->SetColFlag(false);
+		if (stageNum == 0 || stageNum == 1) {
+			//stage1
+			cube[i]->SetPosition(oData[i]->pos);
+			cube[i]->SetScale(size[0]);
+			cube[i]->Quaternion();
+			cube[i]->SetRotation(oData[i]->rot);
+			cube[i]->Update();
+			//ここに書かないとバグる
+			cSphere[i].radius = 1.0f;
+			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,1,0,0 }), 1.0f));
+			cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+			cube[i]->GetCollider()->SetNum(0);
+			cube[i]->SetParentFlag(false);
+			cube[i]->SetColFlag(false);
+		}
+		else if (stageNum == 2) {
+			//stage2
+			Game[i]->SetPosition(oData[i]->pos);
+			Game[i]->SetScale(size[0]);
+			Game[i]->Quaternion();
+			Game[i]->SetRotation(oData[i]->rot);
+			Game[i]->Update();
+			//ここに書かないとバグる
+			cSphere[i].radius = 1.0f;
+			cSphere[i].center = XMVectorSet(Game[i]->GetMatWorld().r[3].m128_f32[0], Game[i]->GetMatWorld().r[3].m128_f32[1], Game[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			Game[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,1,0,0 }), 1.0f));
+			Game[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+			Game[i]->GetCollider()->SetNum(0);
+			Game[i]->SetParentFlag(false);
+			Game[i]->SetColFlag(false);
+		}
 	}
 	for (int i = 0; i < oData2.size(); i++) {
 		oData2[10]->pos.y = 52;
@@ -198,7 +217,7 @@ void GameObject::stageInit(int stageNum)
 				if (stageNum == 0) {
 					oData[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
 				}
-				else if (stageNum == 1||stageNum==2) {
+				else if (stageNum == 1 || stageNum == 2) {
 					oData[num]->pos = { -180 + (float)i * 10,35, 100 + (float)j * (-10) };
 				}
 				oData[num]->rot = { 0,0,0,0 };
@@ -267,7 +286,7 @@ void GameObject::Update()
 			cube[i]->Update();
 		}
 	}
-	else if (stageNum == 1||stageNum==2) {
+	else if (stageNum == 1) {
 		//ここでSetすると離れてくっつくからしないように!!
 		for (int i = 0; i < oData.size(); i++) {
 
@@ -335,6 +354,20 @@ void GameObject::Update()
 			Card[i]->Update();
 		}
 	}
+	else if (stageNum == 2) {
+		for (int i = 0; i < oData.size(); i++) {
+
+			cSphere[i].radius = 1.0f;
+			cSphere[i].center = XMVectorSet(Game[i]->GetMatWorld().r[3].m128_f32[0], Game[i]->GetMatWorld().r[3].m128_f32[1], Game[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			if (Game[i]->GetColFlag() == true) {
+				Game[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+			}
+
+			Game[i]->SetRotation(oData[i]->rot);
+			Game[i]->Quaternion();
+			Game[i]->Update();
+		}
+	}
 }
 
 
@@ -344,6 +377,8 @@ void GameObject::RC()
 	{
 		cube[i]->SetParentFlag(false);
 		cube[i]->RemoveCollider();
+		Game[i]->SetParentFlag(false);
+		Game[i]->RemoveCollider();
 		delete oData[i];
 		oData.erase(oData.begin() + i);
 	}
@@ -385,7 +420,7 @@ void GameObject::Draw()
 			cube[i]->Draw();
 		}
 	}
-	else if (stageNum == 1||stageNum==2) {
+	else if (stageNum == 1) {
 
 		for (int i = 0; i < oData.size(); i++)
 		{
@@ -408,7 +443,12 @@ void GameObject::Draw()
 			Card[i]->Draw();
 		}
 	}
-
+	else if (stageNum == 2) {
+		for (int i = 0; i < oData.size(); i++)
+		{
+			Game[i]->Draw();
+		}
+	}
 }
 
 
@@ -457,8 +497,11 @@ Object3d* GameObject::GetObject3d(int i, int j)
 {
 
 	if (j == 0) {
-		if (stageNum == 0 || stageNum == 1||stageNum==2) {
+		if (stageNum == 0 || stageNum == 1) {
 			return cube[i];
+		}
+		else if (stageNum == 2) {
+			return Game[i];
 		}
 	}
 	else if (j == 1) {
