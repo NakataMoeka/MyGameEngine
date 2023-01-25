@@ -183,6 +183,17 @@ void GameObject::Init()
 			Bear[i]->SetColFlag(false);
 		}
 		else if (stageNum == 2) {
+			Shogi[i]->SetPosition(oData3[i]->pos);
+			Shogi[i]->SetScale({ 0.8f,0.8f,0.8f });
+			Shogi[i]->Quaternion();
+			Shogi[i]->Update();
+			cSphere3[i].radius = 2;
+			cSphere3[i].center = XMVectorSet(Shogi[i]->GetMatWorld().r[3].m128_f32[0], Shogi[i]->GetMatWorld().r[3].m128_f32[1], Shogi[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			Shogi[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 2));
+			Shogi[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+			Shogi[i]->GetCollider()->SetNum(2);
+			Shogi[i]->SetParentFlag(false);
+			Shogi[i]->SetColFlag(false);
 		}
 	}
 	for (int i = 0; i < oData4.size(); i++) {
@@ -200,6 +211,17 @@ void GameObject::Init()
 			Robot[i]->SetColFlag(false);
 		}
 		else if (stageNum == 2) {
+			Kendama[i]->SetPosition(oData4[i]->pos);
+			Kendama[i]->SetScale(size[0]);
+			Kendama[i]->Quaternion();
+			Kendama[i]->Update();
+			cSphere4[i].radius = 2;
+			cSphere4[i].center = XMVectorSet(Kendama[i]->GetMatWorld().r[3].m128_f32[0], Kendama[i]->GetMatWorld().r[3].m128_f32[1], Kendama[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			Kendama[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 2));
+			Kendama[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+			Kendama[i]->GetCollider()->SetNum(3);
+			Kendama[i]->SetParentFlag(false);
+			Kendama[i]->SetColFlag(false);
 		}
 	}
 	for (int i = 0; i < oData5.size(); i++) {
@@ -217,6 +239,17 @@ void GameObject::Init()
 			Card[i]->SetColFlag(false);
 		}
 		else if (stageNum == 2) {
+			Turu[i]->SetPosition(oData5[i]->pos);
+			Turu[i]->SetScale(size[0]);
+			Turu[i]->Quaternion();
+			Turu[i]->Update();
+			cSphere5[i].radius = 2;
+			cSphere5[i].center = XMVectorSet(Turu[i]->GetMatWorld().r[3].m128_f32[0], Turu[i]->GetMatWorld().r[3].m128_f32[1], Turu[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			Turu[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 2));
+			Turu[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
+			Turu[i]->GetCollider()->SetNum(4);
+			Turu[i]->SetParentFlag(false);
+			Turu[i]->SetColFlag(false);
 		}
 	}
 	//d‚­‚È‚é
@@ -285,8 +318,13 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
+				if(stageNum==1){
 				oData3[num]->pos = { -180 + (float)i * 10,50, 100 + (float)j * (-10) };
-				oData3[num]->rot = { 0,0,0,0 };
+				}
+				else if (stageNum == 2) {
+					oData3[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
+				}
+					oData3[num]->rot = { 0,0,0,0 };
 				randRot = rand() / 360;
 				oData3[num]->rot.m128_f32[1] = (float)randRot;
 				oData3[num]->IsHit = false;
@@ -296,7 +334,13 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData4.push_back(new object);
 				num = (int)oData4.size() - 1;
-				oData4[num]->pos = { -180 + (float)i * 10,36, 100 + (float)j * (-10) };
+				if (stageNum == 1) {
+					oData4[num]->pos = { -180 + (float)i * 10,36, 100 + (float)j * (-10) };
+				}
+				else if (stageNum == 2) {
+					oData4[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
+				}
+				
 				oData4[num]->rot = { 0,0,0,0 };
 				randRot = rand() / 360;
 				oData4[num]->rot.m128_f32[1] = (float)randRot;
@@ -307,7 +351,12 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData5.push_back(new object);
 				num = (int)oData5.size() - 1;
-				oData5[num]->pos = { -180 + (float)i * 10,36, 100 + (float)j * (-10) };
+				if (stageNum == 1) {
+					oData5[num]->pos = { -180 + (float)i * 10,36, 100 + (float)j * (-10) };
+				}
+				else if (stageNum == 2) {
+					oData5[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
+				}
 				oData5[num]->rot = { 0,0,0,0 };
 				randRot = rand() / 360;
 				oData5[num]->rot.m128_f32[1] = (float)randRot;
@@ -428,6 +477,39 @@ void GameObject::Update()
 			Koma[i]->SetRotation(oData2[i]->rot);
 			Koma[i]->Update();
 		}
+		for (int i = 0; i < oData3.size(); i++) {
+
+			cSphere[i].radius = 1.0f;
+			cSphere[i].center = XMVectorSet(Shogi[i]->GetMatWorld().r[3].m128_f32[0], Shogi[i]->GetMatWorld().r[3].m128_f32[1], Shogi[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			if (Shogi[i]->GetColFlag() == true) {
+				Shogi[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+			}
+			Shogi[i]->Quaternion();
+			Shogi[i]->SetRotation(oData3[i]->rot);
+			Shogi[i]->Update();
+		}
+		for (int i = 0; i < oData4.size(); i++) {
+
+			cSphere[i].radius = 1.0f;
+			cSphere[i].center = XMVectorSet(Kendama[i]->GetMatWorld().r[3].m128_f32[0], Kendama[i]->GetMatWorld().r[3].m128_f32[1], Kendama[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			if (Kendama[i]->GetColFlag() == true) {
+				Kendama[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+			}
+			Kendama[i]->Quaternion();
+			Kendama[i]->SetRotation(oData4[i]->rot);
+			Kendama[i]->Update();
+		}
+		for (int i = 0; i < oData5.size(); i++) {
+
+			cSphere[i].radius = 1.0f;
+			cSphere[i].center = XMVectorSet(Turu[i]->GetMatWorld().r[3].m128_f32[0], Turu[i]->GetMatWorld().r[3].m128_f32[1], Turu[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			if (Turu[i]->GetColFlag() == true) {
+				Turu[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+			}
+			Turu[i]->Quaternion();
+			Turu[i]->SetRotation(oData5[i]->rot);
+			Turu[i]->Update();
+		}
 	}
 }
 
@@ -456,6 +538,8 @@ void GameObject::RC()
 	{
 		Bear[i]->SetParentFlag(false);
 		Bear[i]->RemoveCollider();
+		Shogi[i]->SetParentFlag(false);
+		Shogi[i]->RemoveCollider();
 		delete oData3[i];
 		oData3.erase(oData3.begin() + i);
 	}
@@ -463,6 +547,8 @@ void GameObject::RC()
 	{
 		Robot[i]->SetParentFlag(false);
 		Robot[i]->RemoveCollider();
+		Kendama[i]->SetParentFlag(false);
+		Kendama[i]->RemoveCollider();
 		delete oData4[i];
 		oData4.erase(oData4.begin() + i);
 	}
@@ -470,6 +556,8 @@ void GameObject::RC()
 	{
 		Card[i]->SetParentFlag(false);
 		Card[i]->RemoveCollider();
+		Turu[i]->SetParentFlag(false);
+		Turu[i]->RemoveCollider();
 		delete oData5[i];
 		oData5.erase(oData5.begin() + i);
 	}
@@ -514,6 +602,18 @@ void GameObject::Draw()
 		for (int i = 0; i < oData2.size(); i++)
 		{
 			Koma[i]->Draw();
+		}
+		for (int i = 0; i < oData3.size(); i++)
+		{
+			Shogi[i]->Draw();
+		}
+		for (int i = 0; i < oData4.size(); i++)
+		{
+			Kendama[i]->Draw();
+		}
+		for (int i = 0; i < oData5.size(); i++)
+		{
+			Turu[i]->Draw();
 		}
 	}
 }
@@ -583,15 +683,24 @@ Object3d* GameObject::GetObject3d(int i, int j)
 		if (stageNum == 1) {
 			return Bear[i];
 		}
+		else if (stageNum == 2) {
+			return Shogi[i];
+		}
 	}
 	else if (j == 3) {
 		if (stageNum == 1) {
 			return Robot[i];
 		}
+		else if (stageNum == 2) {
+			return Kendama[i];
+		}
 	}
 	else {
 		if (stageNum == 1) {
 			return Card[i];
+		}
+		else if (stageNum == 2) {
+			return Turu[i];
 		}
 	}
 	return 0;
