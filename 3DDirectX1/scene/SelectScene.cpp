@@ -73,7 +73,7 @@ void SelectScene::Update()
 {
 	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
 	{
-		if (stageNum < 3) {
+		if (stageNum < 2) {
 			stageNum++;
 			spriteCount = 0;
 			SAFlag = 1;
@@ -109,7 +109,7 @@ void SelectScene::Update()
 	}
 	else if (SAFlag == 0) {
 		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-			if (stageNum == 0 || stageNum == 1) {
+			if (stageNum == 0 || stageNum == 1||stageNum==2) {
 				SCangeFlag = true;
 				audio->SEPlayWave(sound2);
 			}
@@ -139,7 +139,7 @@ void SelectScene::DrawFront()
 	SelectUI->Draw();
 	if (SAFlag == 0) {
 		DebugText::GetInstance()->Printf(600, 300, 6.0f, { 0,0,0,1 }, "%d", stageNum);
-		if (stageNum == 2 || stageNum == 3) {
+		if (stageNum == 2) {
 			DebugText::GetInstance()->Printf(250, 400, 6.0f, { 0,0,0,1 }, "MADA,ASOBENAIYO");
 		}
 		else if (stageNum == 0) {

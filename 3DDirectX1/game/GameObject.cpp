@@ -43,12 +43,19 @@ GameObject::~GameObject()
 }
 
 void GameObject::Initialize()
-{  
+{
 	modelCube = Model::Create("lego", false);
 	modelMove = Model::Create("car", false);
 	modelBear = Model::Create("bear", false);
 	modelRobot = Model::Create("robot", false);
 	modelCard = Model::Create("card", false);
+	modelPencil = Model::Create("pencil", false);
+	modelKendama = Model::Create("kendama", false);
+	modelKoma = Model::Create("koma", false);
+	modelShogi = Model::Create("shogi", false);
+	modelTuru = Model::Create("tsuru", false);
+	modelCont = Model::Create("cont", false);
+	modelGame = Model::Create("game", false);
 	for (int i = 0; i < OBJNumber; i++) {
 		cube[i] = Object3d::Create(modelCube);
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
@@ -60,6 +67,22 @@ void GameObject::Initialize()
 		Robot[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 		Card[i] = Object3d::Create(modelCard);
 		Card[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		Pencil[i] = Object3d::Create(modelPencil);
+		Pencil[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+
+		Kendama[i] = Object3d::Create(modelKendama);
+		Kendama[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		Koma[i] = Object3d::Create(modelKoma);
+		Koma[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		Shogi[i] = Object3d::Create(modelShogi);
+		Shogi[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		Turu[i] = Object3d::Create(modelTuru);
+		Turu[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		Cont[i] = Object3d::Create(modelCont);
+		Cont[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+		Game[i] = Object3d::Create(modelGame);
+		Game[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+
 	}
 
 }
@@ -108,7 +131,7 @@ void GameObject::Init()
 		Bear[i]->Update();
 		cSphere3[i].radius = 2;
 		cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1], Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
-		Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }),2));
+		Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 2));
 		Bear[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 		Bear[i]->GetCollider()->SetNum(2);
 		Bear[i]->SetParentFlag(false);
@@ -158,11 +181,9 @@ void GameObject::stageInit(int stageNum)
 		LoadCSV(spawnMap, "Resources/objMap.csv");
 	}
 	else if (stageNum == 2) {
-
+		LoadCSV(spawnMap, "Resources/objMap3.csv");
 	}
-	else if (stageNum == 3) {
 
-	}
 	int  num = 0;
 	for (size_t j = 0; j < MAP_HEIGHT; j++)
 	{
@@ -177,7 +198,7 @@ void GameObject::stageInit(int stageNum)
 				if (stageNum == 0) {
 					oData[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
 				}
-				else if (stageNum == 1) {
+				else if (stageNum == 1||stageNum==2) {
 					oData[num]->pos = { -180 + (float)i * 10,35, 100 + (float)j * (-10) };
 				}
 				oData[num]->rot = { 0,0,0,0 };
@@ -246,7 +267,7 @@ void GameObject::Update()
 			cube[i]->Update();
 		}
 	}
-	else if (stageNum == 1) {
+	else if (stageNum == 1||stageNum==2) {
 		//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
 		for (int i = 0; i < oData.size(); i++) {
 
@@ -364,7 +385,7 @@ void GameObject::Draw()
 			cube[i]->Draw();
 		}
 	}
-	else if (stageNum == 1) {
+	else if (stageNum == 1||stageNum==2) {
 
 		for (int i = 0; i < oData.size(); i++)
 		{
@@ -434,21 +455,33 @@ Sphere GameObject::GetCSphere(int i, int j)
 }
 Object3d* GameObject::GetObject3d(int i, int j)
 {
+
 	if (j == 0) {
-		return cube[i];
+		if (stageNum == 0 || stageNum == 1||stageNum==2) {
+			return cube[i];
+		}
 	}
 	else if (j == 1) {
-		return moveObj[i];
+		if (stageNum == 1) {
+			return moveObj[i];
+		}
 	}
 	else if (j == 2) {
-		return Bear[i];
+		if (stageNum == 1) {
+			return Bear[i];
+		}
 	}
 	else if (j == 3) {
-		return Robot[i];
+		if (stageNum == 1) {
+			return Robot[i];
+		}
 	}
 	else {
-		return Card[i];
+		if (stageNum == 1) {
+			return Card[i];
+		}
 	}
+	return 0;
 }
 
 bool GameObject::GetHIT(int i, int j)

@@ -33,10 +33,10 @@ void SphereSize::Init()
 void SphereSize::InitStage(int maxNum)
 {
 	tSC = maxNum % 10;
-	tC = maxNum / 10;
-	tSM = maxNum / 100;
-	tM = maxNum / 1000;
-	tMM = maxNum / 10000;
+	tC = (maxNum / 10) % 10;
+	tSM = (maxNum / 100) % 10;
+	tM = (maxNum / 1000) % 10;
+	tMM = (maxNum / 10000) % 10;
 	Number[5]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
 	Number[6]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,45 });
 	Number[7]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,45 });
@@ -68,10 +68,10 @@ void SphereSize::Update()
 
 
 	tSC = Tsize % 10;
-	tC = Tsize / 10;
-	tSM = Tsize / 100;
-	tM = Tsize / 1000;
-	tMM = Tsize / 10000;
+	tC = (Tsize / 10) % 10;
+	tSM = (Tsize / 100) % 10;
+	tM = (Tsize / 1000) % 10;
+	tMM = (Tsize / 10000) % 10;
 	Number[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
 	Number[1]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,45 });
 	Number[2]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,45 });

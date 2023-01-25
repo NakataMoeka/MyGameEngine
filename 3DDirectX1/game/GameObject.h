@@ -56,18 +56,37 @@ private://Update()‚É‚Ü‚Æ‚ß‚é‚à‚Ì
 private://•Ï”
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ”z’u—p(—\’è)
-	static const int OBJNumber = 80;//obj‚ÌÅ‘å”
+	static const int OBJNumber = 60;//obj‚ÌÅ‘å”
 	static const int OBJType = 2;
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
 	std::array < Object3d*, OBJNumber> Bear = {};
 	std::array < Object3d*, OBJNumber> Robot = {};
 	std::array < Object3d*, OBJNumber> Card = {};
+	std::array < Object3d*, OBJNumber> Pencil = {};
+	
+	std::array < Object3d*, OBJNumber> Kendama = {};
+	std::array < Object3d*, OBJNumber> Koma = {};
+	std::array < Object3d*, OBJNumber> Shogi = {};
+	std::array < Object3d*, OBJNumber> Turu = {};
+	std::array < Object3d*, OBJNumber> Cont = {};
+	std::array < Object3d*, OBJNumber> Game = {};
+
 	Model* modelCube = nullptr;
 	Model* modelMove = nullptr;
 	Model* modelBear = nullptr;
 	Model* modelRobot = nullptr;
 	Model* modelCard = nullptr;
+	Model* modelPencil = nullptr;
+
+	Model* modelKendama = nullptr;
+	Model* modelKoma = nullptr;
+	Model* modelShogi = nullptr;
+	Model* modelTuru = nullptr;
+	Model* modelCont = nullptr;
+	Model* modelGame = nullptr;
+
+
 	std::array < Sphere, OBJNumber> cSphere;//“–‚½‚è”»’è‚Ì‚â‚Â
 	std::array < Sphere, OBJNumber> cSphere2;//“–‚½‚è”»’è‚Ì‚â‚Â
 	std::array < Sphere, OBJNumber> cSphere3;//“–‚½‚è”»’è‚Ì‚â‚Â
