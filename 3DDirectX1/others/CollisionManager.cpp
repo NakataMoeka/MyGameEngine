@@ -95,7 +95,21 @@ void CollisionManager::ColSphere()
 			else if (colB->GetNum() == 4) {
 				oSize = 5;
 			}
-
+			else if (colB->GetNum() == 5) {
+				oSize = 10;
+			}
+			else if (colB->GetNum() == 6) {
+				oSize = 20;
+			}
+			else if (colB->GetNum() == 7) {
+				oSize = 30;
+			}
+			else if (colB->GetNum() == 8) {
+				oSize = 40;
+			}
+			else if (colB->GetNum() == 9) {
+				oSize = 50;
+			}
 
 
 			if (colB->attribute == 4U) {
@@ -111,7 +125,7 @@ void CollisionManager::ColSphere()
 					if (colB->GetObject3d()->GetParentFlag() == false) {
 
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-							if (Tsize3 >= oSize * 10 || oSize == 1) {
+							if (Tsize3 >= oSize * 10 || oSize == 1||oSize==10) {
 								colB->GetObject3d()->SetColFlag(true);
 								IsHit = true;
 								HitCount++;

@@ -13,15 +13,21 @@ void SphereSize::Initialize()
 		Meters[i] = Sprite::CreateSprite(26, { 0,0 });
 	}
 	for (int i = 0; i < 2; i++) {
-		Centimeter[i] = Sprite::CreateSprite(27, { 0,0 });
+		Centimeter[i] = Sprite::CreateSprite(27, { 0, 0 });
 	}
 	TargetSprite = Sprite::CreateSprite(29, { 0,0 });
 
 }
 
-void SphereSize::Init()
+void SphereSize::Init(int stageNum)
 {
-	Tsize = 1;
+	this->stageNum = stageNum;
+	//if (stageNum == 1||stageNum==0) {
+		Tsize = 1;
+//	}
+	//else if (stageNum == 2) {
+		Tsize = 10;
+	//}
 	TCount = 0;
 	tSC = 0;
 	tC = 0;
@@ -46,11 +52,22 @@ void SphereSize::InitStage(int maxNum)
 
 void SphereSize::Update()
 {
-	if (Tsize % 10 == 0) {
-		TCount++;
+	if (stageNum == 1) {
+		if (Tsize % 10 == 0) {
+			TCount++;
+		}
+		else {
+			TCount = 0;
+		}
 	}
-	else {
-		TCount = 0;
+	else if (stageNum == 2) {
+		
+		if (Tsize % 100 == 0) {
+			TCount++;
+		}
+		else {
+			TCount = 0;
+		}
 	}
 	for (int i = 0; i < 5; i++) {
 		Number[i]->SetSize({ 32,32 });

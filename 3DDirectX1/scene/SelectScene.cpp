@@ -138,11 +138,11 @@ void SelectScene::DrawFront()
 	Sprite::PreDraw(dxCommon->GetCmdList());
 	SelectUI->Draw();
 	if (SAFlag == 0) {
-		DebugText::GetInstance()->Printf(600, 300, 6.0f, { 0,0,0,1 }, "%d", stageNum);
-		if (stageNum == 2) {
+	/*	if (stageNum == 2 ) {
 			DebugText::GetInstance()->Printf(250, 400, 6.0f, { 0,0,0,1 }, "MADA,ASOBENAIYO");
-		}
-		else if (stageNum == 0) {
+		}*/
+		DebugText::GetInstance()->Printf(600, 300, 6.0f, { 0,0,0,1 }, "%d", stageNum);
+		if (stageNum == 0) {
 			DebugText::GetInstance()->Printf(400, 400, 6.0f, { 0,0,0,1 }, "Tutorial");
 		}
 	}

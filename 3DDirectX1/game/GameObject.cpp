@@ -131,7 +131,7 @@ void GameObject::Init()
 			cSphere[i].center = XMVectorSet(Game[i]->GetMatWorld().r[3].m128_f32[0], Game[i]->GetMatWorld().r[3].m128_f32[1], Game[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			Game[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,1,0,0 }), 1.0f));
 			Game[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-			Game[i]->GetCollider()->SetNum(0);
+			Game[i]->GetCollider()->SetNum(5);
 			Game[i]->SetParentFlag(false);
 			Game[i]->SetColFlag(false);
 		}
@@ -163,7 +163,7 @@ void GameObject::Init()
 			cSphere2[i].center = XMVectorSet(Koma[i]->GetMatWorld().r[3].m128_f32[0], Koma[i]->GetMatWorld().r[3].m128_f32[1], Koma[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			Koma[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 2));
 			Koma[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-			Koma[i]->GetCollider()->SetNum(1);
+			Koma[i]->GetCollider()->SetNum(6);
 			Koma[i]->SetParentFlag(false);
 			Koma[i]->SetColFlag(false);
 		}
@@ -191,7 +191,7 @@ void GameObject::Init()
 			cSphere3[i].center = XMVectorSet(Shogi[i]->GetMatWorld().r[3].m128_f32[0], Shogi[i]->GetMatWorld().r[3].m128_f32[1], Shogi[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			Shogi[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 2));
 			Shogi[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-			Shogi[i]->GetCollider()->SetNum(2);
+			Shogi[i]->GetCollider()->SetNum(7);
 			Shogi[i]->SetParentFlag(false);
 			Shogi[i]->SetColFlag(false);
 		}
@@ -219,7 +219,7 @@ void GameObject::Init()
 			cSphere4[i].center = XMVectorSet(Kendama[i]->GetMatWorld().r[3].m128_f32[0], Kendama[i]->GetMatWorld().r[3].m128_f32[1], Kendama[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			Kendama[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 2));
 			Kendama[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-			Kendama[i]->GetCollider()->SetNum(3);
+			Kendama[i]->GetCollider()->SetNum(8);
 			Kendama[i]->SetParentFlag(false);
 			Kendama[i]->SetColFlag(false);
 		}
@@ -247,7 +247,7 @@ void GameObject::Init()
 			cSphere5[i].center = XMVectorSet(Turu[i]->GetMatWorld().r[3].m128_f32[0], Turu[i]->GetMatWorld().r[3].m128_f32[1], Turu[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			Turu[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 2));
 			Turu[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
-			Turu[i]->GetCollider()->SetNum(4);
+			Turu[i]->GetCollider()->SetNum(9);
 			Turu[i]->SetParentFlag(false);
 			Turu[i]->SetColFlag(false);
 		}
@@ -298,7 +298,12 @@ void GameObject::stageInit(int stageNum)
 				oData[num]->rot.m128_f32[1] = (float)randRot;
 
 				oData[num]->IsHit = false;
-				oData[num]->oSize = 1.0f;
+				if (stageNum == 0 || stageNum == 1) {
+					oData[num]->oSize = 1.0f;
+				}
+				else if (stageNum == 2) {
+					oData[num]->oSize = 10.0f;
+				}
 			}
 			if (spawnMap[j][i] == 2)
 			{
@@ -312,7 +317,12 @@ void GameObject::stageInit(int stageNum)
 				}
 				oData2[num]->rot = { 0,0,0,0 };
 				oData2[num]->IsHit = false;
-				oData2[num]->oSize = 2.0f;
+				if (stageNum == 0 || stageNum == 1) {
+					oData2[num]->oSize = 2.0f;
+				}
+				else if (stageNum == 2) {
+					oData2[num]->oSize = 20.0f;
+				}
 			}
 			if (spawnMap[j][i] == 3)
 			{
@@ -328,7 +338,12 @@ void GameObject::stageInit(int stageNum)
 				randRot = rand() / 360;
 				oData3[num]->rot.m128_f32[1] = (float)randRot;
 				oData3[num]->IsHit = false;
-				oData3[num]->oSize = 3.0f;
+				if (stageNum == 0 || stageNum == 1) {
+					oData3[num]->oSize = 3.0f;
+				}
+				else if (stageNum == 2) {
+					oData3[num]->oSize = 30.0f;
+				}
 			}
 			if (spawnMap[j][i] == 4)
 			{
@@ -345,7 +360,12 @@ void GameObject::stageInit(int stageNum)
 				randRot = rand() / 360;
 				oData4[num]->rot.m128_f32[1] = (float)randRot;
 				oData4[num]->IsHit = false;
-				oData4[num]->oSize = 4.0f;
+				if (stageNum == 0 || stageNum == 1) {
+					oData4[num]->oSize = 4.0f;
+				}
+				else if (stageNum == 2) {
+					oData4[num]->oSize = 40.0f;
+				}
 			}
 			if (spawnMap[j][i] == 5)
 			{
@@ -361,7 +381,12 @@ void GameObject::stageInit(int stageNum)
 				randRot = rand() / 360;
 				oData5[num]->rot.m128_f32[1] = (float)randRot;
 				oData5[num]->IsHit = false;
-				oData5[num]->oSize = 5.0f;
+				if (stageNum == 0 || stageNum == 1) {
+					oData5[num]->oSize = 5.0f;
+				}
+				else if (stageNum == 2) {
+					oData5[num]->oSize = 50.0f;
+				}
 			}
 		}
 	}

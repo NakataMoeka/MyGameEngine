@@ -8,7 +8,7 @@ class SphereSize
 {
 public:
 	void Initialize();//1回のみの初期化
-	void Init();//シーン開始時にする初期化
+	void Init(int stageNum);//シーン開始時にする初期化
 	void InitStage(int maxNum);
 	void Update();
 	void Draw();
@@ -27,6 +27,6 @@ private:
 	int tSM = 0;//mの1の位
 	int tM = 0;//mの10の位
 	int tMM = 0;//mの100の位
-
+	int stageNum=0;
 };
 

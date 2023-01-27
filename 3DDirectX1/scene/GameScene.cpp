@@ -77,8 +77,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
-	pose = new Pose;
-	pose->Initialize(audio);
+	
 }
 
 void GameScene::InitTH()
@@ -105,6 +104,8 @@ void GameScene::InitTH()
 	tutorial->Initialize();
 	sphereSize = new SphereSize();
 	sphereSize->Initialize();
+	pose = new Pose;
+	pose->Initialize(audio);
 	st = new start();
 	st->Initialize(audio);
 }
@@ -117,7 +118,7 @@ void GameScene::Init()
 	colMan->Init();
 	timer->Init();
 	pose->Init();
-	sphereSize->Init();
+
 	st->Init();
 	distance = 10.0f;
 	distanceC = 10.0f;
@@ -129,7 +130,12 @@ void GameScene::Init()
 	clearFlag = false;
 	overFlag = false;
 	Bflag = false;
-	Tsize = 1;
+	if (stageNum == 1 || stageNum == 0) {
+		Tsize = 1;
+	}
+	else if (stageNum == 2) {
+		Tsize = 10;
+	}
 	Tsize2 = (int)Tsize;
 	TCount = 0;
 	HitCount = 0;
@@ -150,6 +156,7 @@ void GameScene::InitStageNum(int stageNum)
 	player->stageInit(stageNum);
 	gameObject->stageInit(stageNum);
 	stageObj->stageInit(stageNum);
+	sphereSize->Init(stageNum);
 	if (stageNum == 0) {
 		sphereSize->InitStage(0);
 	}
@@ -158,7 +165,7 @@ void GameScene::InitStageNum(int stageNum)
 		sphereSize->InitStage(GoalCount);
 	}
 	else if (stageNum == 2) {
-		GoalCount = 660;
+		GoalCount = 360;
 		sphereSize->InitStage(GoalCount);
 	}
 }
@@ -184,7 +191,7 @@ void GameScene::Update()
 				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
 
 					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
-						if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10 || gameObject->GetOSize(i, j) == 1) {
+						if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10 || gameObject->GetOSize(i, j) == 1 || gameObject->GetOSize(i, j) == 10) {
 							gameObject->GetObject3d(i, j)->SetColFlag(true);
 
 							gameObject->SetHIT(i, j, true);
