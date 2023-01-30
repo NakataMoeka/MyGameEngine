@@ -11,7 +11,7 @@ public:
 	void Initialize(Audio* audio);
 	void Init();
 	void Update();
-	void Draw();
+	void Draw(int stage);
 	bool GetStartFlag() { return startFlag; }
 	bool SetStartFlag(bool startFlag) { return this->startFlag=startFlag; }
 private:

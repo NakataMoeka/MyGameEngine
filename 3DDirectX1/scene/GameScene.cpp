@@ -438,7 +438,7 @@ void GameScene::DrawFront()
 		tutorial->Draw();
 	}
 	else if (stageNum != 0) {
-		st->Draw();
+		st->Draw(stageNum);
 	}
 	timer->Draw();
 	if (pose->GetPFlag() == true) {
