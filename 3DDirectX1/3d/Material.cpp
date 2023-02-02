@@ -22,7 +22,7 @@ Material* Material::Create()
 
 void Material::LoadTexture(const std::string& directoryPath, CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle, CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHandle)
 {
-	
+
 	// テクスチャなし
 	if (textureFilename.size() == 0) {
 		textureFilename = "white1x1.png";
@@ -38,15 +38,19 @@ void Material::LoadTexture(const std::string& directoryPath, CD3DX12_CPU_DESCRIP
 
 	string filepath = directoryPath + textureFilename;
 	wchar_t wfilepath[128];
-	
+
+	SeparateFilePath(filepath);
+
+
+
 	MultiByteToWideChar(CP_ACP, 0, filepath.c_str(), -1, wfilepath, _countof(wfilepath));
-	result = LoadFromWICFile(
-		wfilepath, WIC_FLAGS_NONE,
-		&metadata, scratchImg);
-	
-	if (FAILED(result)) {
-		assert(0);
+	if (fileExt_ == "dds") {
+		result = LoadFromDDSFile(wfilepath, DDS_FLAGS_NONE, &metadata, scratchImg);
 	}
+	else {
+		result = LoadFromWICFile(wfilepath, WIC_FLAGS_NONE, &metadata, scratchImg);
+	}
+	assert(SUCCEEDED(result));
 
 	const Image* img = scratchImg.GetImage(0, 0, 0); // 生データ抽出
 	// リソース設定
@@ -68,18 +72,23 @@ void Material::LoadTexture(const std::string& directoryPath, CD3DX12_CPU_DESCRIP
 	if (FAILED(result)) {
 		assert(0);
 	}
-	//テクスチャバッファにデータ転送
-	result = texbuff->WriteToSubresource(
-		0,
-		nullptr,		//全領域へコピー
-		img->pixels,
-		(UINT)img->rowPitch,
-		(UINT)img->slicePitch
-	);
-	if (FAILED(result)) {
-		assert(0);
-	}
+	for (size_t i = 0; i < metadata.mipLevels; i++)
+	{
+		//ミップマップレベルを指定してイメージを取得
+		const Image* img = scratchImg.GetImage(i, 0, 0);
+		// テクスチャバッファにデータ転送
+		result = texbuff->WriteToSubresource(
+			(UINT)i,
+			nullptr, // 全領域へコピー
+			img->pixels,    // 元データアドレス
+			(UINT)img->rowPitch,  // 1ラインサイズ
+			(UINT)img->slicePitch // 1枚サイズ
+		);
 
+		if (FAILED(result)) {
+			assert(0);
+		}
+	}
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{}; // 設定構造体
 	D3D12_RESOURCE_DESC resDesc = texbuff->GetDesc();
 
@@ -129,3 +138,24 @@ void Material::CreateConstantBuffer()
 		assert(0);
 	}
 }
+
+void Material::SeparateFilePath(const std::string& filePath)
+{
+	size_t pos1;
+	std::string exceptExt;
+	//区切り文字 '.'が出てくる一番最後の部分を検索	
+	pos1 = filePath.rfind('.');
+	//検索がヒットしたら
+	if (pos1 != std::string::npos) {
+		//区切り文字の後ろをファイル拡張子として保存
+		fileExt_ = filePath.substr(pos1 + 1, filePath.size() - pos1 - 1);
+		//区切り文字の前までを抜き出す
+		exceptExt = filePath.substr(0, pos1);
+	}
+	else {
+		fileExt_ = "";
+		exceptExt = filePath;
+	}
+
+}
+

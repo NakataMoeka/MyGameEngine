@@ -118,7 +118,7 @@ void GameScene::Init()
 	colMan->Init();
 	timer->Init();
 	pose->Init();
-
+	tutorial->Init();
 	st->Init();
 	distance = 10.0f;
 	distanceC = 10.0f;

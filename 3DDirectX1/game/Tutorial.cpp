@@ -22,6 +22,7 @@ void Tutorial::Initialize()
 
 void Tutorial::Init()
 {
+	TutorialCount = 0;
 	countFlag = false;
 	endFlag = false;
 	moveFlag = false;

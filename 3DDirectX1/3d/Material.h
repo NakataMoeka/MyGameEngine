@@ -78,5 +78,13 @@ private:
 	void Initialize();
 
 	void CreateConstantBuffer();
+	/// <summary>
+/// /// フォルダパスとファイル名を分離する
+/// </summary>
+/// <param name="filepath"></param>
+	void SeparateFilePath(const std::string& filePath);
+
+	//ファイル拡張子
+	std::string fileExt_;
 };
 
