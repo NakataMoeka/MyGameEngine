@@ -78,5 +78,19 @@ private:
 	void Initialize();
 
 	void CreateConstantBuffer();
+	/// <summary>
+	/// /// フォルダパスとファイル名を分離する
+	/// </summary>
+	/// <param name="filepath"></param>
+	void SeparateFilePath(const std::string& filePath);
+	/// <summary>
+/// マルチバイト文字列をワイド文字列に変換
+/// </summary>
+/// <param name="mString">マルチバイト文字列</param>
+/// <returns>ワイド文字列</returns>
+	static std::wstring ConvertMultiabyteStringToWideString(const std::string& mString);
+
+	//ファイル拡張子
+	std::string fileExt_;
 };
 

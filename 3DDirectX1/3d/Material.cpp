@@ -22,7 +22,7 @@ Material* Material::Create()
 
 void Material::LoadTexture(const std::string& directoryPath, CD3DX12_CPU_DESCRIPTOR_HANDLE cpuHandle, CD3DX12_GPU_DESCRIPTOR_HANDLE gpuHandle)
 {
-	
+
 	// テクスチャなし
 	if (textureFilename.size() == 0) {
 		textureFilename = "white1x1.png";
@@ -38,15 +38,20 @@ void Material::LoadTexture(const std::string& directoryPath, CD3DX12_CPU_DESCRIP
 
 	string filepath = directoryPath + textureFilename;
 	wchar_t wfilepath[128];
-	
+	std::wstring wFile;
+	wFile = ConvertMultiabyteStringToWideString(filepath);
+	SeparateFilePath(filepath);
+
+
+
 	MultiByteToWideChar(CP_ACP, 0, filepath.c_str(), -1, wfilepath, _countof(wfilepath));
-	result = LoadFromWICFile(
-		wfilepath, WIC_FLAGS_NONE,
-		&metadata, scratchImg);
-	
-	if (FAILED(result)) {
-		assert(0);
+	if (fileExt_ == "dds") {
+		result = LoadFromDDSFile(wfilepath, DDS_FLAGS_NONE, &metadata, scratchImg);
 	}
+	else {
+		result = LoadFromWICFile(wfilepath, WIC_FLAGS_NONE, &metadata, scratchImg);
+	}
+	assert(SUCCEEDED(result));
 
 	const Image* img = scratchImg.GetImage(0, 0, 0); // 生データ抽出
 	// リソース設定
@@ -128,4 +133,33 @@ void Material::CreateConstantBuffer()
 	if (FAILED(result)) {
 		assert(0);
 	}
+}
+
+void Material::SeparateFilePath(const std::string& filePath)
+{
+	size_t pos1;
+	std::string exceptExt;
+	//区切り文字 '.'が出てくる一番最後の部分を検索	
+	pos1 = filePath.rfind('.');
+	//検索がヒットしたら
+	if (pos1 != std::string::npos) {
+		//区切り文字の後ろをファイル拡張子として保存
+		fileExt_ = filePath.substr(pos1 + 1, filePath.size() - pos1 - 1);
+		//区切り文字の前までを抜き出す
+		exceptExt = filePath.substr(0, pos1);
+	}
+	else {
+		fileExt_ = "";
+		exceptExt = filePath;
+	}
+
+}
+
+std::wstring Material::ConvertMultiabyteStringToWideString(const std::string& mString)
+{
+	int mbwc = MultiByteToWideChar(CP_ACP, 0, mString.c_str(), -1, nullptr, 0);
+	std::wstring wString;
+	wString.resize(mbwc);
+	MultiByteToWideChar(CP_ACP, 0, mString.c_str(), -1, &wString[0], mbwc);
+	return 	wString;
 }
