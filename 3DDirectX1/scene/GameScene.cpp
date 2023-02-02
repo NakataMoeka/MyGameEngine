@@ -22,7 +22,7 @@ GameScene::~GameScene()
 	safe_delete(object3d);
 	safe_delete(object3d2);
 	safe_delete(object3d3);
-	safe_delete(object3d4);
+	safe_delete(Ground);
 	safe_delete(model);
 	safe_delete(model2);
 	safe_delete(model3);
@@ -71,26 +71,29 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
 
-	model3 = Model::Create("skydome", true);
-	model4 = Model::Create("ground", false);
+	model3 = Model::Create("skydome");
+	model4 = Model::Create("ground");
 	object3d3 = Object3d::Create(model3);
-	object3d4 = TouchableObject::Create(model4);
+	Ground = Object3d::Create(model4);
 	model = Model::Create("bullet", false);
-	model2 = FbxLoader::GetInstance()->LoadModelFromFile("Player");
+	//model2 = FbxLoader::GetInstance()->LoadModelFromFile("Player");
 	object3d = Object3d::Create(model);
-	object3d2 = new FbxObject3d();
-	object3d2->Initialize();
-	object3d2->SetModel(model2);
+	//object3d2 = new FbxObject3d();
+	//object3d2->Initialize();
+	//object3d2->SetModel(model2);
 
 
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	object3d->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	object3d3->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	object3d4->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	Ground->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	Ground->SetScale({ 6,6,6 });
+	Ground->SetPosition({ 0,0,0 });
+	Ground->SetRotation({ 0,0,0 });
+	Ground->Update();
+	//object3d2->SetRotation({ 0,45,0 });
 
-	object3d2->SetRotation({ 0,45,0 });
-
-	//object3d->Update();
+	
 
 	//object3d2->Update();
 
@@ -169,10 +172,12 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowDir(0, XMVECTOR({ 0,-1,0,0 }));
 	lightGroup->SetCircleShadowAtten(0, XMFLOAT3(0.5f, 0.6f, 0.0f));
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
+	object3d3->Update();
+	//Ground->Update();
+
 	for (auto& object : objects) {
 		object->Update();
 	}
-	object3d3->Update();
 	
 	camera->Update();
 
@@ -196,8 +201,9 @@ void GameScene::Draw()
 	for (auto& object : objects) {
 		object->Draw();
 	}
-	object3d3->Draw();
 
+	object3d3->Draw();
+	Ground->Draw();
 	//object3d->Draw();
 	//object3d2->Draw();
 	

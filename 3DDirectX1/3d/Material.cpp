@@ -38,8 +38,7 @@ void Material::LoadTexture(const std::string& directoryPath, CD3DX12_CPU_DESCRIP
 
 	string filepath = directoryPath + textureFilename;
 	wchar_t wfilepath[128];
-	std::wstring wFile;
-	wFile = ConvertMultiabyteStringToWideString(filepath);
+
 	SeparateFilePath(filepath);
 
 
@@ -73,18 +72,23 @@ void Material::LoadTexture(const std::string& directoryPath, CD3DX12_CPU_DESCRIP
 	if (FAILED(result)) {
 		assert(0);
 	}
-	//テクスチャバッファにデータ転送
-	result = texbuff->WriteToSubresource(
-		0,
-		nullptr,		//全領域へコピー
-		img->pixels,
-		(UINT)img->rowPitch,
-		(UINT)img->slicePitch
-	);
-	if (FAILED(result)) {
-		assert(0);
-	}
+	for (size_t i = 0; i < metadata.mipLevels; i++)
+	{
+		//ミップマップレベルを指定してイメージを取得
+		const Image* img = scratchImg.GetImage(i, 0, 0);
+		// テクスチャバッファにデータ転送
+		result = texbuff->WriteToSubresource(
+			(UINT)i,
+			nullptr, // 全領域へコピー
+			img->pixels,    // 元データアドレス
+			(UINT)img->rowPitch,  // 1ラインサイズ
+			(UINT)img->slicePitch // 1枚サイズ
+		);
 
+		if (FAILED(result)) {
+			assert(0);
+		}
+	}
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{}; // 設定構造体
 	D3D12_RESOURCE_DESC resDesc = texbuff->GetDesc();
 
@@ -155,11 +159,3 @@ void Material::SeparateFilePath(const std::string& filePath)
 
 }
 
-std::wstring Material::ConvertMultiabyteStringToWideString(const std::string& mString)
-{
-	int mbwc = MultiByteToWideChar(CP_ACP, 0, mString.c_str(), -1, nullptr, 0);
-	std::wstring wString;
-	wString.resize(mbwc);
-	MultiByteToWideChar(CP_ACP, 0, mString.c_str(), -1, &wString[0], mbwc);
-	return 	wString;
-}

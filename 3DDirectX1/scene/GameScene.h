@@ -21,7 +21,7 @@
 #include<map>
 struct LevelData;
 class CollisionManager;
-class TouchableObject;
+//class TouchableObject;
 class GameScene
 {
 private:
@@ -89,7 +89,7 @@ private: // メンバ変数
 	Object3d* object3d3 = nullptr;
 	Model* model3 = nullptr;
 
-	TouchableObject* object3d4 = nullptr;
+	Object3d* Ground = nullptr;
 	Model* model4 = nullptr;
 
 	LightGroup* lightGroup = nullptr;
