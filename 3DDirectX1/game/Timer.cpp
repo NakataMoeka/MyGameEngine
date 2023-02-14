@@ -59,6 +59,9 @@ void Timer::Update()
 			}
 		}
 	}
+	else {
+		start = clock() / CLOCKS_PER_SEC;
+	}
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite3->SetAnchorPoint({ 0.5,0.5 });

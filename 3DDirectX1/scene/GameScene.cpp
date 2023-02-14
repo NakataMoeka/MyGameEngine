@@ -269,11 +269,12 @@ void GameScene::Update()
 		if (stageNum != 0) {
 			testCount++;
 			st->Update();
-			timer->Update();
+			
 			if (st->GetStartFlag() == true) {
 				if (audioCount < 2) {
 					audioCount++;
 				}
+				
 				timer->SetSFlag(true);
 				timer->SetFlag(false);
 				if (timer->GetDT() <= 0) {
@@ -307,7 +308,7 @@ void GameScene::Update()
 		player->Update();
 		stageObj->Update();
 		gameObject->Update();
-
+		timer->Update();
 	}
 	if (audioCount == 1) {
 		audio->SoundPlayWave(sound2);
