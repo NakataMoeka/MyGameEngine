@@ -43,11 +43,11 @@ void SphereSize::InitStage(int maxNum)
 	tSM = (maxNum / 100) % 10;
 	tM = (maxNum / 1000) % 10;
 	tMM = (maxNum / 10000) % 10;
-	Number[5]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
-	Number[6]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,45 });
-	Number[7]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,45 });
-	Number[8]->SetTextureRect({ 0 + 32 * (float)tM,0 }, { 32,45 });
-	Number[9]->SetTextureRect({ 0 + 32 * (float)tMM,0 }, { 32,45 });
+	Number[5]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,48 });
+	Number[6]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,48 });
+	Number[7]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,48 });
+	Number[8]->SetTextureRect({ 0 + 32 * (float)tM,0 }, { 32,48 });
+	Number[9]->SetTextureRect({ 0 + 32 * (float)tMM,0 }, { 32,48 });
 }
 
 void SphereSize::Update()
@@ -78,10 +78,10 @@ void SphereSize::Update()
 	for (int i = 0; i < 2; i++) {
 		Meters[i]->SetSize({ 32,32 });
 	}
-	Meters[2]->SetSize({ 16,16 });
-	Meters[3]->SetSize({ 16,16 });
+	Meters[2]->SetSize({ 18,18 });
+	Meters[3]->SetSize({ 18,18 });
 	Centimeter[0]->SetSize({ 32,32 });
-	Centimeter[1]->SetSize({ 16,16 });
+	Centimeter[1]->SetSize({ 18,18 });
 
 
 	tSC = Tsize % 10;
@@ -89,11 +89,11 @@ void SphereSize::Update()
 	tSM = (Tsize / 100) % 10;
 	tM = (Tsize / 1000) % 10;
 	tMM = (Tsize / 10000) % 10;
-	Number[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
-	Number[1]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,45 });
-	Number[2]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,45 });
-	Number[3]->SetTextureRect({ 0 + 32 * (float)tM,0 }, { 32,45 });
-	Number[4]->SetTextureRect({ 0 + 32 * (float)tMM,0 }, { 32,45 });
+	Number[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,48 });
+	Number[1]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,48 });
+	Number[2]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,48 });
+	Number[3]->SetTextureRect({ 0 + 32 * (float)tM,0 }, { 32,48 });
+	Number[4]->SetTextureRect({ 0 + 32 * (float)tMM,0 }, { 32,48 });
 
 
 
@@ -112,7 +112,7 @@ void SphereSize::Update()
 	Meters[1]->SetPosition({ 240,50 });
 	Meters[2]->SetPosition({ 170,90 });
 	Meters[3]->SetPosition({ 250,90 });
-	TargetSprite->SetPosition({ 60,80 });
+	TargetSprite->SetPosition({ 60,82 });
 	TargetSprite->SetSize({ 32,32 });
 }
 

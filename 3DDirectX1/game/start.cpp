@@ -60,10 +60,10 @@ void start::Update()
 			startFlag = true;
 		}
 	}
-	number->SetSize({ 120,120 });
+	number->SetSize({ 120,130 });
 	Go->SetSize({ 360,120 });
 	tSC = ((int)dt % 10) - 2;
-	number->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
+	number->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,48 });
 }
 
 void start::Draw(int stage)

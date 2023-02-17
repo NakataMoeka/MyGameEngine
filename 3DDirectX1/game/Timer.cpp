@@ -66,20 +66,20 @@ void Timer::Update()
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite3->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetRotation(-TimeRot);
-	TimeNum[0]->SetSize({ 32,32 });
-	TimeNum[1]->SetSize({ 32,32 });
+	TimeNum[0]->SetSize({ 32,50 });
+	TimeNum[1]->SetSize({ 32,50 });
 	TimeNum[1]->SetPosition({ 960,50 });
 
 	if (((int)dt / 60 != 0)) {
 		tSC = (int)(dt / 60) + 1;
-		TimeNum[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
+		TimeNum[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,48 });
 		TimeNum[0]->SetColor({ 1,1,1,1 });
 	}
 	else {
 		tC = (int)dt / 10;
 		tSC = (int)dt % 10;
-		TimeNum[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,45 });
-		TimeNum[1]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,45 });
+		TimeNum[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,48 });
+		TimeNum[1]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,48 });
 		TimeNum[0]->SetColor({ 1.0f,0.5f,0,1 });
 		TimeNum[1]->SetColor({ 1.0f,0.5f,0,1 });
 	}

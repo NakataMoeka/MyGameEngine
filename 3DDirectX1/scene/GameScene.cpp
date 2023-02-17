@@ -302,8 +302,6 @@ void GameScene::Update()
 				timer->SetSFlag(false);
 				player->SetWalkFlag(false);
 			}
-
-
 		}
 		player->Update();
 		stageObj->Update();
