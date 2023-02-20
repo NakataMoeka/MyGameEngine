@@ -163,7 +163,7 @@ void SceneManager::SceneChange()
 	if (changeSFlag == true) {
 		//フェードが1未満なら0.1ずつ加算
 		if (fade < 1) {
-			fade += 0.001f;
+			fade += 0.1f;
 		}
 		//フェードが1以上なら
 		if (fade >= 1) {
@@ -175,7 +175,7 @@ void SceneManager::SceneChange()
 	}
 	if (changeEFlag == true) {
 		if (fade >= 0) {
-			fade -= 0.001f;
+			fade -= 0.1f;
 		}
 		if (fade <= 0) {
 			changeEFlag = false;

@@ -64,8 +64,8 @@ private:
 
 	Sprite* Change = nullptr;
 	float fade = 0;
-	bool changeSFlag = false;//フェードイン
-	bool changeEFlag = false;//フェード
+	bool changeSFlag = false;//フェードアウト
+	bool changeEFlag = false;//フェードイン
 	//ロード画面作りたい
 	Sprite* loadingS = nullptr;
 	std::thread t = {};
