@@ -112,7 +112,7 @@ void GameScene::InitTH()
 
 void GameScene::Init()
 {
-	//
+	//別クラスの初期化
 	player->Init();
 	gameObject->Init();
 	stageObj->Init();
@@ -121,6 +121,7 @@ void GameScene::Init()
 	pose->Init();
 	tutorial->Init();
 	st->Init();
+	//GameSceneの初期化
 	distance = 10.0f;
 	distanceC = 10.0f;
 	distanceY = 2.0f;
@@ -262,15 +263,14 @@ void GameScene::Update()
 	pose->Update();
 
 	player->SetPFlag(pose->GetJFlag());
-
+	//ポーズ状態じゃなかったら
 	if (pose->GetPFlag() == false) {
 		//player->SetPFlag(false);
 
-
+		//チュートリアル以外
 		if (stageNum != 0) {
-			testCount++;
 			st->Update();
-			
+			//開始カウントダウンが終わっている
 			if (st->GetStartFlag() == true) {
 				if (audioCount < 2) {
 					audioCount++;
@@ -278,7 +278,9 @@ void GameScene::Update()
 				
 				timer->SetSFlag(true);
 				timer->SetFlag(false);
+				//タイマーが0以下になったら
 				if (timer->GetDT() <= 0) {
+					//目標サイズ未満ゲームオーバー
 					if (sphereSize->GetTsize() < GoalCount) {
 						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 						overFlag = true;
@@ -287,6 +289,7 @@ void GameScene::Update()
 						player->RC();
 						stageObj->RC();
 					}
+					//目標サイズ以上ゲームクリア
 					else if (sphereSize->GetTsize() >= GoalCount) {
 						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
 						clearFlag = true;
@@ -298,12 +301,15 @@ void GameScene::Update()
 				}
 				player->SetWalkFlag(true);
 			}
+			//ポーズ状態
 			else {
+				//タイマー止める、移動等止める
 				timer->SetFlag(true);
 				timer->SetSFlag(false);
 				player->SetWalkFlag(false);
 			}
 		}
+		//プレイヤー、ステージ、オブジェクト、タイマーのアップデート
 		player->Update();
 		stageObj->Update();
 		gameObject->Update();
@@ -313,9 +319,10 @@ void GameScene::Update()
 		audio->SoundPlayWave(sound2);
 		audio->SetBGMVolume(0.2f);
 	}
-
+	//ポーズ画面でタイトルに戻るときの処理
 	if (pose->GetTFlag() == true) {
 		//audio->StopWave();
+		//コライダーを削除
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
@@ -345,42 +352,57 @@ void GameScene::Update()
 	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
 
 #pragma region チュートリアル
+	//チュートリアルの時
 	if (stageNum == 0) {
+		//1になったら
 		if (tutorial->GetTCount() == 1) {
+			//プレイヤーのZ座標位置が0以上になったら
 			if (player->GetPlayerPos().z >= 0) {
+				//2にする
 				tutorial->SetTCount(2);
-
 			}
 			tutorial->SetCountFlag(true);
 		}
+		//3になったら
 		else if (tutorial->GetTCount() == 3) {
+			//くっつけるようになる
 			if (gameObject->GetObject3d(0, 0)->GetParentFlag() == true) {
+				//4にする
 				tutorial->SetTCount(4);
 			}
 			tutorial->SetCountFlag(true);
 		}
 		else {
+			//TutorialCountが1と3以外は説明文を勝手に進められる。
 			tutorial->SetCountFlag(false);
 		}
+		//チュートリアルが終わったら
 		if (tutorial->GetEndFlag() == true) {
+			//コライダー削除する
 			TSFlag = true;
 			audio->StopWave();
 			gameObject->RC();
 			player->RC();
 			stageObj->RC();
 		}
+		//MoveFlag(動けるか否か)がtrueならば
 		if (tutorial->GetMoveFlag() == true) {
+			//プレイヤー動ける
 			player->SetWalkFlag(true);
 		}
+		//falseならば
 		else if (tutorial->GetMoveFlag() == false) {
+			//プレイヤー動けない
 			player->SetWalkFlag(false);
 		}
 		tutorial->Update();
 	}
 #pragma endregion
 
+	//追従カメラ
 	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y + distanceY,player->GetPlayerPos().z }
 	, XMFLOAT3{ 0,distanceCY,-distanceC }, 0, player->GetPlayerAngle().y);
+	//カメラのめり込み(一部うまくいかない部分あり)
 	camera->CameraCollision(player->GetPlayerPos(), player->GetPlayerAngle());
 	if (camera->GetCCFlag() == true) {
 		//if (camera->GetDistance() <=8) {
@@ -397,6 +419,7 @@ void GameScene::Update()
 	lightGroup->Update();
 	colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
+		//音を鳴らしたりなど
 		Ssize.x += colMan->GetSsize().x;
 		Ssize.y += colMan->GetSsize().y;
 		Ssize.z += colMan->GetSsize().z;
@@ -416,7 +439,6 @@ void GameScene::DrawBG()
 	sprite->Draw();
 	Sprite::PostDraw();
 	dxCommon->ClearDepthBuffer();
-	colMan->CheckAllCollisions();
 }
 
 void GameScene::Draw()

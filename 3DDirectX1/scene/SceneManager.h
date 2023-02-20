@@ -38,6 +38,7 @@ public:
 	void Init();
 	//繰り返し処理
 	void Update();
+	//フェード
 	void SceneChange();
 	//背景画像描画
 	void DrawBG();
@@ -45,11 +46,8 @@ public:
 	void Draw();
 	//前景画像描画
 	void DrawFront();
+	//ロード用初期化
 	void InitTH();
-	void SetLockFlag(bool _);
-	bool GetLockFlag();
-	void AsyncLoad();
-
 	bool GetBFlag() { return Bflag; }
 private:
 	//最初のシーン
@@ -66,12 +64,11 @@ private:
 
 	Sprite* Change = nullptr;
 	float fade = 0;
-	bool changeSFlag = false;
-	bool changeEFlag = false;
+	bool changeSFlag = false;//フェードイン
+	bool changeEFlag = false;//フェード
 	//ロード画面作りたい
 	Sprite* loadingS = nullptr;
 	std::thread t = {};
-	std::mutex isLoadedMutex;
 	Load_Situation Load_s = NOLOAD;
 	bool LoadFlag = false;
 	bool LoadFlagF = false;

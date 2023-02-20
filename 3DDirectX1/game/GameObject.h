@@ -58,6 +58,7 @@ private://変数
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
 	static const int OBJNumber = 60;//objの最大数
 	static const int OBJType = 2;
+	//オブジェクト
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
 	std::array < Object3d*, OBJNumber> Bear = {};
@@ -94,15 +95,13 @@ private://変数
 	std::array < Sphere, OBJNumber> cSphere5;//当たり判定のやつ
 	float r = 3;//
 	//サイズ角度位置
-	XMFLOAT3 pos{ 10,2,0 };
-	
-	
+	XMFLOAT3 pos{ 10,2,0 };	
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };
 	XMVECTOR rota = { 0,0,0,0 };
-	bool moveFlag = true;
-	float oSpeed = 0;
-	int randRot = 0;
-	int stageNum = 0;
+	bool moveFlag = true;//動いているか否か
+	float oSpeed = 0;//
+	int randRot = 0;//角度ランダム
+	int stageNum = 0;//ステージ番号
 
 };
 

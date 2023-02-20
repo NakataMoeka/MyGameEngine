@@ -50,8 +50,7 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
-
-
+	//タイトル
 	if (scene == TITLE) {
 
 		if (titleScene->GetSCangeFlag() == true) {
@@ -63,6 +62,7 @@ void SceneManager::Update()
 		}
 		titleScene->Update();
 	}
+	//セレクト
 	else if (scene == SELECT) {
 		if (selectScene->GetSCangeFlag() == true) {
 
@@ -75,6 +75,7 @@ void SceneManager::Update()
 		}
 		selectScene->Update();
 	}
+	//ゲームシーン
 	else if (scene == GAME) {
 		if (gameScene->GetClearFlag() == true) {
 			changeSFlag = true;
@@ -109,6 +110,7 @@ void SceneManager::Update()
 		}
 		gameScene->Update();
 	}
+	//エンド
 	else if (scene == END) {
 
 		if (clearScene->GetSCangeFlag() == true) {
@@ -130,17 +132,18 @@ void SceneManager::Update()
 		Bflag = false;
 	}
 	SceneChange();
+	//ローディング
 	if (LoadFlagF == true) {
 		switch (Load_s)
 		{
-		case SceneManager::NOLOAD:
-			t = std::thread([&] {AsyncLoad(); });
+		case SceneManager::NOLOAD://ロードしていないとき
+			t = std::thread([&] {InitTH(); });
 			scene = LOAD;
 			Load_s = NOWLOAD;
 			break;
-		case SceneManager::NOWLOAD:
+		case SceneManager::NOWLOAD://ロードしているとき
 			break;
-		case SceneManager::ENDLOAD:
+		case SceneManager::ENDLOAD://ロード終わったら
 			t.join();
 			scene = TITLE;
 			titleScene->Init();
@@ -156,19 +159,23 @@ void SceneManager::Update()
 void SceneManager::SceneChange()
 {
 	Change->SetColor({ 1, 1, 1, fade });
+	//changeSFlagがtrueになったら
 	if (changeSFlag == true) {
+		//フェードが1未満なら0.1ずつ加算
 		if (fade < 1) {
-			fade += 0.1f;
+			fade += 0.001f;
 		}
+		//フェードが1以上なら
 		if (fade >= 1) {
 			fade = 1.0f;
+			//changeSFlagをfalseにする
 			changeSFlag = false;
 			changeEFlag = true;
 		}
 	}
 	if (changeEFlag == true) {
 		if (fade >= 0) {
-			fade -= 0.1f;
+			fade -= 0.001f;
 		}
 		if (fade <= 0) {
 			changeEFlag = false;
@@ -241,27 +248,5 @@ void SceneManager::DrawFront()
 void SceneManager::InitTH()
 {
 	gameScene->InitTH();
-}
-
-void SceneManager::SetLockFlag(bool _)
-{
-	std::lock_guard<std::mutex>  lock(isLoadedMutex);
-	LoadFlag = _;
-}
-
-bool SceneManager::GetLockFlag()
-{
-	std::lock_guard<std::mutex>  lock(isLoadedMutex);
-	return LoadFlag;
-}
-
-void SceneManager::AsyncLoad()
-{
-	InitTH();
-	//auto sleepTime = std::chrono::seconds(5);
-	//std::this_thread::sleep_for(sleepTime);
 	Load_s = ENDLOAD;
-	SetLockFlag(true);
 }
-
-

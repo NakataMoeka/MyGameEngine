@@ -34,7 +34,7 @@ private:
 	Audio* audio = nullptr;
 	Sprite* loadingS = nullptr;//ロード中の文字
 	Sprite* loadBack = nullptr;//背景
-	int loadCount = 0;
-	int LoadCountCount = 0;
+	int loadCount = 0;//文字位置
+	int LoadCountCount = 0;//loadCountの数値を増やすためのやつ
 };
 

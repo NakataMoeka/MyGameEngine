@@ -288,6 +288,7 @@ void Player::Jump()
 	assert(sphereCollider);
 	SphereCollider* sphereCollider2 = dynamic_cast<SphereCollider*>(SphereObj->GetCollider());
 	assert(sphereCollider2);
+	//排斥
 	// クエリーコールバッククラス
 	class PlayerQueryCallback : public QueryCallback
 	{
@@ -380,6 +381,7 @@ void Player::Jump()
 	}
 }
 
+
 void Player::Dash()
 {
 	dashCoolTime--;
@@ -389,6 +391,7 @@ void Player::Dash()
 		dashFlag = false;
 		dashMoveFlag = false;
 	}
+	//ジャンプしていないときにダッシュできる
 	if (JumpFlag == false) {
 		if (Input::GetInstance()->TriggerKey(DIK_UPARROW) && Input::GetInstance()->PushKey(DIK_W) && dashFlag == false)
 		{
@@ -410,11 +413,8 @@ void Player::Dash()
 
 			XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 			movedash = XMVector3TransformNormal(movedash, matRot);
-
-			playerPos.x += movedash.m128_f32[0];
-			playerPos.z += movedash.m128_f32[2];
-			spherePos.x += movedash.m128_f32[0];
-			spherePos.z += movedash.m128_f32[2];
+			playerPos = vec(playerPos,movedash);
+			spherePos = vec(spherePos, movedash);
 			if (fade > 0) {
 				fade -= 0.05f;
 			}
@@ -434,10 +434,12 @@ void Player::Update()
 		Dash();
 	}
 	else {
+		//歩いていないとき待機アニメーション
 		playerObj->PlayAnimation(1, true);
 	}
 	Ball();
 	Jump();
+	//位置などセット系
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 

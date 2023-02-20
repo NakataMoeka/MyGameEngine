@@ -23,20 +23,25 @@ void Loading::Init()
 
 void Loading::Update()
 {
+	//LoadCountCount‚ª10–¢–ž‚È‚ç‚Î‰ÁŽZ
 	if (LoadCountCount < 10) {
 		LoadCountCount++;
 	}
+	//10‚É‚È‚Á‚½‚ç
 	else if (LoadCountCount == 10) {
+		//0‚É–ß‚·
 		LoadCountCount = 0;
-	}
-	if (LoadCountCount == 10) {
+		//loadCount‚ª4–¢–ž‚È‚ç‰ÁŽZ
 		if (loadCount < 4) {
 			loadCount++;
 		}
+		//4‚É‚È‚Á‚½‚ç0‚É–ß‚·
 		else if (loadCount == 4) {
 			loadCount = 0;
 		}
 	}
+
+	
 	loadingS->SetSize({ 640,360 });
 	loadingS->SetTextureRect({ 0 + 1280 * (float)loadCount,0 }, {1280,720 });
 }

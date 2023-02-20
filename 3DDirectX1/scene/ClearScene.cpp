@@ -74,6 +74,7 @@ void ClearScene::Init()
 
 void ClearScene::Update()
 {
+	//文章のイージング
 	if (easeTimer < 100) {
 		easeTimer++;
 	}
@@ -81,6 +82,7 @@ void ClearScene::Update()
 	if (pos.y <= 100) {
 		pushFlag = true;
 	}
+	//イージングで文章が既定の位置についたらキーを押せるようになる
 	if (pushFlag == true) {
 		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 			SCangeFlag = true;
@@ -89,7 +91,7 @@ void ClearScene::Update()
 			overFlag = false;
 		}
 	}
-
+	//セット系
 	motherASprite->SetPosition({ 800,200 });
 	motherSSprite->SetPosition({ 800,200 });
 	motherASprite->SetSize({ 400,400 });
