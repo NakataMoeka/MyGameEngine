@@ -112,6 +112,7 @@ void GameScene::InitTH()
 
 void GameScene::Init()
 {
+	//
 	player->Init();
 	gameObject->Init();
 	stageObj->Init();

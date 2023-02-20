@@ -104,7 +104,7 @@ private: // メンバ変数
 	static const int OBJNumber = 100;//OBJの最大数を記載
 
 	int HitCount = 0;
-	//サイズ
+	//サイズ関係
 	float Tsize = 1;
 	int Tsize2 = 1;
 	int TCount = 0;
@@ -130,8 +130,8 @@ private: // メンバ変数
 	bool caFlag = false;
 
 	int testCount = 0;//test
-	int GoalCount = 0;
-	XMFLOAT3 Ssize = { 1,1,1 };
+	int GoalCount = 0;//目標サイズ
+	XMFLOAT3 Ssize = { 1,1,1 };//球のサイズ
 	float radius = 3;
 	int audioCount = 0;
 };

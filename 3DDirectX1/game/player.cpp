@@ -123,14 +123,16 @@ void Player::Move()
 		playerAngle.y -= moveAngle.m128_f32[1];
 	}
 	//if (JumpFlag == false) {
+	//ダッシュしていないとき
 	if (dashMoveFlag == false) {
-
+		//移動
 		playerPos = vec(playerPos, moveUD);
 		spherePos = vec(spherePos, moveUD);
 		playerPos = vec(playerPos, moveLR);
 		spherePos = vec(spherePos, moveLR);
 		if (Input::GetInstance()->PushKey(DIK_W))
 		{
+			//前後のスピードが0.2fになるまで0.005f加算
 			if (speedUD < 0.2f) {
 				speedUD += 0.005f;
 			}
@@ -138,6 +140,7 @@ void Player::Move()
 		}
 		else if (Input::GetInstance()->PushKey(DIK_S))
 		{
+			//前後のスピードが-0.2fになるまで0.005f除算
 			if (speedUD > -0.2f) {
 				speedUD -= 0.005f;
 			}
@@ -145,6 +148,7 @@ void Player::Move()
 		} 
 		else if (Input::GetInstance()->PushKey(DIK_D))
 		{
+			//左右のスピードが0.2fになるまで0.005f加算
 			if (speedLR < 0.2f) {
 				speedLR += 0.005f;
 			}
@@ -152,19 +156,20 @@ void Player::Move()
 		}
 		else if (Input::GetInstance()->PushKey(DIK_A))
 		{
+			//左右のスピードが-0.2fになるまで0.005f除算
 			if (speedLR > -0.2f) {
 				speedLR -= 0.005f;
 			}
 			sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
 		}
 	}
-
+	//WASD押しているとき
 	if (Input::GetInstance()->PushKey(DIK_W) ||
 		Input::GetInstance()->PushKey(DIK_S) ||
 		Input::GetInstance()->PushKey(DIK_A) ||
 		Input::GetInstance()->PushKey(DIK_D))
 	{
-
+		//UI用
 		if (CountWalk < 5) {
 			CountWalk++;
 		}
@@ -178,14 +183,16 @@ void Player::Move()
 			CountWalk = 0;
 		}
 
-
+		//移動アニメーションにする
 		playerObj->PlayAnimation(2, true);
 	}
+	//WASD押してないとき
 	else {
 		if (JumpFlag == false) {
+			//待機アニメーションにする
 			playerObj->PlayAnimation(1, true);
 		}
-	
+		//0目指して徐々にスピード落とす
 		if (speedUD > 0) {
 			speedUD -= 0.01f;
 		}
@@ -204,15 +211,9 @@ void Player::Move()
 		else {
 			speedLR = 0.0f;
 		}
-		//playerPos = vec(playerPos, -moveLR);
-		//spherePos = vec(spherePos, -moveLR);
-
 	}
-
-	//}
-	//DebugText::GetInstance()->Printf(300, 500, 3.0f, { 1,1,1,1 }, "%f", speedUD);
-
 	if (JumpFlag == true) {
+		//ジャンプアニメーションにする
 		playerObj->PlayAnimation(0, false);
 	}
 
@@ -222,6 +223,7 @@ void Player::Move()
 
 XMFLOAT3 Player::vec(XMFLOAT3 pos, XMVECTOR vec)
 {
+	//移動用のクラス
 	pos.x += vec.m128_f32[0];
 	pos.y += vec.m128_f32[1];
 	pos.z += vec.m128_f32[2];
@@ -232,6 +234,7 @@ XMFLOAT3 Player::vec(XMFLOAT3 pos, XMVECTOR vec)
 
 void Player::Ball()
 {
+	//ボールの追従
 #pragma region カメラ追従とほぼ同じ
 	XMVECTOR v0 = { 0,0,sphereZV,0 };
 	//angleラジアンだけy軸まわりに回転。半径は-100
@@ -242,13 +245,10 @@ void Player::Ball()
 	XMVECTOR v3 = bossTarget + v;
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	////ジャンプをしない時だけY軸の追従をする
-	//if (JumpFlag == false) {
 	spherePos.y = f.y + sphereY;
-	//}
-	//if (moveFlag == false) {
+
 	spherePos.x = f.x;
 	spherePos.z = f.z;
-	//}
 
 #pragma endregion
 }
@@ -345,16 +345,6 @@ void Player::Jump()
 	spherePos.y += callback2.move.m128_f32[1];
 	spherePos.z += callback2.move.m128_f32[2];
 
-
-	//for (int i = 0; i < OBJNumber; i++) {
-	//	for (int j = 0; j < OBJNumber; j++) {
-	//		if (colFlag[i][j] == true) {
-	//	}
-	//	}
-	//}
-
-
-
 	// 球の上端から球の下端までのレイキャスト
 	Ray ray;
 	ray.start = sphereCollider->center;
@@ -388,43 +378,6 @@ void Player::Jump()
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 		}
 	}
-
-	//// 球の上端から球の下端までのレイキャスト
-	//Ray ray2;
-	//ray2.start = sphereCollider2->center;
-	//ray2.start.m128_f32[1] += sphereCollider2->GetRadius();
-	//ray2.dir = { 0,-1.0,0,0 };
-	//RaycastHit raycastHit2;
-	//// 接地状態
-	//if (onGround2) {
-	//	// スムーズに坂を下る為の吸着距離
-	//	const float adsDistance2 = 0.2f;
-	//	// 接地を維持
-	//	if (CollisionManager::GetInstance()->Raycast(ray2, COLLISION_ATTR_LANDSHAPE, &raycastHit2, sphereCollider2->GetRadius() * 2.0f + adsDistance2)) {
-	//		onGround2 = true;
-	//		//下の処理を記入すると-nan(ind)って出て画面にOBJが表示されない
-	//		//解決した(Updateの順番が悪かった)
-	//		spherePos.y -= (raycastHit2.distance - sphereCollider2->GetRadius() * 2.0f);
-	//		SphereObj->SetPosition(spherePos);
-	//		SphereObj->Update();
-	//	}
-	//	// 地面がないので落下
-	//	else {
-	//		onGround2 = false;
-	//		fallV2 = {};
-	//	}
-	//}
-	//// 落下状態
-	//else if (fallV2.m128_f32[1] <= 0.0f) {
-	//	if (CollisionManager::GetInstance()->Raycast(ray2, COLLISION_ATTR_LANDSHAPE, &raycastHit2, sphereCollider2->GetRadius() * 2.0f)) {
-	//		// 着地
-	//		onGround2 = true;
-	//		spherePos.y -= (raycastHit2.distance - sphereCollider2->GetRadius() * 2.0f);
-	//		SphereObj->SetPosition(spherePos);
-	//		SphereObj->Update();
-	//	}
-	//}
-	//SphereObj->Update();
 }
 
 void Player::Dash()

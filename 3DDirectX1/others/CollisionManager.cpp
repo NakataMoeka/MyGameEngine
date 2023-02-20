@@ -20,52 +20,10 @@ void CollisionManager::Init()
 	SY = 0;
 }
 
-void CollisionManager::CheckAllCollisions()
-{
-	////重い一番の原因
-	//std::forward_list<BaseCollider*>::iterator itA;
-	//std::forward_list<BaseCollider*>::iterator itB;
 
-	//// 全ての組み合わせについて総当りチェック
-	//itA = colliders.begin();
-	//for (; itA != colliders.end(); ++itA) {
-	//	itB = itA;
-	//	++itB;
-	//	for (; itB != colliders.end(); ++itB) {
-	//		BaseCollider* colA = *itA;
-	//		BaseCollider* colB = *itB;
-
-	//		// ともに球
-	//		if (colA->attribute == 2) {
-	//			
-	//			if (colA->GetShapeType() == COLLISIONSHAPE_MESH &&
-	//				colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
-	//				MeshCollider* meshCollider = dynamic_cast<MeshCollider*>(colA);
-	//				Sphere* sphere = dynamic_cast<Sphere*>(colB);
-	//				DirectX::XMVECTOR inter;
-	//				if (meshCollider->CheckCollisionSphere(*sphere, &inter)) {
-	//					//colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
-	//					//colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-	//					DebugText::GetInstance()->Printf(100, 40, 3.0f, "Hit");
-
-	//				}
-	//			}
-	//			else if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
-	//				colB->GetShapeType() == COLLISIONSHAPE_MESH) {
-	//				MeshCollider* meshCollider = dynamic_cast<MeshCollider*>(colB);
-	//				Sphere* sphere = dynamic_cast<Sphere*>(colA);
-	//				DirectX::XMVECTOR inter;
-	//				if (meshCollider->CheckCollisionSphere(*sphere, &inter)) {
-	//					//colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
-	//					//colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
-	//					DebugText::GetInstance()->Printf(100, 40, 3.0f, "Hit");
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
-}
-
+//gamesceneでオブジェクト同士の当たり判定やりたかったがうまくいかなかったのでこちらで
+/*プレイヤーとオブジェクトの当たり判定もこっちに移植したかったが
+うまくいかなかったのでとりあえずこのまま。*/
 void CollisionManager::ColSphere()
 {
 
@@ -80,6 +38,7 @@ void CollisionManager::ColSphere()
 		for (; itB != colliders.end(); ++itB) {
 			BaseCollider* colA = *itA;
 			BaseCollider* colB = *itB;
+			//oSize設定
 			if (colB->GetNum() == 0) {
 				oSize = 1;
 			}
@@ -111,9 +70,8 @@ void CollisionManager::ColSphere()
 				oSize = 50;
 			}
 
-
 			if (colB->attribute == 4U) {
-				//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
+			//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
 			// ともに球
 			//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 				if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
@@ -125,11 +83,14 @@ void CollisionManager::ColSphere()
 					if (colB->GetObject3d()->GetParentFlag() == false) {
 
 						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
+							//球のサイズが以上ならくっつくoSize*10またはoSizeが1または10ならば
 							if (Tsize3 >= oSize * 10 || oSize == 1||oSize==10) {
+								//くっつく
 								colB->GetObject3d()->SetColFlag(true);
 								IsHit = true;
 								HitCount++;
 								PFlag = true;
+								//親子関係のフラグtrueにする
 								colB->GetObject3d()->SetParentFlag(true);
 								audioFlag = true;
 							}
@@ -139,9 +100,11 @@ void CollisionManager::ColSphere()
 					}
 				}
 				if (IsHit == true) {
+					//親子関係を設定する
 					colB->GetObject3d()->SetParent(colA->GetObject3d());
 				}
 				if (HitCount == 1) {
+					//くっつく
 					colB->GetObject3d()->transformParent();
 					HitCount = 0;
 					IsHit = false;

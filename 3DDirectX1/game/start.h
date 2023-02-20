@@ -27,7 +27,7 @@ private:
 	double dt;
 	double total;
 	double SetTime;
-	int tSC = 0;
+	int tSC = 0;//カウントダウンの文字用
 	bool startFlag = false;//開始カウントダウン終わったか否か
 	bool GoFlag = false;
 	int MCount = 0;
