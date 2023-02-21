@@ -62,10 +62,12 @@ void Pose::Update()
 			TitleBackSprite->SetPosition({ 490,600 });
 		}
 		else if (PS == 1) {
-			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-				TitleFlag = true;
-				audio->StopWave();
-				audio->SEPlayWave(sound1);
+			if (TitleFlag == false) {
+				if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+					TitleFlag = true;
+					audio->StopWave();
+					audio->SEPlayWave(sound1);
+				}
 			}
 			BackSprite->SetSize({ 260,55 });
 			TitleBackSprite->SetSize({ 500,110 });
