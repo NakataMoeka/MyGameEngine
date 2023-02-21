@@ -301,7 +301,12 @@ void GameScene::Update()
 				}
 				player->SetWalkFlag(true);
 			}
-		
+			else {
+				//タイマー止める、移動等止める
+				timer->SetFlag(true);
+				timer->SetSFlag(false);
+				player->SetWalkFlag(false);
+			}
 		}
 		//プレイヤー、ステージ、オブジェクト、タイマーのアップデート
 		player->Update();
@@ -309,13 +314,7 @@ void GameScene::Update()
 		gameObject->Update();
 		timer->Update();
 	}
-	//ポーズ状態
-	else {
-		//タイマー止める、移動等止める
-		timer->SetFlag(true);
-		timer->SetSFlag(false);
-		player->SetWalkFlag(false);
-	}
+
 	if (audioCount == 1) {
 		audio->SoundPlayWave(sound2);
 		audio->SetBGMVolume(0.2f);
