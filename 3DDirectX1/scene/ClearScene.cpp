@@ -84,11 +84,13 @@ void ClearScene::Update()
 	}
 	//イージングで文章が既定の位置についたらキーを押せるようになる
 	if (pushFlag == true) {
-		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-			SCangeFlag = true;
-			audio->SEPlayWave(sound1);
-			clearFlag = false;
-			overFlag = false;
+		if (SCangeFlag == false) {
+			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				SCangeFlag = true;
+				audio->SEPlayWave(sound1);
+				clearFlag = false;
+				overFlag = false;
+			}
 		}
 	}
 	//セット系

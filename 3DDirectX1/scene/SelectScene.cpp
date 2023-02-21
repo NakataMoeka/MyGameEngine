@@ -108,15 +108,17 @@ void SelectScene::Update()
 
 	}
 	else if (SAFlag == 0) {
-		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-			if (stageNum == 0 || stageNum == 1||stageNum==2) {
-				SCangeFlag = true;
-				audio->SEPlayWave(sound2);
-			}
-			else {
-				audio->SEPlayWave(sound1);
-			}
+		if (SCangeFlag == false) {
+			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				if (stageNum == 0 || stageNum == 1 || stageNum == 2) {
+					SCangeFlag = true;
+					audio->SEPlayWave(sound2);
+				}
+				else {
+					audio->SEPlayWave(sound1);
+				}
 
+			}
 		}
 	}
 }
@@ -138,9 +140,9 @@ void SelectScene::DrawFront()
 	Sprite::PreDraw(dxCommon->GetCmdList());
 	SelectUI->Draw();
 	if (SAFlag == 0) {
-	/*	if (stageNum == 2 ) {
-			DebugText::GetInstance()->Printf(250, 400, 6.0f, { 0,0,0,1 }, "MADA,ASOBENAIYO");
-		}*/
+		/*	if (stageNum == 2 ) {
+				DebugText::GetInstance()->Printf(250, 400, 6.0f, { 0,0,0,1 }, "MADA,ASOBENAIYO");
+			}*/
 		DebugText::GetInstance()->Printf(600, 300, 6.0f, { 0,0,0,1 }, "%d", stageNum);
 		if (stageNum == 0) {
 			DebugText::GetInstance()->Printf(400, 400, 6.0f, { 0,0,0,1 }, "Tutorial");

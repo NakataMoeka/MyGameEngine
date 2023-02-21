@@ -88,10 +88,12 @@ void TitleScene::Update()
 		}
 	}
 	if (SceneNum == 0) {
-		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-			SCangeFlag = true;
-			audio->SEPlayWave(sound2);
-			audio->StopWave();
+		if (SCangeFlag == false) {
+			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+				SCangeFlag = true;
+				audio->SEPlayWave(sound2);
+				audio->StopWave();
+			}
 		}
 		TSSprite->SetSize({ 300,110 });
 		TS2Sprite->SetSize({ 180,50 });
