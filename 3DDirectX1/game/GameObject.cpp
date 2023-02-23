@@ -127,9 +127,9 @@ void GameObject::Init()
 			Game[i]->SetRotation(oData[i]->rot);
 			Game[i]->Update();
 			//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
-			cSphere[i].radius = 1.0f;
+			cSphere[i].radius = 0.5;
 			cSphere[i].center = XMVectorSet(Game[i]->GetMatWorld().r[3].m128_f32[0], Game[i]->GetMatWorld().r[3].m128_f32[1], Game[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			Game[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,1,0,0 }), 1.0f));
+			Game[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,1,0,0 }), 0.5f));
 			Game[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			Game[i]->GetCollider()->SetNum(5);
 			Game[i]->SetParentFlag(false);
@@ -204,7 +204,7 @@ void GameObject::Init()
 			Robot[i]->Update();
 			cSphere4[i].radius = 1.0f;
 			cSphere4[i].center = XMVectorSet(Robot[i]->GetMatWorld().r[3].m128_f32[0], Robot[i]->GetMatWorld().r[3].m128_f32[1], Robot[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			Robot[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.0f));
+			Robot[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 1.0f));
 			Robot[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			Robot[i]->GetCollider()->SetNum(3);
 			Robot[i]->SetParentFlag(false);
@@ -217,7 +217,7 @@ void GameObject::Init()
 			Kendama[i]->Update();
 			cSphere4[i].radius = 1.0f;
 			cSphere4[i].center = XMVectorSet(Kendama[i]->GetMatWorld().r[3].m128_f32[0], Kendama[i]->GetMatWorld().r[3].m128_f32[1], Kendama[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			Kendama[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.0f));
+			Kendama[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 1.0f));
 			Kendama[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			Kendama[i]->GetCollider()->SetNum(8);
 			Kendama[i]->SetParentFlag(false);
@@ -230,9 +230,9 @@ void GameObject::Init()
 			Card[i]->SetScale(size[0]);
 			Card[i]->Quaternion();
 			Card[i]->Update();
-			cSphere5[i].radius = 1.0f;
+			cSphere5[i].radius = 1.5f;
 			cSphere5[i].center = XMVectorSet(Card[i]->GetMatWorld().r[3].m128_f32[0], Card[i]->GetMatWorld().r[3].m128_f32[1], Card[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			Card[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.0f));
+			Card[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.5f));
 			Card[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			Card[i]->GetCollider()->SetNum(4);
 			Card[i]->SetParentFlag(false);
@@ -350,7 +350,7 @@ void GameObject::stageInit(int stageNum)
 				oData4.push_back(new object);
 				num = (int)oData4.size() - 1;
 				if (stageNum == 1) {
-					oData4[num]->pos = { -180 + (float)i * 10,36, 100 + (float)j * (-10) };
+					oData4[num]->pos = { -180 + (float)i * 10,35, 100 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
 					oData4[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
@@ -476,7 +476,7 @@ void GameObject::Update()
 	else if (stageNum == 2) {
 		for (int i = 0; i < oData.size(); i++) {
 
-			cSphere[i].radius = 1.0f;
+			cSphere[i].radius = 0.5f;
 			cSphere[i].center = XMVectorSet(Game[i]->GetMatWorld().r[3].m128_f32[0], Game[i]->GetMatWorld().r[3].m128_f32[1], Game[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			if (Game[i]->GetColFlag() == true) {
 				Game[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);

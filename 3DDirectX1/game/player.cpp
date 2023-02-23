@@ -57,7 +57,7 @@ void Player::Init()
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	pFlag = false;
 	sphereZV = 0;
-	sphereY = 3;
+	sphereY = 2;
 	walkFlag = true;
 	moveUDFlag = false;
 	moveLRFlag = false;
