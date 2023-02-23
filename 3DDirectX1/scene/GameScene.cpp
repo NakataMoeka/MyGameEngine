@@ -163,11 +163,11 @@ void GameScene::InitStageNum(int stageNum)
 		sphereSize->InitStage(0);
 	}
 	else if (stageNum == 1) {
-		GoalCount = 120;
+		GoalCount = 80;
 		sphereSize->InitStage(GoalCount);
 	}
 	else if (stageNum == 2) {
-		GoalCount = 360;
+		GoalCount = 300;
 		sphereSize->InitStage(GoalCount);
 	}
 }
