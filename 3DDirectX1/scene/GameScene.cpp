@@ -245,6 +245,7 @@ void GameScene::Update()
 
 
 	sphereSize->SetTsize((int)colMan->GetTsize());
+	//sphereSize->SetTsize(Tsize);
 	player->SetRadius(radius);
 	player->SetSphereSize(Ssize);
 	player->SetSY(SY);

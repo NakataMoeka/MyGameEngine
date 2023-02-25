@@ -52,7 +52,7 @@ public:
 	float GetOSize(int i, int j);
 	XMFLOAT3 GetOPos(int i, int j);
 private://Update()にまとめるもの
-	void move(int i);//移動
+	void Col(Object3d*object,XMFLOAT3 pos);
 private://変数
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
@@ -102,6 +102,8 @@ private://変数
 	float oSpeed = 0;//
 	int randRot = 0;//角度ランダム
 	int stageNum = 0;//ステージ番号
-
+	bool onGround = true;
+	// 落下ベクトル
+	DirectX::XMVECTOR fallV = {};
 };
 

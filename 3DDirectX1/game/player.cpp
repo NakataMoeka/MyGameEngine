@@ -379,6 +379,7 @@ void Player::Jump()
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 		}
 	}
+
 }
 
 
