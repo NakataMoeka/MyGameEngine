@@ -204,7 +204,7 @@ void GameObject::Init()
 			Robot[i]->Update();
 			cSphere4[i].radius = 1.0f;
 			cSphere4[i].center = XMVectorSet(Robot[i]->GetMatWorld().r[3].m128_f32[0], Robot[i]->GetMatWorld().r[3].m128_f32[1], Robot[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			Robot[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 1.0f));
+			Robot[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,3,0,0 }), 1.0f));
 			Robot[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			Robot[i]->GetCollider()->SetNum(3);
 			Robot[i]->SetParentFlag(false);
