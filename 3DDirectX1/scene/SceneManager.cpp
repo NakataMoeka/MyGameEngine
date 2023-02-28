@@ -239,9 +239,9 @@ void SceneManager::DrawFront()
 	}
 
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	//if (changeFlag == true) {
-	Change->Draw();
-	//}
+	if (changeSFlag == true || changeEFlag == true) {
+		Change->Draw();
+	}
 	Sprite::PostDraw();
 }
 

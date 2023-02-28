@@ -134,4 +134,5 @@ private: // メンバ変数
 	XMFLOAT3 Ssize = { 1,1,1 };//球のサイズ
 	float radius = 3;
 	int audioCount = 0;
+	
 };

@@ -77,7 +77,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
-	
+
 }
 
 void GameScene::InitTH()
@@ -276,7 +276,7 @@ void GameScene::Update()
 				if (audioCount < 2) {
 					audioCount++;
 				}
-				
+
 				timer->SetSFlag(true);
 				timer->SetFlag(false);
 				//タイマーが0以下になったら
@@ -346,7 +346,7 @@ void GameScene::Update()
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
-}
+	}
 #endif
 
 	//object3d->SetRotation({ a,0,b });
@@ -355,10 +355,13 @@ void GameScene::Update()
 #pragma region チュートリアル
 	//チュートリアルの時
 	if (stageNum == 0) {
+		if (audioCount < 2) {
+			audioCount++;
+		}
 		//1になったら
 		if (tutorial->GetTCount() == 1) {
 			//プレイヤーのZ座標位置が0以上になったら
-			if (player->GetPlayerPos().z >= 0) {
+			if (player->GetTWCount() == 100) {
 				//2にする
 				tutorial->SetTCount(2);
 			}

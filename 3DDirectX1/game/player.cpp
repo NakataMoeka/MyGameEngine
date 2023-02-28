@@ -59,6 +59,7 @@ void Player::Init()
 	sphereZV = 0;
 	sphereY = 2;
 	walkFlag = true;
+	TWCount = 0;
 	moveUDFlag = false;
 	moveLRFlag = false;
 
@@ -83,6 +84,7 @@ void Player::Init()
 
 void Player::stageInit(int stageNo)
 {
+	this->stageNum = stageNo;
 	if (stageNo == 0) {
 		playerPos = { 0,0,-40 };
 	}
@@ -145,7 +147,7 @@ void Player::Move()
 				speedUD -= 0.005f;
 			}
 			sphereAngle.m128_f32[0] -= 10;
-		} 
+		}
 		else if (Input::GetInstance()->PushKey(DIK_D))
 		{
 			//左右のスピードが0.2fになるまで0.005f加算
@@ -182,7 +184,11 @@ void Player::Move()
 			}
 			CountWalk = 0;
 		}
-
+		if (stageNum == 0) {
+			if (TWCount < 100) {
+				TWCount++;
+			}
+		}
 		//移動アニメーションにする
 		playerObj->PlayAnimation(2, true);
 	}
@@ -414,7 +420,7 @@ void Player::Dash()
 
 			XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 			movedash = XMVector3TransformNormal(movedash, matRot);
-			playerPos = vec(playerPos,movedash);
+			playerPos = vec(playerPos, movedash);
 			spherePos = vec(spherePos, movedash);
 			if (fade > 0) {
 				fade -= 0.05f;

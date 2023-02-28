@@ -49,6 +49,7 @@ public:
 	float SetSZV(float szv) { return this->sphereZV = szv; }
 	float SetSY(float sy) { return this->sphereY = sy; }
 	float SetRadius(float r) { return this->r = r; }
+	int GetTWCount() { return TWCount; }
 private://Update()にまとめるもの
 	void Move();//移動
 	XMFLOAT3 vec(XMFLOAT3 pos, XMVECTOR vec);
@@ -118,4 +119,6 @@ private://変数
 	float CountWalk = 0;
 	bool pFlag = false;//ポーズ用のフラグ
 	bool walkFlag = true;//チュートリアル用の歩けるか判定フラグ
+	int TWCount = 0;//チュートリアルの移動カウント
+	int stageNum = 0;
 };
