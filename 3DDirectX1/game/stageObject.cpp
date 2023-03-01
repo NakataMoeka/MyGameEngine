@@ -12,6 +12,7 @@ void StageObject::Initialize()
 {
 
 	modelKotatu = Model::Create("Kota", false);
+	modelTV = Model::Create("TV", false);
 	modelGround = Model::Create("road", false);
 	modelHome = Model::Create("home", false);
 	modelSkydome = Model::Create("skydome", true);
@@ -24,6 +25,8 @@ void StageObject::Initialize()
 	Home->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Kotatu = TouchableObject::Create(modelKotatu);
 	Kotatu->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	TV = TouchableObject::Create(modelTV);
+	TV->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 	saku = TouchableObject::Create(modelSaku);
 	saku->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
@@ -57,6 +60,10 @@ void StageObject::stageInit(int stageNum)
 		Kotatu->SetPosition({ 0,38,-80 });
 		Kotatu->SetColor({ 1,1,1,1 });
 		Kotatu->Update();
+		TV->SetTouchCollider();
+		TV->SetPosition({ 0,38,-80 });
+		TV->SetColor({ 1,1,1,1 });
+		TV->Update();
 		Ground->SetScale({ 6,6,6 });
 		Ground->SetPosition({ 0,0,0 });
 		Ground->SetRotation({ 0,0,0 });
@@ -95,6 +102,7 @@ void StageObject::Update()
 	if (stageNum == 1) {
 		Kotatu->Update();
 		Home->Update();
+		TV->Update();
 		saku->Update();
 	}
 	skydome->Update();
@@ -107,6 +115,7 @@ void StageObject::Draw()
 	if (stageNum == 1) {
 		Kotatu->Draw();
 		Home->Draw();
+		TV->Draw();
 		saku->Draw();
 	}
 	skydome->Draw();
@@ -118,6 +127,7 @@ void StageObject::Draw()
 void StageObject::RC()
 {
 	Kotatu->RemoveCollider();
+	TV->RemoveCollider();
 	saku->RemoveCollider();
 	Home->RemoveCollider();
 	Ground->RemoveCollider();

@@ -92,6 +92,7 @@ void GameScene::InitTH()
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/door.wav");
+	sound4 = Audio::SoundLoadWave("Resources/Music/BGM/追いかけっこキャッハー.wav");
 	player = new Player;//newすればエラー吐かない
 	player->Initialize();
 	gameObject = new GameObject;//newすればエラー吐かない
@@ -167,7 +168,7 @@ void GameScene::InitStageNum(int stageNum)
 		sphereSize->InitStage(GoalCount);
 	}
 	else if (stageNum == 2) {
-		GoalCount = 300;
+		GoalCount = 700;
 		sphereSize->InitStage(GoalCount);
 	}
 }
@@ -315,9 +316,14 @@ void GameScene::Update()
 		gameObject->Update();
 		timer->Update();
 	}
-
+	
 	if (audioCount == 1) {
-		audio->SoundPlayWave(sound2);
+		if (stageNum == 0 || stageNum == 1){
+			audio->SoundPlayWave(sound2);
+		}
+		else if (stageNum == 2) {
+			audio->SoundPlayWave(sound4);
+		}
 		audio->SetBGMVolume(0.2f);
 	}
 	//ポーズ画面でタイトルに戻るときの処理
