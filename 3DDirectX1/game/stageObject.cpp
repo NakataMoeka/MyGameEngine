@@ -61,7 +61,10 @@ void StageObject::stageInit(int stageNum)
 		Kotatu->SetColor({ 1,1,1,1 });
 		Kotatu->Update();
 		TV->SetTouchCollider();
-		TV->SetPosition({ 0,38,-80 });
+		TV->SetPosition({ -20,28,-170 });
+		TV->SetScale({ 2,2,2, });
+		TV->SetRotation({ 0,90,0,0 });
+		TV->Quaternion();
 		TV->SetColor({ 1,1,1,1 });
 		TV->Update();
 		Ground->SetScale({ 6,6,6 });
