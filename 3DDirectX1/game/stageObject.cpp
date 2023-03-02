@@ -13,6 +13,7 @@ void StageObject::Initialize()
 
 	modelKotatu = Model::Create("Kota", false);
 	modelTV = Model::Create("TV", false);
+	modelChest = Model::Create("Chest", false);
 	modelGround = Model::Create("road", false);
 	modelHome = Model::Create("home", false);
 	modelSkydome = Model::Create("skydome", true);
@@ -27,7 +28,8 @@ void StageObject::Initialize()
 	Kotatu->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	TV = TouchableObject::Create(modelTV);
 	TV->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-
+	Chest = TouchableObject::Create(modelChest);
+	Chest->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	saku = TouchableObject::Create(modelSaku);
 	saku->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
@@ -67,6 +69,13 @@ void StageObject::stageInit(int stageNum)
 		TV->Quaternion();
 		TV->SetColor({ 1,1,1,1 });
 		TV->Update();
+		Chest->SetTouchCollider();
+		Chest->SetPosition({ 20,46,126 });
+		Chest->SetScale({ 4,4,4, });
+		Chest->SetRotation({ 0,90,0,0 });
+		Chest->Quaternion();
+		Chest->SetColor({ 1,1,1,1 });
+		Chest->Update();
 		Ground->SetScale({ 6,6,6 });
 		Ground->SetPosition({ 0,0,0 });
 		Ground->SetRotation({ 0,0,0 });
@@ -106,6 +115,7 @@ void StageObject::Update()
 		Kotatu->Update();
 		Home->Update();
 		TV->Update();
+		Chest->Update();
 		saku->Update();
 	}
 	skydome->Update();
@@ -119,10 +129,11 @@ void StageObject::Draw()
 		Kotatu->Draw();
 		Home->Draw();
 		TV->Draw();
+		Chest->Draw();
 		saku->Draw();
 	}
+	//全ステージ共通
 	skydome->Draw();
-
 	Ground->Draw();
 
 }
@@ -131,6 +142,7 @@ void StageObject::RC()
 {
 	Kotatu->RemoveCollider();
 	TV->RemoveCollider();
+	Chest->RemoveCollider();
 	saku->RemoveCollider();
 	Home->RemoveCollider();
 	Ground->RemoveCollider();

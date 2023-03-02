@@ -34,6 +34,8 @@ private:
 	Model* modelKotatu = nullptr;
 	TouchableObject* TV = nullptr;
 	Model* modelTV = nullptr;
+	TouchableObject* Chest = nullptr;
+	Model* modelChest = nullptr;
 	TouchableObject* Ground = nullptr;
 	Model* modelGround = nullptr;
 	TouchableObject* Home = nullptr;
