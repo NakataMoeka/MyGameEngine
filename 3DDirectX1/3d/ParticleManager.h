@@ -82,11 +82,11 @@ public: // 静的メンバ関数
 	/// インスタンス生成
 	/// </summary>
 	/// <returns>インスタンス</returns>
-	static ParticleManager* Create(ID3D12Device* device, Camera* camera);
+	static ParticleManager* Create(ID3D12Device* device, Camera* camera, const wchar_t* filename);
 
 public: // メンバ関数	
 
-	void Initialize();
+	void Initialize(const wchar_t* filename);
 
 	void Update();
 
@@ -103,7 +103,7 @@ public: // メンバ関数
 	void InitializeGraphicsPipeline();
 
 
-	void LoadTexture();
+	void LoadTexture(const wchar_t* filename);
 
 
 	void CreateModel();

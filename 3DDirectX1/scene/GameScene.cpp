@@ -60,8 +60,9 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
-	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera);
-
+	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect1.png");
+	//particleMan->LoadTexture();
+	//particleMan->CreateModel();
 	// デバッグテキスト用テクスチャ読み込み
 	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
 		assert(0);
@@ -315,10 +316,12 @@ void GameScene::Update()
 		stageObj->Update();
 		gameObject->Update();
 		timer->Update();
+		CreateParticles();
+		particleMan->Update();
 	}
-	
+
 	if (audioCount == 1) {
-		if (stageNum == 0 || stageNum == 1){
+		if (stageNum == 0 || stageNum == 1) {
 			audio->SoundPlayWave(sound2);
 		}
 		else if (stageNum == 2) {
@@ -352,7 +355,7 @@ void GameScene::Update()
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
-	}
+}
 #endif
 
 	//object3d->SetRotation({ a,0,b });
@@ -425,7 +428,7 @@ void GameScene::Update()
 		distanceC = distance;
 	}
 	camera->Update();
-	particleMan->Update();
+
 	lightGroup->Update();
 	colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
@@ -460,6 +463,8 @@ void GameScene::Draw()
 	stageObj->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
+	particleMan->Draw(dxCommon->GetCmdList());
+
 }
 void GameScene::DrawFront()
 {
@@ -498,11 +503,11 @@ void GameScene::CreateParticles()
 {
 	for (int i = 0; i < 10; i++) {
 		// X,Y,Z全て[-5.0f,+5.0f]でランダムに分布
-		const float rnd_pos = 10.0f;
-		XMFLOAT3 pos{};
-		pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
-		pos.y = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
-		pos.z = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+		const float rnd_pos = 0.5f;
+		XMFLOAT3 pos = player->GetPlayerPos();
+		pos.x += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+		pos.y += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+		pos.z += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 
 		const float rnd_vel = 0.1f;
 		XMFLOAT3 vel{};
@@ -515,7 +520,7 @@ void GameScene::CreateParticles()
 		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
 		// 追加
-		particleMan->Add(60, pos, vel, acc, 1.0f, 0.0f);
+		particleMan->Add(60, pos, vel, acc, 0.3f, 0.0f);
 	}
 }
 

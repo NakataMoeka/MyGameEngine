@@ -34,7 +34,7 @@ const DirectX::XMFLOAT3 operator/(const DirectX::XMFLOAT3& lhs, const float rhs)
 	return result;
 }
 
-ParticleManager* ParticleManager::Create(ID3D12Device* device, Camera* camera)
+ParticleManager* ParticleManager::Create(ID3D12Device* device, Camera* camera, const wchar_t* filename)
 {
 	// 3Dオブジェクトのインスタンスを生成
 	ParticleManager* partMan = new ParticleManager(device, camera);
@@ -43,12 +43,12 @@ ParticleManager* ParticleManager::Create(ID3D12Device* device, Camera* camera)
 	}
 
 	// 初期化
-	partMan->Initialize();
+	partMan->Initialize(filename);
 
 	return partMan;
 }
 
-void ParticleManager::Initialize()
+void ParticleManager::Initialize(const wchar_t* filename)
 {
 	// nullptrチェック
 	assert(device);
@@ -61,10 +61,10 @@ void ParticleManager::Initialize()
 	// パイプライン初期化
 	InitializeGraphicsPipeline();
 
-	// テクスチャ読み込み
-	LoadTexture();
+	//// テクスチャ読み込み
+	LoadTexture(filename);
 
-	// モデル生成
+	//// モデル生成
 	CreateModel();
 
 	// 定数バッファの生成
@@ -385,7 +385,7 @@ void ParticleManager::InitializeGraphicsPipeline()
 	}
 }
 
-void ParticleManager::LoadTexture()
+void ParticleManager::LoadTexture(const wchar_t* filename)
 {
 	HRESULT result = S_FALSE;
 
@@ -394,7 +394,7 @@ void ParticleManager::LoadTexture()
 	ScratchImage scratchImg{};
 
 	result = LoadFromWICFile(
-		L"Resources/effect1.png", WIC_FLAGS_NONE,
+		filename, WIC_FLAGS_NONE,
 		&metadata, scratchImg);
 	if (FAILED(result)) {
 		assert(0);
