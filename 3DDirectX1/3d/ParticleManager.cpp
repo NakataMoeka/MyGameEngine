@@ -34,7 +34,7 @@ const DirectX::XMFLOAT3 operator/(const DirectX::XMFLOAT3& lhs, const float rhs)
 	return result;
 }
 
-ParticleManager* ParticleManager::Create(ID3D12Device* device, Camera* camera, const wchar_t* filename)
+ParticleManager* ParticleManager::Create(ID3D12Device* device, Camera* camera, const wchar_t* filename, bool alpha)
 {
 	// 3Dオブジェクトのインスタンスを生成
 	ParticleManager* partMan = new ParticleManager(device, camera);
@@ -43,12 +43,12 @@ ParticleManager* ParticleManager::Create(ID3D12Device* device, Camera* camera, c
 	}
 
 	// 初期化
-	partMan->Initialize(filename);
+	partMan->Initialize(filename, alpha);
 
 	return partMan;
 }
 
-void ParticleManager::Initialize(const wchar_t* filename)
+void ParticleManager::Initialize(const wchar_t* filename, bool alpha)
 {
 	// nullptrチェック
 	assert(device);
@@ -59,7 +59,7 @@ void ParticleManager::Initialize(const wchar_t* filename)
 	InitializeDescriptorHeap();
 
 	// パイプライン初期化
-	InitializeGraphicsPipeline();
+	InitializeGraphicsPipeline(alpha);
 
 	//// テクスチャ読み込み
 	LoadTexture(filename);
@@ -107,7 +107,7 @@ void ParticleManager::Update()
 		it->scale = it->s_scale + (it->e_scale - it->s_scale) / f;
 
 
-}
+	}
 
 	// 頂点バッファへデータ転送
 	int vertCount = 0;
@@ -122,6 +122,8 @@ void ParticleManager::Update()
 			vertMap->pos = it->position;
 			// スケール
 			vertMap->scale = it->scale;
+			// 色
+			vertMap->color = { it->color.x, it->color.y, it->color.z, 1.0f };
 			// 次の頂点へ
 			vertMap++;
 			if (++vertCount >= vertexCount) {
@@ -208,7 +210,7 @@ void ParticleManager::InitializeDescriptorHeap()
 	descriptorHandleIncrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
-void ParticleManager::InitializeGraphicsPipeline()
+void ParticleManager::InitializeGraphicsPipeline(bool alpha)
 {
 	HRESULT result = S_FALSE;
 	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
@@ -297,6 +299,11 @@ void ParticleManager::InitializeGraphicsPipeline()
 			D3D12_APPEND_ALIGNED_ELEMENT,
 			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
+			{ // 色
+			"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
 	};
 
 	// グラフィックスパイプラインの流れを設定
@@ -320,14 +327,22 @@ void ParticleManager::InitializeGraphicsPipeline()
 	D3D12_RENDER_TARGET_BLEND_DESC blenddesc{};
 	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;	// RBGA全てのチャンネルを描画
 	blenddesc.BlendEnable = true;
-	// 加算ブレンディング
-	blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
-	blenddesc.SrcBlend = D3D12_BLEND_ONE;
-	blenddesc.DestBlend = D3D12_BLEND_ONE;
+
+	//blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
+	//blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
+	//blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+	if (alpha == true) {
+		// 加算ブレンディング
+		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
+		blenddesc.SrcBlend = D3D12_BLEND_ONE;
+		blenddesc.DestBlend = D3D12_BLEND_ONE;
+	}
 	//// 減算ブレンディング
-	//blenddesc.BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
-	//blenddesc.SrcBlend = D3D12_BLEND_ONE;
-	//blenddesc.DestBlend = D3D12_BLEND_ONE;
+	else if (alpha == false) {
+		blenddesc.BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
+		blenddesc.SrcBlend = D3D12_BLEND_ONE;
+		blenddesc.DestBlend = D3D12_BLEND_ONE;
+	}
 
 	blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
 	blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;

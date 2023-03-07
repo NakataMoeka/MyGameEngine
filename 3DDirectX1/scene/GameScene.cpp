@@ -60,7 +60,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
-	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect1.png");
+	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect2.png",true);
 	//particleMan->LoadTexture();
 	//particleMan->CreateModel();
 	// デバッグテキスト用テクスチャ読み込み
@@ -236,7 +236,18 @@ void GameScene::Update()
 		cACount = 0;
 
 	}*/
+	colMan->ColSphere();
+	if (colMan->GetAudioFlag() == true) {
+		//音を鳴らしたりなど
+		Ssize.x += colMan->GetSsize().x;
+		Ssize.y += colMan->GetSsize().y;
+		Ssize.z += colMan->GetSsize().z;
+		radius += colMan->GetRadius();
+		SY += colMan->GetSY();
+		audio->SEPlayWave(sound1);
+		colMan->SetAudioFlag(false);
 
+	}
 #pragma endregion
 
 
@@ -316,7 +327,7 @@ void GameScene::Update()
 		stageObj->Update();
 		gameObject->Update();
 		timer->Update();
-		CreateParticles();
+		//CreateParticles();
 		particleMan->Update();
 	}
 
@@ -412,6 +423,7 @@ void GameScene::Update()
 	}
 #pragma endregion
 
+#pragma region カメラ
 	//追従カメラ
 	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y + distanceY,player->GetPlayerPos().z }
 	, XMFLOAT3{ 0,distanceCY,-distanceC }, 0, player->GetPlayerAngle().y);
@@ -428,20 +440,9 @@ void GameScene::Update()
 		distanceC = distance;
 	}
 	camera->Update();
-
+#pragma endregion
 	lightGroup->Update();
-	colMan->ColSphere();
-	if (colMan->GetAudioFlag() == true) {
-		//音を鳴らしたりなど
-		Ssize.x += colMan->GetSsize().x;
-		Ssize.y += colMan->GetSsize().y;
-		Ssize.z += colMan->GetSsize().z;
-		radius += colMan->GetRadius();
-		SY += colMan->GetSY();
-		audio->SEPlayWave(sound1);
-		colMan->SetAudioFlag(false);
-
-	}
+	
 }
 
 

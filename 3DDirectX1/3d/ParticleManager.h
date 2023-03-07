@@ -29,6 +29,7 @@ public: // サブクラス
 	{
 		XMFLOAT3 pos; // xyz座標
 		float scale; // スケール
+		XMFLOAT4 color;
 	};
 
 	// 定数バッファ用データ構造体
@@ -56,16 +57,16 @@ public: // サブクラス
 		// 加速度
 		XMFLOAT3 accel = {};
 		// 色
-		XMFLOAT3 color = {};
+		XMFLOAT3 color = {1,1,1};
 		// スケール
 		float scale = 1.0f;
 
 		// 初期値
-		XMFLOAT3 s_color = {};
+		XMFLOAT3 s_color = {1,1,1};
 		float s_scale = 1.0f;
 
 		// 最終値
-		XMFLOAT3 e_color = {};
+		XMFLOAT3 e_color = {1,1,1};
 		float e_scale = 0.0f;
 
 		// 現在フレーム
@@ -82,11 +83,11 @@ public: // 静的メンバ関数
 	/// インスタンス生成
 	/// </summary>
 	/// <returns>インスタンス</returns>
-	static ParticleManager* Create(ID3D12Device* device, Camera* camera, const wchar_t* filename);
+	static ParticleManager* Create(ID3D12Device* device, Camera* camera, const wchar_t* filename, bool alpha);
 
 public: // メンバ関数	
 
-	void Initialize(const wchar_t* filename);
+	void Initialize(const wchar_t* filename, bool alpha);
 
 	void Update();
 
@@ -100,7 +101,7 @@ public: // メンバ関数
 	void InitializeDescriptorHeap();
 
 
-	void InitializeGraphicsPipeline();
+	void InitializeGraphicsPipeline(bool alpha);
 
 
 	void LoadTexture(const wchar_t* filename);
