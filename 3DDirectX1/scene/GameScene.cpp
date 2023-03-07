@@ -327,7 +327,7 @@ void GameScene::Update()
 		stageObj->Update();
 		gameObject->Update();
 		timer->Update();
-		CreateParticles();
+		//CreateParticles();
 		particleMan->Update();
 	}
 
