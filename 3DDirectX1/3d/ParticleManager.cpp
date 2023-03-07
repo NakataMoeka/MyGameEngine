@@ -178,7 +178,7 @@ void ParticleManager::Draw(ID3D12GraphicsCommandList* cmdList)
 	cmdList->DrawInstanced(drawNum, 1, 0, 0);
 }
 
-void ParticleManager::Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale)
+void ParticleManager::Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale, XMFLOAT3 s_color, XMFLOAT3 e_color)
 {
 	// リストに要素を追加
 	particles.emplace_front();
@@ -190,6 +190,8 @@ void ParticleManager::Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOA
 	p.s_scale = start_scale;
 	p.e_scale = end_scale;
 	p.num_frame = life;
+	p.s_color = s_color;
+	p.e_color = e_color;
 }
 
 void ParticleManager::InitializeDescriptorHeap()

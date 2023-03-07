@@ -327,7 +327,7 @@ void GameScene::Update()
 		stageObj->Update();
 		gameObject->Update();
 		timer->Update();
-		//CreateParticles();
+		CreateParticles();
 		particleMan->Update();
 	}
 
@@ -521,7 +521,7 @@ void GameScene::CreateParticles()
 		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
 		// 追加
-		particleMan->Add(60, pos, vel, acc, 0.3f, 0.0f);
+		particleMan->Add(60, pos, vel, acc, 0.3f, 0.0f,{1,1,1},{1,1,1});
 	}
 }
 

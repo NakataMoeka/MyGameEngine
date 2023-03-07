@@ -57,16 +57,16 @@ public: // サブクラス
 		// 加速度
 		XMFLOAT3 accel = {};
 		// 色
-		XMFLOAT3 color = {1,1,1};
+		XMFLOAT3 color = {};
 		// スケール
 		float scale = 1.0f;
 
 		// 初期値
-		XMFLOAT3 s_color = {1,1,1};
+		XMFLOAT3 s_color = {};
 		float s_scale = 1.0f;
 
 		// 最終値
-		XMFLOAT3 e_color = {1,1,1};
+		XMFLOAT3 e_color = {};
 		float e_scale = 0.0f;
 
 		// 現在フレーム
@@ -95,7 +95,7 @@ public: // メンバ関数
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
 
-	void Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale);
+	void Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale,XMFLOAT3 s_color,XMFLOAT3 e_color);
 
 
 	void InitializeDescriptorHeap();
