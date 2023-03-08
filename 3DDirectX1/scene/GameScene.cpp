@@ -134,6 +134,7 @@ void GameScene::Init()
 	clearFlag = false;
 	overFlag = false;
 	Bflag = false;
+	//ステージが0と1の時は初期サイズ1,2の時は10
 	if (stageNum == 1 || stageNum == 0) {
 		Tsize = 1;
 	}
@@ -203,7 +204,7 @@ void GameScene::Update()
 							gameObject->GetObject3d(i, j)->SetParentFlag(true);
 						}
 
-						DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
+						//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 					}
 
 

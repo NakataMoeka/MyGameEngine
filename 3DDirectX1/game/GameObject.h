@@ -7,6 +7,8 @@
 #include<array>
 #include"ObjectHelper.h"
 #include"safedelete.h"
+#include <vector>
+#include <string>
 /// <summary>
 /// ステージに配置されているオブジェクトのクラス
 /// </summary>
@@ -29,6 +31,7 @@ private:
 	std::vector<object*>oData4;//ロボット
 	std::vector<object*>oData5;//カード
 public:
+	using CSV = std::vector<std::vector<std::string>>;
 
 	GameObject();
 	~GameObject();
@@ -48,29 +51,34 @@ public:
 	float GetMat();
 	Object3d* GetObject3d(int i, int j);
 	bool GetHIT(int i, int j);
-	bool SetHIT(int i, int j,bool Hit);
+	bool SetHIT(int i, int j, bool Hit);
 	float GetOSize(int i, int j);
 	XMFLOAT3 GetOPos(int i, int j);
+	static CSV loadCsv(const std::string& csvFilePath,
+		bool commentFlag = true,
+		char divChar = ',',
+		const std::string& commentStartStr = "//");
 private://Update()にまとめるもの
-	void Col(Object3d*object,XMFLOAT3 pos);
+	void Col(Object3d* object, XMFLOAT3 pos);
 private://変数
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
-	static const int OBJNumber = 60;//objの最大数
+	static const int OBJNumber = 60;//objの最大数(多いやつ)
+	static const int OBJNumber2 = 20;//objの最大数(少なめのやつ)
 	static const int OBJType = 2;
 	//オブジェクト
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
-	std::array < Object3d*, OBJNumber> Bear = {};
-	std::array < Object3d*, OBJNumber> Robot = {};
-	std::array < Object3d*, OBJNumber> Card = {};
-	std::array < Object3d*, OBJNumber> Pencil = {};
-	
-	std::array < Object3d*, OBJNumber> Kendama = {};
-	std::array < Object3d*, OBJNumber> Koma = {};
-	std::array < Object3d*, OBJNumber> Shogi = {};
-	std::array < Object3d*, OBJNumber> Turu = {};
-	std::array < Object3d*, OBJNumber> Cont = {};
+	std::array < Object3d*, OBJNumber2> Bear = {};
+	std::array < Object3d*, OBJNumber2> Robot = {};
+	std::array < Object3d*, OBJNumber2> Card = {};
+	//std::array < Object3d*, OBJNumber2> Pencil = {};
+
+	std::array < Object3d*, OBJNumber2> Kendama = {};
+	std::array < Object3d*, OBJNumber2> Koma = {};
+	std::array < Object3d*, OBJNumber2> Shogi = {};
+	std::array < Object3d*, OBJNumber2> Turu = {};
+	//std::array < Object3d*, OBJNumber2> Cont = {};
 	std::array < Object3d*, OBJNumber> Game = {};
 
 	Model* modelCube = nullptr;
@@ -95,7 +103,7 @@ private://変数
 	std::array < Sphere, OBJNumber> cSphere5;//当たり判定のやつ
 	float r = 3;//
 	//サイズ角度位置
-	XMFLOAT3 pos{ 10,2,0 };	
+	XMFLOAT3 pos{ 10,2,0 };
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };
 	XMVECTOR rota = { 0,0,0,0 };
 	bool moveFlag = true;//動いているか否か

@@ -85,6 +85,7 @@ void Player::Init()
 void Player::stageInit(int stageNo)
 {
 	this->stageNum = stageNo;
+	//プレイヤーの初期位置決める
 	if (stageNo == 0) {
 		playerPos = { 0,0,-40 };
 	}
@@ -114,6 +115,7 @@ void Player::Move()
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
 	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot3);
 
+	//角度移動
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
 	{
 		sphereAngle.m128_f32[1] += moveAngle.m128_f32[1];
