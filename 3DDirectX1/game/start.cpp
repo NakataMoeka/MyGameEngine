@@ -45,8 +45,8 @@ void start::Update()
 		}
 		if (MCount == 2) {
 			GoFlag = true;
-			audio->SEPlayWave(sound1);
 			start = clock() / CLOCKS_PER_SEC;
+			audio->SEPlayWave(sound1);
 		}
 	}
 

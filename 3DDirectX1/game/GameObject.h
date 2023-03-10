@@ -63,8 +63,8 @@ private://Update()にまとめるもの
 private://変数
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
-	static const int OBJNumber = 60;//objの最大数(多いやつ)
-	static const int OBJNumber2 = 20;//objの最大数(少なめのやつ)
+	static const int OBJNumber = 70;//objの最大数(多いやつ)
+	static const int OBJNumber2 = 30;//objの最大数(少なめのやつ)
 	static const int OBJType = 2;
 	//オブジェクト
 	std::array < Object3d*, OBJNumber> cube = {};

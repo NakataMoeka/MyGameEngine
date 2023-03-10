@@ -144,8 +144,8 @@ void GameObject::Init()
 	}
 	for (int i = 0; i < oData2.size(); i++) {
 		if (stageNum == 1) {
-			//oData2[12]->pos.y = 52;
-			//oData2[13]->pos.y = 52;
+			oData2[10]->pos.y = 52;
+			oData2[12]->pos.y = 52;
 			moveObj[i]->SetPosition(oData2[i]->pos);
 			moveObj[i]->SetScale(size[0]);
 			moveObj[i]->Quaternion();
@@ -317,10 +317,10 @@ void GameObject::stageInit(int stageNum)
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
 				if (stageNum == 1) {
-					oData2[num]->pos = { -180 + (float)i * 5,37, 120 + (float)j * (-10) };
+					oData2[num]->pos = { -140 + (float)i * 5,37, 120 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
-					oData2[num]->pos = { -140 + (float)i * 10,0, 100 + (float)j * (-10) };
+					oData2[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
 				}
 				oData2[num]->rot = { 0,0,0,0 };
 				oData2[num]->IsHit = false;
@@ -336,7 +336,7 @@ void GameObject::stageInit(int stageNum)
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
 				if (stageNum == 1) {
-					oData3[num]->pos = { -140 + (float)i * 5,50, 110 + (float)j * (-10) };
+					oData3[num]->pos = { -140 + (float)i * 5,50, 120 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
 					oData3[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
