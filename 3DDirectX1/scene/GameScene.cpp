@@ -472,7 +472,7 @@ void GameScene::DrawFront()
 {
 	//前景
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	player->DrawSprite();
+	//player->DrawSprite();
 	if (stageNum == 0) {
 		tutorial->Draw();
 	}
