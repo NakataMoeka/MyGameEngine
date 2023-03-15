@@ -18,6 +18,7 @@ void StageObject::Initialize()
 	modelHome = Model::Create("home", false);
 	modelSkydome = Model::Create("skydome", true);
 	modelSaku = Model::Create("saku", false);
+	modelSlide = Model::Create("slide", false);
 	Ground = TouchableObject::Create(modelGround);
 	Ground->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	skydome = Object3d::Create(modelSkydome);
@@ -32,6 +33,8 @@ void StageObject::Initialize()
 	Chest->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	saku = TouchableObject::Create(modelSaku);
 	saku->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	Slide = TouchableObject::Create(modelSlide);
+	Slide->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 }
 
@@ -106,6 +109,9 @@ void StageObject::stageInit(int stageNum)
 		skydome->SetScale({ 4.0f,4.0f,4.0f });
 		skydome->SetColor({ 1,1,1,1 });
 		skydome->Update();
+		Slide->SetTouchCollider();
+		Slide->SetScale({ 5, 5, 5 });
+		Slide->Update();
 	}
 }
 
@@ -117,6 +123,9 @@ void StageObject::Update()
 		TV->Update();
 		Chest->Update();
 		saku->Update();
+	}
+	else if (stageNum == 2) {
+		Slide->Update();
 	}
 	skydome->Update();
 	Ground->Update();
@@ -132,6 +141,9 @@ void StageObject::Draw()
 		Chest->Draw();
 		saku->Draw();
 	}
+	else if (stageNum == 2) {
+		Slide->Draw();
+	}
 	//全ステージ共通
 	skydome->Draw();
 	Ground->Draw();
@@ -146,4 +158,5 @@ void StageObject::RC()
 	saku->RemoveCollider();
 	Home->RemoveCollider();
 	Ground->RemoveCollider();
+	Slide->RemoveCollider();
 }

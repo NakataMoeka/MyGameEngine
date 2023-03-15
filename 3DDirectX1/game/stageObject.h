@@ -36,6 +36,8 @@ private:
 	Model* modelTV = nullptr;
 	TouchableObject* Chest = nullptr;
 	Model* modelChest = nullptr;
+	TouchableObject* Slide = nullptr;
+	Model* modelSlide = nullptr;
 	TouchableObject* Ground = nullptr;
 	Model* modelGround = nullptr;
 	TouchableObject* Home = nullptr;

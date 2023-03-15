@@ -42,11 +42,11 @@ private:
 	Camera* camera = nullptr;
 	LightGroup* lightGroup = nullptr;
 
-	Sprite* TSprite = nullptr;
-	Sprite* TBSprite = nullptr;
-	Sprite* TB2Sprite = nullptr;
-	Sprite* TSSprite = nullptr;
-	Sprite* TS2Sprite = nullptr;
+	std::unique_ptr < Sprite> TSprite;
+	std::unique_ptr < Sprite> TBSprite;
+	std::unique_ptr < Sprite> TB2Sprite;
+	std::unique_ptr<Sprite> TSSprite;
+	std::unique_ptr<Sprite> TS2Sprite;
 
 	bool SCangeFlag = false;
 	int SceneNum = 0;

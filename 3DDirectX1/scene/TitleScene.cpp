@@ -46,11 +46,11 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(12, L"Resources/UI/title/Title2.png");
 	Sprite::LoadTexture(13, L"Resources/UI/title/Title3.png");
 	Sprite::LoadTexture(14, L"Resources/UI/TitleB2.png");
-	TSprite = Sprite::CreateSprite(10, { 0,0 });
-	TBSprite = Sprite::CreateSprite(11, { 0,0 });
-	TSSprite = Sprite::CreateSprite(12, { 500,500 });
-	TS2Sprite = Sprite::CreateSprite(13, { 500,600 });
-	TB2Sprite = Sprite::CreateSprite(14, { 0,0 });
+	TSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(10, { 0,0 }));
+	TBSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(11, { 0,0 }));
+	TSSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(12, { 500,500 }));
+	TS2Sprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(13, { 500,600 }));
+	TB2Sprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(14, { 0,0 }));
 	sound1 = Audio::SoundLoadWave("Resources/Music/BGM/famipop.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/SE/Œˆ’èƒ{ƒ^ƒ“‚ð‰Ÿ‚·26.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");

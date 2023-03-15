@@ -31,7 +31,7 @@ private:
 	std::vector<object*>oData4;//ロボット
 	std::vector<object*>oData5;//カード
 public:
-	using CSV = std::vector<std::vector<std::string>>;
+	
 
 	GameObject();
 	~GameObject();
@@ -54,10 +54,6 @@ public:
 	bool SetHIT(int i, int j, bool Hit);
 	float GetOSize(int i, int j);
 	XMFLOAT3 GetOPos(int i, int j);
-	static CSV loadCsv(const std::string& csvFilePath,
-		bool commentFlag = true,
-		char divChar = ',',
-		const std::string& commentStartStr = "//");
 private://Update()にまとめるもの
 	void Col(Object3d* object, XMFLOAT3 pos);
 private://変数
