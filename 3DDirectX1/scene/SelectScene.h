@@ -48,6 +48,8 @@ private:
 	SoundData sound4 = {};
 	std::array < Sprite*, 6> backSprite = {};
 	Sprite* SelectUI = nullptr;
+	Sprite* SelectNumber = nullptr;
+	Sprite* TutorialS = nullptr;
 	float spriteCount = 0;
 	int stageNum = 0;
 	bool SCangeFlag = false;

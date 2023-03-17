@@ -70,7 +70,7 @@ void Player::Init()
 	sphereAngle = { 0,0,0,0 };
 	sphereSize = { 0.8f,0.8f,0.8f };
 	// コライダーの追加
-	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,r,0,0 }), r));
+	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,1.0f,0,0 }), 3.0f));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
 	SphereObj->SetParentFlag(false);
 	playerObj->SetCollider(new SphereColliderFbx(XMVECTOR({ 0,1.0f,0,0 }), 1.0f));
