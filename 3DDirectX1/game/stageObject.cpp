@@ -19,6 +19,8 @@ void StageObject::Initialize()
 	modelSkydome = Model::Create("skydome", true);
 	modelSaku = Model::Create("saku", false);
 	modelSlide = Model::Create("slide", false);
+	modelSwing = Model::Create("swing", false);
+	modelTree = Model::Create("tree", false);
 	Ground = TouchableObject::Create(modelGround);
 	Ground->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	skydome = Object3d::Create(modelSkydome);
@@ -35,6 +37,10 @@ void StageObject::Initialize()
 	saku->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Slide = TouchableObject::Create(modelSlide);
 	Slide->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	Swing = TouchableObject::Create(modelSwing);
+	Swing->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	Tree = TouchableObject::Create(modelTree);
+	Tree->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 }
 
@@ -112,6 +118,12 @@ void StageObject::stageInit(int stageNum)
 		Slide->SetTouchCollider();
 		Slide->SetScale({ 5, 5, 5 });
 		Slide->Update();
+		Swing->SetTouchCollider();
+		Swing->SetPosition({ -30,0,0 });
+		Swing->Update();
+		Tree->SetTouchCollider();
+		Tree->SetPosition({ 30,0,0 });
+		Tree->Update();
 	}
 }
 
@@ -126,6 +138,8 @@ void StageObject::Update()
 	}
 	else if (stageNum == 2) {
 		Slide->Update();
+		Swing->Update();
+		Tree->Update();
 	}
 	skydome->Update();
 	Ground->Update();
@@ -143,6 +157,8 @@ void StageObject::Draw()
 	}
 	else if (stageNum == 2) {
 		Slide->Draw();
+		Swing->Draw();
+		Tree->Draw();
 	}
 	//全ステージ共通
 	skydome->Draw();
@@ -159,4 +175,6 @@ void StageObject::RC()
 	Home->RemoveCollider();
 	Ground->RemoveCollider();
 	Slide->RemoveCollider();
+	Swing->RemoveCollider();
+	Tree->RemoveCollider();
 }

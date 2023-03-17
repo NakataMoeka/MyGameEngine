@@ -38,6 +38,10 @@ private:
 	Model* modelChest = nullptr;
 	TouchableObject* Slide = nullptr;
 	Model* modelSlide = nullptr;
+	TouchableObject* Swing = nullptr;
+	Model* modelSwing = nullptr;
+	TouchableObject* Tree = nullptr;
+	Model* modelTree = nullptr;
 	TouchableObject* Ground = nullptr;
 	Model* modelGround = nullptr;
 	TouchableObject* Home = nullptr;
