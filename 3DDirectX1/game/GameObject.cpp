@@ -291,6 +291,8 @@ void GameObject::stageInit(int stageNum)
 			{
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
+				//掛ける数値で間隔決める。×2が丁度いい気がする。
+				//最初の数値が端の位置。iが横、jが縦。
 				if (stageNum == 0) {
 					oData[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
 				}
