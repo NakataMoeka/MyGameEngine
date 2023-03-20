@@ -297,7 +297,7 @@ void GameObject::stageInit(int stageNum)
 					oData[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
 				}
 				else if (stageNum == 1) {
-					oData[num]->pos = { -140 + (float)i * 5,35, 120 + (float)j * (-10) };
+					oData[num]->pos = { -180 + (float)i * 4,35, 120 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
 					oData[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
@@ -319,7 +319,7 @@ void GameObject::stageInit(int stageNum)
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
 				if (stageNum == 1) {
-					oData2[num]->pos = { -140 + (float)i * 5,37, 120 + (float)j * (-10) };
+					oData2[num]->pos = { -180 + (float)i * 4,37, 120 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
 					oData2[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
@@ -338,7 +338,7 @@ void GameObject::stageInit(int stageNum)
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
 				if (stageNum == 1) {
-					oData3[num]->pos = { -140 + (float)i * 5,50, 120 + (float)j * (-10) };
+					oData3[num]->pos = { -180 + (float)i * 4,50, 120 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
 					oData3[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
@@ -359,7 +359,7 @@ void GameObject::stageInit(int stageNum)
 				oData4.push_back(new object);
 				num = (int)oData4.size() - 1;
 				if (stageNum == 1) {
-					oData4[num]->pos = { -140 + (float)i * 5,35, 120 + (float)j * (-10) };
+					oData4[num]->pos = { -180 + (float)i * 4,35, 120 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
 					oData4[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
@@ -381,7 +381,7 @@ void GameObject::stageInit(int stageNum)
 				oData5.push_back(new object);
 				num = (int)oData5.size() - 1;
 				if (stageNum == 1) {
-					oData5[num]->pos = { -140 + (float)i * 5,36, 120 + (float)j * (-10) };
+					oData5[num]->pos = { -180 + (float)i * 4,36, 120 + (float)j * (-10) };
 				}
 				else if (stageNum == 2) {
 					oData5[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
