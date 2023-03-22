@@ -24,7 +24,7 @@ void Player::Initialize()
 	playerObj->Initialize();
 	playerObj->SetModel(model);
 	playerObj->LoadAnimation();
-	model2 = Model::Create("bullet", false);
+	model2 = Model::Create("bullet", true);
 	SphereObj = Object3d::Create(model2);
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");

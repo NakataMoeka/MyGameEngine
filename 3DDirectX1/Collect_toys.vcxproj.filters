@@ -305,6 +305,9 @@
     <FxCompile Include="Resources\shaders\PostEffectColorVS.hlsl">
       <Filter>HLSL\2d\posteffect</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\shaders\halfPS.hlsl">
+      <Filter>HLSL\3d\obj</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\DebugText.h">
