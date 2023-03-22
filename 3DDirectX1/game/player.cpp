@@ -254,7 +254,6 @@ void Player::Ball()
 	XMFLOAT3 f = { v3.m128_f32[0], v3.m128_f32[1], v3.m128_f32[2] };
 	////ジャンプをしない時だけY軸の追従をする
 	spherePos.y = f.y + sphereY;
-
 	spherePos.x = f.x;
 	spherePos.z = f.z;
 
@@ -272,9 +271,7 @@ void Player::Jump()
 			// 加速
 			fallV.m128_f32[1] = max(fallV.m128_f32[1] + fallAcc, fallVYMin);
 			// 移動
-			playerPos.x += fallV.m128_f32[0];
-			playerPos.y += fallV.m128_f32[1];
-			playerPos.z += fallV.m128_f32[2];
+			playerPos = vec(playerPos, fallV);
 		}
 	}
 	//ジャンプ操作
@@ -282,7 +279,7 @@ void Player::Jump()
 		if (dashFlag == false && walkFlag == true && pFlag == false) {
 			onGround = false;
 			JumpFlag = true;
-			const float jumpVYFist = 1.0f;
+			const float jumpVYFist = 0.5f;
 			fallV = { 0, jumpVYFist, 0, 0 };
 		}
 	}
@@ -307,7 +304,7 @@ void Player::Jump()
 			float cos = XMVector3Dot(rejectDir, up).m128_f32[0];
 
 			// 地面判定しきい値
-			const float threshold = cosf(XMConvertToRadians(30.0f));
+			const float threshold = cosf(XMConvertToRadians(40.0f));
 
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
@@ -333,23 +330,10 @@ void Player::Jump()
 
 
 	// 交差による排斥分動かす
-	playerPos.x += callback.move.m128_f32[0];
-	playerPos.y += callback.move.m128_f32[1];
-	playerPos.z += callback.move.m128_f32[2];
-	// 交差による排斥分動かす
-	spherePos.x += callback.move.m128_f32[0];
-	spherePos.y += callback.move.m128_f32[1];
-	spherePos.z += callback.move.m128_f32[2];
-	playerObj->GetCollider()->Update();
-	SphereObj->GetCollider()->Update();
-	// 交差による排斥分動かす
-	playerPos.x += callback2.move.m128_f32[0];
-	playerPos.y += callback2.move.m128_f32[1];
-	playerPos.z += callback2.move.m128_f32[2];
-	spherePos.x += callback2.move.m128_f32[0];
-	spherePos.y += callback2.move.m128_f32[1];
-	spherePos.z += callback2.move.m128_f32[2];
-
+	playerPos = vec(playerPos, callback.move);
+	spherePos = vec(spherePos, callback.move);
+	playerPos = vec(playerPos, callback2.move);
+	spherePos = vec(spherePos, callback2.move);
 	// 球の上端から球の下端までのレイキャスト
 	Ray ray;
 	ray.start = sphereCollider->center;
