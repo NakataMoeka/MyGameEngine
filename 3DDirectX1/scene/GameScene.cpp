@@ -219,11 +219,11 @@ void GameScene::Update()
 					HitCount = 0;
 					gameObject->SetHIT(i, j, false);
 					Tsize += gameObject->GetOSize(i, j);
-					Ssize.x += 0.001f;
+			/*		Ssize.x += 0.001f;
 					Ssize.y += 0.001f;
 					Ssize.z += 0.001f;
 					radius += 0.001f;
-					SY += 0.005f;
+					SY += 0.005f;*/
 				}
 			}
 		}
@@ -240,11 +240,11 @@ void GameScene::Update()
 	colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		//音を鳴らしたりなど
-		Ssize.x += colMan->GetSsize().x;
-		Ssize.y += colMan->GetSsize().y;
-		Ssize.z += colMan->GetSsize().z;
-		radius += colMan->GetRadius();
-		SY += colMan->GetSY();
+		//Ssize.x += colMan->GetSsize().x;
+		//Ssize.y += colMan->GetSsize().y;
+		//Ssize.z += colMan->GetSsize().z;
+		//radius += colMan->GetRadius();
+		//SY += colMan->GetSY();
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);
 
