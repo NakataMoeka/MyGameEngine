@@ -39,6 +39,7 @@ public:
 	void Init();
 	void stageInit(int stageNum);
 	void Update();
+	//void UpdNum();//
 	void RC();//コライダー消すやつ
 	void Draw();
 	//GetterSetter
@@ -54,6 +55,7 @@ public:
 	bool SetHIT(int i, int j, bool Hit);
 	float GetOSize(int i, int j);
 	XMFLOAT3 GetOPos(int i, int j);
+	int SetTsize(int Tsize) { return this->Tsize = Tsize; }
 private://Update()にまとめるもの
 	void Col(Object3d* object, XMFLOAT3 pos);
 private://変数
@@ -109,5 +111,6 @@ private://変数
 	bool onGround = true;
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV = {};
+	int Tsize = 0;
 };
 

@@ -60,7 +60,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
-	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect2.png",true);
+	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect2.png", true);
 	//particleMan->LoadTexture();
 	//particleMan->CreateModel();
 	// デバッグテキスト用テクスチャ読み込み
@@ -194,10 +194,9 @@ void GameScene::Update()
 				gameObject->SetHIT(i, j, false);
 
 				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
-
-					if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
-						if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10 || gameObject->GetOSize(i, j) == 1 || gameObject->GetOSize(i, j) == 10) {
-							gameObject->GetObject3d(i, j)->SetColFlag(true);
+					if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10 || gameObject->GetOSize(i, j) == 1 || gameObject->GetOSize(i, j) == 10) {
+						gameObject->GetObject3d(i, j)->SetColFlag(true);
+						if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
 
 							gameObject->SetHIT(i, j, true);
 							HitCount++;
@@ -219,11 +218,11 @@ void GameScene::Update()
 					HitCount = 0;
 					gameObject->SetHIT(i, j, false);
 					Tsize += gameObject->GetOSize(i, j);
-			/*		Ssize.x += 0.001f;
-					Ssize.y += 0.001f;
-					Ssize.z += 0.001f;
-					radius += 0.001f;
-					SY += 0.005f;*/
+					/*		Ssize.x += 0.001f;
+							Ssize.y += 0.001f;
+							Ssize.z += 0.001f;
+							radius += 0.001f;
+							SY += 0.005f;*/
 				}
 			}
 		}
@@ -367,7 +366,7 @@ void GameScene::Update()
 		gameObject->RC();
 		player->RC();
 		stageObj->RC();
-}
+	}
 #endif
 
 	//object3d->SetRotation({ a,0,b });
@@ -443,7 +442,7 @@ void GameScene::Update()
 	camera->Update();
 #pragma endregion
 	lightGroup->Update();
-	
+
 }
 
 
@@ -522,7 +521,7 @@ void GameScene::CreateParticles()
 		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
 		// 追加
-		particleMan->Add(60, pos, vel, acc, 0.3f, 0.0f,{1,1,1},{1,1,1});
+		particleMan->Add(60, pos, vel, acc, 0.3f, 0.0f, { 1,1,1 }, { 1,1,1 });
 	}
 }
 

@@ -71,9 +71,9 @@ void CollisionManager::ColSphere()
 			}
 
 			if (colB->attribute == 4U) {
-			//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
-			// ともに球
-			//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
+				//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
+				// ともに球
+				//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 				if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
 					colB->GetShapeType() == COLLISIONSHAPE_SPHERE) {
 					Sphere* SphereA = dynamic_cast<Sphere*>(colA);
@@ -82,11 +82,11 @@ void CollisionManager::ColSphere()
 					//オブジェクトが両方球にくっついていたら当たり判定はしない
 					if (colB->GetObject3d()->GetParentFlag() == false) {
 
-						if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
-							//球のサイズが以上ならくっつくoSize*10またはoSizeが1または10ならば
-							if (Tsize3 >= oSize * 10 || oSize == 1||oSize==10) {
-								//くっつく
-								colB->GetObject3d()->SetColFlag(true);
+						if (Tsize3 >= oSize * 10 || oSize == 1 || oSize == 10) {
+							//くっつく
+							colB->GetObject3d()->SetColFlag(true);
+							if (Collision::CheckSphere2Sphere2(*SphereA, *SphereB, &inter)) {
+								//球のサイズが以上ならくっつくoSize*10またはoSizeが1または10ならば
 								IsHit = true;
 								HitCount++;
 								PFlag = true;
