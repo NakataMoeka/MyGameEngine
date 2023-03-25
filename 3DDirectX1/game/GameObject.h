@@ -35,9 +35,10 @@ public:
 
 	GameObject();
 	~GameObject();
-	void Initialize();
-	void Init();
-	void stageInit(int stageNum);
+	void Initialize();//1度のみ初期化
+	void Init();//何度もする
+	void stageInit(int stageNum);//ステージ初期化
+	void InitNum(std::vector<object*>oData, int stageNum, float y, float size,size_t i,size_t j);
 	void Update();
 	//void UpdNum();//
 	void RC();//コライダー消すやつ
@@ -64,6 +65,7 @@ private://変数
 	static const int OBJNumber = 100;//objの最大数(多いやつ)
 	static const int OBJNumber2 = 30;//objの最大数(少なめのやつ)
 	static const int OBJType = 2;
+	int  num = 0;
 	//オブジェクト
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};

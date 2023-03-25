@@ -36,7 +36,7 @@ GameObject::~GameObject()
 	for (int i = 0; i < OBJNumber; i++) {
 		safe_delete(cube[i]);
 		safe_delete(moveObj[i]);
-		
+
 		safe_delete(Game[i]);
 
 	}
@@ -278,126 +278,100 @@ void GameObject::stageInit(int stageNum)
 	else if (stageNum == 2) {
 		LoadCSV(spawnMap, (char*)"Resources/objMap3.csv");
 	}
-
-	int  num = 0;
 	//csvからobjの位置の読み込み
 	for (size_t j = 0; j < MAP_HEIGHT; j++)
 	{
 		for (size_t i = 0; i < MAP_WIDTH; i++)
 		{
 			num = 0;
-
+			float y = 0;
 			if (spawnMap[j][i] == 1)
 			{
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
-				//掛ける数値で間隔決める。×2が丁度いい気がする。
-				//最初の数値が端の位置。iが横、jが縦。
-				if (stageNum == 0) {
-					oData[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
+				if (stageNum == 0 || stageNum == 2) {
+					y = 0;
 				}
 				else if (stageNum == 1) {
-					oData[num]->pos = { -180 + (float)i * 4,35, 120 + (float)j * (-10) };
+					y = 35;
 				}
-				else if (stageNum == 2) {
-					oData[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
-				}
-				oData[num]->rot = { 0,0,0,0 };
-				randRot = rand() / 360;
-				oData[num]->rot.m128_f32[1] = (float)randRot;
-
-				oData[num]->IsHit = false;
-				if (stageNum == 0 || stageNum == 1) {
-					oData[num]->oSize = 1.0f;
-				}
-				else if (stageNum == 2) {
-					oData[num]->oSize = 10.0f;
-				}
+				InitNum(oData, stageNum, y, 1, i, j);
 			}
 			if (spawnMap[j][i] == 2)
 			{
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
-				if (stageNum == 1) {
-					oData2[num]->pos = { -180 + (float)i * 4,37, 120 + (float)j * (-10) };
+				if (stageNum == 2) {
+					y = 0;
 				}
-				else if (stageNum == 2) {
-					oData2[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
+				else if (stageNum == 1) {
+					y = 37;
 				}
-				oData2[num]->rot = { 0,0,0,0 };
-				oData2[num]->IsHit = false;
-				if (stageNum == 0 || stageNum == 1) {
-					oData2[num]->oSize = 2.0f;
-				}
-				else if (stageNum == 2) {
-					oData2[num]->oSize = 20.0f;
-				}
+				InitNum(oData2, stageNum, y, 2, i, j);
 			}
 			if (spawnMap[j][i] == 3)
 			{
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
-				if (stageNum == 1) {
-					oData3[num]->pos = { -180 + (float)i * 4,50, 120 + (float)j * (-10) };
+				if (stageNum == 0 || stageNum == 2) {
+					y = 0;
 				}
-				else if (stageNum == 2) {
-					oData3[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
+				else if (stageNum == 1) {
+					y = 50;
 				}
-				oData3[num]->rot = { 0,0,0,0 };
-				randRot = rand() / 360;
-				oData3[num]->rot.m128_f32[1] = (float)randRot;
-				oData3[num]->IsHit = false;
-				if (stageNum == 0 || stageNum == 1) {
-					oData3[num]->oSize = 3.0f;
-				}
-				else if (stageNum == 2) {
-					oData3[num]->oSize = 30.0f;
-				}
+				InitNum(oData3, stageNum, y, 3, i, j);
 			}
 			if (spawnMap[j][i] == 4)
 			{
 				oData4.push_back(new object);
 				num = (int)oData4.size() - 1;
-				if (stageNum == 1) {
-					oData4[num]->pos = { -180 + (float)i * 4,35, 120 + (float)j * (-10) };
+				if (stageNum == 2) {
+					y = 0;
 				}
-				else if (stageNum == 2) {
-					oData4[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
+				else if (stageNum == 1) {
+					y = 35;
 				}
-
-				oData4[num]->rot = { 0,0,0,0 };
-				randRot = rand() / 360;
-				oData4[num]->rot.m128_f32[1] = (float)randRot;
-				oData4[num]->IsHit = false;
-				if (stageNum == 0 || stageNum == 1) {
-					oData4[num]->oSize = 4.0f;
-				}
-				else if (stageNum == 2) {
-					oData4[num]->oSize = 40.0f;
-				}
+				InitNum(oData4, stageNum, y, 4, i, j);
 			}
 			if (spawnMap[j][i] == 5)
 			{
 				oData5.push_back(new object);
 				num = (int)oData5.size() - 1;
-				if (stageNum == 1) {
-					oData5[num]->pos = { -180 + (float)i * 4,36, 120 + (float)j * (-10) };
+				if (stageNum == 2) {
+					y = 0;
 				}
-				else if (stageNum == 2) {
-					oData5[num]->pos = { -180 + (float)i * 10,0, 100 + (float)j * (-10) };
+				else if (stageNum == 1) {
+					y = 36;
 				}
-				oData5[num]->rot = { 0,0,0,0 };
-				randRot = rand() / 360;
-				oData5[num]->rot.m128_f32[1] = (float)randRot;
-				oData5[num]->IsHit = false;
-				if (stageNum == 0 || stageNum == 1) {
-					oData5[num]->oSize = 5.0f;
-				}
-				else if (stageNum == 2) {
-					oData5[num]->oSize = 50.0f;
-				}
+				InitNum(oData5, stageNum, y, 5, i, j);
 			}
 		}
+	}
+}
+
+
+void GameObject::InitNum(std::vector<object*> oData, int stageNum, float y, float size, size_t i, size_t j)
+{
+	//最初の数値が端の位置。iが横、jが縦。
+	if (stageNum == 0) {
+		oData[num]->pos = { -180 + (float)i * 10,0, 120 + (float)j * (-10) };
+	}
+	else if (stageNum == 1) {
+		oData[num]->pos = { -180 + (float)i * 4,35, 120 + (float)j * (-10) };
+	}
+	else if (stageNum == 2) {
+		oData[num]->pos = { -180 + (float)i * 10,0, 120 + (float)j * (-10) };
+	}
+	oData[num]->rot = { 0,0,0,0 };
+	randRot = rand() / 360;
+	oData[num]->rot.m128_f32[1] = (float)randRot;
+
+	oData[num]->IsHit = false;
+	if (stageNum == 0 || stageNum == 1) {
+		oData[num]->oSize = 1.0f * size;
+	}
+	else if (stageNum == 2) {
+		oData[num]->oSize = 10.0f * size;
 	}
 }
 
@@ -864,5 +838,3 @@ XMFLOAT3 GameObject::GetOPos(int i, int j)
 		return Card[i]->GetPosition();
 	}
 }
-
-
