@@ -12,7 +12,7 @@
 /// <summary>
 /// ステージに配置されているオブジェクトのクラス
 /// </summary>
-class GameObject
+class GameObjects
 {
 private:
 	// Microsoft::WRL::を省略
@@ -33,8 +33,8 @@ private:
 public:
 	
 
-	GameObject();
-	~GameObject();
+	GameObjects();
+	~GameObjects();
 	void Initialize();//1度のみ初期化
 	void Init();//何度もする
 	void stageInit(int stageNum);//ステージ初期化

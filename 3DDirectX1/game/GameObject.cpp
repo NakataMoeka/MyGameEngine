@@ -7,11 +7,11 @@
 #include"Input.h"
 #include<time.h>
 using namespace DirectX;
-GameObject::GameObject()
+GameObjects::GameObjects()
 {
 }
 
-GameObject::~GameObject()
+GameObjects::~GameObjects()
 {
 	for (int i = (int)oData.size() - 1; i >= 0; i--) {
 		delete oData[i];
@@ -53,7 +53,7 @@ GameObject::~GameObject()
 	}
 }
 
-void GameObject::Initialize()
+void GameObjects::Initialize()
 {
 	modelCube = Model::Create("lego", false);
 	modelMove = Model::Create("car", false);
@@ -101,7 +101,7 @@ void GameObject::Initialize()
 
 }
 
-void GameObject::Init()
+void GameObjects::Init()
 {
 	size[0] = { 1.0f,1.0f,1.0f };
 	size[1] = { 5,5,5 };
@@ -264,7 +264,7 @@ void GameObject::Init()
 	oSpeed = 0;
 }
 
-void GameObject::stageInit(int stageNum)
+void GameObjects::stageInit(int stageNum)
 {
 	srand((unsigned)time(NULL));
 	randRot = 0;
@@ -350,7 +350,7 @@ void GameObject::stageInit(int stageNum)
 }
 
 
-void GameObject::InitNum(std::vector<object*> oData, int stageNum, float y, float size, size_t i, size_t j)
+void GameObjects::InitNum(std::vector<object*> oData, int stageNum, float y, float size, size_t i, size_t j)
 {
 	//最初の数値が端の位置。iが横、jが縦。
 	if (stageNum == 0) {
@@ -375,7 +375,7 @@ void GameObject::InitNum(std::vector<object*> oData, int stageNum, float y, floa
 	}
 }
 
-void GameObject::Update()
+void GameObjects::Update()
 {
 	if (stageNum == 0) {
 		for (int i = 0; i < oData.size(); i++) {
@@ -529,7 +529,7 @@ void GameObject::Update()
 		}
 	}
 }
-void GameObject::Col(Object3d* object, XMFLOAT3 pos)
+void GameObjects::Col(Object3d* object, XMFLOAT3 pos)
 {
 	SphereCollider* sphereCollider = dynamic_cast<SphereCollider*>(object->GetCollider());
 	assert(sphereCollider);
@@ -571,7 +571,7 @@ void GameObject::Col(Object3d* object, XMFLOAT3 pos)
 	object->Update();
 }
 
-void GameObject::RC()
+void GameObjects::RC()
 {
 	for (int i = (int)oData.size() - 1; i >= 0; i--)
 	{
@@ -620,7 +620,7 @@ void GameObject::RC()
 	}
 }
 
-void GameObject::Draw()
+void GameObjects::Draw()
 {
 	if (stageNum == 0) {
 		for (int i = (int)oData.size() - 1; i >= 0; i--)
@@ -676,11 +676,11 @@ void GameObject::Draw()
 }
 
 
-float GameObject::GetMat()
+float GameObjects::GetMat()
 {
 	return 	cube[0]->GetMatRot().r[3].m128_f32[0];
 }
-int GameObject::GetOBJCount(int j)
+int GameObjects::GetOBJCount(int j)
 {
 	if (j == 0) {
 		return (int)oData.size();
@@ -698,7 +698,7 @@ int GameObject::GetOBJCount(int j)
 		return (int)oData5.size();
 	}
 }
-Sphere GameObject::GetCSphere(int i, int j)
+Sphere GameObjects::GetCSphere(int i, int j)
 {
 	if (j == 0) {
 		return cSphere[i];
@@ -717,7 +717,7 @@ Sphere GameObject::GetCSphere(int i, int j)
 	}
 	//return;
 }
-Object3d* GameObject::GetObject3d(int i, int j)
+Object3d* GameObjects::GetObject3d(int i, int j)
 {
 
 	if (j == 0) {
@@ -763,7 +763,7 @@ Object3d* GameObject::GetObject3d(int i, int j)
 	return 0;
 }
 
-bool GameObject::GetHIT(int i, int j)
+bool GameObjects::GetHIT(int i, int j)
 {
 	if (j == 0) {
 		return oData[i]->IsHit;
@@ -782,7 +782,7 @@ bool GameObject::GetHIT(int i, int j)
 	}
 }
 
-bool GameObject::SetHIT(int i, int j, bool Hit)
+bool GameObjects::SetHIT(int i, int j, bool Hit)
 {
 	if (j == 0) {
 		return this->oData[i]->IsHit = Hit;
@@ -801,7 +801,7 @@ bool GameObject::SetHIT(int i, int j, bool Hit)
 	}
 }
 
-float GameObject::GetOSize(int i, int j)
+float GameObjects::GetOSize(int i, int j)
 {
 	if (j == 0) {
 		return this->oData[i]->oSize;
@@ -820,7 +820,7 @@ float GameObject::GetOSize(int i, int j)
 	}
 }
 
-XMFLOAT3 GameObject::GetOPos(int i, int j)
+XMFLOAT3 GameObjects::GetOPos(int i, int j)
 {
 	if (j == 0) {
 		return cube[i]->GetPosition();

@@ -89,7 +89,7 @@ private: // メンバ変数
 	CollisionManager* colMan = nullptr;
 
 	Player* player = nullptr;
-	GameObject* gameObject = nullptr;
+	GameObjects* gameObjects = nullptr;
 	StageObject* stageObj = nullptr;
 
 	Timer* timer = nullptr;

@@ -96,8 +96,8 @@ void GameScene::InitTH()
 	sound4 = Audio::SoundLoadWave("Resources/Music/BGM/追いかけっこキャッハー.wav");
 	player = new Player;//newすればエラー吐かない
 	player->Initialize();
-	gameObject = new GameObject;//newすればエラー吐かない
-	gameObject->Initialize();
+	gameObjects = new GameObjects;//newすればエラー吐かない
+	gameObjects->Initialize();
 	stageObj = new StageObject;//newすればエラー吐かない
 	stageObj->Initialize();
 	timer = new Timer;
@@ -116,7 +116,7 @@ void GameScene::Init()
 {
 	//別クラスの初期化
 	player->Init();
-	gameObject->Init();
+	gameObjects->Init();
 	stageObj->Init();
 	colMan->Init();
 	timer->Init();
@@ -159,7 +159,7 @@ void GameScene::InitStageNum(int stageNum)
 {
 	this->stageNum = stageNum;
 	player->stageInit(stageNum);
-	gameObject->stageInit(stageNum);
+	gameObjects->stageInit(stageNum);
 	stageObj->stageInit(stageNum);
 	sphereSize->Init(stageNum);
 	if (stageNum == 0) {
@@ -189,18 +189,18 @@ void GameScene::Update()
 #pragma region	当たり判定
 	if (tutorial->GetTCount() != 1) {
 		for (int j = 0; j < 5; j++) {
-			for (int i = 0; i < gameObject->GetOBJCount(j); i++) {
+			for (int i = 0; i < gameObjects->GetOBJCount(j); i++) {
 
-				gameObject->SetHIT(i, j, false);
+				gameObjects->SetHIT(i, j, false);
 
-				if (gameObject->GetObject3d(i, j)->GetParentFlag() == false) {
-					if (colMan->GetTsize() >= gameObject->GetOSize(i, j) * 10 || gameObject->GetOSize(i, j) == 1 || gameObject->GetOSize(i, j) == 10) {
-						gameObject->GetObject3d(i, j)->SetColFlag(true);
-						if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObject->GetCSphere(i, j))) {
+				if (gameObjects->GetObject3d(i, j)->GetParentFlag() == false) {
+					if (colMan->GetTsize() >= gameObjects->GetOSize(i, j) * 10 || gameObjects->GetOSize(i, j) == 1 || gameObjects->GetOSize(i, j) == 10) {
+						gameObjects->GetObject3d(i, j)->SetColFlag(true);
+						if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObjects->GetCSphere(i, j))) {
 
-							gameObject->SetHIT(i, j, true);
+							gameObjects->SetHIT(i, j, true);
 							HitCount++;
-							gameObject->GetObject3d(i, j)->SetParentFlag(true);
+							gameObjects->GetObject3d(i, j)->SetParentFlag(true);
 						}
 
 						//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
@@ -209,15 +209,15 @@ void GameScene::Update()
 
 				}
 
-				if (gameObject->GetHIT(i, j) == true) {
-					gameObject->GetObject3d(i, j)->SetParent(player->GetObject3d());
+				if (gameObjects->GetHIT(i, j) == true) {
+					gameObjects->GetObject3d(i, j)->SetParent(player->GetObject3d());
 				}
 				if (HitCount == 1) {
-					gameObject->GetObject3d(i, j)->transformParent();
+					gameObjects->GetObject3d(i, j)->transformParent();
 					audio->SEPlayWave(sound1);
 					HitCount = 0;
-					gameObject->SetHIT(i, j, false);
-					Tsize += gameObject->GetOSize(i, j);
+					gameObjects->SetHIT(i, j, false);
+					Tsize += gameObjects->GetOSize(i, j);
 					/*		Ssize.x += 0.001f;
 							Ssize.y += 0.001f;
 							Ssize.z += 0.001f;
@@ -299,7 +299,7 @@ void GameScene::Update()
 						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
 						overFlag = true;
 						audio->StopWave();
-						gameObject->RC();
+						gameObjects->RC();
 						player->RC();
 						stageObj->RC();
 					}
@@ -308,7 +308,7 @@ void GameScene::Update()
 						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
 						clearFlag = true;
 						audio->StopWave();
-						gameObject->RC();
+						gameObjects->RC();
 						player->RC();
 						stageObj->RC();
 					}
@@ -325,7 +325,7 @@ void GameScene::Update()
 		//プレイヤー、ステージ、オブジェクト、タイマーのアップデート
 		player->Update();
 		stageObj->Update();
-		gameObject->Update();
+		gameObjects->Update();
 		timer->Update();
 		//CreateParticles();
 		particleMan->Update();
@@ -344,7 +344,7 @@ void GameScene::Update()
 	if (pose->GetTFlag() == true) {
 		//audio->StopWave();
 		//コライダーを削除
-		gameObject->RC();
+		gameObjects->RC();
 		player->RC();
 		stageObj->RC();
 	}
@@ -356,14 +356,14 @@ void GameScene::Update()
 	if (Input::GetInstance()->TriggerKey(DIK_Q)) {
 		overFlag = true;
 		audio->StopWave();
-		gameObject->RC();
+		gameObjects->RC();
 		player->RC();
 		stageObj->RC();
 	}
 	else if (Input::GetInstance()->TriggerKey(DIK_E)) {
 		clearFlag = true;
 		audio->StopWave();
-		gameObject->RC();
+		gameObjects->RC();
 		player->RC();
 		stageObj->RC();
 	}
@@ -390,7 +390,7 @@ void GameScene::Update()
 		//3になったら
 		else if (tutorial->GetTCount() == 3) {
 			//くっつけるようになる
-			if (gameObject->GetObject3d(0, 0)->GetParentFlag() == true) {
+			if (gameObjects->GetObject3d(0, 0)->GetParentFlag() == true) {
 				//4にする
 				tutorial->SetTCount(4);
 			}
@@ -405,7 +405,7 @@ void GameScene::Update()
 			//コライダー削除する
 			TSFlag = true;
 			audio->StopWave();
-			gameObject->RC();
+			gameObjects->RC();
 			player->RC();
 			stageObj->RC();
 		}
@@ -460,7 +460,7 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 	player->Draw();
-	gameObject->Draw();
+	gameObjects->Draw();
 	stageObj->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
@@ -491,7 +491,7 @@ void GameScene::DrawFront()
 	//DebugText::GetInstance()->Printf(100, 320, 3.0f, { 1,1,1,1 }, "SPACE:JUMP");
 	//DebugText::GetInstance()->Printf(100, 360, 3.0f, { 1,1,1,1 }, "R:POSE");
 	/*DebugText::GetInstance()->Printf(460, 150, 3.0f,{1,1,1,1}, "%f,%f,%f",
-	gameObject->GetObject3d(0,0)->GetRotation().m128_f32[0], gameObject->GetObject3d(0, 0)->GetRotation().m128_f32[1], gameObject->GetObject3d(0, 0)->GetRotation().m128_f32[2]);
+	gameObjects->GetObject3d(0,0)->GetRotation().m128_f32[0], gameObjects->GetObject3d(0, 0)->GetRotation().m128_f32[1], gameObjects->GetObject3d(0, 0)->GetRotation().m128_f32[2]);
 	*/
 	/*DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
 		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z);
