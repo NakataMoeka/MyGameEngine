@@ -38,7 +38,7 @@ public:
 	void Initialize();//1度のみ初期化
 	void Init();//何度もする
 	void stageInit(int stageNum);//ステージ初期化
-	void InitNum(std::vector<object*>oData, int stageNum, float y, float size,size_t i,size_t j);
+	
 	void Update();
 	//void UpdNum();//
 	void RC();//コライダー消すやつ
@@ -57,27 +57,36 @@ public:
 	float GetOSize(int i, int j);
 	XMFLOAT3 GetOPos(int i, int j);
 	int SetTsize(int Tsize) { return this->Tsize = Tsize; }
-private://Update()にまとめるもの
-	void Col(Object3d* object, XMFLOAT3 pos);
-private://変数
-
-	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
+private://関数
 	static const int OBJNumber = 100;//objの最大数(多いやつ)
 	static const int OBJNumber2 = 30;//objの最大数(少なめのやつ)
 	static const int OBJType = 2;
+	void Col(std::array < Sphere, OBJNumber> cSphere,std::array < Object3d*, OBJNumber> obj, float r,int i);
+	/// <summary>
+	/// csvからobjの位置の読み込み
+	/// </summary>
+	/// <param name="oData">vector配列</param>/// <param name="stageNum">ステージの数</param>
+	/// <param name="y">高さ</param>/// <param name="size">大きさ</param>
+	/// <param name="i">横</param>/// <param name="j">縦</param>
+	void InitNum(std::vector<object*>oData, int stageNum, float y, float size, size_t i, size_t j);
+	void InitUpd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData);
+private://変数
+
+	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
+
 	int  num = 0;
 	//オブジェクト
 	std::array < Object3d*, OBJNumber> cube = {};
 	std::array < Object3d*, OBJNumber> moveObj = {};
-	std::array < Object3d*, OBJNumber2> Bear = {};
-	std::array < Object3d*, OBJNumber2> Robot = {};
-	std::array < Object3d*, OBJNumber2> Card = {};
+	std::array < Object3d*, OBJNumber> Bear = {};
+	std::array < Object3d*, OBJNumber> Robot = {};
+	std::array < Object3d*, OBJNumber> Card = {};
 	//std::array < Object3d*, OBJNumber2> Pencil = {};
 
-	std::array < Object3d*, OBJNumber2> Kendama = {};
-	std::array < Object3d*, OBJNumber2> Koma = {};
-	std::array < Object3d*, OBJNumber2> Shogi = {};
-	std::array < Object3d*, OBJNumber2> Turu = {};
+	std::array < Object3d*, OBJNumber> Kendama = {};
+	std::array < Object3d*, OBJNumber> Koma = {};
+	std::array < Object3d*, OBJNumber> Shogi = {};
+	std::array < Object3d*, OBJNumber> Turu = {};
 	//std::array < Object3d*, OBJNumber2> Cont = {};
 	std::array < Object3d*, OBJNumber> Game = {};
 
