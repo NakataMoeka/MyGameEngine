@@ -110,7 +110,8 @@ void GameObjects::Init()
 			//stage1
 			InitUpd(cube, i, oData);
 			//‚±‚±‚É‘‚©‚È‚¢‚ÆƒoƒO‚é
-			Col(cSphere, cube, 0.5, i);
+			cSphere[i].radius = 0.5;
+			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			cube[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,1,0,0 }), 0.5f));
 			cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			cube[i]->GetCollider()->SetNum(0);
@@ -481,11 +482,6 @@ void GameObjects::Update()
 			Turu[i]->Update();
 		}
 	}
-}
-void GameObjects::Col(std::array < Sphere, OBJNumber> cSphere,std::array<Object3d*, OBJNumber> obj, float r,int i)
-{
-	cSphere[i].radius = r;
-	cSphere[i].center= XMVectorSet(obj[i]->GetMatWorld().r[3].m128_f32[0], obj[i]->GetMatWorld().r[3].m128_f32[1], obj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 }
 
 void GameObjects::RC()

@@ -61,7 +61,6 @@ private://ŠÖ”
 	static const int OBJNumber = 100;//obj‚ÌÅ‘å”(‘½‚¢‚â‚Â)
 	static const int OBJNumber2 = 30;//obj‚ÌÅ‘å”(­‚È‚ß‚Ì‚â‚Â)
 	static const int OBJType = 2;
-	void Col(std::array < Sphere, OBJNumber> cSphere,std::array < Object3d*, OBJNumber> obj, float r,int i);
 	/// <summary>
 	/// csv‚©‚çobj‚ÌˆÊ’u‚Ì“Ç‚İ‚İ
 	/// </summary>
