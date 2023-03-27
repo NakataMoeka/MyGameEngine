@@ -233,7 +233,7 @@ void GameObjects::stageInit(int stageNum)
 			float y = 0;
 			if (spawnMap[j][i] == 1)
 			{
-			
+
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
 				if (stageNum == 0 || stageNum == 2) {
@@ -246,7 +246,7 @@ void GameObjects::stageInit(int stageNum)
 			}
 			else if (spawnMap[j][i] == 2)
 			{
-				
+
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
 				if (stageNum == 2) {
@@ -259,7 +259,7 @@ void GameObjects::stageInit(int stageNum)
 			}
 			else if (spawnMap[j][i] == 3)
 			{
-				
+
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
 				if (stageNum == 0 || stageNum == 2) {
@@ -268,11 +268,11 @@ void GameObjects::stageInit(int stageNum)
 				else if (stageNum == 1) {
 					y = 50;
 				}
-				InitNum(oData3, stageNum, 50, 3, i, j);
+				InitNum(oData3, stageNum, y, 3, i, j);
 			}
 			else if (spawnMap[j][i] == 4)
 			{
-				
+
 				oData4.push_back(new object);
 				num = (int)oData4.size() - 1;
 				if (stageNum == 2) {
@@ -285,7 +285,7 @@ void GameObjects::stageInit(int stageNum)
 			}
 			else if (spawnMap[j][i] == 5)
 			{
-				
+
 				oData5.push_back(new object);
 				num = (int)oData5.size() - 1;
 				if (stageNum == 2) {
@@ -756,5 +756,3 @@ XMFLOAT3 GameObjects::GetOPos(int i, int j)
 		return Card[i]->GetPosition();
 	}
 }
-
-
