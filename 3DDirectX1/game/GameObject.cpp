@@ -233,6 +233,7 @@ void GameObjects::stageInit(int stageNum)
 			float y = 0;
 			if (spawnMap[j][i] == 1)
 			{
+			
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
 				if (stageNum == 0 || stageNum == 2) {
@@ -243,8 +244,9 @@ void GameObjects::stageInit(int stageNum)
 				}
 				InitNum(oData, stageNum, y, 1, i, j);
 			}
-			if (spawnMap[j][i] == 2)
+			else if (spawnMap[j][i] == 2)
 			{
+				
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
 				if (stageNum == 2) {
@@ -255,8 +257,9 @@ void GameObjects::stageInit(int stageNum)
 				}
 				InitNum(oData2, stageNum, y, 2, i, j);
 			}
-			if (spawnMap[j][i] == 3)
+			else if (spawnMap[j][i] == 3)
 			{
+				
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
 				if (stageNum == 0 || stageNum == 2) {
@@ -265,10 +268,11 @@ void GameObjects::stageInit(int stageNum)
 				else if (stageNum == 1) {
 					y = 50;
 				}
-				InitNum(oData3, stageNum, y, 3, i, j);
+				InitNum(oData3, stageNum, 50, 3, i, j);
 			}
-			if (spawnMap[j][i] == 4)
+			else if (spawnMap[j][i] == 4)
 			{
+				
 				oData4.push_back(new object);
 				num = (int)oData4.size() - 1;
 				if (stageNum == 2) {
@@ -279,8 +283,9 @@ void GameObjects::stageInit(int stageNum)
 				}
 				InitNum(oData4, stageNum, y, 4, i, j);
 			}
-			if (spawnMap[j][i] == 5)
+			else if (spawnMap[j][i] == 5)
 			{
+				
 				oData5.push_back(new object);
 				num = (int)oData5.size() - 1;
 				if (stageNum == 2) {
@@ -299,13 +304,13 @@ void GameObjects::InitNum(std::vector<object*> oData, int stageNum, float y, flo
 {
 	//最初の数値が端の位置。iが横、jが縦。
 	if (stageNum == 0) {
-		oData[num]->pos = { -180 + (float)i * 10,0, 120 + (float)j * (-10) };
+		oData[num]->pos = { -180 + (float)i * 10,y, 120 + (float)j * (-10) };
 	}
 	else if (stageNum == 1) {
-		oData[num]->pos = { -180 + (float)i * 4,35, 120 + (float)j * (-10) };
+		oData[num]->pos = { -180 + (float)i * 4,y, 120 + (float)j * (-10) };
 	}
 	else if (stageNum == 2) {
-		oData[num]->pos = { -180 + (float)i * 10,0, 120 + (float)j * (-10) };
+		oData[num]->pos = { -180 + (float)i * 10,y, 120 + (float)j * (-10) };
 	}
 	oData[num]->rot = { 0,0,0,0 };
 	randRot = rand() / 360;
