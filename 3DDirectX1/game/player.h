@@ -6,6 +6,7 @@
 #include"SafeDelete.h"
 #include "FbxObject.h"
 #include<array>
+#include <memory>
 /// <summary>
 /// プレイヤー関連のクラス
 /// </summary>
@@ -64,13 +65,9 @@ private://変数
 	Object3d* SphereObj = nullptr;
 	Model* model2 = nullptr;
 	//集中線
-	Sprite* dashSprite = nullptr;
-	//サイズ表示の円
-	Sprite* sizeSprite = nullptr;
-	//地球
-	Sprite* earthSprite = nullptr;
-	//プレイヤー
-	Sprite* playerSprite = nullptr;
+	std::unique_ptr<Sprite> dashSprite = nullptr;
+
+
 	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
 	XMFLOAT3 spherePos = { 0,0,0 };

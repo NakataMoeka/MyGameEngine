@@ -29,13 +29,9 @@ void Player::Initialize()
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/halfPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Sprite::LoadTexture(2, L"Resources/dash.png");
-	Sprite::LoadTexture(3, L"Resources/UI/sizeUI.png");
-	Sprite::LoadTexture(4, L"Resources/UI/chikyuu.png");
-	Sprite::LoadTexture(5, L"Resources/UI/Player.png");
-	dashSprite = Sprite::CreateSprite(2, { 0,0 });
-	sizeSprite = Sprite::CreateSprite(3, { 100,100 });
-	earthSprite = Sprite::CreateSprite(4, { 1000,500 });
-	playerSprite = Sprite::CreateSprite(5, { 1100,530 });
+
+	dashSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(2, { 0,0 }));
+
 }
 
 void Player::Init()
@@ -432,8 +428,6 @@ void Player::Update()
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 
-	sizeSprite->SetAnchorPoint({ 0.5, 0.5 });
-
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
 	SphereObj->SetRotation(sphereAngle);
@@ -445,8 +439,6 @@ void Player::Update()
 	playerObj->Update();
 
 	dashSprite->SetColor({ 1, 1, 1, fade });
-	playerSprite->SetSize({ 140,200 });
-	playerSprite->SetTextureRect({ 0 + 580 * PlayerWalkCount,0 }, { 580,810 });
 }
 
 
@@ -464,8 +456,7 @@ void Player::DrawSprite()
 	if (dashFlag == true) {
 		dashSprite->Draw();
 	}
-	earthSprite->Draw();
-	playerSprite->Draw();
+
 }
 
 void Player::RC()

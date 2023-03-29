@@ -1,6 +1,7 @@
 #pragma once
 #include"Sprite.h"
 #include"Audio.h"
+#include <memory>
 /// <summary>
 /// ポーズ機能(ゲームシーンからの移植)
 /// </summary>
@@ -19,11 +20,11 @@ private:
 	Audio* audio = nullptr;
 	SoundData sound1 = {};
 	SoundData sound2 = {};
-	Sprite* PoseSprite = nullptr;
-	Sprite* TitleBackSprite = nullptr;
-	Sprite* BackSprite = nullptr;
-	Sprite* InfoSprite = nullptr;
-	Sprite* PBSprite = nullptr;
+	std::unique_ptr<Sprite> PoseSprite = nullptr;
+	std::unique_ptr<Sprite> TitleBackSprite = nullptr;
+	std::unique_ptr<Sprite> BackSprite = nullptr;
+	std::unique_ptr<Sprite> InfoSprite = nullptr;
+	std::unique_ptr<Sprite> PBSprite = nullptr;
 	bool PoseFlag = false;//ゲーム中断フラグ
 	bool TitleFlag = false;//タイトルに戻るフラグ
 	int PS = 0;//ポーズ時のやつ

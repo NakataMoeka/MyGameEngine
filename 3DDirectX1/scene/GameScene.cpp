@@ -18,7 +18,7 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 
-	safe_delete(sprite);
+
 	safe_delete(particleMan);
 	safe_delete(lightGroup);
 }
@@ -88,7 +88,7 @@ void GameScene::InitTH()
 
 	Sprite::LoadTexture(1, L"Resources/background.png");
 
-	sprite = Sprite::CreateSprite(1, { 0,0 });
+	sprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(1, { 0,0 }));
 
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");

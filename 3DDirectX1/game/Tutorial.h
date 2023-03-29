@@ -1,6 +1,7 @@
 #pragma once
 #include"Sprite.h"
 #include<array>
+#include <memory>
 /// <summary>
 /// チュートリアルクラス
 /// </summary>
@@ -21,8 +22,8 @@ public:
 	bool GetEndFlag() { return endFlag; }
 	bool GetMoveFlag() { return moveFlag; }
 private:
-	std::array < Sprite*, 7> TutorialSprite = {};
-	Sprite* TutorialUI = nullptr;
+	std::array < std::unique_ptr<Sprite>, 7> TutorialSprite = {};
+	std::unique_ptr<Sprite> TutorialUI = nullptr;
 	int TutorialCount = 0;//説明文の表示カウント
 	bool countFlag = false;//説明文を進めることができるのかのフラグ
 	bool endFlag = false;//チュートリアル終了フラグ

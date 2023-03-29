@@ -13,13 +13,13 @@ void start::Initialize(Audio* audio)
 	Sprite::LoadTexture(68, L"Resources/UI/oshioki.png");
 	Sprite::LoadTexture(69, L"Resources/UI/message2.png");
 	Sprite::LoadTexture(70, L"Resources/UI/tutorialUI.png");
-	number = Sprite::CreateSprite(65, { 550,300 });
-	Go = Sprite::CreateSprite(66, { 450,300 });
+	number = std::unique_ptr<Sprite>(Sprite::CreateSprite(65, { 550,300 }));
+	Go = std::unique_ptr<Sprite>(Sprite::CreateSprite(66, { 450,300 }));
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/カウントダウン電子音.wav");
-	message[0] = Sprite::CreateSprite(67, { 150,400 });
-	message[1] = Sprite::CreateSprite(68, { 300,400 });
-	message[2] = Sprite::CreateSprite(69, { 150,400 });
-	messageUI = Sprite::CreateSprite(70, { 700,550 });
+	message[0] = std::unique_ptr<Sprite>(Sprite::CreateSprite(67, { 150,400 }));
+	message[1] = std::unique_ptr<Sprite>(Sprite::CreateSprite(68, { 300,400 }));
+	message[2] = std::unique_ptr<Sprite>(Sprite::CreateSprite(69, { 150,400 }));
+	messageUI = std::unique_ptr<Sprite>(Sprite::CreateSprite(70, { 700,550 }));
 }
 
 void start::Init()

@@ -62,12 +62,11 @@ private:
 	Loading* loadScene = nullptr;
 	bool Bflag = false;
 
-	Sprite* Change = nullptr;
+	std::unique_ptr<Sprite>Change = nullptr;
 	float fade = 0;
 	bool changeSFlag = false;//フェードアウト
 	bool changeEFlag = false;//フェードイン
 	//ロード画面作りたい
-	Sprite* loadingS = nullptr;
 	std::thread t = {};
 	Load_Situation Load_s = NOLOAD;
 	bool LoadFlag = false;

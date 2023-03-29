@@ -51,15 +51,15 @@ void SelectScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(46, L"Resources/UI/number/Number3.png");
 	Sprite::LoadTexture(47, L"Resources/UI/Tutorial.png");
 
-	backSprite[0] = Sprite::CreateSprite(40, { 0,0 });
-	backSprite[1] = Sprite::CreateSprite(41, { 0,0 });
-	backSprite[2] = Sprite::CreateSprite(42, { 0,0 });
-	backSprite[3] = Sprite::CreateSprite(43, { 0,0 });
-	backSprite[4] = Sprite::CreateSprite(44, { 0,0 });
-	backSprite[5] = Sprite::CreateSprite(40, { 0,0 });
-	SelectUI = Sprite::CreateSprite(45, { 0,0 });
-	SelectNumber = Sprite::CreateSprite(46, { 560,250 });
-	TutorialS = Sprite::CreateSprite(47, { 450,400 });
+	backSprite[0] = std::unique_ptr<Sprite>(Sprite::CreateSprite(40, { 0,0 }));
+	backSprite[1] = std::unique_ptr<Sprite>(Sprite::CreateSprite(41, { 0,0 }));
+	backSprite[2] = std::unique_ptr<Sprite>(Sprite::CreateSprite(42, { 0,0 }));
+	backSprite[3] = std::unique_ptr<Sprite>(Sprite::CreateSprite(43, { 0,0 }));
+	backSprite[4] = std::unique_ptr<Sprite>(Sprite::CreateSprite(44, { 0,0 }));
+	backSprite[5] = std::unique_ptr<Sprite>(Sprite::CreateSprite(40, { 0,0 }));
+	SelectUI = std::unique_ptr<Sprite>(Sprite::CreateSprite(45, { 0,0 }));
+	SelectNumber = std::unique_ptr<Sprite>(Sprite::CreateSprite(46, { 560,250 }));
+	TutorialS = std::unique_ptr<Sprite>(Sprite::CreateSprite(47, { 450,400 }));
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/ビープ音1.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/SE/決定ボタンを押す26.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");

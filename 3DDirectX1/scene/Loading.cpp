@@ -8,10 +8,10 @@ void Loading::Initialize(DXCommon* dxCommon, Audio* audio)
 	this->dxCommon = dxCommon;
 	this->audio = audio;
 	Sprite::LoadTexture(61, L"Resources/UI/Load.png");
-	loadingS = Sprite::CreateSprite(61, { 600,500 });
+	loadingS = std::unique_ptr<Sprite>(Sprite::CreateSprite(61, { 600,500 }));
 	//loadingS->SetSize({ 1280,720 });
 	Sprite::LoadTexture(62, L"Resources/UI/Select0.png");
-	loadBack = Sprite::CreateSprite(62, { 0,0 });
+	loadBack = std::unique_ptr<Sprite>(Sprite::CreateSprite(62, { 0,0 }));
 	//loadBack->SetSize({ 1280,720 });
 	loadCount = 0;
 	LoadCountCount = 0;

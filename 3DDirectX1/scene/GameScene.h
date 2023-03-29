@@ -82,7 +82,7 @@ private: // メンバ変数
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
 
-	Sprite* sprite = nullptr;
+	std::unique_ptr<Sprite> sprite = nullptr;
 
 	LightGroup* lightGroup = nullptr;
 

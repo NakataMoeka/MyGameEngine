@@ -2,6 +2,7 @@
 #include"Sprite.h"
 #include"Audio.h"
 #include<array>
+#include <memory>
 /// <summary>
 /// スタート時の目標発表&開始カウントダウン用のクラス
 /// </summary>
@@ -17,10 +18,10 @@ public:
 private:
 	Audio* audio = nullptr;
 	SoundData sound1 = {};
-	Sprite* number = nullptr;
-	Sprite* Go = nullptr;
-	std::array<Sprite*, 3> message = {};
-	Sprite* messageUI = nullptr;
+	std::unique_ptr<Sprite> number = nullptr;
+	std::unique_ptr<Sprite> Go = nullptr;
+	std::array<std::unique_ptr<Sprite>, 3> message = {};
+	std::unique_ptr<Sprite> messageUI = nullptr;
 	//タイマー処理
 	double start;
 	double end;

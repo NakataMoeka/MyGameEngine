@@ -18,7 +18,7 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	this->audio = audio;
 
 	Sprite::LoadTexture(60, L"Resources/white.jpg");
-	Change = Sprite::CreateSprite(60, { 0,0 });
+	Change = std::unique_ptr<Sprite>(Sprite::CreateSprite(60, { 0,0 }));
 	Change->SetSize({ 1280,720 });
 	//Sprite::LoadTexture(61, L"Resources/UI/Load.png");
 	//loadingS = Sprite::CreateSprite(61, { 0,0 });

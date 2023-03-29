@@ -48,14 +48,14 @@ void ClearScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(36, L"Resources/UI/title/space.png");
 	Sprite::LoadTexture(37, L"Resources/UI/back2.png");
 
-	overTextSprite = Sprite::CreateSprite(30, { 0,0 });
-	clearTextSprite = Sprite::CreateSprite(31, { 0,0 });
-	overSprite = Sprite::CreateSprite(32, { 0,0 });
-	clearSprite = Sprite::CreateSprite(33, { 0,0 });
-	motherASprite = Sprite::CreateSprite(34, { 0,0 });
-	motherSSprite = Sprite::CreateSprite(35, { 0,0 });
-	Space = Sprite::CreateSprite(36, { 0,0 });
-	back = Sprite::CreateSprite(37, { 0,0 });
+	overTextSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(30, { 0,0 }));
+	clearTextSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(31, { 0,0 }));
+	overSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(32, { 0,0 }));
+	clearSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(33, { 0,0 }));
+	motherASprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(34, { 0,0 }));
+	motherSSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(35, { 0,0 }));
+	Space = std::unique_ptr<Sprite>(Sprite::CreateSprite(36, { 0,0 }));
+	back = std::unique_ptr<Sprite>(Sprite::CreateSprite(37, { 0,0 }));
 
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });

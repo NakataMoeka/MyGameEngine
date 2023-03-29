@@ -13,11 +13,11 @@ void Pose::Initialize(Audio* audio)
 	Sprite::LoadTexture(22, L"Resources/UI/title/Back.png");
 	Sprite::LoadTexture(23, L"Resources/UI/Info.png");
 	Sprite::LoadTexture(24, L"Resources/UI/PoseBack.png");
-	PoseSprite = Sprite::CreateSprite(20, { 450,0 });
-	TitleBackSprite = Sprite::CreateSprite(21, { 0,0 });
-	BackSprite = Sprite::CreateSprite(22, { 0,0 });
-	InfoSprite = Sprite::CreateSprite(23, { 0,0 });
-	PBSprite = Sprite::CreateSprite(24, { 0,0 });
+	PoseSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(20, { 450,0 }));
+	TitleBackSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(21, { 0,0 }));
+	BackSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(22, { 0,0 }));
+	InfoSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(23, { 0,0 }));
+	PBSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(24, { 0,0 }));
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/Œˆ’èƒ{ƒ^ƒ“‚ð‰Ÿ‚·26.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/SE/cursor.wav");
 }

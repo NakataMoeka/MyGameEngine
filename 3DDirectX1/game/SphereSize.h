@@ -1,6 +1,7 @@
 #pragma once
 #include"Sprite.h"
 #include<array>
+#include<d3dx12.h>
 /// <summary>
 /// サイズ表示用のクラス
 /// </summary>
@@ -16,10 +17,10 @@ public:
 	int GetTsize() { return Tsize; }
 	int GetTcount() { return TCount; }
 private:
-	std::array < Sprite*, 10>Number = {};//数字。8つなのはcmとmの一の位と十の位があるため&目標サイズ用
-	std::array < Sprite*, 4> Meters = {};//目標サイズと現在のサイズ用で2つ
-	std::array < Sprite*, 2> Centimeter = {};//上記と同じ
-	Sprite* TargetSprite = nullptr;
+	std::array < std::unique_ptr<Sprite>, 10>Number = {};//数字。8つなのはcmとmの一の位と十の位があるため&目標サイズ用
+	std::array < std::unique_ptr<Sprite>, 4> Meters = {};//目標サイズと現在のサイズ用で2つ
+	std::array < std::unique_ptr<Sprite>, 2> Centimeter = {};//上記と同じ
+	std::unique_ptr<Sprite> TargetSprite = nullptr;
 	int Tsize = 1;
 	int TCount = 0;
 	int tSC = 0;//cmの1の位カウント

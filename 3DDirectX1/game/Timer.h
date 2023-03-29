@@ -1,6 +1,7 @@
 #pragma once
 #include"Sprite.h"
 #include <array>
+#include <memory>
 /// <summary>
 /// タイマー表示(ゲームシーンからの分離)
 /// </summary>
@@ -15,10 +16,10 @@ public:
 	bool SetFlag(bool poseFlag) { return this->poseFlag = poseFlag; }
 	bool SetSFlag(bool startFlag) { return this->startFlag = startFlag; }
 private:
-	Sprite* timeSprite = nullptr;//円
-	Sprite* timeSprite3 = nullptr;//円
-	Sprite* timeSprite2 = nullptr;//バー
-	std::array<Sprite*,2> TimeNum = {};
+	std::unique_ptr<Sprite> timeSprite = nullptr;//円
+	std::unique_ptr<Sprite> timeSprite3 = nullptr;//円
+	std::unique_ptr<Sprite> timeSprite2 = nullptr;//バー
+	std::array<std::unique_ptr<Sprite>,2> TimeNum = {};
 	//タイマー系
 	float TimeRot = 0;
 	int TimeCount = 0;

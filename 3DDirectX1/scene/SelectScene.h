@@ -46,10 +46,10 @@ private:
 	SoundData sound2 = {};
 	SoundData sound3 = {};
 	SoundData sound4 = {};
-	std::array < Sprite*, 6> backSprite = {};
-	Sprite* SelectUI = nullptr;
-	Sprite* SelectNumber = nullptr;
-	Sprite* TutorialS = nullptr;
+	std::array <std::unique_ptr<Sprite>, 6> backSprite = {};
+	std::unique_ptr<Sprite> SelectUI = nullptr;
+	std::unique_ptr<Sprite> SelectNumber = nullptr;
+	std::unique_ptr<Sprite> TutorialS = nullptr;
 	float spriteCount = 0;
 	int stageNum = 0;
 	bool SCangeFlag = false;

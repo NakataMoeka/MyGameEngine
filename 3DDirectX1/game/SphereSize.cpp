@@ -7,15 +7,15 @@ void SphereSize::Initialize()
 	Sprite::LoadTexture(27, L"Resources/UI/number/c.png");
 	Sprite::LoadTexture(29, L"Resources/UI/number/target.png");
 	for (int i = 0; i < 10; i++) {
-		Number[i] = Sprite::CreateSprite(25, { 180,50 });
+		Number[i] = std::unique_ptr<Sprite>(Sprite::CreateSprite(25, { 180,50 }));
 	}
 	for (int i = 0; i < 4; i++) {
-		Meters[i] = Sprite::CreateSprite(26, { 0,0 });
+		Meters[i] = std::unique_ptr<Sprite>(Sprite::CreateSprite(26, { 0,0 }));
 	}
 	for (int i = 0; i < 2; i++) {
-		Centimeter[i] = Sprite::CreateSprite(27, { 0, 0 });
+		Centimeter[i] = std::unique_ptr<Sprite>(Sprite::CreateSprite(27, { 0, 0 }));
 	}
-	TargetSprite = Sprite::CreateSprite(29, { 0,0 });
+	TargetSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(29, { 0,0 }));
 
 }
 

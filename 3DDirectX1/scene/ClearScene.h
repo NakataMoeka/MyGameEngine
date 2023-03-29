@@ -46,14 +46,14 @@ private:
 
 	SoundData sound1 = {};
 
-	Sprite* overTextSprite = nullptr;
-	Sprite* clearTextSprite = nullptr;
-	Sprite* overSprite = nullptr;
-	Sprite* clearSprite = nullptr;
-	Sprite* motherASprite = nullptr;
-	Sprite* motherSSprite = nullptr;
-	Sprite* Space = nullptr;
-	Sprite* back = nullptr;
+	std::unique_ptr<Sprite> overTextSprite = nullptr;
+	std::unique_ptr<Sprite> clearTextSprite = nullptr;
+	std::unique_ptr<Sprite> overSprite = nullptr;
+	std::unique_ptr<Sprite> clearSprite = nullptr;
+	std::unique_ptr<Sprite> motherASprite = nullptr;
+	std::unique_ptr<Sprite> motherSSprite = nullptr;
+	std::unique_ptr<Sprite> Space = nullptr;
+	std::unique_ptr<Sprite> back = nullptr;
 
 	bool clearFlag = false;
 	bool overFlag = false;

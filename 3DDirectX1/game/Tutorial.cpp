@@ -10,14 +10,14 @@ void Tutorial::Initialize()
 	Sprite::LoadTexture(55, L"Resources/UI/Tutorial6.png");
 	Sprite::LoadTexture(56, L"Resources/UI/Tutorial7.png");
 	Sprite::LoadTexture(57, L"Resources/UI/TutorialUI.png");
-	TutorialSprite[0] = Sprite::CreateSprite(50, { 200,400 });
-	TutorialSprite[1] = Sprite::CreateSprite(51, { 200,400 });
-	TutorialSprite[2] = Sprite::CreateSprite(52, { 200,400 });
-	TutorialSprite[3] = Sprite::CreateSprite(53, { 200,400 });
-	TutorialSprite[4] = Sprite::CreateSprite(54, { 200,400 });
-	TutorialSprite[5] = Sprite::CreateSprite(55, { 200,400 });
-	TutorialSprite[6] = Sprite::CreateSprite(56, { 200,400 });
-	TutorialUI = Sprite::CreateSprite(57, { 700,550 });
+	TutorialSprite[0] = std::unique_ptr<Sprite>(Sprite::CreateSprite(50, { 200,400 }));
+	TutorialSprite[1] = std::unique_ptr<Sprite>(Sprite::CreateSprite(51, { 200,400 }));
+	TutorialSprite[2] = std::unique_ptr<Sprite>(Sprite::CreateSprite(52, { 200,400 }));
+	TutorialSprite[3] = std::unique_ptr<Sprite>(Sprite::CreateSprite(53, { 200,400 }));
+	TutorialSprite[4] = std::unique_ptr<Sprite>(Sprite::CreateSprite(54, { 200,400 }));
+	TutorialSprite[5] = std::unique_ptr<Sprite>(Sprite::CreateSprite(55, { 200,400 }));
+	TutorialSprite[6] = std::unique_ptr<Sprite>(Sprite::CreateSprite(56, { 200,400 }));
+	TutorialUI = std::unique_ptr<Sprite>(Sprite::CreateSprite(57, { 700,550 }));
 }
 
 void Tutorial::Init()
