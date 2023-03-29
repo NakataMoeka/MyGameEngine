@@ -109,7 +109,7 @@ private: // メンバ変数
 	int Tsize2 = 1;
 	int TCount = 0;
 	bool TFlag = false;
-
+	float radius = 3.0f;
 	float distance = 20.0f;//プレイヤーとカメラの距離
 
 	float distanceY = 20.0f;//カメラの位置
@@ -132,7 +132,6 @@ private: // メンバ変数
 	int testCount = 0;//test
 	int GoalCount = 0;//目標サイズ
 	XMFLOAT3 Ssize = { 1,1,1 };//球のサイズ
-	float radius = 3;
 	int audioCount = 0;
 	
 };

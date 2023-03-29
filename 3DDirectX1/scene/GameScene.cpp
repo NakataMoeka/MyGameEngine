@@ -147,7 +147,7 @@ void GameScene::Init()
 	TSFlag = false;
 	cACount = 0;
 	caFlag = false;
-	radius = 3;
+	radius = 3.0f;
 	SZV = 5;
 	SY = 3;
 	Ssize = { 0.8f,0.8f,0.8f };
@@ -194,7 +194,7 @@ void GameScene::Update()
 				gameObjects->SetHIT(i, j, false);
 
 				if (gameObjects->GetObject3d(i, j)->GetParentFlag() == false) {
-					if (colMan->GetTsize() >= gameObjects->GetOSize(i, j) * 10 || gameObjects->GetOSize(i, j) == 1 || gameObjects->GetOSize(i, j) == 10) {
+					if (Tsize >= gameObjects->GetOSize(i, j) * 10 || gameObjects->GetOSize(i, j) == 1 || gameObjects->GetOSize(i, j) == 10) {
 						gameObjects->GetObject3d(i, j)->SetColFlag(true);
 						if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObjects->GetCSphere(i, j))) {
 
@@ -210,6 +210,7 @@ void GameScene::Update()
 				}
 
 				if (gameObjects->GetHIT(i, j) == true) {
+					
 					gameObjects->GetObject3d(i, j)->SetParent(player->GetObject3d());
 				}
 				if (HitCount == 1) {
@@ -227,6 +228,16 @@ void GameScene::Update()
 			}
 		}
 	}
+	//for (int j = 1; j < 5; j++) {
+	//	for (int i = 0; i < gameObjects->GetOBJCount(j); i++) {
+	//		if (gameObjects->GetHIT(i, j) == true) {
+	//			radius += 0.05f;
+	//			SY += 0.05f;
+	//			player->SetSY(SY);
+	//			player->SetRadius(radius);
+	//		}
+	//	}
+	//}
 	/*if (cACount == 1) {
 		caFlag = true;
 	}
@@ -236,7 +247,7 @@ void GameScene::Update()
 		cACount = 0;
 
 	}*/
-	colMan->ColSphere();
+	//colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		//音を鳴らしたりなど
 		//Ssize.x += colMan->GetSsize().x;
@@ -252,12 +263,12 @@ void GameScene::Update()
 
 
 #pragma region	サイズ
-	colMan->SetTsize2(Tsize);
+	//colMan->SetTsize2(Tsize);
 
 	//プレイヤーの大きさ
 
 
-	sphereSize->SetTsize((int)colMan->GetTsize());
+	sphereSize->SetTsize((int)Tsize);
 	//sphereSize->SetTsize(Tsize);
 	player->SetRadius(radius);
 	player->SetSphereSize(Ssize);

@@ -49,7 +49,7 @@ public:
 
 	float SetSZV(float szv) { return this->sphereZV = szv; }
 	float SetSY(float sy) { return this->sphereY = sy; }
-	float SetRadius(float r) { return this->r = r; }
+	float SetRadius(float r) { return this->radius = r; }
 	int GetTWCount() { return TWCount; }
 private://Update()にまとめるもの
 	void Move();//移動
@@ -64,6 +64,8 @@ private://変数
 	//球のモデル
 	Object3d* SphereObj = nullptr;
 	Model* model2 = nullptr;
+	Object3d* SphereObj2 = nullptr;
+	Model* model3 = nullptr;
 	//集中線
 	std::unique_ptr<Sprite> dashSprite = nullptr;
 
@@ -79,7 +81,7 @@ private://変数
 
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 	float r = 3;
-
+	float radius = 3.0f;
 	//移動
 	float speedUD = 0;
 	float speedLR = 0;
