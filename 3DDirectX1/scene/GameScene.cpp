@@ -233,16 +233,7 @@ void GameScene::Update()
 			}
 		}
 	}
-	//for (int j = 1; j < 5; j++) {
-	//	for (int i = 0; i < gameObjects->GetOBJCount(j); i++) {
-	//		if (gameObjects->GetHIT(i, j) == true) {
-	//			radius += 0.05f;
-	//			SY += 0.05f;
-	//			player->SetSY(SY);
-	//			player->SetRadius(radius);
-	//		}
-	//	}
-	//}
+	
 
 	//colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
