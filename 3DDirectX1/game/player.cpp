@@ -27,7 +27,7 @@ void Player::Initialize()
 	model2 = Model::Create("bullet", true);
 	SphereObj = Object3d::Create(model2);
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
-	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/halfPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	Sprite::LoadTexture(2, L"Resources/dash.png");
 
 	dashSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(2, { 0,0 }));
