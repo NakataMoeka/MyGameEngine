@@ -470,7 +470,8 @@ void GameScene::DrawFront()
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}
-sphereSize->Draw();
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", player->GetRadius());
+	sphereSize->Draw();
 
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
