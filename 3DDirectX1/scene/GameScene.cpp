@@ -240,7 +240,6 @@ void GameScene::Update()
 		//音を鳴らしたりなど
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);
-
 	}
 #pragma endregion
 
@@ -270,7 +269,6 @@ void GameScene::Update()
 	player->SetPFlag(pose->GetJFlag());
 	//ポーズ状態じゃなかったら
 	if (pose->GetPFlag() == false) {
-		//player->SetPFlag(false);
 
 		//チュートリアル以外
 		if (stageNum != 0) {
@@ -340,7 +338,6 @@ void GameScene::Update()
 		stageObj->RC();
 	}
 	sphereSize->Update();
-	//DebugText::GetInstance()->Printf(100, 500, 3.0f, { 1,1,1,1 }, "%d", testCount);
 #pragma endregion
 #if _DEBUG 
 	//デバッグでクリアとゲームオーバー見るために作ったやつ
@@ -473,20 +470,7 @@ void GameScene::DrawFront()
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", player->GetRadius());
-	//DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
-	//DebugText::GetInstance()->Printf(100, 80, 3.0f, "%d", Alive[1]);
-	//DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "WASD:MOVE");
-	//DebugText::GetInstance()->Printf(100, 240, 3.0f, { 1,1,1,1 }, "LRARROW:ANGLE");
-	//DebugText::GetInstance()->Printf(100, 280, 3.0f, { 1,1,1,1 }, "UPARROW:DASH");
-	//DebugText::GetInstance()->Printf(100, 320, 3.0f, { 1,1,1,1 }, "SPACE:JUMP");
-	//DebugText::GetInstance()->Printf(100, 360, 3.0f, { 1,1,1,1 }, "R:POSE");
-	/*DebugText::GetInstance()->Printf(460, 150, 3.0f,{1,1,1,1}, "%f,%f,%f",
-	gameObjects->GetObject3d(0,0)->GetRotation().m128_f32[0], gameObjects->GetObject3d(0, 0)->GetRotation().m128_f32[1], gameObjects->GetObject3d(0, 0)->GetRotation().m128_f32[2]);
-	*/
-	/*DebugText::GetInstance()->Printf(460, 150, 3.0f, { 1,1,1,1 }, "%f,%f,%f",
-		player->GetPlayerPos().x,player->GetPlayerPos().y,player->GetPlayerPos().z);
-	*/sphereSize->Draw();
+sphereSize->Draw();
 
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
