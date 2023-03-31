@@ -243,15 +243,7 @@ void GameScene::Update()
 	//		}
 	//	}
 	//}
-	/*if (cACount == 1) {
-		caFlag = true;
-	}
-	if (caFlag == true) {
-		audio->SEPlayWave(sound3);
-		caFlag = false;
-		cACount = 0;
 
-	}*/
 	//colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		//音を鳴らしたりなど
