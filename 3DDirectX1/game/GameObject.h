@@ -57,6 +57,7 @@ public:
 	float GetOSize(int i, int j);
 	XMFLOAT3 GetOPos(int i, int j);
 	int SetTsize(int Tsize) { return this->Tsize = Tsize; }
+	float SetY(float y) { return this->y = y; }
 private://関数
 	static const int OBJNumber = 100;//objの最大数(多いやつ)
 	static const int OBJNumber2 = 30;//objの最大数(少なめのやつ)
@@ -110,6 +111,7 @@ private://変数
 	std::array < Sphere, OBJNumber> cSphere4;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere5;//当たり判定のやつ
 	float r = 3;//
+	float y = 0;
 	//サイズ角度位置
 	XMFLOAT3 pos{ 10,2,0 };
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };

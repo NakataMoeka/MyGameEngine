@@ -102,6 +102,7 @@ void GameObjects::Init()
 {
 	size[0] = { 1.0f,1.0f,1.0f };
 	size[1] = { 5,5,5 };
+	y = 0;
 	for (int i = 0; i < oData.size(); i++) {
 
 
@@ -340,7 +341,7 @@ void GameObjects::Update()
 		for (int i = 0; i < oData.size(); i++) {
 
 			cSphere[i].radius = 0.5f;
-			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1] + y, cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			if (cube[i]->GetColFlag() == true) {
 				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 			}
@@ -353,7 +354,7 @@ void GameObjects::Update()
 
 
 			cSphere[i].radius = 0.5f;
-			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1], cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1] + y, cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚½‚ç”rË‚µ‚È‚¢
 			if (cube[i]->GetColFlag() == true) {
 				cube[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -367,7 +368,7 @@ void GameObjects::Update()
 
 			//obj‚ÌˆÚ“®ˆ—
 			cSphere2[i].radius = 1.0f;
-			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1], moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1] + y, moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚Ä‚¢‚È‚¢‚Æ‚«‚Í‰ñ“]‚·‚é
 			if (moveObj[i]->GetParentFlag() == false) {
 				oData2[i]->rot.m128_f32[1] += 2;
@@ -383,7 +384,7 @@ void GameObjects::Update()
 		for (int i = 0; i < oData3.size(); i++) {
 
 			cSphere3[i].radius = 1.0f;
-			cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1], Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1] + y, Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚½‚ç”rË‚µ‚È‚¢
 			if (Bear[i]->GetColFlag() == true) {
 				Bear[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -396,7 +397,7 @@ void GameObjects::Update()
 		for (int i = 0; i < oData4.size(); i++) {
 
 			cSphere4[i].radius = 1.5f;
-			cSphere4[i].center = XMVectorSet(Robot[i]->GetMatWorld().r[3].m128_f32[0], Robot[i]->GetMatWorld().r[3].m128_f32[1], Robot[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere4[i].center = XMVectorSet(Robot[i]->GetMatWorld().r[3].m128_f32[0], Robot[i]->GetMatWorld().r[3].m128_f32[1] + y, Robot[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚½‚ç”rË‚µ‚È‚¢
 			if (Robot[i]->GetColFlag() == true) {
 				Robot[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -409,7 +410,7 @@ void GameObjects::Update()
 		for (int i = 0; i < oData5.size(); i++) {
 
 			cSphere5[i].radius = 2.0f;
-			cSphere5[i].center = XMVectorSet(Card[i]->GetMatWorld().r[3].m128_f32[0], Card[i]->GetMatWorld().r[3].m128_f32[1], Card[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere5[i].center = XMVectorSet(Card[i]->GetMatWorld().r[3].m128_f32[0], Card[i]->GetMatWorld().r[3].m128_f32[1] + y, Card[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚½‚ç”rË‚µ‚È‚¢
 			if (Card[i]->GetColFlag() == true) {
 				Card[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -424,7 +425,7 @@ void GameObjects::Update()
 		for (int i = 0; i < oData.size(); i++) {
 
 			cSphere[i].radius = 0.5f;
-			cSphere[i].center = XMVectorSet(Game[i]->GetMatWorld().r[3].m128_f32[0], Game[i]->GetMatWorld().r[3].m128_f32[1], Game[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere[i].center = XMVectorSet(Game[i]->GetMatWorld().r[3].m128_f32[0], Game[i]->GetMatWorld().r[3].m128_f32[1] + y, Game[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚½‚ç”rË‚µ‚È‚¢
 			if (Game[i]->GetColFlag() == true) {
 				Game[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -437,7 +438,7 @@ void GameObjects::Update()
 
 			//obj‚ÌˆÚ“®ˆ—
 			cSphere2[i].radius = 1.0f;
-			cSphere2[i].center = XMVectorSet(Koma[i]->GetMatWorld().r[3].m128_f32[0], Koma[i]->GetMatWorld().r[3].m128_f32[1], Koma[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere2[i].center = XMVectorSet(Koma[i]->GetMatWorld().r[3].m128_f32[0], Koma[i]->GetMatWorld().r[3].m128_f32[1] + y, Koma[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚Ä‚¢‚È‚¢‚Æ‚«‚Í‰ñ“]‚·‚é
 			if (Koma[i]->GetParentFlag() == false) {
 				oData2[i]->rot.m128_f32[1] += 2;
@@ -453,7 +454,7 @@ void GameObjects::Update()
 		for (int i = 0; i < oData3.size(); i++) {
 
 			cSphere3[i].radius = 1.0f;
-			cSphere3[i].center = XMVectorSet(Shogi[i]->GetMatWorld().r[3].m128_f32[0], Shogi[i]->GetMatWorld().r[3].m128_f32[1], Shogi[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere3[i].center = XMVectorSet(Shogi[i]->GetMatWorld().r[3].m128_f32[0], Shogi[i]->GetMatWorld().r[3].m128_f32[1] + y, Shogi[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚½‚ç”rË‚µ‚È‚¢
 			if (Shogi[i]->GetColFlag() == true) {
 				Shogi[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -465,7 +466,7 @@ void GameObjects::Update()
 		for (int i = 0; i < oData4.size(); i++) {
 
 			cSphere4[i].radius = 1.0f;
-			cSphere4[i].center = XMVectorSet(Kendama[i]->GetMatWorld().r[3].m128_f32[0], Kendama[i]->GetMatWorld().r[3].m128_f32[1], Kendama[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere4[i].center = XMVectorSet(Kendama[i]->GetMatWorld().r[3].m128_f32[0], Kendama[i]->GetMatWorld().r[3].m128_f32[1] + y, Kendama[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚½‚ç”rË‚µ‚È‚¢
 			if (Kendama[i]->GetColFlag() == true) {
 				Kendama[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
@@ -477,7 +478,7 @@ void GameObjects::Update()
 		for (int i = 0; i < oData5.size(); i++) {
 
 			cSphere5[i].radius = 1.0f;
-			cSphere5[i].center = XMVectorSet(Turu[i]->GetMatWorld().r[3].m128_f32[0], Turu[i]->GetMatWorld().r[3].m128_f32[1], Turu[i]->GetMatWorld().r[3].m128_f32[2], 1);
+			cSphere5[i].center = XMVectorSet(Turu[i]->GetMatWorld().r[3].m128_f32[0], Turu[i]->GetMatWorld().r[3].m128_f32[1] + y, Turu[i]->GetMatWorld().r[3].m128_f32[2], 1);
 			//‚­‚Á‚Â‚¢‚½‚ç”rË‚µ‚È‚¢
 			if (Turu[i]->GetColFlag() == true) {
 				Turu[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);

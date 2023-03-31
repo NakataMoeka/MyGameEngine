@@ -37,6 +37,7 @@ public:
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMVECTOR GetSphereAngle() { return sphereAngle; }
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
+	float GetRadius() { return radius; }
 	Sphere GetSphere() { return sphere; }
 	Object3d* GetObject3d() { return SphereObj; }
 	XMFLOAT3 SetSphereSize(XMFLOAT3 sphereSize) { return this->sphereSize = sphereSize; }

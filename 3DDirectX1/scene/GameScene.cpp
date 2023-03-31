@@ -152,6 +152,7 @@ void GameScene::Init()
 	SY = 3;
 	Ssize = { 0.8f,0.8f,0.8f };
 	audioCount = 0;
+	OY = 0;
 
 }
 
@@ -187,30 +188,25 @@ void GameScene::Update()
 	lightGroup->SetCircleShadowFactorAngle(0, XMFLOAT2(0.0f, 0.5f));
 
 #pragma region	当たり判定
+	//チュートリアルで動いてみてよの後ならくっつく
 	if (tutorial->GetTCount() != 1) {
+		//jはobjの種類数
+		//iは種類ごとの数
 		for (int j = 0; j < 5; j++) {
 			for (int i = 0; i < gameObjects->GetOBJCount(j); i++) {
-
 				gameObjects->SetHIT(i, j, false);
-
 				if (gameObjects->GetObject3d(i, j)->GetParentFlag() == false) {
 					if (Tsize >= gameObjects->GetOSize(i, j) * 10 || gameObjects->GetOSize(i, j) == 1 || gameObjects->GetOSize(i, j) == 10) {
 						gameObjects->GetObject3d(i, j)->SetColFlag(true);
 						if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObjects->GetCSphere(i, j))) {
-
 							gameObjects->SetHIT(i, j, true);
 							HitCount++;
 							gameObjects->GetObject3d(i, j)->SetParentFlag(true);
 						}
-
 						//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
 					}
-
-
 				}
-
 				if (gameObjects->GetHIT(i, j) == true) {
-					
 					gameObjects->GetObject3d(i, j)->SetParent(player->GetObject3d());
 				}
 				if (HitCount == 1) {
@@ -219,6 +215,15 @@ void GameScene::Update()
 					HitCount = 0;
 					gameObjects->SetHIT(i, j, false);
 					Tsize += gameObjects->GetOSize(i, j);
+					if (j != 0) {
+						radius += 0.1f;
+						SY += 0.1f;
+						player->SetSY(SY);
+						player->SetRadius(radius);
+						OY += 0.1f;
+						gameObjects->SetY(OY);
+					}
+
 					/*		Ssize.x += 0.001f;
 							Ssize.y += 0.001f;
 							Ssize.z += 0.001f;
@@ -264,10 +269,7 @@ void GameScene::Update()
 
 #pragma region	サイズ
 	//colMan->SetTsize2(Tsize);
-
 	//プレイヤーの大きさ
-
-
 	sphereSize->SetTsize((int)Tsize);
 	//sphereSize->SetTsize(Tsize);
 	player->SetRadius(radius);
@@ -493,7 +495,7 @@ void GameScene::DrawFront()
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}
-	//DebugText::GetInstance()->Printf(100, 20, 3.0f, "%d", player->GetOnGround());
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", player->GetRadius());
 	//DebugText::GetInstance()->Printf(100, 40, 3.0f, "%f", Tsize);
 	//DebugText::GetInstance()->Printf(100, 80, 3.0f, "%d", Alive[1]);
 	//DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "WASD:MOVE");

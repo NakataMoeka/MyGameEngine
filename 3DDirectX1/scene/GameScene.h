@@ -118,6 +118,7 @@ private: // メンバ変数
 
 	float SZV = 3;//sphereとの
 	float SY = 3;//SphereのY軸高さ
+	float OY = 0;//objの当たり判定用y足す変数
 	bool clearFlag = false;
 	bool overFlag = false;
 
