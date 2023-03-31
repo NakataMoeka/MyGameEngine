@@ -238,11 +238,6 @@ void GameScene::Update()
 	//colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		//音を鳴らしたりなど
-		//Ssize.x += colMan->GetSsize().x;
-		//Ssize.y += colMan->GetSsize().y;
-		//Ssize.z += colMan->GetSsize().z;
-		//radius += colMan->GetRadius();
-		//SY += colMan->GetSY();
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);
 
