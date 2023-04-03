@@ -36,11 +36,7 @@ void Player::Initialize()
 
 void Player::Init()
 {
-	/*for (int i = 0; i < OBJNumber; i++) {
-		for (int j = 0; j < OBJNumber; j++) {
-			colFlag[i][j] = false;
-		}
-	}*/
+
 	dashMoveFlag = false;
 	dashFlag = false;
 	PlayerWalkCount = 0;

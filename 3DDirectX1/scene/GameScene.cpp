@@ -57,7 +57,6 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	lightGroup->SetCircleShadowActive(0, true);
 
 
-
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
 	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect2.png", true);
@@ -72,9 +71,6 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
 
 
-	//audio->SoundPlayWave(sound1);
-	//audio->SoundPlayWave(sound2);
-	//audio->SetBGMVolume(0.5f);
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
@@ -459,7 +455,7 @@ void GameScene::DrawFront()
 {
 	//前景
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	//player->DrawSprite();
+	
 	if (stageNum == 0) {
 		tutorial->Draw();
 	}
