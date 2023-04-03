@@ -163,7 +163,7 @@ void GameScene::InitStageNum(int stageNum)
 		sphereSize->InitStage(0);
 	}
 	else if (stageNum == 1) {
-		GoalCount = 80;
+		GoalCount = 120;
 		sphereSize->InitStage(GoalCount);
 	}
 	else if (stageNum == 2) {
@@ -466,7 +466,7 @@ void GameScene::DrawFront()
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", player->GetRadius());
+	//DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", player->GetRadius());
 	sphereSize->Draw();
 
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
