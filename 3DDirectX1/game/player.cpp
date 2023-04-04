@@ -97,7 +97,7 @@ void Player::Move()
 
 	XMVECTOR moveUD = { 0,0,speedUD,0 };//前後方向用の移動ベクトル
 	XMVECTOR moveLR = { speedLR,0,0,0 };//左右方向の移動用ベクトル
-	XMVECTOR moveAngle = { 0,0.5,0,0 };//角度のベクトル
+	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
 	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 	XMMATRIX matRot2 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
