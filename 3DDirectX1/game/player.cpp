@@ -37,14 +37,13 @@ void Player::Initialize()
 void Player::Init()
 {
 
-	dashMoveFlag = false;
 	dashFlag = false;
 	PlayerWalkCount = 0;
 	CountWalk = 0;
 	speedUD = 0.0f;
 	speedLR = 0.0f;
 	r = 3.0f;
-	dash = 1.5f;
+	dash = 0.0f;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	pFlag = false;
@@ -97,7 +96,7 @@ void Player::Move()
 
 	XMVECTOR moveUD = { 0,0,speedUD,0 };//前後方向用の移動ベクトル
 	XMVECTOR moveLR = { speedLR,0,0,0 };//左右方向の移動用ベクトル
-	XMVECTOR moveAngle = { 0,1,0,0 };//角度のベクトル
+	XMVECTOR moveAngle = { 0,0.7f,0,0 };//角度のベクトル
 	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 	XMMATRIX matRot2 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
@@ -120,7 +119,7 @@ void Player::Move()
 	}
 	//if (JumpFlag == false) {
 	//ダッシュしていないとき
-	if (dashMoveFlag == false) {
+	if (dashFlag == false) {
 		//移動
 		playerPos = vec(playerPos, moveUD);
 		spherePos = vec(spherePos, moveUD);
@@ -216,8 +215,6 @@ void Player::Move()
 		//ジャンプアニメーションにする
 		playerObj->PlayAnimation(0, false);
 	}
-
-
 	//回転を追従させたい
 }
 
@@ -359,18 +356,16 @@ void Player::Jump()
 			playerPos.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 		}
 	}
-
 }
-
 
 void Player::Dash()
 {
+	//ダッシュにも慣性を付ける
 	dashCoolTime--;
 	if (dashCoolTime <= 0 && dashTime <= 0)
 	{
 		dashCoolTime = 0;
 		dashFlag = false;
-		dashMoveFlag = false;
 	}
 	//ジャンプしていないときにダッシュできる
 	if (JumpFlag == false) {
@@ -380,7 +375,6 @@ void Player::Dash()
 			fade = 1;
 			dash = 1.5f;
 			dashFlag = true;
-			dashMoveFlag = true;
 		}
 
 		if (dashTime > 0)

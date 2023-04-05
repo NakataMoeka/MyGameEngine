@@ -83,7 +83,7 @@ private: // メンバ変数
 	ParticleManager* particleMan = nullptr;
 
 	std::unique_ptr<Sprite> sprite = nullptr;
-
+	std::unique_ptr<Sprite> tmSprite = nullptr;//目標達成時にアナウンスする用
 	LightGroup* lightGroup = nullptr;
 
 	CollisionManager* colMan = nullptr;

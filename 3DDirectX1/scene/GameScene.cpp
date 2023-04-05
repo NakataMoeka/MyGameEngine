@@ -83,9 +83,9 @@ void GameScene::InitTH()
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 
 	Sprite::LoadTexture(1, L"Resources/background.png");
-
+	Sprite::LoadTexture(2, L"Resources/background.png");
 	sprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(1, { 0,0 }));
-
+	tmSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(2, { 0,0 }));
 	sound1 = Audio::SoundLoadWave("Resources/Music/SE/po.wav");
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/door.wav");
