@@ -38,6 +38,7 @@ void Player::Init()
 {
 
 	dashFlag = false;
+	dashTime = 20;
 	PlayerWalkCount = 0;
 	CountWalk = 0;
 	speedUD = 0.0f;
@@ -298,11 +299,9 @@ void Player::Jump()
 			if (-threshold < cos && cos < threshold) {
 				sphere->center += info.reject;
 				move += info.reject;
-
 			}
 			return true;
 		}
-
 		Sphere* sphere = nullptr;
 		DirectX::XMVECTOR move = { };
 	};
@@ -316,7 +315,6 @@ void Player::Jump()
 
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_OBJECT);
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider2, &callback2, COLLISION_ATTR_OBJECT);
-
 
 	// 交差による排斥分動かす
 	playerPos = vec(playerPos, callback.move);
@@ -361,26 +359,27 @@ void Player::Jump()
 void Player::Dash()
 {
 	//ダッシュにも慣性を付ける
-	dashCoolTime--;
-	if (dashCoolTime <= 0 && dashTime <= 0)
-	{
-		dashCoolTime = 0;
-		dashFlag = false;
+	if (dash<=0) {
+		dashCoolTime--;
+		if (dashCoolTime <= 0 && dashTime <= 0)
+		{
+			dashCoolTime = 0;
+			dashFlag = false;
+		}
 	}
 	//ジャンプしていないときにダッシュできる
 	if (JumpFlag == false) {
 		if (Input::GetInstance()->TriggerKey(DIK_UPARROW) && Input::GetInstance()->PushKey(DIK_W) && dashFlag == false)
 		{
-			dashTime = dashTimeMax;
+			dashTime = 20;
 			fade = 1;
 			dash = 1.5f;
 			dashFlag = true;
 		}
-
 		if (dashTime > 0)
 		{
 			dashTime--;
-			if (dashTime <= 0)
+			if (dashTime >= 0)
 			{
 				dashCoolTime = dashCoolTimeMax;
 			}
@@ -396,8 +395,14 @@ void Player::Dash()
 			if (dash > 0) {
 				dash -= 0.1f;
 			}
+			else {
+				dashCoolTime = dashCoolTimeMax;
+			}
 		}
 	}
+	//DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%f", dash);
+	//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "%d", dashTime);
+	//DebugText::GetInstance()->Printf(100, 100, 3.0f, { 1,1,1,1 }, "%d", dashFlag);
 }
 
 

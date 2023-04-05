@@ -98,7 +98,7 @@ private://•Ï”
 	int dashCoolTime = 0;
 	const int dashCoolTimeMax = 20;
 	int dashTime = 0;
-	const int dashTimeMax = 20;
+	//const int dashTimeMax = 20;
 	float fade = 1;
 	//ƒWƒƒƒ“ƒv•’n–Ê‚Æ‚Ì“–‚½‚è”»’èŒn
 	bool JumpFlag = false;

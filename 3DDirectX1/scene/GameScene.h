@@ -134,5 +134,7 @@ private: // メンバ変数
 	int GoalCount = 0;//目標サイズ
 	XMFLOAT3 Ssize = { 1,1,1 };//球のサイズ
 	int audioCount = 0;
-	
+	//まだくっつかないobjに当たった時に音をだしたりエフェクトを出したり
+	//する時に1回のみやるための変数
+	int HitCC;
 };

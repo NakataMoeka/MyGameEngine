@@ -221,9 +221,11 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 			// クエリーコールバック呼び出し
 			if (!callback->OnQueryHit(info)) {
 				// 戻り値がfalseの場合、継続せず終了
+				IsHit = false;
 				return;
 			}
-
+			DebugText::GetInstance()->Printf(100, 100, 3.0f, { 1,1,1,1 }, "Atatta");
+			IsHit = true;
 		}
 		// メッシュ
 		else if (col->GetShapeType() == COLLISIONSHAPE_MESH) {
@@ -243,9 +245,13 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 			// クエリーコールバック呼び出し
 			if (!callback->OnQueryHit(info)) {
 				// 戻り値がfalseの場合、継続せず終了
+				IsHit = false;
 				return;
 			}
+			IsHit = false;
 		}
+	
+		DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%d",IsHit);
 	}
 
 }

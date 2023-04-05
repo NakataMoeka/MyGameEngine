@@ -237,6 +237,18 @@ void GameScene::Update()
 		audio->SEPlayWave(sound1);
 		colMan->SetAudioFlag(false);
 	}
+	if (colMan->GetHit() == true) {
+		if (HitCC < 2) {
+			HitCC++;
+		}
+	}
+	else {
+		HitCC = 0;
+	}
+	if (HitCC == 1) {
+		audio->SEPlayWave(sound3);
+	}
+	DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "%d",HitCC);
 #pragma endregion
 
 
@@ -455,7 +467,7 @@ void GameScene::DrawFront()
 {
 	//前景
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	
+	player->DrawSprite();
 	if (stageNum == 0) {
 		tutorial->Draw();
 	}
