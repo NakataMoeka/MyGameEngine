@@ -18,7 +18,6 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 
-
 	safe_delete(particleMan);
 	safe_delete(lightGroup);
 }
@@ -59,7 +58,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
-	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect2.png", true);
+	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/bikkuri.png", true);
 	//particleMan->LoadTexture();
 	//particleMan->CreateModel();
 	// デバッグテキスト用テクスチャ読み込み
@@ -219,7 +218,6 @@ void GameScene::Update()
 						OY += 0.1f;
 						gameObjects->SetY(OY);
 					}
-
 					/*		Ssize.x += 0.001f;
 							Ssize.y += 0.001f;
 							Ssize.z += 0.001f;
@@ -229,8 +227,6 @@ void GameScene::Update()
 			}
 		}
 	}
-	
-
 	//colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		//音を鳴らしたりなど
@@ -267,7 +263,6 @@ void GameScene::Update()
 	}
 	player->SetSZV(SZV);
 #pragma endregion
-
 
 
 #pragma region ポーズなど
@@ -324,7 +319,7 @@ void GameScene::Update()
 		stageObj->Update();
 		gameObjects->Update();
 		timer->Update();
-		//CreateParticles();
+		CreateParticles();
 		particleMan->Update();
 	}
 
@@ -438,7 +433,7 @@ void GameScene::Update()
 	camera->Update();
 #pragma endregion
 	lightGroup->Update();
-
+	particleMan->Update();
 }
 
 
@@ -486,7 +481,7 @@ void GameScene::DrawFront()
 }
 void GameScene::CreateParticles()
 {
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 1; i++) {
 		// X,Y,Z全て[-5.0f,+5.0f]でランダムに分布
 		const float rnd_pos = 0.5f;
 		XMFLOAT3 pos = player->GetPlayerPos();
@@ -505,7 +500,7 @@ void GameScene::CreateParticles()
 		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
 		// 追加
-		particleMan->Add(60, pos, vel, acc, 0.3f, 0.0f, { 1,1,1 }, { 1,1,1 });
+		particleMan->Add(60, pos, vel, acc, 0.5f, 0.0f, { 1,1,1 }, { 1,1,1 });
 	}
 }
 
