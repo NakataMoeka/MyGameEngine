@@ -239,7 +239,7 @@ void GameScene::Update()
 		colMan->SetAudioFlag(false);
 	}
 	if (colMan->GetHit() == true) {
-		if (HitCC < 2) {
+		if (HitCC < 3) {
 			HitCC++;
 		}
 	}
@@ -459,7 +459,9 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 	player->Draw();
-	Bikkuri->Draw();
+	if (HitCC!=0&&HitCC <= 2) {
+		Bikkuri->Draw();
+	}
 	gameObjects->Draw();
 	stageObj->Draw();
 	Object3d::PostDraw();
