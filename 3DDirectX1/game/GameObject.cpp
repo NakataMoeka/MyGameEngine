@@ -234,7 +234,6 @@ void GameObjects::stageInit(int stageNum)
 			float y = 0;
 			if (spawnMap[j][i] == 1)
 			{
-
 				oData.push_back(new object);
 				num = (int)oData.size() - 1;
 				if (stageNum == 0 || stageNum == 2) {
@@ -247,7 +246,6 @@ void GameObjects::stageInit(int stageNum)
 			}
 			else if (spawnMap[j][i] == 2)
 			{
-
 				oData2.push_back(new object);
 				num = (int)oData2.size() - 1;
 				if (stageNum == 2) {
@@ -273,7 +271,6 @@ void GameObjects::stageInit(int stageNum)
 			}
 			else if (spawnMap[j][i] == 4)
 			{
-
 				oData4.push_back(new object);
 				num = (int)oData4.size() - 1;
 				if (stageNum == 2) {
@@ -286,7 +283,6 @@ void GameObjects::stageInit(int stageNum)
 			}
 			else if (spawnMap[j][i] == 5)
 			{
-
 				oData5.push_back(new object);
 				num = (int)oData5.size() - 1;
 				if (stageNum == 2) {

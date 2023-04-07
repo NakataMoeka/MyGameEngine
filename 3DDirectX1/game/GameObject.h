@@ -25,11 +25,11 @@ private:
 	using XMVECTOR = DirectX::XMVECTOR;
 
 	//オブジェクト配列
-	std::vector<object*>oData;//ブロック
-	std::vector<object*>oData2;//車
-	std::vector<object*>oData3;//クマ
-	std::vector<object*>oData4;//ロボット
-	std::vector<object*>oData5;//カード
+	std::vector<object*>oData;//ブロック,ゲーム機
+	std::vector<object*>oData2;//車,コマ
+	std::vector<object*>oData3;//クマ,将棋のコマ
+	std::vector<object*>oData4;//ロボット,けん玉
+	std::vector<object*>oData5;//カード,折鶴
 public:
 	
 
@@ -40,14 +40,10 @@ public:
 	void stageInit(int stageNum);//ステージ初期化
 	
 	void Update();
-	//void UpdNum();//
 	void RC();//コライダー消すやつ
 	void Draw();
 	//GetterSetter
 	Sphere GetCSphere(int i, int j);
-
-	//XMFLOAT3 GetPos(int i) { return position2[i]; }
-	//XMFLOAT3 SetPos(XMFLOAT3 pos ,int i) { return this->position[i] = pos; }
 	XMFLOAT3 GetSize(int i) { return size[i]; }
 	int GetOBJCount(int j);
 	float GetMat();

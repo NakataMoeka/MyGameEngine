@@ -65,8 +65,6 @@ private://•Ï”
 	//‹…‚Ìƒ‚ƒfƒ‹
 	Object3d* SphereObj = nullptr;
 	Model* model2 = nullptr;
-	Object3d* Bikkuri = nullptr;
-	Model* BikkuriModel = nullptr;
 
 	//W’†ü
 	std::unique_ptr<Sprite> dashSprite = nullptr;

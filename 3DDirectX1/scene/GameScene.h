@@ -98,7 +98,8 @@ private: // メンバ変数
 	SphereSize* sphereSize = nullptr;
 	Tutorial* tutorial = nullptr;
 	start* st = nullptr;
-
+	Object3d* Bikkuri = nullptr;
+	Model* BikkuriModel = nullptr;
 	const int debugTextTexNumber = 0;
 
 

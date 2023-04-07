@@ -105,6 +105,11 @@ void GameScene::InitTH()
 	pose->Initialize(audio);
 	st = new start();
 	st->Initialize(audio);
+	BikkuriModel = Model::Create("bikkuri", true);
+	Bikkuri = Object3d::Create(BikkuriModel);
+	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
+	Bikkuri->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
+
 }
 
 void GameScene::Init()
@@ -319,8 +324,8 @@ void GameScene::Update()
 		stageObj->Update();
 		gameObjects->Update();
 		timer->Update();
-		CreateParticles();
-		particleMan->Update();
+		//CreateParticles();
+		//particleMan->Update();
 	}
 
 	if (audioCount == 1) {
@@ -341,6 +346,8 @@ void GameScene::Update()
 		stageObj->RC();
 	}
 	sphereSize->Update();
+	Bikkuri->SetPosition(player->GetPlayerPos());
+	Bikkuri->Update();
 #pragma endregion
 #if _DEBUG 
 	//デバッグでクリアとゲームオーバー見るために作ったやつ
@@ -443,6 +450,7 @@ void GameScene::DrawBG()
 	Sprite::PreDraw(dxCommon->GetCmdList());
 	sprite->Draw();
 	Sprite::PostDraw();
+
 	dxCommon->ClearDepthBuffer();
 }
 
@@ -451,12 +459,12 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 	player->Draw();
+	Bikkuri->Draw();
 	gameObjects->Draw();
 	stageObj->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
-	particleMan->Draw(dxCommon->GetCmdList());
-
+	//particleMan->Draw(dxCommon->GetCmdList());
 }
 void GameScene::DrawFront()
 {
