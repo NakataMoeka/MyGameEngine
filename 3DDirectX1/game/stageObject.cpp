@@ -129,6 +129,8 @@ void StageObject::stageInit(int stageNum)
 
 void StageObject::Update()
 {
+	skydome->Update();
+	Ground->Update();
 	if (stageNum == 1) {
 		Kotatu->Update();
 		Home->Update();
@@ -141,13 +143,17 @@ void StageObject::Update()
 		Swing->Update();
 		Tree->Update();
 	}
-	skydome->Update();
-	Ground->Update();
+
 
 }
 
 void StageObject::Draw()
 {
+	//全ステージ共通
+	skydome->Draw();
+	Ground->Draw();
+
+
 	if (stageNum == 1) {
 		Kotatu->Draw();
 		Home->Draw();
@@ -160,9 +166,7 @@ void StageObject::Draw()
 		Swing->Draw();
 		Tree->Draw();
 	}
-	//全ステージ共通
-	skydome->Draw();
-	Ground->Draw();
+
 
 }
 

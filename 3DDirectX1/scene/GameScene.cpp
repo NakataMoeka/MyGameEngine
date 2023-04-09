@@ -346,7 +346,10 @@ void GameScene::Update()
 		stageObj->RC();
 	}
 	sphereSize->Update();
-	Bikkuri->SetPosition(player->GetPlayerPos());
+	Bikkuri->SetPosition({ player->GetPlayerPos().x,
+		player->GetPlayerPos().y+4,player->GetPlayerPos().z });
+	Bikkuri->SetRotation({ 90,player->GetSphereAngle().m128_f32[1],0,0});
+	Bikkuri->Quaternion();
 	Bikkuri->Update();
 #pragma endregion
 #if _DEBUG 
@@ -459,11 +462,11 @@ void GameScene::Draw()
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 	player->Draw();
-	if (HitCC!=0&&HitCC <= 2) {
-		Bikkuri->Draw();
-	}
 	gameObjects->Draw();
 	stageObj->Draw();
+	//if (HitCC != 0 && HitCC <= 2) {
+		Bikkuri->Draw();
+	//}
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 	//particleMan->Draw(dxCommon->GetCmdList());
