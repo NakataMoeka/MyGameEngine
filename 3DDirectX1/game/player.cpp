@@ -14,18 +14,17 @@ Player::Player()
 }
 Player::~Player()
 {
-	safe_delete(playerObj);
-	safe_delete(SphereObj);
+
 }
 void Player::Initialize()
 {
-	model = FbxLoader::GetInstance()->LoadModelFromFile("Player");
-	playerObj = new FbxObject3d();
+	model = std::unique_ptr<FbxModel>(FbxLoader::GetInstance()->LoadModelFromFile("Player"));
+	playerObj = std::unique_ptr<FbxObject3d>(new FbxObject3d());
 	playerObj->Initialize();
-	playerObj->SetModel(model);
+	playerObj->SetModel(model.get());
 	playerObj->LoadAnimation();
-	model2 = Model::Create("bullet", true);
-	SphereObj = Object3d::Create(model2);
+	model2 = std::unique_ptr<Model>(Model::Create("bullet", true));
+	SphereObj = std::unique_ptr<Object3d>(Object3d::Create(model2.get()));
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 

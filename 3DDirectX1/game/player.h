@@ -39,7 +39,7 @@ public:
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
 	float GetRadius() { return radius; }
 	Sphere GetSphere() { return sphere; }
-	Object3d* GetObject3d() { return SphereObj; }
+	std::unique_ptr < Object3d> &GetObject3d() { return SphereObj; }
 	XMFLOAT3 SetSphereSize(XMFLOAT3 sphereSize) { return this->sphereSize = sphereSize; }
 	float SetSpherePos(float spherePos) { return this->spherePos.y = spherePos; }
 	XMFLOAT3 SetPlayerPos(XMFLOAT3 playerPos) { return this->playerPos = playerPos; }
@@ -60,11 +60,11 @@ private://Update()にまとめるもの
 	void Dash();//ダッシュ
 private://変数
 	//プレイヤーのモデル
-	FbxObject3d* playerObj = nullptr;
-	FbxModel* model = nullptr;
+	std::unique_ptr < FbxObject3d> playerObj = nullptr;
+	std::unique_ptr < FbxModel> model = nullptr;
 	//球のモデル
-	Object3d* SphereObj = nullptr;
-	Model* model2 = nullptr;
+	std::unique_ptr < Object3d> SphereObj = nullptr;
+	std::unique_ptr < Model> model2 = nullptr;
 
 	//集中線
 	std::unique_ptr<Sprite> dashSprite = nullptr;

@@ -58,7 +58,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
-	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/bikkuri.png", true);
+	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect2.png", true);
 	//particleMan->LoadTexture();
 	//particleMan->CreateModel();
 	// デバッグテキスト用テクスチャ読み込み
@@ -207,7 +207,7 @@ void GameScene::Update()
 					}
 				}
 				if (gameObjects->GetHIT(i, j) == true) {
-					gameObjects->GetObject3d(i, j)->SetParent(player->GetObject3d());
+					gameObjects->GetObject3d(i, j)->SetParent(player->GetObject3d().get());
 				}
 				if (HitCount == 1) {
 					gameObjects->GetObject3d(i, j)->transformParent();
@@ -223,11 +223,6 @@ void GameScene::Update()
 						OY += 0.1f;
 						gameObjects->SetY(OY);
 					}
-					/*		Ssize.x += 0.001f;
-							Ssize.y += 0.001f;
-							Ssize.z += 0.001f;
-							radius += 0.001f;
-							SY += 0.005f;*/
 				}
 			}
 		}
@@ -239,6 +234,7 @@ void GameScene::Update()
 		colMan->SetAudioFlag(false);
 	}
 	if (colMan->GetHit() == true) {
+		CreateParticles();
 		if (HitCC < 3) {
 			HitCC++;
 		}
@@ -324,8 +320,7 @@ void GameScene::Update()
 		stageObj->Update();
 		gameObjects->Update();
 		timer->Update();
-		//CreateParticles();
-		//particleMan->Update();
+		particleMan->Update();
 	}
 
 	if (audioCount == 1) {
@@ -464,12 +459,12 @@ void GameScene::Draw()
 	player->Draw();
 	gameObjects->Draw();
 	stageObj->Draw();
-	if (HitCC != 0 && HitCC <= 2) {
-		Bikkuri->Draw();
+	//if (HitCC != 0 && HitCC <= 2) {
+	if (colMan->GetHit() == true) {
+		particleMan->Draw(dxCommon->GetCmdList());
 	}
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
-	//particleMan->Draw(dxCommon->GetCmdList());
 }
 void GameScene::DrawFront()
 {
@@ -494,13 +489,13 @@ void GameScene::DrawFront()
 }
 void GameScene::CreateParticles()
 {
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < 10; i++) {
 		// X,Y,Z全て[-5.0f,+5.0f]でランダムに分布
-		const float rnd_pos = 0.5f;
-		XMFLOAT3 pos = player->GetPlayerPos();
-		pos.x += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
-		pos.y += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
-		pos.z += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+		const float rnd_pos = 0.00001f;
+		XMFLOAT3 pos = player->GetSpherePos();
+		/*pos.x += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+		pos.y += ((float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f)+3;
+		pos.z += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;*/
 
 		const float rnd_vel = 0.1f;
 		XMFLOAT3 vel{};
@@ -513,7 +508,7 @@ void GameScene::CreateParticles()
 		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
 		// 追加
-		particleMan->Add(60, pos, vel, acc, 0.5f, 0.0f, { 1,1,1 }, { 1,1,1 });
+		particleMan->Add(60, pos, vel, acc, 2.0f, 0.0f, { 1,1,1 }, { 1,1,1 });
 	}
 }
 
