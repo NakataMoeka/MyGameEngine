@@ -36,60 +36,56 @@ GameObjects::~GameObjects()
 	for (int i = 0; i < OBJNumber; i++) {
 		safe_delete(cube[i]);
 		safe_delete(moveObj[i]);
-
 		safe_delete(Game[i]);
-
 	}
 	for (int i = 0; i < OBJNumber2; i++) {
 		safe_delete(Bear[i]);
 		safe_delete(Robot[i]);
 		safe_delete(Card[i]);
-		//safe_delete(Pencil[i]);
 		safe_delete(Kendama[i]);
 		safe_delete(Koma[i]);
 		safe_delete(Shogi[i]);
 		safe_delete(Turu[i]);
-		//safe_delete(Cont[i]);
 	}
 }
 
 void GameObjects::Initialize()
 {
-	modelCube = Model::Create("lego", false);
-	modelMove = Model::Create("car", false);
-	modelBear = Model::Create("bear", false);
-	modelRobot = Model::Create("robot", false);
-	modelCard = Model::Create("card", false);
-	modelPencil = Model::Create("pencil", false);
-	modelKendama = Model::Create("kendama", false);
-	modelKoma = Model::Create("koma", false);
-	modelShogi = Model::Create("shogi", false);
-	modelTuru = Model::Create("tsuru", false);
-	modelCont = Model::Create("cont", false);
-	modelGame = Model::Create("game", false);
+	modelCube = std::unique_ptr<Model>(Model::Create("lego", false));
+	modelMove = std::unique_ptr<Model>(Model::Create("car", false));
+	modelBear = std::unique_ptr<Model>(Model::Create("bear", false));
+	modelRobot = std::unique_ptr<Model>(Model::Create("robot", false));
+	modelCard = std::unique_ptr<Model>(Model::Create("card", false));
+	modelPencil = std::unique_ptr<Model>(Model::Create("pencil", false));
+	modelKendama = std::unique_ptr<Model>(Model::Create("kendama", false));
+	modelKoma = std::unique_ptr<Model>(Model::Create("koma", false));
+	modelShogi = std::unique_ptr<Model>(Model::Create("shogi", false));
+	modelTuru = std::unique_ptr<Model>(Model::Create("tsuru", false));
+	modelCont = std::unique_ptr<Model>(Model::Create("cont", false));
+	modelGame = std::unique_ptr<Model>(Model::Create("game", false));
 	for (int i = 0; i < OBJNumber; i++) {
-		cube[i] = Object3d::Create(modelCube);
+		cube[i] = Object3d::Create(modelCube.get());
 		cube[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		moveObj[i] = Object3d::Create(modelMove);
+		moveObj[i] = Object3d::Create(modelMove.get());
 		moveObj[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		Game[i] = Object3d::Create(modelGame);
+		Game[i] = Object3d::Create(modelGame.get());
 		Game[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 	}
 	for (int i = 0; i < OBJNumber2; i++) {
-		Bear[i] = Object3d::Create(modelBear);
+		Bear[i] = Object3d::Create(modelBear.get());
 		Bear[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		Robot[i] = Object3d::Create(modelRobot);
+		Robot[i] = Object3d::Create(modelRobot.get());
 		Robot[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		Card[i] = Object3d::Create(modelCard);
+		Card[i] = Object3d::Create(modelCard.get());
 		Card[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		Kendama[i] = Object3d::Create(modelKendama);
+		Kendama[i] = Object3d::Create(modelKendama.get());
 		Kendama[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		Koma[i] = Object3d::Create(modelKoma);
+		Koma[i] = Object3d::Create(modelKoma.get());
 		Koma[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		Shogi[i] = Object3d::Create(modelShogi);
+		Shogi[i] = Object3d::Create(modelShogi.get());
 		Shogi[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		Turu[i] = Object3d::Create(modelTuru);
+		Turu[i] = Object3d::Create(modelTuru.get());
 		Turu[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 		//Cont[i] = Object3d::Create(modelCont);
 		//Cont[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");

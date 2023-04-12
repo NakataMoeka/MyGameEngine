@@ -86,19 +86,19 @@ private://ïœêî
 	//std::array < Object3d*, OBJNumber2> Cont = {};
 	std::array < Object3d*, OBJNumber> Game = {};
 
-	Model* modelCube = nullptr;
-	Model* modelMove = nullptr;
-	Model* modelBear = nullptr;
-	Model* modelRobot = nullptr;
-	Model* modelCard = nullptr;
-	Model* modelPencil = nullptr;
+	std::unique_ptr<Model> modelCube = nullptr;
+	std::unique_ptr<Model> modelMove = nullptr;
+	std::unique_ptr<Model> modelBear = nullptr;
+	std::unique_ptr<Model> modelRobot = nullptr;
+	std::unique_ptr<Model> modelCard = nullptr;
+	std::unique_ptr<Model> modelPencil = nullptr;
 
-	Model* modelKendama = nullptr;
-	Model* modelKoma = nullptr;
-	Model* modelShogi = nullptr;
-	Model* modelTuru = nullptr;
-	Model* modelCont = nullptr;
-	Model* modelGame = nullptr;
+	std::unique_ptr<Model> modelKendama = nullptr;
+	std::unique_ptr<Model> modelKoma = nullptr;
+	std::unique_ptr<Model> modelShogi = nullptr;
+	std::unique_ptr<Model> modelTuru = nullptr;
+	std::unique_ptr<Model> modelCont = nullptr;
+	std::unique_ptr<Model> modelGame = nullptr;
 
 
 	std::array < Sphere, OBJNumber> cSphere;//ìñÇΩÇËîªíËÇÃÇ‚Ç¬
