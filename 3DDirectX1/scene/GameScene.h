@@ -3,20 +3,28 @@
 
 #include"SafeDelete.h"
 #include <DirectXMath.h>
-#include"input.h"
 #include"Sprite.h"
 #include"Audio.h"
 #include"DXCommon.h"
-#include"DebugText.h"
 #include"Object3d.h"
 #include "ParticleManager.h"
 #include"Model.h"
 #include "Camera.h"
 #include "FbxObject.h"
 #include"LightGroup.h"
-#include"PostEffect.h"
 #include"player.h"
-
+#include"GameObject.h"
+#include"stageObject.h"
+#include"Collision.h"
+#include<vector>
+#include<array>
+#include"Timer.h"
+#include"Pose.h"
+#include"Tutorial.h"
+#include"SphereSize.h"
+#include"start.h"
+class CollisionManager;
+class TouchableObject;
 class GameScene
 {
 private:
@@ -32,56 +40,103 @@ public: // メンバ関数
 
 	GameScene();
 
-
 	~GameScene();
-
+	//起動したら一回しか行われない初期化(モデルの読み込みなど)
 	void Initialize(DXCommon* dxCommon, Audio* audio);
-
-
+	//OBJ等初期化用()
+	void InitTH();
+	//そのシーンを通るたびに何度も行われる初期化(位置など)
+	void Init();
+	//ステージ初期化
+	void InitStageNum(int stageNum);
+	//繰り返し処理
 	void Update();
+	//背景画像描画
 	void DrawBG();
+	//オブジェクト描画
 	void Draw();
+	//前景画像描画
 	void DrawFront();
+	//パーティクル
 	void CreateParticles();
+	bool GetClearFlag() { return clearFlag; }
+	bool GetOverFlag() { return overFlag; }
+	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
+	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
+	bool GetBFlag() { return Bflag; }
+	bool GetTitleFlag();
+	int SetStageNum(int stageNum) { return this->stageNum = stageNum; }
+	bool GetTSFlag() { return TSFlag; }
+
 private: // メンバ変数
 	DXCommon* dxCommon = nullptr;
 
 
 	Audio* audio = nullptr;
-	
-	SoundData sound1;
-	SoundData sound2;
 
+	SoundData sound1 = {};
+	SoundData sound2 = {};
+	SoundData sound3 = {};
+	SoundData sound4 = {};
+	SoundData sound5 = {};
 	Camera* camera = nullptr;
 	ParticleManager* particleMan = nullptr;
-	PostEffect* postEffect = nullptr;
-	Sprite* sprite = nullptr;
 
-	Object3d* object3d = nullptr;
-	Model* model = nullptr;
-
-	FbxObject3d* object3d2 = nullptr;
-	FbxModel* model2 = nullptr;
-
-	Object3d* object3d3 = nullptr;
-	Model* model3 = nullptr;
-
-	Object3d* object3d4 = nullptr;
-	Model* model4 = nullptr;
-
+	std::unique_ptr<Sprite> sprite = nullptr;
+	std::unique_ptr<Sprite> tmSprite = nullptr;//目標達成時にアナウンスする用
+	std::unique_ptr<Sprite> btSprite = nullptr;//ぶつかった時用
 	LightGroup* lightGroup = nullptr;
 
-	Player* player;
+	CollisionManager* colMan = nullptr;
 
+	Player* player = nullptr;
+	GameObjects* gameObjects = nullptr;
+	StageObject* stageObj = nullptr;
+
+	Timer* timer = nullptr;
+	Pose* pose = nullptr;
+	SphereSize* sphereSize = nullptr;
+	Tutorial* tutorial = nullptr;
+	start* st = nullptr;
+	Object3d* Bikkuri = nullptr;
+	Model* BikkuriModel = nullptr;
 	const int debugTextTexNumber = 0;
 
-	XMFLOAT3 playerPosition = { 0.0f,0.0f,0.0f };
 
-	int HP = 50;
-	const int HPRecovery = 10;
-	int pg = 0;
-	bool pFlag = false;
-	float a = 0;
-	float b = 0;
+	static const int OBJNumber = 100;//OBJの最大数を記載
+
+	int HitCount = 0;
+	//サイズ関係
+	float Tsize = 1;
+	int Tsize2 = 1;
+	int TCount = 0;
+	bool TFlag = false;
+	float radius = 3.0f;
+	float distance = 20.0f;//プレイヤーとカメラの距離
+
+	float distanceY = 20.0f;//カメラの位置
+	float distanceC = 20.0f;//カメラの位置
+	float distanceCY = 20.0f;//カメラの位置
+
+	float SZV = 3;//sphereとの
+	float SY = 3;//SphereのY軸高さ
+	float OY = 0;//objの当たり判定用y足す変数
+	bool clearFlag = false;
+	bool overFlag = false;
+
+	bool Bflag = false;//ブラーを掛けるか否か
+
+	//ステージナンバー
+	int stageNum = 0;
+	bool TSFlag;
+	int cACount = 0;
+	bool caFlag = false;
+
+	int testCount = 0;//test
+	int GoalCount = 0;//目標サイズ
+	XMFLOAT3 Ssize = { 1,1,1 };//球のサイズ
+	int audioCount = 0;
+	//まだくっつかないobjに当たった時に音をだしたりエフェクトを出したり
+	//する時に1回のみやるための変数
+	int HitCC;
 };
-

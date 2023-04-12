@@ -10,6 +10,10 @@
 #include "FbxModel.h"
 #include "FbxLoader.h"
 #include "Camera.h"
+#include "CollisionInfo.h"
+#include"LightGroup.h"
+
+class BaseCollider;
 class FbxObject3d
 {
 protected: // エイリアス
@@ -36,6 +40,11 @@ public:
 		XMMATRIX bones[MAX_BONES];
 
 	};
+	struct animationData
+	{
+		FbxTakeInfo* takeinfo;
+		FbxAnimStack* animstack;
+	};
 
 
 
@@ -46,18 +55,28 @@ public:
 	static void SetCamera(Camera* camera) {
 		FbxObject3d::camera = camera;
 	}
-
+	static void SetLight(LightGroup* lightGroup) {
+		FbxObject3d::lightGroup = lightGroup;
+	}
+	FbxObject3d() = default;
+	virtual ~FbxObject3d();
 	static void PreDraw(ID3D12GraphicsCommandList* cmdList);
 
 	static void PostDraw();
 
-	void Initialize();
+	virtual void Initialize();//初期化
 
-	void Update();
+	void UpdateWorldMatrix();//アプデ
 
-	void Draw();
+	virtual void Update();//アプデ
 
-	void PlayAnimation();
+	virtual void Draw();//描画
+
+	//アニメーション関係
+	void PlayAnimation(int No,bool loop);
+	void LoadAnimation();
+	void Stop();
+	
 
 	const XMFLOAT3& GetPosition() { return position; }
 
@@ -71,16 +90,25 @@ public:
 
 	// モデルとの連携
 	void SetModel(FbxModel* fbxModel) { this->fbxModel = fbxModel; };
+	
+	const XMMATRIX& GetMatWorld() { return matWorld; }
 
+	void SetCollider(BaseCollider* collider);//コライダーの追加
+	
+	void RemoveCollider();//コライダーの消去
+	//virtual void OnFCollision(const CollisionInfo& info) {}
 
+	XMFLOAT3 GetWorldPosition();
+	BaseCollider* GetCollider() { return collider; }
 
+	BaseCollider* collider = nullptr;
 
 protected:
 	ComPtr<ID3D12Resource> constBuffTransform;
 
 	ComPtr<ID3D12Resource> constBuffSkin;
-private:
-
+protected:
+	const char* name = nullptr;
 	// デバイス
 	static ID3D12Device* dev;
 
@@ -91,7 +119,8 @@ private:
 	static ComPtr<ID3D12RootSignature> rootsignature;
 	// パイプラインステートオブジェクト
 	static ComPtr<ID3D12PipelineState> pipelinestate;
-
+	
+	
 
 
 	//ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
@@ -114,7 +143,7 @@ private:
 
 	// カメラ
 	static Camera* camera;
-
+	static LightGroup* lightGroup;
 	//1フレームの時間
 	FbxTime frameTime;
 	//アニメーション開始時間	
@@ -125,5 +154,7 @@ private:
 	FbxTime currentTime;
 	//アニメーション再生中
 	bool isPlay = false;
+	bool Loop = false;
+	std::vector<animationData>animation;
 };
 

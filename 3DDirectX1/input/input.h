@@ -43,6 +43,7 @@ class Input
 private:
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 	using XMFLOAT2 = DirectX::XMFLOAT2;
+
 public: 
 
 	static Input* GetInstance();
@@ -90,7 +91,6 @@ public:
 	//マウス押す
 	bool PushMouse(int MouseNumber);
 	bool TriggerMouse(int MouseNumber);
-
 	XMFLOAT2 GetMousePos() { return MousePos; }
 	//マウスの移動量
 	MouseMove GetMouseMove();

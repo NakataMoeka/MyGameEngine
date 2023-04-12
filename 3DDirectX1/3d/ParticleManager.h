@@ -29,6 +29,7 @@ public: // サブクラス
 	{
 		XMFLOAT3 pos; // xyz座標
 		float scale; // スケール
+		XMFLOAT4 color;
 	};
 
 	// 定数バッファ用データ構造体
@@ -82,11 +83,11 @@ public: // 静的メンバ関数
 	/// インスタンス生成
 	/// </summary>
 	/// <returns>インスタンス</returns>
-	static ParticleManager* Create(ID3D12Device* device, Camera* camera);
+	static ParticleManager* Create(ID3D12Device* device, Camera* camera, const wchar_t* filename, bool alpha);
 
 public: // メンバ関数	
 
-	void Initialize();
+	void Initialize(const wchar_t* filename, bool alpha);
 
 	void Update();
 
@@ -94,16 +95,16 @@ public: // メンバ関数
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
 
-	void Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale);
+	void Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale,XMFLOAT3 s_color,XMFLOAT3 e_color);
 
 
 	void InitializeDescriptorHeap();
 
 
-	void InitializeGraphicsPipeline();
+	void InitializeGraphicsPipeline(bool alpha);
 
 
-	void LoadTexture();
+	void LoadTexture(const wchar_t* filename);
 
 
 	void CreateModel();

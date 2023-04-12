@@ -11,9 +11,11 @@
 
 #include "Camera.h"
 #include "LightGroup.h"
+#include "CollisionInfo.h"
+class BaseCollider;
 class Object3d
 {
-private: // エイリアス
+protected: // エイリアス
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 	// DirectX::を省略
@@ -21,9 +23,10 @@ private: // エイリアス
 	using XMFLOAT3 = DirectX::XMFLOAT3;
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
+	using XMVECTOR = DirectX::XMVECTOR;
 
 public:
-	
+
 	// パイプラインセット
 	struct PipelineSet
 	{
@@ -37,14 +40,18 @@ public:
 	struct ConstBufferDataB0
 	{
 		//XMMATRIX mat;	// ３Ｄ変換行列
+		XMFLOAT4 color;
 		XMMATRIX viewproj;//ビュープロジェクション行列
 		XMMATRIX world;//ワールド行列
 		XMFLOAT3 cameraPos;//カメラ座標(ワールド座標)
+	
 	};
 
+	Object3d() = default;
 
+	virtual ~Object3d();
 
-	static void StaticInitialize(ID3D12Device* dev, Camera* camera= nullptr);
+	static void StaticInitialize(ID3D12Device* dev, Camera* camera = nullptr);
 
 	void CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs);
 
@@ -62,30 +69,51 @@ public:
 	static Object3d* Create(Model* model);
 
 
-	bool Initialize();
+	virtual bool Initialize();
 
-	void Update();
+	void Quaternion();
 
-	void Draw();
+	void UpdateWorldMatrix();
 
+	virtual void Update();
+
+	virtual void Draw();
+
+	const XMMATRIX& GetMatWorld() { return matWorld; }
+
+	void SetCollider(BaseCollider* collider);//コライダーの追加
+
+	void RemoveCollider();//コライダー消去
+
+	virtual void OnCollision(const CollisionInfo& info) {}
+
+	void transformParent();//ペアレント用関数
+
+	//GetterSetter
+	XMFLOAT3 GetWorldPosition();
 	const XMFLOAT3& GetPosition() { return position; }
-
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
-
-	const XMFLOAT3& GetRotation() { return rotation; }
-
-	void SetRotation(XMFLOAT3 rotation) { this->rotation = rotation; }
-
+	const XMVECTOR& GetRotation() { return rotation; }
+	void SetRotation(XMVECTOR rotation) { this->rotation = rotation; }
+	const XMFLOAT3& GetScale() { return scale; }
 	void SetScale(XMFLOAT3 scale) { this->scale = scale; }
-
+	void SetColor(XMFLOAT4 color) { this->color = color; }
 	// モデルとの連携
 	void SetModel(Model* model) { this->model = model; };
-
-
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
-
-private:
-
+	void SetParent(Object3d* parent) { this->parent = parent; }
+	XMMATRIX GetMatRot() { return matRot; }
+	XMMATRIX GetMatTrans() { return matTrans; }
+	inline Model* GetModel() { return model; }
+	BaseCollider* GetCollider() { return collider; }
+	void SetParentFlag(bool pFlag) { this->parentFlag = pFlag; }
+	void SetColFlag(bool cFlag) { this->ColFlag = cFlag; }
+	bool GetParentFlag() { return parentFlag; }
+	bool GetColFlag() { return ColFlag; }
+	// コライダー
+	BaseCollider* collider = nullptr;
+protected:
+	const char* name = nullptr;
 	// デバイス
 	static ID3D12Device* dev;
 
@@ -98,11 +126,11 @@ private:
 	ComPtr<ID3D12Resource> constBuffB0; // 定数バッファ
 
 	// 色
-	XMFLOAT4 color = { 1,0,0,1 };
+	XMFLOAT4 color = { 1,1,1,1 };
 	// ローカルスケール
 	XMFLOAT3 scale = { 1,1,1 };
 	// X,Y,Z軸回りのローカル回転角
-	XMFLOAT3 rotation = { 0,0,0 };
+	XMVECTOR rotation = { 0,0,0 };
 	// ローカル座標
 	XMFLOAT3 position = { 0,0,0 };
 	// ローカルワールド変換行列
@@ -111,11 +139,16 @@ private:
 	Object3d* parent = nullptr;
 
 	Model* model = nullptr;
-
+	XMMATRIX matWorld_parent, matTransV, matRotV, matScaleV, matWorld_Invers;
+	XMMATRIX matScale, matRot, matTrans;
+	XMVECTOR rotV;
 	// カメラ
 	static Camera* camera;
 	static LightGroup* lightGroup;
 	// ビルボード
 	bool isBillboard = false;
+
+	bool parentFlag = false;//ペアレントしているかのフラグ
+	bool ColFlag = false;//当たっているかフラグ
 };
 

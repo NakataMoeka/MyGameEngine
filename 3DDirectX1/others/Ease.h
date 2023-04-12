@@ -29,17 +29,25 @@ public:
 	static const XMFLOAT2 easeInOut(const XMFLOAT2& start, const XMFLOAT2& end, const float t);
 	static const XMFLOAT3 easeInOut(const XMFLOAT3& start, const XMFLOAT3& end, const float t);
 
-	static const XMFLOAT2 easeInCubic(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d);
-	static const XMFLOAT3 easeInCubic(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d);
+	float easeInCubic(float x);//1
+	float easeOutCubic(float x);//2
+	float easeInQuad(float x);//3
+	float easeOutQuad(float x);//4
+	float easeOutBounce(float x);//5
+	float easeInBounce(float x);//6
+	/// <summary>
+	/// イージング
+	/// </summary>
+	/// <param name="start">開始位置</param>
+	/// <param name="end">終了位置</param>
+	/// <param name="t">時間</param>
+	/// <param name="d">終了時間</param>
+	/// <param name="i">イージングの種類</param>
+	float ease(const float& start, const float& end, float t, float d, int i);
+	XMFLOAT2 ease(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d, int i);
+	XMFLOAT3 ease(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d, int i);
 
-	static const XMFLOAT2 easeOutCubic(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d);
-	static const XMFLOAT3 easeOutCubic(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d);
 
-	static const XMFLOAT2 easeInQuad(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d);
-	static const XMFLOAT3 easeInQuad(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d);
-
-	static const XMFLOAT2 easeOutQuad(const XMFLOAT2& start, const XMFLOAT2& end, float t, float d);
-	static const XMFLOAT3 easeOutQuad(const XMFLOAT3& start, const XMFLOAT3& end, float t, float d);
 
 };
 

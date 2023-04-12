@@ -1,4 +1,7 @@
 #include "Object3d.h"
+#include "BaseCollider.h"
+#include "CollisionManager.h"
+
 #include <d3dcompiler.h>
 #include <DirectXTex.h>
 #include<fstream>
@@ -18,6 +21,14 @@ ID3D12GraphicsCommandList* Object3d::cmdList = nullptr;
 //Object3d::PipelineSet Object3d::pipelineSet;
 Camera* Object3d::camera = nullptr;
 LightGroup* Object3d::lightGroup = nullptr;
+
+Object3d::~Object3d()
+{
+	if (collider) {
+		CollisionManager::GetInstance()->RemoveCollider(collider);
+		delete collider;
+	}
+}
 
 void Object3d::StaticInitialize(ID3D12Device* dev, Camera* camera)
 {
@@ -115,7 +126,7 @@ void Object3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 	// ラスタライザステート
 	gpipeline.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
 	//gpipeline.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
-	//gpipeline.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
+	//gpipeline.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;//ワイヤーフレームになるよー
 	// デプスステンシルステート
 	gpipeline.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 
@@ -153,7 +164,7 @@ void Object3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
 
 	// ルートパラメータ
-	CD3DX12_ROOT_PARAMETER rootparams[4];
+	CD3DX12_ROOT_PARAMETER rootparams[4] = {};
 	rootparams[0].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_ALL);
 	rootparams[1].InitAsConstantBufferView(1, 0, D3D12_SHADER_VISIBILITY_ALL);
 	rootparams[2].InitAsDescriptorTable(1, &descRangeSRV, D3D12_SHADER_VISIBILITY_ALL);
@@ -216,7 +227,6 @@ Object3d* Object3d::Create(Model* model)
 	if (!object3d->Initialize()) {
 		delete object3d;
 		assert(0);
-		return nullptr;
 	}
 
 	if (model) {
@@ -228,8 +238,10 @@ Object3d* Object3d::Create(Model* model)
 
 bool Object3d::Initialize()
 {
+
 	assert(dev);
-		HRESULT result;
+	name = typeid(*this).name();
+	HRESULT result;
 
 	result = dev->CreateCommittedResource(
 		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
@@ -241,50 +253,75 @@ bool Object3d::Initialize()
 	return true;
 }
 
+void Object3d::Quaternion()
+{
+	rotV = XMQuaternionRotationRollPitchYaw(
+		XMConvertToRadians(rotation.m128_f32[0])
+		, XMConvertToRadians(rotation.m128_f32[1])
+		, XMConvertToRadians(rotation.m128_f32[2]));
+	//rotV = XMQuaternionRotationRollPitchYawFromVector(rotation);
+}
+void Object3d::UpdateWorldMatrix() {
+	assert(camera);
+
+	XMMATRIX matScale, matRot, matTrans;
+
+	// スケール、回転、平行移動行列の計算
+	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
+	matRot = XMMatrixIdentity();
+	matRot = XMMatrixRotationQuaternion(rotV);
+	matTrans = XMMatrixTranslation(position.x, position.y, position.z);
+
+	// ワールド行列の合成
+	if (isBillboard && camera) {
+		const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
+
+		matWorld = XMMatrixIdentity();
+		matWorld *= matScale; // ワールド行列にスケーリングを反映
+		matWorld *= matRot; // ワールド行列に回転を反映
+		matWorld *= matBillboard;
+		matWorld *= matTrans; // ワールド行列に平行移動を反映
+	}
+	else {
+		matWorld = XMMatrixIdentity(); // 変形をリセット
+		matWorld *= matScale; // ワールド行列にスケーリングを反映
+		matWorld *= matRot; // ワールド行列に回転を反映
+		matWorld *= matTrans; // ワールド行列に平行移動を反映
+	}
+
+	// 親オブジェクトがあれば
+	if (parentFlag == true) {
+		if (parent != nullptr) {
+			matWorld *= parent->matWorld;
+		}
+	}
+}
 void Object3d::Update()
 {
 	assert(camera);
 
 	HRESULT result;
-	XMMATRIX matScale, matRot, matTrans;
-	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
-	matRot = XMMatrixIdentity();
-	matRot *= XMMatrixRotationZ(XMConvertToRadians(rotation.z));	//Z軸まわりに45度回転
-	matRot *= XMMatrixRotationX(XMConvertToRadians(rotation.x));
-	matRot *= XMMatrixRotationY(XMConvertToRadians(rotation.y));
-	matTrans = XMMatrixTranslation(position.x,position.y, position.z);	//平行移動行列を再計算
 
-	matWorld = XMMatrixIdentity();
-	matWorld *= matScale;
-	matWorld *= matRot;
-	matWorld *= matTrans;
-
-	//if (isBillboard) {
-	//	const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
-
-	//	matWorld = XMMatrixIdentity();
-	//	matWorld *= matScale; // ワールド行列にスケーリングを反映
-	//	matWorld *= matRot; // ワールド行列に回転を反映
-	//	matWorld *= matBillboard;
-	//	matWorld *= matTrans; // ワールド行列に平行移動を反映
-	//}
-
-	if (parent != nullptr) {
-		matWorld *= parent->matWorld;
-	}
+	UpdateWorldMatrix();
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
 	const XMFLOAT3& cameraPos = camera->GetEye();
 
 	// 定数バッファへデータ転送
+
 	ConstBufferDataB0* constMap = nullptr;
 	result = constBuffB0->Map(0, nullptr, (void**)&constMap);
-	//constMap->mat = matWorld * matViewProjection;	// 行列の合成
 	constMap->viewproj = matViewProjection;
 	constMap->world = matWorld;
 	constMap->cameraPos = cameraPos;
+	constMap->color = color;
 	constBuffB0->Unmap(0, nullptr);
-	
+
+
+	// 当たり判定更新
+	if (collider) {
+		collider->Update();
+	}
 }
 
 void Object3d::Draw()
@@ -305,7 +342,53 @@ void Object3d::Draw()
 	cmdList->SetGraphicsRootSignature(pipelineSet.rootsignature.Get());
 	// 定数バッファビューをセット
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
-	lightGroup->Draw(cmdList,3);
+	lightGroup->Draw(cmdList, 3);
 	// モデル描画
 	model->Draw(cmdList);
+}
+
+void Object3d::SetCollider(BaseCollider* collider)
+{
+	collider->SetObject(this);
+	this->collider = collider;
+	// コリジョンマネージャに追加
+	CollisionManager::GetInstance()->AddCollider(collider);
+	//重い原因②
+	UpdateWorldMatrix();
+	collider->Update();
+}
+
+void Object3d::RemoveCollider()
+{
+	//if (collider) {
+	CollisionManager::GetInstance()->RemoveCollider(collider);
+	//delete collider;
+	//}
+}
+
+XMFLOAT3 Object3d::GetWorldPosition()
+{
+	XMFLOAT3 worldpos;
+
+	worldpos.x = matWorld.r[3].m128_f32[0];
+	worldpos.y = matWorld.r[3].m128_f32[1];
+	worldpos.z = matWorld.r[3].m128_f32[2];
+
+	return worldpos;
+}
+
+void Object3d::transformParent()
+{
+	XMVECTOR scaleV, rotationV, positionV;
+
+	//親を逆行列にする
+	matWorld_Invers = XMMatrixInverse(nullptr, parent->matWorld);
+	//子供のワールド座標と親のワールド座標の逆行列を乗算
+	matWorld_parent = matWorld * matWorld_Invers;
+	//分解する
+	XMMatrixDecompose(&scaleV, &rotationV, &positionV, matWorld_parent);
+	//親のワールド座標に分解したものを代入
+	XMStoreFloat3(&scale, scaleV);
+	rotation = rotationV;
+	XMStoreFloat3(&position, positionV);
 }

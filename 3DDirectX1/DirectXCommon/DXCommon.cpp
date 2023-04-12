@@ -56,7 +56,22 @@ void DXCommon::preDraw()
 
 	//シザー短形の設定
 	cmdList->RSSetScissorRects(1, &CD3DX12_RECT(0, 0, WinApp::window_width, WinApp::window_height));
+
+#if _DEBUG
+	// FPS,CPU使用率表示
+	{
+		static int count = 0;
+		const float FPS_BASIS = 60.0f;
+		// 一秒に一度更新
+		if (++count > FPS_BASIS) {
+			count = 0;
+			char str[50];
+			sprintf_s(str, "fps=%03.0f", FPS::GetInstance()->GetFPS());
+			SetWindowTextA(winapp->GetHwnd(), str);
+		}
 	}
+#endif
+}
 
 void DXCommon::postDraw()
 {
@@ -108,10 +123,11 @@ void DXCommon::InitializeDevice()
 
 #ifdef _DEBUG
 	//デバッグレイヤーをオンに
-	ComPtr<ID3D12Debug> debugController;
+	ComPtr<ID3D12Debug1> debugController;
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
 	{
 		debugController->EnableDebugLayer();
+		debugController->SetEnableGPUBasedValidation(TRUE);
 	}
 #endif
 
@@ -196,7 +212,16 @@ void DXCommon::InitializeCommand()
 
 	dev->CreateCommandQueue(&cmdQueueDesc, IID_PPV_ARGS(&cmdQueue));
 
-
+#ifdef _DEBUG
+	//デバッグレイヤーをオンに
+	ComPtr<ID3D12InfoQueue> infoQueue;
+	if (SUCCEEDED(dev->QueryInterface(IID_PPV_ARGS(&infoQueue))))
+	{
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
+		infoQueue->Release();
+	}
+#endif
 }
 
 void DXCommon::InitializeSwapchain()
@@ -232,7 +257,7 @@ void DXCommon::InitializeSwapchain()
 void DXCommon::InitializeRenderTargetView()
 {
 	HRESULT result;
-	
+
 
 	// 各種設定をしてデスクリプタヒープを生成
 	D3D12_DESCRIPTOR_HEAP_DESC heapDesc{};
@@ -265,12 +290,12 @@ void DXCommon::InitializeRenderTargetView()
 void DXCommon::InitializeDepthBuffer()
 {
 	HRESULT result;
-	
+
 	// 深度バッファリソース設定
 	CD3DX12_RESOURCE_DESC depthResDesc = CD3DX12_RESOURCE_DESC::Tex2D(
 		DXGI_FORMAT_D32_FLOAT,
-		WinApp:: window_width,
-		WinApp:: window_height,
+		WinApp::window_width,
+		WinApp::window_height,
 		1, 0,
 		1, 0,
 		D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL);

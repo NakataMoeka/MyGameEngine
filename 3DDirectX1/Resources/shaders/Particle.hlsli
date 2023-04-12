@@ -1,6 +1,6 @@
 cbuffer cbuff0 : register(b0)
 {
-	float4 color;
+	//float4 color;
 	matrix mat; // ３Ｄ変換行列
 	matrix matBillboard;
 };
@@ -9,11 +9,13 @@ cbuffer cbuff0 : register(b0)
 struct VSOutput
 {
 	float4 pos : POSITION; // システム用頂点座標
-	float scale : TEXCOORD;
-
+	float scale : TEXCOORD;//スケール
+	float4 color:COLOR;//色
 };
+
 struct GSOutput
 {
-	float4 svpos : SV_POSITION;
-	float2 uv:TEXCOORD;
+	float4 svpos : SV_POSITION; // システム用頂点座標
+	float2 uv  :TEXCOORD; // uv値
+	float4 color:COLOR;
 };

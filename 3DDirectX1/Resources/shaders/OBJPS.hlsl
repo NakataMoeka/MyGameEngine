@@ -7,7 +7,7 @@ float4 main(VSOutput input) : SV_TARGET
 {
 	// テクスチャマッピング
 	float4 texcolor = tex.Sample(smp, input.uv);
-
+	
 	// 光沢度
 	const float shininess = 4.0f;
 	// 頂点から視点への方向ベクトル
@@ -99,7 +99,7 @@ float4 main(VSOutput input) : SV_TARGET
 			float d = dot(casterv, circleShadows[i].dir);
 
 			// 距離減衰係数
-			float atten = saturate(1.0f / (circleShadows[i].atten.x + circleShadows[i].atten.y * d + circleShadows[i].atten.z * d * d));
+			float atten = saturate(0.2f / (circleShadows[i].atten.x + circleShadows[i].atten.y * d + circleShadows[i].atten.z * d * d));
 			// 距離がマイナスなら0にする
 			atten *= step(0, d);
 
@@ -114,12 +114,11 @@ float4 main(VSOutput input) : SV_TARGET
 			float angleatten = smoothstep(circleShadows[i].factorAngleCos.y, circleShadows[i].factorAngleCos.x, cos);
 			// 角度減衰を乗算
 			atten *= angleatten;
-
 			// 全て減算する
 			shadecolor.rgb -= atten;
 		}
 	}
 
 	// シェーディングによる色で描画
-	return shadecolor * texcolor;
+	return (shadecolor * texcolor) * color;
 }

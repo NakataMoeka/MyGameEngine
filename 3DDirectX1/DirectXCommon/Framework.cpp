@@ -56,6 +56,8 @@ void Framework::Finalize()
 	winapp->TerminateGameWindow();
 
 
+
+
 	delete audio;
 	delete dxcommon;
 	delete winapp;

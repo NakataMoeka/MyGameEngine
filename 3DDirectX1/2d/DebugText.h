@@ -4,21 +4,30 @@
 #include <string>
 class DebugText
 {
+private:
+
+	// Microsoft::WRL::を省略
+	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
+	// DirectX::を省略
+	using XMFLOAT2 = DirectX::XMFLOAT2;
+	using XMFLOAT3 = DirectX::XMFLOAT3;
+	using XMFLOAT4 = DirectX::XMFLOAT4;
+	using XMMATRIX = DirectX::XMMATRIX;
 public: // 定数の宣言    
-	static const int maxCharCount = 256;    // 最大文字数
+	static const int maxCharCount = 512;    // 最大文字数
 	static const int fontWidth = 9;         // フォント画像内1文字分の横幅
 	static const int fontHeight = 18;       // フォント画像内1文字分の縦幅
 	static const int fontLineCount = 14;    // フォント画像内1行分の文字数
-	static const int bufferSize = 256;	// 書式付き文字列展開用バッファサイズ
+	static const int bufferSize = 512;	// 書式付き文字列展開用バッファサイズ
 
 public: // メンバ関数
 
 	static DebugText* GetInstance();
 
 	void Initialize(UINT texnumber);
-	void Print(int len, const std::string& text, float x, float y, float scale);
+	void Print(int len, const std::string& text, float x, float y, float scale, XMFLOAT4 color);
 	//void NPrint(int len, const char* text);
-	void Printf(float x, float y, float scale, const char* fmt, ...);
+	void Printf(float x, float y, float scale, XMFLOAT4 color, const char* fmt, ...);
 	void DrawAll(ID3D12GraphicsCommandList* cmdList);
 
 private: // メンバ変数     
@@ -38,4 +47,3 @@ private: // メンバ変数
 	float posY = 0.0f;
 	float size = 1.0f;
 };
-

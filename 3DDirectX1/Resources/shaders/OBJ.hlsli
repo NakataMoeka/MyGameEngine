@@ -1,5 +1,6 @@
 cbuffer cbuff0 : register(b0)
 {
+	float4 color;//色
 	matrix viewproj; // ビュープロジェクション行列
 	matrix world; // ワールド行列
 	float3 cameraPos; // カメラ座標（ワールド座標）
@@ -45,7 +46,7 @@ struct SpotLight
 	uint active;
 };
 // 丸影の数
-static const int CIRCLESHADOW_NUM = 3;
+static const int CIRCLESHADOW_NUM = 50;
 
 struct CircleShadow
 {

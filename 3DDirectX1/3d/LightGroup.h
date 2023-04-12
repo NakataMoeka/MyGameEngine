@@ -32,7 +32,7 @@ public: // 定数
 	// スポットライトの数
 	static const int SpotLightNum = 3;
 	// 丸影の数
-	static const int CircleShadowNum = 1;
+	static const int CircleShadowNum = 200;
 public: // サブクラス
 
 	// 定数バッファ用データ構造体

@@ -54,8 +54,10 @@ VSOutput main(VSInput input)
 	SkinOutput skinned = ComputeSkin(input);
 	// 法線にワールド行列によるスケーリング・回転を適用
 	float4 wnormal = normalize(mul(world, float4(skinned.normal, 0)));
+	float4 wpos = mul(world, skinned.pos);
 	VSOutput output; // ピクセルシェーダーに渡す値
 	output.svpos = mul(mul(viewproj, world), skinned.pos);// 行列による座標変換
+	output.worldpos = wpos;
 	output.normal = wnormal.xyz;// ワールド法線を次のステージに渡す
 	output.uv = input.uv;// 入力値をそのまま次のステージに渡す
 	return output;

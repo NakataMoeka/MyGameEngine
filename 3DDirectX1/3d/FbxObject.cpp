@@ -5,6 +5,8 @@
 #include<sstream>
 #include<string>
 #include<vector>
+#include "BaseCollider.h"
+#include "CollisionManager.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -22,7 +24,7 @@ ComPtr<ID3D12RootSignature> FbxObject3d::rootsignature;
 ComPtr<ID3D12PipelineState> FbxObject3d::pipelinestate;
 
 Camera* FbxObject3d::camera = nullptr;
-
+LightGroup* FbxObject3d::lightGroup = nullptr;
 
 void FbxObject3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 {
@@ -158,13 +160,15 @@ void FbxObject3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
 
 	// ルートパラメータ
-	CD3DX12_ROOT_PARAMETER rootparams[3];
+	CD3DX12_ROOT_PARAMETER rootparams[4] = {};
 	// CBV（座標変換行列用）
 	rootparams[0].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_ALL);
 	// SRV（テクスチャ）
 	rootparams[1].InitAsDescriptorTable(1, &descRangeSRV, D3D12_SHADER_VISIBILITY_ALL);
 	//CBV(スキニング用)
 	rootparams[2].InitAsConstantBufferView(3, 0, D3D12_SHADER_VISIBILITY_ALL);
+	//ライト用
+	rootparams[3].InitAsConstantBufferView(2, 0, D3D12_SHADER_VISIBILITY_ALL);
 	// スタティックサンプラー
 	CD3DX12_STATIC_SAMPLER_DESC samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
 
@@ -188,6 +192,14 @@ void FbxObject3d::CreateGraphicsPipeline(const wchar_t* ps, const wchar_t* vs)
 
 
 
+FbxObject3d::~FbxObject3d()
+{
+	if (collider) {
+		CollisionManager::GetInstance()->RemoveCollider(collider);
+		delete collider;
+	}
+}
+
 void FbxObject3d::PreDraw(ID3D12GraphicsCommandList* cmdList)
 {
 	// PreDrawとPostDrawがペアで呼ばれていなければエラー
@@ -210,7 +222,7 @@ void FbxObject3d::PostDraw()
 
 void FbxObject3d::Initialize()
 {
-
+	name = typeid(*this).name();
 	HRESULT result;
 
 	result = dev->CreateCommittedResource(
@@ -238,11 +250,10 @@ void FbxObject3d::Initialize()
 	constBuffSkin->Unmap(0, nullptr);
 }
 
-void FbxObject3d::Update()
+void FbxObject3d::UpdateWorldMatrix()
 {
 	assert(camera);
 
-	HRESULT result;
 	XMMATRIX matScale, matRot, matTrans;
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();
@@ -255,7 +266,14 @@ void FbxObject3d::Update()
 	matWorld *= matScale;
 	matWorld *= matRot;
 	matWorld *= matTrans;
+}
 
+void FbxObject3d::Update()
+{
+
+	HRESULT result;
+
+	UpdateWorldMatrix();
 
 	const XMMATRIX& matViewProjection = camera->GetViewProjectionMatrix();
 	const XMMATRIX& modelTransform = fbxModel->GetModelTransform();
@@ -295,9 +313,14 @@ void FbxObject3d::Update()
 	if (isPlay) {
 		//1フレーム進める
 		currentTime += frameTime;
-		//最後まで再生したら先頭に戻す	
 		if (currentTime > endTime) {
-			currentTime = startTime;
+			if (Loop == true) {
+				//最後まで再生したら先頭に戻す	
+				currentTime = startTime;
+			}
+			else if (Loop == false) {
+				currentTime = endTime;
+			}
 		}
 	}
 }
@@ -322,29 +345,77 @@ void FbxObject3d::Draw()
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuffTransform->GetGPUVirtualAddress());
 	// 定数バッファビューをセット
 	cmdList->SetGraphicsRootConstantBufferView(2, constBuffSkin->GetGPUVirtualAddress());
-
+	lightGroup->Draw(cmdList, 3);
 	// モデル描画
 	fbxModel->Draw(cmdList);
 
 }
 
-void FbxObject3d::PlayAnimation()
+void FbxObject3d::LoadAnimation()
 {
 	FbxScene* fbxScene = fbxModel->GetFbxScene();
-	//0番のアニメーションを取得	
-	FbxAnimStack* animstack = fbxScene->GetSrcObject<FbxAnimStack>(0);
-	//アニメーションの名前取得
-	const char* animstackname = animstack->GetName();
-	//アニメーションの時間情報
-	FbxTakeInfo* takeinfo = fbxScene->GetTakeInfo(animstackname);
+	//アニメーションカウント
+	int sceneCount = fbxScene->GetSrcObjectCount<FbxAnimStack>();
+	for (int i = 0; i < sceneCount; i++)
+	{
+		//仮データ
+		animationData aData = {};
+		//i番のアニメーション取得
+		aData.animstack = fbxScene->GetSrcObject<FbxAnimStack>(i);
+		//アニメーションの名前を取得
+		const char* animstackname = aData.animstack->GetName();
+		//アニメーションの時間情報
+		aData.takeinfo = fbxScene->GetTakeInfo(animstackname);
+		//開始時間取得
+		startTime = aData.takeinfo->mLocalTimeSpan.GetStart();
+		//終了時間取得
+		endTime = aData.takeinfo->mLocalTimeSpan.GetStop();
+		//開始時間に合わせる
+		currentTime = startTime;
+		//仮データを実データに入れる
+		animation.push_back(aData);
+	}
+}
 
-	//開始時間取得
-	startTime = takeinfo->mLocalTimeSpan.GetStart();
-	//終了時間取得
-	endTime = takeinfo->mLocalTimeSpan.GetStop();
-	//開始時間に合わせる	
-	currentTime = startTime;
-	//再生状態にする
+void FbxObject3d::PlayAnimation(int No, bool loop)
+{
+	FbxScene* fbxScene = fbxModel->GetFbxScene();
+	//アニメーションの変更
+	fbxScene->SetCurrentAnimationStack(animation[No].animstack);
+	//再生中状態にする
 	isPlay = true;
+	this->Loop = loop;
+}
 
+
+
+void FbxObject3d::Stop()
+{
+	isPlay = false;
+}
+
+void FbxObject3d::SetCollider(BaseCollider* collider)
+{
+	collider->SetObject2(this);
+	this->collider = collider;
+	// コリジョンマネージャに追加
+	CollisionManager::GetInstance()->AddCollider(collider);
+	UpdateWorldMatrix();
+	collider->Update();
+}
+
+void FbxObject3d::RemoveCollider()
+{
+	CollisionManager::GetInstance()->RemoveCollider(collider);
+}
+
+XMFLOAT3 FbxObject3d::GetWorldPosition()
+{
+	XMFLOAT3 worldpos;
+
+	worldpos.x = matWorld.r[3].m128_f32[0];
+	worldpos.y = matWorld.r[3].m128_f32[1];
+	worldpos.z = matWorld.r[3].m128_f32[2];
+
+	return worldpos;
 }

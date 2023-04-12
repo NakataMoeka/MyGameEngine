@@ -1,6 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
-
+#include "Collision.h"
 /// <summary>
 /// カメラ基本機能
 /// </summary>
@@ -21,13 +21,14 @@ public: // メンバ関数
 	virtual ~Camera() = default;
 
 	virtual void Update();
-
-	void FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX= 0, float angleY = 0);
+	//追従
+	void FollowCamera(XMFLOAT3 position, XMFLOAT3 d, float angleX = 0, float angleY = 0);
 
 	void UpdateViewMatrix();
 
 	void UpdateProjectionMatrix();
 
+	void CameraCollision(XMFLOAT3 position, XMFLOAT3 angle);
 	inline const XMMATRIX& GetViewMatrix() {
 		return matView;
 	}
@@ -74,6 +75,9 @@ public: // メンバ関数
 	void MoveVector(const XMFLOAT3& move);
 	void MoveVector(const XMVECTOR& move);
 
+	bool GetCCFlag() { return ccFlag; }
+	float GetDistance() { return distance; }
+	bool GetColFlag() { return colFlag; }
 protected: // メンバ変数
 	// ビュー行列
 	XMMATRIX matView = DirectX::XMMatrixIdentity();
@@ -97,4 +101,13 @@ protected: // メンバ変数
 	XMFLOAT3 up = { 0, 1, 0 };
 	// アスペクト比
 	float aspectRatio = 1.0f;
+
+	XMFLOAT3 FEye;
+	XMFLOAT3 FTarget;
+
+	Sphere sphere;
+	bool colFlag = false;
+	bool ccFlag = false;//カメラこリジョン用のフラグ
+
+	float distance;
 };

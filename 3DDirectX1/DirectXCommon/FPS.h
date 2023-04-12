@@ -15,7 +15,7 @@ public:
 	void Ran();
 	//インスタンスの取得
 	static FPS* GetInstance();
-
+	float GetFPS() { return fps; }
 	//コピーコンストラクタ、代入演算子無効化
 	FPS(const FPS& obj) = delete;
 	FPS& operator=(const FPS& obj) = delete;
@@ -23,11 +23,11 @@ private:
 	FPS() {};
 	~FPS() {};
 
-	const float MIN_FREAM_TIME = 1.0 / 60.0;
+	const float MIN_FREAM_TIME = 1.0f / 60.0f;
 	float frameTime = 0;
-	LARGE_INTEGER timeStart;
-	LARGE_INTEGER timeEnd;
-	LARGE_INTEGER timeFreq;
+	LARGE_INTEGER timeStart={};
+	LARGE_INTEGER timeEnd={};
+	LARGE_INTEGER timeFreq={};
 	
 	float fps = 0;
 };

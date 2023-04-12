@@ -1,5 +1,5 @@
 #include "DebugText.h"
-
+using namespace DirectX;
 
 //DebugText::~DebugText()
 //{
@@ -26,7 +26,7 @@ void DebugText::Initialize(UINT texnumber)
 	}
 }
 
-void DebugText::Print(int len, const std::string& text, float x, float y, float scale = 1.0f)
+void DebugText::Print(int len, const std::string& text, float x, float y, float scale = 1.0f, XMFLOAT4 color = { 1,1,1,1 })
 {
 	// 全ての文字について
 	for (int i = 0; i < len; i++)
@@ -51,21 +51,21 @@ void DebugText::Print(int len, const std::string& text, float x, float y, float 
 		// 座標計算
 		sprite[spriteIndex]->SetPosition({ x + fontWidth * scale * i, y });
 		sprite[spriteIndex]->SetTextureRect({ (float)fontIndexX * fontWidth, (float)fontIndexY * fontHeight }
-
 		, { (float)fontWidth ,(float)fontHeight });
 		sprite[spriteIndex]->SetSize({ fontWidth * scale, fontHeight * scale });
+		sprite[spriteIndex]->SetColor(color);
 		// 文字を１つ進める
 		spriteIndex++;
 	}
 }
 
 
-void DebugText::Printf(float x, float y, float scale, const char* fmt, ...)
+void DebugText::Printf(float x, float y, float scale, XMFLOAT4 color, const char* fmt, ...)
 {
 	va_list args;
 	va_start(args, fmt);
 	int w = vsnprintf(buffer, bufferSize - 1, fmt, args);
-	Print(w, buffer, x, y, scale);
+	Print(w, buffer, x, y, scale, color);
 	va_end(args);
 }
 
@@ -81,7 +81,3 @@ void DebugText::DrawAll(ID3D12GraphicsCommandList* cmdList)
 
 	spriteIndex = 0;
 }
-
-
-
-

@@ -282,13 +282,12 @@ void Input::updateMouse()
 	result = devMouse->Acquire();
 	//マウスの入力情報を取得
 	result = devMouse->GetDeviceState(sizeof(DIMOUSESTATE), &mouse);
-
 	POINT p;
 	// マウス座標(スクリーン座標)を取得する
 	GetCursorPos(&p);
 	ScreenToClient(winapp->GetHwnd(), &p);
-	MousePos.x = p.x;
-	MousePos.y = p.y;
+	MousePos.x = (float)p.x;
+	MousePos.y = (float)p.y;
 }
 
 void Input::updatePad()
@@ -545,8 +544,8 @@ void UpdateGamePad()
 	}
 	//角度を取得
 #define PI 3.141592653589793
-	leftAngle = atan2(0 - pad_data.lX, 0 - pad_data.lY);
-	rightAngle = atan2(0 - pad_data.lRx, 0 - pad_data.lRy);
+	leftAngle = atan2f(0 - (float)pad_data.lX, 0 - (float)pad_data.lY);
+	rightAngle = atan2f(0 - (float)pad_data.lRx, 0 - (float)pad_data.lRy);
 	// 十字キー判定
 	if (pad_data.rgdwPOV[0] != 0xFFFFFFFF)
 	{

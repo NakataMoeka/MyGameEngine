@@ -44,7 +44,6 @@ struct FormatChunk
 	ChunkHeader chunk;		//"fmt"
 	WAVEFORMATEX fmt;		//波形フォーマット
 };
-//e
 //音声データ
 struct SoundData
 {

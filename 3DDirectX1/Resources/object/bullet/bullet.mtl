@@ -1,0 +1,12 @@
+# Blender 3.3.1 MTL File: 'None'
+# www.blender.org
+
+newmtl None
+Ns 499.999969
+Ka 1.0000 1.0000 1.0000
+Kd 0.5000 0.5000 0.5000
+Ks 0.0000 0.0000 0.0000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd yellow.jpg
