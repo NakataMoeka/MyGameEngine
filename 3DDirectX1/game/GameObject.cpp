@@ -254,7 +254,6 @@ void GameObjects::stageInit(int stageNum)
 			}
 			else if (spawnMap[j][i] == 3)
 			{
-
 				oData3.push_back(new object);
 				num = (int)oData3.size() - 1;
 				if (stageNum == 0 || stageNum == 2) {

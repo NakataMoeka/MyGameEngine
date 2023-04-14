@@ -98,8 +98,6 @@ private: // メンバ変数
 	SphereSize* sphereSize = nullptr;
 	Tutorial* tutorial = nullptr;
 	start* st = nullptr;
-	Object3d* Bikkuri = nullptr;
-	Model* BikkuriModel = nullptr;
 	const int debugTextTexNumber = 0;
 
 
@@ -115,8 +113,8 @@ private: // メンバ変数
 	float distance = 20.0f;//プレイヤーとカメラの距離
 
 	float distanceY = 20.0f;//カメラの位置
-	float distanceC = 20.0f;//カメラの位置
-	float distanceCY = 20.0f;//カメラの位置
+	XMFLOAT3 distanceC = { 0,20.0f,20.0f };//カメラの位置
+
 
 	float SZV = 3;//sphereとの
 	float SY = 3;//SphereのY軸高さ

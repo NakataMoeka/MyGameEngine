@@ -401,9 +401,6 @@ void Player::Dash()
 			}
 		}
 	}
-	//DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%f", dash);
-	//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "%d", dashTime);
-	//DebugText::GetInstance()->Printf(100, 100, 3.0f, { 1,1,1,1 }, "%d", dashFlag);
 }
 
 

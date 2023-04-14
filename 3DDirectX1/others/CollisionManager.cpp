@@ -224,7 +224,7 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 				IsHit = false;
 				return;
 			}
-			DebugText::GetInstance()->Printf(100, 100, 3.0f, { 1,1,1,1 }, "Atatta");
+			//DebugText::GetInstance()->Printf(100, 100, 3.0f, { 1,1,1,1 }, "Atatta");
 			IsHit = true;
 		}
 		// メッシュ
@@ -251,7 +251,7 @@ void CollisionManager::QuerySphere(const Sphere& sphere, QueryCallback* callback
 			IsHit = false;
 		}
 	
-		DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%d",IsHit);
+		//DebugText::GetInstance()->Printf(100, 200, 3.0f, { 1,1,1,1 }, "%d",IsHit);
 	}
 
 }

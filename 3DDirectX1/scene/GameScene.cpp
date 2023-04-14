@@ -105,11 +105,6 @@ void GameScene::InitTH()
 	pose->Initialize(audio);
 	st = new start();
 	st->Initialize(audio);
-	BikkuriModel = Model::Create("bikkuri", true);
-	Bikkuri = Object3d::Create(BikkuriModel);
-	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
-	Bikkuri->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-
 }
 
 void GameScene::Init()
@@ -125,9 +120,8 @@ void GameScene::Init()
 	st->Init();
 	//GameSceneの初期化
 	distance = 10.0f;
-	distanceC = 10.0f;
+	distanceC = { 0, 4.0f, -10.0f };
 	distanceY = 2.0f;
-	distanceCY = 4.0f;
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
 
@@ -153,7 +147,7 @@ void GameScene::Init()
 	Ssize = { 0.8f,0.8f,0.8f };
 	audioCount = 0;
 	OY = 0;
-
+	srand((unsigned)time(NULL));
 }
 
 void GameScene::InitStageNum(int stageNum)
@@ -245,7 +239,7 @@ void GameScene::Update()
 	if (HitCC == 1) {
 		audio->SEPlayWave(sound3);
 	}
-	DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "%d",HitCC);
+	//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "%d",HitCC);
 #pragma endregion
 
 
@@ -341,11 +335,7 @@ void GameScene::Update()
 		stageObj->RC();
 	}
 	sphereSize->Update();
-	Bikkuri->SetPosition({ player->GetPlayerPos().x,
-		player->GetPlayerPos().y+8,player->GetPlayerPos().z });
-	Bikkuri->SetRotation({ 90,player->GetSphereAngle().m128_f32[1],0,0});
-	Bikkuri->Quaternion();
-	Bikkuri->Update();
+
 #pragma endregion
 #if _DEBUG 
 	//デバッグでクリアとゲームオーバー見るために作ったやつ
@@ -422,18 +412,18 @@ void GameScene::Update()
 #pragma region カメラ
 	//追従カメラ
 	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y + distanceY,player->GetPlayerPos().z }
-	, XMFLOAT3{ 0,distanceCY,-distanceC }, 0, player->GetPlayerAngle().y);
+	, XMFLOAT3{ distanceC.x,distanceC.y,-distanceC.z }, 0, player->GetPlayerAngle().y);
 	//カメラのめり込み(一部うまくいかない部分あり)
 	camera->CameraCollision(player->GetPlayerPos(), player->GetPlayerAngle());
 	if (camera->GetCCFlag() == true) {
 		//if (camera->GetDistance() <=8) {
-		distanceC = camera->GetDistance();
-		distanceCY = 0;
+		distanceC.z = camera->GetDistance();
+		distanceC.y = 0;
 		//}
 	}
 	else if (camera->GetCCFlag() == false) {
-		distanceCY = 4;
-		distanceC = distance;
+		distanceC.y = 4;
+		distanceC.z = distance;
 	}
 	camera->Update();
 #pragma endregion
@@ -459,10 +449,12 @@ void GameScene::Draw()
 	player->Draw();
 	gameObjects->Draw();
 	stageObj->Draw();
-	//if (HitCC != 0 && HitCC <= 2) {
-	if (colMan->GetHit() == true) {
-		particleMan->Draw(dxCommon->GetCmdList());
-	}
+	
+	//if (colMan->GetHit() == true) {
+	//	if (HitCC <= 2) {
+	//		particleMan->Draw(dxCommon->GetCmdList());
+	//	}
+	//}
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 }
@@ -491,11 +483,11 @@ void GameScene::CreateParticles()
 {
 	for (int i = 0; i < 10; i++) {
 		// X,Y,Z全て[-5.0f,+5.0f]でランダムに分布
-		const float rnd_pos = 0.00001f;
+		const float rnd_pos = 0.005f;
 		XMFLOAT3 pos = player->GetSpherePos();
-		/*pos.x += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
-		pos.y += ((float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f)+3;
-		pos.z += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;*/
+		pos.x += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+		pos.y += ((float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f) + 4;
+		pos.z += (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 
 		const float rnd_vel = 0.1f;
 		XMFLOAT3 vel{};
@@ -504,11 +496,11 @@ void GameScene::CreateParticles()
 		vel.z = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 
 		XMFLOAT3 acc{};
-		const float rnd_acc = 0.001f;
+		const float rnd_acc = 0.0001f;
 		acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
 		// 追加
-		particleMan->Add(60, pos, vel, acc, 2.0f, 0.0f, { 1,1,1 }, { 1,1,1 });
+		particleMan->Add(60, pos, vel, acc, 2.0f, 0.0f, { 1,0.5,0 }, { 1,1,1 });
 	}
 }
 
