@@ -152,7 +152,7 @@ void GameObjects::Init()
 			InitUpd(Bear, i, oData3);
 			cSphere3[i].radius = 1.0f;
 			cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1], Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.0f));
+			Bear[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 1.0f));
 			Bear[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			Bear[i]->GetCollider()->SetNum(2);
 		}
@@ -170,7 +170,7 @@ void GameObjects::Init()
 			InitUpd(Robot, i, oData4);
 			cSphere4[i].radius = 1.0f;
 			cSphere4[i].center = XMVectorSet(Robot[i]->GetMatWorld().r[3].m128_f32[0], Robot[i]->GetMatWorld().r[3].m128_f32[1], Robot[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			Robot[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.0f));
+			Robot[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,4,0,0 }), 1.5f));
 			Robot[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			Robot[i]->GetCollider()->SetNum(3);
 		}
@@ -188,7 +188,7 @@ void GameObjects::Init()
 			InitUpd(Card, i, oData5);
 			cSphere5[i].radius = 1.5f;
 			cSphere5[i].center = XMVectorSet(Card[i]->GetMatWorld().r[3].m128_f32[0], Card[i]->GetMatWorld().r[3].m128_f32[1], Card[i]->GetMatWorld().r[3].m128_f32[2], 1);
-			Card[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 1.5f));
+			Card[i]->SetCollider(new SphereCollider(XMVECTOR({ 0,2,0,0 }), 2.0f));
 			Card[i]->GetCollider()->SetAttribute(COLLISION_ATTR_OBJECT);
 			Card[i]->GetCollider()->SetNum(4);
 		}
