@@ -372,17 +372,12 @@ void Player::Dash()
 	if (JumpFlag == false) {
 		if (Input::GetInstance()->TriggerKey(DIK_UPARROW) /*&& Input::GetInstance()->PushKey(DIK_W)*/ && dashFlag == false)
 		{
-			dashTime = 20;
 			fade = 1;
 			dash = 1.5f;
 			dashCoolTime = dashCoolTimeMax;
 			dashFlag = true;
 		}
-		//if (dashTime > 0)
-		//{
-			//dashTime--;
 			XMVECTOR movedash = { 0,0,dash,0 };//ダッシュ用の移動ベクトル
-
 			XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 			movedash = XMVector3TransformNormal(movedash, matRot);
 			playerPos = vec(playerPos, movedash);
@@ -393,7 +388,6 @@ void Player::Dash()
 			if (dash > 0) {
 				dash -= 0.1f;
 			}
-		//}
 	}
 	DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%d", dashCoolTime);
 }
