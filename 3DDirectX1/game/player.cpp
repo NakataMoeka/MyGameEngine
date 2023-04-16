@@ -362,7 +362,7 @@ void Player::Dash()
 	//ダッシュにも慣性を付ける
 	if (dash<=0) {
 		dashCoolTime--;
-		if (dashCoolTime <= 0 && dashTime <= 0)
+		if (dashCoolTime <= 0)
 		{
 			dashCoolTime = 0;
 			dashFlag = false;
@@ -370,20 +370,17 @@ void Player::Dash()
 	}
 	//ジャンプしていないときにダッシュできる
 	if (JumpFlag == false) {
-		if (Input::GetInstance()->TriggerKey(DIK_UPARROW) && Input::GetInstance()->PushKey(DIK_W) && dashFlag == false)
+		if (Input::GetInstance()->TriggerKey(DIK_UPARROW) /*&& Input::GetInstance()->PushKey(DIK_W)*/ && dashFlag == false)
 		{
 			dashTime = 20;
 			fade = 1;
 			dash = 1.5f;
+			dashCoolTime = dashCoolTimeMax;
 			dashFlag = true;
 		}
-		if (dashTime > 0)
-		{
-			dashTime--;
-			if (dashTime >= 0)
-			{
-				dashCoolTime = dashCoolTimeMax;
-			}
+		//if (dashTime > 0)
+		//{
+			//dashTime--;
 			XMVECTOR movedash = { 0,0,dash,0 };//ダッシュ用の移動ベクトル
 
 			XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
@@ -396,11 +393,9 @@ void Player::Dash()
 			if (dash > 0) {
 				dash -= 0.1f;
 			}
-			else {
-				dashCoolTime = dashCoolTimeMax;
-			}
-		}
+		//}
 	}
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%d", dashCoolTime);
 }
 
 
