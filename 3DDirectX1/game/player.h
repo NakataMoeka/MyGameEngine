@@ -80,7 +80,7 @@ private://変数
 	Sphere sphere;//当たり判定のやつ
 
 	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
-	float r = 3;
+	float r = 2;
 	float radius = 3.0f;
 	//移動
 	float speedUD = 0;

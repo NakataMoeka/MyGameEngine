@@ -44,13 +44,13 @@ void Player::Init()
 	CountWalk = 0;
 	speedUD = 0.0f;
 	speedLR = 0.0f;
-	r = 3.0f;
+	r = 2.0f;
 	dash = 0.0f;
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
 	pFlag = false;
 	sphereZV = 0;
-	sphereY = 2;
+	sphereY = -3;
 	walkFlag = true;
 	TWCount = 0;
 	moveUDFlag = false;
@@ -58,10 +58,10 @@ void Player::Init()
 
 	JumpFlag = false;
 	onGround = true;
-	spherePos = { 0,3,-40 };
+	spherePos = { 0,0,-40 };
 	playerAngle = { 0,0,0 };
 	sphereAngle = { 0,0,0,0 };
-	sphereSize = { 0.8f,0.8f,0.8f };
+	sphereSize = { 0.2f,0.2f,0.2f };
 	// コライダーの追加
 	SphereObj->SetCollider(new SphereCollider(XMVECTOR({ 0,radius,0,0 }), radius));
 	SphereObj->GetCollider()->SetAttribute(COLLISION_ATTR_ALLIES);
@@ -409,7 +409,7 @@ void Player::Update()
 	//位置などセット系
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);
-
+	sphereSize = { 0.6f,0.6f,0.6f };
 	SphereObj->SetPosition(spherePos);
 	SphereObj->SetScale(sphereSize);
 	SphereObj->SetRotation(sphereAngle);

@@ -141,9 +141,9 @@ void GameScene::Init()
 	TSFlag = false;
 	cACount = 0;
 	caFlag = false;
-	radius = 3.0f;
+	radius = 2.0f;
 	SZV = 5;
-	SY = 3;
+	SY = 2;
 	Ssize = { 0.8f,0.8f,0.8f };
 	audioCount = 0;
 	OY = 0;
@@ -324,7 +324,7 @@ void GameScene::Update()
 		else if (stageNum == 2) {
 			audio->SoundPlayWave(sound4);
 		}
-		audio->SetBGMVolume(0.2f);
+		audio->SetBGMVolume(0.1f);
 	}
 	//ポーズ画面でタイトルに戻るときの処理
 	if (pose->GetTFlag() == true) {
