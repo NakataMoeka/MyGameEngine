@@ -69,6 +69,7 @@ public: // メンバ関数
 	bool GetTSFlag() { return TSFlag; }
 
 private: // メンバ変数
+	void ObjCollision(int i,int j);
 	DXCommon* dxCommon = nullptr;
 
 

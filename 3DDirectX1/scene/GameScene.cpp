@@ -183,41 +183,11 @@ void GameScene::Update()
 
 #pragma region	当たり判定
 	//チュートリアルで動いてみてよの後ならくっつく
+	//深いネストの改善
 	if (tutorial->GetTCount() != 1) {
-		//jはobjの種類数
-		//iは種類ごとの数
 		for (int j = 0; j < 5; j++) {
 			for (int i = 0; i < gameObjects->GetOBJCount(j); i++) {
-				gameObjects->SetHIT(i, j, false);
-				if (gameObjects->GetObject3d(i, j)->GetParentFlag() == false) {
-					if (Tsize >= gameObjects->GetOSize(i, j) * 10 || gameObjects->GetOSize(i, j) == 1 || gameObjects->GetOSize(i, j) == 10) {
-						gameObjects->GetObject3d(i, j)->SetColFlag(true);
-						if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObjects->GetCSphere(i, j))) {
-							gameObjects->SetHIT(i, j, true);
-							HitCount++;
-							gameObjects->GetObject3d(i, j)->SetParentFlag(true);
-						}
-						//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "Hit");
-					}
-				}
-				if (gameObjects->GetHIT(i, j) == true) {
-					gameObjects->GetObject3d(i, j)->SetParent(player->GetObject3d().get());
-				}
-				if (HitCount == 1) {
-					gameObjects->GetObject3d(i, j)->transformParent();
-					audio->SEPlayWave(sound1);
-					HitCount = 0;
-					gameObjects->SetHIT(i, j, false);
-					Tsize += gameObjects->GetOSize(i, j);
-					if (j != 0) {
-						radius += 0.1f;
-						SY += 0.1f;
-						player->SetSY(SY);
-						player->SetRadius(radius);
-						OY += 0.1f;
-						gameObjects->SetY(OY);
-					}
-				}
+				ObjCollision(i, j);
 			}
 		}
 	}
@@ -449,7 +419,7 @@ void GameScene::Draw()
 	player->Draw();
 	gameObjects->Draw();
 	stageObj->Draw();
-	
+
 	//if (colMan->GetHit() == true) {
 	//	if (HitCC <= 2) {
 	//		particleMan->Draw(dxCommon->GetCmdList());
@@ -508,3 +478,42 @@ bool GameScene::GetTitleFlag()
 {
 	return pose->GetTFlag();
 }
+
+void GameScene::ObjCollision(int i, int j)
+{
+
+	//jはobjの種類数
+	//iは種類ごとの数
+	gameObjects->SetHIT(i, j, false);
+	if (gameObjects->GetObject3d(i, j)->GetParentFlag() == false) {
+		if (Tsize >= gameObjects->GetOSize(i, j) * 10 || gameObjects->GetOSize(i, j) == 1 || gameObjects->GetOSize(i, j) == 10) {
+			gameObjects->GetObject3d(i, j)->SetColFlag(true);
+			if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObjects->GetCSphere(i, j))) {
+				gameObjects->SetHIT(i, j, true);
+				HitCount++;
+				gameObjects->GetObject3d(i, j)->SetParentFlag(true);
+			}
+		}
+	}
+	if (gameObjects->GetHIT(i, j) == true) {
+		gameObjects->GetObject3d(i, j)->SetParent(player->GetObject3d().get());
+	}
+	if (HitCount == 1) {
+		gameObjects->GetObject3d(i, j)->transformParent();
+		audio->SEPlayWave(sound1);
+		HitCount = 0;
+		gameObjects->SetHIT(i, j, false);
+		Tsize += gameObjects->GetOSize(i, j);
+		if (j != 0) {
+			radius += 0.1f;
+			SY += 0.1f;
+			player->SetSY(SY);
+			player->SetRadius(radius);
+			OY += 0.1f;
+			gameObjects->SetY(OY);
+		}
+	}
+}
+
+
+
