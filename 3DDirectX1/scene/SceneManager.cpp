@@ -20,19 +20,17 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	Sprite::LoadTexture(60, L"Resources/white.jpg");
 	Change = std::unique_ptr<Sprite>(Sprite::CreateSprite(60, { 0,0 }));
 	Change->SetSize({ 1280,720 });
-	//Sprite::LoadTexture(61, L"Resources/UI/Load.png");
-	//loadingS = Sprite::CreateSprite(61, { 0,0 });
-	//loadingS->SetSize({ 1280,720 });
-	titleScene = new TitleScene();
+
+	titleScene = std::unique_ptr <TitleScene>(new TitleScene());
 	titleScene->Initialize(dxCommon, audio);
-	selectScene = new SelectScene();
+	selectScene = std::unique_ptr <SelectScene>(new SelectScene());
 	selectScene->Initialize(dxCommon, audio);
-	clearScene = new ClearScene();
+	clearScene = std::unique_ptr <ClearScene>(new ClearScene());
 	clearScene->Initialize(dxCommon, audio);
-	gameScene = new GameScene();
+	gameScene = std::unique_ptr <GameScene>(new GameScene());
 	gameScene->Initialize(dxCommon, audio);
 	//gameScene->InitTH();
-	loadScene = new Loading();
+	loadScene = std::unique_ptr <Loading>(new Loading());
 	loadScene->Initialize(dxCommon, audio);
 	Bflag = false;
 	fade = 0.0f;

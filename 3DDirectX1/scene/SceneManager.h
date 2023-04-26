@@ -55,11 +55,11 @@ private:
 	Audio* audio = nullptr;
 	Scene scene = LOAD;
 
-	TitleScene* titleScene = nullptr;
-	SelectScene* selectScene = nullptr;
-	GameScene* gameScene = nullptr;
-	ClearScene* clearScene = nullptr;
-	Loading* loadScene = nullptr;
+	std::unique_ptr < TitleScene> titleScene = nullptr;
+	std::unique_ptr < SelectScene> selectScene = nullptr;
+	std::unique_ptr < GameScene> gameScene = nullptr;
+	std::unique_ptr < ClearScene> clearScene = nullptr;
+	std::unique_ptr < Loading> loadScene = nullptr;
 	bool Bflag = false;
 
 	std::unique_ptr<Sprite>Change = nullptr;

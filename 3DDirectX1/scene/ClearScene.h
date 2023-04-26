@@ -41,9 +41,8 @@ private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
 	const int debugTextTexNumber = 0;
-	Camera* camera = nullptr;
-	LightGroup* lightGroup = nullptr;
-
+	std::unique_ptr < Camera> camera = nullptr;
+	std::unique_ptr < LightGroup> lightGroup = nullptr;
 	SoundData sound1 = {};
 
 	std::unique_ptr<Sprite> overTextSprite = nullptr;

@@ -39,8 +39,8 @@ private:
 	SoundData sound2 = {};
 	SoundData sound3 = {};
 	const int debugTextTexNumber = 0;
-	Camera* camera = nullptr;
-	LightGroup* lightGroup = nullptr;
+	std::unique_ptr < Camera> camera = nullptr;
+	std::unique_ptr < LightGroup> lightGroup = nullptr;
 
 	std::unique_ptr < Sprite> TSprite;
 	std::unique_ptr < Sprite> TBSprite;

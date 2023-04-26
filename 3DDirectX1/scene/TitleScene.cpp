@@ -10,15 +10,15 @@ void TitleScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	this->audio = audio;
 
 	// カメラ生成
-	camera = new Camera(WinApp::window_width, WinApp::window_height);
+	camera = std::unique_ptr <Camera>(new Camera(WinApp::window_width, WinApp::window_height));
 
 	// 3Dオブジェクトにカメラをセット
-	Object3d::SetCamera(camera);
+	Object3d::SetCamera(camera.get());
 	FbxObject3d::SetDev(dxCommon->Getdev());
 	//ライト生成
-	lightGroup = LightGroup::Create();
+	lightGroup = std::unique_ptr <LightGroup>(LightGroup::Create());
 
-	Object3d::SetLight(lightGroup);
+	Object3d::SetLight(lightGroup.get());
 
 	// 3Dオブエクトにライトをセット
 	// 
