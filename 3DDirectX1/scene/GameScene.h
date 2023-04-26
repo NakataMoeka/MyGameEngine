@@ -71,8 +71,6 @@ public: // メンバ関数
 private: // メンバ変数
 	void ObjCollision(int i,int j);
 	DXCommon* dxCommon = nullptr;
-
-
 	Audio* audio = nullptr;
 
 	SoundData sound1 = {};

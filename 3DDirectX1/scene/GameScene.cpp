@@ -19,13 +19,13 @@ GameScene::~GameScene()
 {
 }
 
-void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
+void GameScene::Initialize(DXCommon dxCommon, Audio* audio)
 {
 	//u
 	assert(dxCommon);
 	assert(audio);
 
-	this->dxCommon = dxCommon;
+	this->dxCommon =  dxCommon;
 	this->audio = audio;
 
 	// カメラ生成
@@ -99,9 +99,9 @@ void GameScene::InitTH()
 	sphereSize = std::unique_ptr <SphereSize>(new SphereSize());
 	sphereSize->Initialize();
 	pose = std::unique_ptr <Pose>(new Pose());
-	pose->Initialize(audio);
+	pose->Initialize(audio.get());
 	st = std::unique_ptr < start>(new start());
-	st->Initialize(audio);
+	st->Initialize(audio.get());
 }
 
 void GameScene::Init()
