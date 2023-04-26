@@ -19,13 +19,13 @@ GameScene::~GameScene()
 {
 }
 
-void GameScene::Initialize(DXCommon dxCommon, Audio* audio)
+void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 {
 	//u
 	assert(dxCommon);
 	assert(audio);
 
-	this->dxCommon =  dxCommon;
+	this->dxCommon = dxCommon;
 	this->audio = audio;
 
 	// カメラ生成
