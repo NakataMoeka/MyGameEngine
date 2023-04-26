@@ -99,9 +99,9 @@ void GameScene::InitTH()
 	sphereSize = std::unique_ptr <SphereSize>(new SphereSize());
 	sphereSize->Initialize();
 	pose = std::unique_ptr <Pose>(new Pose());
-	pose->Initialize(audio.get());
+	pose->Initialize(audio);
 	st = std::unique_ptr < start>(new start());
-	st->Initialize(audio.get());
+	st->Initialize(audio);
 }
 
 void GameScene::Init()
