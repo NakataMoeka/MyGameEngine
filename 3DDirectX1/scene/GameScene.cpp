@@ -195,7 +195,7 @@ void GameScene::Update()
 		colMan->SetAudioFlag(false);
 	}
 	if (colMan->GetHit() == true) {
-		CreateParticles();
+		//CreateParticles();
 		if (HitCC < 3) {
 			HitCC++;
 		}
@@ -208,7 +208,6 @@ void GameScene::Update()
 	}
 	//DebugText::GetInstance()->Printf(100, 60, 3.0f, { 1,1,1,1 }, "%d",HitCC);
 #pragma endregion
-
 
 #pragma region	サイズ
 	//colMan->SetTsize2(Tsize);
@@ -226,7 +225,6 @@ void GameScene::Update()
 	player->SetSZV(SZV);
 #pragma endregion
 
-
 #pragma region ポーズなど
 
 	pose->Update();
@@ -234,7 +232,6 @@ void GameScene::Update()
 	player->SetPFlag(pose->GetJFlag());
 	//ポーズ状態じゃなかったら
 	if (pose->GetPFlag() == false) {
-
 		//チュートリアル以外
 		if (stageNum != 0) {
 			st->Update();
@@ -478,18 +475,18 @@ bool GameScene::GetTitleFlag()
 
 void GameScene::ObjCollision(int i, int j)
 {
-
 	//jはobjの種類数
 	//iは種類ごとの数
 	gameObjects->SetHIT(i, j, false);
-	if (gameObjects->GetObject3d(i, j)->GetParentFlag() == false) {
-		if (Tsize >= gameObjects->GetOSize(i, j) * 10 || gameObjects->GetOSize(i, j) == 1 || gameObjects->GetOSize(i, j) == 10) {
-			gameObjects->GetObject3d(i, j)->SetColFlag(true);
-			if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObjects->GetCSphere(i, j))) {
-				gameObjects->SetHIT(i, j, true);
-				HitCount++;
-				gameObjects->GetObject3d(i, j)->SetParentFlag(true);
-			}
+	if (gameObjects->GetObject3d(i, j)->GetParentFlag() == false &&
+		(Tsize >= gameObjects->GetOSize(i, j) * 10 ||
+			gameObjects->GetOSize(i, j) == 1 ||
+			gameObjects->GetOSize(i, j) == 10)) {
+		gameObjects->GetObject3d(i, j)->SetColFlag(true);
+		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObjects->GetCSphere(i, j))) {
+			gameObjects->SetHIT(i, j, true);
+			HitCount++;
+			gameObjects->GetObject3d(i, j)->SetParentFlag(true);
 		}
 	}
 	if (gameObjects->GetHIT(i, j) == true) {

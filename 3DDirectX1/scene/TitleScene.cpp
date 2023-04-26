@@ -101,19 +101,14 @@ void TitleScene::Update()
 		TS2Sprite->SetPosition({ 560,600 });
 	}
 	else if (SceneNum == 1) {
-		if (Scene == 0) {
-			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-				audio->SEPlayWave(sound2);
-				Scene = 1;
-			}
+		if (Scene == 0 && Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+			audio->SEPlayWave(sound2);
+			Scene = 1;
 		}
-		else if (Scene == 1) {
-			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-				audio->SEPlayWave(sound2);
-				Scene = 0;
-			}
+		else if (Scene == 1 && Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+			audio->SEPlayWave(sound2);
+			Scene = 0;
 		}
-
 		TSSprite->SetSize({ 150,55 });
 		TS2Sprite->SetSize({ 360,100 });
 		TSSprite->SetPosition({ 560,550 });

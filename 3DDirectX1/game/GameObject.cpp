@@ -101,7 +101,6 @@ void GameObjects::Init()
 	y = 0;
 	for (int i = 0; i < oData.size(); i++) {
 
-
 		float radius = 1.0f;
 		if (stageNum == 0 || stageNum == 1) {
 			//stage1
@@ -326,6 +325,7 @@ void GameObjects::InitUpd(std::array<Object3d*, OBJNumber> obj, int i, std::vect
 	obj[i]->SetParentFlag(false);
 	obj[i]->SetColFlag(false);
 }
+
 void GameObjects::Update()
 {
 	if (stageNum == 0) {
@@ -485,51 +485,45 @@ void GameObjects::RC()
 {
 	for (int i = (int)oData.size() - 1; i >= 0; i--)
 	{
-		cube[i]->SetParentFlag(false);
-		cube[i]->RemoveCollider();
-		Game[i]->SetParentFlag(false);
-		Game[i]->RemoveCollider();
+		RCC(cube, i);
+		RCC(Game, i);
 		delete oData[i];
 		oData.erase(oData.begin() + i);
 	}
 	for (int i = (int)oData2.size() - 1; i >= 0; i--)
 	{
-		moveObj[i]->SetParentFlag(false);
-		moveObj[i]->RemoveCollider();
-		Koma[i]->SetParentFlag(false);
-		Koma[i]->RemoveCollider();
+		RCC(moveObj, i);
+		RCC(Koma, i);
 		delete oData2[i];
 		oData2.erase(oData2.begin() + i);
 	}
 	for (int i = (int)oData3.size() - 1; i >= 0; i--)
 	{
-		Bear[i]->SetParentFlag(false);
-		Bear[i]->RemoveCollider();
-		Shogi[i]->SetParentFlag(false);
-		Shogi[i]->RemoveCollider();
+		RCC(Bear,i);
+		RCC(Shogi, i);
 		delete oData3[i];
 		oData3.erase(oData3.begin() + i);
 	}
 	for (int i = (int)oData4.size() - 1; i >= 0; i--)
 	{
-		Robot[i]->SetParentFlag(false);
-		Robot[i]->RemoveCollider();
-		Kendama[i]->SetParentFlag(false);
-		Kendama[i]->RemoveCollider();
+		RCC(Robot, i);
+		RCC(Kendama, i);
 		delete oData4[i];
 		oData4.erase(oData4.begin() + i);
 	}
 	for (int i = (int)oData5.size() - 1; i >= 0; i--)
 	{
-		Card[i]->SetParentFlag(false);
-		Card[i]->RemoveCollider();
-		Turu[i]->SetParentFlag(false);
-		Turu[i]->RemoveCollider();
+		RCC(Card, i);
+		RCC(Turu, i);
 		delete oData5[i];
 		oData5.erase(oData5.begin() + i);
 	}
 }
-
+void GameObjects::RCC(std::array < Object3d*, OBJNumber>obj,int i)
+{
+	obj[i]->SetParentFlag(false);
+	obj[i]->RemoveCollider();
+}
 void GameObjects::Draw()
 {
 	if (stageNum == 0) {

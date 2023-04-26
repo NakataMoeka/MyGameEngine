@@ -66,6 +66,7 @@ private://関数
 	/// <param name="i">横</param>/// <param name="j">縦</param>
 	void InitNum(std::vector<object*>oData, int stageNum, float y, float size, size_t i, size_t j);
 	void InitUpd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData);
+	void RCC(std::array < Object3d*, OBJNumber>obj,int i);//コライダー削除共通の処理
 private://変数
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)

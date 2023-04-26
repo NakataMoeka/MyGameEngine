@@ -111,9 +111,7 @@ void SelectScene::Update()
 		}
 
 	}
-	else if (SAFlag == 0) {
-		if (SCangeFlag == false) {
-			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+	else if (SAFlag == 0&& SCangeFlag == false && Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 				if (stageNum == 0 || stageNum == 1 || stageNum == 2) {
 					SCangeFlag = true;
 					audio->SEPlayWave(sound2);
@@ -121,9 +119,6 @@ void SelectScene::Update()
 				else {
 					audio->SEPlayWave(sound1);
 				}
-
-			}
-		}
 	}
 	SelectNumber->SetSize({ 120,130 });
 	TutorialS->SetSize({ 315, 70 });
