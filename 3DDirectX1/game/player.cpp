@@ -37,11 +37,7 @@ void Player::Initialize()
 
 void Player::Init()
 {
-
 	dashFlag = false;
-	dashTime = 20;
-	PlayerWalkCount = 0;
-	CountWalk = 0;
 	speedUD = 0.0f;
 	speedLR = 0.0f;
 	r = 2.0f;
@@ -55,7 +51,6 @@ void Player::Init()
 	TWCount = 0;
 	moveUDFlag = false;
 	moveLRFlag = false;
-
 	JumpFlag = false;
 	onGround = true;
 	spherePos = { 0,0,-40 };
@@ -71,8 +66,6 @@ void Player::Init()
 	//playerObj->SetParentFlag(false);
 	SphereObj->Quaternion();
 	SphereObj->Update();
-
-
 }
 
 void Player::stageInit(int stageNo)
@@ -103,8 +96,8 @@ void Player::Move()
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
 	XMMATRIX matRot2 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
 	XMMATRIX matRot3 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[0]));
-	moveUD = XMVector3TransformNormal(moveUD, matRot2);
-	moveLR = XMVector3TransformNormal(moveLR, matRot2);
+	moveUD = XMVector3TransformNormal(moveUD, matRot);
+	moveLR = XMVector3TransformNormal(moveLR, matRot);
 	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
 	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot3);
 
@@ -119,14 +112,10 @@ void Player::Move()
 		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 		playerAngle.y -= moveAngle.m128_f32[1];
 	}
-	//if (JumpFlag == false) {
-	//ダッシュしていないとき
 	if (dashFlag == false) {
 		//移動
 		playerPos = vec(playerPos, moveUD);
-		spherePos = vec(spherePos, moveUD);
 		playerPos = vec(playerPos, moveLR);
-		spherePos = vec(spherePos, moveLR);
 		if (Input::GetInstance()->PushKey(DIK_W))
 		{
 			//前後のスピードが0.2fになるまで0.005f加算
@@ -166,19 +155,6 @@ void Player::Move()
 		Input::GetInstance()->PushKey(DIK_A) ||
 		Input::GetInstance()->PushKey(DIK_D))
 	{
-		//UI用
-		if (CountWalk < 5) {
-			CountWalk++;
-		}
-		if (CountWalk == 5) {
-			if (PlayerWalkCount < 6) {
-				PlayerWalkCount++;
-			}
-			if (PlayerWalkCount == 6) {
-				PlayerWalkCount = 0;
-			}
-			CountWalk = 0;
-		}
 		if (stageNum == 0) {
 			if (TWCount < 100) {
 				TWCount++;
@@ -217,12 +193,11 @@ void Player::Move()
 		//ジャンプアニメーションにする
 		playerObj->PlayAnimation(0, false);
 	}
-	//回転を追従させたい
 }
 
 XMFLOAT3 Player::vec(XMFLOAT3 pos, XMVECTOR vec)
 {
-	//移動用のクラス
+	//ベクトル加算
 	pos.x += vec.m128_f32[0];
 	pos.y += vec.m128_f32[1];
 	pos.z += vec.m128_f32[2];
@@ -389,7 +364,7 @@ void Player::Dash()
 				dash -= 0.1f;
 			}
 	}
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%d", dashCoolTime);
+	//DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%d", dashCoolTime);
 }
 
 

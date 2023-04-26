@@ -32,31 +32,30 @@ public:
 	void DrawSprite();//画像の描画
 	void RC();//コライダーを消すやつ
 
-	//GetterSetter
+	//ゲッター
 	XMFLOAT3 GetPlayerPos() { return playerPos; }
 	XMFLOAT3 GetSpherePos() { return spherePos; }
 	XMVECTOR GetSphereAngle() { return sphereAngle; }
 	XMFLOAT3 GetPlayerAngle() { return playerAngle; }
 	float GetRadius() { return radius; }
 	Sphere GetSphere() { return sphere; }
+	int GetTWCount() { return TWCount; }
 	std::unique_ptr < Object3d> &GetObject3d() { return SphereObj; }
+	//セッター
 	XMFLOAT3 SetSphereSize(XMFLOAT3 sphereSize) { return this->sphereSize = sphereSize; }
 	float SetSpherePos(float spherePos) { return this->spherePos.y = spherePos; }
 	XMFLOAT3 SetPlayerPos(XMFLOAT3 playerPos) { return this->playerPos = playerPos; }
-	float GetTsize() { return Tsize; }
-	float SetTsize(float tsize) { return this->Tsize = tsize; }
 	bool SetWalkFlag(bool walkFlag) { return this->walkFlag = walkFlag; }
 	bool SetPFlag(bool pFlag) { return this->pFlag = pFlag; }
-
 	float SetSZV(float szv) { return this->sphereZV = szv; }
 	float SetSY(float sy) { return this->sphereY = sy; }
 	float SetRadius(float r) { return this->radius = r; }
-	int GetTWCount() { return TWCount; }
+
 private://Update()にまとめるもの
 	void Move();//移動
 	XMFLOAT3 vec(XMFLOAT3 pos, XMVECTOR vec);
 	void Ball();//ボール関係
-	void Jump();//ジャンプ
+	void Jump();//ジャンプと地形との判定
 	void Dash();//ダッシュ
 private://変数
 	//プレイヤーのモデル
@@ -65,10 +64,8 @@ private://変数
 	//球のモデル
 	std::unique_ptr < Object3d> SphereObj = nullptr;
 	std::unique_ptr < Model> model2 = nullptr;
-
 	//集中線
 	std::unique_ptr<Sprite> dashSprite = nullptr;
-
 
 	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
@@ -78,8 +75,6 @@ private://変数
 	XMFLOAT3 sphereSize = { 1,1,1 };
 
 	Sphere sphere;//当たり判定のやつ
-
-	float Tsize = 1;//球のサイズ(左上に表示されているやつ)
 	float r = 2;
 	float radius = 3.0f;
 	//移動
@@ -87,35 +82,21 @@ private://変数
 	float speedLR = 0;
 	bool moveUDFlag = false;
 	bool moveLRFlag = false;
-	//球のz軸
 	float sphereZV = 0;//球との距離z軸
 	float sphereY = 0;//球y軸高さ
 	//ダッシュ関連の変数
 	bool dashFlag = false;
 	float dash = 1.5f;
-	float dashSpeed = 2.0f;
 	int dashCoolTime = 0;
 	const int dashCoolTimeMax = 20;
-	int dashTime = 0;
-	//const int dashTimeMax = 20;
 	float fade = 1;
 	//ジャンプ＆地面との当たり判定系
 	bool JumpFlag = false;
 	bool onGround = true;
 	// 落下ベクトル
 	DirectX::XMVECTOR fallV = {};
-
-	bool onGround2 = true;
-	// 落下ベクトル
-	DirectX::XMVECTOR fallV2 = {};
-
-	static const int OBJNumber = 100;
-
-	//bool colFlag[OBJNumber][OBJNumber] = {};
-
-	float PlayerWalkCount = 0;
-	float CountWalk = 0;
 	bool pFlag = false;//ポーズ用のフラグ
+	//チュートリアル関連
 	bool walkFlag = true;//チュートリアル用の歩けるか判定フラグ
 	int TWCount = 0;//チュートリアルの移動カウント
 	int stageNum = 0;
