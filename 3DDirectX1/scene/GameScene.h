@@ -80,25 +80,25 @@ private: // メンバ変数
 	SoundData sound3 = {};
 	SoundData sound4 = {};
 	SoundData sound5 = {};
-	Camera* camera = nullptr;
-	ParticleManager* particleMan = nullptr;
+	std::unique_ptr < Camera> camera = nullptr;
+	std::unique_ptr < ParticleManager> particleMan = nullptr;
 
 	std::unique_ptr<Sprite> sprite = nullptr;
 	std::unique_ptr<Sprite> tmSprite = nullptr;//目標達成時にアナウンスする用
 	std::unique_ptr<Sprite> btSprite = nullptr;//ぶつかった時用
-	LightGroup* lightGroup = nullptr;
+	std::unique_ptr < LightGroup> lightGroup = nullptr;
 
 	CollisionManager* colMan = nullptr;
 
-	Player* player = nullptr;
-	GameObjects* gameObjects = nullptr;
-	StageObject* stageObj = nullptr;
+	std::unique_ptr < Player> player = nullptr;
+	std::unique_ptr < GameObjects> gameObjects = nullptr;
+	std::unique_ptr < StageObject> stageObj = nullptr;
 
-	Timer* timer = nullptr;
-	Pose* pose = nullptr;
-	SphereSize* sphereSize = nullptr;
-	Tutorial* tutorial = nullptr;
-	start* st = nullptr;
+	std::unique_ptr < Timer> timer = nullptr;
+	std::unique_ptr < Pose> pose = nullptr;
+	std::unique_ptr < SphereSize> sphereSize = nullptr;
+	std::unique_ptr < Tutorial> tutorial = nullptr;
+	std::unique_ptr < start> st = nullptr;
 	const int debugTextTexNumber = 0;
 
 

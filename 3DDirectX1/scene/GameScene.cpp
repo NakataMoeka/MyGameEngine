@@ -17,9 +17,6 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-
-	safe_delete(particleMan);
-	safe_delete(lightGroup);
 }
 
 void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
@@ -32,17 +29,17 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	this->audio = audio;
 
 	// カメラ生成
-	camera = new Camera(WinApp::window_width, WinApp::window_height);
+	camera = std::unique_ptr < Camera>(new Camera(WinApp::window_width, WinApp::window_height));
 
 	// 3Dオブジェクトにカメラをセット
-	Object3d::SetCamera(camera);
-	FbxObject3d::SetCamera(camera);
+	Object3d::SetCamera(camera.get());
+	FbxObject3d::SetCamera(camera.get());
 	FbxObject3d::SetDev(dxCommon->Getdev());
 	//ライト生成
-	lightGroup = LightGroup::Create();
+	lightGroup = std::unique_ptr <LightGroup>(LightGroup::Create());
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
-	Object3d::SetLight(lightGroup);
-	FbxObject3d::SetLight(lightGroup);
+	Object3d::SetLight(lightGroup.get());
+	FbxObject3d::SetLight(lightGroup.get());
 	// 3Dオブエクトにライトをセット
 	// 
 	lightGroup->SetDirLightActive(0, true);
@@ -58,7 +55,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
-	particleMan = ParticleManager::Create(dxCommon->Getdev(), camera, L"Resources/effect2.png", true);
+	particleMan = std::unique_ptr < ParticleManager>(ParticleManager::Create(dxCommon->Getdev(), camera.get(), L"Resources/effect2.png", true));
 	//particleMan->LoadTexture();
 	//particleMan->CreateModel();
 	// デバッグテキスト用テクスチャ読み込み
@@ -89,21 +86,21 @@ void GameScene::InitTH()
 	sound2 = Audio::SoundLoadWave("Resources/Music/BGM/oo39_ys135.wav");
 	sound3 = Audio::SoundLoadWave("Resources/Music/SE/door.wav");
 	sound4 = Audio::SoundLoadWave("Resources/Music/BGM/追いかけっこキャッハー.wav");
-	player = new Player;//newすればエラー吐かない
+	player = std::unique_ptr <Player>(new Player());//newすればエラー吐かない
 	player->Initialize();
-	gameObjects = new GameObjects;//newすればエラー吐かない
+	gameObjects = std::unique_ptr <GameObjects>(new GameObjects());//newすればエラー吐かない
 	gameObjects->Initialize();
-	stageObj = new StageObject;//newすればエラー吐かない
+	stageObj = std::unique_ptr <StageObject>(new StageObject());//newすればエラー吐かない
 	stageObj->Initialize();
-	timer = new Timer;
+	timer = std::unique_ptr <Timer>(new Timer());
 	timer->Initialize();
-	tutorial = new Tutorial();
+	tutorial = std::unique_ptr <Tutorial>(new Tutorial());
 	tutorial->Initialize();
-	sphereSize = new SphereSize();
+	sphereSize = std::unique_ptr <SphereSize>(new SphereSize());
 	sphereSize->Initialize();
-	pose = new Pose;
+	pose = std::unique_ptr <Pose>(new Pose());
 	pose->Initialize(audio);
-	st = new start();
+	st = std::unique_ptr < start>(new start());
 	st->Initialize(audio);
 }
 
