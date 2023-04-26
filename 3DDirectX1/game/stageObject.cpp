@@ -11,35 +11,35 @@ StageObject::~StageObject()
 void StageObject::Initialize()
 {
 
-	modelKotatu = Model::Create("Kota", false);
-	modelTV = Model::Create("TV", false);
-	modelChest = Model::Create("Chest", false);
-	modelGround = Model::Create("road", false);
-	modelHome = Model::Create("home", false);
-	modelSkydome = Model::Create("skydome", true);
-	modelSaku = Model::Create("saku", false);
-	modelSlide = Model::Create("slide", false);
-	modelSwing = Model::Create("swing", false);
-	modelTree = Model::Create("tree", false);
-	Ground = TouchableObject::Create(modelGround);
+	modelKotatu = std::unique_ptr<Model>(Model::Create("Kota", false));
+	modelTV = std::unique_ptr<Model>(Model::Create("TV", false));
+	modelChest = std::unique_ptr<Model>(Model::Create("Chest", false));
+	modelGround = std::unique_ptr<Model>(Model::Create("road", false));
+	modelHome = std::unique_ptr<Model>(Model::Create("home", false));
+	modelSkydome = std::unique_ptr<Model>(Model::Create("skydome", true));
+	modelSaku = std::unique_ptr<Model>(Model::Create("saku", false));
+	modelSlide = std::unique_ptr<Model>(Model::Create("slide", false));
+	modelSwing = std::unique_ptr<Model>(Model::Create("swing", false));
+	modelTree = std::unique_ptr<Model>(Model::Create("tree", false));
+	Ground = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelGround.get()));
 	Ground->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	skydome = Object3d::Create(modelSkydome);
+	skydome = std::unique_ptr < Object3d>(Object3d::Create(modelSkydome.get()));
 	skydome->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Home = TouchableObject::Create(modelHome);
+	Home = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelHome.get()));
 	Home->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Kotatu = TouchableObject::Create(modelKotatu);
+	Kotatu = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelKotatu.get()));
 	Kotatu->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	TV = TouchableObject::Create(modelTV);
+	TV = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelTV.get()));
 	TV->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Chest = TouchableObject::Create(modelChest);
+	Chest = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelChest.get()));
 	Chest->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	saku = TouchableObject::Create(modelSaku);
+	saku = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelSaku.get()));
 	saku->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Slide = TouchableObject::Create(modelSlide);
+	Slide = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelSlide.get()));
 	Slide->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Swing = TouchableObject::Create(modelSwing);
+	Swing = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelSwing.get()));
 	Swing->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	Tree = TouchableObject::Create(modelTree);
+	Tree = std::unique_ptr < TouchableObject>(TouchableObject::Create(modelTree.get()));
 	Tree->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 }

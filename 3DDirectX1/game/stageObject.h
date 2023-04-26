@@ -30,26 +30,26 @@ public:
 
 private:
 
-	TouchableObject* Kotatu = nullptr;
-	Model* modelKotatu = nullptr;
-	TouchableObject* TV = nullptr;
-	Model* modelTV = nullptr;
-	TouchableObject* Chest = nullptr;
-	Model* modelChest = nullptr;
-	TouchableObject* Slide = nullptr;
-	Model* modelSlide = nullptr;
-	TouchableObject* Swing = nullptr;
-	Model* modelSwing = nullptr;
-	TouchableObject* Tree = nullptr;
-	Model* modelTree = nullptr;
-	TouchableObject* Ground = nullptr;
-	Model* modelGround = nullptr;
-	TouchableObject* Home = nullptr;
-	Model* modelHome = nullptr;
-	TouchableObject* saku = nullptr;
-	Model* modelSaku = nullptr;
-	Model* modelSkydome = nullptr;
-	Object3d* skydome = nullptr;
+	std::unique_ptr < TouchableObject> Kotatu = nullptr;
+	std::unique_ptr < Model> modelKotatu = nullptr;
+	std::unique_ptr < TouchableObject> TV = nullptr;
+	std::unique_ptr < Model> modelTV = nullptr;
+	std::unique_ptr < TouchableObject> Chest = nullptr;
+	std::unique_ptr < Model> modelChest = nullptr;
+	std::unique_ptr < TouchableObject> Slide = nullptr;
+	std::unique_ptr < Model> modelSlide = nullptr;
+	std::unique_ptr < TouchableObject> Swing = nullptr;
+	std::unique_ptr < Model> modelSwing = nullptr;
+	std::unique_ptr < TouchableObject> Tree = nullptr;
+	std::unique_ptr < Model> modelTree = nullptr;
+	std::unique_ptr < TouchableObject> Ground = nullptr;
+	std::unique_ptr < Model> modelGround = nullptr;
+	std::unique_ptr < TouchableObject> Home = nullptr;
+	std::unique_ptr < Model> modelHome = nullptr;
+	std::unique_ptr < TouchableObject> saku = nullptr;
+	std::unique_ptr < Model> modelSaku = nullptr;
+	std::unique_ptr < Model> modelSkydome = nullptr;
+	std::unique_ptr <Object3d> skydome = nullptr;
 	XMFLOAT3 position[2] = { {0,0,0} ,{0,0,-50} };
 	XMFLOAT3 size = { 1,1,1 };
 	XMVECTOR rota = { 0,0,0,0 };

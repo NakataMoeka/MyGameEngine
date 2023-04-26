@@ -26,7 +26,7 @@ public:
 	~Player();
 	void Initialize();//一回だけの初期化
 	void Init();//シーンチェンジ時にもする初期化
-	void stageInit(int stageNo);
+	void stageInit(int stageNo);//ステージが変わるごとの初期化
 	void Update();//アプデ
 	void Draw();//モデルの描画
 	void DrawSprite();//画像の描画
