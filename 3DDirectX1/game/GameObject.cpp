@@ -301,7 +301,7 @@ void GameObjects::InitNum(std::vector<object*> oData, int stageNum, float y, flo
 		oData[num]->pos = { -180 + (float)i * 4,y, 120 + (float)j * (-10) };
 	}
 	else if (stageNum == 2) {
-		oData[num]->pos = { -180 + (float)i * 10,y, 120 + (float)j * (-10) };
+		oData[num]->pos = { -180 + (float)i * 4,y, 120 + (float)j * (-10) };
 	}
 	oData[num]->rot = { 0,0,0,0 };
 	randRot = rand() / 360;
