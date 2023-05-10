@@ -21,6 +21,12 @@ private:
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
 	using XMVECTOR = DirectX::XMVECTOR;
+	//
+	enum STATE{
+		JUMP,
+		WALK,
+		STAND
+	};
 public:
 	Player();
 	~Player();
@@ -40,7 +46,7 @@ public:
 	float GetRadius() { return radius; }
 	Sphere GetSphere() { return sphere; }
 	int GetTWCount() { return TWCount; }
-	std::unique_ptr < Object3d> &GetObject3d() { return SphereObj; }
+	std::unique_ptr < Object3d>& GetObject3d() { return SphereObj; }
 	//セッター
 	XMFLOAT3 SetSphereSize(XMFLOAT3 sphereSize) { return this->sphereSize = sphereSize; }
 	float SetSpherePos(float spherePos) { return this->spherePos.y = spherePos; }
@@ -66,7 +72,7 @@ private://変数
 	std::unique_ptr < Model> model2 = nullptr;
 	//集中線
 	std::unique_ptr<Sprite> dashSprite = nullptr;
-
+	STATE state_;
 	//位置サイズ角度
 	XMFLOAT3 playerPos = { 0,0,0 };
 	XMFLOAT3 spherePos = { 0,0,0 };
