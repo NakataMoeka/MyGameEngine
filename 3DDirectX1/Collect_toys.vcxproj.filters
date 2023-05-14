@@ -479,6 +479,9 @@
     <ClInclude Include="game\start.h">
       <Filter>Game\gameScene</Filter>
     </ClInclude>
+    <ClInclude Include="scene\BaseScene.h">
+      <Filter>Game\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXEngine.rc">

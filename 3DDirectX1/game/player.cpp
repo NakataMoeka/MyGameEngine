@@ -1,10 +1,11 @@
 #include "player.h"
 #include"input.h"
 #include <cassert>
-#include "SphereCollider.h"
-#include "SphereColliderFbx.h"
+
 #include "CollisionManager.h"
 #include "CollisionAttribute.h"
+#include "SphereCollider.h"
+#include "SphereColliderFbx.h"
 #include "FbxLoader.h"
 #include "FbxObject.h"
 #include"DebugText.h"
@@ -251,6 +252,11 @@ void Player::Jump()
 	}
 	playerObj->UpdateWorldMatrix();
 	playerObj->GetCollider()->Update();
+
+}
+
+void Player::terrainCol()
+{
 	SphereColliderFbx* sphereCollider = dynamic_cast<SphereColliderFbx*>(playerObj->GetCollider());
 	assert(sphereCollider);
 	SphereCollider* sphereCollider2 = dynamic_cast<SphereCollider*>(SphereObj->GetCollider());
@@ -297,6 +303,8 @@ void Player::Jump()
 	spherePos = vec(spherePos, callback.move);
 	playerPos = vec(playerPos, callback2.move);
 	spherePos = vec(spherePos, callback2.move);
+
+
 	// 球の上端から球の下端までのレイキャスト
 	Ray ray;
 	ray.start = sphereCollider->center;
@@ -381,6 +389,7 @@ void Player::Update()
 	}
 	Ball();
 	Jump();
+	terrainCol();
 	//位置などセット系
 	sphere.radius = r;
 	sphere.center = XMVectorSet(spherePos.x, spherePos.y, spherePos.z, 1);

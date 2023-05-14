@@ -399,6 +399,7 @@
     <ClInclude Include="others\SphereColliderFbx.h" />
     <ClInclude Include="others\TouchableObject.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="scene\BaseScene.h" />
     <ClInclude Include="scene\ClearScene.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\Loading.h" />

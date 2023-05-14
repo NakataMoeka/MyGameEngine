@@ -61,7 +61,8 @@ private://Update()にまとめるもの
 	void Move();//移動
 	XMFLOAT3 vec(XMFLOAT3 pos, XMVECTOR vec);
 	void Ball();//ボール関係
-	void Jump();//ジャンプと地形との判定
+	void Jump();//ジャンプ
+	void terrainCol();//地形との判定
 	void Dash();//ダッシュ
 private://変数
 	//プレイヤーのモデル
