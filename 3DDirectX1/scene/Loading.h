@@ -13,22 +13,23 @@
 #include "Camera.h"
 #include "FbxObject.h"
 #include"LightGroup.h"
+#include"BaseScene.h"
 /// <summary>
-class Loading
+class Loading:public BaseScene
 {
 public:
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
-	void Initialize();
+	void Initialize()override;
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
-	void Init();
+	void Init()override;
 	//繰り返し処理
-	void Update();
+	void Update()override;
 	//背景画像描画
-	void DrawBG();
+	void DrawBG()override;
 	//オブジェクト描画
-	void Draw();
+	void Draw()override;
 	//前景画像描画
-	void DrawFront();
+	void DrawFront()override;
 private:
 	Audio* audio = Audio::GetInstance();
 	std::unique_ptr<Sprite> loadingS = nullptr;//ロード中の文字

@@ -12,24 +12,25 @@
 #include "Camera.h"
 #include "FbxObject.h"
 #include"LightGroup.h"
+#include "BaseScene.h"
 /// <summary>
 /// タイトル表示
 /// </summary>
-class TitleScene
+class TitleScene :public BaseScene
 {
 public:
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
-	void Initialize();
+	void Initialize()override;
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
-	void Init();
+	void Init()override;
 	//繰り返し処理
-	void Update();
+	void Update()override;
 	//背景画像描画
-	void DrawBG();
+	void DrawBG()override;
 	//オブジェクト描画
-	void Draw();
+	void Draw()override;
 	//前景画像描画
-	void DrawFront();
+	void DrawFront()override;
 	bool GetSCangeFlag() { return SCangeFlag; }
 private:
 

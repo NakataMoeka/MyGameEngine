@@ -20,6 +20,7 @@
 #include"Loading.h"
 #include <thread>
 #include<mutex>
+#include"BaseScene.h"
 class SceneManager
 {
 public:
@@ -55,6 +56,10 @@ private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
 	Scene scene = LOAD;
+	//今のシーン
+	BaseScene* scene_ = nullptr;
+	//次のシーン
+	BaseScene* nextScene_ = nullptr;
 
 	std::unique_ptr < TitleScene> titleScene = nullptr;
 	std::unique_ptr < SelectScene> selectScene = nullptr;

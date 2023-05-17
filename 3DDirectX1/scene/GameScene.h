@@ -23,9 +23,10 @@
 #include"Tutorial.h"
 #include"SphereSize.h"
 #include"start.h"
+#include"BaseScene.h"
 class CollisionManager;
 class TouchableObject;
-class GameScene
+class GameScene:public BaseScene
 {
 private:
 	// Microsoft::WRL::を省略
@@ -46,17 +47,17 @@ public: // メンバ関数
 	//OBJ等初期化用()
 	void InitTH();
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
-	void Init();
+	void Init()override;
 	//ステージ初期化
 	void InitStageNum(int stageNum);
 	//繰り返し処理
-	void Update();
+	void Update()override;
 	//背景画像描画
-	void DrawBG();
+	void DrawBG()override;
 	//オブジェクト描画
-	void Draw();
+	void Draw()override;
 	//前景画像描画
-	void DrawFront();
+	void DrawFront()override;
 	//パーティクル
 	void CreateParticles();
 	bool GetClearFlag() { return clearFlag; }
