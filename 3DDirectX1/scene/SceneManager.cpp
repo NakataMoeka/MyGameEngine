@@ -184,6 +184,7 @@ void SceneManager::SceneChange()
 
 void SceneManager::DrawBG()
 {
+	Sprite::PreDraw(dxCommon->GetCmdList());
 	if (scene == TITLE) {
 		titleScene->DrawBG();
 	}
@@ -200,10 +201,14 @@ void SceneManager::DrawBG()
 
 		loadScene->DrawBG();
 	}
+	Sprite::PostDraw();
+	dxCommon->ClearDepthBuffer();
 }
 
 void SceneManager::Draw()
 {
+	Object3d::PreDraw(dxCommon->GetCmdList());
+	FbxObject3d::PreDraw(dxCommon->GetCmdList());
 	if (scene == TITLE) {
 		titleScene->Draw();
 	}
@@ -213,12 +218,13 @@ void SceneManager::Draw()
 	else if (scene == END) {
 		clearScene->Draw();
 	}
-
+	Object3d::PostDraw();
+	FbxObject3d::PostDraw();
 }
 
 void SceneManager::DrawFront()
 {
-
+	Sprite::PreDraw(dxCommon->GetCmdList());
 	if (scene == TITLE) {
 		titleScene->DrawFront();
 	}
@@ -236,7 +242,6 @@ void SceneManager::DrawFront()
 		loadScene->DrawFront();
 	}
 
-	Sprite::PreDraw(dxCommon->GetCmdList());
 	if (changeSFlag == true || changeEFlag == true) {
 		Change->Draw();
 	}

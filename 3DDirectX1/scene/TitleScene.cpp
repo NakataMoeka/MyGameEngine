@@ -124,15 +124,15 @@ void TitleScene::Update()
 
 void TitleScene::DrawBG()
 {
-	Sprite::PreDraw(dxCommon->GetCmdList());
-	dxCommon->ClearDepthBuffer();
+
+
 	if (Scene == 0) {
 		TBSprite->Draw();
 	}
 	if (Scene == 1) {
 		TB2Sprite->Draw();
 	}
-	Sprite::PostDraw();
+	
 }
 
 void TitleScene::Draw()
@@ -141,7 +141,6 @@ void TitleScene::Draw()
 
 void TitleScene::DrawFront()
 {
-	Sprite::PreDraw(dxCommon->GetCmdList());
 	if (Scene == 0) {
 		TSprite->Draw();
 		TSSprite->Draw();
@@ -150,5 +149,4 @@ void TitleScene::DrawFront()
 	//DebugText::GetInstance()->Printf(0, 0, 3.0f, "%d",SceneNum);
 	//DebugText::GetInstance()->Printf(200, 500, 3.0f, {0,0,0,1}, "%d", testCount);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
-	Sprite::PostDraw();
 }

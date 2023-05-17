@@ -30,5 +30,3 @@ public:
 	/// </summary>
 	virtual void DrawFront() = 0;
 };
-
-#pragma once

@@ -107,10 +107,7 @@ void ClearScene::Update()
 
 void ClearScene::DrawBG()
 {
-	Sprite::PreDraw(dxCommon->GetCmdList());
-	dxCommon->ClearDepthBuffer();
 	back->Draw();
-	Sprite::PostDraw();
 }
 
 void ClearScene::Draw()
@@ -119,7 +116,6 @@ void ClearScene::Draw()
 
 void ClearScene::DrawFront()
 {
-	Sprite::PreDraw(dxCommon->GetCmdList());
 	if (clearFlag == true) {
 		clearTextSprite->Draw();
 		clearSprite->Draw();
@@ -137,5 +133,4 @@ void ClearScene::DrawFront()
 	}
 	//DebugText::GetInstance()->Printf(200, 500, 3.0f, "PUSH SPACE");
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
-	Sprite::PostDraw();
 }

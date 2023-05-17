@@ -399,17 +399,12 @@ void GameScene::Update()
 void GameScene::DrawBG()
 {
 	//背景
-	Sprite::PreDraw(dxCommon->GetCmdList());
 	sprite->Draw();
-	Sprite::PostDraw();
-
-	dxCommon->ClearDepthBuffer();
 }
 
 void GameScene::Draw()
 {
-	Object3d::PreDraw(dxCommon->GetCmdList());
-	FbxObject3d::PreDraw(dxCommon->GetCmdList());
+
 	player->Draw();
 	gameObjects->Draw();
 	stageObj->Draw();
@@ -419,13 +414,11 @@ void GameScene::Draw()
 	//		particleMan->Draw(dxCommon->GetCmdList());
 	//	}
 	//}
-	Object3d::PostDraw();
-	FbxObject3d::PostDraw();
+
 }
 void GameScene::DrawFront()
 {
 	//前景
-	Sprite::PreDraw(dxCommon->GetCmdList());
 	player->DrawSprite();
 	if (stageNum == 0) {
 		tutorial->Draw();
@@ -441,7 +434,6 @@ void GameScene::DrawFront()
 	sphereSize->Draw();
 
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
-	Sprite::PostDraw();
 }
 void GameScene::CreateParticles()
 {

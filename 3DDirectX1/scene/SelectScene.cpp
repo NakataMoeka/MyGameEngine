@@ -127,10 +127,7 @@ void SelectScene::Update()
 
 void SelectScene::DrawBG()
 {
-	Sprite::PreDraw(dxCommon->GetCmdList());
-	dxCommon->ClearDepthBuffer();
 	backSprite[(int)spriteCount]->Draw();
-	Sprite::PostDraw();
 }
 
 void SelectScene::Draw()
@@ -139,7 +136,6 @@ void SelectScene::Draw()
 
 void SelectScene::DrawFront()
 {
-	Sprite::PreDraw(dxCommon->GetCmdList());
 	SelectUI->Draw();
 	if (SAFlag == 0) {
 		/*	if (stageNum == 2 ) {
@@ -154,7 +150,6 @@ void SelectScene::DrawFront()
 
 	//DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
-	Sprite::PostDraw();
 }
 
 void SelectScene::CreateParticles()

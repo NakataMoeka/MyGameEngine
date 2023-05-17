@@ -48,10 +48,8 @@ void Loading::Update()
 
 void Loading::DrawBG()
 {
-	Sprite::PreDraw(dxCommon->GetCmdList());
-	dxCommon->ClearDepthBuffer();
+
 	loadBack->Draw();
-	Sprite::PostDraw();
 }
 
 void Loading::Draw()
@@ -60,7 +58,5 @@ void Loading::Draw()
 
 void Loading::DrawFront()
 {
-	Sprite::PreDraw(dxCommon->GetCmdList());
 	loadingS->Draw();
-	Sprite::PostDraw();
 }
