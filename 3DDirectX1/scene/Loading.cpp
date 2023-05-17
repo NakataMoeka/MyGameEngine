@@ -1,12 +1,8 @@
 #include "Loading.h"
 
-void Loading::Initialize(DXCommon* dxCommon, Audio* audio)
+void Loading::Initialize()
 {
-	assert(dxCommon);
-	assert(audio);
 
-	this->dxCommon = dxCommon;
-	this->audio = audio;
 	Sprite::LoadTexture(61, L"Resources/UI/Load.png");
 	loadingS = std::unique_ptr<Sprite>(Sprite::CreateSprite(61, { 600,500 }));
 	//loadingS->SetSize({ 1280,720 });

@@ -2,12 +2,10 @@
 #include"input.h"
 #include<cassert>
 
-void Pose::Initialize(Audio* audio)
+void Pose::Initialize()
 {
 
-	assert(audio);
 
-	this->audio = audio;
 	Sprite::LoadTexture(20, L"Resources/UI/title/pose.png");
 	Sprite::LoadTexture(21, L"Resources/UI/title/TitleBack.png");
 	Sprite::LoadTexture(22, L"Resources/UI/title/Back.png");

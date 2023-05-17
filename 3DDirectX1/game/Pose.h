@@ -8,7 +8,7 @@
 class Pose
 {
 public:
-	void Initialize(Audio* audio);//一回だけの初期化
+	void Initialize();//一回だけの初期化
 	void Init();//シーンチェンジ時にもする初期化
 	void Update();//アプデ
 	void Draw();//モデルの描画
@@ -17,7 +17,7 @@ public:
 	bool GetJFlag() { return jFlag; }
 private:
 
-	Audio* audio = nullptr;
+	Audio* audio = Audio::GetInstance();
 	SoundData sound1 = {};
 	SoundData sound2 = {};
 	std::unique_ptr<Sprite> PoseSprite = nullptr;

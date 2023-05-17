@@ -61,7 +61,7 @@ private:
 
 
 public:
-
+	static Audio* GetInstance();
 
 	bool Initialize();
 	/// <summary>
@@ -94,7 +94,11 @@ public:
 	/// </summary>
 	/// <param name="volume"></param>
 	void SetBGMVolume(float volume);
-
+private:
+	Audio() = default;
+	Audio(const Audio&) = delete;
+	~Audio() = default;
+	Audio& operator=(const Audio&) = delete;
 private: //ïœêî
 	ComPtr<IXAudio2> xAudio2;
 	IXAudio2MasteringVoice* masterVoice;

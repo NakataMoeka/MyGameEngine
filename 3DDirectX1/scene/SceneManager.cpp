@@ -16,22 +16,30 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	this->dxCommon = dxCommon;
 	this->audio = audio;
-
+	// デバッグテキスト用テクスチャ読み込み
+	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
+		assert(0);
+		return;
+	}
+	// デバッグテキスト初期化
+	DebugText::GetInstance()->Initialize(debugTextTexNumber);
 	Sprite::LoadTexture(60, L"Resources/white.jpg");
+	FbxObject3d::SetDev(dxCommon->Getdev());
+
 	Change = std::unique_ptr<Sprite>(Sprite::CreateSprite(60, { 0,0 }));
 	Change->SetSize({ 1280,720 });
 
 	titleScene = std::unique_ptr <TitleScene>(new TitleScene());
-	titleScene->Initialize(dxCommon, audio);
+	titleScene->Initialize();
 	selectScene = std::unique_ptr <SelectScene>(new SelectScene());
-	selectScene->Initialize(dxCommon, audio);
+	selectScene->Initialize();
 	clearScene = std::unique_ptr <ClearScene>(new ClearScene());
-	clearScene->Initialize(dxCommon, audio);
+	clearScene->Initialize();
 	gameScene = std::unique_ptr <GameScene>(new GameScene());
-	gameScene->Initialize(dxCommon, audio);
+	gameScene->Initialize();
 	//gameScene->InitTH();
 	loadScene = std::unique_ptr <Loading>(new Loading());
-	loadScene->Initialize(dxCommon, audio);
+	loadScene->Initialize();
 	Bflag = false;
 	fade = 0.0f;
 	//gameScene->Init();
@@ -245,6 +253,7 @@ void SceneManager::DrawFront()
 	if (changeSFlag == true || changeEFlag == true) {
 		Change->Draw();
 	}
+	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }
 

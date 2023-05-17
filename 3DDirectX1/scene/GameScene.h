@@ -42,7 +42,7 @@ public: // メンバ関数
 
 	~GameScene();
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
-	void Initialize(DXCommon* dxCommon, Audio* audio);
+	void Initialize();
 	//OBJ等初期化用()
 	void InitTH();
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
@@ -70,8 +70,8 @@ public: // メンバ関数
 
 private: // メンバ変数
 	void ObjCollision(int i,int j);
-	DXCommon* dxCommon = nullptr;
-	Audio* audio = nullptr;
+
+	Audio* audio = Audio::GetInstance();
 
 	SoundData sound1 = {};
 	SoundData sound2 = {};
@@ -97,7 +97,6 @@ private: // メンバ変数
 	std::unique_ptr < SphereSize> sphereSize = nullptr;
 	std::unique_ptr < Tutorial> tutorial = nullptr;
 	std::unique_ptr < start> st = nullptr;
-	const int debugTextTexNumber = 0;
 
 
 	static const int OBJNumber = 100;//OBJの最大数を記載

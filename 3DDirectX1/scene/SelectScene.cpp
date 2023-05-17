@@ -1,20 +1,16 @@
 #include "SelectScene.h"
 #include"Input.h"
 
-void SelectScene::Initialize(DXCommon* dxCommon, Audio* audio)
+void SelectScene::Initialize()
 {	//u
-	assert(dxCommon);
-	assert(audio);
 
-	this->dxCommon = dxCommon;
-	this->audio = audio;
 
 	// カメラ生成
 	camera = std::unique_ptr < Camera>(new Camera(WinApp::window_width, WinApp::window_height));
 
 	// 3Dオブジェクトにカメラをセット
 	Object3d::SetCamera(camera.get());
-	FbxObject3d::SetDev(dxCommon->Getdev());
+
 	//ライト生成
 	lightGroup = std::unique_ptr <LightGroup>(LightGroup::Create());
 
@@ -31,13 +27,7 @@ void SelectScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	//lightGroup->SetPointLightActive(0, true);
 	//lightGroup->SetSpotLightActive(0, true);
 	lightGroup->SetCircleShadowActive(0, true);
-	// デバッグテキスト用テクスチャ読み込み
-	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
-		assert(0);
-		return;
-	}
-	// デバッグテキスト初期化
-	DebugText::GetInstance()->Initialize(debugTextTexNumber);
+
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
 
@@ -149,7 +139,6 @@ void SelectScene::DrawFront()
 	}
 
 	//DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
-	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 }
 
 void SelectScene::CreateParticles()

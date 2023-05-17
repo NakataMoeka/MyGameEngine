@@ -19,14 +19,9 @@ GameScene::~GameScene()
 {
 }
 
-void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
+void GameScene::Initialize()
 {
-	//u
-	assert(dxCommon);
-	assert(audio);
 
-	this->dxCommon = dxCommon;
-	this->audio = audio;
 
 	// カメラ生成
 	camera = std::unique_ptr < Camera>(new Camera(WinApp::window_width, WinApp::window_height));
@@ -34,7 +29,7 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 	// 3Dオブジェクトにカメラをセット
 	Object3d::SetCamera(camera.get());
 	FbxObject3d::SetCamera(camera.get());
-	FbxObject3d::SetDev(dxCommon->Getdev());
+
 	//ライト生成
 	lightGroup = std::unique_ptr <LightGroup>(LightGroup::Create());
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
@@ -55,16 +50,11 @@ void GameScene::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
-	particleMan = std::unique_ptr < ParticleManager>(ParticleManager::Create(dxCommon->Getdev(), camera.get(), L"Resources/effect2.png", true));
+	//particleMan = std::unique_ptr < ParticleManager>(ParticleManager::Create(dxCommon->Getdev(), camera.get(), L"Resources/effect2.png", true));
 	//particleMan->LoadTexture();
 	//particleMan->CreateModel();
 	// デバッグテキスト用テクスチャ読み込み
-	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
-		assert(0);
-		return;
-	}
-	// デバッグテキスト初期化
-	DebugText::GetInstance()->Initialize(debugTextTexNumber);
+	
 
 
 	// カメラ注視点をセット
@@ -99,9 +89,9 @@ void GameScene::InitTH()
 	sphereSize = std::unique_ptr <SphereSize>(new SphereSize());
 	sphereSize->Initialize();
 	pose = std::unique_ptr <Pose>(new Pose());
-	pose->Initialize(audio);
+	pose->Initialize();
 	st = std::unique_ptr < start>(new start());
-	st->Initialize(audio);
+	st->Initialize();
 }
 
 void GameScene::Init()
@@ -278,7 +268,7 @@ void GameScene::Update()
 		stageObj->Update();
 		gameObjects->Update();
 		timer->Update();
-		particleMan->Update();
+		//particleMan->Update();
 	}
 
 	if (audioCount == 1) {
@@ -392,7 +382,6 @@ void GameScene::Update()
 	camera->Update();
 #pragma endregion
 	lightGroup->Update();
-	particleMan->Update();
 }
 
 
@@ -432,8 +421,6 @@ void GameScene::DrawFront()
 	}
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", player->GetRadius());
 	sphereSize->Draw();
-
-	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 }
 void GameScene::CreateParticles()
 {

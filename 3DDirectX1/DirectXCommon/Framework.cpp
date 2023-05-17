@@ -23,7 +23,7 @@ void Framework::Initialize()
 	dxcommon->Initialize(winapp);
 
 	//”Ä—p‹@”\‚Ì‰Šú‰»
-	audio = new Audio();
+	audio = Audio::GetInstance();
 	if (!audio->Initialize()) {
 		assert(0);
 		return;
@@ -58,7 +58,6 @@ void Framework::Finalize()
 
 
 
-	delete audio;
 	delete dxcommon;
 	delete winapp;
 	delete postEffect;

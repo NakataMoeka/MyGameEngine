@@ -19,7 +19,7 @@ class TitleScene
 {
 public:
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
-	void Initialize(DXCommon* dxCommon, Audio* audio);
+	void Initialize();
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init();
 	//繰り返し処理
@@ -32,13 +32,12 @@ public:
 	void DrawFront();
 	bool GetSCangeFlag() { return SCangeFlag; }
 private:
-	DXCommon* dxCommon = nullptr;
-	Audio* audio = nullptr;
+
 
 	SoundData sound1 = {};
 	SoundData sound2 = {};
 	SoundData sound3 = {};
-	const int debugTextTexNumber = 0;
+	Audio* audio = Audio::GetInstance();
 	std::unique_ptr < Camera> camera = nullptr;
 	std::unique_ptr < LightGroup> lightGroup = nullptr;
 

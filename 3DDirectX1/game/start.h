@@ -9,14 +9,14 @@
 class start
 {
 public:
-	void Initialize(Audio* audio);
+	void Initialize();
 	void Init();
 	void Update();
 	void Draw(int stage);
 	bool GetStartFlag() { return startFlag; }
 	bool SetStartFlag(bool startFlag) { return this->startFlag=startFlag; }
 private:
-	Audio* audio = nullptr;
+	Audio* audio = Audio::GetInstance();
 	SoundData sound1 = {};
 	std::unique_ptr<Sprite> number = nullptr;
 	std::unique_ptr<Sprite> Go = nullptr;

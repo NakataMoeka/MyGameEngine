@@ -18,7 +18,7 @@ class Loading
 {
 public:
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
-	void Initialize(DXCommon* dxCommon, Audio* audio);
+	void Initialize();
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init();
 	//繰り返し処理
@@ -30,8 +30,7 @@ public:
 	//前景画像描画
 	void DrawFront();
 private:
-	DXCommon* dxCommon = nullptr;
-	Audio* audio = nullptr;
+	Audio* audio = Audio::GetInstance();
 	std::unique_ptr<Sprite> loadingS = nullptr;//ロード中の文字
 	std::unique_ptr<Sprite> loadBack = nullptr;//背景
 	int loadCount = 0;//文字位置

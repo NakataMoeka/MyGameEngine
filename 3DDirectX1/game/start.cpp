@@ -2,11 +2,9 @@
 #include <time.h>
 #include"DebugText.h"
 #include"Input.h"
-void start::Initialize(Audio* audio)
+void start::Initialize()
 {
-	assert(audio);
 
-	this->audio = audio;
 	Sprite::LoadTexture(65, L"Resources/UI/number/number2.png");
 	Sprite::LoadTexture(66, L"Resources/UI/number/Go.png");
 	Sprite::LoadTexture(67, L"Resources/UI/message.png");

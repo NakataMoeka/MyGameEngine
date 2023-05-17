@@ -50,6 +50,7 @@ public:
 	void InitTH();
 	bool GetBFlag() { return Bflag; }
 private:
+	const int debugTextTexNumber = 0;
 	//Å‰‚ÌƒV[ƒ“
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
