@@ -43,7 +43,7 @@ public: // メンバ関数
 
 	~GameScene();
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
-	void Initialize();
+	void Initialize()override;
 	//OBJ等初期化用()
 	void InitTH();
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
