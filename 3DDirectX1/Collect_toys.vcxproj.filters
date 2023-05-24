@@ -217,6 +217,9 @@
     <ClCompile Include="game\start.cpp">
       <Filter>Game\gameScene</Filter>
     </ClCompile>
+    <ClCompile Include="scene\SceneChange.cpp">
+      <Filter>Game\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -480,6 +483,9 @@
       <Filter>Game\gameScene</Filter>
     </ClInclude>
     <ClInclude Include="scene\BaseScene.h">
+      <Filter>Game\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneChange.h">
       <Filter>Game\scene</Filter>
     </ClInclude>
   </ItemGroup>

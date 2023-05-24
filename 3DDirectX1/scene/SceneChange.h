@@ -13,27 +13,28 @@
 #include "FbxObject.h"
 #include"LightGroup.h"
 #include"BaseScene.h"
-/// <summary>
-class Loading:public BaseScene
+class SceneChange
 {
 public:
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
-	void Initialize()override;
+	void Initialize();
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
-	void Init()override;
+	void Init();
 	//繰り返し処理
-	void Update()override;
+	void Update();
 	//背景画像描画
-	void DrawBG()override;
+	void DrawBG();
 	//オブジェクト描画
-	void Draw()override;
+	void Draw();
 	//前景画像描画
-	void DrawFront()override;
+	void DrawFront();
+
+	bool SetChangeSFlag(bool changeSFlag) { return this->changeSFlag = changeSFlag; }
+	bool GetChangeEFlag() { return changeEFlag; }
 private:
-	Audio* audio = Audio::GetInstance();
-	std::unique_ptr<Sprite> loadingS = nullptr;//ロード中の文字
-	std::unique_ptr<Sprite> loadBack = nullptr;//背景
-	int loadCount = 0;//文字位置
-	int LoadCountCount = 0;//loadCountの数値を増やすためのやつ
+	std::unique_ptr<Sprite>ChangeS = nullptr;
+	float fade = 0;
+	bool changeSFlag = false;//フェードアウト
+	bool changeEFlag = false;//フェードイン
 };
 

@@ -23,11 +23,9 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	}
 	// デバッグテキスト初期化
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
-	Sprite::LoadTexture(60, L"Resources/white.jpg");
+
 	FbxObject3d::SetDev(dxCommon->Getdev());
 
-	Change = std::unique_ptr<Sprite>(Sprite::CreateSprite(60, { 0,0 }));
-	Change->SetSize({ 1280,720 });
 
 	titleScene = std::unique_ptr <TitleScene>(new TitleScene());
 	titleScene->Initialize();
@@ -40,8 +38,8 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	//gameScene->InitTH();
 	loadScene = std::unique_ptr <Loading>(new Loading());
 	loadScene->Initialize();
-	Bflag = false;
-	fade = 0.0f;
+	change = std::unique_ptr <SceneChange>(new SceneChange());
+	change->Initialize();
 	//gameScene->Init();
 	//clearScene->Init();
 	Load_s = NOLOAD;
@@ -56,12 +54,11 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
-	//タイトル
-	if (scene == TITLE) {
 
+	if (scene == TITLE) {
 		if (titleScene->GetSCangeFlag() == true) {
-			changeSFlag = true;
-			if (changeEFlag == true) {
+			change->SetChangeSFlag(true);
+			if (change->GetChangeEFlag() == true) {
 				selectScene->Init();
 				scene = SELECT;
 			}
@@ -71,9 +68,8 @@ void SceneManager::Update()
 	//セレクト
 	else if (scene == SELECT) {
 		if (selectScene->GetSCangeFlag() == true) {
-
-			changeSFlag = true;
-			if (changeEFlag == true) {
+			change->SetChangeSFlag(true);
+			if (change->GetChangeEFlag() == true) {
 				gameScene->InitStageNum(selectScene->GetStageNum());
 				gameScene->Init();
 				scene = GAME;
@@ -84,8 +80,8 @@ void SceneManager::Update()
 	//ゲームシーン
 	else if (scene == GAME) {
 		if (gameScene->GetClearFlag() == true) {
-			changeSFlag = true;
-			if (changeEFlag == true) {
+			change->SetChangeSFlag(true);
+			if (change->GetChangeEFlag() == true) {
 				clearScene->SetClearFlag(true);
 				clearScene->Init();
 				scene = END;
@@ -93,23 +89,23 @@ void SceneManager::Update()
 
 		}
 		if (gameScene->GetOverFlag() == true) {
-			changeSFlag = true;
-			if (changeEFlag == true) {
+			change->SetChangeSFlag(true);
+			if (change->GetChangeEFlag() == true) {
 				clearScene->SetOverFlag(true);
 				clearScene->Init();
 				scene = END;
 			}
 		}
 		if (gameScene->GetTitleFlag() == true) {
-			changeSFlag = true;
-			if (changeEFlag == true) {
+			change->SetChangeSFlag(true);
+			if (change->GetChangeEFlag() == true) {
 				titleScene->Init();
 				scene = TITLE;
 			}
 		}
 		if (gameScene->GetTSFlag() == true) {
-			changeSFlag = true;
-			if (changeEFlag == true) {
+			change->SetChangeSFlag(true);
+			if (change->GetChangeEFlag() == true) {
 				selectScene->Init();
 				scene = SELECT;
 			}
@@ -118,10 +114,9 @@ void SceneManager::Update()
 	}
 	//エンド
 	else if (scene == END) {
-
 		if (clearScene->GetSCangeFlag() == true) {
-			changeSFlag = true;
-			if (changeEFlag == true) {
+			change->SetChangeSFlag(true);
+			if (change->GetChangeEFlag() == true) {
 				titleScene->Init();
 				scene = TITLE;
 			}
@@ -131,13 +126,7 @@ void SceneManager::Update()
 	else if (scene == LOAD) {
 		loadScene->Update();
 	}
-	if (gameScene->GetBFlag() == true) {
-		Bflag = true;
-	}
-	else if (gameScene->GetBFlag() == false) {
-		Bflag = false;
-	}
-	SceneChange();
+	change->Update();
 	//ローディング
 	if (LoadFlagF == true) {
 		switch (Load_s)
@@ -161,35 +150,6 @@ void SceneManager::Update()
 		}
 	}
 }
-
-void SceneManager::SceneChange()
-{
-	Change->SetColor({ 1, 1, 1, fade });
-	//changeSFlagがtrueになったら
-	if (changeSFlag == true) {
-		//フェードが1未満なら0.1ずつ加算
-		if (fade < 1) {
-			fade += 0.1f;
-		}
-		//フェードが1以上なら
-		if (fade >= 1) {
-			fade = 1.0f;
-			//changeSFlagをfalseにする
-			changeSFlag = false;
-			changeEFlag = true;
-		}
-	}
-	if (changeEFlag == true) {
-		if (fade >= 0) {
-			fade -= 0.1f;
-		}
-		if (fade <= 0) {
-			changeEFlag = false;
-			fade = 0.0f;
-		}
-	}
-}
-
 void SceneManager::DrawBG()
 {
 	Sprite::PreDraw(dxCommon->GetCmdList());
@@ -250,9 +210,7 @@ void SceneManager::DrawFront()
 		loadScene->DrawFront();
 	}
 
-	if (changeSFlag == true || changeEFlag == true) {
-		Change->Draw();
-	}
+	change->DrawFront();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

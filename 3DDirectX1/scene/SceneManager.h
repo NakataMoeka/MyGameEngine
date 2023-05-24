@@ -21,6 +21,8 @@
 #include <thread>
 #include<mutex>
 #include"BaseScene.h"
+
+#include"SceneChange.h"
 class SceneManager
 {
 public:
@@ -39,8 +41,7 @@ public:
 	void Init();
 	//繰り返し処理
 	void Update();
-	//フェード
-	void SceneChange();
+
 	//背景画像描画
 	void DrawBG();
 	//オブジェクト描画
@@ -49,7 +50,6 @@ public:
 	void DrawFront();
 	//ロード用初期化
 	void InitTH();
-	bool GetBFlag() { return Bflag; }
 private:
 	const int debugTextTexNumber = 0;
 	//最初のシーン
@@ -66,12 +66,10 @@ private:
 	std::unique_ptr < GameScene> gameScene = nullptr;
 	std::unique_ptr < ClearScene> clearScene = nullptr;
 	std::unique_ptr < Loading> loadScene = nullptr;
-	bool Bflag = false;
 
-	std::unique_ptr<Sprite>Change = nullptr;
-	float fade = 0;
-	bool changeSFlag = false;//フェードアウト
-	bool changeEFlag = false;//フェードイン
+	std::unique_ptr < SceneChange> change = nullptr;
+
+
 	//ロード画面作りたい
 	std::thread t = {};
 	Load_Situation Load_s = NOLOAD;
