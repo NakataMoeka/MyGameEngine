@@ -29,12 +29,12 @@ public:
 	//前景画像描画
 	void DrawFront();
 
-	bool SetChangeSFlag(bool changeSFlag) { return this->changeSFlag = changeSFlag; }
-	bool GetChangeEFlag() { return changeEFlag; }
+	bool SetChangeSFlag(bool fadeIn) { return this->fadeIn = fadeIn; }
+	bool GetChangeEFlag() { return fadeOut; }
 private:
 	std::unique_ptr<Sprite>ChangeS = nullptr;
 	float fade = 0;
-	bool changeSFlag = false;//フェードアウト
-	bool changeEFlag = false;//フェードイン
+	bool fadeIn = false;//フェードイン
+	bool fadeOut = false;//フェードアウト
 };
 

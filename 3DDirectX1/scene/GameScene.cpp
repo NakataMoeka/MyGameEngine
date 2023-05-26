@@ -54,7 +54,7 @@ void GameScene::Initialize()
 	//particleMan->LoadTexture();
 	//particleMan->CreateModel();
 	// デバッグテキスト用テクスチャ読み込み
-	
+
 
 
 	// カメラ注視点をセット
@@ -106,9 +106,9 @@ void GameScene::Init()
 	tutorial->Init();
 	st->Init();
 	//GameSceneの初期化
-	distance = 10.0f;
+	distance = { 0,2.0f,10.0f };
 	distanceC = { 0, 4.0f, -10.0f };
-	distanceY = 2.0f;
+	distanceNum = { 0,0,0 };
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
 
@@ -207,10 +207,19 @@ void GameScene::Update()
 	player->SetRadius(radius);
 	player->SetSphereSize(Ssize);
 	player->SetSY(SY);
-	if (sphereSize->GetTcount() == 1) {
-		distance += 1;
-		distanceY += 0.5f;
+	if (sphereSize->GetTcount() > 0 && sphereSize->GetTcount() < 4) {
+		if (distanceNum.z < 0.5f) {
+			distanceNum.z += 0.1f;
+			distance.z += distanceNum.z;
+		}
+		if (distanceNum.y < 0.2f) {
+			distanceNum.y += 0.1f;
+			distance.y += distanceNum.y;
+		}
 		SZV += 1;
+	}
+	else {
+		distanceNum = { 0,0,0 };
 	}
 	player->SetSZV(SZV);
 #pragma endregion
@@ -365,7 +374,7 @@ void GameScene::Update()
 
 #pragma region カメラ
 	//追従カメラ
-	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y + distanceY,player->GetPlayerPos().z }
+	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y + distance.y,player->GetPlayerPos().z }
 	, XMFLOAT3{ distanceC.x,distanceC.y,-distanceC.z }, 0, player->GetPlayerAngle().y);
 	//カメラのめり込み(一部うまくいかない部分あり)
 	camera->CameraCollision(player->GetPlayerPos(), player->GetPlayerAngle());
@@ -377,12 +386,12 @@ void GameScene::Update()
 	}
 	else if (camera->GetCCFlag() == false) {
 		distanceC.y = 4;
-		distanceC.z = distance;
+		distanceC.z = distance.z;
 	}
 	camera->Update();
 #pragma endregion
 	lightGroup->Update();
-}
+	}
 
 
 void GameScene::DrawBG()
@@ -419,7 +428,7 @@ void GameScene::DrawFront()
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}
-	//DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", player->GetRadius());
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", distance.z);
 	sphereSize->Draw();
 }
 void GameScene::CreateParticles()

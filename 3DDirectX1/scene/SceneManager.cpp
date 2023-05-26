@@ -3,7 +3,7 @@
 SceneManager::~SceneManager()
 {
 	//#if _DEBUG
-	if (LoadFlagF == true) {
+	if (scene == LOAD) {
 		t.detach();
 	}
 	t.~thread();
@@ -26,7 +26,6 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	FbxObject3d::SetDev(dxCommon->Getdev());
 
-
 	titleScene = std::unique_ptr <TitleScene>(new TitleScene());
 	titleScene->Initialize();
 	selectScene = std::unique_ptr <SelectScene>(new SelectScene());
@@ -40,12 +39,9 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	loadScene->Initialize();
 	change = std::unique_ptr <SceneChange>(new SceneChange());
 	change->Initialize();
-	//gameScene->Init();
-	//clearScene->Init();
-	Load_s = NOLOAD;
-	LoadFlagF = true;
-	scene = LOAD;
 
+	Load_s = NOLOAD;
+	scene = LOAD;
 }
 
 void SceneManager::Init()
@@ -54,7 +50,6 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
-
 	if (scene == TITLE) {
 		if (titleScene->GetSCangeFlag() == true) {
 			change->SetChangeSFlag(true);
@@ -86,7 +81,6 @@ void SceneManager::Update()
 				clearScene->Init();
 				scene = END;
 			}
-
 		}
 		if (gameScene->GetOverFlag() == true) {
 			change->SetChangeSFlag(true);
@@ -123,17 +117,12 @@ void SceneManager::Update()
 		}
 		clearScene->Update();
 	}
-	else if (scene == LOAD) {
-		loadScene->Update();
-	}
-	change->Update();
 	//ローディング
-	if (LoadFlagF == true) {
+	else if (scene == LOAD) {
 		switch (Load_s)
 		{
 		case SceneManager::NOLOAD://ロードしていないとき
 			t = std::thread([&] {InitTH(); });
-			scene = LOAD;
 			Load_s = NOWLOAD;
 			break;
 		case SceneManager::NOWLOAD://ロードしているとき
@@ -143,12 +132,13 @@ void SceneManager::Update()
 			scene = TITLE;
 			titleScene->Init();
 			Load_s = NOLOAD;
-			LoadFlagF = false;
 			break;
 		default:
 			break;
 		}
+		loadScene->Update();
 	}
+	change->Update();
 }
 void SceneManager::DrawBG()
 {
@@ -206,10 +196,8 @@ void SceneManager::DrawFront()
 		clearScene->DrawFront();
 	}
 	else if (scene == LOAD) {
-
 		loadScene->DrawFront();
 	}
-
 	change->DrawFront();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();

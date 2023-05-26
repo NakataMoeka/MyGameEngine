@@ -69,11 +69,8 @@ private:
 
 	std::unique_ptr < SceneChange> change = nullptr;
 
-
 	//ƒ[ƒh‰æ–Êì‚è‚½‚¢
 	std::thread t = {};
 	Load_Situation Load_s = NOLOAD;
-	bool LoadFlag = false;
-	bool LoadFlagF = false;
 };
 

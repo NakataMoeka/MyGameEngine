@@ -26,7 +26,7 @@
 #include"BaseScene.h"
 class CollisionManager;
 class TouchableObject;
-class GameScene:public BaseScene
+class GameScene :public BaseScene
 {
 private:
 	// Microsoft::WRL::を省略
@@ -70,7 +70,7 @@ public: // メンバ関数
 	bool GetTSFlag() { return TSFlag; }
 
 private: // メンバ変数
-	void ObjCollision(int i,int j);
+	void ObjCollision(int i, int j);
 
 	Audio* audio = Audio::GetInstance();
 
@@ -109,9 +109,9 @@ private: // メンバ変数
 	int TCount = 0;
 	bool TFlag = false;
 	float radius = 3.0f;
-	float distance = 20.0f;//プレイヤーとカメラの距離
+	XMFLOAT3 distance = { 0,2.0f,10.0f };//プレイヤーとカメラの距離
 
-	float distanceY = 20.0f;//カメラの位置
+	XMFLOAT3 distanceNum = {0,0,0};
 	XMFLOAT3 distanceC = { 0,20.0f,20.0f };//カメラの位置
 
 
