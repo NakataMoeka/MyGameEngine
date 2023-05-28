@@ -63,6 +63,10 @@ void SelectScene::Init()
 	SAFlag = 0;
 }
 
+void SelectScene::InitStageNum(int stageNum)
+{
+}
+
 void SelectScene::Update()
 {
 	if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW))
@@ -141,6 +145,15 @@ void SelectScene::DrawFront()
 	//DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
 }
 
+void SelectScene::Finalize()
+{
+}
+
 void SelectScene::CreateParticles()
 {
+}
+
+bool SelectScene::GetSCangeFlag()
+{
+	return SCangeFlag;
 }

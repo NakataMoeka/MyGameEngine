@@ -24,6 +24,7 @@ public:
 	void Initialize()override;
 	//‚»‚ÌƒV[ƒ“‚ð’Ê‚é‚½‚Ñ‚É‰½“x‚às‚í‚ê‚é‰Šú‰»(ˆÊ’u‚È‚Ç)
 	void Init()override;
+	void InitStageNum(int stageNum)override;
 	//ŒJ‚è•Ô‚µˆ—
 	void Update()override;
 	//”wŒi‰æ‘œ•`‰æ
@@ -33,9 +34,11 @@ public:
 	//‘OŒi‰æ‘œ•`‰æ
 	void DrawFront()override;
 
+	void Finalize()override;
+
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
-	bool GetSCangeFlag() { return SCangeFlag; }
+	bool GetSCangeFlag()override;
 
 private:
 	Audio* audio = Audio::GetInstance();

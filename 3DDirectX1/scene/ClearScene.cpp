@@ -60,6 +60,10 @@ void ClearScene::Init()
 	SCangeFlag = false;
 }
 
+void ClearScene::InitStageNum(int stageNum)
+{
+}
+
 void ClearScene::Update()
 {
 	//文章のイージング
@@ -118,4 +122,13 @@ void ClearScene::DrawFront()
 		Space->Draw();
 	}
 	//DebugText::GetInstance()->Printf(200, 500, 3.0f, "PUSH SPACE");}
+}
+
+void ClearScene::Finalize()
+{
+}
+
+bool ClearScene::GetSCangeFlag()
+{
+	return SCangeFlag;
 }

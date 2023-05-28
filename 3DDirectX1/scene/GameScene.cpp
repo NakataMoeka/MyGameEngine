@@ -114,7 +114,6 @@ void GameScene::Init()
 
 	clearFlag = false;
 	overFlag = false;
-	Bflag = false;
 	//ステージが0と1の時は初期サイズ1,2の時は10
 	if (stageNum == 1 || stageNum == 0) {
 		Tsize = 1;
@@ -210,13 +209,13 @@ void GameScene::Update()
 	if (sphereSize->GetTcount() > 0 && sphereSize->GetTcount() < 4) {
 		if (distanceNum.z < 0.5f) {
 			distanceNum.z += 0.1f;
-			distance.z += distanceNum.z;
 		}
 		if (distanceNum.y < 0.2f) {
 			distanceNum.y += 0.1f;
-			distance.y += distanceNum.y;
 		}
-		SZV += 1;
+		distance.z += distanceNum.z;
+		distance.y += distanceNum.y;
+		SZV += 0.2f;
 	}
 	else {
 		distanceNum = { 0,0,0 };
@@ -431,6 +430,9 @@ void GameScene::DrawFront()
 	DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", distance.z);
 	sphereSize->Draw();
 }
+void GameScene::Finalize()
+{
+}
 void GameScene::CreateParticles()
 {
 	for (int i = 0; i < 10; i++) {
@@ -454,6 +456,11 @@ void GameScene::CreateParticles()
 		// 追加
 		particleMan->Add(60, pos, vel, acc, 2.0f, 0.0f, { 1,0.5,0 }, { 1,1,1 });
 	}
+}
+
+bool GameScene::GetSCangeFlag()
+{
+	return SCangeFlag;
 }
 
 bool GameScene::GetTitleFlag()

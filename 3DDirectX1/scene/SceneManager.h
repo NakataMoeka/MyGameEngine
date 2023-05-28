@@ -50,6 +50,7 @@ public:
 	void DrawFront();
 	//ロード用初期化
 	void InitTH();
+	int SetNum(int num) { return this->num = num; }
 private:
 	const int debugTextTexNumber = 0;
 	//最初のシーン
@@ -72,5 +73,7 @@ private:
 	//ロード画面作りたい
 	std::thread t = {};
 	Load_Situation Load_s = NOLOAD;
+
+	int num;
 };
 

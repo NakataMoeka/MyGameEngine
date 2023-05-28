@@ -64,6 +64,10 @@ void TitleScene::Init()
 	audio->SetBGMVolume(0.1f);
 }
 
+void TitleScene::InitStageNum(int stageNum)
+{
+}
+
 void TitleScene::Update()
 {
 	if (Scene == 0) {
@@ -139,4 +143,13 @@ void TitleScene::DrawFront()
 	//DebugText::GetInstance()->Printf(0, 0, 3.0f, "%d",SceneNum);
 	//DebugText::GetInstance()->Printf(200, 500, 3.0f, {0,0,0,1}, "%d", testCount);
 
+}
+
+void TitleScene::Finalize()
+{
+}
+
+bool TitleScene::GetSCangeFlag()
+{
+	return SCangeFlag;
 }

@@ -24,6 +24,7 @@ public:
 	void Initialize()override;
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init()override;
+	void InitStageNum(int stageNum)override;
 	//繰り返し処理
 	void Update()override;
 	//背景画像描画
@@ -32,10 +33,13 @@ public:
 	void Draw()override;
 	//前景画像描画
 	void DrawFront()override;
+
+	void Finalize()override;
+
 	//パーティクル
 	void CreateParticles();
 	int GetStageNum() { return stageNum; }
-	bool GetSCangeFlag() { return SCangeFlag; }
+	bool GetSCangeFlag()override;
 private:
 	Audio* audio = Audio::GetInstance();
 	std::unique_ptr <Camera> camera = nullptr;

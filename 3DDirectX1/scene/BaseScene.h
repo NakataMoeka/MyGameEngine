@@ -13,6 +13,8 @@ public:
 	/// シーン変わるごとに行われる初期化
 	/// </summary>
 	virtual void Init() = 0;
+
+	virtual void InitStageNum(int num) = 0;
 	/// <summary>
 	/// 更新
 	/// </summary>
@@ -29,4 +31,11 @@ public:
 	/// 前景画像描画
 	/// </summary>
 	virtual void DrawFront() = 0;
+
+	virtual void Finalize() = 0;
+	
+	virtual void SetSceneManager(SceneManager* sceneManager) { sceneManager_ = sceneManager; }
+	virtual bool GetSCangeFlag() = 0;
+protected:
+	SceneManager* sceneManager_ = nullptr;
 };

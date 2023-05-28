@@ -50,6 +50,29 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
+
+	//if (nextScene_)
+	//{
+	//	if (scene_->GetSCangeFlag() == true) {
+	//		change->SetChangeSFlag(true);
+	//		if (scene_)
+	//		{
+	//			scene_->Finalize();
+	//			delete scene_;
+	//		}
+	//		//シーン切り替え
+	//		scene_ = nextScene_;
+	//		nextScene_ = nullptr;
+	//		scene_->SetSceneManager(this);
+	//		//次のシーンを初期化する
+	//		if (change->GetChangeEFlag() == true) {
+	//			scene_->Initialize();
+	//			scene_->Init();
+	//			scene_->InitStageNum(num);
+	//		}
+	//	}
+	//}
+	//scene_->Update();
 	if (scene == TITLE) {
 		if (titleScene->GetSCangeFlag() == true) {
 			change->SetChangeSFlag(true);

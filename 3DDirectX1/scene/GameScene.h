@@ -49,7 +49,7 @@ public: // メンバ関数
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init()override;
 	//ステージ初期化
-	void InitStageNum(int stageNum);
+	void InitStageNum(int stageNum)override;
 	//繰り返し処理
 	void Update()override;
 	//背景画像描画
@@ -58,13 +58,16 @@ public: // メンバ関数
 	void Draw()override;
 	//前景画像描画
 	void DrawFront()override;
+
+	void Finalize()override;
 	//パーティクル
 	void CreateParticles();
+
+	bool GetSCangeFlag()override;
 	bool GetClearFlag() { return clearFlag; }
 	bool GetOverFlag() { return overFlag; }
 	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
 	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
-	bool GetBFlag() { return Bflag; }
 	bool GetTitleFlag();
 	int SetStageNum(int stageNum) { return this->stageNum = stageNum; }
 	bool GetTSFlag() { return TSFlag; }
@@ -121,8 +124,7 @@ private: // メンバ変数
 	bool clearFlag = false;
 	bool overFlag = false;
 
-	bool Bflag = false;//ブラーを掛けるか否か
-
+	bool SCangeFlag = false;
 	//ステージナンバー
 	int stageNum = 0;
 	bool TSFlag;

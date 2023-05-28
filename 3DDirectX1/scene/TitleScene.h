@@ -23,6 +23,7 @@ public:
 	void Initialize()override;
 	//‚»‚ÌƒV[ƒ“‚ğ’Ê‚é‚½‚Ñ‚É‰½“x‚às‚í‚ê‚é‰Šú‰»(ˆÊ’u‚È‚Ç)
 	void Init()override;
+	void InitStageNum(int stageNum)override;
 	//ŒJ‚è•Ô‚µˆ—
 	void Update()override;
 	//”wŒi‰æ‘œ•`‰æ
@@ -31,7 +32,10 @@ public:
 	void Draw()override;
 	//‘OŒi‰æ‘œ•`‰æ
 	void DrawFront()override;
-	bool GetSCangeFlag() { return SCangeFlag; }
+
+	void Finalize()override;
+
+	bool GetSCangeFlag()override;
 private:
 
 
