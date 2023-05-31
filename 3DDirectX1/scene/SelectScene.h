@@ -24,6 +24,7 @@ public:
 	void Initialize()override;
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init()override;
+	void InitTH()override;
 	void InitStageNum(int stageNum)override;
 	//繰り返し処理
 	void Update()override;

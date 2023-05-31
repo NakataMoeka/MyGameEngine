@@ -13,7 +13,7 @@ public:
 	/// シーン変わるごとに行われる初期化
 	/// </summary>
 	virtual void Init() = 0;
-
+	virtual void InitTH() = 0;
 	virtual void InitStageNum(int num) = 0;
 	/// <summary>
 	/// 更新

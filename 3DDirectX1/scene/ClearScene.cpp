@@ -1,5 +1,6 @@
 #include "ClearScene.h"
-
+#include"SceneManager.h"
+#include"TitleScene.h"
 void ClearScene::Initialize()
 {
 
@@ -60,8 +61,20 @@ void ClearScene::Init()
 	SCangeFlag = false;
 }
 
+void ClearScene::InitTH()
+{
+}
+
 void ClearScene::InitStageNum(int stageNum)
 {
+	if (stageNum == 0) {
+		overFlag = true;
+		clearFlag = false;
+	}
+	else if (stageNum == 1) {
+		clearFlag = true;
+		overFlag = false;
+	}
 }
 
 void ClearScene::Update()

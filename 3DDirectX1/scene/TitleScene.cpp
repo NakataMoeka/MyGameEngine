@@ -1,4 +1,6 @@
 #include "TitleScene.h"
+#include"SceneManager.h"
+#include"SelectScene.h"
 void TitleScene::Initialize()
 {
 	//u
@@ -62,6 +64,10 @@ void TitleScene::Init()
 	testCount = 0;
 	audio->SoundPlayWave(sound1);
 	audio->SetBGMVolume(0.1f);
+}
+
+void TitleScene::InitTH()
+{
 }
 
 void TitleScene::InitStageNum(int stageNum)

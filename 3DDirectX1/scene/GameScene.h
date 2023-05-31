@@ -45,7 +45,7 @@ public: // メンバ関数
 	//起動したら一回しか行われない初期化(モデルの読み込みなど)
 	void Initialize()override;
 	//OBJ等初期化用()
-	void InitTH();
+	void InitTH()override;
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init()override;
 	//ステージ初期化
@@ -64,10 +64,8 @@ public: // メンバ関数
 	void CreateParticles();
 
 	bool GetSCangeFlag()override;
-	bool GetClearFlag() { return clearFlag; }
-	bool GetOverFlag() { return overFlag; }
-	bool SetClearFlag(bool clearFlag) { return this->clearFlag = clearFlag; }
-	bool SetOverFlag(bool overFlag) { return this->overFlag = overFlag; }
+	bool GetEndFlag() { return endFlag; }
+	bool GetNum() { return endNum; };
 	bool GetTitleFlag();
 	int SetStageNum(int stageNum) { return this->stageNum = stageNum; }
 	bool GetTSFlag() { return TSFlag; }
@@ -121,9 +119,8 @@ private: // メンバ変数
 	float SZV = 3;//sphereとの
 	float SY = 3;//SphereのY軸高さ
 	float OY = 0;//objの当たり判定用y足す変数
-	bool clearFlag = false;
-	bool overFlag = false;
-
+	bool endFlag = false;
+	bool endNum;
 	bool SCangeFlag = false;
 	//ステージナンバー
 	int stageNum = 0;

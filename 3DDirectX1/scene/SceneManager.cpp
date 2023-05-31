@@ -53,8 +53,8 @@ void SceneManager::Update()
 
 	//if (nextScene_)
 	//{
-	//	if (scene_->GetSCangeFlag() == true) {
-	//		change->SetChangeSFlag(true);
+	//	//if (scene_->GetSCangeFlag() == true) {
+	//		//change->SetChangeSFlag(true);
 	//		if (scene_)
 	//		{
 	//			scene_->Finalize();
@@ -65,12 +65,12 @@ void SceneManager::Update()
 	//		nextScene_ = nullptr;
 	//		scene_->SetSceneManager(this);
 	//		//次のシーンを初期化する
-	//		if (change->GetChangeEFlag() == true) {
+	//		//if (change->GetChangeEFlag() == true) {
 	//			scene_->Initialize();
 	//			scene_->Init();
 	//			scene_->InitStageNum(num);
-	//		}
-	//	}
+	//		//}
+	//	//}
 	//}
 	//scene_->Update();
 	if (scene == TITLE) {
@@ -97,18 +97,10 @@ void SceneManager::Update()
 	}
 	//ゲームシーン
 	else if (scene == GAME) {
-		if (gameScene->GetClearFlag() == true) {
+		if (gameScene->GetEndFlag() == true) {
 			change->SetChangeSFlag(true);
 			if (change->GetChangeEFlag() == true) {
-				clearScene->SetClearFlag(true);
-				clearScene->Init();
-				scene = END;
-			}
-		}
-		if (gameScene->GetOverFlag() == true) {
-			change->SetChangeSFlag(true);
-			if (change->GetChangeEFlag() == true) {
-				clearScene->SetOverFlag(true);
+				clearScene->InitStageNum(gameScene->GetNum());
 				clearScene->Init();
 				scene = END;
 			}
@@ -182,6 +174,7 @@ void SceneManager::DrawBG()
 
 		loadScene->DrawBG();
 	}
+	//scene_->DrawBG();
 	Sprite::PostDraw();
 	dxCommon->ClearDepthBuffer();
 }
@@ -199,6 +192,7 @@ void SceneManager::Draw()
 	else if (scene == END) {
 		clearScene->Draw();
 	}
+	//scene_->Draw();
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 }
@@ -222,6 +216,7 @@ void SceneManager::DrawFront()
 		loadScene->DrawFront();
 	}
 	change->DrawFront();
+	//scene_->DrawFront();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

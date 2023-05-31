@@ -1,5 +1,7 @@
 #include "SelectScene.h"
 #include"Input.h"
+#include"SceneManager.h"
+#include"GameScene.h"
 
 void SelectScene::Initialize()
 {	//u
@@ -63,6 +65,10 @@ void SelectScene::Init()
 	SAFlag = 0;
 }
 
+void SelectScene::InitTH()
+{
+}
+
 void SelectScene::InitStageNum(int stageNum)
 {
 }
@@ -105,14 +111,17 @@ void SelectScene::Update()
 		}
 
 	}
-	else if (SAFlag == 0&& SCangeFlag == false && Input::GetInstance()->TriggerKey(DIK_SPACE)) {
-				if (stageNum == 0 || stageNum == 1 || stageNum == 2) {
-					SCangeFlag = true;
-					audio->SEPlayWave(sound2);
-				}
-				else {
-					audio->SEPlayWave(sound1);
-				}
+	else if (SAFlag == 0 && SCangeFlag == false && Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+		if (stageNum == 0 || stageNum == 1 || stageNum == 2) {
+			SCangeFlag = true;
+			/*BaseScene* scene = new GameScene();
+			sceneManager_->SetNum(stageNum);
+			sceneManager_->SetNextScene(scene);*/
+			audio->SEPlayWave(sound2);
+		}
+		else {
+			audio->SEPlayWave(sound1);
+		}
 	}
 	SelectNumber->SetSize({ 120,130 });
 	TutorialS->SetSize({ 315, 70 });

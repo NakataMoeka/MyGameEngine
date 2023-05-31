@@ -10,6 +10,10 @@
 #include"TouchableObject.h"
 #include"MeshCollider.h"
 #include<time.h>
+#include"SceneManager.h"
+#include"ClearScene.h"
+#include"TitleScene.h"
+#include"SelectScene.h"
 GameScene::GameScene()
 {
 
@@ -111,9 +115,8 @@ void GameScene::Init()
 	distanceNum = { 0,0,0 };
 	colMan->SetParentFlag(false);
 	colMan->SetTsize(0);
-
-	clearFlag = false;
-	overFlag = false;
+	endFlag = false;
+	endNum = 0;
 	//ステージが0と1の時は初期サイズ1,2の時は10
 	if (stageNum == 1 || stageNum == 0) {
 		Tsize = 1;
@@ -245,8 +248,11 @@ void GameScene::Update()
 				if (timer->GetDT() <= 0) {
 					//目標サイズ未満ゲームオーバー
 					if (sphereSize->GetTsize() < GoalCount) {
-						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "GameOver");
-						overFlag = true;
+						endFlag = true;
+						endNum = 0;
+						/*BaseScene* scene = new ClearScene();
+						sceneManager_->SetNumber(0);
+						sceneManager_->SetNextScene(scene);*/
 						audio->StopWave();
 						gameObjects->RC();
 						player->RC();
@@ -254,8 +260,11 @@ void GameScene::Update()
 					}
 					//目標サイズ以上ゲームクリア
 					else if (sphereSize->GetTsize() >= GoalCount) {
-						//DebugText::GetInstance()->Printf(500, 400, 3.0f, { 1,1,1,1 }, "Clear");
-						clearFlag = true;
+						/*BaseScene* scene = new ClearScene();
+						sceneManager_->SetNum(1);
+						sceneManager_->SetNextScene(scene);*/
+						endFlag = true;
+						endNum = 1;
 						audio->StopWave();
 						gameObjects->RC();
 						player->RC();
@@ -314,7 +323,7 @@ void GameScene::Update()
 		gameObjects->RC();
 		player->RC();
 		stageObj->RC();
-	}
+}
 #endif
 
 	//object3d->SetRotation({ a,0,b });
@@ -352,6 +361,8 @@ void GameScene::Update()
 		if (tutorial->GetEndFlag() == true) {
 			//コライダー削除する
 			TSFlag = true;
+			/*BaseScene* scene = new SelectScene();
+			sceneManager_->SetNextScene(scene);*/
 			audio->StopWave();
 			gameObjects->RC();
 			player->RC();
@@ -427,7 +438,7 @@ void GameScene::DrawFront()
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, {1,1,1,1},"%f", distance.z);
+	DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%f", distance.z);
 	sphereSize->Draw();
 }
 void GameScene::Finalize()
