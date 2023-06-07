@@ -67,6 +67,7 @@ private://関数
 	void InitNum(std::vector<object*>oData, int stageNum, float y, float size, size_t i, size_t j);
 	void InitUpd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData);
 	void RCC(std::array < Object3d*, OBJNumber>obj,int i);//コライダー削除共通の処理
+	void Upd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData, std::array < Sphere, OBJNumber> sphere,float radius,bool move);
 private://変数
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
@@ -100,8 +101,6 @@ private://変数
 	std::unique_ptr<Model> modelTuru = nullptr;
 	std::unique_ptr<Model> modelCont = nullptr;
 	std::unique_ptr<Model> modelGame = nullptr;
-
-
 	std::array < Sphere, OBJNumber> cSphere;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere2;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere3;//当たり判定のやつ

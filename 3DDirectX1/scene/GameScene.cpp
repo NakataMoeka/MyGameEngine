@@ -250,9 +250,9 @@ void GameScene::Update()
 					if (sphereSize->GetTsize() < GoalCount) {
 						endFlag = true;
 						endNum = 0;
-						/*BaseScene* scene = new ClearScene();
-						sceneManager_->SetNumber(0);
-						sceneManager_->SetNextScene(scene);*/
+						//BaseScene* scene = new ClearScene();
+						//sceneManager_->SetNum(0);
+						//sceneManager_->SetNextScene(scene);
 						audio->StopWave();
 						gameObjects->RC();
 						player->RC();
@@ -260,9 +260,9 @@ void GameScene::Update()
 					}
 					//目標サイズ以上ゲームクリア
 					else if (sphereSize->GetTsize() >= GoalCount) {
-						/*BaseScene* scene = new ClearScene();
-						sceneManager_->SetNum(1);
-						sceneManager_->SetNextScene(scene);*/
+						//BaseScene* scene = new ClearScene();
+						//sceneManager_->SetNum(1);
+						//sceneManager_->SetNextScene(scene);
 						endFlag = true;
 						endNum = 1;
 						audio->StopWave();
@@ -299,6 +299,8 @@ void GameScene::Update()
 	}
 	//ポーズ画面でタイトルに戻るときの処理
 	if (pose->GetTFlag() == true) {
+		//BaseScene* scene = new TitleScene();
+		//sceneManager_->SetNextScene(scene);
 		//audio->StopWave();
 		//コライダーを削除
 		gameObjects->RC();
@@ -361,8 +363,8 @@ void GameScene::Update()
 		if (tutorial->GetEndFlag() == true) {
 			//コライダー削除する
 			TSFlag = true;
-			/*BaseScene* scene = new SelectScene();
-			sceneManager_->SetNextScene(scene);*/
+			//BaseScene* scene = new SelectScene();
+			//sceneManager_->SetNextScene(scene);
 			audio->StopWave();
 			gameObjects->RC();
 			player->RC();
@@ -438,7 +440,7 @@ void GameScene::DrawFront()
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}
-	DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%f", distance.z);
+	
 	sphereSize->Draw();
 }
 void GameScene::Finalize()

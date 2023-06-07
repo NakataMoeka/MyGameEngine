@@ -51,12 +51,15 @@ public:
 	//ロード用初期化
 	void InitTH();
 	int SetNum(int num) { return this->num = num; }
+	//次のシーン予約
+	void SetNextScene(BaseScene* nextScene) { nextScene_ = nextScene; }
+	void SetScene();
+	Scene scene;
 private:
 	const int debugTextTexNumber = 0;
 	//最初のシーン
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
-	Scene scene = LOAD;
 	//今のシーン
 	BaseScene* scene_ = nullptr;
 	//次のシーン

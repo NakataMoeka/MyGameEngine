@@ -92,6 +92,8 @@ void ClearScene::Update()
 		if (SCangeFlag == false) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 				SCangeFlag = true;
+				//BaseScene* scene = new TitleScene();
+				//sceneManager_->SetNextScene(scene);
 				audio->SEPlayWave(sound1);
 				clearFlag = false;
 				overFlag = false;

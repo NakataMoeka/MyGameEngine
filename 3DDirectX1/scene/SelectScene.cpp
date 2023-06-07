@@ -114,9 +114,8 @@ void SelectScene::Update()
 	else if (SAFlag == 0 && SCangeFlag == false && Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		if (stageNum == 0 || stageNum == 1 || stageNum == 2) {
 			SCangeFlag = true;
-			/*BaseScene* scene = new GameScene();
-			sceneManager_->SetNum(stageNum);
-			sceneManager_->SetNextScene(scene);*/
+			//BaseScene* scene = new GameScene();
+			//sceneManager_->SetNum(stageNum);
 			audio->SEPlayWave(sound2);
 		}
 		else {

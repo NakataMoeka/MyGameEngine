@@ -48,5 +48,5 @@ void NMGame::Finalize()
 {
 	// ŠeŽí‰ð•ú
 	Framework::Finalize();
-	safe_delete(gameScene);
+	//safe_delete(gameScene);
 }
