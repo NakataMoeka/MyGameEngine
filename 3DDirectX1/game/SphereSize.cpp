@@ -94,10 +94,8 @@ void SphereSize::Update()
 	Number[2]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,48 });
 	Number[3]->SetTextureRect({ 0 + 32 * (float)tM,0 }, { 32,48 });
 	Number[4]->SetTextureRect({ 0 + 32 * (float)tMM,0 }, { 32,48 });
-
-
-
 	Number[1]->SetPosition({ 150,50 });
+	
 	Number[2]->SetPosition({ 90,50 });
 	Number[3]->SetPosition({ 60,50 });
 	Number[4]->SetPosition({ 30,50 });

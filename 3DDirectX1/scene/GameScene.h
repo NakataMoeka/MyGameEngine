@@ -38,7 +38,6 @@ private:
 	using XMMATRIX = DirectX::XMMATRIX;
 public: // メンバ関数
 
-
 	GameScene();
 
 	~GameScene();
@@ -79,7 +78,7 @@ private: // メンバ変数
 	SoundData sound2 = {};
 	SoundData sound3 = {};
 	SoundData sound4 = {};
-	SoundData sound5 = {};
+
 	std::unique_ptr < Camera> camera = nullptr;
 	std::unique_ptr < ParticleManager> particleMan = nullptr;
 
@@ -100,9 +99,6 @@ private: // メンバ変数
 	std::unique_ptr < Tutorial> tutorial = nullptr;
 	std::unique_ptr < start> st = nullptr;
 
-
-	static const int OBJNumber = 100;//OBJの最大数を記載
-
 	int HitCount = 0;
 	//サイズ関係
 	float Tsize = 1;
@@ -110,28 +106,26 @@ private: // メンバ変数
 	int TCount = 0;
 	bool TFlag = false;
 	float radius = 3.0f;
-	XMFLOAT3 distance = { 0,2.0f,10.0f };//プレイヤーとカメラの距離
 
+	XMFLOAT3 distance = { 0,2.0f,10.0f };//プレイヤーとカメラの距離
 	XMFLOAT3 distanceNum = {0,0,0};
 	XMFLOAT3 distanceC = { 0,20.0f,20.0f };//カメラの位置
-
 
 	float SZV = 3;//sphereとの
 	float SY = 3;//SphereのY軸高さ
 	float OY = 0;//objの当たり判定用y足す変数
+
 	bool endFlag = false;
 	bool endNum;
-	bool SCangeFlag = false;
+
 	//ステージナンバー
 	int stageNum = 0;
 	bool TSFlag;
-	int cACount = 0;
-	bool caFlag = false;
 
-	int testCount = 0;//test
 	int GoalCount = 0;//目標サイズ
 	XMFLOAT3 Ssize = { 1,1,1 };//球のサイズ
 	int audioCount = 0;
+
 	//まだくっつかないobjに当たった時に音をだしたりエフェクトを出したり
 	//する時に1回のみやるための変数
 	int HitCC;

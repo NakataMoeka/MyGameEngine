@@ -28,7 +28,6 @@ void Player::Initialize()
 	SphereObj = std::unique_ptr<Object3d>(Object3d::Create(model2.get()));
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-
 	
 	Sprite::LoadTexture(2, L"Resources/dash.png");
 

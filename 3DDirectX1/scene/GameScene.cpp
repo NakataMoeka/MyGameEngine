@@ -25,8 +25,6 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
-
-
 	// カメラ生成
 	camera = std::unique_ptr < Camera>(new Camera(WinApp::window_width, WinApp::window_height));
 
@@ -36,7 +34,7 @@ void GameScene::Initialize()
 
 	//ライト生成
 	lightGroup = std::unique_ptr <LightGroup>(LightGroup::Create());
-	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
+
 	Object3d::SetLight(lightGroup.get());
 	FbxObject3d::SetLight(lightGroup.get());
 	// 3Dオブエクトにライトをセット
@@ -51,15 +49,11 @@ void GameScene::Initialize()
 	//lightGroup->SetSpotLightActive(0, true);
 	lightGroup->SetCircleShadowActive(0, true);
 
-
 	colMan = CollisionManager::GetInstance();
 	// パーティクルマネージャ生成
 	//particleMan = std::unique_ptr < ParticleManager>(ParticleManager::Create(dxCommon->Getdev(), camera.get(), L"Resources/effect2.png", true));
 	//particleMan->LoadTexture();
 	//particleMan->CreateModel();
-	// デバッグテキスト用テクスチャ読み込み
-
-
 
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
@@ -69,9 +63,6 @@ void GameScene::Initialize()
 
 void GameScene::InitTH()
 {
-
-	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
-
 	Sprite::LoadTexture(1, L"Resources/background.png");
 	Sprite::LoadTexture(2, L"Resources/background.png");
 	sprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(1, { 0,0 }));
@@ -128,8 +119,6 @@ void GameScene::Init()
 	TCount = 0;
 	HitCount = 0;
 	TSFlag = false;
-	cACount = 0;
-	caFlag = false;
 	radius = 2.0f;
 	SZV = 5;
 	SY = 2;
@@ -241,7 +230,6 @@ void GameScene::Update()
 				if (audioCount < 2) {
 					audioCount++;
 				}
-
 				timer->SetSFlag(true);
 				timer->SetFlag(false);
 				//タイマーが0以下になったら
@@ -310,54 +298,19 @@ void GameScene::Update()
 	sphereSize->Update();
 
 #pragma endregion
-#if _DEBUG 
-	//デバッグでクリアとゲームオーバー見るために作ったやつ
-	if (Input::GetInstance()->TriggerKey(DIK_Q)) {
-		overFlag = true;
-		audio->StopWave();
-		gameObjects->RC();
-		player->RC();
-		stageObj->RC();
-	}
-	else if (Input::GetInstance()->TriggerKey(DIK_E)) {
-		clearFlag = true;
-		audio->StopWave();
-		gameObjects->RC();
-		player->RC();
-		stageObj->RC();
-}
-#endif
-
-	//object3d->SetRotation({ a,0,b });
-	//TouchableObjectのobjは	playerの前に書かないとエラー起こるよ
 
 #pragma region チュートリアル
 	//チュートリアルの時
 	if (stageNum == 0) {
-		if (audioCount < 2) {
-			audioCount++;
-		}
-		//1になったら
-		if (tutorial->GetTCount() == 1) {
-			//プレイヤーのZ座標位置が0以上になったら
-			if (player->GetTWCount() == 100) {
-				//2にする
-				tutorial->SetTCount(2);
-			}
-			tutorial->SetCountFlag(true);
-		}
-		//3になったら
-		else if (tutorial->GetTCount() == 3) {
+	
+		tutorial->SetWalkCount(player->GetTWCount());
+		if (tutorial->GetColFlag() == true) {
 			//くっつけるようになる
 			if (gameObjects->GetObject3d(0, 0)->GetParentFlag() == true) {
 				//4にする
 				tutorial->SetTCount(4);
+				tutorial->SetColFlag(false);
 			}
-			tutorial->SetCountFlag(true);
-		}
-		else {
-			//TutorialCountが1と3以外は説明文を勝手に進められる。
-			tutorial->SetCountFlag(false);
 		}
 		//チュートリアルが終わったら
 		if (tutorial->GetEndFlag() == true) {
@@ -403,28 +356,17 @@ void GameScene::Update()
 	camera->Update();
 #pragma endregion
 	lightGroup->Update();
-	}
-
-
+}
 void GameScene::DrawBG()
 {
 	//背景
 	sprite->Draw();
 }
-
 void GameScene::Draw()
 {
-
 	player->Draw();
 	gameObjects->Draw();
 	stageObj->Draw();
-
-	//if (colMan->GetHit() == true) {
-	//	if (HitCC <= 2) {
-	//		particleMan->Draw(dxCommon->GetCmdList());
-	//	}
-	//}
-
 }
 void GameScene::DrawFront()
 {
@@ -440,7 +382,7 @@ void GameScene::DrawFront()
 	if (pose->GetPFlag() == true) {
 		pose->Draw();
 	}
-	
+
 	sphereSize->Draw();
 }
 void GameScene::Finalize()
@@ -473,7 +415,7 @@ void GameScene::CreateParticles()
 
 bool GameScene::GetSCangeFlag()
 {
-	return SCangeFlag;
+	return false;
 }
 
 bool GameScene::GetTitleFlag()

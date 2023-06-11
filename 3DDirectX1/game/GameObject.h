@@ -67,6 +67,7 @@ private://関数
 	void InitNum(std::vector<object*>oData, int stageNum, float y, float size, size_t i, size_t j);
 	void InitUpd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData);
 	void RCC(std::array < Object3d*, OBJNumber>obj,int i);//コライダー削除共通の処理
+	//アップデート共通の処理
 	void Upd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData, std::array < Sphere, OBJNumber> sphere,float radius,bool move);
 private://変数
 

@@ -25,7 +25,8 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	DebugText::GetInstance()->Initialize(debugTextTexNumber);
 
 	FbxObject3d::SetDev(dxCommon->Getdev());
-
+	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
+	
 	titleScene = std::unique_ptr <TitleScene>(new TitleScene());
 	titleScene->Initialize();
 	selectScene = std::unique_ptr <SelectScene>(new SelectScene());
@@ -44,13 +45,8 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	scene = LOAD;
 }
 
-void SceneManager::Init()
-{
-}
-
 void SceneManager::Update()
 {
-
 	//if (nextScene_)
 	//{
 	//	//if (scene_->GetSCangeFlag() == true) {
@@ -137,7 +133,9 @@ void SceneManager::Update()
 		switch (Load_s)
 		{
 		case SceneManager::NOLOAD://ロードしていないとき
-			t = std::thread([&] {InitTH(); });
+			t = std::thread([&] {
+			gameScene->InitTH();
+			Load_s = ENDLOAD; });
 			Load_s = NOWLOAD;
 			break;
 		case SceneManager::NOWLOAD://ロードしているとき
@@ -219,10 +217,4 @@ void SceneManager::DrawFront()
 	//scene_->DrawFront();
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
-}
-
-void SceneManager::InitTH()
-{
-	gameScene->InitTH();
-	Load_s = ENDLOAD;
 }

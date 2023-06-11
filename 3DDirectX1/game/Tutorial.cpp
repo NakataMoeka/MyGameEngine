@@ -26,6 +26,7 @@ void Tutorial::Init()
 	countFlag = false;
 	endFlag = false;
 	moveFlag = false;
+	colFlag = false;
 }
 
 void Tutorial::Update()
@@ -40,25 +41,33 @@ void Tutorial::Update()
 			}
 		}
 	}
-	
+	//1になったら
+	if (TutorialCount == 1) {
+		//プレイヤーのZ座標位置が0以上になったら
+		if (walkCount == 100) {
+			//2にする
+			TutorialCount = 2;
+		}
+		countFlag = true;
+	}
+	else if (TutorialCount==3) {
+		colFlag = true;
+		countFlag = true;
+	}
+	else{
+		countFlag = false;
+	}
 	if (TutorialCount == 1 || TutorialCount >= 3) {
 		moveFlag = true;
 	}
 	else {
 		moveFlag = false;
 	}
-	//else if (Input::GetInstance()->TriggerKey(DIK_LEFTARROW)) {
-	//	if (TutorialCount > 0) {
-	//		TutorialCount--;
-	//	}
-	//}
 }
 
 void Tutorial::Draw()
 {
-	//for (int i = 0; i < 7; i++) {
 	TutorialSprite[TutorialCount]->Draw();
-	//}
 	if (TutorialCount != 1 && TutorialCount != 3) {
 		TutorialUI->Draw();
 	}

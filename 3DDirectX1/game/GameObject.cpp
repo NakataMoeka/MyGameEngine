@@ -373,7 +373,6 @@ void GameObjects::Upd(std::array<Object3d*, OBJNumber> obj, int i, std::vector<o
 {
 	sphere[i].radius = radius;
 	sphere[i].center = XMVectorSet(obj[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1] + y, cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
-
 	if (move == true) {
 		if (obj[i]->GetParentFlag() == false) {
 			oData[i]->rot.m128_f32[1] += 2;
@@ -382,7 +381,6 @@ void GameObjects::Upd(std::array<Object3d*, OBJNumber> obj, int i, std::vector<o
 	if (obj[i]->GetColFlag() == true) {
 		obj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
 	}
-
 	obj[i]->SetRotation(oData[i]->rot);
 	obj[i]->Quaternion();
 	obj[i]->Update();
