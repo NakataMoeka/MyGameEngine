@@ -2,7 +2,6 @@
 
 void Loading::Initialize()
 {
-
 	Sprite::LoadTexture(61, L"Resources/UI/Load.png");
 	loadingS = std::unique_ptr<Sprite>(Sprite::CreateSprite(61, { 600,500 }));
 	//loadingS->SetSize({ 1280,720 });
@@ -35,16 +34,13 @@ void Loading::Update()
 		else if (loadCount == 4) {
 			loadCount = 0;
 		}
-	}
-
-	
+	}	
 	loadingS->SetSize({ 640,360 });
 	loadingS->SetTextureRect({ 0 + 1280 * (float)loadCount,0 }, {1280,720 });
 }
 
 void Loading::DrawBG()
 {
-
 	loadBack->Draw();
 }
 

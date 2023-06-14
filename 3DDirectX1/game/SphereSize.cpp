@@ -83,12 +83,12 @@ void SphereSize::Update()
 	Centimeter[0]->SetSize({ 32,32 });
 	Centimeter[1]->SetSize({ 18,18 });
 
-
 	tSC = Tsize % 10;
 	tC = (Tsize / 10) % 10;
 	tSM = (Tsize / 100) % 10;
 	tM = (Tsize / 1000) % 10;
 	tMM = (Tsize / 10000) % 10;
+
 	Number[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,48 });
 	Number[1]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,48 });
 	Number[2]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,48 });

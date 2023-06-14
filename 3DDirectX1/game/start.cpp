@@ -47,7 +47,6 @@ void start::Update()
 			audio->SEPlayWave(sound1);
 		}
 	}
-
 	else if (GoFlag == true) {
 		if (dt > 0) {
 			end = clock() / CLOCKS_PER_SEC;

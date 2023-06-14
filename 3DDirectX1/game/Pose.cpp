@@ -4,8 +4,6 @@
 
 void Pose::Initialize()
 {
-
-
 	Sprite::LoadTexture(20, L"Resources/UI/title/pose.png");
 	Sprite::LoadTexture(21, L"Resources/UI/title/TitleBack.png");
 	Sprite::LoadTexture(22, L"Resources/UI/title/Back.png");
@@ -47,7 +45,6 @@ void Pose::Update()
 			PS = 0;
 			audio->SEPlayWave(sound2);
 		}
-
 		if (PS == 0) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 				PoseFlag = false;
@@ -78,11 +75,9 @@ void Pose::Update()
 
 void Pose::Draw()
 {
-	
 		PBSprite->Draw();
 		PoseSprite->Draw();
 		TitleBackSprite->Draw();
 		BackSprite->Draw();
 		InfoSprite->Draw();
-	
 }

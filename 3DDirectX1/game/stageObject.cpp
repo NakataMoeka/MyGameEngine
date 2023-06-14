@@ -51,79 +51,23 @@ void StageObject::Init()
 
 void StageObject::stageInit(int stageNum)
 {
-	Ground->SetTouchCollider();
 	this->stageNum = stageNum;
-	if (stageNum == 0) {
-
-		Ground->SetScale({ 6,6,6 });
-		Ground->SetPosition({ 0,0,0 });
-		Ground->SetRotation({ 0,0,0 });
-		Ground->Quaternion();
-		Ground->SetColor({ 1,1,1,1 });
-		Ground->Update();
-		skydome->SetPosition({ 0.0f,100.0f,0.0f });
-		skydome->SetScale({ 4.0f,4.0f,4.0f });
-		skydome->SetColor({ 1,1,1,1 });
-		skydome->Update();
-	}
-	else if (stageNum == 1) {
-		Kotatu->SetTouchCollider();
-		Kotatu->SetPosition({ 0,38,-80 });
-		Kotatu->SetColor({ 1,1,1,1 });
-		Kotatu->Update();
-		TV->SetTouchCollider();
-		TV->SetPosition({ -20,28,-170 });
-		TV->SetScale({ 2,2,2, });
-		TV->SetRotation({ 0,90,0,0 });
-		TV->Quaternion();
-		TV->SetColor({ 1,1,1,1 });
-		TV->Update();
-		Chest->SetTouchCollider();
-		Chest->SetPosition({ 20,46,126 });
-		Chest->SetScale({ 4,4,4, });
-		Chest->SetRotation({ 0,90,0,0 });
-		Chest->Quaternion();
-		Chest->SetColor({ 1,1,1,1 });
-		Chest->Update();
-		Ground->SetScale({ 6,6,6 });
-		Ground->SetPosition({ 0,0,0 });
-		Ground->SetRotation({ 0,0,0 });
-		Ground->Quaternion();
-		Ground->SetColor({ 1,1,1,1 });
-		Ground->Update();
-		Home->SetTouchCollider();
-		Home->SetColor({ 1,1,1,1 });
-		Home->Update();
-		skydome->SetPosition({ 0.0f,100.0f,0.0f });
-		skydome->SetScale({ 4.0f,4.0f,4.0f });
-		skydome->SetColor({ 1,1,1,1 });
-		skydome->Update();
-		saku->SetTouchCollider();
-		saku->SetPosition({ -190,58,-47.5f });
-		saku->SetScale({ 2.0f,2.0f,2.0f });
-		saku->SetColor({ 1,1,1,1 });
-		saku->Update();
+	InitUpd(Ground, { 0,0,0 }, { 6,6,6 }, { 0,0,0,0 });
+	skydome->SetPosition({ 0.0f,100.0f,0.0f });
+	skydome->SetScale({ 4.0f,4.0f,4.0f });
+	skydome->SetColor({ 1,1,1,1 });
+	skydome->Update();
+	if (stageNum == 1) {
+		InitUpd(Kotatu, { 0,38,-80 }, { 1,1,1 }, { 0,0,0,0 });
+		InitUpd(TV, { -20,28,-170 }, { 2,2,2 }, { 0,90,0,0 });
+		InitUpd(Chest, { 20,46,126 }, { 4,4,4 }, { 0,90,0,0 });
+		InitUpd(Home, { 0,0,0 }, { 1,1,1 }, { 0,0,0,0 });
+		InitUpd(saku, { -190,58,-47.5f }, { 2,2,2 }, { 0,0,0,0 });
 	}
 	else if (stageNum == 2) {
-		Ground->SetScale({ 6,6,6 });
-		Ground->SetPosition({ 0,0,0 });
-		Ground->SetRotation({ 0,0,0 });
-		Ground->Quaternion();
-		Ground->SetColor({ 1,1,1,1 });
-		Ground->Update();
-		skydome->SetPosition({ 0.0f,100.0f,0.0f });
-		skydome->SetScale({ 4.0f,4.0f,4.0f });
-		skydome->SetColor({ 1,1,1,1 });
-		skydome->Update();
-		Slide->SetTouchCollider();
-		Slide->SetScale({ 5, 5, 5 });
-		Slide->Update();
-		Swing->SetTouchCollider();
-		Swing->SetPosition({ -30,0,0 });
-		Swing->Update();
-		Tree->SetTouchCollider();
-		Tree->SetPosition({ 30,0,0 });
-		Tree->Update();
+		InitUpd(Slide, { 0,0,0 }, { 5,5,5 }, { 0,0,0,0 });
+		InitUpd(Swing, { -30,0,0 }, { 1,1,1 }, { 0,0,0,0 });
+		InitUpd(Tree, { -30,0,0 }, { 1,1,1 }, { 0,0,0,0 });
 	}
 }
 
@@ -143,8 +87,6 @@ void StageObject::Update()
 		Swing->Update();
 		Tree->Update();
 	}
-
-
 }
 
 void StageObject::Draw()
@@ -152,7 +94,6 @@ void StageObject::Draw()
 	//全ステージ共通
 	skydome->Draw();
 	Ground->Draw();
-
 
 	if (stageNum == 1) {
 		Kotatu->Draw();
@@ -166,8 +107,6 @@ void StageObject::Draw()
 		Swing->Draw();
 		Tree->Draw();
 	}
-
-
 }
 
 void StageObject::RC()
@@ -182,3 +121,16 @@ void StageObject::RC()
 	Swing->RemoveCollider();
 	Tree->RemoveCollider();
 }
+
+void StageObject::InitUpd(std::unique_ptr < TouchableObject>& obj, XMFLOAT3 position, XMFLOAT3 scale, XMVECTOR rot)
+{
+	obj->SetScale(scale);
+	obj->SetPosition(position);
+	obj->SetRotation(rot);
+	obj->Quaternion();
+	obj->SetColor({ 1,1,1,1 });
+	obj->SetTouchCollider();
+	obj->Update();
+}
+
+

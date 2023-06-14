@@ -169,7 +169,6 @@ void SceneManager::DrawBG()
 		clearScene->DrawBG();
 	}
 	else if (scene == LOAD) {
-
 		loadScene->DrawBG();
 	}
 	//scene_->DrawBG();

@@ -3,6 +3,7 @@
 #include"Model.h"
 #include"Collision.h"
 #include<DirectXMath.h>
+#include <memory>
 /// <summary>
 /// 地形オブジェクト
 /// </summary>
@@ -29,7 +30,7 @@ public:
 	void RC();//コライダー消すやつ
 
 private:
-
+	void InitUpd(std::unique_ptr < TouchableObject>&obj,XMFLOAT3 position,XMFLOAT3 scale,XMVECTOR rot);
 	std::unique_ptr < TouchableObject> Kotatu = nullptr;
 	std::unique_ptr < Model> modelKotatu = nullptr;
 	std::unique_ptr < TouchableObject> TV = nullptr;

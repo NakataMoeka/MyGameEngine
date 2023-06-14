@@ -88,7 +88,6 @@ void Player::stageInit(int stageNo)
 
 void Player::Move()
 {
-
 	XMVECTOR moveUD = { 0,0,speedUD,0 };//前後方向用の移動ベクトル
 	XMVECTOR moveLR = { speedLR,0,0,0 };//左右方向の移動用ベクトル
 	XMVECTOR moveAngle = { 0,0.7f,0,0 };//角度のベクトル

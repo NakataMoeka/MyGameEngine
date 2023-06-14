@@ -25,8 +25,6 @@ void Timer::Init()
 	SetTime = 180;
 	dt = SetTime;
 	TR = (float)dt;
-	
-	//poseFlag = false;
 	tSC = (int)(dt / 60) + 1;
 	timeSprite->SetAnchorPoint({ 0.5,0.5 });
 	timeSprite2->SetAnchorPoint({ 0.5,0.5 });

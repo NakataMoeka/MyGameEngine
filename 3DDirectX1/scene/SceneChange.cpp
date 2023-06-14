@@ -6,7 +6,6 @@ void SceneChange::Initialize()
 	ChangeS = std::unique_ptr<Sprite>(Sprite::CreateSprite(60, { 0,0 }));
 	ChangeS->SetSize({ 1280,720 });
 	fade = 0.0f;
-
 }
 
 void SceneChange::Init()
