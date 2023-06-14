@@ -283,7 +283,7 @@ void GameScene::Update()
 		else if (stageNum == 2) {
 			audio->SoundPlayWave(sound4);
 		}
-		audio->SetBGMVolume(0.1f);
+		audio->SetBGMVolume(0.4f);
 	}
 	//ポーズ画面でタイトルに戻るときの処理
 	if (pose->GetTFlag() == true) {
