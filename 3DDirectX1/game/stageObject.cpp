@@ -132,5 +132,3 @@ void StageObject::InitUpd(std::unique_ptr < TouchableObject>& obj, XMFLOAT3 posi
 	obj->SetTouchCollider();
 	obj->Update();
 }
-
-

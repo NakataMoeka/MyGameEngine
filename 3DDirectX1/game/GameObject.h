@@ -53,7 +53,7 @@ public:
 	float GetOSize(int i, int j);
 	XMFLOAT3 GetOPos(int i, int j);
 	int SetTsize(int Tsize) { return this->Tsize = Tsize; }
-	float SetY(float y) { return this->y = y; }
+	float SetY(float y) { return this->oy = y; }
 private://関数
 	static const int OBJNumber = 100;//objの最大数(多いやつ)
 	static const int OBJNumber2 = 30;//objの最大数(少なめのやつ)
@@ -68,7 +68,7 @@ private://関数
 	void InitUpd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData);
 	void RCC(std::array < Object3d*, OBJNumber>obj,int i);//コライダー削除共通の処理
 	//アップデート共通の処理
-	void Upd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData, std::array < Sphere, OBJNumber> sphere,float radius,bool move);
+	void Upd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData,bool move);
 private://変数
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
@@ -108,7 +108,7 @@ private://変数
 	std::array < Sphere, OBJNumber> cSphere4;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere5;//当たり判定のやつ
 	float r = 3;//
-	float y = 0;
+	float oy = 0;
 	//サイズ角度位置
 	XMFLOAT3 pos{ 10,2,0 };
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };

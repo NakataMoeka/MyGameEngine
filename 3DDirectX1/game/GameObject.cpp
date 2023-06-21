@@ -6,6 +6,7 @@
 #include"MeshCollider.h"
 #include"Input.h"
 #include<time.h>
+#include"DebugText.h"
 using namespace DirectX;
 GameObjects::GameObjects()
 {
@@ -98,7 +99,7 @@ void GameObjects::Init()
 {
 	size[0] = { 1.0f,1.0f,1.0f };
 	size[1] = { 5,5,5 };
-	y = 0;
+	oy = 0;
 	for (int i = 0; i < oData.size(); i++) {
 
 		float radius = 1.0f;
@@ -330,49 +331,70 @@ void GameObjects::Update()
 {
 	if (stageNum == 0) {
 		for (int i = 0; i < oData.size(); i++) {
-			Upd(cube, i, oData, cSphere, 0.5f, false);
+			Upd(cube, i, oData, false);
+			cSphere[i].radius = 0.5f;
+			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1] + oy, cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 	}
 	else if (stageNum == 1) {
 		//‚±‚±‚ÅSet‚·‚é‚Æ—£‚ê‚Ä‚­‚Á‚Â‚­‚©‚ç‚µ‚È‚¢‚æ‚¤‚É!!
 		for (int i = 0; i < oData.size(); i++) {
-			Upd(cube, i, oData, cSphere, 0.5f, false);
+			Upd(cube, i, oData, false);
+			cSphere[i].radius = 0.5f;
+			cSphere[i].center = XMVectorSet(cube[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1] + oy, cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 		for (int i = 0; i < oData2.size(); i++) {
-			Upd(moveObj, i, oData2, cSphere2, 1.0f,true);
+			Upd(moveObj, i, oData2, true);
+			cSphere2[i].radius = 1.0f;
+			cSphere2[i].center = XMVectorSet(moveObj[i]->GetMatWorld().r[3].m128_f32[0], moveObj[i]->GetMatWorld().r[3].m128_f32[1] + oy, moveObj[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 		for (int i = 0; i < oData3.size(); i++) {
-			Upd(Bear, i, oData3, cSphere3, 1.0f,false);
+			Upd(Bear, i, oData3, false);
+			cSphere3[i].radius = 1.0f;
+			cSphere3[i].center = XMVectorSet(Bear[i]->GetMatWorld().r[3].m128_f32[0], Bear[i]->GetMatWorld().r[3].m128_f32[1] + oy, Bear[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 		for (int i = 0; i < oData4.size(); i++) {
-			Upd(Robot, i, oData4, cSphere4, 1.5f,false);
+			Upd(Robot, i, oData4, false);
+			cSphere4[i].radius = 1.5f;
+			cSphere4[i].center = XMVectorSet(Robot[i]->GetMatWorld().r[3].m128_f32[0], Robot[i]->GetMatWorld().r[3].m128_f32[1] + oy, Robot[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 		for (int i = 0; i < oData5.size(); i++) {
-			Upd(Card, i, oData5, cSphere5, 2.0f,false);
+			Upd(Card, i, oData5, false);
+			cSphere5[i].radius = 2.0f;
+			cSphere5[i].center = XMVectorSet(Card[i]->GetMatWorld().r[3].m128_f32[0], Card[i]->GetMatWorld().r[3].m128_f32[1] + oy, Card[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 	}
 	else if (stageNum == 2) {
 		for (int i = 0; i < oData.size(); i++) {
-			Upd(Game, i, oData, cSphere, 0.5f,false);
+			Upd(Game, i, oData, false);
+			cSphere[i].radius = 0.5f;
+			cSphere[i].center = XMVectorSet(Game[i]->GetMatWorld().r[3].m128_f32[0], Game[i]->GetMatWorld().r[3].m128_f32[1] + oy, Game[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 		for (int i = 0; i < oData2.size(); i++) {
-			Upd(Koma, i, oData2, cSphere2, 1.0f,true);
+			Upd(Koma, i, oData2, true);
+			cSphere2[i].radius = 1.0f;
+			cSphere2[i].center = XMVectorSet(Koma[i]->GetMatWorld().r[3].m128_f32[0], Koma[i]->GetMatWorld().r[3].m128_f32[1] + oy, Koma[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 		for (int i = 0; i < oData3.size(); i++) {
-			Upd(Shogi, i, oData3, cSphere3, 1.0f,false);
+			Upd(Shogi, i, oData3, false);
+			cSphere3[i].radius = 1.0f;
+			cSphere3[i].center = XMVectorSet(Shogi[i]->GetMatWorld().r[3].m128_f32[0], Shogi[i]->GetMatWorld().r[3].m128_f32[1] + oy, Shogi[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 		for (int i = 0; i < oData4.size(); i++) {
-			Upd(Kendama, i, oData4, cSphere4, 1.0f,false);
+			Upd(Kendama, i, oData4, false);
+			cSphere4[i].radius = 1.0f;
+			cSphere4[i].center = XMVectorSet(Kendama[i]->GetMatWorld().r[3].m128_f32[0], Kendama[i]->GetMatWorld().r[3].m128_f32[1] + oy, Kendama[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 		for (int i = 0; i < oData5.size(); i++) {
-			Upd(Turu, i, oData5, cSphere5, 1.0f,false);
+			Upd(Turu, i, oData5, false);
+			cSphere5[i].radius = 1.0f;
+			cSphere5[i].center = XMVectorSet(Turu[i]->GetMatWorld().r[3].m128_f32[0], Turu[i]->GetMatWorld().r[3].m128_f32[1] + oy, Turu[i]->GetMatWorld().r[3].m128_f32[2], 1);
 		}
 	}
+	DebugText::GetInstance()->Printf(250, 400, 6.0f, { 1,1,1,1 }, "%f", cSphere[44].center.m128_f32[1]);
 }
-void GameObjects::Upd(std::array<Object3d*, OBJNumber> obj, int i, std::vector<object*> oData, std::array < Sphere, OBJNumber> sphere, float radius, bool move)
+void GameObjects::Upd(std::array<Object3d*, OBJNumber> obj, int i, std::vector<object*> oData, bool move)
 {
-	sphere[i].radius = radius;
-	sphere[i].center = XMVectorSet(obj[i]->GetMatWorld().r[3].m128_f32[0], cube[i]->GetMatWorld().r[3].m128_f32[1] + y, cube[i]->GetMatWorld().r[3].m128_f32[2], 1);
 	if (move == true) {
 		if (obj[i]->GetParentFlag() == false) {
 			oData[i]->rot.m128_f32[1] += 2;

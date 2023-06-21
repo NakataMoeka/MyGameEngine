@@ -4,9 +4,7 @@
 #include"GameScene.h"
 
 void SelectScene::Initialize()
-{	//u
-
-
+{	
 	// カメラ生成
 	camera = std::unique_ptr < Camera>(new Camera(WinApp::window_width, WinApp::window_height));
 
@@ -15,11 +13,9 @@ void SelectScene::Initialize()
 
 	//ライト生成
 	lightGroup = std::unique_ptr <LightGroup>(LightGroup::Create());
-
+	// 3Dオブエクトにライトをセット
 	Object3d::SetLight(lightGroup.get());
 
-	// 3Dオブエクトにライトをセット
-	// 
 	lightGroup->SetDirLightActive(0, true);
 	lightGroup->SetDirLightActive(1, true);
 	lightGroup->SetDirLightActive(2, true);
@@ -140,17 +136,15 @@ void SelectScene::DrawFront()
 {
 	SelectUI->Draw();
 	if (SAFlag == 0) {
-		/*	if (stageNum == 2 ) {
-				DebugText::GetInstance()->Printf(250, 400, 6.0f, { 0,0,0,1 }, "MADA,ASOBENAIYO");
-			}*/
+
 		SelectNumber->Draw();
-		//DebugText::GetInstance()->Printf(600, 300, 6.0f, { 0,0,0,1 }, "%d", stageNum);
+		
 		if (stageNum == 0) {
 			TutorialS->Draw();
 		}
 	}
 
-	//DebugText::GetInstance()->Printf(0, 0, 3.0f, { 0,0,0,1 }, "%f", spriteCount);
+
 }
 
 void SelectScene::Finalize()

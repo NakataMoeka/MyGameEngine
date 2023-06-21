@@ -3,8 +3,6 @@
 #include"TitleScene.h"
 void ClearScene::Initialize()
 {
-
-
 	// ƒJƒƒ‰¶¬
 	camera = std::unique_ptr <Camera>(new Camera(WinApp::window_width, WinApp::window_height));
 

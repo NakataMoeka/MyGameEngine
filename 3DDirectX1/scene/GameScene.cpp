@@ -198,6 +198,7 @@ void GameScene::Update()
 	player->SetRadius(radius);
 	player->SetSphereSize(Ssize);
 	player->SetSY(SY);
+	gameObjects->SetY(OY);
 	if (sphereSize->GetTcount() > 0 && sphereSize->GetTcount() < 4) {
 		if (distanceNum.z < 0.5f) {
 			distanceNum.z += 0.1f;
@@ -451,10 +452,7 @@ void GameScene::ObjCollision(int i, int j)
 		if (j != 0) {
 			radius += 0.1f;
 			SY += 0.1f;
-			player->SetSY(SY);
-			player->SetRadius(radius);
 			OY += 0.1f;
-			gameObjects->SetY(OY);
 		}
 	}
 }

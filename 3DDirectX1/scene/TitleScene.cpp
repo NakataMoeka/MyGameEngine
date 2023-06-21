@@ -3,11 +3,6 @@
 #include"SelectScene.h"
 void TitleScene::Initialize()
 {
-	//u
-	assert(dxCommon);
-
-
-
 	// カメラ生成
 	camera = std::unique_ptr <Camera>(new Camera(WinApp::window_width, WinApp::window_height));
 
@@ -15,11 +10,9 @@ void TitleScene::Initialize()
 	Object3d::SetCamera(camera.get());
 	//ライト生成
 	lightGroup = std::unique_ptr <LightGroup>(LightGroup::Create());
-
+	// 3Dオブエクトにライトをセット
 	Object3d::SetLight(lightGroup.get());
 
-	// 3Dオブエクトにライトをセット
-	// 
 	lightGroup->SetDirLightActive(0, true);
 	lightGroup->SetDirLightActive(1, true);
 	lightGroup->SetDirLightActive(2, true);
