@@ -4,9 +4,6 @@
 #include"Collision.h"
 #include<DirectXMath.h>
 #include <memory>
-/// <summary>
-/// 地形オブジェクト
-/// </summary>
 class TouchableObject;
 class StageObject
 {
@@ -22,38 +19,15 @@ private:
 public:
 	StageObject();
 	~StageObject();
-	void Initialize();
-	void Init();
-	void stageInit(int stageNum);
+	void Initialize(const std::string& modelname);
+	void Init(XMFLOAT3 pos, XMFLOAT3 size, XMVECTOR rot);
 	void Update();
 	void Draw();
 	void RC();//コライダー消すやつ
 
 private:
-	void InitUpd(std::unique_ptr < TouchableObject>&obj,XMFLOAT3 position,XMFLOAT3 scale,XMVECTOR rot);
-	std::unique_ptr < TouchableObject> Kotatu = nullptr;
-	std::unique_ptr < Model> modelKotatu = nullptr;
-	std::unique_ptr < TouchableObject> TV = nullptr;
-	std::unique_ptr < Model> modelTV = nullptr;
-	std::unique_ptr < TouchableObject> Chest = nullptr;
-	std::unique_ptr < Model> modelChest = nullptr;
-	std::unique_ptr < TouchableObject> Slide = nullptr;
-	std::unique_ptr < Model> modelSlide = nullptr;
-	std::unique_ptr < TouchableObject> Swing = nullptr;
-	std::unique_ptr < Model> modelSwing = nullptr;
-	std::unique_ptr < TouchableObject> Tree = nullptr;
-	std::unique_ptr < Model> modelTree = nullptr;
-	std::unique_ptr < TouchableObject> Ground = nullptr;
-	std::unique_ptr < Model> modelGround = nullptr;
-	std::unique_ptr < TouchableObject> Home = nullptr;
-	std::unique_ptr < Model> modelHome = nullptr;
-	std::unique_ptr < TouchableObject> saku = nullptr;
-	std::unique_ptr < Model> modelSaku = nullptr;
-	std::unique_ptr < Model> modelSkydome = nullptr;
-	std::unique_ptr <Object3d> skydome = nullptr;
-	XMFLOAT3 position[2] = { {0,0,0} ,{0,0,-50} };
-	XMFLOAT3 size = { 1,1,1 };
-	XMVECTOR rota = { 0,0,0,0 };
-	int stageNum = 0;
+	std::unique_ptr < TouchableObject> obj = nullptr;
+	//std::unique_ptr <Object3d> obj = nullptr;
+	std::unique_ptr < Model> model = nullptr;
 };
 

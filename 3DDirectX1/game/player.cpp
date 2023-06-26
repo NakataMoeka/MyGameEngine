@@ -370,7 +370,7 @@ void Player::Dash()
 				dash -= 0.1f;
 			}
 	}
-	//DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%d", dashCoolTime);
+	//DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%f,%f", playerPos.x,playerPos.z);
 }
 
 

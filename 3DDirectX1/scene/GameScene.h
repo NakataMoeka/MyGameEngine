@@ -71,7 +71,8 @@ public: // メンバ関数
 
 private: // メンバ変数
 	void ObjCollision(int i, int j);
-
+	void SOInit();//ステージobjの初期化など
+	void SOCreate();//ステージobjの読み込み
 	Audio* audio = Audio::GetInstance();
 
 	SoundData sound1 = {};
@@ -91,14 +92,15 @@ private: // メンバ変数
 
 	std::unique_ptr < Player> player = nullptr;
 	std::unique_ptr < GameObjects> gameObjects = nullptr;
-	std::unique_ptr < StageObject> stageObj = nullptr;
+	std::array < std::unique_ptr < StageObject>, 9> stageObj = {};
 
 	std::unique_ptr < Timer> timer = nullptr;
 	std::unique_ptr < Pose> pose = nullptr;
 	std::unique_ptr < SphereSize> sphereSize = nullptr;
 	std::unique_ptr < Tutorial> tutorial = nullptr;
 	std::unique_ptr < start> st = nullptr;
-
+	std::unique_ptr < Model> modelSkydome = nullptr;
+	std::unique_ptr <Object3d> skydome = nullptr;
 	int HitCount = 0;
 	//サイズ関係
 	float Tsize = 1;
@@ -108,7 +110,7 @@ private: // メンバ変数
 	float radius = 3.0f;
 
 	XMFLOAT3 distance = { 0,2.0f,10.0f };//プレイヤーとカメラの距離
-	XMFLOAT3 distanceNum = {0,0,0};
+	XMFLOAT3 distanceNum = { 0,0,0 };
 	XMFLOAT3 distanceC = { 0,20.0f,20.0f };//カメラの位置
 
 	float SZV = 3;//sphereとの

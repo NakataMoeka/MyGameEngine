@@ -26,9 +26,6 @@ bool TouchableObject::Initialize(Model* model)
 	{
 		return false;
 	}
-
-
-
 	return true;
 }
 

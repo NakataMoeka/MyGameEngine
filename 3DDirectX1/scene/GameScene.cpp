@@ -75,8 +75,13 @@ void GameScene::InitTH()
 	player->Initialize();
 	gameObjects = std::unique_ptr <GameObjects>(new GameObjects());//newすればエラー吐かない
 	gameObjects->Initialize();
-	stageObj = std::unique_ptr <StageObject>(new StageObject());//newすればエラー吐かない
-	stageObj->Initialize();
+	for (int i = 0; i < 9; i++) {
+		stageObj[i] = std::unique_ptr <StageObject>(new StageObject());//newすればエラー吐かない	
+	}
+	SOCreate();
+	modelSkydome = std::unique_ptr<Model>(Model::Create("skydome", true));
+	skydome = std::unique_ptr < Object3d>(Object3d::Create(modelSkydome.get()));
+	skydome->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 	timer = std::unique_ptr <Timer>(new Timer());
 	timer->Initialize();
 	tutorial = std::unique_ptr <Tutorial>(new Tutorial());
@@ -94,12 +99,16 @@ void GameScene::Init()
 	//別クラスの初期化
 	player->Init();
 	gameObjects->Init();
-	stageObj->Init();
 	colMan->Init();
 	timer->Init();
 	pose->Init();
 	tutorial->Init();
 	st->Init();
+	SOInit();
+	skydome->SetPosition({ 0.0f,100.0f,0.0f });
+	skydome->SetScale({ 4.0f,4.0f,4.0f });
+	skydome->SetColor({ 1,1,1,1 });
+	skydome->Update();
 	//GameSceneの初期化
 	distance = { 0,2.0f,10.0f };
 	distanceC = { 0, 4.0f, -10.0f };
@@ -133,7 +142,6 @@ void GameScene::InitStageNum(int stageNum)
 	this->stageNum = stageNum;
 	player->stageInit(stageNum);
 	gameObjects->stageInit(stageNum);
-	stageObj->stageInit(stageNum);
 	sphereSize->Init(stageNum);
 	if (stageNum == 0) {
 		sphereSize->InitStage(0);
@@ -245,7 +253,9 @@ void GameScene::Update()
 						audio->StopWave();
 						gameObjects->RC();
 						player->RC();
-						stageObj->RC();
+						for (int i = 0; i < 9; i++) {
+							stageObj[i]->RC();
+						}
 					}
 					//目標サイズ以上ゲームクリア
 					else if (sphereSize->GetTsize() >= GoalCount) {
@@ -257,7 +267,10 @@ void GameScene::Update()
 						audio->StopWave();
 						gameObjects->RC();
 						player->RC();
-						stageObj->RC();
+						for (int i = 0; i < 9; i++) {
+							stageObj[i]->RC();
+						}
+
 					}
 				}
 				player->SetWalkFlag(true);
@@ -271,9 +284,12 @@ void GameScene::Update()
 		}
 		//プレイヤー、ステージ、オブジェクト、タイマーのアップデート
 		player->Update();
-		stageObj->Update();
+		for (int i = 0; i < 9; i++) {
+			stageObj[i]->Update();
+		}
 		gameObjects->Update();
 		timer->Update();
+		skydome->Update();
 		//particleMan->Update();
 	}
 
@@ -294,7 +310,10 @@ void GameScene::Update()
 		//コライダーを削除
 		gameObjects->RC();
 		player->RC();
-		stageObj->RC();
+		for (int i = 0; i < 9; i++) {
+			stageObj[i]->RC();
+		}
+
 	}
 	sphereSize->Update();
 
@@ -303,7 +322,7 @@ void GameScene::Update()
 #pragma region チュートリアル
 	//チュートリアルの時
 	if (stageNum == 0) {
-	
+
 		tutorial->SetWalkCount(player->GetTWCount());
 		if (tutorial->GetColFlag() == true) {
 			//くっつけるようになる
@@ -322,7 +341,9 @@ void GameScene::Update()
 			audio->StopWave();
 			gameObjects->RC();
 			player->RC();
-			stageObj->RC();
+			for (int i = 0; i < 9; i++) {
+				stageObj[i]->RC();
+			}
 		}
 		//MoveFlag(動けるか否か)がtrueならば
 		if (tutorial->GetMoveFlag() == true) {
@@ -367,7 +388,18 @@ void GameScene::Draw()
 {
 	player->Draw();
 	gameObjects->Draw();
-	stageObj->Draw();
+	stageObj[0]->Draw();
+	if (stageNum == 1) {
+		for (int i = 1; i < 6; i++) {
+			stageObj[i]->Draw();
+		}
+	}
+	else if (stageNum == 2) {
+		for (int i = 6; i < 9; i++) {
+			stageObj[i]->Draw();
+		}
+	}
+	skydome->Draw();sss
 }
 void GameScene::DrawFront()
 {
@@ -455,6 +487,37 @@ void GameScene::ObjCollision(int i, int j)
 			OY += 0.1f;
 		}
 	}
+}
+
+void GameScene::SOInit()
+{
+	stageObj[0]->Init({ 0,0,0 }, { 6,6,6 }, { 0,0,0,0 });
+
+	if (stageNum == 1) {
+		stageObj[1]->Init({ 0,38,-80 }, { 1,1,1 }, { 0,0,0,0 });
+		stageObj[2]->Init({ -20,28,-170 }, { 2,2,2 }, { 0,90,0,0 });
+		stageObj[3]->Init({ 20,46,126 }, { 4,4,4 }, { 0,90,0,0 });
+		stageObj[4]->Init({ 0,0,0 }, { 1,1,1 }, { 0,0,0,0 });
+		stageObj[5]->Init({ -190,58,-47.5f }, { 2,2,2 }, { 0,0,0,0 });
+	}
+	else if (stageNum == 2) {
+		stageObj[6]->Init({ 0,0,0 }, { 5,5,5 }, { 0,0,0,0 });
+		stageObj[7]->Init({ -30,0,0 }, { 1,1,1 }, { 0,0,0,0 });
+		stageObj[8]->Init({ -30,0,0 }, { 1,1,1 }, { 0,0,0,0 });
+	}
+}
+
+void GameScene::SOCreate()
+{
+	stageObj[0]->Initialize("road");
+	stageObj[1]->Initialize("Kota");
+	stageObj[2]->Initialize("TV");
+	stageObj[3]->Initialize("Chest");
+	stageObj[4]->Initialize("home");
+	stageObj[5]->Initialize("saku");
+	stageObj[6]->Initialize("swing");
+	stageObj[7]->Initialize("slide");
+	stageObj[8]->Initialize("tree");
 }
 
 
