@@ -24,10 +24,8 @@ public:
 	void Update();
 	void Draw();
 	void RC();//コライダー消すやつ
-
 private:
 	std::unique_ptr < TouchableObject> obj = nullptr;
-	//std::unique_ptr <Object3d> obj = nullptr;
 	std::unique_ptr < Model> model = nullptr;
 };
 

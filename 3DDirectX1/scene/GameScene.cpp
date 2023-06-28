@@ -399,7 +399,7 @@ void GameScene::Draw()
 			stageObj[i]->Draw();
 		}
 	}
-	skydome->Draw();sss
+	skydome->Draw();
 }
 void GameScene::DrawFront()
 {

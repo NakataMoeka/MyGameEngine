@@ -14,7 +14,6 @@ void StageObject::Initialize(const std::string& modelname)
 
 	model = std::unique_ptr<Model>(Model::Create(modelname, false));
 	obj = std::unique_ptr < TouchableObject>(TouchableObject::Create(model.get()));
-	//obj = std::unique_ptr < Object3d>(Object3d::Create(model.get()));
 	obj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 
 }
