@@ -82,7 +82,7 @@ private://•Ï”
 	std::array < Object3d*, OBJNumber> Card = {};
 	//std::array < Object3d*, OBJNumber2> Pencil = {};
 
-	std::array < Object3d*, OBJNumber> Kendama = {};
+	std::array < Object3d*, OBJNumber> Kendama = {};  
 	std::array < Object3d*, OBJNumber> Koma = {};
 	std::array < Object3d*, OBJNumber> Shogi = {};
 	std::array < Object3d*, OBJNumber> Turu = {};

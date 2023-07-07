@@ -28,7 +28,7 @@ void Player::Initialize()
 	SphereObj = std::unique_ptr<Object3d>(Object3d::Create(model2.get()));
 	//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる//Createの後に書かないとclient.hのInternalRelease()でエラーが起こる
 	SphereObj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-	
+
 	Sprite::LoadTexture(2, L"Resources/dash.png");
 
 	dashSprite = std::unique_ptr<Sprite>(Sprite::CreateSprite(2, { 0,0 }));
@@ -111,43 +111,43 @@ void Player::Move()
 		sphereAngle.m128_f32[1] -= moveAngle.m128_f32[1];
 		playerAngle.y -= moveAngle.m128_f32[1];
 	}
+	//DebugText::GetInstance()->Printf(100, 40, 3.0f, { 0,0,0,1 }, "%f,%f", speedUD, speedLR);
 	if (dashFlag == false) {
 		//移動
 		playerPos = vec(playerPos, moveUD);
 		playerPos = vec(playerPos, moveLR);
+		sphereAngle.m128_f32[0] += speedUD * 10.0f;
+		sphereAngle.m128_f32[2] += speedLR * 10.0f;
 		if (Input::GetInstance()->PushKey(DIK_W))
 		{
 			//前後のスピードが0.2fになるまで0.005f加算
 			if (speedUD < 0.2f) {
 				speedUD += 0.005f;
 			}
-			sphereAngle.m128_f32[0] += 10;
 		}
-		else if (Input::GetInstance()->PushKey(DIK_S))
+		if (Input::GetInstance()->PushKey(DIK_S))
 		{
 			//前後のスピードが-0.2fになるまで0.005f除算
 			if (speedUD > -0.2f) {
 				speedUD -= 0.005f;
 			}
-			sphereAngle.m128_f32[0] -= 10;
 		}
-		else if (Input::GetInstance()->PushKey(DIK_D))
+		if (Input::GetInstance()->PushKey(DIK_D))
 		{
 			//左右のスピードが0.2fになるまで0.005f加算
 			if (speedLR < 0.2f) {
 				speedLR += 0.005f;
 			}
-			sphereAngle.m128_f32[2] += moveAngleZ.m128_f32[2];
 		}
-		else if (Input::GetInstance()->PushKey(DIK_A))
+		if (Input::GetInstance()->PushKey(DIK_A))
 		{
 			//左右のスピードが-0.2fになるまで0.005f除算
 			if (speedLR > -0.2f) {
 				speedLR -= 0.005f;
 			}
-			sphereAngle.m128_f32[2] -= moveAngleZ.m128_f32[2];
 		}
 	}
+
 	//WASD押しているとき
 	if (Input::GetInstance()->PushKey(DIK_W) ||
 		Input::GetInstance()->PushKey(DIK_S) ||
@@ -170,19 +170,19 @@ void Player::Move()
 		}
 		//0目指して徐々にスピード落とす
 		if (speedUD > 0) {
-			speedUD -= 0.01f;
+			speedUD -= 0.005f;
 		}
 		else if (speedUD < 0) {
-			speedUD += 0.01f;
+			speedUD += 0.005f;
 		}
 		else {
 			speedUD = 0.0f;
 		}
 		if (speedLR > 0) {
-			speedLR -= 0.01f;
+			speedLR -= 0.005f;
 		}
 		else if (speedLR < 0) {
-			speedLR += 0.01f;
+			speedLR += 0.005f;
 		}
 		else {
 			speedLR = 0.0f;
@@ -341,7 +341,7 @@ void Player::terrainCol()
 void Player::Dash()
 {
 	//ダッシュにも慣性を付ける
-	if (dash<=0) {
+	if (dash <= 0) {
 		dashCoolTime--;
 		if (dashCoolTime <= 0)
 		{
@@ -351,24 +351,24 @@ void Player::Dash()
 	}
 	//ジャンプしていないときにダッシュできる
 	if (JumpFlag == false) {
-		if (Input::GetInstance()->TriggerKey(DIK_UPARROW) /*&& Input::GetInstance()->PushKey(DIK_W)*/ && dashFlag == false)
+		if (Input::GetInstance()->TriggerKey(DIK_UPARROW) && Input::GetInstance()->PushKey(DIK_W) && dashFlag == false)
 		{
 			fade = 1;
 			dash = 1.5f;
 			dashCoolTime = dashCoolTimeMax;
 			dashFlag = true;
 		}
-			XMVECTOR movedash = { 0,0,dash,0 };//ダッシュ用の移動ベクトル
-			XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
-			movedash = XMVector3TransformNormal(movedash, matRot);
-			playerPos = vec(playerPos, movedash);
-			spherePos = vec(spherePos, movedash);
-			if (fade > 0) {
-				fade -= 0.05f;
-			}
-			if (dash > 0) {
-				dash -= 0.1f;
-			}
+		XMVECTOR movedash = { 0,0,dash,0 };//ダッシュ用の移動ベクトル
+		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
+		movedash = XMVector3TransformNormal(movedash, matRot);
+		playerPos = vec(playerPos, movedash);
+		spherePos = vec(spherePos, movedash);
+		if (fade > 0) {
+			fade -= 0.05f;
+		}
+		if (dash > 0) {
+			dash -= 0.1f;
+		}
 	}
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%f,%f", playerPos.x,playerPos.z);
 }

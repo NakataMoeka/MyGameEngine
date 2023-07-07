@@ -11,11 +11,9 @@ StageObject::~StageObject()
 
 void StageObject::Initialize(const std::string& modelname)
 {
-
 	model = std::unique_ptr<Model>(Model::Create(modelname, false));
 	obj = std::unique_ptr < TouchableObject>(TouchableObject::Create(model.get()));
 	obj->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-
 }
 
 void StageObject::Init(XMFLOAT3 pos, XMFLOAT3 size, XMVECTOR rot)
@@ -28,7 +26,6 @@ void StageObject::Init(XMFLOAT3 pos, XMFLOAT3 size, XMVECTOR rot)
 	obj->SetTouchCollider();
 	obj->Update();
 }
-
 
 void StageObject::Update()
 {
