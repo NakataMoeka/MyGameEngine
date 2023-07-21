@@ -317,7 +317,6 @@ void Object3d::Update()
 	constMap->color = color;
 	constBuffB0->Unmap(0, nullptr);
 
-
 	// 当たり判定更新
 	if (collider) {
 		collider->Update();
@@ -334,7 +333,6 @@ void Object3d::Draw()
 	if (model == nullptr) {
 		return;
 	}
-
 
 	// パイプラインステートの設定
 	cmdList->SetPipelineState(pipelineSet.pipelinestate.Get());
@@ -379,6 +377,7 @@ XMFLOAT3 Object3d::GetWorldPosition()
 
 void Object3d::transformParent()
 {
+	//くっつく処理
 	XMVECTOR scaleV, rotationV, positionV;
 
 	//親を逆行列にする

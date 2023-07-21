@@ -22,12 +22,14 @@ void SphereSize::Initialize()
 void SphereSize::Init(int stageNum)
 {
 	this->stageNum = stageNum;
-	//if (stageNum == 1||stageNum==0) {
+	if (stageNum == 1||stageNum==0) {
+		//チュートリアルとステージ1では最初のサイズが1
 		Tsize = 1;
-//	}
-	//else if (stageNum == 2) {
+	}
+	else if (stageNum == 2) {
+		//ステージ2では最初のサイズは10
 		Tsize = 10;
-	//}
+	}
 	TCount = 0;
 	tSC = 0;
 	tC = 0;
@@ -38,11 +40,11 @@ void SphereSize::Init(int stageNum)
 
 void SphereSize::InitStage(int maxNum)
 {
-	tSC = maxNum % 10;
-	tC = (maxNum / 10) % 10;
-	tSM = (maxNum / 100) % 10;
-	tM = (maxNum / 1000) % 10;
-	tMM = (maxNum / 10000) % 10;
+	tSC = maxNum % 10;//cm一の位
+	tC = (maxNum / 10) % 10;//cm十の位
+	tSM = (maxNum / 100) % 10;//m一の位
+	tM = (maxNum / 1000) % 10;//m十の位
+	tMM = (maxNum / 10000) % 10;//m百の位
 	Number[5]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,48 });
 	Number[6]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,48 });
 	Number[7]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,48 });
@@ -83,12 +85,12 @@ void SphereSize::Update()
 	Centimeter[0]->SetSize({ 32,32 });
 	Centimeter[1]->SetSize({ 18,18 });
 
-	tSC = Tsize % 10;
-	tC = (Tsize / 10) % 10;
-	tSM = (Tsize / 100) % 10;
-	tM = (Tsize / 1000) % 10;
-	tMM = (Tsize / 10000) % 10;
-
+	tSC = Tsize % 10;//cm一の位
+	tC = (Tsize / 10) % 10;//cm十の位
+	tSM = (Tsize / 100) % 10;//m一の位
+	tM = (Tsize / 1000) % 10;//m十の位
+	tMM = (Tsize / 10000) % 10;//m百の位
+	//位置などの設定
 	Number[0]->SetTextureRect({ 0 + 32 * (float)tSC,0 }, { 32,48 });
 	Number[1]->SetTextureRect({ 0 + 32 * (float)tC,0 }, { 32,48 });
 	Number[2]->SetTextureRect({ 0 + 32 * (float)tSM,0 }, { 32,48 });

@@ -85,10 +85,8 @@ private://変数
 	float r = 2;
 	float radius = 3.0f;
 	//移動
-	float speedUD = 0;
-	float speedLR = 0;
-	bool moveUDFlag = false;
-	bool moveLRFlag = false;
+	float speedUD = 0;//前後移動スピード
+	float speedLR = 0;//左右移動スピード
 	float sphereZV = 0;//球との距離z軸
 	float sphereY = 0;//球y軸高さ
 	//ダッシュ関連の変数

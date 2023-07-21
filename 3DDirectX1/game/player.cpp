@@ -49,8 +49,6 @@ void Player::Init()
 	sphereY = -3;
 	walkFlag = true;
 	TWCount = 0;
-	moveUDFlag = false;
-	moveLRFlag = false;
 	JumpFlag = false;
 	onGround = true;
 	spherePos = { 0,0,-40 };
@@ -207,8 +205,7 @@ XMFLOAT3 Player::vec(XMFLOAT3 pos, XMVECTOR vec)
 
 void Player::Ball()
 {
-	//ボールの追従
-#pragma region カメラ追従とほぼ同じ
+#pragma region ボールの追従
 	XMVECTOR v0 = { 0,0,sphereZV,0 };
 	//angleラジアンだけy軸まわりに回転。半径は-100
 	XMMATRIX rotM = XMMatrixIdentity();
@@ -222,6 +219,8 @@ void Player::Ball()
 	spherePos.x = f.x;
 	spherePos.z = f.z;
 
+#pragma endregion
+#pragma region 回転処理
 #pragma endregion
 }
 

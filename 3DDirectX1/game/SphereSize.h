@@ -10,6 +10,10 @@ class SphereSize
 public:
 	void Initialize();//1回のみの初期化
 	void Init(int stageNum);//シーン開始時にする初期化
+	/// <summary>
+	/// 目標サイズ設定
+	/// </summary>
+	/// <param name="maxNum">目標サイズ</param>
 	void InitStage(int maxNum);
 	void Update();
 	void Draw();

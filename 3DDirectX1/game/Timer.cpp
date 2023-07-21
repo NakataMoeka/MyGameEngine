@@ -18,7 +18,6 @@ void Timer::Initialize()
 void Timer::Init()
 {
 	TimeRot = 0;
-	TimeCount = 0;
 	start = (double)time(NULL);
 	start = clock() / CLOCKS_PER_SEC;
 	total = 0.0;
@@ -36,9 +35,11 @@ void Timer::Update()
 {
 	if (startFlag == true) {
 		if (poseFlag == true) {
+			//ポーズ中はタイマー動かない
 			start = clock() / CLOCKS_PER_SEC;
 		}
 		if (poseFlag == false) {
+			//ポーズ画面じゃないときタイマーの処理をする
 			if (dt > 60) {
 				TR = (float)dt;
 			}

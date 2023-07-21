@@ -34,8 +34,9 @@ void start::Init()
 }
 
 void start::Update()
-{
+{	
 	if (GoFlag == false) {
+		//目標発表
 		if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
 			if (MCount < 2) {
 				MCount++;
@@ -48,6 +49,7 @@ void start::Update()
 		}
 	}
 	else if (GoFlag == true) {
+		//開始カウントダウンの処理
 		if (dt > 0) {
 			end = clock() / CLOCKS_PER_SEC;
 			total = end - start;

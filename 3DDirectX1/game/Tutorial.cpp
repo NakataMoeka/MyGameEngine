@@ -32,6 +32,7 @@ void Tutorial::Init()
 void Tutorial::Update()
 {
 	if (countFlag == false) {
+		//à–¾•¶‚ði‚ß‚é
 		if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
 			if (TutorialCount < 6) {
 				TutorialCount++;
@@ -51,6 +52,7 @@ void Tutorial::Update()
 		countFlag = true;
 	}
 	else if (TutorialCount==3) {
+		//“–‚½‚è”»’è‚ªon‚É‚È‚é
 		colFlag = true;
 		countFlag = true;
 	}
@@ -58,9 +60,11 @@ void Tutorial::Update()
 		countFlag = false;
 	}
 	if (TutorialCount == 1 || TutorialCount >= 3) {
+		//“®‚¯‚é
 		moveFlag = true;
 	}
 	else {
+		//“®‚¯‚È‚¢
 		moveFlag = false;
 	}
 }

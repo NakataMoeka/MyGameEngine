@@ -63,6 +63,7 @@ void TestObject::stageInit(int stageNum, float y2, float type)
 	srand((unsigned)time(NULL));
 	randRot = 0;
 	this->stageNum = stageNum;
+
 	if (stageNum == 0) {
 		LoadCSV(spawnMap, (char*)"Resources/objMap2.csv");
 	}

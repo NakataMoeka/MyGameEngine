@@ -21,9 +21,8 @@ private:
 	std::unique_ptr<Sprite> timeSprite2 = nullptr;//バー
 	std::array<std::unique_ptr<Sprite>,2> TimeNum = {};
 	//タイマー系
-	float TimeRot = 0;
-	int TimeCount = 0;
-	float TR;
+	float TimeRot = 0;//角度
+	float TR;//角度
 	double start;
 	double end;
 	double dt;

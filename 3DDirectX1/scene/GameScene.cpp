@@ -73,8 +73,8 @@ void GameScene::InitTH()
 	sound4 = Audio::SoundLoadWave("Resources/Music/BGM/追いかけっこキャッハー.wav");
 	player = std::unique_ptr <Player>(new Player());//newすればエラー吐かない
 	player->Initialize();
-	gameObjects = std::unique_ptr <GameObjects>(new GameObjects());//newすればエラー吐かない
-	gameObjects->Initialize();
+	//gameObjects = std::unique_ptr <GameObjects>(new GameObjects());//newすればエラー吐かない
+	//gameObjects->Initialize();
 	for (int i = 0; i < 9; i++) {
 		stageObj[i] = std::unique_ptr <StageObject>(new StageObject());//newすればエラー吐かない	
 	}
@@ -98,7 +98,7 @@ void GameScene::Init()
 {
 	//別クラスの初期化
 	player->Init();
-	gameObjects->Init();
+	//gameObjects->Init();
 	colMan->Init();
 	timer->Init();
 	pose->Init();
@@ -141,7 +141,7 @@ void GameScene::InitStageNum(int stageNum)
 {
 	this->stageNum = stageNum;
 	player->stageInit(stageNum);
-	gameObjects->stageInit(stageNum);
+	//gameObjects->stageInit(stageNum);
 	sphereSize->Init(stageNum);
 	if (stageNum == 0) {
 		sphereSize->InitStage(0);
@@ -170,13 +170,13 @@ void GameScene::Update()
 #pragma region	当たり判定
 	//チュートリアルで動いてみてよの後ならくっつく
 	//深いネストの改善
-	if (tutorial->GetTCount() != 1) {
+	/*if (tutorial->GetTCount() != 1) {
 		for (int j = 0; j < 5; j++) {
 			for (int i = 0; i < gameObjects->GetOBJCount(j); i++) {
 				ObjCollision(i, j);
 			}
 		}
-	}
+	}*/
 	//colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		//音を鳴らしたりなど
@@ -206,8 +206,9 @@ void GameScene::Update()
 	player->SetRadius(radius);
 	player->SetSphereSize(Ssize);
 	player->SetSY(SY);
-	gameObjects->SetY(OY);
+	//gameObjects->SetY(OY);
 	if (sphereSize->GetTcount() > 0 && sphereSize->GetTcount() < 4) {
+		//くっつくオブジェクトが増えたらカメラの距離を変える
 		if (distanceNum.z < 0.5f) {
 			distanceNum.z += 0.1f;
 		}
@@ -229,6 +230,7 @@ void GameScene::Update()
 	pose->Update();
 
 	player->SetPFlag(pose->GetJFlag());
+	//----------要改善----------
 	//ポーズ状態じゃなかったら
 	if (pose->GetPFlag() == false) {
 		//チュートリアル以外
@@ -251,7 +253,7 @@ void GameScene::Update()
 						//sceneManager_->SetNum(0);
 						//sceneManager_->SetNextScene(scene);
 						audio->StopWave();
-						gameObjects->RC();
+						//gameObjects->RC();
 						player->RC();
 						for (int i = 0; i < 9; i++) {
 							stageObj[i]->RC();
@@ -265,7 +267,7 @@ void GameScene::Update()
 						endFlag = true;
 						endNum = 1;
 						audio->StopWave();
-						gameObjects->RC();
+						//gameObjects->RC();
 						player->RC();
 						for (int i = 0; i < 9; i++) {
 							stageObj[i]->RC();
@@ -287,7 +289,7 @@ void GameScene::Update()
 		for (int i = 0; i < 9; i++) {
 			stageObj[i]->Update();
 		}
-		gameObjects->Update();
+		//gameObjects->Update();
 		timer->Update();
 		skydome->Update();
 		//particleMan->Update();
@@ -308,7 +310,7 @@ void GameScene::Update()
 		//sceneManager_->SetNextScene(scene);
 		//audio->StopWave();
 		//コライダーを削除
-		gameObjects->RC();
+		//gameObjects->RC();
 		player->RC();
 		for (int i = 0; i < 9; i++) {
 			stageObj[i]->RC();
@@ -322,24 +324,25 @@ void GameScene::Update()
 #pragma region チュートリアル
 	//チュートリアルの時
 	if (stageNum == 0) {
-
+		//歩いた距離をplayerクラスからチュートリアルに送る
 		tutorial->SetWalkCount(player->GetTWCount());
 		if (tutorial->GetColFlag() == true) {
 			//くっつけるようになる
-			if (gameObjects->GetObject3d(0, 0)->GetParentFlag() == true) {
-				//4にする
+			//if (gameObjects->GetObject3d(0, 0)->GetParentFlag() == true) {
+				//テキスト画像をを4番目にする
 				tutorial->SetTCount(4);
 				tutorial->SetColFlag(false);
-			}
+			//}
 		}
 		//チュートリアルが終わったら
 		if (tutorial->GetEndFlag() == true) {
 			//コライダー削除する
+			//セレクトシーンに戻る
 			TSFlag = true;
 			//BaseScene* scene = new SelectScene();
 			//sceneManager_->SetNextScene(scene);
 			audio->StopWave();
-			gameObjects->RC();
+			//gameObjects->RC();
 			player->RC();
 			for (int i = 0; i < 9; i++) {
 				stageObj[i]->RC();
@@ -363,7 +366,7 @@ void GameScene::Update()
 	//追従カメラ
 	camera->FollowCamera({ player->GetPlayerPos().x,player->GetPlayerPos().y + distance.y,player->GetPlayerPos().z }
 	, XMFLOAT3{ distanceC.x,distanceC.y,-distanceC.z }, 0, player->GetPlayerAngle().y);
-	//カメラのめり込み(一部うまくいかない部分あり)
+	//カメラのめり込み対策(一部うまくいかない部分あり)
 	camera->CameraCollision(player->GetPlayerPos(), player->GetPlayerAngle());
 	if (camera->GetCCFlag() == true) {
 		//if (camera->GetDistance() <=8) {
@@ -386,8 +389,9 @@ void GameScene::DrawBG()
 }
 void GameScene::Draw()
 {
+	//オブジェクトの描画
 	player->Draw();
-	gameObjects->Draw();
+	//gameObjects->Draw();
 	stageObj[0]->Draw();
 	if (stageNum == 1) {
 		for (int i = 1; i < 6; i++) {
@@ -466,22 +470,30 @@ void GameScene::ObjCollision(int i, int j)
 			gameObjects->GetOSize(i, j) == 1 ||
 			gameObjects->GetOSize(i, j) == 10)) {
 		gameObjects->GetObject3d(i, j)->SetColFlag(true);
+		//当たり判定
 		if (Collision::CheckSphere2Sphere(player->GetSphere(), gameObjects->GetCSphere(i, j))) {
+			//HITフラグtrueにする
 			gameObjects->SetHIT(i, j, true);
 			HitCount++;
 			gameObjects->GetObject3d(i, j)->SetParentFlag(true);
 		}
 	}
 	if (gameObjects->GetHIT(i, j) == true) {
+		//当たったら親子関係結ぶ
 		gameObjects->GetObject3d(i, j)->SetParent(player->GetObject3d().get());
 	}
 	if (HitCount == 1) {
+		//当たった時一瞬する処理
 		gameObjects->GetObject3d(i, j)->transformParent();
+		//くっついた時のぽこって音
 		audio->SEPlayWave(sound1);
 		HitCount = 0;
+		//HITフラグfalseにする
 		gameObjects->SetHIT(i, j, false);
+		//オブジェクトのサイズを球のサイズに加算
 		Tsize += gameObjects->GetOSize(i, j);
 		if (j != 0) {
+			//0のオブジェクト以外がくっついたときに半径など少し大きくする
 			radius += 0.1f;
 			SY += 0.1f;
 			OY += 0.1f;
@@ -491,8 +503,8 @@ void GameScene::ObjCollision(int i, int j)
 
 void GameScene::SOInit()
 {
+	//ステージにある飾りオブジェクト等の位置設定
 	stageObj[0]->Init({ 0,0,0 }, { 6,6,6 }, { 0,0,0,0 });
-
 	if (stageNum == 1) {
 		stageObj[1]->Init({ 0,38,-80 }, { 1,1,1 }, { 0,0,0,0 });
 		stageObj[2]->Init({ -20,28,-170 }, { 2,2,2 }, { 0,90,0,0 });
@@ -509,14 +521,15 @@ void GameScene::SOInit()
 
 void GameScene::SOCreate()
 {
+	//ステージにある飾りオブジェクト等の初期化
 	stageObj[0]->Initialize("road");
 	stageObj[1]->Initialize("Kota");
 	stageObj[2]->Initialize("TV");
 	stageObj[3]->Initialize("Chest");
 	stageObj[4]->Initialize("home");
 	stageObj[5]->Initialize("saku");
-	stageObj[6]->Initialize("swing");
-	stageObj[7]->Initialize("slide");
+	stageObj[6]->Initialize("slide");
+	stageObj[7]->Initialize("swing");
 	stageObj[8]->Initialize("tree");
 }
 

@@ -100,6 +100,7 @@ void GameObjects::Init()
 	size[0] = { 1.0f,1.0f,1.0f };
 	size[1] = { 5,5,5 };
 	oy = 0;
+	//初期位置など設定
 	for (int i = 0; i < oData.size(); i++) {
 
 		float radius = 1.0f;
@@ -212,6 +213,7 @@ void GameObjects::stageInit(int stageNum)
 	srand((unsigned)time(NULL));
 	randRot = 0;
 	this->stageNum = stageNum;
+	//csvファイル読み込み
 	if (stageNum == 0) {
 		LoadCSV(spawnMap, (char*)"Resources/objMap2.csv");
 	}
@@ -395,13 +397,15 @@ void GameObjects::Update()
 }
 void GameObjects::Upd(std::array<Object3d*, OBJNumber> obj, int i, std::vector<object*> oData, bool move)
 {
+	//moveがtrueでくっついてない時y軸回転する。
 	if (move == true) {
 		if (obj[i]->GetParentFlag() == false) {
 			oData[i]->rot.m128_f32[1] += 2;
 		}
 	}
 	if (obj[i]->GetColFlag() == true) {
-		obj[i]->GetCollider()->SetAttribute(COLLISION_ATTR_POBJECT);
+		//当たったらコライダーの削除
+		obj[i]->RemoveCollider();
 	}
 	obj[i]->SetRotation(oData[i]->rot);
 	obj[i]->Quaternion();
@@ -409,6 +413,7 @@ void GameObjects::Upd(std::array<Object3d*, OBJNumber> obj, int i, std::vector<o
 }
 void GameObjects::RC()
 {
+	//コライダーの削除
 	for (int i = (int)oData.size() - 1; i >= 0; i--)
 	{
 		RCC(cube, i);

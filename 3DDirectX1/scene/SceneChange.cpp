@@ -27,6 +27,7 @@ void SceneChange::Update()
 		}
 	}
 	if (fadeOut == true) {
+		//フェードが0になるまで0.1ずつ減算
 		if (fade >= 0) {
 			fade -= 0.1f;
 		}

@@ -29,6 +29,7 @@ void Pose::Init()
 void Pose::Update()
 {
 	if (PoseFlag == false) {
+		//Rを押すとpose画面に行く
 		if (Input::GetInstance()->TriggerKey(DIK_R)) {
 			PoseFlag = true;
 			audio->SEPlayWave(sound1);
@@ -36,7 +37,7 @@ void Pose::Update()
 		jFlag = false;
 	}
 	else if (PoseFlag == true) {
-
+		//ゲームに戻るかタイトルに戻るか
 		if (Input::GetInstance()->TriggerKey(DIK_DOWNARROW)) {
 			PS = 1;
 			audio->SEPlayWave(sound2);
@@ -46,6 +47,7 @@ void Pose::Update()
 			audio->SEPlayWave(sound2);
 		}
 		if (PS == 0) {
+			//ゲームに戻る
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 				PoseFlag = false;
 				jFlag = true;
@@ -57,6 +59,7 @@ void Pose::Update()
 			TitleBackSprite->SetPosition({ 490,600 });
 		}
 		else if (PS == 1) {
+			//タイトルに戻る
 			if (TitleFlag == false) {
 				if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 					TitleFlag = true;
