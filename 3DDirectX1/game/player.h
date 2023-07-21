@@ -60,6 +60,7 @@ public:
 private://Update()にまとめるもの
 	void Move();//移動
 	XMFLOAT3 vec(XMFLOAT3 pos, XMVECTOR vec);
+	XMVECTOR vecTrans(XMVECTOR vec, float rot, float speed,float xyz);
 	void Ball();//ボール関係
 	void Jump();//ジャンプ
 	void terrainCol();//地形との判定
@@ -85,6 +86,9 @@ private://変数
 	float r = 2;
 	float radius = 3.0f;
 	//移動
+	XMVECTOR moveUD = { 0,0,0,0 };//前後移動用ベクトル
+	XMVECTOR moveLR = { 0,0,0,0 };//左右移動用ベクトル
+	XMVECTOR moveAngle = { 0,0,0,0 };//角度ベクトル
 	float speedUD = 0;//前後移動スピード
 	float speedLR = 0;//左右移動スピード
 	float sphereZV = 0;//球との距離z軸
@@ -92,8 +96,8 @@ private://変数
 	//ダッシュ関連の変数
 	bool dashFlag = false;
 	float dash = 1.5f;
-	int dashCoolTime = 0;
-	const int dashCoolTimeMax = 20;
+	int dashCoolTime = 0;//クールタイム
+	const int dashCoolTimeMax = 20;//クールタイム最大値
 	float fade = 1;
 	//ジャンプ＆地面との当たり判定系
 	bool JumpFlag = false;
@@ -104,5 +108,5 @@ private://変数
 	//チュートリアル関連
 	bool walkFlag = true;//チュートリアル用の歩けるか判定フラグ
 	int TWCount = 0;//チュートリアルの移動カウント
-	int stageNum = 0;
+	int stageNum = 0;//ステージ数
 };

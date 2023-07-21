@@ -73,8 +73,8 @@ void GameScene::InitTH()
 	sound4 = Audio::SoundLoadWave("Resources/Music/BGM/追いかけっこキャッハー.wav");
 	player = std::unique_ptr <Player>(new Player());//newすればエラー吐かない
 	player->Initialize();
-	//gameObjects = std::unique_ptr <GameObjects>(new GameObjects());//newすればエラー吐かない
-	//gameObjects->Initialize();
+	gameObjects = std::unique_ptr <GameObjects>(new GameObjects());//newすればエラー吐かない
+	gameObjects->Initialize();
 	for (int i = 0; i < 9; i++) {
 		stageObj[i] = std::unique_ptr <StageObject>(new StageObject());//newすればエラー吐かない	
 	}
@@ -98,7 +98,7 @@ void GameScene::Init()
 {
 	//別クラスの初期化
 	player->Init();
-	//gameObjects->Init();
+	gameObjects->Init();
 	colMan->Init();
 	timer->Init();
 	pose->Init();
@@ -141,7 +141,7 @@ void GameScene::InitStageNum(int stageNum)
 {
 	this->stageNum = stageNum;
 	player->stageInit(stageNum);
-	//gameObjects->stageInit(stageNum);
+	gameObjects->stageInit(stageNum);
 	sphereSize->Init(stageNum);
 	if (stageNum == 0) {
 		sphereSize->InitStage(0);
@@ -170,13 +170,13 @@ void GameScene::Update()
 #pragma region	当たり判定
 	//チュートリアルで動いてみてよの後ならくっつく
 	//深いネストの改善
-	/*if (tutorial->GetTCount() != 1) {
+	if (tutorial->GetTCount() != 1) {
 		for (int j = 0; j < 5; j++) {
 			for (int i = 0; i < gameObjects->GetOBJCount(j); i++) {
 				ObjCollision(i, j);
 			}
 		}
-	}*/
+	}
 	//colMan->ColSphere();
 	if (colMan->GetAudioFlag() == true) {
 		//音を鳴らしたりなど
@@ -206,7 +206,7 @@ void GameScene::Update()
 	player->SetRadius(radius);
 	player->SetSphereSize(Ssize);
 	player->SetSY(SY);
-	//gameObjects->SetY(OY);
+	gameObjects->SetY(OY);
 	if (sphereSize->GetTcount() > 0 && sphereSize->GetTcount() < 4) {
 		//くっつくオブジェクトが増えたらカメラの距離を変える
 		if (distanceNum.z < 0.5f) {
@@ -253,7 +253,7 @@ void GameScene::Update()
 						//sceneManager_->SetNum(0);
 						//sceneManager_->SetNextScene(scene);
 						audio->StopWave();
-						//gameObjects->RC();
+						gameObjects->RC();
 						player->RC();
 						for (int i = 0; i < 9; i++) {
 							stageObj[i]->RC();
@@ -267,7 +267,7 @@ void GameScene::Update()
 						endFlag = true;
 						endNum = 1;
 						audio->StopWave();
-						//gameObjects->RC();
+						gameObjects->RC();
 						player->RC();
 						for (int i = 0; i < 9; i++) {
 							stageObj[i]->RC();
@@ -289,7 +289,7 @@ void GameScene::Update()
 		for (int i = 0; i < 9; i++) {
 			stageObj[i]->Update();
 		}
-		//gameObjects->Update();
+		gameObjects->Update();
 		timer->Update();
 		skydome->Update();
 		//particleMan->Update();
@@ -310,7 +310,7 @@ void GameScene::Update()
 		//sceneManager_->SetNextScene(scene);
 		//audio->StopWave();
 		//コライダーを削除
-		//gameObjects->RC();
+		gameObjects->RC();
 		player->RC();
 		for (int i = 0; i < 9; i++) {
 			stageObj[i]->RC();
@@ -328,11 +328,11 @@ void GameScene::Update()
 		tutorial->SetWalkCount(player->GetTWCount());
 		if (tutorial->GetColFlag() == true) {
 			//くっつけるようになる
-			//if (gameObjects->GetObject3d(0, 0)->GetParentFlag() == true) {
+			if (gameObjects->GetObject3d(0, 0)->GetParentFlag() == true) {
 				//テキスト画像をを4番目にする
 				tutorial->SetTCount(4);
 				tutorial->SetColFlag(false);
-			//}
+			}
 		}
 		//チュートリアルが終わったら
 		if (tutorial->GetEndFlag() == true) {
@@ -342,7 +342,7 @@ void GameScene::Update()
 			//BaseScene* scene = new SelectScene();
 			//sceneManager_->SetNextScene(scene);
 			audio->StopWave();
-			//gameObjects->RC();
+			gameObjects->RC();
 			player->RC();
 			for (int i = 0; i < 9; i++) {
 				stageObj[i]->RC();
@@ -391,7 +391,7 @@ void GameScene::Draw()
 {
 	//オブジェクトの描画
 	player->Draw();
-	//gameObjects->Draw();
+	gameObjects->Draw();
 	stageObj[0]->Draw();
 	if (stageNum == 1) {
 		for (int i = 1; i < 6; i++) {

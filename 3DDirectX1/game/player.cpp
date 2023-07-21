@@ -38,8 +38,11 @@ void Player::Initialize()
 void Player::Init()
 {
 	dashFlag = false;
-	speedUD = 0.0f;
-	speedLR = 0.0f;
+	moveUD = { 0,0,0,0 };//前後移動用ベクトル
+	moveLR = { 0,0,0,0 };//左右移動用ベクトル
+	moveAngle = { 0,0,0,0 };//角度ベクトル
+	speedUD = 0.0f;//前後移動スピード
+	speedLR = 0.0f;//左右移動スピード
 	r = 2.0f;
 	dash = 0.0f;
 	sphere.radius = r;
@@ -86,17 +89,9 @@ void Player::stageInit(int stageNo)
 
 void Player::Move()
 {
-	XMVECTOR moveUD = { 0,0,speedUD,0 };//前後方向用の移動ベクトル
-	XMVECTOR moveLR = { speedLR,0,0,0 };//左右方向の移動用ベクトル
-	XMVECTOR moveAngle = { 0,0.7f,0,0 };//角度のベクトル
-	XMVECTOR moveAngleZ = { 0,0,10,0 };//角度のベクトル
-	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(playerAngle.y));//y 軸を中心に回転するマトリックスを作成
-	XMMATRIX matRot2 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[1]));
-	XMMATRIX matRot3 = XMMatrixRotationY(XMConvertToRadians(sphereAngle.m128_f32[0]));
-	moveUD = XMVector3TransformNormal(moveUD, matRot);
-	moveLR = XMVector3TransformNormal(moveLR, matRot);
-	moveAngle = XMVector3TransformNormal(moveAngle, matRot);
-	moveAngleZ = XMVector3TransformNormal(moveAngleZ, matRot3);
+	moveUD = vecTrans(moveUD, playerAngle.y, speedUD,2);
+	moveLR = vecTrans(moveLR, playerAngle.y, speedLR,0);
+	moveAngle = vecTrans(moveAngle, playerAngle.y, 0.7f,1);
 
 	//角度移動
 	if (Input::GetInstance()->PushKey(DIK_RIGHTARROW))
@@ -201,7 +196,21 @@ XMFLOAT3 Player::vec(XMFLOAT3 pos, XMVECTOR vec)
 	return pos;
 }
 
-
+XMVECTOR Player::vecTrans(XMVECTOR vec, float rot, float speed,float xyz)
+{
+	if (xyz == 2) {
+		vec = { 0,0,speed,0 };
+	}
+	else if (xyz == 1) {
+		vec = { 0,speed,0,0 };
+	}
+	else if (xyz == 0) {
+		vec = { speed,0,0,0 };
+	}
+	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(rot));//y 軸を中心に回転するマトリックスを作成
+	vec= XMVector3TransformNormal(vec, matRot);
+	return vec;
+}
 
 void Player::Ball()
 {
@@ -372,7 +381,6 @@ void Player::Dash()
 	//DebugText::GetInstance()->Printf(100, 20, 3.0f, { 1,1,1,1 }, "%f,%f", playerPos.x,playerPos.z);
 }
 
-
 void Player::Update()
 {
 	SphereObj->SetParentFlag(false);
@@ -403,8 +411,6 @@ void Player::Update()
 
 	dashSprite->SetColor({ 1, 1, 1, fade });
 }
-
-
 
 void Player::Draw()
 {
