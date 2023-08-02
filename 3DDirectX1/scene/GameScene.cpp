@@ -485,7 +485,7 @@ void GameScene::ObjCollision(int i, int j)
 	if (HitCount == 1) {
 		//当たった時一瞬する処理
 		gameObjects->GetObject3d(i, j)->transformParent();
-		//くっついた時のぽこって音
+		//くっついた時の音
 		audio->SEPlayWave(sound1);
 		HitCount = 0;
 		//HITフラグfalseにする

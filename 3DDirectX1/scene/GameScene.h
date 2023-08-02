@@ -13,7 +13,7 @@
 #include "FbxObject.h"
 #include"LightGroup.h"
 #include"player.h"
-#include"GameObject.h"
+#include"GameObjects.h"
 #include"stageObject.h"
 #include"Collision.h"
 #include<vector>
@@ -71,8 +71,10 @@ public: // メンバ関数
 
 private: // メンバ変数
 	void ObjCollision(int i, int j);
-	void SOInit();//ステージobjの初期化など
-	void SOCreate();//ステージobjの読み込み
+	//ステージobjの初期位置等設定
+	void SOInit();
+	//ステージobjの読み込み
+	void SOCreate();
 	Audio* audio = Audio::GetInstance();
 
 	SoundData sound1 = {};

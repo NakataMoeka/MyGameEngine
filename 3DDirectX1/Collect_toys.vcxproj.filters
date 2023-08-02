@@ -157,7 +157,7 @@
     <ClCompile Include="2d\SpriteAnimation.cpp">
       <Filter>Library\2d</Filter>
     </ClCompile>
-    <ClCompile Include="game\GameObject.cpp">
+    <ClCompile Include="game\GameObjects.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="scene\ClearScene.cpp">
@@ -403,7 +403,7 @@
     <ClInclude Include="2d\SpriteAnimation.h">
       <Filter>Library\2d</Filter>
     </ClInclude>
-    <ClInclude Include="game\GameObject.h">
+    <ClInclude Include="game\GameObjects.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="game\ObjectHelper.h">
