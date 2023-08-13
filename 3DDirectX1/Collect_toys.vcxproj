@@ -190,7 +190,6 @@
     <ClCompile Include="game\SphereSize.cpp" />
     <ClCompile Include="game\stageObject.cpp" />
     <ClCompile Include="game\start.cpp" />
-    <ClCompile Include="game\stickyobject.cpp" />
     <ClCompile Include="game\TestObject.cpp" />
     <ClCompile Include="game\Timer.cpp" />
     <ClCompile Include="game\Tutorial.cpp" />
@@ -385,7 +384,6 @@
     <ClInclude Include="game\SphereSize.h" />
     <ClInclude Include="game\stageObject.h" />
     <ClInclude Include="game\start.h" />
-    <ClInclude Include="game\stickyobject.h" />
     <ClInclude Include="game\TestObject.h" />
     <ClInclude Include="game\Timer.h" />
     <ClInclude Include="game\Tutorial.h" />

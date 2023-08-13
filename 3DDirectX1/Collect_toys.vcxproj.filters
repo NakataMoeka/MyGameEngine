@@ -223,9 +223,6 @@
     <ClCompile Include="game\TestObject.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="game\stickyobject.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -495,9 +492,6 @@
       <Filter>Game\scene</Filter>
     </ClInclude>
     <ClInclude Include="game\TestObject.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="game\stickyobject.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
