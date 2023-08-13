@@ -52,7 +52,6 @@ public:
 	bool SetHIT(int i, int j, bool Hit);
 	float GetOSize(int i, int j);
 	XMFLOAT3 GetOPos(int i, int j);
-	int SetTsize(int Tsize) { return this->Tsize = Tsize; }
 	float SetY(float y) { return this->oy = y; }
 private://関数
 	static const int OBJNumber = 100;//objの最大数(多いやつ)
@@ -80,13 +79,11 @@ private://変数
 	std::array < Object3d*, OBJNumber> Bear = {};
 	std::array < Object3d*, OBJNumber> Robot = {};
 	std::array < Object3d*, OBJNumber> Card = {};
-	//std::array < Object3d*, OBJNumber2> Pencil = {};
 
 	std::array < Object3d*, OBJNumber> Kendama = {};  
 	std::array < Object3d*, OBJNumber> Koma = {};
 	std::array < Object3d*, OBJNumber> Shogi = {};
 	std::array < Object3d*, OBJNumber> Turu = {};
-	//std::array < Object3d*, OBJNumber2> Cont = {};
 	std::array < Object3d*, OBJNumber> Game = {};
 
 	std::unique_ptr<Model> modelCube = nullptr;
@@ -113,13 +110,7 @@ private://変数
 	XMFLOAT3 pos{ 10,2,0 };
 	XMFLOAT3 size[OBJType] = { {3,3,3},{5,5,5} };
 	XMVECTOR rota = { 0,0,0,0 };
-	bool moveFlag = true;//動いているか否か
-	float oSpeed = 0;//
 	int randRot = 0;//角度ランダム
 	int stageNum = 0;//ステージ番号
-	bool onGround = true;
-	// 落下ベクトル
-	DirectX::XMVECTOR fallV = {};
-	int Tsize = 0;
 };
 

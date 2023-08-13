@@ -41,25 +41,44 @@ public: // メンバ関数
 	GameScene();
 
 	~GameScene();
-	//起動したら一回しか行われない初期化(モデルの読み込みなど)
+	/// <summary>
+	/// 起動したら一回しか行われない初期化(モデルの読み込みなど)
+	/// </summary>
 	void Initialize()override;
-	//OBJ等初期化用()
+	/// <summary>
+	/// OBJ用の初期化
+	/// </summary>
 	void InitTH()override;
-	//そのシーンを通るたびに何度も行われる初期化(位置など)
+	/// <summary>
+	/// そのシーンを通るたびに何度も行われる初期化(位置など)
+	/// </summary>
 	void Init()override;
-	//ステージ初期化
+	/// <summary>
+	/// ステージ初期化
+	/// </summary>
+	/// <param name="stageNum">ステージ番号</param>
 	void InitStageNum(int stageNum)override;
-	//繰り返し処理
+	/// <summary>
+	/// 繰り返し処理
+	/// </summary>
 	void Update()override;
-	//背景画像描画
+	/// <summary>
+	/// 背景画像描画
+	/// </summary>
 	void DrawBG()override;
-	//オブジェクト描画
+	/// <summary>
+	/// オブジェクト描画
+	/// </summary>
 	void Draw()override;
-	//前景画像描画
+	/// <summary>
+	/// 前景画像描画
+	/// </summary>
 	void DrawFront()override;
 
 	void Finalize()override;
-	//パーティクル
+	/// <summary>
+	/// パーティクル
+	/// </summary>
 	void CreateParticles();
 
 	bool GetSCangeFlag()override;

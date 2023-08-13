@@ -88,9 +88,6 @@ void GameObjects::Initialize()
 		Shogi[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
 		Turu[i] = Object3d::Create(modelTuru.get());
 		Turu[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-		//Cont[i] = Object3d::Create(modelCont);
-		//Cont[i]->CreateGraphicsPipeline(L"Resources/shaders/OBJPS.hlsl", L"Resources/shaders/OBJVS.hlsl");
-
 	}
 
 }
@@ -202,10 +199,6 @@ void GameObjects::Init()
 			Turu[i]->GetCollider()->SetNum(9);
 		}
 	}
-	//èdÇ≠Ç»ÇÈ
-
-	moveFlag = false;
-	oSpeed = 0;
 }
 
 void GameObjects::stageInit(int stageNum)
