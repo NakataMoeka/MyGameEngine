@@ -53,11 +53,11 @@ void ClearScene::Initialize()
 
 void ClearScene::Init()
 {
+	stageNum = nextStage;
 	easeTimer = 0;
 	pos = { 350,800 };
 	pushFlag = false;
 	SCangeFlag = false;
-	stageNum = nextStage;
 }
 
 void ClearScene::InitTH()

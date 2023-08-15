@@ -321,7 +321,7 @@ void GameScene::Update()
 	if (Input::GetInstance()->TriggerKey(DIK_C)) {
 		BaseScene*scene = new ClearScene();
 		sceneManager_->SetNextScene(scene);
-		nextStage = 0;
+		scene->nextStage = 1;
 		audio->StopWave();
 		//コライダーを削除
 		//gameObjects->RC();
@@ -333,7 +333,7 @@ void GameScene::Update()
 	if (Input::GetInstance()->TriggerKey(DIK_E)) {
 		BaseScene* scene = new ClearScene();
 		sceneManager_->SetNextScene(scene);
-		nextStage = 1;
+		scene->nextStage = 0;
 		audio->StopWave();
 		//コライダーを削除
 		//gameObjects->RC();
