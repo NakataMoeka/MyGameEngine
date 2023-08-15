@@ -58,6 +58,13 @@ void ClearScene::Init()
 	pushFlag = false;
 	SCangeFlag = false;
 	stageNum = nextStage;
+}
+
+void ClearScene::InitTH()
+{
+}
+void ClearScene::Update()
+{
 	if (stageNum == 0) {
 		overFlag = true;
 		clearFlag = false;
@@ -66,13 +73,6 @@ void ClearScene::Init()
 		clearFlag = true;
 		overFlag = false;
 	}
-}
-
-void ClearScene::InitTH()
-{
-}
-void ClearScene::Update()
-{
 	//文章のイージング
 	if (easeTimer < 100) {
 		easeTimer++;
@@ -117,12 +117,12 @@ void ClearScene::Draw()
 
 void ClearScene::DrawFront()
 {
-	if (clearFlag == true) {
+	if (clearFlag == true&&overFlag==false) {
 		clearTextSprite->Draw();
 		clearSprite->Draw();
 		motherSSprite->Draw();
 	}
-	if (overFlag == true) {
+	if (overFlag == true&&clearFlag==false) {
 		overTextSprite->Draw();
 		overSprite->Draw();
 		motherASprite->Draw();

@@ -96,6 +96,7 @@ void GameScene::InitTH()
 
 void GameScene::Init()
 {
+	stageNum = nextStage;
 	//別クラスの初期化
 	player->Init();
 	//gameObjects->Init();
@@ -140,7 +141,6 @@ void GameScene::Init()
 
 void GameScene::InitStageNum()
 {
-	stageNum = nextStage;
 	player->stageInit(stageNum);
 	//gameObjects->stageInit(stageNum);
 	sphereSize->Init(stageNum);
@@ -317,6 +317,30 @@ void GameScene::Update()
 			stageObj[i]->RC();
 		}
 
+	}
+	if (Input::GetInstance()->TriggerKey(DIK_C)) {
+		BaseScene*scene = new ClearScene();
+		sceneManager_->SetNextScene(scene);
+		nextStage = 0;
+		audio->StopWave();
+		//コライダーを削除
+		//gameObjects->RC();
+		player->RC();
+		for (int i = 0; i < 9; i++) {
+			stageObj[i]->RC();
+		}
+	}
+	if (Input::GetInstance()->TriggerKey(DIK_E)) {
+		BaseScene* scene = new ClearScene();
+		sceneManager_->SetNextScene(scene);
+		nextStage = 1;
+		audio->StopWave();
+		//コライダーを削除
+		//gameObjects->RC();
+		player->RC();
+		for (int i = 0; i < 9; i++) {
+			stageObj[i]->RC();
+		}
 	}
 	sphereSize->Update();
 
