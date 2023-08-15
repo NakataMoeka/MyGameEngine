@@ -63,10 +63,6 @@ void TitleScene::InitTH()
 {
 }
 
-void TitleScene::InitStageNum(int stageNum)
-{
-}
-
 void TitleScene::Update()
 {
 	if (Scene == 0) {
@@ -84,8 +80,8 @@ void TitleScene::Update()
 		if (SCangeFlag == false) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 				SCangeFlag = true;
-				//BaseScene* scene = new SelectScene();
-				//sceneManager_->SetNextScene(scene);
+				BaseScene* scene = new SelectScene();
+				sceneManager_->SetNextScene(scene);
 				audio->SEPlayWave(sound2);
 				audio->StopWave();
 			}

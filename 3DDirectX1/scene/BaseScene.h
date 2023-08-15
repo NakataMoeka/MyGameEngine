@@ -14,7 +14,6 @@ public:
 	/// </summary>
 	virtual void Init() = 0;
 	virtual void InitTH() = 0;
-	virtual void InitStageNum(int num) = 0;
 	/// <summary>
 	/// 更新
 	/// </summary>
@@ -36,6 +35,8 @@ public:
 	
 	virtual void SetSceneManager(SceneManager* sceneManager) { sceneManager_ = sceneManager; }
 	virtual bool GetSCangeFlag() = 0;
+	//ステージナンバー
+	int nextStage= 0;
 protected:
 	SceneManager* sceneManager_ = nullptr;
 };

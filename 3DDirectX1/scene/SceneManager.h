@@ -45,19 +45,18 @@ public:
 	void Draw();
 	//前景画像描画
 	void DrawFront();
-	//int SetNum(int num) { return this->num = num; }
-	////次のシーン予約
-	//void SetNextScene(BaseScene* nextScene) { nextScene_ = nextScene; }
+	//次のシーン予約
+	void SetNextScene(BaseScene* nextScene) { nextScene_ = nextScene; }
 private:
 	const int debugTextTexNumber = 0;
 	//最初のシーン
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
-	////今のシーン
-	//BaseScene* scene_ = nullptr;
-	////次のシーン
-	//BaseScene* nextScene_ = nullptr;
-
+	//今のシーン
+	BaseScene* scene_ = nullptr;
+	//次のシーン
+	BaseScene* nextScene_ = nullptr;
+	BaseScene* loadScene_ = nullptr;
 	Scene scene;
 	std::unique_ptr < TitleScene> titleScene = nullptr;
 	std::unique_ptr < SelectScene> selectScene = nullptr;
@@ -69,6 +68,5 @@ private:
 	//ロード画面作りたい
 	std::thread t = {};
 	Load_Situation Load_s = NOLOAD;
-	//int num;
 };
 

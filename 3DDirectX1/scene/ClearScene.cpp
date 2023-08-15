@@ -57,14 +57,7 @@ void ClearScene::Init()
 	pos = { 350,800 };
 	pushFlag = false;
 	SCangeFlag = false;
-}
-
-void ClearScene::InitTH()
-{
-}
-
-void ClearScene::InitStageNum(int stageNum)
-{
+	stageNum = nextStage;
 	if (stageNum == 0) {
 		overFlag = true;
 		clearFlag = false;
@@ -75,6 +68,9 @@ void ClearScene::InitStageNum(int stageNum)
 	}
 }
 
+void ClearScene::InitTH()
+{
+}
 void ClearScene::Update()
 {
 	//文章のイージング
@@ -90,8 +86,8 @@ void ClearScene::Update()
 		if (SCangeFlag == false) {
 			if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 				SCangeFlag = true;
-				//BaseScene* scene = new TitleScene();
-				//sceneManager_->SetNextScene(scene);
+				BaseScene* scene = new TitleScene();
+				sceneManager_->SetNextScene(scene);
 				audio->SEPlayWave(sound1);
 				clearFlag = false;
 				overFlag = false;

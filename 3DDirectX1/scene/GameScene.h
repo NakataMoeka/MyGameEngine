@@ -48,7 +48,7 @@ public: // メンバ関数
 	//そのシーンを通るたびに何度も行われる初期化(位置など)
 	void Init()override;
 	//ステージ初期化
-	void InitStageNum(int stageNum)override;
+	void InitStageNum();
 	//繰り返し処理
 	void Update()override;
 	//背景画像描画
@@ -68,7 +68,8 @@ public: // メンバ関数
 	bool GetTitleFlag();
 	int SetStageNum(int stageNum) { return this->stageNum = stageNum; }
 	bool GetTSFlag() { return TSFlag; }
-
+	//ステージナンバー
+	int stageNum = 0;
 private: // メンバ変数
 	void ObjCollision(int i, int j);
 	void SOInit();//ステージobjの初期化など
@@ -119,9 +120,6 @@ private: // メンバ変数
 
 	bool endFlag = false;
 	bool endNum;
-
-	//ステージナンバー
-	int stageNum = 0;
 	bool TSFlag;
 
 	int GoalCount = 0;//目標サイズ

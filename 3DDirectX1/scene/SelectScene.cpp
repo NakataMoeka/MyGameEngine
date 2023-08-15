@@ -65,9 +65,6 @@ void SelectScene::InitTH()
 {
 }
 
-void SelectScene::InitStageNum(int stageNum)
-{
-}
 
 void SelectScene::Update()
 {
@@ -107,11 +104,12 @@ void SelectScene::Update()
 		}
 
 	}
-	else if (SAFlag == 0 && SCangeFlag == false && Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+	else if (SAFlag == 0 && /*SCangeFlag == false &&*/ Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		if (stageNum == 0 || stageNum == 1 || stageNum == 2) {
-			SCangeFlag = true;
-			//BaseScene* scene = new GameScene();
-			//sceneManager_->SetNum(stageNum);
+			//SCangeFlag = true;
+			BaseScene* scene = new GameScene();
+			scene->nextStage = stageNum;
+			sceneManager_->SetNextScene(scene);
 			audio->SEPlayWave(sound2);
 		}
 		else {
@@ -143,8 +141,6 @@ void SelectScene::DrawFront()
 			TutorialS->Draw();
 		}
 	}
-
-
 }
 
 void SelectScene::Finalize()
