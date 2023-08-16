@@ -45,6 +45,7 @@ public:
 	void Draw();
 	//前景画像描画
 	void DrawFront();
+	void InitTH();
 	//次のシーン予約
 	void SetNextScene(BaseScene* nextScene) { nextScene_ = nextScene; }
 private:
@@ -56,7 +57,6 @@ private:
 	BaseScene* scene_ = nullptr;
 	//次のシーン
 	BaseScene* nextScene_ = nullptr;
-	BaseScene* loadScene_ = nullptr;
 	Scene scene;
 	std::unique_ptr < TitleScene> titleScene = nullptr;
 	std::unique_ptr < SelectScene> selectScene = nullptr;
@@ -68,5 +68,6 @@ private:
 	//ロード画面作りたい
 	std::thread t = {};
 	Load_Situation Load_s = NOLOAD;
+	bool loadFlag = false;
 };
 

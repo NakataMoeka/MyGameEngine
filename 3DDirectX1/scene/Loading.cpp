@@ -1,5 +1,11 @@
 #include "Loading.h"
 
+Loading::Loading()
+{}
+
+Loading::~Loading()
+{}
+
 void Loading::Initialize()
 {
 	Sprite::LoadTexture(61, L"Resources/UI/Load.png");
@@ -13,6 +19,10 @@ void Loading::Initialize()
 }
 
 void Loading::Init()
+{
+}
+
+void Loading::InitTH()
 {
 }
 
@@ -51,4 +61,13 @@ void Loading::Draw()
 void Loading::DrawFront()
 {
 	loadingS->Draw();
+}
+
+void Loading::Finalize()
+{
+}
+
+bool Loading::GetSCangeFlag()
+{
+	return false;
 }
