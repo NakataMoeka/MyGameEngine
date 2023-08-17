@@ -27,19 +27,6 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 	FbxObject3d::SetDev(dxCommon->Getdev());
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
 	
-	//titleScene = std::unique_ptr <TitleScene>(new TitleScene());
-	//titleScene->Initialize();
-	//selectScene = std::unique_ptr <SelectScene>(new SelectScene());
-	//selectScene->Initialize();
-	//clearScene = std::unique_ptr <ClearScene>(new ClearScene());
-	//clearScene->Initialize();
-	//gameScene = std::unique_ptr <GameScene>(new GameScene());
-	//gameScene->Initialize();
-	//gameScene->InitTH();
-	//loadScene = std::unique_ptr <Loading>(new Loading());
-	//loadScene->Initialize();
-	//change = std::unique_ptr <SceneChange>(new SceneChange());
-	//change->Initialize();
 	BaseScene* scene1 = new TitleScene();
 	//シーンマネージャに最初のシーンセット
 	SetNextScene(scene1);

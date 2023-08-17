@@ -15,13 +15,10 @@
 #include"TitleScene.h"
 #include"SelectScene.h"
 GameScene::GameScene()
-{
-
-}
+{}
 
 GameScene::~GameScene()
-{
-}
+{}
 
 void GameScene::Initialize()
 {
@@ -96,7 +93,7 @@ void GameScene::InitTH()
 
 void GameScene::Init()
 {
-	stageNum = nextStage;
+	InitStageNum();
 	//別クラスの初期化
 	player->Init();
 	gameObjects->Init();
@@ -136,11 +133,11 @@ void GameScene::Init()
 	audioCount = 0;
 	OY = 0;
 	srand((unsigned)time(NULL));
-	InitStageNum();
 }
 
 void GameScene::InitStageNum()
 {
+	stageNum = nextStage;
 	player->stageInit(stageNum);
 	gameObjects->stageInit(stageNum);
 	sphereSize->Init(stageNum);
