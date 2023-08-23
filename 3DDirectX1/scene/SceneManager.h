@@ -58,13 +58,7 @@ private:
 	//次のシーン
 	BaseScene* nextScene_ = nullptr;
 	Scene scene;
-	std::unique_ptr < TitleScene> titleScene = nullptr;
-	std::unique_ptr < SelectScene> selectScene = nullptr;
-	std::unique_ptr < GameScene> gameScene = nullptr;
-	std::unique_ptr < ClearScene> clearScene = nullptr;
 	std::unique_ptr < Loading> loadScene = nullptr;
-	std::unique_ptr < SceneChange> change = nullptr;
-
 	//ロード画面作りたい
 	std::thread t = {};
 	Load_Situation Load_s = NOLOAD;

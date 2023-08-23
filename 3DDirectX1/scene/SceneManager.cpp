@@ -26,7 +26,9 @@ void SceneManager::Initialize(DXCommon* dxCommon, Audio* audio)
 
 	FbxObject3d::SetDev(dxCommon->Getdev());
 	FbxObject3d::CreateGraphicsPipeline(L"Resources/shaders/FBXPS.hlsl", L"Resources/shaders/FBXVS.hlsl");
-	
+	loadScene = std::unique_ptr <Loading>(new Loading());
+	loadScene->Initialize();
+	loadScene->Init();
 	BaseScene* scene1 = new TitleScene();
 	//シーンマネージャに最初のシーンセット
 	SetNextScene(scene1);
@@ -39,26 +41,24 @@ void SceneManager::Update()
 {
 	if (nextScene_)
 	{
-		//if (scene_->GetSCangeFlag() == true) {
-			//change->SetChangeSFlag(true);
-			if (scene_)
-			{
-				scene_->Finalize();
-				delete scene_;
-			}
-			//シーン切り替え
-			scene_ = nextScene_;
-			nextScene_ = nullptr;
-			scene_->SetSceneManager(this);
-			//次のシーンを初期化する
-			//if (change->GetChangeEFlag() == true) {
-				scene_->Initialize();
-				scene_->Init();
-				//scene_->InitTH();
-			//}
-		//}
+		if (scene_)
+		{
+			scene_->Finalize();
+			delete scene_;
+		}
+		//シーン切り替え
+		scene_ = nextScene_;
+		nextScene_ = nullptr;
+		scene_->SetSceneManager(this);
+		//次のシーンを初期化する
+		scene_->Initialize();
+		scene_->InitTH();
+		scene_->Init();
+		loadFlag = true;
 	}
-	scene_->Update();
+	//if (loadFlag == false) {
+		scene_->Update();
+	//}
 
 	//ローディング
 	if (loadFlag == true) {
@@ -66,8 +66,7 @@ void SceneManager::Update()
 		{
 		case SceneManager::NOLOAD://ロードしていないとき
 			t = std::thread([&] {
-				BaseScene* scene = new GameScene();
-				scene->InitTH();
+				InitTH();
 				Load_s = ENDLOAD; });
 			Load_s = NOWLOAD;
 			break;
@@ -75,23 +74,26 @@ void SceneManager::Update()
 			break;
 		case SceneManager::ENDLOAD://ロード終わったら
 			t.join();
-			BaseScene* scene = new TitleScene();
-			SetNextScene(scene);
 			Load_s = NOLOAD;
 			loadFlag = false;
 			break;
 			//default:
 				//break;
 		}
+
 	}
-	
+	loadScene->Update();
 	//change->Update();
 }
 void SceneManager::DrawBG()
 {
 	Sprite::PreDraw(dxCommon->GetCmdList());
-
-	scene_->DrawBG();
+	if (loadFlag == true) {
+		loadScene->DrawBG();
+	}
+	else {
+		scene_->DrawBG();
+	}
 	Sprite::PostDraw();
 	dxCommon->ClearDepthBuffer();
 }
@@ -100,8 +102,9 @@ void SceneManager::Draw()
 {
 	Object3d::PreDraw(dxCommon->GetCmdList());
 	FbxObject3d::PreDraw(dxCommon->GetCmdList());
-	
-	scene_->Draw();
+	if (loadFlag == false) {
+		scene_->Draw();
+	}
 	Object3d::PostDraw();
 	FbxObject3d::PostDraw();
 }
@@ -109,8 +112,13 @@ void SceneManager::Draw()
 void SceneManager::DrawFront()
 {
 	Sprite::PreDraw(dxCommon->GetCmdList());
-	
-	scene_->DrawFront();
+	if (loadFlag == true) {
+		loadScene->DrawFront();
+	}
+	else {
+		scene_->DrawFront();
+	}
+	DebugText::GetInstance()->Printf(0, 0, 3, { 0,0,0,1 }, "%d", loadFlag);
 	DebugText::GetInstance()->DrawAll(dxCommon->GetCmdList());
 	Sprite::PostDraw();
 }

@@ -55,7 +55,7 @@ void GameScene::Initialize()
 	// カメラ注視点をセット
 	camera->SetTarget({ 0, 0.0f, 0 });
 	camera->SetEye({ 0, 0, -10 });
-	InitTH();
+	//InitTH();
 }
 
 void GameScene::InitTH()
