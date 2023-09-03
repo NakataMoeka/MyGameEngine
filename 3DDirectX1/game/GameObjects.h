@@ -6,6 +6,7 @@
 #include"LoadCSV.h"
 #include<array>
 #include"ObjectHelper.h"
+#include"GObject.h"
 #include"safedelete.h"
 #include <vector>
 #include <string>
@@ -31,14 +32,14 @@ private:
 	std::vector<object*>oData4;//ロボット,けん玉
 	std::vector<object*>oData5;//カード,折鶴
 public:
-	
+
 
 	GameObjects();
 	~GameObjects();
 	void Initialize();//1度のみ初期化
 	void Init();//何度もする
 	void stageInit(int stageNum);//ステージ初期化
-	
+
 	void Update();
 	void RC();//コライダー消すやつ
 	void Draw();
@@ -64,41 +65,35 @@ private://関数
 	/// <param name="y">高さ</param>/// <param name="size">大きさ</param>
 	/// <param name="i">横</param>/// <param name="j">縦</param>
 	void InitNum(std::vector<object*>oData, int stageNum, float y, float size, size_t i, size_t j);
-	void InitUpd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData);
-	void RCC(std::array < Object3d*, OBJNumber>obj,int i);//コライダー削除共通の処理
 	//アップデート共通の処理
-	void Upd(std::array < Object3d*, OBJNumber> obj, int i, std::vector<object*>oData,bool move);
 private://変数
 
 	int	spawnMap[MAP_HEIGHT][MAP_WIDTH];//OBJ配置用(予定)
 
 	int  num = 0;
 	//オブジェクト
-	std::array < Object3d*, OBJNumber> cube = {};
-	std::array < Object3d*, OBJNumber> moveObj = {};
-	std::array < Object3d*, OBJNumber> Bear = {};
-	std::array < Object3d*, OBJNumber> Robot = {};
-	std::array < Object3d*, OBJNumber> Card = {};
+	std::array < GObject*, OBJNumber> cube = {};
+	std::array < GObject*, OBJNumber> moveObj = {};
+	std::array < GObject*, OBJNumber> Bear = {};
+	std::array < GObject*, OBJNumber> Robot = {};
+	std::array < GObject*, OBJNumber> Card = {};
+	std::array < GObject*, OBJNumber> Kendama = {};
+	std::array < GObject*, OBJNumber> Koma = {};
+	std::array < GObject*, OBJNumber> Shogi = {};
+	std::array < GObject*, OBJNumber> Turu = {};
+	std::array < GObject*, OBJNumber> Game = {};
 
-	std::array < Object3d*, OBJNumber> Kendama = {};  
-	std::array < Object3d*, OBJNumber> Koma = {};
-	std::array < Object3d*, OBJNumber> Shogi = {};
-	std::array < Object3d*, OBJNumber> Turu = {};
-	std::array < Object3d*, OBJNumber> Game = {};
+	Model* modelCube = nullptr;
+	Model* modelMove = nullptr;
+	Model* modelBear = nullptr;
+	Model* modelRobot = nullptr;
+	Model* modelCard = nullptr;
+	Model* modelKendama = nullptr;
+	Model* modelKoma = nullptr;
+	Model* modelShogi = nullptr;
+	Model* modelTuru = nullptr;
+	Model* modelGame = nullptr;
 
-	std::unique_ptr<Model> modelCube = nullptr;
-	std::unique_ptr<Model> modelMove = nullptr;
-	std::unique_ptr<Model> modelBear = nullptr;
-	std::unique_ptr<Model> modelRobot = nullptr;
-	std::unique_ptr<Model> modelCard = nullptr;
-	std::unique_ptr<Model> modelPencil = nullptr;
-
-	std::unique_ptr<Model> modelKendama = nullptr;
-	std::unique_ptr<Model> modelKoma = nullptr;
-	std::unique_ptr<Model> modelShogi = nullptr;
-	std::unique_ptr<Model> modelTuru = nullptr;
-	std::unique_ptr<Model> modelCont = nullptr;
-	std::unique_ptr<Model> modelGame = nullptr;
 	std::array < Sphere, OBJNumber> cSphere;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere2;//当たり判定のやつ
 	std::array < Sphere, OBJNumber> cSphere3;//当たり判定のやつ

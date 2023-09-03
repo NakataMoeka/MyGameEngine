@@ -54,7 +54,7 @@ private:
 	DXCommon* dxCommon = nullptr;
 	Audio* audio = nullptr;
 	////今のシーン
-	//BaseScene* scene_ = nullptr;
+	BaseScene* scene_ = nullptr;
 	////次のシーン
 	//BaseScene* nextScene_ = nullptr;
 
